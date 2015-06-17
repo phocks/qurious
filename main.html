@@ -1,0 +1,334 @@
+<!-- Here is the main head for all the pages -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <title>Quotey</title>
+</head>
+
+
+<template name="Explore">
+  <div class="col-md-6 col-md-offset-3">
+    {{> esInput index="quotes" placeholder="Search..." }}
+
+
+    <ul>
+        {{#esEach index="quotes"}}
+            <li>&ldquo;{{quotation}}&rdquo; &mdash;{{author}}</li>
+        {{/esEach}}
+    </ul>
+
+    {{> esLoadMoreButton index="quotes"}}
+
+    {{#ifEsHasNoResults index="quotes"}}
+        <div class="no-results">No results found!</div>
+    {{/ifEsHasNoResults}}
+
+    {{#ifEsIsSearching index="quotes"}}
+            <div>Loading...</div>
+    {{/ifEsIsSearching}}
+  </div>
+</template>
+
+
+
+
+<template name="Search"> 
+  
+      
+  
+  <div class="col-md-6 col-md-offset-3">
+    Search
+  </div>
+    
+</template>
+
+
+<template name="Login"> 
+  
+      
+  
+  <div class="col-md-6 col-md-offset-3">
+    {{> atForm}}
+  </div>
+    
+</template>
+
+
+
+
+<template name="Quotes">
+ 
+
+    
+    {{#each quotes}}
+      {{> Quote}}
+    {{/each}}
+  
+</template>
+
+
+
+<template name="Submit">
+  <div class="col-md-6 col-md-offset-3">
+    <header>
+        {{#unless currentUser}}
+          <p>Please login!</p>
+        {{/unless}}
+      
+        {{#if currentUser}}
+
+
+        <form class="new-quote">
+          <div class="form-group">
+            <label for="quotationText">Quotation text</label>
+            <textarea type="text" rows="3" class="form-control" id="quotationText" name="text" placeholder="Quotation" autocomplete="off"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="authorText">Password</label>
+            <input type="text" class="form-control" id="authorText" name="author" placeholder="Author">
+          </div>          
+          
+         
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        {{/if}}
+    </header>
+    
+    
+  </div>
+</template>
+
+
+
+
+
+
+<template name="SingleQuote">
+  <div class="single-quote">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          
+          <div class="quotation">
+            <h1>&ldquo;</h1>
+            {{quotation}}
+            <h1>&rdquo;</h1>
+          </div>
+          
+          <div class="author">
+            &mdash;{{author}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+
+
+
+<template name="Quote">
+  <!-- <li class="quote">&ldquo;{{quotation}}&rdquo; {{#if author}}&mdash;{{author}}
+  <small class="link"><a href="/quotes/{{ quote_id }}">{{formatTime createdAt}}</a></small>
+  {{/if}} {{#if currentUser}}<small class="delete"><a href="#">delete</a></small>{{/if}}</li> -->
+
+
+  <div class="list-quote">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          
+          <div class="quotation">
+            <h1>&ldquo;</h1>
+            {{quotation}}
+            <h1>&rdquo;</h1>
+          </div>
+          
+          <div class="author">
+            &mdash;{{author}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</template>
+
+<template name="SingleAuthor">
+<li class="author"><a href="/{{slug}}">{{name}}</a> <small class="delete"><a href="#">delete</a></small></li>
+</template>
+
+
+
+
+
+<template name="Author">
+  <div class="container">
+    <header>
+      <b>Quotey</b> &mdash; {{> loginButtons }}
+      <hr>
+        
+    </header>
+
+    {{name}}<br>
+    
+
+  </div>
+</template>
+
+
+
+
+
+<template name="ListAuthors">
+  <div class="container">
+    <header>
+      <b>Quotey</b> &mdash; {{> loginButtons }}
+      <hr>        
+    </header>
+
+    {{#if currentUser}}
+        <form class="new-author">
+          <input type="text" name="author" placeholder="New author" />
+          <input type="submit" id="submit"/>
+        </form>
+    {{/if}}
+
+    {{#each authors}}
+      <ul>
+      {{> SingleAuthor}}
+      </ul>
+    {{/each}}
+
+  </div>
+</template>
+
+
+
+
+
+<template name="Create">
+  <div class="container">
+    <header>
+      <b>Quotey</b> &mdash; {{> loginButtons }}
+      <hr>        
+    </header>
+
+    {{#if currentUser}}
+        <form class="new-author">
+          <input type="text" name="author" placeholder="New author" />
+          <input type="submit" id="submit"/>
+        </form>
+    {{/if}}
+
+  </div>
+</template>
+
+
+
+
+
+
+
+<template name="ApplicationLayout">
+<header>
+      {{> TopNavigation }}
+      {{> yield}}
+</header>
+</template>
+
+
+
+
+
+
+
+
+<template name="Home"> 
+  <div class="homepage-quote">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          
+          <div class="quotation">
+            <h1>&ldquo;</h1>
+            {{quotation}}
+            <h1>&rdquo;</h1>
+          </div>
+          
+          <div class="author">
+            &mdash;{{author}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<template name="About">
+  <p>Write something in here that is about the product.</p>
+</template>
+
+
+
+
+<template name="TopNavigation">
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Quotey</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      </ul>
+      <form class="navbar-form navbar-left main-search" role="search">
+        <div class="form-group">
+          <input type="text" name="searchQuery" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/submit">Submit</a></li>
+        <li><a href="/quotes">Quotes</a></li>
+        <li><a href="/explore">Explore</a></li>
+        <li><a href="/about">About</a></li>
+        <li>{{> atNavButton }}</li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<template name="NotFound">
+You are looking for something that is not here.
+</template>

@@ -1,0 +1,78 @@
+/* CSS declarations go here */
+
+@import url(http://fonts.googleapis.com/css?family=Karma);
+
+
+body {
+  
+}
+
+li {
+
+}
+
+.quote { 
+	font-size: 1.7em; 
+	list-style-type: none; 
+	padding: 1em 0 1em; 
+}
+
+.single-quote {
+  font-size: 1.7em; 
+  text-align: center;
+  background-color: #E0D8E0;
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+
+.homepage-quote {
+  font-size: 1.7em; 
+  text-align: center;
+  background-color: #E0D8E0;
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+
+.list-quote {
+  font-size: 1.7em; 
+  text-align: center;
+  background-color: #E0D8E0;
+  padding-top: 5em;
+  padding-bottom: 5em;
+  border-bottom: 1px solid #BBB6BB;
+}
+
+.vertical-container {
+  flex-direction: column;
+  height: 100vh;
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+
+.landing {
+  
+  font-family: 'Karma', serif;
+}
+
+.navbar {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-right: 10px;
+}
+
+.quotation {
+  font-family: 'Karma', serif;
+}
+
+.author {
+  font-family: 'Karma', serif;
+  font-size: 80%;
+}
+
+.new-quote {
+  margin-top: 50px;
+}

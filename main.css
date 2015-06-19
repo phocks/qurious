@@ -53,6 +53,17 @@ li {
           justify-content: center;
 }
 
+.vertical-center {
+  flex-direction: column;
+  height: 100px;  
+  display: -webkit-flex;
+  display:         flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+
 .landing {
   
   font-family: 'Karma', serif;
@@ -71,6 +82,7 @@ li {
 .author {
   font-family: 'Karma', serif;
   font-size: 80%;
+  margin-top: 0.6em;
 }
 
 .new-quote {

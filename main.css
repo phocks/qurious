@@ -88,3 +88,11 @@ li {
 .new-quote {
   margin-top: 50px;
 }
+
+
+.footer {
+  color: white;
+  background-color: #666;
+  padding-top: 5em;
+  padding-bottom: 5em;
+}

@@ -8,7 +8,23 @@
 </head>
 
 
+
+
+<template name="ApplicationLayout">
+  <header>
+    {{> TopNavigation }}
+    {{> yield }}
+  </header>
+</template>
+
+
+
+
+
+
 <template name="Explore">
+<div class="container">
+  <div class="row">
   <div class="col-md-6 col-md-offset-3">
     {{> esInput index="quotes" placeholder="Search..." }}
 
@@ -28,6 +44,8 @@
     {{#ifEsIsSearching index="quotes"}}
             <div>Loading...</div>
     {{/ifEsIsSearching}}
+  </div>
+  </div>
   </div>
 </template>
 
@@ -253,12 +271,7 @@
 
 
 
-<template name="ApplicationLayout">
-<header>
-      {{> TopNavigation }}
-      {{> yield}}
-</header>
-</template>
+
 
 
 
@@ -346,4 +359,26 @@
 
 <template name="NotFound">
 You are looking for something that is not here.
+</template>
+
+
+
+
+
+
+
+<template name="Footer">
+ <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="">
+          
+          <div class="quotation">
+             footer
+          </div>          
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

@@ -372,20 +372,44 @@ Router.route('/authors', function () {
 });
 
 
+Router.route('/authors/:_id', {
+  // this template will be rendered until the subscriptions are ready
+  loadingTemplate: 'Loading',
 
-Router.route('/quotes/:_quote_slug', function () {
-  this.layout('ApplicationLayout');
-  this.render('SingleQuote', {
-    data: function () {
-      var quote =  Quotes.findOne({ quote_id: this.params._quote_slug });
-      if (!quote) {
-        this.render('NotFound');
-      } else {
-        return quote;
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe('quotes', this.params._id);
+  },
+
+  action: function () {
+    this.render('SingleQuote', {
+      data: function() {
+        return Quotes.findOne({});
       }
-       
-    }
-  });
+    });
+  }
+});
+
+
+Router.route('/quotes/:_quote_slug', {
+  loadingTemplate: 'Loading',
+
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe('quotes');
+  },
+  action: function () {
+    this.render('SingleQuote', {
+      data: function () {
+        var quote = Quotes.findOne({ quote_id: this.params._quote_slug });
+        if (!quote) {
+          this.render('NotFound');
+        } else {
+          return quote;
+        }    
+      }
+    });  
+  }
 });
 
 
@@ -408,9 +432,17 @@ Router.route('/about', function () {
 });
 
 
-Router.route('/quotes', function () {
-  this.layout('ApplicationLayout');  
-  this.render('Quotes');
+Router.route('/quotes', {
+    loadingTemplate: 'Loading',
+
+    waitOn: function () {
+      // return one handle, a function, or an array
+      return Meteor.subscribe('quotes');
+    },
+
+    action: function () { 
+    this.render('Quotes');
+  }
 });
 
 Router.route('/explore', function () {
@@ -424,15 +456,19 @@ Router.route('/search', function () {
 });
 
 
-Router.route('/', function () {
-  this.layout('ApplicationLayout');  
-  this.render('Home', {
-    data: function() {
-      var count = Quotes.find().count();
-      var random_index = Math.floor(Math.random() * (count));
-      var random_object = Quotes.findOne({}, {skip:random_index}
-      );
-      return random_object;
-    }
-  });
+Router.route('/', {
+  waitOn: function () {
+    return Meteor.subscribe('quotes');
+  },
+  action: function () {  
+    this.render('Home', {
+      data: function() {
+        var count = Quotes.find().count();
+        var random_index = Math.floor(Math.random() * (count));
+        var random_object = Quotes.findOne({}, {skip:random_index}
+        );
+        return random_object;
+      }
+    });
+}
 });

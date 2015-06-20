@@ -8,20 +8,6 @@
 </head>
 
 
-
-
-<template name="ApplicationLayout">
-  <header>
-    {{> TopNavigation }}
-    {{> yield }}
-  </header>
-</template>
-
-
-
-
-
-
 <template name="Explore">
 <div class="container">
   <div class="row">
@@ -271,7 +257,13 @@
 
 
 
-
+<template name="ApplicationLayout">
+  <header>
+    {{> TopNavigation }}
+    {{> yield }}
+    
+  </header>
+</template>
 
 
 

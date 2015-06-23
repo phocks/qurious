@@ -24,7 +24,6 @@ if (Meteor.isClient) { // only runs on the client
   // We need to tell the client to subscribe explicitly to data collections
   // Later we don't want to subscribe to the whole thing
   Meteor.subscribe("quotes");
-  Meteor.subscribe("authors");
   Meteor.subscribe("counters");
 
 
@@ -37,30 +36,30 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
-Router.configure({
-  layoutTemplate: 'ApplicationLayout',
-  loadingTemplate: "Loading",
-});
-
-
-Router.plugin('dataNotFound', {notFoundTemplate: 'NotFound'});
-
-
-
-
-// Here are the helpers
-
-  Template.Home.helpers({
-    latestQuote: function() {
-      var count = Quotes.find().count();
-      var random_index = Math.floor(Math.random() * (count));
-      var random_object = Quotes.findOne(
-          {skip:random_index}
-      );
-      return random_object;
-    }
-    
+  Router.configure({
+    layoutTemplate: 'ApplicationLayout',
+    loadingTemplate: "Loading",
   });
+
+
+  Router.plugin('dataNotFound', {notFoundTemplate: 'NotFound'});
+
+
+
+
+  // Here are the helpers
+
+    Template.Home.helpers({
+      latestQuote: function() {
+        var count = Quotes.find().count();
+        var random_index = Math.floor(Math.random() * (count));
+        var random_object = Quotes.findOne(
+            {skip:random_index}
+        );
+        return random_object;
+      }
+      
+    });
 
   Template.Home.events({
       "click .container": function () {

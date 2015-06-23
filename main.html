@@ -8,61 +8,11 @@
 </head>
 
 
-<template name="Explore">
-<div class="container">
-  <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    {{> esInput index="quotes" placeholder="Search..." }}
-
-
-    <ul>
-        {{#esEach index="quotes"}}
-            <li>&ldquo;{{quotation}}&rdquo; &mdash;{{author}}</li>
-        {{/esEach}}
-    </ul>
-
-    {{> esLoadMoreButton index="quotes"}}
-
-    {{#ifEsHasNoResults index="quotes"}}
-        <div class="no-results">No results found!</div>
-    {{/ifEsHasNoResults}}
-
-    {{#ifEsIsSearching index="quotes"}}
-            <div>Loading...</div>
-    {{/ifEsIsSearching}}
-  </div>
-  </div>
-  </div>
-</template>
-
-
 
 <template name="Loading">
   
   <div class="col-md-6 col-md-offset-3 vertical-center">
-    Loading.......
-  </div>
-    
-</template>
-
-
-
-<template name="OneAuthor">
-  
-  <div class="col-md-6 col-md-offset-3">
-    One Author.
-  </div>
-    
-</template>
-
-
-
-<template name="Search"> 
-  
-      
-  
-  <div class="col-md-6 col-md-offset-3">
-    Search
+    <img src="spinner.gif">
   </div>
     
 </template>
@@ -317,18 +267,14 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       </ul>
-      <form class="navbar-form navbar-left main-search" role="search">
-        <div class="form-group">
-          <input type="text" name="searchQuery" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/submit">Submit</a></li>
-        <li><a href="/quotes">Quotes</a></li>
-        <li><a href="/explore">Explore</a></li>
+        {{#if currentUser}}
+          <li><a href="/submit">Submit</a></li>
+        {{/if}}
+        <li><a href="/quotes">Explore</a></li>
         <li><a href="/about">About</a></li>
-        <li>{{> atNavButton }}</li>
+        <li>{{#unless currentUser}}<a href="/login">Sign In</a>{{/unless}}
+        {{#if currentUser}}<a href="/logout">Sign Out</a>{{/if}}</li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

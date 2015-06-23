@@ -20,7 +20,7 @@ li {
 .single-quote {
   font-size: 1.7em; 
   text-align: center;
-  background-color: #E0D8E0;
+  background-color: #EBEBEB;
   padding-top: 5em;
   padding-bottom: 5em;
 }
@@ -28,7 +28,7 @@ li {
 .homepage-quote {
   font-size: 1.7em; 
   text-align: center;
-  background-color: #E0D8E0;
+  background-color: #EBEBEB;
   padding-top: 5em;
   padding-bottom: 5em;
 }
@@ -36,7 +36,7 @@ li {
 .list-quote {
   font-size: 1.7em; 
   text-align: center;
-  background-color: #E0D8E0;
+  background-color: #EBEBEB;
   padding-top: 5em;
   padding-bottom: 5em;
   border-bottom: 1px solid #BBB6BB;
@@ -73,6 +73,7 @@ li {
   margin-bottom: 0;
   border-bottom: none;
   padding-right: 10px;
+  background-color: #323232;
 }
 
 .quotation {

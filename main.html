@@ -8,6 +8,57 @@
 </head>
 
 
+<!-- First up we have the iron-router main layout -->
+<template name="ApplicationLayout">
+  <header>
+    {{> Header }}
+  </header>
+
+    {{> yield }}    
+  
+</template>
+
+
+<template name="Header">
+  <div class="nav-block">
+    <div class="text-logo"><a href="/">Quotey</a></div>       
+    <div class="navlink">
+    <a  href="/quotes">Explore</a>
+    </div>
+  </div>
+  
+</template>
+
+
+
+
+<template name="Home">
+  <div class="vertical-container">
+    <div class="homepage-quote">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+
+
+
+                 
+          
+            
+            <div class="quotation">
+               &ldquo;{{quotation}}&rdquo;
+            </div>
+            
+            <div class="author">
+              &mdash;{{author}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
 
 <template name="Loading">
   
@@ -139,81 +190,6 @@
 
 
 
-<template name="Author">
-  <div class="container">
-    <header>
-      <b>Quotey</b> &mdash; {{> loginButtons }}
-      <hr>
-        
-    </header>
-
-    {{name}}<br>
-    
-
-  </div>
-</template>
-
-
-
-
-
-<template name="ListAuthors">
-  <div class="container">
-    <header>
-      <b>Quotey</b> &mdash; {{> loginButtons }}
-      <hr>        
-    </header>
-
-    {{#if currentUser}}
-        <form class="new-author">
-          <input type="text" name="author" placeholder="New author" />
-          <input type="submit" id="submit"/>
-        </form>
-    {{/if}}
-
-    {{#each authors}}
-      <ul>
-      {{> SingleAuthor}}
-      </ul>
-    {{/each}}
-
-  </div>
-</template>
-
-
-
-
-
-<template name="Create">
-  <div class="container">
-    <header>
-      <b>Quotey</b> &mdash; {{> loginButtons }}
-      <hr>        
-    </header>
-
-    {{#if currentUser}}
-        <form class="new-author">
-          <input type="text" name="author" placeholder="New author" />
-          <input type="submit" id="submit"/>
-        </form>
-    {{/if}}
-
-  </div>
-</template>
-
-
-
-
-
-
-
-<template name="ApplicationLayout">
-  <header>
-    {{> TopNavigation }}
-    {{> yield }}
-    
-  </header>
-</template>
 
 
 
@@ -222,24 +198,6 @@
 
 
 
-<template name="Home"> 
-  <div class="homepage-quote">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          
-          <div class="quotation">
-             &ldquo;{{quotation}}&rdquo;
-          </div>
-          
-          <div class="author">
-            &mdash;{{author}}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
 
 
 <template name="About">
@@ -249,37 +207,7 @@
 
 
 
-<template name="TopNavigation">
-<nav class="navbar navbar-default navbar-static-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Quotey</a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        {{#if currentUser}}
-          <li><a href="/submit">Submit</a></li>
-        {{/if}}
-        <li><a href="/quotes">Explore</a></li>
-        <li><a href="/about">About</a></li>
-        <li>{{#unless currentUser}}<a href="/login">Sign In</a>{{/unless}}
-        {{#if currentUser}}<a href="/logout">Sign Out</a>{{/if}}</li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-</template>
 
 
 
@@ -319,4 +247,41 @@ You are looking for something that is not here.
       </div>
     </div>
   </div>
+</template>
+
+
+
+
+
+
+<template name="TopNavigation">
+<nav class="navbar navbar-default navbar-static-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Quotey</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {{#if currentUser}}
+          <li><a href="/submit">Submit</a></li>
+        {{/if}}
+        <li><a href="/quotes">Explore</a></li>
+        <li><a href="/about">About</a></li>
+        <li>{{#unless currentUser}}<a href="/login">Sign In</a>{{/unless}}
+        {{#if currentUser}}<a href="/logout">Sign Out</a>{{/if}}</li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
 </template>

@@ -6,15 +6,8 @@
 
 // First up we are going to create a few collections
 Quotes = new Mongo.Collection('quotes');
-Authors = new Mongo.Collection('authors');
 Counters = new Mongo.Collection('counters');
 
-// Set up Easy-Search
-Quotes.initEasySearch(['author', 'quotation'], {
-    'limit' : 10,
-    'use' : 'mongo-db'
-    
-});
 
 // Here we have stuff that will only run on the client's browser
 
@@ -32,7 +25,7 @@ if (Meteor.isClient) { // only runs on the client
   // One of 'USERNAME_AND_EMAIL', 'USERNAME_AND_OPTIONAL_EMAIL', 
   // 'USERNAME_ONLY', or 'EMAIL_ONLY' (default).
   Accounts.ui.config({
-    passwordSignupFields: "EMAIL_ONLY"
+    passwordSignupFields: "USERNAME_AND_EMAIL"
   });
 
 
@@ -61,12 +54,13 @@ if (Meteor.isClient) { // only runs on the client
       
     });
 
+/* A testing function that changed themes
   Template.Home.events({
       "click .container": function () {
       Meteor.call('changeTheme', this._id, this.theme);
     }
     });
-
+*/
 
   Template.Quotes.helpers({
       quotes: function () {
@@ -74,11 +68,6 @@ if (Meteor.isClient) { // only runs on the client
       }
     });
 
-  Template.ListAuthors.helpers({
-      authors: function () {
-        return Authors.find({}, {sort: {createdAt: -1}});
-      }
-    });
 
   UI.registerHelper('formatTime', function(context, options) {
     if(context)
@@ -111,7 +100,7 @@ if (Meteor.isClient) { // only runs on the client
       Meteor.call('deleteQuote', this._id);
     },
     "click .list-quote": function () {
-      Router.go('/quotes/' + this.quote_id);
+      Router.go('/quotes/' + this._id);
     }
   });
 
@@ -141,44 +130,6 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
-  
-Template.Create.events({
-    "submit .new-author": function (event) {      
-      var author = event.target.author.value;
-      if (author == "") return false; // prevent empty strings
-
-      Meteor.call('addAuthor', author);
-
-      // Clear form      
-      event.target.author.value = "";
-
-      // Prevent default action from form submit
-      return false;
-    },
-    "click .delete": function () {
-      Meteor.call('deleteAuthor', this._id);
-    }
-  });
-
-
-
-Template.ListAuthors.events({
-  "submit .new-author": function (event) {      
-    var author = event.target.author.value;
-    if (author == "") return false; // prevent empty strings
-
-    Meteor.call('addAuthor', author);
-
-    // Clear form      
-    event.target.author.value = "";
-
-    // Prevent default action from form submit
-    return false;
-  },
-  "click .delete": function () {
-    Meteor.call('deleteAuthor', this._id);
-  }
-});
 
 
 Template.TopNavigation.events({
@@ -226,10 +177,6 @@ if (Meteor.isServer) {
     return Quotes.find({} /*,  {sort: {createdAt: -1}, limit: 3} */);
   });
 
-  Meteor.publish("authors", function () {
-    return Authors.find();
-  });
-
   Meteor.publish("counters", function () {
     return Counters.find();
   });
@@ -255,7 +202,6 @@ Meteor.methods({
     var counter = Counters.findOne({ query: { _id: 'quote_id' } });
                 
        
-
     
 
     Quotes.insert({      
@@ -362,12 +308,9 @@ AccountsTemplates.configure({
 });
 
 
-Router.route('/create', function () {
-  this.render('Create');
-});
-
-Router.route('/authors', function () {
-  this.render('ListAuthors');
+Router.route('/logout', function() {
+  Meteor.logout();
+  Router.go('/');
 });
 
 
@@ -400,7 +343,7 @@ Router.route('/quotes/:_quote_slug', {
   action: function () {
     this.render('SingleQuote', {
       data: function () {
-        var quote = Quotes.findOne({ quote_id: this.params._quote_slug });
+        var quote = Quotes.findOne({ _id: this.params._quote_slug });
         if (!quote) {
           this.render('NotFound');
         } else {

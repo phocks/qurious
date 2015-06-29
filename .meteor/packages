@@ -9,7 +9,7 @@ twbs:bootstrap
 accounts-password
 iron:router
 momentjs:moment
-accounts-ui
 matteodem:easy-search
 useraccounts:bootstrap
 useraccounts:core
+accounts-ui

@@ -54,6 +54,11 @@ body {
           justify-content: center;
 }
 
+.nonflex-container {
+  border-top: 5px #FF6600 solid;
+  background-color: #EBEBEB;
+}
+
 
 .landing {
   

@@ -11,17 +11,19 @@
 <!-- First up we have the iron-router main layout -->
 <template name="ApplicationLayout">
   <header>
-    {{> Header }}
+    {{> Header}}
   </header>
 
-    {{> yield }}    
+    {{> yield}} 
+
+    {{> Footer}}
   
 </template>
 
 
 <template name="Header">
   <div class="nav-block">
-    <div class="text-logo"><a href="/">Quotey</a></div>       
+    <div class="text-logo"><a href="/#">Quotey</a></div>       
     <div class="navlink">
     <a  href="/quotes">Explore</a>
     </div>
@@ -32,16 +34,31 @@
 
 
 
+<template name="Footer">
+ <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="">
+          
+          <div class="quotation">
+             Quotey
+          </div>          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+
 <template name="Home">
   <div class="vertical-container">
     <div class="homepage-quote">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-md-6 col-md-offset-3">
-
-
-
-                 
+          <div class="col-md-6 col-md-offset-3">                 
           
             
             <div class="quotation">
@@ -60,12 +77,50 @@
 
 
 
-<template name="Loading">
-  
-  <div class="col-md-6 col-md-offset-3 vertical-center">
-    <img src="spinner.gif">
+
+
+<template name="SingleQuote">
+  <div class="vertical-container">
+    <div class="single-quote">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            
+            <div class="quotation">
+              
+              &ldquo;{{quotation}}&rdquo;
+              
+            </div>
+            
+            <div class="author">
+              &mdash;{{author}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-    
+</template>
+
+
+
+
+
+
+<template name="Loading">
+  <div class="vertical-container">
+    <div class="single-quote">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="quotation">
+              <img src="/loader.gif">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 
@@ -83,13 +138,11 @@
 
 
 <template name="Quotes">
- 
-
-    
+  <div class="nonflex-container">    
     {{#each quotes}}
       {{> Quote}}
     {{/each}}
-  
+  </div>
 </template>
 
 
@@ -129,26 +182,7 @@
 
 
 
-<template name="SingleQuote">
-  <div class="single-quote">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          
-          <div class="quotation">
-            
-            &ldquo;{{quotation}}&rdquo;
-            
-          </div>
-          
-          <div class="author">
-            &mdash;{{author}}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
+
 
 
 
@@ -233,21 +267,7 @@ You are looking for something that is not here.
 
 
 
-<template name="Footer">
- <div class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="">
-          
-          <div class="quotation">
-             footer
-          </div>          
-          
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
+
 
 
 

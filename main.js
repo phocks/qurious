@@ -29,6 +29,8 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
+  // Some more configs to run initially
+
   Router.configure({
     layoutTemplate: 'ApplicationLayout',
     loadingTemplate: "Loading",
@@ -36,6 +38,11 @@ if (Meteor.isClient) { // only runs on the client
 
 
   Router.plugin('dataNotFound', {notFoundTemplate: 'NotFound'});
+
+
+  // We have a package that gets us to the top when we navigate
+  // This changes the animation period, set to zero for none 
+  IronRouterAutoscroll.animationDuration = 0;
 
 
 

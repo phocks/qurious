@@ -1,15 +1,11 @@
 /* CSS declarations go here */
 
 @import url(http://fonts.googleapis.com/css?family=Karma);
-
+@import url(http://fonts.googleapis.com/css?family=Lobster);
 
 body {
-  
 }
 
-li {
-
-}
 
 .quote { 
 	font-size: 1.7em; 
@@ -28,9 +24,12 @@ li {
 .homepage-quote {
   font-size: 1.7em; 
   text-align: center;
-  background-color: #EBEBEB;
+  
   padding-top: 5em;
   padding-bottom: 5em;
+  
+
+
 }
 
 .list-quote {
@@ -43,7 +42,9 @@ li {
 }
 
 .vertical-container {
-  flex-direction: column;
+  border-top: 5px #FF6600 solid;
+  background-color: #EBEBEB;
+  
   height: 100vh;
   display: -webkit-flex;
   display:         flex;
@@ -53,16 +54,6 @@ li {
           justify-content: center;
 }
 
-.vertical-center {
-  flex-direction: column;
-  height: 100px;  
-  display: -webkit-flex;
-  display:         flex;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-}
 
 .landing {
   
@@ -96,4 +87,33 @@ li {
   background-color: #666;
   padding-top: 5em;
   padding-bottom: 5em;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #eee;
+  background-color: #555;
+}
+
+.nav-block {
+	position: absolute;
+	top: 8px;
+	left: 10px;
+	opacity: 0.5;
+}
+
+.nav-block div {
+	display: inline;
+	margin-right: 10px;
+}
+
+.text-logo a {	
+	font-family: Lobster, serif;
+	font-size: 26px;
+	color: black;
+	text-decoration: none;
+}
+
+.navlink {
+
 }

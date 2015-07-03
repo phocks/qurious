@@ -16,7 +16,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // We need to tell the client to subscribe explicitly to data collections
   // Later we don't want to subscribe to the whole thing
-  Meteor.subscribe("quotes");
+  // moved to individual routes // Meteor.subscribe("quotes");
   Meteor.subscribe("counters");
 
 
@@ -70,10 +70,12 @@ if (Meteor.isClient) { // only runs on the client
 */
 
   Template.Quotes.helpers({
-      quotes: function () {
-        return Quotes.find({}, {sort: {createdAt: -1}});
-      }
-    });
+    quotes: function () {
+      return Quotes.find({}, {sort: {createdAt: -1}});
+    }
+  });
+
+  
 
 
   UI.registerHelper('formatTime', function(context, options) {
@@ -180,7 +182,7 @@ if (Meteor.isServer) {
 
 
   // Get the server to publish our collections
-  Meteor.publish("quotes", function () {
+  Meteor.publish("quotes-all", function () {
     return Quotes.find({} /*,  {sort: {createdAt: -1}, limit: 3} */);
   });
 
@@ -284,6 +286,7 @@ Meteor.methods({
 
 // Here come our routes which catch and process URLs
 
+/* just making our own route
 AccountsTemplates.configureRoute('signIn', {
     name: 'signin',
     path: '/login',
@@ -291,9 +294,11 @@ AccountsTemplates.configureRoute('signIn', {
     layoutTemplate: 'ApplicationLayout',
     redirect: '/',
 });
+*/
+
 
 AccountsTemplates.configure({
-  forbidClientAccountCreation: false,
+  forbidClientAccountCreation: true,
   enablePasswordChange: true,
   showForgotPasswordLink: true,
 });
@@ -314,6 +319,11 @@ AccountsTemplates.configure({
     }
 });
 
+Router.route('/login', function() {
+  this.render('Header', {to: 'header'});
+  this.render('Login');
+});
+
 
 Router.route('/logout', function() {
   Meteor.logout();
@@ -321,33 +331,18 @@ Router.route('/logout', function() {
 });
 
 
-Router.route('/authors/:_id', {
-  // this template will be rendered until the subscriptions are ready
-  loadingTemplate: 'Loading',
 
-  waitOn: function () {
-    // return one handle, a function, or an array
-    return Meteor.subscribe('quotes', this.params._id);
-  },
-
-  action: function () {
-    this.render('SingleQuote', {
-      data: function() {
-        return Quotes.findOne({});
-      }
-    });
-  }
-});
-
-
+// Here is a nice little route that gives a single quote
+// given a specified _id in the quotes collection as URL param
 Router.route('/quotes/:_quote_slug', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotes');
+    return Meteor.subscribe('quotes-all');
   },
   action: function () {
+    this.render('Header', {to: 'header'});
     this.render('SingleQuote', {
       data: function () {
         var quote = Quotes.findOne({ _id: this.params._quote_slug });
@@ -363,53 +358,37 @@ Router.route('/quotes/:_quote_slug', {
 
 
 
-Router.route('author/:_slug', function () {
-  this.render('Author', {
-    data: function () {
-      return Authors.findOne({ slug: this.params._slug });
-    }
-  });
-});
-
-
 Router.route('/submit', function () {    
+  this.render('Header', {to: 'header'});
   this.render('Submit');
 });
 
-Router.route('/about', function () {    
-  this.render('About');
-});
 
 
 Router.route('/quotes', {
-    loadingTemplate: 'Loading',
+  loadingTemplate: 'Loading',
 
-    waitOn: function () {
-      // return one handle, a function, or an array
-      return Meteor.subscribe('quotes');
-    },
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe('quotes-all');
+  },
 
-    action: function () { 
+  action: function () { 
+    this.render('Header', {to: 'header'});
     this.render('Quotes');
   }
 });
 
-Router.route('/explore', function () {
-  this.layout('ApplicationLayout');  
-  this.render('Explore');
-});
-
-Router.route('/search', function () {
-  this.layout('ApplicationLayout');  
-  this.render('Search');
-});
 
 
 Router.route('/', {
-  waitOn: function () {
+  /*waitOn: function () {
     return Meteor.subscribe('quotes');
-  },
+  },*/
   action: function () {  
+    this.render('HeaderNoLogo', {to: 'header'});
+    this.render('Home');
+/*
     this.render('Home', {
       data: function() {
         var count = Quotes.find().count();
@@ -419,5 +398,6 @@ Router.route('/', {
         return random_object;
       }
     });
-}
+*/
+  }
 });

@@ -4,11 +4,17 @@
 @import url(http://fonts.googleapis.com/css?family=Lobster);
 @import url(http://fonts.googleapis.com/css?family=Lato);
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab);
+@import url(http://fonts.googleapis.com/css?family=Cardo:400,700);
+@import url(http://fonts.googleapis.com/css?family=Playfair+Display);
 
 body {
   font-family: 'Roboto Slab', serif;
+  background-color: #383838;
 }
-
+ 
+.body-container {
+  background-color: #EAEAEA;
+}
 
 .quote { 
 	font-size: 1.7em; 
@@ -19,7 +25,7 @@ body {
 .single-quote {
   font-size: 1.7em; 
   text-align: center;
-  background-color: #EBEBEB;
+  background-color: #EAEAEA;
   padding-top: 5em;
   padding-bottom: 5em;
 }
@@ -31,38 +37,85 @@ body {
   padding-bottom: 5em;
 }
 
-.list-quote {
-  font-size: 1.7em; 
+.homepage-title {
+  padding-top: 150px;
+  padding-bottom: 200px;
   text-align: center;
-  background-color: #EBEBEB;
-  padding-top: 5em;
-  padding-bottom: 5em;
-  border-bottom: 1px solid #BBB6BB;
+}
+
+.homepage-title h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 150px;
+}
+
+.homepage-title .subtitle {
+  font-size: 110%;
+  position: relative;  
+  top: 40px;
+  color: #777;
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+  .homepage-title h1 {
+    font-size: 100px;
+  }
+}
+
+.homepage-about {
+  background-color: #777;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.explore {
+  margin-top: 50px;
+  padding-bottom: 50px;
+}
+
+.list-quote {  
+  background-color: #EAEAEA;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.list-quote .quotation {
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
+
 }
 
 .vertical-container {
-  border-top: 5px #FF6600 solid;
-  background-color: #EBEBEB;
+  border-top: 5px #FF6D0C solid;
+  background-color: #EAEAEA;
   
-  height: 100vh;
+  min-height: 100vh;
   display: -webkit-flex;
   display:         flex;
   -webkit-align-items: center;
           align-items: center;
   -webkit-justify-content: center;
           justify-content: center;
+
+  
+  overflow: hidden;
+  justify-content: center;
+  flex-direction: column;
 }
+
+
+
 
 .nonflex-container {
-  border-top: 5px #FF6600 solid;
-  background-color: #EBEBEB;
+  border-top: 5px #FF6D0C solid;
+  background-color: #EAEAEA;
 }
 
-
-.landing {
-  
-  font-family: 'Karma', serif;
-}
 
 .navbar {
   margin-bottom: 0;
@@ -71,14 +124,19 @@ body {
   background-color: #323232;
 }
 
-.quotation {
-  font-family: 'Karma', serif;
+.single-quote .quotation {
+  font-family: 'Cardo', serif;
+  font-weight: 700;
+  font-size: 150%
 }
 
-.author {
-  font-family: 'Karma', serif;
+.single-quote .author {
+  font-family: 'Cardo', serif;
+  font-weight: 700;
   font-size: 80%;
-  margin-top: 0.6em;
+  margin-top: 1em;
+  color: #aaa;
+  text-transform: uppercase;
 }
 
 .new-quote {
@@ -88,9 +146,9 @@ body {
 
 .footer {
   color: #999;
-  background-color: #323232;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  background-color: #383838;
+  padding-top: 1.5em;
+  padding-bottom: 200px;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
@@ -101,18 +159,46 @@ body {
 
 .nav-block {
 	position: absolute;
-	top: 8px;
-	left: 10px;
 	opacity: 0.5;
+  width: 100%;
 }
 
 .nav-block div {
 	display: inline;
-	margin-right: 10px;
+}
+
+.nav-block ul {
+  position: relative;
+  top: 18px;
+  right: 10px;
+  float: right;
+  overflow: hidden; 
+  margin: 0; 
+  padding: 0;
+  list-style-type: none;
+}
+
+.nav-block li {
+  float: left; margin-bottom: 0;  
+  margin-right: 0.5em;
+  background: #eee; 
+  line-height: 1; 
+  padding: 0.25em 0.5em;
+}
+
+.nav-block a {
+   
+}
+
+.text-logo {
+  position: relative;
+  top: 8px;
+  left: 10px;
+
 }
 
 .text-logo a {	
-	font-family: Lobster, serif;
+	font-family: "Playfair Display", serif;
 	font-size: 26px;
 	color: black;
 	text-decoration: none;
@@ -126,4 +212,18 @@ body {
   text-align: right;
   font-size: 1em;
   margin-right: 20px;
+}
+
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+  .created-by {
+    text-align: center;
+    font-size: 1em;
+    margin-right: 0;
+  }
+}
+
+.created-by a {
+  color: #999;
 }

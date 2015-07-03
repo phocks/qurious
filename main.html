@@ -11,12 +11,14 @@
 <!-- First up we have the iron-router main layout -->
 <template name="ApplicationLayout">
   <header>
-    {{> Header}}
+    {{> yield "header"}}
   </header>
-
+  <div class="body-container">
     {{> yield}} 
-
+  </div>
+  <footer>
     {{> Footer}}
+  </footer>
   
 </template>
 
@@ -24,12 +26,28 @@
 <template name="Header">
   <div class="nav-block">
     <div class="text-logo"><a href="/#">Quotey</a></div>       
-    <div class="navlink">
-    <a class="hidden" href="/quotes">Explore</a>
-    </div>
+    <ul class="right-nav">
+      <li><a href="/quotes">Explore</a></li>
+      <li>Create</li>      
+    </ul>
   </div>
   
 </template>
+
+
+
+
+<template name="HeaderNoLogo">
+  <div class="nav-block">
+    <div class="text-logo hidden"><a href="/#">Quotey</a></div>       
+    <ul>
+      <li><a href="/quotes">Explore</a></li>
+      <li>Create</li>
+    </ul>
+  </div>
+  
+</template>
+
 
 
 
@@ -41,9 +59,8 @@
         <div class="">
           
           <div class="created-by">
-             A Meagre production, &copy; 2015.
-          </div>          
-          
+             A <a href="http://meag.re">Meagre production</a>, &copy; 2015.
+          </div>
         </div>
       </div>
     </div>
@@ -53,21 +70,23 @@
 
 
 
-<template name="Home">
-  <div class="vertical-container">
-    <div class="homepage-quote">
+<template name="Home"> 
+  <div class="nonflex-container">
+    <div class="homepage-title">
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6 col-md-offset-3">                 
-          
-            
-            <div class="quotation">
-               &ldquo;{{quotation}}&rdquo;
-            </div>
-            
-            <div class="author">
-              &mdash;{{author}}
-            </div>
+            <h1>Quotey</h1>
+            <p class="subtitle">an experiment in quotation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="homepage-about">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt pretium hendrerit. Pellentesque lacinia mauris at aliquet sollicitudin. Donec at enim at ex interdum porttitor. Morbi feugiat, felis eget aliquam luctus, risus nisi pharetra eros, eget venenatis enim lorem eget felis. Nam blandit, enim id imperdiet vestibulum, massa quam aliquet lacus, et interdum libero orci at turpis. Cras ipsum massa, commodo eget semper non, iaculis non lorem. Etiam ligula lorem, cursus vitae odio sit amet, suscipit semper felis. Aenean gravida facilisis nulla, in consequat libero aliquam quis. Pellentesque tristique nisi id accumsan euismod.</p>
           </div>
         </div>
       </div>
@@ -82,9 +101,9 @@
 <template name="SingleQuote">
   <div class="vertical-container">
     <div class="single-quote">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-md-6 col-md-offset-3">
+          <div class="col-md-8 col-md-offset-2">
             
             <div class="quotation">
               
@@ -93,7 +112,7 @@
             </div>
             
             <div class="author">
-              &mdash;{{author}}
+              {{author}}
             </div>
           </div>
         </div>
@@ -125,68 +144,25 @@
 
 
 <template name="Login"> 
-  
-      
-  
-  <div class="col-md-6 col-md-offset-3">
-    {{> atForm}}
+  <div class="container">
+    <div class="col-md-6 col-md-offset-3">
+      {{> atForm}}
+    </div>
   </div>
-    
 </template>
 
 
 
 
 <template name="Quotes">
-  <div class="nonflex-container">    
-    {{#each quotes}}
-      {{> Quote}}
-    {{/each}}
+  <div class="nonflex-container">
+    <div class="explore">  
+      {{#each quotes}}
+        {{> Quote}}
+      {{/each}}
+    </div>
   </div>
 </template>
-
-
-
-<template name="Submit">
-  <div class="col-md-6 col-md-offset-3">
-    <header>
-        {{#unless currentUser}}
-          <p>Please login!</p>
-        {{/unless}}
-      
-        {{#if currentUser}}
-
-
-        <form class="new-quote">
-          <div class="form-group">
-            <label for="quotationText">Quotation text</label>
-            <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Quotation" autocomplete="off"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="authorText">Author</label>
-            <input type="text" class="form-control" id="authorText" name="author" placeholder="Author">
-          </div>          
-          
-         
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-        {{/if}}
-    </header>
-    
-    
-  </div>
-</template>
-
-
-
-
-
-
-
-
-
-
-
 
 
 <template name="Quote">
@@ -198,14 +174,14 @@
   <div class="list-quote">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          
+        <div class="col-md-8 col-md-offset-2">
+          {{ teaser }}
           <div class="quotation">
-             &ldquo;{{quotation}}&rdquo;
+             &ldquo;{{ quotation }}&rdquo;
           </div>
           
           <div class="author">
-            &mdash;{{author}}
+            &mdash;{{ author }}
           </div>
         </div>
       </div>
@@ -216,31 +192,41 @@
 
 </template>
 
-<template name="SingleAuthor">
-<li class="author"><a href="/{{slug}}">{{name}}</a> <small class="delete"><a href="#">delete</a></small></li>
+
+
+<template name="Submit">
+  <div class="container">
+    <div class="col-md-6 col-md-offset-3">
+      <header>
+          {{#unless currentUser}}
+            <p>Please login!</p>
+          {{/unless}}
+        
+          
+      </header>
+          {{#if currentUser}}
+          <div class="create">
+            <form class="new-quote">
+              <div class="form-group">
+                <label for="quotationText">Quotation text</label>
+                <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Quotation" autocomplete="off"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="authorText">Author</label>
+                <input type="text" class="form-control" id="authorText" name="author" placeholder="Author">
+              </div>          
+              
+             
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+          </div>
+          {{/if}}
+      
+      
+      
+    </div>
+  </div>
 </template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<template name="About">
-  <p>Write something in here that is about the product.</p>
-</template>
-
-
-
-
 
 
 

@@ -1,11 +1,10 @@
 /* CSS declarations go here */
 
 @import url(http://fonts.googleapis.com/css?family=Karma);
-@import url(http://fonts.googleapis.com/css?family=Lobster);
 @import url(http://fonts.googleapis.com/css?family=Lato);
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab);
 @import url(http://fonts.googleapis.com/css?family=Cardo:400,700);
-@import url(http://fonts.googleapis.com/css?family=Playfair+Display);
+@import url(http://fonts.googleapis.com/css?family=Playfair+Display:400italic);
 
 body {
   font-family: 'Roboto Slab', serif;
@@ -46,6 +45,7 @@ body {
 .homepage-title h1 {
   font-family: "Playfair Display", serif;
   font-size: 150px;
+  font-style: italic;
 }
 
 .homepage-title .subtitle {
@@ -64,9 +64,33 @@ body {
 
 .homepage-about {
   background-color: #777;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
+
+.front-quotation {
+  font-size: 3em;
+  font-family: Karma, serif;
+}
+
+.front-attribution {
+  font-size: 2.4em;
+  font-family: Karma, serif;
+  position: relative;
+  left: 9em;
+}
+
+.elongated-dash {
+    display:inline-block;
+    transform:scale(3,1); /* W3C */
+    -webkit-transform:scale(3,1); /* Safari and Chrome */
+    -moz-transform:scale(3,1); /* Firefox */
+    -ms-transform:scale(4,1); /* IE 9 */
+    -o-transform:scale(5,1); /* Opera */
+    position: relative;
+    right: 25px;
+}
+
 
 .explore {
   margin-top: 50px;
@@ -117,13 +141,6 @@ body {
 }
 
 
-.navbar {
-  margin-bottom: 0;
-  border-bottom: none;
-  padding-right: 10px;
-  background-color: #323232;
-}
-
 .single-quote .quotation {
   font-family: 'Cardo', serif;
   font-weight: 700;
@@ -170,7 +187,7 @@ body {
 .nav-block ul {
   position: relative;
   top: 18px;
-  right: 10px;
+  right: 5px;
   float: right;
   overflow: hidden; 
   margin: 0; 
@@ -192,13 +209,14 @@ body {
 
 .text-logo {
   position: relative;
-  top: 8px;
-  left: 10px;
+  top: 10px;
+  left: 12px;
 
 }
 
 .text-logo a {	
 	font-family: "Playfair Display", serif;
+	font-style: italic;
 	font-size: 26px;
 	color: black;
 	text-decoration: none;

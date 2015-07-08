@@ -20,7 +20,6 @@ if (Meteor.isClient) { // only runs on the client
   Meteor.subscribe("counters");
 
 
-
   // Here we work out what kind of signups we want to use
   // One of 'USERNAME_AND_EMAIL', 'USERNAME_AND_OPTIONAL_EMAIL', 
   // 'USERNAME_ONLY', or 'EMAIL_ONLY' (default).
@@ -49,7 +48,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // Here are the helpers
 
-    Template.Home.helpers({
+    /*Template.Home.helpers({
       latestQuote: function() {
         var count = Quotes.find().count();
         var random_index = Math.floor(Math.random() * (count));
@@ -59,7 +58,8 @@ if (Meteor.isClient) { // only runs on the client
         return random_object;
       }
       
-    });
+    });*/
+
 
 /* A testing function that changed themes
   Template.Home.events({
@@ -67,6 +67,15 @@ if (Meteor.isClient) { // only runs on the client
       Meteor.call('changeTheme', this._id, this.theme);
     }
     });
+*/
+  
+/*
+  Template.Header.helpers({
+    frontPage: function () {
+       return Session.get("frontPage");
+    }
+  });
+
 */
 
   Template.Quotes.helpers({
@@ -373,7 +382,7 @@ Router.route('/quotes', {
     return Meteor.subscribe('quotes-all');
   },
 
-  action: function () { 
+  action: function () {     
     this.render('Header', {to: 'header'});
     this.render('Quotes');
   }
@@ -385,8 +394,13 @@ Router.route('/', {
   /*waitOn: function () {
     return Meteor.subscribe('quotes');
   },*/
-  action: function () {  
-    this.render('HeaderNoLogo', {to: 'header'});
+  action: function () {
+    this.render('Header', { 
+      to: 'header',
+      data: {
+        frontPage: true
+      }
+    });
     this.render('Home');
 /*
     this.render('Home', {

@@ -11,59 +11,61 @@
 <!-- First up we have the iron-router main layout -->
 <template name="ApplicationLayout">
   <header>
-    {{> yield "header"}}
+  {{> yield "header"}}
   </header>
   <div class="body-container">
-    {{> yield}} 
+  {{> yield}} 
   </div>
   <footer>
-    {{> Footer}}
+  {{> Footer}}
   </footer>
-  
 </template>
 
 
 <template name="Header">
   <div class="nav-block">
-    <div class="text-logo"><a href="/#">Quotey</a></div>       
-    <ul class="right-nav">
-      <li><a href="/quotes">Explore</a></li>
-      <li>Create</li>      
-    </ul>
-  </div>
+    <div class="text-logo {{#if frontPage}}hidden{{/if}}">
+      <a href="/#">Quotey{{frontPage}}</a>
+    </div>    
+      <ul class="right-nav">
+        <li><a href="/quotes">Explore</a></li>
+        <li><a href="/login">Login</a></li>      
+      </ul>
+    </div>
   
 </template>
 
 
 
-
+<!-- hidden due to Josh's solution to send data context if homepage
 <template name="HeaderNoLogo">
   <div class="nav-block">
-    <div class="text-logo hidden"><a href="/#">Quotey</a></div>       
-    <ul>
-      <li><a href="/quotes">Explore</a></li>
-      <li>Create</li>
-    </ul>
+  <div class="text-logo hidden">
+    <a href="/#">Quotey</a>
+  </div>       
+  <ul class="right-nav">
+    <li><a href="/quotes">Explore</a></li>
+    <li>Create</li>
+  </ul>
   </div>
-  
 </template>
-
+-->
 
 
 
 
 <template name="Footer">
   <div class="footer">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="">
-          
-          <div class="created-by">
-             A <a href="http://meag.re">Meagre production</a>, &copy; 2015.
-          </div>
-        </div>
+  <div class="container-fluid">
+    <div class="row">
+    <div class="">
+      
+      <div class="created-by">
+       A <a href="http://meag.re">Meagre production</a>, &copy; 2015.
       </div>
     </div>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -72,25 +74,26 @@
 
 <template name="Home"> 
   <div class="nonflex-container">
-    <div class="homepage-title">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3">                 
-            <h1>Quotey</h1>
-            <p class="subtitle">an experiment in quotation.</p>
-          </div>
-        </div>
+  <div class="homepage-title">
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">                 
+      <h1>Quotey</h1>
+      <p class="subtitle">an experiment in quotation.</p>
       </div>
     </div>
-    <div class="homepage-about">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3">
-            <p class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt pretium hendrerit. Pellentesque lacinia mauris at aliquet sollicitudin. Donec at enim at ex interdum porttitor. Morbi feugiat, felis eget aliquam luctus, risus nisi pharetra eros, eget venenatis enim lorem eget felis. Nam blandit, enim id imperdiet vestibulum, massa quam aliquet lacus, et interdum libero orci at turpis. Cras ipsum massa, commodo eget semper non, iaculis non lorem. Etiam ligula lorem, cursus vitae odio sit amet, suscipit semper felis. Aenean gravida facilisis nulla, in consequat libero aliquam quis. Pellentesque tristique nisi id accumsan euismod.</p>
-          </div>
-        </div>
+    </div>
+  </div>
+  <div class="homepage-about">
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+      <p class="front-quotation lead"><em>&ldquo;Most people are other people. Their thoughts are someone else's opinions, their lives a mimicry, their passions a quotation.&rdquo;</em></p>
+      <p class="front-attribution lead"><span class="elongated-dash">&mdash;</span>Oscar Wilde</p>
       </div>
     </div>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -100,24 +103,24 @@
 
 <template name="SingleQuote">
   <div class="vertical-container">
-    <div class="single-quote">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2">
-            
-            <div class="quotation">
-              
-              &ldquo;{{quotation}}&rdquo;
-              
-            </div>
-            
-            <div class="author">
-              {{author}}
-            </div>
-          </div>
-        </div>
+  <div class="single-quote">
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+      
+      <div class="quotation">
+        
+        &ldquo;{{quotation}}&rdquo;
+        
+      </div>
+      
+      <div class="author">
+        {{author}}
+      </div>
       </div>
     </div>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -128,26 +131,26 @@
 
 <template name="Loading">
   <div class="vertical-container">
-    <div class="single-quote">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3">
-            <div class="quotation">
-              <img src="/loader.gif">
-            </div>
-          </div>
-        </div>
+  <div class="single-quote">
+    <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+      <div class="quotation">
+        <img src="/loader.gif">
+      </div>
       </div>
     </div>
+    </div>
+  </div>
   </div>
 </template>
 
 
 <template name="Login"> 
   <div class="container">
-    <div class="col-md-6 col-md-offset-3">
-      {{> atForm}}
-    </div>
+  <div class="col-md-6 col-md-offset-3">
+    {{> atForm}}
+  </div>
   </div>
 </template>
 
@@ -156,11 +159,11 @@
 
 <template name="Quotes">
   <div class="nonflex-container">
-    <div class="explore">  
-      {{#each quotes}}
-        {{> Quote}}
-      {{/each}}
-    </div>
+  <div class="explore">  
+    {{#each quotes}}
+    {{> Quote}}
+    {{/each}}
+  </div>
   </div>
 </template>
 
@@ -172,20 +175,20 @@
 
 
   <div class="list-quote">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          {{ teaser }}
-          <div class="quotation">
-             &ldquo;{{ quotation }}&rdquo;
-          </div>
-          
-          <div class="author">
-            &mdash;{{ author }}
-          </div>
-        </div>
+  <div class="container">
+    <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      {{ teaser }}
+      <div class="quotation">
+       &ldquo;{{ quotation }}&rdquo;
+      </div>
+      
+      <div class="author">
+      &mdash;{{ author }}
       </div>
     </div>
+    </div>
+  </div>
   </div>
 
 
@@ -196,35 +199,35 @@
 
 <template name="Submit">
   <div class="container">
-    <div class="col-md-6 col-md-offset-3">
-      <header>
-          {{#unless currentUser}}
-            <p>Please login!</p>
-          {{/unless}}
+  <div class="col-md-6 col-md-offset-3">
+    <header>
+      {{#unless currentUser}}
+      <p>Please login!</p>
+      {{/unless}}
+    
+      
+    </header>
+      {{#if currentUser}}
+      <div class="create">
+      <form class="new-quote">
+        <div class="form-group">
+        <label for="quotationText">Quotation text</label>
+        <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Quotation" autocomplete="off"></textarea>
+        </div>
+        <div class="form-group">
+        <label for="authorText">Author</label>
+        <input type="text" class="form-control" id="authorText" name="author" placeholder="Author">
+        </div>          
         
-          
-      </header>
-          {{#if currentUser}}
-          <div class="create">
-            <form class="new-quote">
-              <div class="form-group">
-                <label for="quotationText">Quotation text</label>
-                <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Quotation" autocomplete="off"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="authorText">Author</label>
-                <input type="text" class="form-control" id="authorText" name="author" placeholder="Author">
-              </div>          
-              
-             
-              <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-          </div>
-          {{/if}}
-      
-      
-      
-    </div>
+       
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      </div>
+      {{/if}}
+    
+    
+    
+  </div>
   </div>
 </template>
 
@@ -263,31 +266,31 @@ You are looking for something that is not here.
 <template name="TopNavigation">
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">Quotey</a>
-    </div>
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">Quotey</a>
+  </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        {{#if currentUser}}
-          <li><a href="/submit">Submit</a></li>
-        {{/if}}
-        <li><a href="/quotes">Explore</a></li>
-        <li><a href="/about">About</a></li>
-        <li>{{#unless currentUser}}<a href="/login">Sign In</a>{{/unless}}
-        {{#if currentUser}}<a href="/logout">Sign Out</a>{{/if}}</li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+    {{#if currentUser}}
+      <li><a href="/submit">Submit</a></li>
+    {{/if}}
+    <li><a href="/quotes">Explore</a></li>
+    <li><a href="/about">About</a></li>
+    <li>{{#unless currentUser}}<a href="/login">Sign In</a>{{/unless}}
+    {{#if currentUser}}<a href="/logout">Sign Out</a>{{/if}}</li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 </template>

@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-  <title>Quotey</title>
+  <title>Qurious</title>
 </head>
 
 
@@ -25,12 +25,17 @@
 <template name="Header">
   <div class="nav-block">
     <div class="text-logo {{#if frontPage}}hidden{{/if}}">
-      <a href="/#">Quotey</a>
+      <a href="/#">Qurious</a>
     </div>
-      <ul class="right-nav">
+      <ul>
         <li><a href="/quotes">Explore</a></li>
-        {{#unless currentUser}}<li><a href="/login">Login</a></li>{{/unless}}
-        {{#if currentUser}}<li><a href="/logout">Logout</a></li>{{/if}}
+        {{#unless currentUser}}
+          <li><a href="/login">Login</a></li>
+        {{/unless}}
+        {{#if currentUser}}
+          <li><a href="/mine">My Quotes</a></li>
+          <li><a href="/logout">Logout</a></li>
+        {{/if}}
       </ul>
     </div>
 </template>
@@ -46,10 +51,10 @@
       <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">                 
-        <h1>Quotey</h1>
-        <p class="subtitle">quotation if life</p>
+        <h1>Qurious</h1>
+        <p class="subtitle">quotation is life</p>
         <br><br>
-        <button class="btn btn-primary raised">Submit your favourite quote</button>
+        <a href="submit" class="btn btn-primary raised" role="button">Submit your favourite quote</a>
         </div>
       </div>
       </div>
@@ -85,21 +90,23 @@
 <template name="SingleQuote">
   <div class="vertical-container">
   <div class="single-quote">
-    <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-      
-      <div class="quotation">
-        
-        &ldquo;{{quotation}}&rdquo;
-        
+    <div class="container-fluid">    
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="submitted-by">
+            <ol class="breadcrumb">
+              <li>Submitted by</li>      
+              <li class="active">{{username}}</li>
+            </ol>
+          </div>
+          <div class="quotation">          
+            &ldquo;{{quotation}}&rdquo;          
+          </div>        
+          <div class="author">
+            {{author}}
+          </div>          
+        </div>
       </div>
-      
-      <div class="author">
-        {{author}}
-      </div>
-      </div>
-    </div>
     </div>
   </div>
   </div>
@@ -111,7 +118,8 @@
 
 
 <template name="Loading">
-  <div class="vertical-container">
+  {{> Header}}
+  <div class="content-container">
   <div class="single-quote">
     <div class="container">
     <div class="row">
@@ -179,37 +187,34 @@
 
 
 <template name="Submit">
-  <div class="container">
-  <div class="col-md-6 col-md-offset-3">
-    <header>
-      {{#unless currentUser}}
-      <p>Please login!</p>
-      {{/unless}}
-    
+  
+
+  {{#unless currentUser}}
+    {{> NoticeLogin}}
+  {{/unless}}  
+
+
+
+  {{#if currentUser}}
+    <div class="container">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="create">
+          <form class="new-quote">
+            <div class="form-group">
+              <label for="quotationText">Quotation text</label>
+              <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Quotation" autocomplete="off"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="authorText">Attribution</label>
+              <input type="text" class="form-control" id="authorText" name="author" placeholder="Attribution">
+            </div>          
       
-    </header>
-      {{#if currentUser}}
-      <div class="create">
-      <form class="new-quote">
-        <div class="form-group">
-        <label for="quotationText">Quotation text</label>
-        <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Quotation" autocomplete="off"></textarea>
+            <button type="submit" class="btn btn-default btn-block">Submit</button>
+          </form>
         </div>
-        <div class="form-group">
-        <label for="authorText">Author</label>
-        <input type="text" class="form-control" id="authorText" name="author" placeholder="Author">
-        </div>          
-        
-       
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
       </div>
-      {{/if}}
-    
-    
-    
-  </div>
-  </div>
+    </div>
+  {{/if}}
 </template>
 
 
@@ -218,7 +223,11 @@
 
 
 
-
+<template name="NoticeLogin">
+  <div class="content-container container-fluid">
+    <div class="alert alert-warning" role="alert">Please login!</div>
+  </div>
+</template>
 
 
 
@@ -228,7 +237,52 @@
 
 
 <template name="NotFound">
-You are looking for something that is not here.
+  <div class="vertical-container">
+  <div class="single-quote"> <!-- quote emulation -->
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+      
+      <div class="quotation">
+        
+        <p>&ldquo;404. You are looking for something that is not in the database.&rdquo;</p>
+        
+      </div>
+      
+      <div class="author">
+        Quotey
+      </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+</template>
+
+
+
+
+<template name="404">
+  <div class="vertical-container">
+  <div class="single-quote"> <!-- quote emulation -->
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+      
+      <div class="quotation">
+        
+        <p>&ldquo;404. You are lost.&rdquo;</p>
+        
+      </div>
+      
+      <div class="author">
+        Quotey
+      </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
 </template>
 
 
@@ -238,12 +292,7 @@ You are looking for something that is not here.
 
 
 
-
-
-
-
-
-
+<!-- Not using any more -->
 <template name="TopNavigation">
 <nav class="navbar navbar-default navbar-static-top">
   <div class="container-fluid">

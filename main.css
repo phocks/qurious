@@ -13,6 +13,7 @@ body {
  
 .body-container {
   background-color: #EAEAEA;
+  min-height: 400px
 }
 
 .quote { 
@@ -64,15 +65,23 @@ body {
   
 }
 
-.homepage-quote {
-  font-size: 1.7em; 
-  text-align: center;
-  padding-top: 5em;
-  padding-bottom: 5em;
+.text-logo {
+  position: relative;
+  top: 10px;
+  left: 12px;
+
+}
+
+.text-logo a {  
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 26px;
+  color: black;
+  text-decoration: none;
 }
 
 .homepage-title {
-  padding-top: 150px;
+  padding-top: 100px;
   padding-bottom: 200px;
   text-align: center;
 }
@@ -85,7 +94,6 @@ body {
 
 .homepage-title .subtitle {
   font-size: 110%;
-  position: relative;  
   top: 40px;
   color: #777;
 }
@@ -152,9 +160,9 @@ body {
 }
 
 
-
-
-.nonflex-container {
+.content-container {
+  padding-top: 50px;
+  padding-bottom: 50px;
   border-top: 5px #FF6D0C solid;
   background-color: #EAEAEA;
 }
@@ -189,20 +197,7 @@ body {
 
 
 
-.text-logo {
-  position: relative;
-  top: 10px;
-  left: 12px;
 
-}
-
-.text-logo a {	
-	font-family: "Playfair Display", serif;
-	font-style: italic;
-	font-size: 26px;
-	color: black;
-	text-decoration: none;
-}
 
 
 .created-by {
@@ -223,4 +218,43 @@ body {
 
 .created-by a {
   color: #999;
+}
+
+
+/* This is a custom button pack that we may not use */
+.btn {
+  padding: 14px 24px;
+  border: 0 none;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+  outline: 0 none;
+}
+
+.btn-primary {
+  background: #0099cc;
+  color: #ffffff;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+  background: #33a6cc;
+}
+
+.btn-primary:active, .btn-primary.active {
+  background: #007299;
+  box-shadow: none;
+}
+
+.btn-primary.raised {
+  box-shadow: 0 3px 0 0 #007299;
+}
+
+
+.btn-primary.raised:active, .btn-primary.raised.active {
+  background: #33a6cc;
+  box-shadow: none;
+  margin-bottom: -3px;
+  margin-top: 3px;
 }

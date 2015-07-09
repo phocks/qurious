@@ -9,6 +9,8 @@ Quotes = new Mongo.Collection('quotes');
 Counters = new Mongo.Collection('counters');
 
 
+
+
 // Here we have stuff that will only run on the client's browser
 
 if (Meteor.isClient) { // only runs on the client
@@ -43,7 +45,13 @@ if (Meteor.isClient) { // only runs on the client
   // This changes the animation period, set to zero for none 
   IronRouterAutoscroll.animationDuration = 0;
 
+  // Sets up automatically setting <title> in head
+  Deps.autorun(function(){
+    document.title = Session.get("DocumentTitle");
+  });
 
+  // Call this at any time to set the <title>
+  Session.set("DocumentTitle","Quotey*");
 
 
   // Here are the helpers
@@ -157,7 +165,11 @@ Template.TopNavigation.events({
     // Prevent default action from form submit
     return false;
   }
-})
+});
+
+
+
+
 
 
 
@@ -292,6 +304,55 @@ Meteor.methods({
 
 
 
+// Setting up the useraccounts:core
+AccountsTemplates.configure({
+  forbidClientAccountCreation: false,
+  enablePasswordChange: true,
+  showForgotPasswordLink: true,
+  lowercaseUsername: true,
+});
+
+
+AccountsTemplates.configure({ // Here we enter some custom error messages
+    texts: {
+        errors: {
+            accountsCreationDisabled: "Client side accounts creation is disabled!!!",
+            cannotRemoveService: "Cannot remove the only active service!",
+            captchaVerification: "Captcha verification failed!",
+            loginForbidden: "error.accounts.User or password incorrect",
+            mustBeLoggedIn: "error.accounts.Must be logged in",
+            pwdMismatch: "error.pwdsDontMatch",
+            validationErrors: "Validation Errors",
+            verifyEmailFirst: "Please verify your email first. Check the email and follow the link!",
+        }
+    }
+});
+
+var pwd = AccountsTemplates.removeField('password');
+AccountsTemplates.removeField('email');
+AccountsTemplates.addFields([
+  {
+      _id: "username",
+      type: "text",
+      displayName: "username",
+      required: true,
+      minLength: 5,
+  },
+  {
+      _id: 'email',
+      type: 'email',
+      required: true,
+      displayName: "email",
+      re: /.+@(.+){2,}\.(.+){2,}/,
+      errStr: 'Invalid email',
+  },
+  pwd
+]);
+
+
+
+
+
 
 // Here come our routes which catch and process URLs
 
@@ -306,27 +367,7 @@ AccountsTemplates.configureRoute('signIn', {
 */
 
 
-AccountsTemplates.configure({
-  forbidClientAccountCreation: true,
-  enablePasswordChange: true,
-  showForgotPasswordLink: true,
-});
 
-
-AccountsTemplates.configure({
-    texts: {
-        errors: {
-            accountsCreationDisabled: "Client side accounts creation is disabled!!!",
-            cannotRemoveService: "Cannot remove the only active service!",
-            captchaVerification: "Captcha verification failed!",
-            loginForbidden: "error.accounts.User or password incorrect",
-            mustBeLoggedIn: "error.accounts.Must be logged in",
-            pwdMismatch: "error.pwdsDontMatch",
-            validationErrors: "Validation Errors",
-            verifyEmailFirst: "Please verify your email first. Check the email and follow the link!",
-        }
-    }
-});
 
 Router.route('/login', function() {
   this.render('Header', {to: 'header'});
@@ -401,6 +442,7 @@ Router.route('/', {
         frontPage: true
       }
     });
+
     this.render('Home');
 /*
     this.render('Home', {

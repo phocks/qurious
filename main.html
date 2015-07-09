@@ -11,13 +11,13 @@
 <!-- First up we have the iron-router main layout -->
 <template name="ApplicationLayout">
   <header>
-  {{> yield "header"}}
+    {{> yield "header"}}
   </header>
   <div class="body-container">
-  {{> yield}} 
+    {{> yield}} 
   </div>
   <footer>
-  {{> Footer}}
+    {{> Footer}}
   </footer>
 </template>
 
@@ -26,54 +26,34 @@
   <div class="nav-block">
     <div class="text-logo {{#if frontPage}}hidden{{/if}}">
       <a href="/#">Quotey</a>
-    </div>    
+    </div>
       <ul class="right-nav">
         <li><a href="/quotes">Explore</a></li>
-        <li><a href="/login">Login</a></li>      
+        {{#unless currentUser}}<li><a href="/login">Login</a></li>{{/unless}}
+        {{#if currentUser}}<li><a href="/logout">Logout</a></li>{{/if}}
       </ul>
-    </div>  
+    </div>
 </template>
 
 
 
 
-<!-- hidden due to Josh's solution to send data context if homepage
-<template name="HeaderNoLogo">
-  <div class="nav-block">
-  <div class="text-logo hidden">
-    <a href="/#">Quotey</a>
-  </div>       
-  <ul class="right-nav">
-    <li><a href="/quotes">Explore</a></li>
-    <li>Create</li>
-  </ul>
-  </div>
-</template>
--->
 
 
 <template name="Home"> 
-  <div class="nonflex-container">
-  <div class="homepage-title">
-    <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">                 
-      <h1>Quotey</h1>
-      <p class="subtitle">all your favourite quotations.</p>
-      </div>
-    </div>
-    </div>
-  </div>
-  <div class="homepage-about hidden">
-    <div class="container-fluid">
+  <div class="content-container">
+    <div class="homepage-title">
+      <div class="container-fluid">
       <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-        <p class="front-quotation lead"><em>&ldquo;Most people are other people. Their thoughts are someone else's opinions, their lives a mimicry, their passions a quotation.&rdquo;</em></p>
-        <p class="front-attribution lead"><span class="elongated-dash">&mdash;</span>Oscar Wilde</p>
+        <div class="col-md-6 col-md-offset-3">                 
+        <h1>Quotey</h1>
+        <p class="subtitle">quotation if life</p>
+        <br><br>
+        <button class="btn btn-primary raised">Submit your favourite quote</button>
         </div>
       </div>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -84,9 +64,8 @@
   <div class="container-fluid">
     <div class="row">
     <div class="">
-      
       <div class="created-by">
-       A <a href="http://meag.re">Meagre production</a>, &copy; 2015.
+       A Meagre production &copy; 2015
       </div>
     </div>
     </div>
@@ -149,7 +128,7 @@
 
 
 <template name="Login"> 
-  <div class="container">
+  <div class="container-fluid content-container">
   <div class="col-md-6 col-md-offset-3">
     {{> atForm}}
   </div>
@@ -160,7 +139,7 @@
 
 
 <template name="Quotes">
-  <div class="nonflex-container">
+  <div class="container-fluid content-container">
   <div class="explore">  
     {{#each quotes}}
     {{> Quote}}
@@ -296,3 +275,22 @@ You are looking for something that is not here.
   </div><!-- /.container-fluid -->
 </nav>
 </template>
+
+
+
+
+
+
+<!-- hidden due to Josh's solution to send data context if homepage
+<template name="HeaderNoLogo">
+  <div class="nav-block">
+  <div class="text-logo hidden">
+    <a href="/#">Quotey</a>
+  </div>       
+  <ul class="right-nav">
+    <li><a href="/quotes">Explore</a></li>
+    <li>Create</li>
+  </ul>
+  </div>
+</template>
+-->

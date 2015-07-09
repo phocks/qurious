@@ -25,15 +25,15 @@
 <template name="Header">
   <div class="nav-block">
     <div class="text-logo {{#if frontPage}}hidden{{/if}}">
-      <a href="/#">Quotey{{frontPage}}</a>
+      <a href="/#">Quotey</a>
     </div>    
       <ul class="right-nav">
         <li><a href="/quotes">Explore</a></li>
         <li><a href="/login">Login</a></li>      
       </ul>
-    </div>
-  
+    </div>  
 </template>
+
 
 
 
@@ -51,6 +51,31 @@
 </template>
 -->
 
+
+<template name="Home"> 
+  <div class="nonflex-container">
+  <div class="homepage-title">
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">                 
+      <h1>Quotey</h1>
+      <p class="subtitle">all your favourite quotations.</p>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="homepage-about hidden">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+        <p class="front-quotation lead"><em>&ldquo;Most people are other people. Their thoughts are someone else's opinions, their lives a mimicry, their passions a quotation.&rdquo;</em></p>
+        <p class="front-attribution lead"><span class="elongated-dash">&mdash;</span>Oscar Wilde</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</template>
 
 
 
@@ -72,30 +97,7 @@
 
 
 
-<template name="Home"> 
-  <div class="nonflex-container">
-  <div class="homepage-title">
-    <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">                 
-      <h1>Quotey</h1>
-      <p class="subtitle">an experiment in quotation.</p>
-      </div>
-    </div>
-    </div>
-  </div>
-  <div class="homepage-about">
-    <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-      <p class="front-quotation lead"><em>&ldquo;Most people are other people. Their thoughts are someone else's opinions, their lives a mimicry, their passions a quotation.&rdquo;</em></p>
-      <p class="front-attribution lead"><span class="elongated-dash">&mdash;</span>Oscar Wilde</p>
-      </div>
-    </div>
-    </div>
-  </div>
-  </div>
-</template>
+
 
 
 

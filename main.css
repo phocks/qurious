@@ -172,6 +172,8 @@ body {
   -o-text-overflow: ellipsis;
   -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
 
+  cursor: pointer;
+
 }
 
 .vertical-container {
@@ -181,15 +183,18 @@ body {
   min-height: 100vh;
   display: -webkit-flex;
   display:         flex;
+  display: -ms-flexbox;
   -webkit-align-items: center;
           align-items: center;
   -webkit-justify-content: center;
           justify-content: center;
 
+
   
   overflow: hidden;
   justify-content: center;
   flex-direction: column;
+  -ms-flex-direction: row;
 }
 
 

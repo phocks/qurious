@@ -1,13 +1,22 @@
-// Welcome to this file. The large main file with a lot of things that
-// probably should be moved to different locations. But we will
-// get to that later... maybe.
+// ___  ___                          
+// |  \/  |                          
+// | .  . | ___  __ _  __ _ _ __ ___ 
+// | |\/| |/ _ \/ _` |/ _` | '__/ _ \
+// | |  | |  __/ (_| | (_| | | |  __/
+// \_|  |_/\___|\__,_|\__, |_|  \___|
+//                     __/ |         
+//                    |___/          
 // 
-// This file was originally created by Josh - phocks@gmail.com
+// Quotey web app for creating and sharing quotes
+
+
 
 // First up we are going to create a few collections
 Quotes = new Mongo.Collection('quotes');
 Counters = new Mongo.Collection('counters');
 
+
+// Initial setup of some things below
 
 
 
@@ -25,6 +34,7 @@ if (Meteor.isClient) { // only runs on the client
   // Here we work out what kind of signups we want to use
   // One of 'USERNAME_AND_EMAIL', 'USERNAME_AND_OPTIONAL_EMAIL', 
   // 'USERNAME_ONLY', or 'EMAIL_ONLY' (default).
+  // Note: this doesn't do anything when using useraccounts:core
   Accounts.ui.config({
     passwordSignupFields: "USERNAME_AND_EMAIL"
   });
@@ -35,6 +45,7 @@ if (Meteor.isClient) { // only runs on the client
   Router.configure({
     layoutTemplate: 'ApplicationLayout',
     loadingTemplate: "Loading",
+    //notFoundTemplate: '404' //this is used for somewhat custom 404s
   });
 
 
@@ -51,47 +62,68 @@ if (Meteor.isClient) { // only runs on the client
   });
 
   // Call this at any time to set the <title>
-  Session.set("DocumentTitle","Quotey*");
+  Session.set("DocumentTitle","Qurious");
+
+
+
+  // Setting up the useraccounts:core
+  AccountsTemplates.configure({
+    forbidClientAccountCreation: false,
+    enablePasswordChange: true,
+    showForgotPasswordLink: true,
+    lowercaseUsername: true,
+  });
+
+
+  AccountsTemplates.configure({ // Here we enter some custom error messages
+      texts: {
+          errors: {
+              accountsCreationDisabled: "Client side accounts creation is disabled!!!",
+              cannotRemoveService: "Cannot remove the only active service!",
+              captchaVerification: "Captcha verification failed!",
+              loginForbidden: "error.accounts.User or password incorrect",
+              mustBeLoggedIn: "error.accounts.Must be logged in",
+              pwdMismatch: "error.pwdsDontMatch",
+              validationErrors: "Validation Errors",
+              verifyEmailFirst: "Please verify your email first. Check the email and follow the link!",
+          }
+      }
+  });
+
+  var pwd = AccountsTemplates.removeField('password');
+  AccountsTemplates.removeField('email');
+  AccountsTemplates.addFields([
+    {
+        _id: "username",
+        type: "text",
+        displayName: "username",
+        required: true,
+        minLength: 5,
+    },
+    {
+        _id: 'email',
+        type: 'email',
+        required: true,
+        displayName: "email",
+        re: /.+@(.+){2,}\.(.+){2,}/,
+        errStr: 'Invalid email',
+    },
+    pwd
+  ]);
+
+
+
 
 
   // Here are the helpers
 
-    /*Template.Home.helpers({
-      latestQuote: function() {
-        var count = Quotes.find().count();
-        var random_index = Math.floor(Math.random() * (count));
-        var random_object = Quotes.findOne(
-            {skip:random_index}
-        );
-        return random_object;
-      }
-      
-    });*/
-
-
-/* A testing function that changed themes
-  Template.Home.events({
-      "click .container": function () {
-      Meteor.call('changeTheme', this._id, this.theme);
-    }
-    });
-*/
-  
-/*
-  Template.Header.helpers({
-    frontPage: function () {
-       return Session.get("frontPage");
-    }
-  });
-
-*/
-
+/* moving to iron router data context
   Template.Quotes.helpers({
     quotes: function () {
       return Quotes.find({}, {sort: {createdAt: -1}});
     }
   });
-
+*/
   
 
 
@@ -103,25 +135,9 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-
-
-// Events that drive things  
+// Events that drive things like clicks etc
 
   Template.Quotes.events({
-    "submit .new-quote": function (event) {
-      var text = event.target.text.value;
-      var author = event.target.author.value;
-      if (text == "" || author == "") return false; // prevent empty strings
-
-      Meteor.call('addQuote', text, author);
-
-      // Clear form
-      event.target.text.value = "";
-      event.target.author.value = "";
-
-      // Prevent default action from form submit
-      return false;
-    },
     "click .delete": function () {
       Meteor.call('deleteQuote', this._id);
     },
@@ -197,14 +213,19 @@ if (Meteor.isServer) {
     });
 */
 
-
   });  // end of code to do at startup
 
 
 
   // Get the server to publish our collections
-  Meteor.publish("quotes-all", function () {
+  Meteor.publish("quotesAll", function () {
     return Quotes.find({} /*,  {sort: {createdAt: -1}, limit: 3} */);
+    self.ready();
+  });
+
+  Meteor.publish("quotesCurrentUser", function () {
+    return Quotes.find({ owner: this.userId });
+    self.ready();
   });
 
   Meteor.publish("counters", function () {
@@ -232,12 +253,12 @@ Meteor.methods({
     var counter = Counters.findOne({ query: { _id: 'quote_id' } });
                 
        
-    
 
     Quotes.insert({      
       author: author,
       quotation: text,
       createdAt: new Date(), // current time
+      username: Meteor.user().username, // username of quote
       owner: Meteor.userId(),  // _id of logged in user      
       quote_id: counter.seq.toString()
     });
@@ -251,7 +272,7 @@ Meteor.methods({
 
 
 
-
+// This isn't being used any more, but maybe in the future
   addAuthor: function (author) {
     // Make sure the user is logged in before inserting a task
     if (! Meteor.userId()) {
@@ -281,10 +302,6 @@ Meteor.methods({
       throw new Meteor.Error("already-exists", "The slug has to be unique: " + e);
     }
   },
-
-
-
-
   deleteAuthor: function (authorId) {
     Authors.remove(authorId);
   },
@@ -292,7 +309,7 @@ Meteor.methods({
 
 
 
-
+// We are not using this either
   changeTheme: function (quoteId, quoteTheme) {
     if (quoteTheme == "blue") {
       Quotes.update({ _id: quoteId }, { $set: { theme: 'green' }});
@@ -303,51 +320,6 @@ Meteor.methods({
 });
 
 
-
-// Setting up the useraccounts:core
-AccountsTemplates.configure({
-  forbidClientAccountCreation: false,
-  enablePasswordChange: true,
-  showForgotPasswordLink: true,
-  lowercaseUsername: true,
-});
-
-
-AccountsTemplates.configure({ // Here we enter some custom error messages
-    texts: {
-        errors: {
-            accountsCreationDisabled: "Client side accounts creation is disabled!!!",
-            cannotRemoveService: "Cannot remove the only active service!",
-            captchaVerification: "Captcha verification failed!",
-            loginForbidden: "error.accounts.User or password incorrect",
-            mustBeLoggedIn: "error.accounts.Must be logged in",
-            pwdMismatch: "error.pwdsDontMatch",
-            validationErrors: "Validation Errors",
-            verifyEmailFirst: "Please verify your email first. Check the email and follow the link!",
-        }
-    }
-});
-
-var pwd = AccountsTemplates.removeField('password');
-AccountsTemplates.removeField('email');
-AccountsTemplates.addFields([
-  {
-      _id: "username",
-      type: "text",
-      displayName: "username",
-      required: true,
-      minLength: 5,
-  },
-  {
-      _id: 'email',
-      type: 'email',
-      required: true,
-      displayName: "email",
-      re: /.+@(.+){2,}\.(.+){2,}/,
-      errStr: 'Invalid email',
-  },
-  pwd
-]);
 
 
 
@@ -389,7 +361,7 @@ Router.route('/quotes/:_quote_slug', {
 
   waitOn: function () {
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotes-all');
+    return Meteor.subscribe('quotesAll');
   },
   action: function () {
     this.render('Header', {to: 'header'});
@@ -420,12 +392,39 @@ Router.route('/quotes', {
 
   waitOn: function () {
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotes-all');
+    return Meteor.subscribe('quotesAll');
   },
 
   action: function () {
     this.render('Header', {to: 'header'});
-    this.render('Quotes');
+    this.render('Quotes', {
+      data: {
+        quotes: function () {
+          return Quotes.find({}, {sort: {createdAt: -1}});
+        }
+      }
+    });
+  }
+});
+
+
+Router.route('/mine', {
+  loadingTemplate: 'Loading',
+
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe('quotesCurrentUser');
+  },
+
+  action: function () {
+    this.render('Header', {to: 'header'});
+    this.render('Quotes', {
+      data: {
+        quotes: function () {
+          return Quotes.find({ }, {sort: {createdAt: -1}});
+        }
+      }
+    });
   }
 });
 
@@ -456,4 +455,18 @@ Router.route('/', {
     });
 */
   }
+});
+
+
+// Just to test the loader
+Router.route('/loading', function() {  
+  this.render('Loading');
+});
+
+
+
+// This is our catch all for unknown things
+Router.route('/(.*)', function() {
+  this.render('Header', {to: 'header'});
+  this.render('404');
 });

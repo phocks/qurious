@@ -382,7 +382,7 @@ Router.route('/quotes', {
     return Meteor.subscribe('quotes-all');
   },
 
-  action: function () {     
+  action: function () {
     this.render('Header', {to: 'header'});
     this.render('Quotes');
   }

@@ -156,13 +156,16 @@ if (Meteor.isClient) { // only runs on the client
       var author = event.target.author.value;
       if (text == "" || author == "") return false; // prevent empty strings
 
-      Meteor.call('addQuote', text, author);
+      Meteor.call('addQuote', text, author, function(error, result) {
+        var newQuoteId = result;
+        Router.go('/quotes/' + newQuoteId);
+      });
 
       // Clear form
       event.target.text.value = "";
       event.target.author.value = "";
 
-      Router.go('/quotes')
+      
 
       // Prevent default action from form submit
       return false;
@@ -258,7 +261,7 @@ Meteor.methods({
     
     var counter = Counters.findOne({ query: { _id: 'quote_id' } });
                 
-    Quotes.insert({      
+    var newQuote = Quotes.insert({      
       author: author,
       quotation: text,
       createdAt: new Date(), // current time
@@ -266,6 +269,8 @@ Meteor.methods({
       owner: Meteor.userId(),  // _id of logged in user      
       quote_id: counter.seq.toString()
     });
+
+    return newQuote;
   },
 
 
@@ -365,8 +370,9 @@ Router.route('/quotes/:_quote_slug', {
     // return one handle, a function, or an array
     return Meteor.subscribe('quotesAll');
   },
-    onAfterAction: function() {
-    Meteor.call('incQuoteViewCounter', this.params._quote_slug);    
+    onBeforeAction: function() {
+    Meteor.call('incQuoteViewCounter', this.params._quote_slug);
+    this.next()   
   },
   action: function () {
     this.render('Header', {to: 'header'});
@@ -396,7 +402,7 @@ Router.route('/submit', {
   action: function () {
     this.render('Header', {to: 'header'});
     this.render('Submit');
-    console.log(Meteor.user().admin);
+    console.log(Meteor.user().admin); // testing the admin setting
   }
 });
 

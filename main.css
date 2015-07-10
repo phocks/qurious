@@ -29,10 +29,10 @@ body {
   padding-bottom: 5em;
 }
 
-.single-quote .submitted-by {
+.single-quote .created-by {
 }
 
-.single-quote .submitted-by .breadcrumb {
+.single-quote .created-by .breadcrumb {
   display: inline-block;
 }
 
@@ -218,6 +218,7 @@ body {
   font-size: 130%;
   display: relative;
   top: -4px;
+  margin-bottom: 5px;
 }
 
 

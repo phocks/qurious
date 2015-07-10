@@ -154,7 +154,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-    Template.Submit.events({
+    Template.Create.events({
     "submit .new-quote": function (event) {
       var text = event.target.text.value;
       var author = event.target.author.value;
@@ -383,7 +383,7 @@ Router.route('/quotes/:_quote_slug', {
 
 
 
-Router.route('/submit', {
+Router.route('/create', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
@@ -393,7 +393,7 @@ Router.route('/submit', {
 
   action: function () {
     this.render('Header', {to: 'header'});
-    this.render('Submit');
+    this.render('Create');
     console.log(Meteor.user().admin); // testing the admin setting
   }
 });

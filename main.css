@@ -17,9 +17,9 @@ body {
 }
 
 .quote { 
-	font-size: 1.7em; 
-	list-style-type: none; 
-	padding: 1em 0 1em; 
+  font-size: 1.7em; 
+  list-style-type: none; 
+  padding: 1em 0 1em; 
 }
 
 .single-quote { 
@@ -114,27 +114,11 @@ body {
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) { 
   .homepage-title h1 {
-    font-size: 90px;
+    font-size: 70px;
   }
 
   .homepage-title .subtitle {
-    font-size: 100%
-  }
-
-  .nav-block ul {
-    position: static;
-    float: none;
-    list-style-type: none;
-    text-align: center;
-  }
-
-  .nav-block ul li {
-    display: block;
-    float: none; 
-    margin-bottom: 0;  
-    margin-right: 0.5em;  
-    line-height: 1; 
-    padding: 0.25em 0.5em;
+    font-size: 90%
   }
 }
 
@@ -221,28 +205,19 @@ body {
 }
 
 
-
-
-
-
-.created-by {
-  text-align: right;
-  font-size: 1em;
-  margin-right: 20px;
-}
-
-
-/* Landscape phone to portrait tablet */
-@media (max-width: 767px) { 
-  .created-by {
-    text-align: center;
-    font-size: 1em;
-    margin-right: 0;
-  }
-}
-
-.created-by a {
+.footer a {
   color: #999;
+}
+
+
+
+
+.footer-title {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 130%;
+  display: relative;
+  top: -4px;
 }
 
 
@@ -271,13 +246,53 @@ body {
   box-shadow: none;
 }
 
+
+
+/******************************************************
+  RAISED BUTTONS
+******************************************************/
+
 .btn-primary.raised {
   box-shadow: 0 3px 0 0 #007299;
 }
-
-
 .btn-primary.raised:active, .btn-primary.raised.active {
   background: #33a6cc;
+  box-shadow: none;
+  margin-bottom: -3px;
+  margin-top: 3px;
+}
+.btn-success.raised {
+  box-shadow: 0 3px 0 0 #008c52;
+}
+.btn-success.raised:active, .btn-success.raised.active {
+  background: #39bf87;
+  box-shadow: none;
+  margin-bottom: -3px;
+  margin-top: 3px;
+}
+.btn-info.raised {
+  box-shadow: 0 3px 0 0 #35a2b5;
+}
+.btn-info.raised:active, .btn-info.raised.active {
+  background: #5fd4e8;
+  box-shadow: none;
+  margin-bottom: -3px;
+  margin-top: 3px;
+}
+.btn-warning.raised {
+  box-shadow: 0 3px 0 0 #b87430;
+}
+.btn-warning.raised:active, .btn-warning.raised.active {
+  background: #eba259;
+  box-shadow: none;
+  margin-bottom: -3px;
+  margin-top: 3px;
+}
+.btn-danger.raised {
+  box-shadow: 0 3px 0 0 #bf4343;
+}
+.btn-danger.raised:active, .btn-danger.raised.active {
+  background: #f26d6d;
   box-shadow: none;
   margin-bottom: -3px;
   margin-top: 3px;

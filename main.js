@@ -134,7 +134,11 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
-
+  Template.Header.helpers({
+    username: function () {
+      return Meteor.user().username;
+    }
+  });
 
 // Events that drive things like clicks etc
 
@@ -174,18 +178,6 @@ if (Meteor.isClient) { // only runs on the client
       Meteor.call('deleteQuote', this._id);
     }
   });
-
-
-
-
-Template.TopNavigation.events({
-  "submit .main-search": function(event) {
-    query = event.target.searchQuery.value;
-    Router.go('/search?=' + query);
-    // Prevent default action from form submit
-    return false;
-  }
-});
 
 
 

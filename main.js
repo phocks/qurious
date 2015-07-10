@@ -29,6 +29,7 @@ if (Meteor.isClient) { // only runs on the client
   // Later we don't want to subscribe to the whole thing
   // moved to individual routes // Meteor.subscribe("quotes");
   Meteor.subscribe("counters");
+  Meteor.subscribe("userData"); // for admin access etc.
 
 
   // Here we work out what kind of signups we want to use
@@ -185,10 +186,6 @@ Template.TopNavigation.events({
 
 
 
-
-
-
-
 } // this marks the end of the client code
 
 
@@ -230,6 +227,17 @@ if (Meteor.isServer) {
 
   Meteor.publish("counters", function () {
     return Counters.find();
+  });
+
+  // We are going to publish some more userData
+  // to check if user is admin
+  Meteor.publish("userData", function () {
+    if (this.userId) {
+      return Meteor.users.find({_id: this.userId},
+                               {fields: {'admin': 1}});
+    } else {
+      this.ready();
+    }
   });
 
 
@@ -322,13 +330,9 @@ Meteor.methods({
 
 
 
-
-
-
-
 // Here come our routes which catch and process URLs
 
-/* just making our own route so not needed
+/* just going to make our own route so not needed
 AccountsTemplates.configureRoute('signIn', {
     name: 'signin',
     path: '/login',
@@ -337,7 +341,6 @@ AccountsTemplates.configureRoute('signIn', {
     redirect: '/',
 });
 */
-
 
 
 
@@ -363,8 +366,7 @@ Router.route('/quotes/:_quote_slug', {
     return Meteor.subscribe('quotesAll');
   },
     onAfterAction: function() {
-    Meteor.call('incQuoteViewCounter', this.params._quote_slug);
-    this.next();
+    Meteor.call('incQuoteViewCounter', this.params._quote_slug);    
   },
   action: function () {
     this.render('Header', {to: 'header'});
@@ -383,10 +385,23 @@ Router.route('/quotes/:_quote_slug', {
 
 
 
-Router.route('/submit', function () {    
-  this.render('Header', {to: 'header'});
-  this.render('Submit');
+Router.route('/submit', {
+  loadingTemplate: 'Loading',
+
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe('userData');
+  },
+
+  action: function () {
+    this.render('Header', {to: 'header'});
+    this.render('Submit');
+    console.log(Meteor.user().admin);
+  }
 });
+
+
+
 
 
 

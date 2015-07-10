@@ -245,15 +245,11 @@ Meteor.methods({
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
-
     
     Counters.update({ _id: 'quote_id' }, { $inc: { seq: 1 } });
-
     
     var counter = Counters.findOne({ query: { _id: 'quote_id' } });
                 
-       
-
     Quotes.insert({      
       author: author,
       quotation: text,
@@ -265,9 +261,13 @@ Meteor.methods({
   },
 
 
-
   deleteQuote: function (quoteId) {
     Quotes.remove(quoteId);
+  },
+
+
+  incQuoteViewCounter: function (quoteId) {
+    Quotes.update( { _id: quoteId }, {$inc: { views: 1 } });
   },
 
 
@@ -371,6 +371,8 @@ Router.route('/quotes/:_quote_slug', {
         if (!quote) {
           this.render('NotFound');
         } else {
+          console.log(quote.views);
+          Meteor.call('incQuoteViewCounter', this.params._quote_slug);
           return quote;
         }    
       }

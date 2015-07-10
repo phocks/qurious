@@ -358,10 +358,13 @@ Router.route('/logout', function() {
 // given a specified _id in the quotes collection as URL param
 Router.route('/quotes/:_quote_slug', {
   loadingTemplate: 'Loading',
-
   waitOn: function () {
     // return one handle, a function, or an array
     return Meteor.subscribe('quotesAll');
+  },
+    onAfterAction: function() {
+    Meteor.call('incQuoteViewCounter', this.params._quote_slug);
+    this.next();
   },
   action: function () {
     this.render('Header', {to: 'header'});
@@ -370,9 +373,7 @@ Router.route('/quotes/:_quote_slug', {
         var quote = Quotes.findOne({ _id: this.params._quote_slug });
         if (!quote) {
           this.render('NotFound');
-        } else {
-          console.log(quote.views);
-          Meteor.call('incQuoteViewCounter', this.params._quote_slug);
+        } else {      
           return quote;
         }    
       }
@@ -402,7 +403,7 @@ Router.route('/quotes', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({}, {sort: {createdAt: -1}});
+          return Quotes.find({}, {sort: {views: -1}, limit: 100 });
         }
       }
     });

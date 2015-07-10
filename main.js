@@ -328,7 +328,7 @@ Meteor.methods({
 
 // Here come our routes which catch and process URLs
 
-/* just making our own route
+/* just making our own route so not needed
 AccountsTemplates.configureRoute('signIn', {
     name: 'signin',
     path: '/login',

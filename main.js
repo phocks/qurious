@@ -63,7 +63,7 @@ if (Meteor.isClient) { // only runs on the client
   });
 
   // Call this at any time to set the <title>
-  Session.set("DocumentTitle","Qurious");
+  Session.set("DocumentTitle","Qurious - quotes and stuff");
 
 
 

@@ -1,10 +1,10 @@
 /* CSS declarations go here */
 
-@import url(http://fonts.googleapis.com/css?family=Karma);
-@import url(http://fonts.googleapis.com/css?family=Lato);
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab);
-@import url(http://fonts.googleapis.com/css?family=Cardo:400,700);
-@import url(http://fonts.googleapis.com/css?family=Playfair+Display:400italic);
+@import url(//fonts.googleapis.com/css?family=Karma);
+@import url(//fonts.googleapis.com/css?family=Lato);
+@import url(//fonts.googleapis.com/css?family=Roboto+Slab);
+@import url(//fonts.googleapis.com/css?family=Cardo:400,700);
+@import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic);
 
 body {
   font-family: 'Roboto Slab', serif;

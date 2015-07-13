@@ -35,8 +35,8 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
+              <li class="{{isActivePath '/quotes'}}"><a href="/quotes">Quotes</a></li>
+              
               <li><a href="#contact">Contact</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -52,9 +52,8 @@
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="../navbar/">Default</a></li>
-              <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
-              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+              <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>       
+              
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -62,46 +61,6 @@
 </template>
 
 
-<template name="HeaderGrid">
-  <div class="header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-4 header-title">
-          <a class="{{#if frontPage}}hidden{{/if}}" href="/">Qurious</a>
-        </div>
-        <div class="col-sm-8 text-right">
-          <ul class="list-inline">
-            <li><a href="/quotes">Explore</a></li>
-            {{#unless currentUser}}
-              <li><a href="/login">Login</a></li>
-            {{/unless}}
-            {{#if currentUser}}
-              <li><a href="/mine">{{username}}</a></li>
-            {{/if}}
-          </ul>
-        </div>          
-      </div>
-    </div>
-  </div>
-</template>
-
-
-<template name="HeaderAbsolute">
-  <div class="nav-block">
-    <div class="text-logo {{#if frontPage}}hidden{{/if}}">
-      <a href="/#">Qurious</a>
-    </div>
-      <ul>
-        <li><a href="/quotes">Explore</a></li>
-        {{#unless currentUser}}
-          <li><a href="/login">Login</a></li>
-        {{/unless}}
-        {{#if currentUser}}
-          <li><a href="/mine">{{username}}</a></li>
-        {{/if}}
-      </ul>
-    </div>
-</template>
 
 
 
@@ -139,10 +98,16 @@
               <li><a href="/create">Create</a></li>
             </ul>
         </div>
+        <div class="col-sm-2">
+          <ul class="list-unstyled">
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            
+          </ul>
+        </div>
         <div class="col-sm-2"></div>
         <div class="col-sm-2"></div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-2">A Meagre Production &copy; 2015</div>    
+        <div class="col-sm-2">&copy; Meagre 2015</div>    
       </div>
     </div>
   </div>
@@ -354,3 +319,47 @@
 </template>
 
 
+
+<!-- not used -->
+
+
+<template name="HeaderGrid">
+  <div class="header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4 header-title">
+          <a class="{{#if frontPage}}hidden{{/if}}" href="/">Qurious</a>
+        </div>
+        <div class="col-sm-8 text-right">
+          <ul class="list-inline">
+            <li><a href="/quotes">Explore</a></li>
+            {{#unless currentUser}}
+              <li><a href="/login">Login</a></li>
+            {{/unless}}
+            {{#if currentUser}}
+              <li><a href="/mine">{{username}}</a></li>
+            {{/if}}
+          </ul>
+        </div>          
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<template name="HeaderAbsolute">
+  <div class="nav-block">
+    <div class="text-logo {{#if frontPage}}hidden{{/if}}">
+      <a href="/#">Qurious</a>
+    </div>
+      <ul>
+        <li><a href="/quotes">Explore</a></li>
+        {{#unless currentUser}}
+          <li><a href="/login">Login</a></li>
+        {{/unless}}
+        {{#if currentUser}}
+          <li><a href="/mine">{{username}}</a></li>
+        {{/if}}
+      </ul>
+    </div>
+</template>

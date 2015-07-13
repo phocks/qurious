@@ -12,7 +12,7 @@ body {
 }
  
 .body-container {
-  background-color: #EAEAEA;
+  background-color: #E7E7E7;
   min-height: 400px
 }
 
@@ -24,7 +24,7 @@ body {
 
 .single-quote { 
   text-align: center;
-  background-color: #EAEAEA;
+  background-color: #e7e7e7;
   padding-top: 5em;
   padding-bottom: 5em;
 }
@@ -90,10 +90,7 @@ body {
   border-bottom: 0;
 }
 
-.header {
-  background-color: #EAEAEA;
-  height: 50px;
-}
+
 
 .header-title a {  
   font-family: "Playfair Display", serif;
@@ -152,7 +149,7 @@ body {
 
 
 .list-quote {  
-  background-color: #EAEAEA;
+  background-color: #e7e7e7;
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #ddd;
@@ -172,7 +169,7 @@ body {
 
 .vertical-container {
   /*border-top: 5px #FF6D0C solid;*/
-  background-color: #EAEAEA;
+  background-color: #e7e7e7;
   
   min-height: 100vh;
   display: -webkit-flex;
@@ -196,7 +193,7 @@ body {
   padding-top: 50px;
   padding-bottom: 50px;
   /*border-top: 5px #FF6D0C solid;*/
-  background-color: #EAEAEA;
+  background-color: #e7e7e7;
 }
 
 

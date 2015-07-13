@@ -8,7 +8,7 @@
 
 body {
   font-family: 'Roboto Slab', serif;
-  background-color: #383838;
+  background-color: #1a1a1a;
 }
  
 .body-container {
@@ -86,6 +86,7 @@ body {
 */
 
 .navbar {
+  border-top: 4px #FF6D0C solid;
   margin-bottom: 0;
   border-bottom: 0;
 }
@@ -97,17 +98,9 @@ body {
 
 
 
-.header-title a {  
-  font-family: "Playfair Display", serif;
-  font-style: italic;
-  font-size: 26px;
-  color: #777;
-  text-decoration: none;
-}
-
 .homepage-title {
-  padding-top: 100px;
-  padding-bottom: 200px;
+  padding-top: 80px;
+  padding-bottom: 150px;
   text-align: center;
 }
 
@@ -125,6 +118,11 @@ body {
 
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) { 
+  .homepage-title {
+    padding-top: 40px;
+    padding-bottom: 80px;
+  }
+
   .homepage-title h1 {
     font-size: 70px;
   }
@@ -176,7 +174,7 @@ body {
   /*border-top: 5px #FF6D0C solid;*/
   background-color: #e7e7e7;
   
-  min-height: 100vh;
+  min-height: 95vh;
   display: -webkit-flex;
   display:         flex;
   display: -ms-flexbox;
@@ -220,15 +218,13 @@ body {
 }
 
 
-
-
 .footer-title {
   font-family: "Playfair Display", serif;
   font-style: italic;
   font-size: 130%;
   display: relative;
   top: -4px;
-  margin-bottom: 5px;
+  margin-bottom: .6em;
 }
 
 

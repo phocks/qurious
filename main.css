@@ -29,8 +29,6 @@ body {
   padding-bottom: 5em;
 }
 
-.single-quote .created-by {
-}
 
 .single-quote .created-by .breadcrumb {
   display: inline-block;
@@ -52,7 +50,7 @@ body {
   text-transform: uppercase;
 }
 
-
+/* trying something different with nav
 .nav-block {
   position: absolute;
   opacity: 0.5;
@@ -85,11 +83,18 @@ body {
   left: 18px;
 }
 
-.text-logo a {  
+*/
+
+.header {
+  background-color: #EAEAE0;
+  height: 50px;
+}
+
+.header-title a {  
   font-family: "Playfair Display", serif;
   font-style: italic;
   font-size: 26px;
-  color: black;
+  color: #777;
   text-decoration: none;
 }
 
@@ -161,7 +166,7 @@ body {
 }
 
 .vertical-container {
-  border-top: 5px #FF6D0C solid;
+  /*border-top: 5px #FF6D0C solid;*/
   background-color: #EAEAEA;
   
   min-height: 100vh;
@@ -185,7 +190,7 @@ body {
 .content-container {
   padding-top: 50px;
   padding-bottom: 50px;
-  border-top: 5px #FF6D0C solid;
+  /*border-top: 5px #FF6D0C solid;*/
   background-color: #EAEAEA;
 }
 

@@ -14,3 +14,4 @@ useraccounts:bootstrap
 useraccounts:core
 accounts-ui
 okgrow:iron-router-autoscroll
+zimme:active-route

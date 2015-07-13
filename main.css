@@ -90,6 +90,11 @@ body {
   border-bottom: 0;
 }
 
+.navbar-brand {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+}
+
 
 
 .header-title a {  
@@ -197,8 +202,6 @@ body {
 }
 
 
-
-
 .new-quote {
   margin-top: 50px;
 }
@@ -208,7 +211,7 @@ body {
   color: #999;
   background-color: #1a1a1a;
   padding-top: 1.5em;
-  padding-bottom: 200px;
+  padding-bottom: 30px;
 }
 
 

@@ -57,13 +57,16 @@ if (Meteor.isClient) { // only runs on the client
   // This changes the animation period, set to zero for none 
   IronRouterAutoscroll.animationDuration = 0;
 
+
+  // Call this at any time to set the <title>
+  Session.set("DocumentTitle","Qurious - quotes and stuff");
+
   // Sets up automatically setting <title> in head
   Deps.autorun(function(){
     document.title = Session.get("DocumentTitle");
   });
 
-  // Call this at any time to set the <title>
-  Session.set("DocumentTitle","Qurious - quotes and stuff");
+  
 
 
 

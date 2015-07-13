@@ -23,6 +23,30 @@
 
 
 <template name="Header">
+  <div class="header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4 header-title">
+          <a class="{{#if frontPage}}hidden{{/if}}" href="/">Qurious</a>
+        </div>
+        <div class="col-sm-8 text-right">
+          <ul class="list-inline">
+            <li><a href="/quotes">Explore</a></li>
+            {{#unless currentUser}}
+              <li><a href="/login">Login</a></li>
+            {{/unless}}
+            {{#if currentUser}}
+              <li><a href="/mine">{{username}}</a></li>
+            {{/if}}
+          </ul>
+        </div>          
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<template name="HeaderAbsolute">
   <div class="nav-block">
     <div class="text-logo {{#if frontPage}}hidden{{/if}}">
       <a href="/#">Qurious</a>
@@ -65,22 +89,22 @@
 
 <template name="Footer">
   <div class="footer">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-2 footer-title">Qurious</div>
-      <div class="col-sm-2">
-          <ul class="list-unstyled">
-            <li><a href="/">Home</a></li>
-            <li><a href="/quotes">Explore</a></li>
-            <li><a href="/create">Create</a></li>
-          </ul>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-2 footer-title">Qurious</div>
+        <div class="col-sm-2">
+            <ul class="list-unstyled">
+              <li><a href="/">Home</a></li>
+              <li><a href="/quotes">Explore</a></li>
+              <li><a href="/create">Create</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2">A Meagre Production &copy; 2015</div>    
       </div>
-      <div class="col-sm-2"></div>
-      <div class="col-sm-2"></div>
-      <div class="col-sm-2"></div>
-      <div class="col-sm-2">A Meagre Production &copy; 2015</div>    
     </div>
-  </div>
   </div>
 </template>
 

@@ -85,8 +85,13 @@ body {
 
 */
 
+.navbar {
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+
 .header {
-  background-color: #EAEAE0;
+  background-color: #EAEAEA;
   height: 50px;
 }
 
@@ -204,7 +209,7 @@ body {
 
 .footer {
   color: #999;
-  background-color: #383838;
+  background-color: #1a1a1a;
   padding-top: 1.5em;
   padding-bottom: 200px;
 }

@@ -7,7 +7,7 @@
 //                     __/ |         
 //                    |___/          
 // 
-// Quotey web app for creating and sharing quotes
+// Qurious, a web app for creating and sharing quotes
 
 
 

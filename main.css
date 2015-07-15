@@ -6,6 +6,12 @@
 @import url(//fonts.googleapis.com/css?family=Cardo:400,700);
 @import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic);
 
+a, /* this gets rid of the dotty outline in Firefox. */
+a:hover,
+a:focus {
+  outline: none;
+}
+
 body {
   font-family: 'Roboto Slab', serif;
   background-color: #1a1a1a;
@@ -23,8 +29,7 @@ body {
 }
 
 .single-quote { 
-  text-align: center;
-  background-color: #e7e7e7;
+  text-align: center;  
   padding-top: 5em;
   padding-bottom: 5em;
 }
@@ -46,44 +51,11 @@ body {
   font-weight: 700;
   font-size: 80%;
   margin-top: 1em;
-  color: #aaa;
+  color: #999;
   text-transform: uppercase;
 }
 
-/* trying something different with nav
-.nav-block {
-  position: absolute;
-  opacity: 0.5;
-  width: 100%;
-}
 
-
-.nav-block ul {
-  position: relative;
-  top: 18px;
-  right: 10px;
-  float: right;
-  overflow: hidden; 
-  margin: 0; 
-  padding: 0;
-  list-style-type: none;
-}
-
-.nav-block ul li {
-  float: left; margin-bottom: 0;  
-  margin-right: 0.5em;  
-  line-height: 1; 
-  padding: 0.25em 0.5em;
-}
-
-
-.nav-block .text-logo {
-  position: absolute;
-  top: 10px;
-  left: 18px;
-}
-
-*/
 
 .navbar {
   border-top: 4px #FF6D0C solid;
@@ -156,6 +128,7 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #ddd;
+  cursor: pointer;
 }
 
 .list-quote .quotation {
@@ -166,7 +139,7 @@ body {
   -o-text-overflow: ellipsis;
   -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
 
-  cursor: pointer;
+  
 
 }
 
@@ -193,10 +166,7 @@ body {
 
 
 .content-container {
-  padding-top: 50px;
-  padding-bottom: 50px;
-  /*border-top: 5px #FF6D0C solid;*/
-  background-color: #e7e7e7;
+
 }
 
 
@@ -225,7 +195,44 @@ body {
   display: relative;
   top: -4px;
   margin-bottom: .6em;
+
 }
+
+
+/* trying something different with nav
+.nav-block {
+  position: absolute;
+  opacity: 0.5;
+  width: 100%;
+}
+
+
+.nav-block ul {
+  position: relative;
+  top: 18px;
+  right: 10px;
+  float: right;
+  overflow: hidden; 
+  margin: 0; 
+  padding: 0;
+  list-style-type: none;
+}
+
+.nav-block ul li {
+  float: left; margin-bottom: 0;  
+  margin-right: 0.5em;  
+  line-height: 1; 
+  padding: 0.25em 0.5em;
+}
+
+
+.nav-block .text-logo {
+  position: absolute;
+  top: 10px;
+  left: 18px;
+}
+
+*/
 
 
 /* This is a custom button pack that we may not use */
@@ -304,3 +311,19 @@ body {
   margin-bottom: -3px;
   margin-top: 3px;
 }
+
+
+
+
+/*******************************************
+     Some navigation styles 
+*******************************************/
+
+
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+      color: #fff;
+      background: #FF6D0C;
+ }
+

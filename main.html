@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel='shortcut icon' type='image/png' href='/favicon-white.png' />
   <title>Qurious</title>
 </head>
 
@@ -31,32 +31,29 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Qurious</a>
+            <a class="navbar-brand" href="/"><img height="20px" src="/brand.png"></a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="{{isActivePath '/quotes'}}"><a href="/quotes">Quotes</a></li>
+              <li class="{{isActivePath '/quotes'}} hidden"><a href="/quotes">Explore</a></li>             
               
-              <li><a href="#contact">Contact</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
+              
             </ul>
-            <ul class="nav navbar-nav navbar-right">              
+            <ul class="nav navbar-nav navbar-right">
+              <li class="{{isActivePath '/quotes'}}"><a href="/quotes">Explore</a></li>
               {{#unless currentUser}}
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
               {{/unless}}
-              {{#if currentUser}}
-                <li class="{{isActivePath '/mine'}}"><a href="/mine">{{username}}</a></li>
+              {{#if currentUser}}                
+                <li class="dropdown {{isActivePath '/mine'}}">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}} <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/mine">Your Quotations</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header hidden">Nav header</li>
+                    <li><a href="/logout">Logout</a></li>                    
+                  </ul>
+                </li> 
               {{/if}}      
               
             </ul>
@@ -78,8 +75,8 @@
       <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">                 
-        <h1>Qurious</h1>
-        <p class="subtitle">i quote therefore i am</p>
+        <h1 class="hidden">Qurious</h1><h1><img width="500px" src="/brand.png"></h1>
+        <p class="subtitle">don't quote me on that</p>
         <br><br>
         <a href="/create" class="btn btn-info raised" role="button">Submit your favourite quote</a>
         </div>
@@ -131,18 +128,18 @@
       <div class="container-fluid">    
         <div class="row">
           <div class="col-md-8 col-md-offset-2">
+            <div class="quotation">          
+              &ldquo;{{quotation}}&rdquo;          
+            </div>        
+            <div class="attribution">
+              {{attribution}}
+            </div>
             <div class="created-by">
               <ol class="breadcrumb">
                 <li>Created by</li>      
                 <li class="active">{{username}}</li>
               </ol>
-            </div>
-            <div class="quotation">          
-              &ldquo;{{quotation}}&rdquo;          
-            </div>        
-            <div class="author">
-              {{author}}
-            </div>          
+            </div>     
           </div>
         </div>
       </div>
@@ -185,39 +182,55 @@
 
 
 <template name="Quotes">
-  <div class="container-fluid content-container">
-  <div class="explore">  
-    {{#each quotes}}
-    {{> Quote}}
-    {{/each}}
-  </div>
+  <div class="content-container container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="explore-lead">
+          <h1 class="text-center text-uppercase">Exploring all quotations</h1>
+          {{#if isActivePath '/mine'}}
+            <h2 class="text-center">Contributed by: <a href="#">{{username}}</a></h2>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        {{#each quotes}}
+          {{> Quote}}
+        {{/each}}
+      </div>
+    </div>
+
+  
   </div>
 </template>
 
 
 <template name="Quote">
-  <!-- <li class="quote">&ldquo;{{quotation}}&rdquo; {{#if author}}&mdash;{{author}}
-  <small class="link"><a href="/quotes/{{ quote_id }}">{{formatTime createdAt}}</a></small>
-  {{/if}} {{#if currentUser}}<small class="delete"><a href="#">delete</a></small>{{/if}}</li> -->
-
-
   <div class="list-quote">
-    <div class="container">
-      <div class="row">
-      <div class="">
-        <div class="quotation">
-         &ldquo;{{ quotation }}&rdquo;
-        </div>        
-        <div class="author">
-        &mdash;{{ author }}
+    <div class="contrib">
+      <p>Contributed by <a href="#">{{username}}</a></p>
+    </div>
+    <div class="quotation">
+     &ldquo;{{ quotation }}&rdquo;
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="attribution">
+          {{ attribution }}
         </div>
       </div>
+      <div class="col-sm-6">
+        <div class="read-more">
+          <p class="text-right"><a href="/quotes/{{_id}}">Read more <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></p>
+        </div>
       </div>
     </div>
   </div>
-
-
-
+<!-- old way with time etc <li class="quote">&ldquo;{{quotation}}&rdquo; {{#if author}}&mdash;{{author}}
+  <small class="link"><a href="/quotes/{{ quote_id }}">{{formatTime createdAt}}</a></small>
+  {{/if}} {{#if currentUser}}<small class="delete"><a href="#">delete</a></small>{{/if}}</li> -->
 </template>
 
 
@@ -231,6 +244,8 @@
 
 
 
+
+
   {{#if currentUser}}
     <div class="container">
       <div class="col-md-6 col-md-offset-3">
@@ -241,8 +256,8 @@
               <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Quotation" autocomplete="off"></textarea>
             </div>
             <div class="form-group">
-              <label for="authorText">Attribution</label>
-              <input type="text" class="form-control" id="authorText" name="author" placeholder="Attribution">
+              <label for="attributionText">Attribution</label>
+              <input type="text" class="form-control" id="attributionText" name="attribution" placeholder="Attribution">
             </div>          
       
             <button type="submit" class="btn btn-default btn-block">Submit</button>
@@ -285,7 +300,7 @@
         
       </div>
       
-      <div class="author">
+      <div class="attribution">
         Quotey
       </div>
       </div>
@@ -311,7 +326,7 @@
         
       </div>
       
-      <div class="author">
+      <div class="attribution">
         Quotey
       </div>
       </div>

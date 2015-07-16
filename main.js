@@ -137,11 +137,10 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
-  Template.Header.helpers({
-    username: function () {
+  Template.registerHelper('username', function () {
       return Meteor.user().username;
     }
-  });
+  );
 
 // Events that drive things like clicks etc
 
@@ -149,9 +148,9 @@ if (Meteor.isClient) { // only runs on the client
     "click .delete": function () {
       Meteor.call('deleteQuote', this._id);
     },
-    "click .list-quote": function () {
+    /*"click .list-quote": function () {
       Router.go('/quotes/' + this._id);
-    }
+    }*/
   });
 
 
@@ -160,17 +159,17 @@ if (Meteor.isClient) { // only runs on the client
     Template.Create.events({
     "submit .new-quote": function (event) {
       var text = event.target.text.value;
-      var author = event.target.author.value;
-      if (text == "" || author == "") return false; // prevent empty strings
+      var attribution = event.target.attribution.value;
+      if (text == "" || attribution == "") return false; // prevent empty strings
 
-      Meteor.call('addQuote', text, author, function(error, result) {
+      Meteor.call('addQuote', text, attribution, function(error, result) {
         var newQuoteId = result;
         Router.go('/quotes/' + newQuoteId);
       });
 
       // Clear form
       event.target.text.value = "";
-      event.target.author.value = "";
+      event.target.attribution.value = "";
 
       
 
@@ -246,7 +245,7 @@ if (Meteor.isServer) {
 // Meteor methods can be called by the client to do server things
 // They can also be called by the server
 Meteor.methods({
-  addQuote: function (text, author) {
+  addQuote: function (text, attribution) {
     // Make sure the user is logged in before inserting a task
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
@@ -257,7 +256,7 @@ Meteor.methods({
     var counter = Counters.findOne({ query: { _id: 'quote_id' } });
                 
     var newQuote = Quotes.insert({      
-      author: author,
+      attribution: attribution,
       quotation: text,
       createdAt: new Date(), // current time
       username: Meteor.user().username, // username of quote
@@ -396,7 +395,14 @@ Router.route('/create', {
 
   action: function () {
     this.render('Header', {to: 'header'});
-    this.render('Create');
+    this.render('Create', {
+      data: {
+        isAdmin: function() {
+          if (Meteor.user().admin) return true;
+          else return false;
+        }
+      }
+    });
     console.log(Meteor.user().admin); // testing the admin setting
   }
 });
@@ -419,7 +425,7 @@ Router.route('/quotes', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({}, {sort: {views: -1}, limit: 100 });
+          return Quotes.find({}, {sort: {views: -1}, limit: 20 });
         }
       }
     });

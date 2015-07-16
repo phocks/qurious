@@ -43,18 +43,31 @@ body {
 .single-quote .quotation {
   font-family: 'Cardo', serif;
   font-weight: 700;
-  font-size: 150%
+  font-size: 170%
 }
 
-.single-quote .author {
+.single-quote .attribution {
   font-family: 'Cardo', serif;
   font-weight: 700;
-  font-size: 80%;
+  font-size: 120%;
   margin-top: 1em;
+  margin-bottom: 1em;
   color: #999;
   text-transform: uppercase;
 }
 
+
+@media (max-width: 767px) { 
+
+  .single-quote .quotation {
+    font-size: 120%;
+  }
+
+  .single-quote .attribution {
+    font-size: 80%;
+  }
+
+}
 
 
 .navbar {
@@ -66,7 +79,10 @@ body {
 .navbar-brand {
   font-family: "Playfair Display", serif;
   font-style: italic;
+  opacity: 0.8;
 }
+
+
 
 
 
@@ -110,37 +126,69 @@ body {
   padding-bottom: 100px;
 }
 
-
-.elongated-dash {
-    display:inline-block;
-    transform:scale(3,1); /* W3C */
-    -webkit-transform:scale(3,1); /* Safari and Chrome */
-    -moz-transform:scale(3,1); /* Firefox */
-    -ms-transform:scale(4,1); /* IE 9 */
-    -o-transform:scale(5,1); /* Opera */
-    position: relative;
-    right: 25px;
+.explore-lead {
+  margin-top: 100px;
+  padding-bottom: 40px;
+  border-bottom: #999 solid 1px;
 }
 
+.explore-lead a {
+  color: #FF6D0C;
+  font-style: italic;
+}
 
 .list-quote {  
   background-color: #e7e7e7;
   padding-top: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
-  cursor: pointer;
+  border-bottom: 1px solid #999;
+  /*cursor: pointer; */
+  padding-top: 70px;
+  padding-bottom: 50px;
+
 }
 
 .list-quote .quotation {
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
 
-  
+  font-family: 'Cardo', serif;
+  font-weight: 700;
+  font-size: 250%;
+  margin-bottom: 20px;
+}
 
+.list-quote .attribution {
+  text-transform: uppercase;
+  color: #999;
+  font-size: 120%;
+}
+
+.list-quote .contrib {
+  margin-bottom: 50px;
+  color: #999;
+}
+
+.list-quote .contrib a {
+  color: #FF6D0C;
+  font-style: italic;
+}
+
+.list-quote .read-more {
+  color: #999;
+  font-size: 120%;
+}
+
+.list-quote .read-more .glyphicon {
+  position: relative;
+  top: 3px;
+}
+
+.list-quote .read-more a {
+  color: #999;
 }
 
 .vertical-container {
@@ -326,4 +374,3 @@ body {
       color: #fff;
       background: #FF6D0C;
  }
-

@@ -137,7 +137,7 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
-  Template.registerHelper('username', function () {
+  Template.registerHelper('currentUsername', function () {
       return Meteor.user().username;
     }
   );

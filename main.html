@@ -46,7 +46,7 @@
               {{/unless}}
               {{#if currentUser}}                
                 <li class="dropdown {{isActivePath '/mine'}}">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{username}} <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUsername}} <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="/mine">Your Quotations</a></li>
                     <li role="separator" class="divider"></li>
@@ -188,7 +188,7 @@
         <div class="explore-lead">
           <h1 class="text-center text-uppercase">Exploring all quotations</h1>
           {{#if isActivePath '/mine'}}
-            <h2 class="text-center">Contributed by: <a href="#">{{username}}</a></h2>
+            <h2 class="text-center">Contributed by: <a href="#">{{currentUsername}}</a></h2>
           {{/if}}
         </div>
       </div>

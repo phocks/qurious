@@ -1,10 +1,32 @@
 /* CSS declarations go here */
 
+
+/* some fonts */
 @import url(//fonts.googleapis.com/css?family=Karma);
 @import url(//fonts.googleapis.com/css?family=Lato);
 @import url(//fonts.googleapis.com/css?family=Roboto+Slab);
 @import url(//fonts.googleapis.com/css?family=Cardo:400,700);
 @import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic);
+
+@font-face {
+  font-family: 'Aleo';
+  src: url('/fonts/Aleo/Regular/aleo-regular-webfont.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/Aleo/Regular/aleo-regular-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/Aleo/Regular/aleo-regular-webfont.woff2') format('woff2'),
+       url('/fonts/Aleo/Regular/aleo-regular-webfont.woff') format('woff'),
+       url('/fonts/Aleo/Regular/aleo-regular-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/Aleo/Regular/aleo-regular-webfont.svg#aleoregular') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'Aleo Light';
+  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/Aleo/Light/aleo-light-webfont.woff2') format('woff2'),
+       url('/fonts/Aleo/Light/aleo-light-webfont.woff') format('woff'),
+       url('/fonts/Aleo/Light/aleo-light-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/Aleo/Light/aleo-light-webfont.svg#aleolight') format('svg'); /* Legacy iOS */
+}
 
 a, /* this gets rid of the dotty outline in Firefox. */
 a:hover,
@@ -18,7 +40,7 @@ body {
 }
  
 .body-container {
-  background-color: #E7E7E7;
+  background-color: #FEFCF9;
   min-height: 400px
 }
 
@@ -41,7 +63,7 @@ body {
 
 
 .single-quote .quotation {
-  font-family: 'Cardo', serif;
+  font-family: 'Aleo', serif;
   font-weight: 700;
   font-size: 170%
 }
@@ -68,20 +90,6 @@ body {
   }
 
 }
-
-
-.navbar {
-  border-top: 4px #FF6D0C solid;
-  margin-bottom: 0;
-  border-bottom: 0;
-}
-
-.navbar-brand {
-  font-family: "Playfair Display", serif;
-  font-style: italic;
-  opacity: 0.7;
-}
-
 
 
 
@@ -137,12 +145,12 @@ body {
 }
 
 .explore-lead a {
-  color: #FF6D0C;
+  color: #F5896C;
   font-style: italic;
 }
 
 .list-quote {  
-  background-color: #e7e7e7;
+  background-color: #FEFCF9;
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #999;
@@ -190,7 +198,7 @@ body {
 }
 
 .list-quote .contrib a {
-  color: #FF6D0C;
+  color: #F5896C;
   font-style: italic;
 }
 
@@ -220,8 +228,7 @@ body {
 }
 
 .vertical-container {
-  /*border-top: 5px #FF6D0C solid;*/
-  background-color: #e7e7e7;
+  background-color: #FEFCF9;
   
   min-height: 95vh;
   display: -webkit-flex;
@@ -369,9 +376,23 @@ body {
 *******************************************/
 
 
+
 .navbar-default .navbar-nav > .active > a, 
 .navbar-default .navbar-nav > .active > a:hover, 
 .navbar-default .navbar-nav > .active > a:focus {
       color: #fff;
-      background: #FF6D0C;
+      background: #F5896C;
  }
+
+ .navbar {
+  border-top: 4px #F5896C solid;
+  margin-bottom: 0;
+  border-bottom: 0;
+  background-color: #FEFCF9
+}
+
+.navbar-brand {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  opacity: 0.7;
+}

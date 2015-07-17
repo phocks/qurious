@@ -40,7 +40,8 @@
               
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="{{isActivePath '/quotes'}}"><a href="/quotes">Explore</a></li>
+              <li class="{{isActivePath '/quotes'}}"><a href="/quotes">Popular</a></li>
+              <li class="{{isActivePath '/quotes/latest'}}"><a href="/quotes/latest">Latest</a></li>
               {{#unless currentUser}}
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
               {{/unless}}

@@ -19,7 +19,6 @@ Counters = new Mongo.Collection('counters');
 // Initial setup of some things below
 
 
-
 // Here we have stuff that will only run on the client's browser
 
 if (Meteor.isClient) { // only runs on the client
@@ -30,6 +29,8 @@ if (Meteor.isClient) { // only runs on the client
   // moved to individual routes // Meteor.subscribe("quotes");
   Meteor.subscribe("counters");
   Meteor.subscribe("userData"); // for admin access etc.
+
+
 
 
   // Here we work out what kind of signups we want to use
@@ -213,7 +214,7 @@ if (Meteor.isServer) {
 
   // Get the server to publish our collections
   Meteor.publish("quotesAll", function () {
-    return Quotes.find({} /*,  {sort: {createdAt: -1}, limit: 3} */);
+    return Quotes.find({} /*{sort: {views: -1}, { limit: limit}*/);
     self.ready();
   });
 
@@ -392,6 +393,9 @@ Router.route('/quotes', {
   waitOn: function () {
     // return one handle, a function, or an array
     return Meteor.subscribe('quotesAll');
+    //quotesPaginated = Meteor.subscribeWithPagination('quotesAll', 5);
+    //return quotesPaginated;
+    
   },
 
   action: function () {

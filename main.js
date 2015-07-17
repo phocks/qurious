@@ -356,32 +356,6 @@ Router.route('/logout', function() {
 
 
 
-// Here is a nice little route that gives a single quote
-// given a specified _id in the quotes collection as URL param
-Router.route('/quotes/:_quote_slug', {
-  loadingTemplate: 'Loading',
-  waitOn: function () {
-    // return one handle, a function, or an array
-    return Meteor.subscribe('quotesAll');
-  },
-    onBeforeAction: function() {
-    Meteor.call('incQuoteViewCounter', this.params._quote_slug);
-    this.next()   
-  },
-  action: function () {
-    this.render('Header', {to: 'header'});
-    this.render('SingleQuote', {
-      data: function () {
-        var quote = Quotes.findOne({ _id: this.params._quote_slug });
-        if (!quote) {
-          this.render('NotFound');
-        } else {      
-          return quote;
-        }    
-      }
-    });  
-  }
-});
 
 
 
@@ -425,10 +399,61 @@ Router.route('/quotes', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({}, {sort: {views: -1}, limit: 20 });
+          return Quotes.find({}, {sort: {views: -1}, limit: 100 });
         }
       }
     });
+  }
+});
+
+
+
+Router.route('/quotes/latest', {
+  loadingTemplate: 'Loading',
+
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe('quotesAll');
+  },
+
+  action: function () {
+    this.render('Header', {to: 'header'});
+    this.render('Quotes', {
+      data: {
+        quotes: function () {
+          return Quotes.find({}, {sort: {createdAt: -1}, limit: 100 });
+        }
+      }
+    });
+  }
+});
+
+
+
+// Here is a nice little route that gives a single quote
+// given a specified _id in the quotes collection as URL param
+Router.route('/quotes/:_quote_slug', {
+  loadingTemplate: 'Loading',
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe('quotesAll');
+  },
+    onBeforeAction: function() {
+    Meteor.call('incQuoteViewCounter', this.params._quote_slug);
+    this.next()   
+  },
+  action: function () {
+    this.render('Header', {to: 'header'});
+    this.render('SingleQuote', {
+      data: function () {
+        var quote = Quotes.findOne({ _id: this.params._quote_slug });
+        if (!quote) {
+          this.render('NotFound');
+        } else {      
+          return quote;
+        }    
+      }
+    });  
   }
 });
 

@@ -291,6 +291,7 @@ body {
 
 
 
+
 /* This is a custom button pack that we may not use */
 .btn {
   padding: 14px 24px;
@@ -368,6 +369,26 @@ body {
   margin-top: 3px;
 }
 
+
+
+/* useraccounts button styles override as easier than messing around with code */
+.at-btn {
+  box-shadow: 0 3px 0 0 #007299;
+  background: #0099cc;
+  color: #ffffff;
+  display: inline !imortant;
+}
+
+.at-btn:active {
+  position: relative; /* to avoid the whole page going up */
+  top: 3px;
+  background: #33a6cc;
+  box-shadow: none;
+}
+
+.at-btn:hover, .at-btn:focus  {
+  background: #33a6cc;
+}
 
 
 

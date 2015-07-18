@@ -117,22 +117,21 @@ if (Meteor.isClient) { // only runs on the client
 
 
   // We are setting up Infinite Scrolling
-
+  
   incrementLimit = function(inc) { // this is defining a new global function
     inc = 5;
     newLimit = Session.get('limit') + inc;
     Session.set('limit', newLimit);
-    return newLimit;
   }
 
   Template.Quotes.created = function() {
-    Session.set('limit', 5);
+    Session.setDefault('limit', 5);
 
     // Deps.autorun() automatically rerun the subscription whenever Session.get('limit') changes
     // http://docs.meteor.com/#deps_autorun
     // Changed to 'Tracker' in newer versions of Meteor
-    Tracker.autorun(function() {
-      Meteor.subscribe('quotesAll', Session.get('limit'));
+    Tracker.autorun(function() {      
+      Meteor.subscribe('quotesPopular', Session.get('limit'));
     });
   }
 
@@ -243,17 +242,37 @@ if (Meteor.isServer) {
 
 
   // Get the server to publish our collections
-  Meteor.publish("quotesAll", function (limit) {
+  Meteor.publish("quotesAll", function () {  
+    return Quotes.find({}, { sort: {createdAt: -1} });
+    self.ready();
+  });
+
+  Meteor.publish("quotesLatest", function (limit) {
     if (limit > Quotes.find().count()) {
       limit = 0;
     }
+    
 
-    return Quotes.find({}, { limit: limit });
+    return Quotes.find({}, { sort: {createdAt: -1}, limit: limit });
+    self.ready();
+  });
+
+  Meteor.publish("quotesPopular", function (limit) {
+    if (limit > Quotes.find().count()) {
+      limit = 0;
+    }    
+    
+    return Quotes.find({}, { sort: {views: -1}, limit: limit });
     self.ready();
   });
 
   Meteor.publish("quotesCurrentUser", function () {
     return Quotes.find({ owner: this.userId });
+    self.ready();
+  });
+
+  Meteor.publish("quotesSlug", function (slug) {
+    return Quotes.find({ _id: slug });
     self.ready();
   });
 
@@ -415,16 +434,15 @@ Router.route('/quotes', {
     //return Meteor.subscribe('quotesAll');
     //quotesPaginated = Meteor.subscribeWithPagination('quotesAll', 5);
     //return quotesPaginated;   
-    Meteor.subscribe('quotesAll', Session.get('limit')); 
-    
+    return Meteor.subscribe('quotesPopular', 1);     
   },
 
   action: function () {
-    this.render('Header', {to: 'header'});
+    this.render('Header', {to: 'header'});    
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({});
+          return Quotes.find({}, {sort: {views: -1}} );
         }
       }
     });
@@ -438,15 +456,15 @@ Router.route('/quotes/latest', {
 
   waitOn: function () {
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotesAll');
+    return Meteor.subscribe('quotesLatest');
   },
 
   action: function () {
-    this.render('Header', {to: 'header'});
+    this.render('Header', {to: 'header'});   
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({}, {sort: {createdAt: -1}, limit: 100 });
+          return Quotes.find( { } );
         }
       }
     });
@@ -461,7 +479,7 @@ Router.route('/quotes/:_quote_slug', {
   loadingTemplate: 'Loading',
   waitOn: function () {
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotesAll');
+    return Meteor.subscribe('quotesSlug', this.params._quote_slug);
   },
     onBeforeAction: function() {
     Meteor.call('incQuoteViewCounter', this.params._quote_slug);
@@ -496,7 +514,7 @@ Router.route('/mine', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ }, {sort: {createdAt: -1}});
+          return Quotes.find({ owner: Meteor.userId() }, {sort: {createdAt: -1}});
         }
       }
     });

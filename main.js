@@ -63,11 +63,10 @@ if (Meteor.isClient) { // only runs on the client
   Session.set("DocumentTitle","Qurious - quotes etc.");
 
   // Sets up automatically setting <title> in head
-  Deps.autorun(function(){
+  Tracker.autorun(function(){
     document.title = Session.get("DocumentTitle");
   });
 
-  
 
 
 
@@ -117,6 +116,43 @@ if (Meteor.isClient) { // only runs on the client
   ]);
 
 
+  // We are setting up Infinite Scrolling
+
+  incrementLimit = function(inc) { // this is defining a new global function
+    inc = 5;
+    newLimit = Session.get('limit') + inc;
+    Session.set('limit', newLimit);
+    return newLimit;
+  }
+
+  Template.Quotes.created = function() {
+    Session.set('limit', 5);
+
+    // Deps.autorun() automatically rerun the subscription whenever Session.get('limit') changes
+    // http://docs.meteor.com/#deps_autorun
+    // Changed to 'Tracker' in newer versions of Meteor
+    Tracker.autorun(function() {
+      Meteor.subscribe('getPosts', Session.get('limit'));
+    });
+  }
+
+  // This is an auto load feature when we have reached the bottom
+  /* disabling for now
+  Template.Quotes.rendered = function() {
+    // is triggered every time we scroll
+    $(window).scroll(function() {
+      if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+        incrementLimit();
+      }
+    });
+  }
+  */
+
+  Template.Quotes.events({
+    'click .give-me-more': function(evt) {
+      incrementLimit();
+    }
+  });
 
 
 
@@ -124,14 +160,6 @@ if (Meteor.isClient) { // only runs on the client
 
   // Here are the helpers
 
-/* moving to iron router data context
-  Template.Quotes.helpers({
-    quotes: function () {
-      return Quotes.find({}, {sort: {createdAt: -1}});
-    }
-  });
-*/
-  
 
 
   UI.registerHelper('formatTime', function(context, options) {
@@ -215,8 +243,12 @@ if (Meteor.isServer) {
 
 
   // Get the server to publish our collections
-  Meteor.publish("quotesAll", function () {
-    return Quotes.find({} /*{sort: {views: -1}, { limit: limit}*/);
+  Meteor.publish("quotesAll", function (limit) {
+    if (limit > Quotes.find().count()) {
+      limit = 0;
+    }
+
+    return Quotes.find({}, { limit: limit });
     self.ready();
   });
 
@@ -334,16 +366,6 @@ Meteor.methods({
 
 // Here come our routes which catch and process URLs
 
-/* just going to make our own route so not needed
-AccountsTemplates.configureRoute('signIn', {
-    name: 'signin',
-    path: '/login',
-    template: 'Login',
-    layoutTemplate: 'ApplicationLayout',
-    redirect: '/',
-});
-*/
-
 
 
 Router.route('/login', function() {
@@ -356,10 +378,6 @@ Router.route('/logout', function() {
   Meteor.logout();
   Router.go('/');
 });
-
-
-
-
 
 
 Router.route('/create', {
@@ -396,7 +414,7 @@ Router.route('/quotes', {
     // return one handle, a function, or an array
     return Meteor.subscribe('quotesAll');
     //quotesPaginated = Meteor.subscribeWithPagination('quotesAll', 5);
-    //return quotesPaginated;
+    //return quotesPaginated;    
     
   },
 
@@ -405,7 +423,7 @@ Router.route('/quotes', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({}, {sort: {views: -1}, limit: 100 });
+          return Quotes.find({}, { limit: Session.get('limit') });
         }
       }
     });

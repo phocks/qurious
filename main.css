@@ -329,8 +329,8 @@ body {
 .btn-primary.raised:active, .btn-primary.raised.active {
   background: #33a6cc;
   box-shadow: none;
-  margin-bottom: -3px;
-  margin-top: 3px;
+  position: relative;
+  top: 3px;
 }
 .btn-success.raised {
   box-shadow: 0 3px 0 0 #008c52;
@@ -338,8 +338,8 @@ body {
 .btn-success.raised:active, .btn-success.raised.active {
   background: #39bf87;
   box-shadow: none;
-  margin-bottom: -3px;
-  margin-top: 3px;
+  position: relative;
+  top: 3px;
 }
 .btn-info.raised {
   box-shadow: 0 3px 0 0 #35a2b5;
@@ -347,8 +347,8 @@ body {
 .btn-info.raised:active, .btn-info.raised.active {
   background: #5fd4e8;
   box-shadow: none;
-  margin-bottom: -3px;
-  margin-top: 3px;
+  position: relative;
+  top: 3px;
 }
 .btn-warning.raised {
   box-shadow: 0 3px 0 0 #b87430;
@@ -356,8 +356,8 @@ body {
 .btn-warning.raised:active, .btn-warning.raised.active {
   background: #eba259;
   box-shadow: none;
-  margin-bottom: -3px;
-  margin-top: 3px;
+  position: relative;
+  top: 3px;
 }
 .btn-danger.raised {
   box-shadow: 0 3px 0 0 #bf4343;
@@ -365,8 +365,8 @@ body {
 .btn-danger.raised:active, .btn-danger.raised.active {
   background: #f26d6d;
   box-shadow: none;
-  margin-bottom: -3px;
-  margin-top: 3px;
+  position: relative;
+  top: 3px;
 }
 
 
@@ -376,7 +376,6 @@ body {
   box-shadow: 0 3px 0 0 #007299;
   background: #0099cc;
   color: #ffffff;
-  display: inline !imortant;
 }
 
 .at-btn:active {
@@ -416,4 +415,9 @@ body {
   font-family: "Playfair Display", serif;
   font-style: italic;
   opacity: 0.7;
+}
+
+.load-more {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }

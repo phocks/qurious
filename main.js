@@ -132,7 +132,7 @@ if (Meteor.isClient) { // only runs on the client
     // http://docs.meteor.com/#deps_autorun
     // Changed to 'Tracker' in newer versions of Meteor
     Tracker.autorun(function() {
-      Meteor.subscribe('getPosts', Session.get('limit'));
+      Meteor.subscribe('quotesAll', Session.get('limit'));
     });
   }
 
@@ -412,9 +412,10 @@ Router.route('/quotes', {
 
   waitOn: function () {
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotesAll');
+    //return Meteor.subscribe('quotesAll');
     //quotesPaginated = Meteor.subscribeWithPagination('quotesAll', 5);
-    //return quotesPaginated;    
+    //return quotesPaginated;   
+    Meteor.subscribe('quotesAll', Session.get('limit')); 
     
   },
 
@@ -423,7 +424,7 @@ Router.route('/quotes', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({}, { limit: Session.get('limit') });
+          return Quotes.find({});
         }
       }
     });

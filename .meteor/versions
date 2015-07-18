@@ -2,7 +2,6 @@ accounts-base@1.2.0
 accounts-password@1.1.1
 accounts-ui@1.1.5
 accounts-ui-unstyled@1.1.7
-aldeed:template-extension@3.4.3
 autoupdate@1.2.1
 base64@1.0.3
 binary-heap@1.0.3
@@ -37,7 +36,6 @@ less@1.0.14
 livedata@1.0.13
 localstorage@1.0.3
 logging@1.0.7
-matteodem:easy-search@1.5.6
 meteor@1.1.6
 meteor-platform@1.2.2
 minifiers@1.1.5
@@ -45,12 +43,10 @@ minimongo@1.0.8
 mobile-status-bar@1.0.3
 momentjs:moment@2.10.3
 mongo@1.1.0
-mongo-livedata@1.0.8
 npm-bcrypt@0.7.8_2
 observe-sequence@1.0.6
 okgrow:iron-router-autoscroll@0.0.8
 ordered-dict@1.0.3
-percolate:paginated-subscription@0.2.4
 random@1.0.3
 reactive-dict@1.1.0
 reactive-var@1.0.5

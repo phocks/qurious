@@ -9,11 +9,8 @@ twbs:bootstrap
 accounts-password
 iron:router
 momentjs:moment
-matteodem:easy-search
 useraccounts:bootstrap
 useraccounts:core
 accounts-ui
 okgrow:iron-router-autoscroll
 zimme:active-route
-percolate:paginated-subscription
-aldeed:template-extension

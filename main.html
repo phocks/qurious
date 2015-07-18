@@ -41,7 +41,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="{{isActivePath '/quotes'}}"><a href="/quotes">Popular</a></li>
-              <li class="{{isActivePath '/quotes/latest'}}"><a href="/quotes/latest">Latest</a></li>
+              <!-- removed until load-more is fixed <li class="{{isActivePath '/quotes/latest'}}"><a href="/quotes/latest">Latest</a></li> -->
               {{#unless currentUser}}
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
               {{/unless}}
@@ -214,7 +214,7 @@
 <template name="Quote">
   <div class="list-quote">
     <div class="contrib">
-      <p>Contributed by <a href="#">{{username}}</a></p>
+      <p>Contributed by <a href="#">{{username}}</a> {{views}}</p>
     </div>
     <div class="quotation">
       <p>&ldquo;{{ quotation }}&rdquo;</p>

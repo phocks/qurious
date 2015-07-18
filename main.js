@@ -163,7 +163,7 @@ if (Meteor.isClient) { // only runs on the client
 
   UI.registerHelper('formatTime', function(context, options) {
     if(context)
-      return moment(context).format('DD/MM/YYYY, hh:mm');
+      return moment(context).format('DD/MM/YYYY, hh:mm a');
   });
 
 
@@ -451,7 +451,7 @@ Router.route('/quotes', {
 
 
 
-Router.route('/quotes/latest', {
+Router.route('/latest', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
@@ -464,7 +464,7 @@ Router.route('/quotes/latest', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find( { } );
+          return Quotes.find( { }, {sort: {createdAt: -1}} );
         }
       }
     });

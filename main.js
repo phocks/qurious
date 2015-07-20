@@ -132,7 +132,6 @@ if (Meteor.isClient) { // only runs on the client
     // Changed to 'Tracker' in newer versions of Meteor
     Tracker.autorun(function() {      
       Meteor.subscribe('quotesPopular', Session.get('limit'));
-      Meteor.subscribe('quotesLatest', Session.get('limit'));
     });
   }
 
@@ -457,7 +456,7 @@ Router.route('/latest', {
 
   waitOn: function () {
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotesLatest', 1);
+    return Meteor.subscribe('quotesLatest');
   },
 
   action: function () {

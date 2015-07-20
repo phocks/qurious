@@ -456,7 +456,7 @@ Router.route('/latest', {
 
   waitOn: function () {
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotesLatest');
+    return Meteor.subscribe('quotesLatest', 1);
   },
 
   action: function () {

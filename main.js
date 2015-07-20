@@ -125,7 +125,7 @@ if (Meteor.isClient) { // only runs on the client
   }
 
   Template.Quotes.created = function() {
-    Session.setDefault('limit', 5);
+    Session.set('limit', 5);  // use Session.setDefault maybe
 
     // Deps.autorun() automatically rerun the subscription whenever Session.get('limit') changes
     // http://docs.meteor.com/#deps_autorun

@@ -132,6 +132,7 @@ if (Meteor.isClient) { // only runs on the client
     // Changed to 'Tracker' in newer versions of Meteor
     Tracker.autorun(function() {      
       Meteor.subscribe('quotesPopular', Session.get('limit'));
+      Meteor.subscribe('quotesPopular', Session.get('limit'));
     });
   }
 
@@ -442,7 +443,7 @@ Router.route('/quotes', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({}, {sort: {views: -1}} );
+          return Quotes.find({}, {sort: {views: -1}, limit: Session.get('limit') });
         }
       }
     });
@@ -456,7 +457,7 @@ Router.route('/latest', {
 
   waitOn: function () {
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotesLatest');
+    return Meteor.subscribe('quotesLatest', 1);
   },
 
   action: function () {
@@ -464,7 +465,7 @@ Router.route('/latest', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find( { }, {sort: {createdAt: -1}} );
+          return Quotes.find( { }, {sort: {createdAt: -1}, limit: Session.get('limit') });
         }
       }
     });

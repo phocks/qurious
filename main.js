@@ -17,6 +17,9 @@ Counters = new Mongo.Collection('counters');
 
 
 // Initial setup of some things below
+// like some variables etc
+
+loadMoreLimit = 5;
 
 
 // Here we have stuff that will only run on the client's browser
@@ -119,21 +122,21 @@ if (Meteor.isClient) { // only runs on the client
   // We are setting up Infinite Scrolling
   
   incrementLimit = function(inc) { // this is defining a new global function
-    inc = 5;
+    var inc = loadMoreLimit;
     newLimit = Session.get('limit') + inc;
     Session.set('limit', newLimit);
   }
 
   Template.Quotes.created = function() {
-    Session.set('limit', 5);  // use Session.setDefault maybe
+    Session.set('limit', loadMoreLimit);  // use Session.setDefault maybe
 
     // Deps.autorun() automatically rerun the subscription whenever Session.get('limit') changes
     // http://docs.meteor.com/#deps_autorun
     // Changed to 'Tracker' in newer versions of Meteor
-    Tracker.autorun(function() {      
+    /*Tracker.autorun(function() {      
       Meteor.subscribe('quotesPopular', Session.get('limit'));
       Meteor.subscribe('quotesLatest', Session.get('limit'));
-    });
+    });*/
   }
 
   // This is an auto load feature when we have reached the bottom
@@ -381,11 +384,15 @@ Meteor.methods({
   }
 });
 
+// trying out this router hook thing to reset the post limit
 
+Router.onBeforeAction(function() {
+  Session.set('limit', loadMoreLimit);  
+  this.next();  
+});
 
 
 // Here come our routes which catch and process URLs
-
 
 
 Router.route('/login', function() {
@@ -427,15 +434,20 @@ Router.route('/create', {
 
 
 
-Router.route('/quotes', {
+Router.route('/popular', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
     // return one handle, a function, or an array
     //return Meteor.subscribe('quotesAll');
     //quotesPaginated = Meteor.subscribeWithPagination('quotesAll', 5);
-    //return quotesPaginated;   
-    return Meteor.subscribe('quotesPopular', 1);     
+    //return quotesPaginated;
+
+    Tracker.autorun(function() {      
+      Meteor.subscribe('quotesPopular', Session.get('limit'));
+    });
+
+    //return Meteor.subscribe('quotesPopular', 1);     
   },
 
   action: function () {
@@ -456,8 +468,13 @@ Router.route('/latest', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
+
+    Tracker.autorun(function() {      
+      Meteor.subscribe('quotesLatest', Session.get('limit'));
+    });
+
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotesLatest', 1);
+    //return Meteor.subscribe('quotesLatest', 1);
   },
 
   action: function () {
@@ -506,8 +523,14 @@ Router.route('/mine', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
+
+    Tracker.autorun(function() {      
+      Meteor.subscribe('quotesCurrentUser', Session.get('limit'));
+    });
+
+
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotesCurrentUser');
+    //return Meteor.subscribe('quotesCurrentUser');
   },
 
   action: function () {
@@ -515,7 +538,7 @@ Router.route('/mine', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ owner: Meteor.userId() }, {sort: {createdAt: -1}});
+          return Quotes.find({ owner: Meteor.userId() }, {sort: {createdAt: -1}, limit: Session.get('limit') });
         }
       }
     });

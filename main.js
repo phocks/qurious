@@ -59,7 +59,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // We have a package that gets us to the top when we navigate
   // This changes the animation period, set to zero for none 
-  IronRouterAutoscroll.animationDuration = 0;
+  //IronRouterAutoscroll.animationDuration = 200;
 
 
   // Call this at any time to set the <title>
@@ -384,10 +384,17 @@ Meteor.methods({
   }
 });
 
+
+
+
+
+
 // trying out this router hook thing to reset the post limit
 
 Router.onBeforeAction(function() {
-  Session.set('limit', loadMoreLimit);  
+  Session.set('limit', loadMoreLimit); // set the infinite scroll limit back to default
+  $(window).scrollTop(0);
+
   this.next();  
 });
 

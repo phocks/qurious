@@ -526,6 +526,32 @@ Router.route('/quotes/:_quote_slug', {
   }
 });
 
+// Identical route but handles extra text for SEO (but disregarded)
+Router.route('/quotes/:_quote_slug/:_extra_text', {
+  loadingTemplate: 'Loading',
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe('quotesSlug', this.params._quote_slug);
+  },
+    onBeforeAction: function() {
+    Meteor.call('incQuoteViewCounter', this.params._quote_slug);
+    this.next()   
+  },
+  action: function () {
+    this.render('Header', {to: 'header'});
+    this.render('SingleQuote', {
+      data: function () {
+        var quote = Quotes.findOne({ _id: this.params._quote_slug });
+        if (!quote) {
+          this.render('NotFound');
+        } else {      
+          return quote;
+        }    
+      }
+    });  
+  }
+});
+
 
 Router.route('/mine', {
   loadingTemplate: 'Loading',

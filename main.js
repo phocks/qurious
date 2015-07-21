@@ -134,10 +134,11 @@ if (Meteor.isClient) { // only runs on the client
     // Deps.autorun() automatically rerun the subscription whenever Session.get('limit') changes
     // http://docs.meteor.com/#deps_autorun
     // Changed to 'Tracker' in newer versions of Meteor
-    /*Tracker.autorun(function() {      
+    Tracker.autorun(function() {      
       Meteor.subscribe('quotesPopular', Session.get('limit'));
       Meteor.subscribe('quotesLatest', Session.get('limit'));
-    });*/
+      Meteor.subscribe('quotesCurrentUser', Session.get('limit'));
+    });
   }
 
   // This is an auto load feature when we have reached the bottom
@@ -451,9 +452,11 @@ Router.route('/popular', {
     //quotesPaginated = Meteor.subscribeWithPagination('quotesAll', 5);
     //return quotesPaginated;
 
-    Tracker.autorun(function() {      
-      Meteor.subscribe('quotesPopular', Session.get('limit'));
-    });
+    
+
+    return Meteor.subscribe('quotesPopular', 5);
+
+    
 
     //return Meteor.subscribe('quotesPopular', 1);     
   },
@@ -477,9 +480,9 @@ Router.route('/latest', {
 
   waitOn: function () {
 
-    Tracker.autorun(function() {      
-      Meteor.subscribe('quotesLatest', Session.get('limit'));
-    });
+    
+    return Meteor.subscribe('quotesLatest', 5);
+    
 
     // return one handle, a function, or an array
     //return Meteor.subscribe('quotesLatest', 1);
@@ -558,9 +561,9 @@ Router.route('/mine', {
 
   waitOn: function () {
 
-    Tracker.autorun(function() {      
-      Meteor.subscribe('quotesCurrentUser', Session.get('limit'));
-    });
+      
+    return Meteor.subscribe('quotesCurrentUser', 5);
+    
 
 
     // return one handle, a function, or an array

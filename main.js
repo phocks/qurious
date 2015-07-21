@@ -8,6 +8,7 @@
 //                    |___/          
 // 
 // Qurious, a web app for creating and sharing quotes
+// Copyright Meagre 2015- All rights reserved
 
 
 
@@ -500,7 +501,7 @@ Router.route('/latest', {
 
 // Here is a nice little route that gives a single quote
 // given a specified _id in the quotes collection as URL param
-Router.route('/quotes/:_quote_slug', {
+Router.route('/quotes/:_quote_slug/:_quote_name', {
   loadingTemplate: 'Loading',
   waitOn: function () {
     // return one handle, a function, or an array

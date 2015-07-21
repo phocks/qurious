@@ -36,7 +36,7 @@ a:focus {
 
 body {
   font-family: 'Roboto Slab', serif;
-  background-color: #1a1a1a;
+  background-color: #282828;
 }
  
 .body-container {
@@ -142,7 +142,7 @@ body {
 }
 
 .explore-lead a {
-  color: #F5896C;
+  color: #F58465;
   font-style: italic;
 }
 
@@ -195,7 +195,7 @@ body {
 }
 
 .list-quote .contrib a {
-  color: #F5896C;
+  color: #F58465;
   font-style: italic;
 }
 
@@ -260,7 +260,7 @@ body {
 
 .footer {
   color: #999;
-  background-color: #1a1a1a;
+  background-color: #282828;
   padding-top: 1.5em;
   padding-bottom: 30px;
 }
@@ -402,11 +402,11 @@ body {
 .navbar-default .navbar-nav > .active > a:hover, 
 .navbar-default .navbar-nav > .active > a:focus {
       color: #fff;
-      background: #F5896C;
+      background: #F58465;
  }
 
  .navbar {
-  border-top: 4px #F5896C solid;
+  border-top: 4px #F58465 solid;
   margin-bottom: 0;
   border-bottom: 0;
   background-color: #FEFCF9
@@ -415,7 +415,7 @@ body {
 .navbar-brand {
   font-family: "Playfair Display", serif;
   font-style: italic;
-  opacity: 0.7;
+  opacity: 1;
 }
 
 .load-more {

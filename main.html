@@ -46,10 +46,10 @@
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
               {{/unless}}
               {{#if currentUser}}                
-                <li class="dropdown {{isActivePath '/mine'}}">
+                <li class="dropdown {{isActivePath regex='/users/'}}">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUsername}} <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="/mine">Your Quotations</a></li>
+                    <li><a href="/users/{{currentUsername}}">Your Quotations</a></li>
                     <li role="separator" class="divider"></li>
                     <li class="dropdown-header hidden">Nav header</li>
                     <li><a href="/logout">Logout</a></li>                    

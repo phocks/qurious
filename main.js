@@ -134,11 +134,11 @@ if (Meteor.isClient) { // only runs on the client
     // Deps.autorun() automatically rerun the subscription whenever Session.get('limit') changes
     // http://docs.meteor.com/#deps_autorun
     // Changed to 'Tracker' in newer versions of Meteor
-    Tracker.autorun(function() {      
-      Meteor.subscribe('quotesPopular', Session.get('limit'));
-      Meteor.subscribe('quotesLatest', Session.get('limit'));
-      Meteor.subscribe('quotesCurrentUser', Session.get('limit'));
-    });
+    // Tracker.autorun(function() {      
+    //   Meteor.subscribe('quotesPopular', Session.get('limit'));
+    //   Meteor.subscribe('quotesLatest', Session.get('limit'));
+    //   Meteor.subscribe('quotesCurrentUser', Session.get('limit'));      
+    // });
   }
 
   // This is an auto load feature when we have reached the bottom
@@ -253,15 +253,15 @@ if (Meteor.isServer) {
     self.ready();
   });
 
+
   Meteor.publish("quotesLatest", function (limit) {
     if (limit > Quotes.find().count()) {
       limit = 0;
     }
-    
-
     return Quotes.find({}, { sort: {createdAt: -1}, limit: limit });
     self.ready();
   });
+
 
   Meteor.publish("quotesPopular", function (limit) {
     if (limit > Quotes.find().count()) {
@@ -272,15 +272,24 @@ if (Meteor.isServer) {
     self.ready();
   });
 
+
   Meteor.publish("quotesCurrentUser", function () {
     return Quotes.find({ owner: this.userId });
     self.ready();
   });
 
+
+  Meteor.publish("quotesSlugUser", function (limit, user_slug) {
+    return Quotes.find({ username: user_slug }, { sort: {createdAt: -1}, limit: limit });
+    self.ready();
+  });
+
+
   Meteor.publish("quotesSlug", function (slug) {
     return Quotes.find({ _id: slug });
     self.ready();
   });
+
 
   Meteor.publish("counters", function () {
     return Counters.find();
@@ -452,6 +461,11 @@ Router.route('/popular', {
     //quotesPaginated = Meteor.subscribeWithPagination('quotesAll', 5);
     //return quotesPaginated;
 
+
+    Tracker.autorun(function() {      
+      Meteor.subscribe('quotesPopular', Session.get('limit'));     
+    });
+
     
 
     return Meteor.subscribe('quotesPopular', 5);
@@ -480,6 +494,9 @@ Router.route('/latest', {
 
   waitOn: function () {
 
+    Tracker.autorun(function() {
+      Meteor.subscribe('quotesLatest', Session.get('limit'));
+    });
     
     return Meteor.subscribe('quotesLatest', 5);
     
@@ -530,6 +547,7 @@ Router.route('/quotes/:_quote_slug', {
 });
 
 // Identical route but handles extra text for SEO (but disregarded)
+// Please keep up to date with previous or figure out how to replicate automatically
 Router.route('/quotes/:_quote_slug/:_extra_text', {
   loadingTemplate: 'Loading',
   waitOn: function () {
@@ -556,14 +574,14 @@ Router.route('/quotes/:_quote_slug/:_extra_text', {
 });
 
 
+
+
 Router.route('/mine', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
-
       
     return Meteor.subscribe('quotesCurrentUser', 5);
-    
 
 
     // return one handle, a function, or an array
@@ -576,6 +594,41 @@ Router.route('/mine', {
       data: {
         quotes: function () {
           return Quotes.find({ owner: Meteor.userId() }, {sort: {createdAt: -1}, limit: Session.get('limit') });
+        }
+      }
+    });
+  }
+});
+
+
+
+
+Router.route('/users/:_username', {
+  loadingTemplate: 'Loading',
+
+  waitOn: function () {
+
+    var username_to_lookup = this.params._username; //to pass it into the autorun for some reason..???
+
+    Tracker.autorun(function() {      
+      Meteor.subscribe('quotesSlugUser', Session.get('limit'), username_to_lookup);
+    });
+      
+    return Meteor.subscribe('quotesSlugUser', 5, this.params._username);
+
+
+    // return one handle, a function, or an array
+    //return Meteor.subscribe('quotesCurrentUser');
+  },
+
+  action: function () {
+    var username_to_lookup = this.params._username; //to pass it into the function, someone help with this
+
+    this.render('Header', {to: 'header'});
+    this.render('Quotes', {
+      data: {
+        quotes: function () {
+          return Quotes.find({ username: username_to_lookup }, {sort: {createdAt: -1}, limit: Session.get('limit') });
         }
       }
     });

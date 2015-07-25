@@ -279,8 +279,8 @@ if (Meteor.isServer) {
   });
 
 
-  Meteor.publish("quotesSlugUser", function (limit, user_slug) {
-    return Quotes.find({ username: user_slug }, { sort: {createdAt: -1}, limit: limit });
+  Meteor.publish("quotesSlugUser", function (user_slug) {
+    return Quotes.find({ username: user_slug }, { sort: {createdAt: -1}});
     self.ready();
   });
 
@@ -608,13 +608,13 @@ Router.route('/users/:_username', {
 
   waitOn: function () {
 
-    var username_to_lookup = this.params._username; //to pass it into the autorun for some reason..???
+    // var username_to_lookup = this.params._username; //to pass it into the autorun for some reason..???
 
-    Tracker.autorun(function() {      
-      Meteor.subscribe('quotesSlugUser', Session.get('limit'), username_to_lookup);
-    });
+    // Tracker.autorun(function() {      
+    //   Meteor.subscribe('quotesSlugUser', username_to_lookup);
+    // });
       
-    return Meteor.subscribe('quotesSlugUser', 5, this.params._username);
+    return Meteor.subscribe('quotesSlugUser', this.params._username);
 
 
     // return one handle, a function, or an array

@@ -189,7 +189,7 @@
         <div class="explore-lead">
           <h1 class="text-center text-uppercase">Exploring all quotations</h1>
           {{#if isActivePath '/mine'}}
-            <h2 class="text-center">Contributed by: <a href="#">{{currentUsername}}</a></h2>
+            <h2 class="text-center">Contributed by: <a href="/users/{{currentUsername}}">{{currentUsername}}</a></h2>
           {{/if}}
         </div>
       </div>
@@ -216,7 +216,7 @@
     <div class="row">
       <div class="col-xs-7">
         <div class="contrib">
-            <p>Contributed by <a href="#">{{username}}</a> - {{views}} views</p>
+            <p>Contributed by <a href="/users/{{username}}">{{username}}</a> - {{views}} views</p>
           </div>
       </div>
       <div class="col-xs-5">

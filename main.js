@@ -404,7 +404,7 @@ Meteor.methods({
 
 Router.onBeforeAction(function() {
   Session.set('limit', loadMoreLimit); // set the infinite scroll limit back to default
-  $(window).scrollTop(0);
+  $(window).scrollTop(0); // this replaces the auto scroll package
 
   this.next();  
 });
@@ -423,6 +423,19 @@ Router.route('/logout', function() {
   Meteor.logout();
   Router.go('/');
 });
+
+
+// First some static pages with About Us and Privacy etc.
+
+
+Router.route('/about', function() { 
+  this.render('Header', {to: 'header'}); 
+  this.render('TextContent');
+});
+
+
+
+
 
 
 Router.route('/create', {
@@ -446,10 +459,6 @@ Router.route('/create', {
     console.log(Meteor.user().admin); // testing the admin setting
   }
 });
-
-
-
-
 
 
 Router.route('/popular', {

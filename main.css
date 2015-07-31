@@ -1,12 +1,12 @@
 /* CSS declarations go here */
 
 
-/* some fonts */
-@import url(//fonts.googleapis.com/css?family=Karma);
-@import url(//fonts.googleapis.com/css?family=Lato);
+/*  some fonts 
+    probably consider cutting these down to essentials */
 @import url(//fonts.googleapis.com/css?family=Roboto+Slab);
 @import url(//fonts.googleapis.com/css?family=Cardo:400,700);
-@import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic);
+/* commenting because this is now replaced by images
+@import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic); */
 
 @font-face {
   font-family: 'Aleo';
@@ -18,15 +18,17 @@
        url('/fonts/Aleo/Regular/aleo-regular-webfont.svg#aleoregular') format('svg'); /* Legacy iOS */
 }
 
+/*
 @font-face {
   font-family: 'Aleo Light';
-  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot'); /* IE9 Compat Modes */
-  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot'); 
+  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot?#iefix') format('embedded-opentype'), 
        url('/fonts/Aleo/Light/aleo-light-webfont.woff2') format('woff2'),
        url('/fonts/Aleo/Light/aleo-light-webfont.woff') format('woff'),
-       url('/fonts/Aleo/Light/aleo-light-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('/fonts/Aleo/Light/aleo-light-webfont.svg#aleolight') format('svg'); /* Legacy iOS */
+       url('/fonts/Aleo/Light/aleo-light-webfont.ttf')  format('truetype'), 
+       url('/fonts/Aleo/Light/aleo-light-webfont.svg#aleolight') format('svg'); 
 }
+*/
 
 a, /* this gets rid of the dotty outline in Firefox. */
 a:hover,
@@ -157,6 +159,12 @@ body {
 
 }
 
+/* use this eventually to do things with alternating quotes perhaps
+.list-quote:nth-child(odd) { 
+  background-color:#eee; 
+}
+*/
+
 .list-quote .quotation {
   /*white-space: nowrap;
   overflow: hidden;
@@ -253,6 +261,14 @@ body {
 }
 
 
+.text-content {
+  padding-top: 30px;
+  padding-bottom: 50px;
+}
+
+
+
+
 .new-quote {
   margin-top: 50px;
 }
@@ -285,6 +301,10 @@ body {
 @media (max-width: 767px) { 
   .footer {
     text-align: right;
+  }
+
+  .footer .footer-title img {
+    width: 40px;
   }
 }
 

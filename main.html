@@ -79,7 +79,7 @@
         <h1 class="hidden">Qurious</h1><h1><img width="500px" src="/qurious_logo.png"></h1>
         <p class="subtitle">Quotation, n: The act of repeating erroneously the words of another.</p>
         <br><br>
-        <a href="/create" class="btn btn-info raised" role="button">Submit your favourite quote</a>
+        <a href="/login" class="btn btn-info raised" role="button">Sign up</a>
         </div>
       </div>
       </div>
@@ -103,7 +103,7 @@
         </div>
         <div class="col-sm-2">
           <ul class="list-unstyled">
-            <li><a href="about">About Qurious</a></li>
+            <li><a href="/about">About</a></li>
             <li><a href="#">Privacy</a></li>
             <li><a href="#">Terms &amp; Conditions</a></li>
             <li><a href="#">Contact Us</a></li>
@@ -151,13 +151,25 @@
 
 
 
+<template name="TextPageNavigation">
+  <ul class="nav nav-pills nav-stacked">
+    <li><a href="/about">About</a></li>
+    <li><a href="/privacy">Privacy Policy</a></li>
+    <li><a href="/terms">Terms &amp; Conditions</a></li>
+    <li><a href="/contact">Contact Us</a></li>
+  </ul>
+</template>
+
 
 <template name="TextContent">
   <div class="text-content">
     <div class="container">
       <div class="row">
-        <div class="col-md-8 col-md-offset-3">
-          <h1>About Qurious</h1>
+        <div class="navigation-column col-md-3">
+          {{> TextPageNavigation }}
+        </div>
+        <div class="content-column col-md-8">
+          <h1>Qurious About Us?</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin condimentum, ex sed blandit aliquet, neque est molestie lectus, eu volutpat metus massa vitae est. Curabitur fringilla imperdiet neque a consequat. Fusce id metus fermentum, efficitur mauris a, eleifend magna. Maecenas id sollicitudin eros, et rutrum risus. Donec consectetur lacus volutpat ex gravida, vitae porttitor est venenatis. Sed nec ex at sem eleifend fringilla elementum sit amet eros. Maecenas lectus sem, semper vel suscipit et, imperdiet a massa. Mauris accumsan mi nec nisi volutpat, eu scelerisque quam ultricies. Phasellus egestas, risus a dictum ornare, quam dolor placerat est, ut tempor lectus mauris quis metus. Suspendisse bibendum lectus vitae tortor auctor, eget molestie urna accumsan. Vivamus venenatis, tortor sit amet hendrerit efficitur, lectus risus condimentum est, id blandit neque diam vitae turpis. Praesent ac dui euismod, lacinia dui vel, pharetra purus. Proin sapien nisi, eleifend in ligula non, condimentum ultrices massa. Cras sem libero, porttitor ut maximus eget, pharetra et sem. Sed eu justo eu ligula scelerisque varius. Curabitur eu odio nulla.</p>
 
           <p>Praesent vestibulum tellus id neque ultricies pulvinar. Donec pulvinar nulla non nisl semper imperdiet vitae vitae arcu. Aenean non turpis quis massa sodales commodo. Fusce ut pharetra quam. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus molestie elit turpis. Sed eget risus semper metus ullamcorper gravida. Aliquam euismod commodo libero, ac blandit est finibus eu. Sed vestibulum at lorem a aliquet. Sed porttitor a turpis quis tincidunt. Phasellus mattis justo elit, eu convallis lectus vehicula sit amet. Fusce quis velit mi.</p>

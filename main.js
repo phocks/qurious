@@ -357,18 +357,18 @@ Meteor.methods({
     Quotes.update( { _id: quoteId }, {$inc: { views: 1 } });
   },
 
-
-  checkQuoteSize: function(quoteId) {
-    console.log(quoteId);
+  // Here we are going to check the size of the quote and then
+  // set a value to it so that we can display long quotes with smaller font
+  // etc etc
+  checkQuoteSize: function(quoteId) {    
 
     var currentQuote = Quotes.findOne(quoteId);
-
     var quotation = currentQuote.quotation;
-
     var n = quotation.length;
 
-    console.log(quotation);
-    console.log(n);
+    //console.log(quoteId);
+    //console.log(quotation);
+    //console.log(n);
 
     if (n <= 50) Quotes.update({ _id: quoteId }, { $set: { length: 'tiny' }});
     if (n > 50 && n <= 140) Quotes.update({ _id: quoteId }, { $set: { length: 'short' }});

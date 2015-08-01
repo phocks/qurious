@@ -364,17 +364,22 @@ Meteor.methods({
 
     var currentQuote = Quotes.findOne(quoteId);
     var quotation = currentQuote.quotation;
-    var n = quotation.length;
 
-    //console.log(quoteId);
-    //console.log(quotation);
-    //console.log(n);
+    console.log(currentQuote.length);
+    
+    if (currentQuote.length == undefined) {
+      var n = quotation.length;
 
-    if (n <= 50) Quotes.update({ _id: quoteId }, { $set: { length: 'tiny' }});
-    if (n > 50 && n <= 140) Quotes.update({ _id: quoteId }, { $set: { length: 'short' }});
-    if (n > 140 && n <= 400) Quotes.update({ _id: quoteId }, { $set: { length: 'medium' }});
-    if (n > 400 && n <= 600) Quotes.update({ _id: quoteId }, { $set: { length: 'long' }});
-    if (n > 600) Quotes.update({ _id: quoteId }, { $set: { length: 'gigantic' }});
+      //console.log(quoteId);
+      //console.log(quotation);
+      //console.log(n);
+
+      if (n <= 50) Quotes.update({ _id: quoteId }, { $set: { length: 'tiny' }});
+      if (n > 50 && n <= 140) Quotes.update({ _id: quoteId }, { $set: { length: 'short' }});
+      if (n > 140 && n <= 400) Quotes.update({ _id: quoteId }, { $set: { length: 'medium' }});
+      if (n > 400 && n <= 600) Quotes.update({ _id: quoteId }, { $set: { length: 'long' }});
+      if (n > 600) Quotes.update({ _id: quoteId }, { $set: { length: 'gigantic' }});
+    }
   },
 
 
@@ -437,7 +442,7 @@ Router.onBeforeAction(function() {
   Session.set('limit', loadMoreLimit); // set the infinite scroll limit back to default
   $(window).scrollTop(0); // this replaces the auto scroll package
 
-  this.next();  
+  this.next();
 });
 
 
@@ -568,7 +573,7 @@ Router.route('/quotes/:_quote_slug', {
     return Meteor.subscribe('quotesSlug', this.params._quote_slug);
   },
     onBeforeAction: function() {
-    Meteor.call('incQuoteViewCounter', this.params._quote_slug); // +1 to view count
+    //Meteor.call('incQuoteViewCounter', this.params._quote_slug); // +1 to view count
     Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?
     this.next();
   },

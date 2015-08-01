@@ -307,7 +307,7 @@ if (Meteor.isServer) {
   });
 
   // We are going to publish some more userData
-  // to check if user is admin
+  // in order to check if user is admin we need this
   Meteor.publish("userData", function () {
     if (this.userId) {
       return Meteor.users.find({_id: this.userId},

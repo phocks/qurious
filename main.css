@@ -266,6 +266,15 @@ body {
   padding-bottom: 50px;
 }
 
+.text-content .content-column {
+  border-left: 1px solid #999;
+}
+
+.text-content .content-column h1 {
+  margin-top: 0;
+}
+
+
 
 
 

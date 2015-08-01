@@ -180,13 +180,24 @@ if (Meteor.isClient) { // only runs on the client
 
 // Events that drive things like clicks etc
 
+  // Let's finally set up a delete
+  Template.SingleQuote.events({
+    "click .delete": function () {
+      Meteor.call('deleteQuote', this._id);
+    }
+  });
+  
+
+  // this isn't even used any more but yeah
   Template.Quotes.events({
     "click .delete": function () {
       Meteor.call('deleteQuote', this._id);
     },
+
+
     /*"click .list-quote": function () {
       Router.go('/quotes/' + this._id);
-    }*/
+    } this was commented out in favour of a direct read more link */
   });
 
 

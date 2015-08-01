@@ -70,6 +70,26 @@ body {
   font-size: 170%;
 }
 
+.single-quote .quotation.tiny {
+  font-size: 500%;
+}
+
+.single-quote .quotation.short {
+  font-size: 400%;
+}
+
+.single-quote .quotation.medium {
+  font-size: 300%;
+}
+
+.single-quote .quotation.long {
+  font-size: 200%;
+}
+
+.single-quote .quotation.gigantic {
+  font-size: 150%;
+}
+
 .single-quote .attribution {
   font-family: 'Cardo', serif;
   font-weight: 700;

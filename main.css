@@ -67,7 +67,8 @@ body {
 .single-quote .quotation {
   font-family: 'Aleo', serif;
   font-weight: 700;
-  font-size: 170%
+  font-size: 170%;
+  text-align: left;
 }
 
 .single-quote .attribution {
@@ -274,6 +275,12 @@ body {
   margin-top: 0;
 }
 
+
+@media (max-width: 767px) { 
+  .text-content .content-column {
+    border-left: none;
+  }
+}
 
 
 

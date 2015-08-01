@@ -323,7 +323,7 @@ if (Meteor.isServer) {
 
 
 // Meteor methods can be called by the client to do server things
-// They can also be called by the server
+// They can also be called by the server, I think
 Meteor.methods({
   addQuote: function (text, attribution) {
     // Make sure the user is logged in before inserting a task
@@ -348,13 +348,33 @@ Meteor.methods({
   },
 
 
-  deleteQuote: function (quoteId) {
+  deleteQuote: function(quoteId) {
     Quotes.remove(quoteId);
   },
 
 
-  incQuoteViewCounter: function (quoteId) {
+  incQuoteViewCounter: function(quoteId) {
     Quotes.update( { _id: quoteId }, {$inc: { views: 1 } });
+  },
+
+
+  checkQuoteSize: function(quoteId) {
+    console.log(quoteId);
+
+    var currentQuote = Quotes.findOne(quoteId);
+
+    var quotation = currentQuote.quotation;
+
+    var n = quotation.length;
+
+    console.log(quotation);
+    console.log(n);
+
+    if (n <= 50) Quotes.update({ _id: quoteId }, { $set: { length: 'tiny' }});
+    if (n > 50 && n <= 140) Quotes.update({ _id: quoteId }, { $set: { length: 'short' }});
+    if (n > 140 && n <= 400) Quotes.update({ _id: quoteId }, { $set: { length: 'medium' }});
+    if (n > 400 && n <= 600) Quotes.update({ _id: quoteId }, { $set: { length: 'long' }});
+    if (n > 600) Quotes.update({ _id: quoteId }, { $set: { length: 'gigantic' }});
   },
 
 
@@ -548,8 +568,9 @@ Router.route('/quotes/:_quote_slug', {
     return Meteor.subscribe('quotesSlug', this.params._quote_slug);
   },
     onBeforeAction: function() {
-    Meteor.call('incQuoteViewCounter', this.params._quote_slug);
-    this.next()   
+    Meteor.call('incQuoteViewCounter', this.params._quote_slug); // +1 to view count
+    Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?
+    this.next();
   },
   action: function () {
     this.render('Header', {to: 'header'});

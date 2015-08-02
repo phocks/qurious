@@ -60,7 +60,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // We have a package that gets us to the top when we navigate
   // This changes the animation period, set to zero for none 
-  //IronRouterAutoscroll.animationDuration = 200;
+  IronRouterAutoscroll.animationDuration = 200;
 
 
   // Call this at any time to set the <title>
@@ -367,18 +367,18 @@ Meteor.methods({
 
     console.log(currentQuote.length);
     
-    if (currentQuote.length == undefined) {
+    if (true) { // use currentQuote.length == undefined to only update undefined
       var n = quotation.length;
 
       //console.log(quoteId);
       //console.log(quotation);
       //console.log(n);
 
-      if (n <= 50) Quotes.update({ _id: quoteId }, { $set: { length: 'tiny' }});
-      if (n > 50 && n <= 140) Quotes.update({ _id: quoteId }, { $set: { length: 'short' }});
-      if (n > 140 && n <= 400) Quotes.update({ _id: quoteId }, { $set: { length: 'medium' }});
-      if (n > 400 && n <= 600) Quotes.update({ _id: quoteId }, { $set: { length: 'long' }});
-      if (n > 600) Quotes.update({ _id: quoteId }, { $set: { length: 'gigantic' }});
+      if (n <= 40) Quotes.update({ _id: quoteId }, { $set: { length: 'tiny' }});
+      if (n > 40 && n <= 120) Quotes.update({ _id: quoteId }, { $set: { length: 'short' }});
+      if (n > 120 && n <= 300) Quotes.update({ _id: quoteId }, { $set: { length: 'medium' }});
+      if (n > 300 && n <= 500) Quotes.update({ _id: quoteId }, { $set: { length: 'long' }});
+      if (n > 500) Quotes.update({ _id: quoteId }, { $set: { length: 'gigantic' }});
     }
   },
 
@@ -440,13 +440,25 @@ Meteor.methods({
 
 Router.onBeforeAction(function() {
   Session.set('limit', loadMoreLimit); // set the infinite scroll limit back to default
-  $(window).scrollTop(0); // this replaces the auto scroll package
+  //$(window).scrollTop(0); // this replaces the auto scroll package
 
   this.next();
 });
 
 
-// Here come our routes which catch and process URLs
+// Here come our routes which catch and process URLs -----------------
+// First some static pages with About Us and Privacy etc.
+
+
+Router.route('/about', function() { 
+  this.render('Header', {to: 'header'}); 
+  this.render('TextContent');
+});
+
+
+
+
+// Now here are the main routes
 
 
 Router.route('/login', function() {
@@ -459,18 +471,6 @@ Router.route('/logout', function() {
   Meteor.logout();
   Router.go('/');
 });
-
-
-// First some static pages with About Us and Privacy etc.
-
-
-Router.route('/about', function() { 
-  this.render('Header', {to: 'header'}); 
-  this.render('TextContent');
-});
-
-
-
 
 
 

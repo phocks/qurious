@@ -22,6 +22,8 @@ Counters = new Mongo.Collection('counters');
 
 loadMoreLimit = 5;
 
+process.env.HTTP_FORWARDED_COUNT = 1;
+
 
 
 
@@ -251,7 +253,7 @@ if (Meteor.isServer) {
 
 
   Meteor.onConnection(function(conn) {
-      console.log(conn.clientAddress);
+    console.log(conn.clientAddress);
   });
 
     

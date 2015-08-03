@@ -251,6 +251,8 @@ if (Meteor.isServer) {
       Counters.insert( { _id: "quote_id", seq: 0 } );
     } 
 
+    process.env.HTTP_FORWARDED_COUNT = 2;
+
     // Here we are going to get the client IP Address
     Meteor.onConnection(function(conn) {
       var forwardedFor = conn.httpHeaders['x-forwarded-for'].split(",");

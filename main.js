@@ -251,13 +251,16 @@ if (Meteor.isServer) {
       Counters.insert( { _id: "quote_id", seq: 0 } );
     } 
 
-    process.env.HTTP_FORWARDED_COUNT = 2;
+    process.env.HTTP_FORWARDED_COUNT = 2; // this seems to shift x-forwarded-for list for ip
 
     // Here we are going to get the client IP Address
     Meteor.onConnection(function(conn) {
+      //console.log(conn.clientAddress); // this uses x-forwarded-for with forward count
+
+      // Here is another way using headers
       var forwardedFor = conn.httpHeaders['x-forwarded-for'].split(",");
       clientIp = forwardedFor[0]; 
-      console.log(clientIp);    
+      //console.log(clientIp);    
     });
 
 /* had to remove due to unstyled accounts for some reason
@@ -397,16 +400,17 @@ Meteor.methods({
     }
   },
 
-  // testing ip getting
-  getClientIp: function (author) {
+  // testing ip getting on the client side
+  // will be null if not behind a proxy as set in process.env.HTTP_FORWARDED_COUNT = 2;
+  getClientIp: function() {
     clientIp = this.connection.clientAddress;
-    console.log(clientIp);
+    console.log("Client IP is: " + clientIp);
   },
 
 
 
 // This isn't being used any more, but maybe in the future
-  addAuthor: function (author) {
+  addAuthor: function(author) {
     // Make sure the user is logged in before inserting a task
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");

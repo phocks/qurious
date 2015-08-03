@@ -263,7 +263,7 @@ if (Meteor.isServer) {
 
   });  // end of code to do at startup
 
-    process.env.HTTP_FORWARDED_COUNT = 1;
+    process.env.HTTP_FORWARDED_COUNT = 2;
 
     Meteor.onConnection(function(conn) {
       console.log(conn.clientAddress);

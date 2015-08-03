@@ -23,6 +23,9 @@ Counters = new Mongo.Collection('counters');
 loadMoreLimit = 5;
 
 
+
+
+
 // Here we have stuff that will only run on the client's browser
 
 if (Meteor.isClient) { // only runs on the client
@@ -245,6 +248,11 @@ if (Meteor.isServer) {
     if (Counters.find().count() === 0) {
       Counters.insert( { _id: "quote_id", seq: 0 } );
     }
+
+
+  Meteor.onConnection(function(conn) {
+      console.log(conn.clientAddress);
+  });
 
     
 
@@ -694,6 +702,9 @@ Router.route('/', {
         frontPage: true
       }
     });
+
+
+
 
     this.render('Home');
 /*

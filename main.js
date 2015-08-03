@@ -249,11 +249,7 @@ if (Meteor.isServer) {
     // init the counters in case mongo reset
     if (Counters.find().count() === 0) {
       Counters.insert( { _id: "quote_id", seq: 0 } );
-    }
-
-    
-
-    
+    } 
 
 /* had to remove due to unstyled accounts for some reason
   Accounts.config({
@@ -263,13 +259,14 @@ if (Meteor.isServer) {
 
   });  // end of code to do at startup
 
-    process.env.HTTP_FORWARDED_COUNT = 2;
 
-    Meteor.onConnection(function(conn) {
-      console.log(conn.clientAddress);
-      var forwardedFor = conn.httpHeaders['x-forwarded-for'].split(",");
-      console.log(forwardedFor[0]);
-    });
+
+  // Here we are going to get the client IP Address
+  Meteor.onConnection(function(conn) {
+    var forwardedFor = conn.httpHeaders['x-forwarded-for'].split(",");
+    clientIp = forwardedFor[0];
+    console.log(clientIp);
+  });
 
 
 

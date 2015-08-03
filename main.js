@@ -251,6 +251,13 @@ if (Meteor.isServer) {
       Counters.insert( { _id: "quote_id", seq: 0 } );
     } 
 
+    // Here we are going to get the client IP Address
+    Meteor.onConnection(function(conn) {
+      var forwardedFor = conn.httpHeaders['x-forwarded-for'].split(",");
+      clientIp = forwardedFor[0]; 
+      console.log(clientIp);    
+    });
+
 /* had to remove due to unstyled accounts for some reason
   Accounts.config({
     forbidClientAccountCreation : false  // set this to true to disable signup
@@ -261,14 +268,7 @@ if (Meteor.isServer) {
 
 
 
-  // Here we are going to get the client IP Address
-  Meteor.onConnection(function(conn) {
-    var forwardedFor = conn.httpHeaders['x-forwarded-for'].split(",");
-    clientIp = forwardedFor[0];
-    console.log(clientIp);
-  });
-
-
+  
 
 
   // Get the server to publish our collections
@@ -393,6 +393,12 @@ Meteor.methods({
       if (n > 300 && n <= 500) Quotes.update({ _id: quoteId }, { $set: { length: 'long' }});
       if (n > 500) Quotes.update({ _id: quoteId }, { $set: { length: 'gigantic' }});
     }
+  },
+
+  // testing ip getting
+  getClientIp: function (author) {
+    clientIp = this.connection.clientAddress;
+    console.log(clientIp);
   },
 
 
@@ -708,7 +714,7 @@ Router.route('/', {
       }
     });
 
-
+    Meteor.call('getClientIp');
 
 
     this.render('Home');

@@ -14,3 +14,4 @@ useraccounts:core
 accounts-ui
 zimme:active-route
 okgrow:iron-router-autoscroll
+mizzao:user-status

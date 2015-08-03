@@ -253,11 +253,6 @@ if (Meteor.isServer) {
 
     process.env.HTTP_FORWARDED_COUNT = 1;
 
-
-    Meteor.onConnection(function(conn) {
-      console.log(conn.clientAddress);
-    });
-
     
 
 /* had to remove due to unstyled accounts for some reason
@@ -268,6 +263,10 @@ if (Meteor.isServer) {
 
   });  // end of code to do at startup
 
+
+    Meteor.onConnection(function(conn) {
+      console.log(conn.clientAddress);
+    });
 
 
   // Get the server to publish our collections

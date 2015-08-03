@@ -251,7 +251,7 @@ if (Meteor.isServer) {
       Counters.insert( { _id: "quote_id", seq: 0 } );
     }
 
-    //process.env.HTTP_FORWARDED_COUNT = 1;
+    process.env.HTTP_FORWARDED_COUNT = 1;
 
     
 

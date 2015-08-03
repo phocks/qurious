@@ -267,7 +267,7 @@ if (Meteor.isServer) {
 
     Meteor.onConnection(function(conn) {
       console.log(conn.clientAddress);
-      console.log(conn.httpHeaders);
+      console.log(conn.httpHeaders['x-forwarded-for']);
     });
 
 

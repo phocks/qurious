@@ -251,7 +251,7 @@ if (Meteor.isServer) {
       Counters.insert( { _id: "quote_id", seq: 0 } );
     }
 
-    process.env.HTTP_FORWARDED_COUNT = 1;
+    
 
     
 
@@ -263,9 +263,11 @@ if (Meteor.isServer) {
 
   });  // end of code to do at startup
 
+    process.env.HTTP_FORWARDED_COUNT = 1;
 
     Meteor.onConnection(function(conn) {
       console.log(conn.clientAddress);
+      console.log(conn.httpHeaders);
     });
 
 

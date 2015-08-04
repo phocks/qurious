@@ -40,6 +40,19 @@ if (Meteor.isClient) { // only runs on the client
   Meteor.subscribe("userData"); // for admin access etc.
 
 
+  // I'm going to set up some things to be tracked.
+
+  Tracker.autorun(function () {
+    var quoteId = Session.get("sessionQuoteId");
+
+    Meteor.call('viewQuote', quoteId, function(e,r) {
+      if (r)
+        console.log("Quote " + quoteId + " logged an increment.");
+      else 
+        console.log("Quote " + quoteId + " is doing something wrong " + Meteor.userId());
+    });
+  });
+
 
 
   // Here we work out what kind of signups we want to use
@@ -342,6 +355,11 @@ if (Meteor.isServer) {
 // Meteor methods can be called by the client to do server things
 // They can also be called by the server, I think
 Meteor.methods({
+
+
+
+
+
   addQuote: function (text, attribution) {
     // Make sure the user is logged in before inserting a task
     if (! Meteor.userId()) {
@@ -369,7 +387,7 @@ Meteor.methods({
     Quotes.remove(quoteId);
   },
 
-
+  // Will use viewQuote instead probably
   incQuoteViewCounter: function(quoteId) {
     Quotes.update( { _id: quoteId }, {$inc: { views: 1 } });
   },
@@ -452,7 +470,26 @@ Meteor.methods({
     } else {
       Quotes.update({ _id: quoteId }, { $set: { theme: 'blue' }});
     }
-  }
+  },
+
+
+
+
+viewQuote: function(quoteId) {
+  // check if the user hasn't visited this question already
+  // var user = Meteor.users.findOne({_id:this.userId,questionsVisited:{$ne:questionId}});
+
+  // if (!user)
+  //      return false;
+
+  // otherwise, increment the question view count and add the question to the user's visited page
+  Quotes.update( { _id: quoteId }, {$inc: { views: 1 } });
+  return true;
+},
+
+
+
+
 });
 
 
@@ -597,8 +634,8 @@ Router.route('/quotes/:_quote_slug', {
     return Meteor.subscribe('quotesSlug', this.params._quote_slug);
   },
     onBeforeAction: function() {
-      Session.set('sessionQuote', this.params._quote_slug);
-      console.log(Session.get('sessionQuote'));
+      Session.set('sessionQuoteId', this.params._quote_slug);
+      // console.log(Session.get('sessionQuote'));
       //Meteor.call('incQuoteViewCounter', this.params._quote_slug); // +1 to view count
       Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?
       this.next();

@@ -58,8 +58,11 @@ body {
   padding-bottom: 5em;
 }
 
+.single-quote .meta {
+  padding-top: 30px;
+}
 
-.single-quote .created-by .breadcrumb {
+.single-quote .meta .breadcrumb {
   display: inline-block;
 }
 
@@ -71,19 +74,19 @@ body {
 }
 
 .single-quote .quotation.tiny {
-  font-size: 450%;
+  font-size: 390%;
 }
 
 .single-quote .quotation.short {
-  font-size: 400%;
+  font-size: 330%;
 }
 
 .single-quote .quotation.medium {
-  font-size: 300%;
+  font-size: 220%;
 }
 
 .single-quote .quotation.long {
-  font-size: 200%;
+  font-size: 190%;
 }
 
 .single-quote .quotation.gigantic {
@@ -278,7 +281,7 @@ body {
 .vertical-container {
   background-color: #FEFCF9;
   
-  min-height: 95vh;
+  min-height: 100vh;
   display: -webkit-flex;
   display:         flex;
   display: -ms-flexbox;
@@ -294,6 +297,7 @@ body {
   flex-direction: column;
   -ms-flex-direction: row;
 }
+
 
 
 .content-container {
@@ -484,7 +488,7 @@ body {
   border-top: 4px #F58465 solid;
   margin-bottom: 0;
   border-bottom: 0;
-  background-color: #FEFCF9
+  background-color: #FEFCF9;
 }
 
 .navbar-brand {

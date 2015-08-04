@@ -168,8 +168,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-  // Here are the helpers
-
+  // Here are the helpers to put data into Templates etc
 
 
   UI.registerHelper('formatTime', function(context, options) {
@@ -383,7 +382,7 @@ Meteor.methods({
     var currentQuote = Quotes.findOne(quoteId);
     var quotation = currentQuote.quotation;
 
-    console.log(currentQuote.length);
+    //console.log(currentQuote.length);
     
     if (true) { // use currentQuote.length == undefined to only update undefined
       var n = quotation.length;
@@ -404,7 +403,7 @@ Meteor.methods({
   // will be null if not behind a proxy as set in process.env.HTTP_FORWARDED_COUNT = 2;
   getClientIp: function() {
     clientIp = this.connection.clientAddress;
-    console.log("Client IP is: " + clientIp);
+    //console.log("Client IP is: " + clientIp);
   },
 
 
@@ -517,7 +516,7 @@ Router.route('/create', {
         }
       }
     });
-    console.log(Meteor.user().admin); // testing the admin setting
+    //console.log(Meteor.user().admin); // testing the admin setting
   }
 });
 

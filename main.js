@@ -250,7 +250,7 @@ if (Meteor.isServer) {
       Counters.insert( { _id: "quote_id", seq: 0 } );
     } 
 
-    process.env.HTTP_FORWARDED_COUNT = 2; // this seems to shift x-forwarded-for list for ip
+    //process.env.HTTP_FORWARDED_COUNT = 2; // this seems to shift x-forwarded-for list for ip
 
     // Here we are going to get the client IP Address
     Meteor.onConnection(function(conn) {
@@ -401,10 +401,10 @@ Meteor.methods({
 
   // testing ip getting on the client side
   // will be null if not behind a proxy as set in process.env.HTTP_FORWARDED_COUNT = 2;
-  getClientIp: function() {
+  /*getClientIp: function() {
     clientIp = this.connection.clientAddress;
-    //console.log("Client IP is: " + clientIp);
-  },
+    console.log("Client IP is: " + clientIp);
+  },-------------------doesn't work with client so deleting*/ 
 
 
 
@@ -597,9 +597,11 @@ Router.route('/quotes/:_quote_slug', {
     return Meteor.subscribe('quotesSlug', this.params._quote_slug);
   },
     onBeforeAction: function() {
-    //Meteor.call('incQuoteViewCounter', this.params._quote_slug); // +1 to view count
-    Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?
-    this.next();
+      Session.set('sessionQuote', this.params._quote_slug);
+      console.log(Session.get('sessionQuote'));
+      //Meteor.call('incQuoteViewCounter', this.params._quote_slug); // +1 to view count
+      Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?
+      this.next();
   },
   action: function () {
     this.render('Header', {to: 'header'});
@@ -719,7 +721,6 @@ Router.route('/', {
       }
     });
 
-    Meteor.call('getClientIp');
 
 
     this.render('Home');

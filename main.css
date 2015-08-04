@@ -18,7 +18,7 @@
        url('/fonts/Aleo/Regular/aleo-regular-webfont.svg#aleoregular') format('svg'); /* Legacy iOS */
 }
 
-/*
+
 @font-face {
   font-family: 'Aleo Light';
   src: url('/fonts/Aleo/Light/aleo-light-webfont.eot'); 
@@ -28,7 +28,7 @@
        url('/fonts/Aleo/Light/aleo-light-webfont.ttf')  format('truetype'), 
        url('/fonts/Aleo/Light/aleo-light-webfont.svg#aleolight') format('svg'); 
 }
-*/
+
 
 a, /* this gets rid of the dotty outline in Firefox. */
 a:hover,
@@ -56,6 +56,7 @@ body {
   text-align: center;  
   padding-top: 5em;
   padding-bottom: 5em;
+  min-width: 400px;
 }
 
 .single-quote .meta {
@@ -64,11 +65,12 @@ body {
 
 .single-quote .meta .breadcrumb {
   display: inline-block;
+  background-color: #eee;
 }
 
 
 .single-quote .quotation {
-  font-family: 'Aleo', serif;
+  font-family: 'Aleo Light', serif;
   font-weight: 700;
   font-size: 170%;
 }

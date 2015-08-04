@@ -410,6 +410,8 @@ Meteor.methods({
     Quotes.remove(quoteId);
   },
 
+
+
   // Will use viewQuote instead probably
   incQuoteViewCounter: function(quoteId) {
     Quotes.update( { _id: quoteId }, {$inc: { views: 1 } });
@@ -688,9 +690,9 @@ Router.route('/quotes/:_quote_slug/:_extra_text', {
     // return one handle, a function, or an array
     return Meteor.subscribe('quotesSlug', this.params._quote_slug);
   },
-    onBeforeAction: function() {
-    Meteor.call('incQuoteViewCounter', this.params._quote_slug);
-    this.next()   
+  onBeforeAction: function() {
+  Meteor.call('incQuoteViewCounter', this.params._quote_slug);
+  this.next()
   },
   action: function () {
     this.render('Header', {to: 'header'});
@@ -705,6 +707,25 @@ Router.route('/quotes/:_quote_slug/:_extra_text', {
       }
     });  
   }
+});
+
+
+
+
+
+Router.route('/random', {
+  onBeforeAction: function() {
+    Meteor.call('getRandomQuoteId', function (error, result) {
+      var randomId = result;
+      Router.go('/quotes/' + randomId);
+    });
+
+    this.next()
+  },
+  action: function () {
+    this.render('Header', {to: 'header'});
+    
+  },
 });
 
 
@@ -748,7 +769,7 @@ Router.route('/users/:_username', {
     //   Meteor.subscribe('quotesSlugUser', username_to_lookup);
     // });
       
-    return Meteor.subscribe('quotesSlugUser', this.params._username);
+    //return Meteor.subscribe('quotesSlugUser', this.params._username);
 
 
     // return one handle, a function, or an array

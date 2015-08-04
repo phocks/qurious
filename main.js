@@ -26,18 +26,39 @@ loadMoreLimit = 5;
 
 
 
-
-
 // Here we have stuff that will only run on the client's browser
 
 if (Meteor.isClient) { // only runs on the client
 
+
+  
 
   // We need to tell the client to subscribe explicitly to data collections
   // Later we don't want to subscribe to the whole thing
   // moved to individual routes // Meteor.subscribe("quotes");
   Meteor.subscribe("counters");
   Meteor.subscribe("userData"); // for admin access etc.
+
+
+
+  // Just trying something with subscriptions
+  // var latestSubscription = Meteor.subscribeWithPagination('quotesLatest', loadMoreLimit);
+  // var popularSubscription = Meteor.subscribeWithPagination('quotesPopular', loadMoreLimit);
+  
+
+  // Template.Quotes.events({
+  //   'click .give-me-more': function (event) {
+  //     event.preventDefault();
+  //     latestSubscription.loadNextPage();
+  //     popularSubscription.loadNextPage();
+  //   }
+  // });
+
+
+
+
+
+
 
 
   // I'm going to set up some things to be tracked.
@@ -94,7 +115,6 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-
   // Setting up the useraccounts:core
   AccountsTemplates.configure({
     forbidClientAccountCreation: false,
@@ -142,6 +162,10 @@ if (Meteor.isClient) { // only runs on the client
 
 
   // We are setting up Infinite Scrolling
+
+
+
+
   
   incrementLimit = function(inc) { // this is defining a new global function
     var inc = loadMoreLimit;
@@ -155,11 +179,11 @@ if (Meteor.isClient) { // only runs on the client
     // Deps.autorun() automatically rerun the subscription whenever Session.get('limit') changes
     // http://docs.meteor.com/#deps_autorun
     // Changed to 'Tracker' in newer versions of Meteor
-    // Tracker.autorun(function() {      
-    //   Meteor.subscribe('quotesPopular', Session.get('limit'));
-    //   Meteor.subscribe('quotesLatest', Session.get('limit'));
-    //   Meteor.subscribe('quotesCurrentUser', Session.get('limit'));      
-    // });
+    Tracker.autorun(function() {      
+      Meteor.subscribe('quotesPopular', Session.get('limit'));
+      Meteor.subscribe('quotesLatest', Session.get('limit'));
+      Meteor.subscribe('quotesCurrentUser', Session.get('limit'));      
+    });
   }
 
   // This is an auto load feature when we have reached the bottom
@@ -176,7 +200,7 @@ if (Meteor.isClient) { // only runs on the client
 
   Template.Quotes.events({
     'click .give-me-more': function(evt) {
-      incrementLimit();
+      incrementLimit();      
     }
   });
 
@@ -567,13 +591,13 @@ Router.route('/popular', {
     //return quotesPaginated;
 
 
-    Tracker.autorun(function() {      
-      Meteor.subscribe('quotesPopular', Session.get('limit'));     
-    });
+    // Tracker.autorun(function() {      
+    //   Meteor.subscribe('quotesPopular', Session.get('limit'));     
+    // });
 
     
 
-    return Meteor.subscribe('quotesPopular', 5);
+    // return Meteor.subscribe('quotesPopular', 5);
 
     
 
@@ -599,11 +623,13 @@ Router.route('/latest', {
 
   waitOn: function () {
 
-    Tracker.autorun(function() {
-      Meteor.subscribe('quotesLatest', Session.get('limit'));
-    });
+    // Tracker.autorun(function() {
+    //   Meteor.subscribe('quotesLatest', Session.get('limit'));
+    // });
     
-    return Meteor.subscribe('quotesLatest', 5);
+    // return Meteor.subscribe('quotesLatest', 5);
+
+    
     
 
     // return one handle, a function, or an array

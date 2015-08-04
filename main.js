@@ -45,12 +45,15 @@ if (Meteor.isClient) { // only runs on the client
   Tracker.autorun(function () {
     var quoteId = Session.get("sessionQuoteId");
 
-    Meteor.call('viewQuote', quoteId, function(e,r) {
-      if (r)
-        console.log("Quote " + quoteId + " logged an increment.");
-      else 
-        console.log("Quote " + quoteId + " is doing something wrong " + Meteor.userId());
-    });
+
+    if (quoteId != undefined) {
+      Meteor.call('viewQuote', quoteId, function(e,r) {
+        if (r)
+          console.log("Quote " + quoteId + " logged an increment.");
+        else 
+          console.log("Quote " + quoteId + " is doing something wrong " + Meteor.userId());
+      });
+    }
   });
 
 
@@ -353,12 +356,8 @@ if (Meteor.isServer) {
 
 
 // Meteor methods can be called by the client to do server things
-// They can also be called by the server, I think
+// They can also be called by the server, I think... maybe
 Meteor.methods({
-
-
-
-
 
   addQuote: function (text, attribution) {
     // Make sure the user is logged in before inserting a task
@@ -475,17 +474,17 @@ Meteor.methods({
 
 
 
-viewQuote: function(quoteId) {
-  // check if the user hasn't visited this question already
-  // var user = Meteor.users.findOne({_id:this.userId,questionsVisited:{$ne:questionId}});
+  viewQuote: function(quoteId) {
+    // check if the user hasn't visited this question already
+    // var user = Meteor.users.findOne({_id:this.userId,questionsVisited:{$ne:questionId}});
 
-  // if (!user)
-  //      return false;
+    // if (!user)
+    //      return false;
 
-  // otherwise, increment the question view count and add the question to the user's visited page
-  Quotes.update( { _id: quoteId }, {$inc: { views: 1 } });
-  return true;
-},
+    // otherwise, increment the question view count and add the question to the user's visited page
+    Quotes.update( { _id: quoteId }, {$inc: { views: 1 } });
+    return true;
+  },
 
 
 

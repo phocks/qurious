@@ -8,4 +8,44 @@ Meteor.methods({
     return random_object._id;
   },
 
+
+  // This happens each time the user looks at a quotation
+  viewQuote: function (quoteId) {
+    // Check if the user hasn't visited this question already
+    if (Meteor.userId()) {
+      var user = Meteor.users.findOne({_id:this.userId,quotesVisited:{$ne:quoteId}});
+      console.log("user " + this.userId + " visited the quote " + quoteId );  
+
+
+      if (!user) return false;
+      
+
+    // otherwise, increment the question view count and add the question to the user's visited page
+      
+      Quotes.update( { _id: quoteId }, {$inc: { views: 1 }});
+      
+      Meteor.users.update({_id:this.userId},{$addToSet:{quotesVisited:quoteId}});
+      return true;
+    } 
+  },
+
+  
+  // This is a feature to "Like" a quotation. It should put the quote in the user's
+  // likes list and then update the 
+  collectQuote: function (quoteId) {
+    if (Meteor.userId()) {
+      var user = Meteor.users.findOne({_id:this.userId,liked:{$ne:quoteId}});
+      
+
+      if (!user) return false;
+
+      
+      console.log("user " + this.userId + " collected the quote " + quoteId );
+
+      Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
+      Meteor.users.update({_id:this.userId},{$addToSet:{liked:quoteId}});
+      return true;
+    }
+  },
+
 });

@@ -54,12 +54,12 @@ body {
 
 .single-quote { 
   text-align: center;  
-  padding-top: 5em;
-  padding-bottom: 5em;
-  min-width: 400px;
+  padding-top: 70px;
+  padding-bottom: 50px;
+  min-width: 320px;
 }
 
-.single-quote .meta {
+.meta {
   padding-top: 30px;
 }
 
@@ -104,6 +104,13 @@ body {
   color: #999;
   text-transform: uppercase;
 }
+
+/* We are going to do some themes here for the quotations */
+
+.single-quote.default {
+  background-color: #ddd;
+}
+
 
 
 @media (max-width: 767px) { 
@@ -299,6 +306,7 @@ body {
   flex-direction: column;
   -ms-flex-direction: row;
 }
+
 
 
 

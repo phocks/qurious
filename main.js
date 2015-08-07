@@ -523,8 +523,12 @@ Meteor.methods({
   collectQuote: function (quoteId) {
     if (Meteor.userId()) {
       var user = Meteor.users.findOne({_id:this.userId,liked:{$ne:quoteId}});
-      console.log("user " + this.userId + " collected the quote " + quoteId );
+      
 
+      if (!user) return false;
+
+      
+      console.log("user " + this.userId + " collected the quote " + quoteId );
 
       Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
       Meteor.users.update({_id:this.userId},{$addToSet:{liked:quoteId}});
@@ -701,7 +705,7 @@ Router.route('/quotes/:_quote_slug', {
     return Meteor.subscribe('quotesSlug', this.params._quote_slug);
   },
     onBeforeAction: function() {
-      Session.set('sessionQuoteId', this.params._quote_slug);
+      //Session.set('sessionQuoteId', this.params._quote_slug);
       // console.log(Session.get('sessionQuote'));
       //Meteor.call('incQuoteViewCounter', this.params._quote_slug); // +1 to view count
       Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?

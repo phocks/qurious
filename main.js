@@ -502,40 +502,6 @@ Meteor.methods({
 
 
 
-  // This happens each time the user looks at a quotation
-  viewQuote: function (quoteId) {
-    // Check if the user hasn't visited this question already
-    if (Meteor.userId()) {
-      var user = Meteor.users.findOne({_id:this.userId,quotesVisited:{$ne:quoteId}});
-      console.log("user " + this.userId + " visited the quote " + quoteId );      
-      //if (!user) return false;
-      
-
-    // otherwise, increment the question view count and add the question to the user's visited page
-      
-      Quotes.update( { _id: quoteId }, {$inc: { views: 1 }});
-      return true;
-    } 
-  },
-
-  // This is a feature to "Like" a quotation. It should put the quote in the user's
-  // likes list and then update the 
-  collectQuote: function (quoteId) {
-    if (Meteor.userId()) {
-      var user = Meteor.users.findOne({_id:this.userId,liked:{$ne:quoteId}});
-      
-
-      if (!user) return false;
-
-      
-      console.log("user " + this.userId + " collected the quote " + quoteId );
-
-      Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
-      Meteor.users.update({_id:this.userId},{$addToSet:{liked:quoteId}});
-      return true;
-    }
-  },
-
 
 
 });
@@ -705,8 +671,8 @@ Router.route('/quotes/:_quote_slug', {
     return Meteor.subscribe('quotesSlug', this.params._quote_slug);
   },
     onBeforeAction: function() {
-      //Session.set('sessionQuoteId', this.params._quote_slug);
-      // console.log(Session.get('sessionQuote'));
+      Session.set('sessionQuoteId', this.params._quote_slug);
+      console.log(Session.get('sessionQuote'));
       //Meteor.call('incQuoteViewCounter', this.params._quote_slug); // +1 to view count
       Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?
       this.next();

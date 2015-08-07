@@ -8,13 +8,20 @@ Meteor.methods({
     var count = Quotes.find().count();
     var random_index = Math.floor(Math.random() * (count));
     var random_object = Quotes.findOne({}, {skip:random_index});
-    console.log(random_object._id)
     return random_object._id;
   },
 
 
   // This happens each time the user looks at a quotation
   viewQuote: function (quoteId) {
+    // Just make sure we have a dogear attribute
+    console.log(Quotes.findOne({_id: quoteId, upcount: {$exists: true}}));
+    if (!Quotes.findOne({_id: quoteId, upcount: {$exists: true}})) {
+      Quotes.update( { _id: quoteId }, {$set: { upcount: 0 }});
+    }
+
+
+
     // Check if the user hasn't visited this question already
     if (Meteor.userId()) {
       var user = Meteor.users.findOne({_id:this.userId,quotesVisited:{$ne:quoteId}});

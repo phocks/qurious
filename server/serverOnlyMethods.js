@@ -1,3 +1,7 @@
+// These Meteor methods only run on the server. This is useful to hide things from the client.
+// Things like database changes that the client might do latency compensation on are especially
+// useful to hide from the client.
+
 Meteor.methods({
 
 	getRandomQuoteId: function() {

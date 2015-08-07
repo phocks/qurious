@@ -66,7 +66,6 @@ if (Meteor.isClient) { // only runs on the client
   Tracker.autorun(function () {
     var quoteId = Session.get("sessionQuoteId");
 
-
     if (quoteId != undefined) {
       Meteor.call('viewQuote', quoteId, function(e,r) {
         if (r)
@@ -228,6 +227,11 @@ if (Meteor.isClient) { // only runs on the client
   Template.SingleQuote.events({
     "click .delete": function () {
       Meteor.call('deleteQuote', this._id);
+    },
+
+    // Put the quotation into the users collection!
+    "click .collect": function () {
+      Meteor.call('collectQuote', this._id);
     }
   });
   
@@ -263,7 +267,6 @@ if (Meteor.isClient) { // only runs on the client
       event.target.attribution.value = "";
 
       
-
       // Prevent default action from form submit
       return false;
     },
@@ -413,9 +416,9 @@ Meteor.methods({
 
 
   // Will use viewQuote instead probably
-  incQuoteViewCounter: function(quoteId) {
-    Quotes.update( { _id: quoteId }, {$inc: { views: 1 } });
-  },
+  // incQuoteViewCounter: function(quoteId) {
+  //   Quotes.update( { _id: quoteId }, {$inc: { views: 1 } });
+  // },
 
   // Here we are going to check the size of the quote and then
   // set a value to it so that we can display long quotes with smaller font
@@ -499,19 +502,29 @@ Meteor.methods({
 
 
 
-
-  viewQuote: function(quoteId) {
-    // check if the user hasn't visited this question already
-    // var user = Meteor.users.findOne({_id:this.userId,questionsVisited:{$ne:questionId}});
-
-    // if (!user)
-    //      return false;
+  // This happens each time the user looks at a quotation
+  viewQuote: function (quoteId) {
+    // Check if the user hasn't visited this question already
+    if (this.userId) {
+      var user = Meteor.users.findOne({_id:this.userId,quotesVisited:{$ne:quoteId}});
+      console.log("user " + this.userId + " visited the quote " + quoteId );
+      if (true) return false;
+      
 
     // otherwise, increment the question view count and add the question to the user's visited page
-    Quotes.update( { _id: quoteId }, {$inc: { views: 1 } });
-    return true;
+      
+      Quotes.update( { _id: quoteId }, {$inc: { views: 1 }});
+      //Meteor.users.update({_id:this.userId},{$addToSet:{quotesVisited:quoteId}});
+      return true;
+    }
   },
 
+  // This is a feature to "Like" a quotation. It should put the quote in the user's
+  // likes list and then update the 
+  collectQuote: function (quoteId) {
+    Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
+    return true;
+  },
 
 
 
@@ -533,13 +546,34 @@ Router.onBeforeAction(function() {
 
 
 // Here come our routes which catch and process URLs -----------------
+
+
+
 // First some static pages with About Us and Privacy etc.
 
 
 Router.route('/about', function() { 
   this.render('Header', {to: 'header'}); 
-  this.render('TextContent');
+  this.render('AboutText');
 });
+
+Router.route('/privacy', function() { 
+  this.render('Header', {to: 'header'}); 
+  this.render('PrivacyText');
+});
+
+Router.route('/terms', function() { 
+  this.render('Header', {to: 'header'}); 
+  this.render('TermsText');
+});
+
+Router.route('/contact', function() { 
+  this.render('Header', {to: 'header'}); 
+  this.render('ContactText');
+});
+
+
+
 
 
 
@@ -667,6 +701,9 @@ Router.route('/quotes/:_quote_slug', {
       Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?
       this.next();
   },
+    onAfterAction: function() {
+      
+    },
   action: function () {
     this.render('Header', {to: 'header'});
     this.render('SingleQuote', {

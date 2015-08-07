@@ -109,6 +109,14 @@ body {
 
 .single-quote.default {
   background-color: #ddd;
+  padding-top: 170px;
+  padding-bottom: 150px;
+}
+
+.single-quote.default .attribution {
+  
+  color: #f48365;
+  
 }
 
 

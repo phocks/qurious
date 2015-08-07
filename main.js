@@ -505,10 +505,10 @@ Meteor.methods({
   // This happens each time the user looks at a quotation
   viewQuote: function (quoteId) {
     // Check if the user hasn't visited this question already
-    if (Meteor.userId) {
+    if (Meteor.userId()) {
       var user = Meteor.users.findOne({_id:this.userId,quotesVisited:{$ne:quoteId}});
       console.log("user " + this.userId + " visited the quote " + quoteId );      
-      if (!user) return false;
+      //if (!user) return false;
       
 
     // otherwise, increment the question view count and add the question to the user's visited page
@@ -521,8 +521,15 @@ Meteor.methods({
   // This is a feature to "Like" a quotation. It should put the quote in the user's
   // likes list and then update the 
   collectQuote: function (quoteId) {
-    Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
-    return true;
+    if (Meteor.userId()) {
+      var user = Meteor.users.findOne({_id:this.userId,liked:{$ne:quoteId}});
+      console.log("user " + this.userId + " collected the quote " + quoteId );
+
+
+      Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
+      Meteor.users.update({_id:currentUserId},{$addToSet:{quotesVisited:this.params._quote_slug}});
+      return true;
+    }
   },
 
 
@@ -701,8 +708,8 @@ Router.route('/quotes/:_quote_slug', {
       this.next();
   },
     onAfterAction: function() {
-      Meteor.users.update({_id:this.userId},{$addToSet:{quotesVisited:this.params._quote_slug}});
-      
+      // if (Meteor.userId()) currentUserId = Meteor.userId();
+      // Meteor.users.update({_id:currentUserId},{$addToSet:{quotesVisited:this.params._quote_slug}});
     },
   action: function () {
     this.render('Header', {to: 'header'});

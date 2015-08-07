@@ -41,7 +41,12 @@ Meteor.methods({
       var user = Meteor.users.findOne({_id:this.userId,liked:{$ne:quoteId}});
       
 
-      if (!user) return false;
+      if (!user) {
+        Meteor.users.update({_id:this.userId},{$pull:{liked:quoteId}});
+        Quotes.update( { _id: quoteId }, {$inc: { upcount: -1 } });
+
+        return false;
+      }
 
       
       console.log("user " + this.userId + " collected the quote " + quoteId );

@@ -127,7 +127,7 @@
 
 <template name="SingleQuote">
   <div class="vertical-container">
-    <div class="single-quote">
+    <div class="single-quote {{theme}}">
       <div class="container-fluid">    
         <div class="row">
           <div class="col-md-8 col-md-offset-2">
@@ -136,17 +136,17 @@
             </div>        
             <div class="attribution">
               <span class="dash hidden">&mdash;</span>{{attribution}}
-            </div>
-            <div class="meta">
-              <ol class="breadcrumb">                
-                <li class="active">{{username}}</li>
-                <li >{{views}}</li>                
-              </ol>
-            </div>     
+            </div>                
           </div>
         </div>
       </div>
     </div>
+    <div class="meta">
+      <ol class="breadcrumb">                
+        <li class="active">{{username}}</li>
+        <li >{{views}}</li>                
+      </ol>
+    </div> 
   </div>
 </template>
 

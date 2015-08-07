@@ -527,7 +527,7 @@ Meteor.methods({
 
 
       Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
-      Meteor.users.update({_id:currentUserId},{$addToSet:{quotesVisited:this.params._quote_slug}});
+      Meteor.users.update({_id:this.userId},{$addToSet:{liked:quoteId}});
       return true;
     }
   },

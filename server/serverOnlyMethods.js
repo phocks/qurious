@@ -28,7 +28,7 @@ Meteor.methods({
       console.log("user " + this.userId + " visited the quote " + quoteId );  
 
 
-      if (!user) return false;
+      //if (!user) return false;
       
 
     // otherwise, increment the question view count and add the question to the user's visited page

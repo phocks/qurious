@@ -54,8 +54,13 @@ Meteor.methods({
       Quotes.update({ _id: quoteId }, { $set: { lastViewedBy: this.userId }});      
     }
     else {
-      console.log(clientIp + " accessed quote");
+      if (activeQuote.lastViewedBy != clientIp) {
+        console.log(clientIp + " accessed quote");
+        Quotes.update({ _id: quoteId }, { $set: { lastViewedBy: clientIp }});
+        Quotes.update( { _id: quoteId }, {$inc: { views: 1 }});
+      }
     }
+    return true;
   },
 
   

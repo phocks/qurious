@@ -68,7 +68,7 @@ if (Meteor.isClient) { // only runs on the client
     if (quoteId != undefined) {
       Meteor.call('viewQuote', quoteId, function(e,r) {
         if (r)
-          console.log("Quote " + quoteId + " logged an increment.");
+          console.log("Quote " + quoteId + " was viewed.");
         else 
           console.log("Quote " + quoteId + " is doing something wrong " + Meteor.userId());
       });
@@ -300,7 +300,9 @@ if (Meteor.isServer) {
 
       // Here is another way using headers
       var forwardedFor = conn.httpHeaders['x-forwarded-for'].split(",");
-      clientIp = forwardedFor[0];
+      clientIp = forwardedFor[0];     
+
+
     });
 
 /* had to remove due to unstyled accounts for some reason
@@ -498,7 +500,7 @@ Meteor.methods({
     }
   },
 
-
+  
 
 
 

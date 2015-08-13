@@ -3,6 +3,8 @@
 
 /*  some fonts 
     probably consider cutting these down to essentials */
+
+@import url(//fonts.googleapis.com/css?family=Roboto);
 @import url(//fonts.googleapis.com/css?family=Roboto+Slab);
 @import url(//fonts.googleapis.com/css?family=Cardo:400,700);
 /* commenting because this is now replaced by images
@@ -40,6 +42,11 @@ body {
   font-family: 'Roboto Slab', serif;
   background-color: #282828;
 }
+
+.text-content p, .text-content li {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
  
 .body-container {
   background-color: #FEFCF9; 
@@ -71,7 +78,7 @@ body {
 
 .single-quote .quotation {
   font-family: 'Aleo Light', serif;
-  font-weight: 700;
+  font-family: 'Vollkorn', serif;
   font-size: 170%;
 }
 
@@ -97,12 +104,13 @@ body {
 
 .single-quote .attribution {
   font-family: 'Cardo', serif;
+  font-family: 'Vollkorn', serif;
   font-weight: 700;
-  font-size: 140%;
+  font-size: 160%;
   margin-top: 1em;
   margin-bottom: 1em;
   color: #999;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
 }
 
 /* We are going to do some themes here for the quotations */
@@ -298,7 +306,7 @@ body {
 .vertical-container {
   background-color: #FEFCF9;
   
-  min-height: 100vh;
+  min-height: 95vh;
   display: -webkit-flex;
   display:         flex;
   display: -ms-flexbox;

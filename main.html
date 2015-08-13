@@ -50,10 +50,10 @@
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
               {{/unless}}
               {{#if currentUser}}                
-                <li class="dropdown {{isActivePath regex='\/users\/'}}">
+                <li class="dropdown {{isActivePath currentUsername}}">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUsername}} <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="/users/{{currentUsername}}">Your Quotations</a></li>
+                    <li><a href="/{{currentUsername}}">Your Quotations</a></li>
                     <li role="separator" class="divider"></li>
                     <li class="dropdown-header hidden">Nav header</li>
                     <li><a href="/logout">Logout</a></li>                    
@@ -223,9 +223,9 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <div class="explore-lead">
-          <h1 class="text-center text-uppercase">Explore</h1>
+          <h1 class="text-center text-uppercase">Explore {{username}}</h1>
           {{#if isActivePath '/mine'}}
-            <h2 class="text-center">Contributed by: <a href="/users/{{currentUsername}}">{{currentUsername}}</a></h2>
+            <h2 class="text-center">Contributed by: <a href="/{{currentUsername}}">{{currentUsername}}</a></h2>
           {{/if}}
         </div>
       </div>
@@ -254,7 +254,7 @@
     <div class="row">
       <div class="col-xs-7">
         <div class="contrib">
-            <p>Contributed by <a href="/users/{{username}}">{{username}}</a> <!-- - {{views}} views --></p>
+            <p>Contributed by <a href="/{{username}}">{{username}}</a> <!-- - {{views}} views --></p>
           </div>
       </div>
       <div class="col-xs-5">

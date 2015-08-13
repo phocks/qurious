@@ -58,6 +58,23 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
+  // Font experiment to see if we can load fonts on demand
+  WebFontConfig = {
+      google: { families: [ 'Vollkorn::latin' ] }
+    };
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+
+
+
+
 
 
   // I'm going to set up some things to be tracked.

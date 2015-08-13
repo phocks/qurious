@@ -237,6 +237,10 @@ if (Meteor.isClient) { // only runs on the client
     }
   );
 
+
+
+
+
 // Events that drive things like clicks etc
 
   // Let's finally set up a delete
@@ -246,8 +250,8 @@ if (Meteor.isClient) { // only runs on the client
     },
 
     // Put the quotation into the users collection!
-    "click .collect": function () {
-      Meteor.call('collectQuote', this._id);
+    "click .dogear": function () {
+      Meteor.call('dogearQuote', this._id);
     }
   });
   
@@ -579,6 +583,11 @@ Router.route('/login', function() {
   this.render('Login');
 });
 
+Router.route('/signup', function() {
+  this.render('Header', {to: 'header'});
+  this.render('SignUp');
+});
+
 
 Router.route('/logout', function() {
   Meteor.logout();
@@ -853,6 +862,30 @@ Router.route('/', {
 // Just to test the loader
 Router.route('/loading', function() {  
   this.render('Loading');
+});
+
+
+
+Router.route('/:_username', {
+  loadingTemplate: 'Loading',
+
+  waitOn: function () {
+
+    
+  },
+
+  action: function () {
+    var username_to_lookup = this.params._username; //to pass it into the function, someone help with this
+
+    this.render('Header', {to: 'header'});
+    this.render('Quotes', {
+      data: {
+        quotes: function () {
+          return Quotes.find({ _id: { $in: [ 'PmbgztgP9Qs2Fbikv', '6wD4XpGDdetXW38uZ' ] } }, {sort: {createdAt: -1}, limit: Session.get('limit') });
+        }
+      }
+    });
+  }
 });
 
 

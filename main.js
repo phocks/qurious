@@ -383,6 +383,12 @@ if (Meteor.isServer) {
   });
 
 
+  Meteor.publish("quotesInArray", function (array) {
+    return Quotes.find({ _id: { $in: array } }, {sort: {upcount: -1}});
+    self.ready();
+  });
+
+
   Meteor.publish("counters", function () {
     return Counters.find();
   });
@@ -902,11 +908,13 @@ Router.route('/:_username', {
       
     console.log(user.liked);
 
+    Meteor.subscribe('quotesInArray', user.liked);
+
     
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ _id: { $in: user.liked } }, {sort: {upcount: -1}, limit: Session.get('limit') });
+          return Quotes.find({ _id: { $in: user.liked } }, {sort: {upcount: -1, views: -1}, limit: Session.get('limit') });
 
 
         },

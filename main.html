@@ -44,8 +44,8 @@
               
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="{{isActivePath '/popular'}}"><a href="/popular">Popular</a></li>
-              <li class="{{isActivePath '/latest'}}"><a href="/latest">Latest</a></li>
+              <li class="{{isActivePath '/popular'}} hidden"><a href="/popular">Popular</a></li>
+              <li class="{{isActivePath '/latest'}} hidden"><a href="/latest">Latest</a></li>
               {{#unless currentUser}}
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
               {{/unless}}
@@ -83,7 +83,9 @@
         <h1 class="hidden">Qurious</h1><h1><img width="500px" src="/qurious_logo.png"></h1>
         <p class="subtitle hidden">Quotation, n: The act of repeating erroneously the words of another.</p>
         <br><br>
-        <a href="/random" class="btn btn-info raised" role="button">I'm feeling lucky!</a>
+        {{#unless currentUser}}
+          <a href="/signup" class="btn btn-info raised" role="button">Alpha sign up</a>
+        {{/unless}}
         </div>
       </div>
       </div>
@@ -101,14 +103,14 @@
         <div class="col-sm-3">
             <ul class="list-unstyled">
               <li><a href="/">Home</a></li>
-              <li><a href="/quotes">Explore</a></li>
+              <li><a href="/random">Random</a></li>
               <li><a href="/create">Create</a></li>
             </ul>
         </div>
         <div class="col-sm-3">
           <ul class="list-unstyled">
-            <li><a href="/about">About</a></li>
-            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="/about">About Qurious</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
             <li><a href="terms">Terms &amp; Conditions</a></li>
             <li><a href="contact">Contact Us</a></li>
           </ul>
@@ -141,6 +143,13 @@
         </div>
       </div>
     </div>
+    {{#if currentUser}}
+    <div class="meta">
+      <ol class="breadcrumb">
+        <li><img class="dogear {{#if dogeared}}desaturate{{/if}}" src="/ui/dogear.png"><span class="badge">{{upcount}}</span></li>
+      </ol>
+    </div>
+    {{/if}}
     <div class="meta hidden">
       <ol class="breadcrumb">                
         <li class="active">{{username}}</li>
@@ -162,6 +171,8 @@
     <li><a href="/contact">Contact Us</a></li>
   </ul>
 </template>
+
+
 
 
 <!-- the AboutText etc templates are now in their own files under /client/about.html etc -->
@@ -189,9 +200,17 @@
 
 
 <template name="Login"> 
-  <div class="container-fluid content-container">
+  <div class="container-fluid content-container login-container">
   <div class="col-md-6 col-md-offset-3">
     {{> atForm}}
+  </div>
+  </div>
+</template>
+
+<template name="SignUp"> 
+  <div class="container-fluid content-container signup-container">
+  <div class="col-md-6 col-md-offset-3">
+    {{> atForm state='signUp'}}
   </div>
   </div>
 </template>
@@ -308,7 +327,7 @@
 
 
 <template name="NoticeLogin">
-  <div class="content-container container-fluid">
+  <div class="vertical-container container-fluid">
     <div class="alert alert-warning" role="alert">Please login!</div>
   </div>
 </template>
@@ -367,50 +386,4 @@
     </div>
   </div>
   </div>
-</template>
-
-
-
-<!-- not used past this point -->
-
-
-<template name="HeaderGrid">
-  <div class="header">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-4 header-title">
-          <a class="{{#if frontPage}}hidden{{/if}}" href="/">Qurious</a>
-        </div>
-        <div class="col-sm-8 text-right">
-          <ul class="list-inline">
-            <li><a href="/quotes">Explore</a></li>
-            {{#unless currentUser}}
-              <li><a href="/login">Login</a></li>
-            {{/unless}}
-            {{#if currentUser}}
-              <li><a href="/mine">{{username}}</a></li>
-            {{/if}}
-          </ul>
-        </div>          
-      </div>
-    </div>
-  </div>
-</template>
-
-
-<template name="HeaderAbsolute">
-  <div class="nav-block">
-    <div class="text-logo {{#if frontPage}}hidden{{/if}}">
-      <a href="/#">Qurious</a>
-    </div>
-      <ul>
-        <li><a href="/quotes">Explore</a></li>
-        {{#unless currentUser}}
-          <li><a href="/login">Login</a></li>
-        {{/unless}}
-        {{#if currentUser}}
-          <li><a href="/mine">{{username}}</a></li>
-        {{/if}}
-      </ul>
-    </div>
 </template>

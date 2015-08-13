@@ -38,7 +38,7 @@ Meteor.methods({
     if (Meteor.userId()) {
 
       // This checks the user doc to see if the quote _id is in the list
-      var user = Meteor.users.findOne({_id:this.userId,quotesVisited:{$ne:quoteId}});
+      var user = Meteor.users.findOne({_id:this.userId, quotesVisited:{$ne:quoteId}});
 
  
       // Here we are trying to stop view refresh hacking
@@ -47,7 +47,7 @@ Meteor.methods({
       
         Quotes.update( { _id: quoteId }, {$inc: { views: 1 }});
         
-        Meteor.users.update({_id:this.userId},{$addToSet:{quotesVisited:quoteId}});
+        Meteor.users.update({_id:this.userId},{$addToSet:{ quotesVisited:quoteId}});
       }
 
       // Update last viewed by
@@ -66,7 +66,7 @@ Meteor.methods({
   
   // This is a feature to "Like" a quotation. It should put the quote in the user's
   // likes list and then update the 
-  collectQuote: function (quoteId) {
+  dogearQuote: function (quoteId) {
     if (Meteor.userId()) {
       var user = Meteor.users.findOne({_id:this.userId,liked:{$ne:quoteId}});
       

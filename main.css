@@ -43,6 +43,16 @@ body {
   background-color: #282828;
 }
 
+img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
+
+img.dogear {
+  position: relative;
+  top: -2px;
+  left: -3px;
+  cursor: pointer;
+  width: 22px;
+}
+
 .text-content p, .text-content li {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
@@ -60,19 +70,21 @@ body {
 }
 
 .single-quote { 
-  text-align: center;  
-  padding-top: 70px;
-  padding-bottom: 50px;
+  text-align: center;
   min-width: 320px;
 }
 
-.meta {
-  padding-top: 30px;
+.meta {  
+  padding-top: 10px;
+
+  position: relative;
+  top: 80px;
+  
 }
 
-.single-quote .meta .breadcrumb {
+.meta .breadcrumb {
   display: inline-block;
-  background-color: #eee;
+  background-color: transparent;
 }
 
 
@@ -526,4 +538,16 @@ body {
 .load-more {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+
+
+/* ---------------- Extra styles - keep em coming ------- */
+
+.at-signup-link {
+  display: none;
+}
+
+.signup-container .at-signin-link {
+  display: none;
 }

@@ -4,6 +4,7 @@
 
 Meteor.methods({
 
+  // Throw the dice with all the db docs
 	getRandomQuoteId: function() {
     var count = Quotes.find().count();
     var random_index = Math.floor(Math.random() * (count));
@@ -14,30 +15,47 @@ Meteor.methods({
 
   // This happens each time the user looks at a quotation
   viewQuote: function (quoteId) {
+
+    var activeQuote = Quotes.findOne({ _id: quoteId });
+
     // Just make sure we have a dogear attribute
-    console.log(Quotes.findOne({_id: quoteId, upcount: {$exists: true}}));
     if (!Quotes.findOne({_id: quoteId, upcount: {$exists: true}})) {
       Quotes.update( { _id: quoteId }, {$set: { upcount: 0 }});
     }
+
+    // Set views if not there
+    if (!Quotes.findOne({_id: quoteId, views: {$exists: true}})) {
+      Quotes.update( { _id: quoteId }, {$set: { views: 0 }});
+    }
+
+
+    // Update last time viewed attribute
+    Quotes.update({ _id: quoteId }, { $set: { lastViewed: new Date() }});
 
 
 
     // Check if the user hasn't visited this question already
     if (Meteor.userId()) {
+
+      // This checks the user doc to see if the quote _id is in the list
       var user = Meteor.users.findOne({_id:this.userId,quotesVisited:{$ne:quoteId}});
-      console.log("user " + this.userId + " visited the quote " + quoteId );  
 
+ 
+      // Here we are trying to stop view refresh hacking
+      // Please someone find a better way of doing this later, cheers
+      if (activeQuote.lastViewedBy != this.userId) {
+      
+        Quotes.update( { _id: quoteId }, {$inc: { views: 1 }});
+        
+        Meteor.users.update({_id:this.userId},{$addToSet:{quotesVisited:quoteId}});
+      }
 
-      //if (!user) return false;
-      
-
-    // otherwise, increment the question view count and add the question to the user's visited page
-      
-      Quotes.update( { _id: quoteId }, {$inc: { views: 1 }});
-      
-      Meteor.users.update({_id:this.userId},{$addToSet:{quotesVisited:quoteId}});
-      return true;
-    } 
+      // Update last viewed by
+      Quotes.update({ _id: quoteId }, { $set: { lastViewedBy: this.userId }});      
+    }
+    else {
+      console.log(clientIp + " accessed quote");
+    }
   },
 
   

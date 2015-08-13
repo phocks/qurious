@@ -21,6 +21,7 @@ Counters = new Mongo.Collection('counters');
 // like some variables etc
 
 loadMoreLimit = 5;
+maximumQuotationLength = 1000;
 
 
 
@@ -53,8 +54,6 @@ if (Meteor.isClient) { // only runs on the client
   //     popularSubscription.loadNextPage();
   //   }
   // });
-
-
 
 
 
@@ -301,8 +300,7 @@ if (Meteor.isServer) {
 
       // Here is another way using headers
       var forwardedFor = conn.httpHeaders['x-forwarded-for'].split(",");
-      clientIp = forwardedFor[0]; 
-      //console.log(clientIp);    
+      clientIp = forwardedFor[0];
     });
 
 /* had to remove due to unstyled accounts for some reason
@@ -387,10 +385,10 @@ if (Meteor.isServer) {
 Meteor.methods({
 
   addQuote: function (text, attribution) {
-    // Make sure the user is logged in before inserting a task
-    if (! Meteor.userId()) {
-      throw new Meteor.Error("not-authorized");
-    }
+    // Make sure the user is logged in otherwise throw and error
+    if (! Meteor.userId()) throw new Meteor.Error("not-authorized");
+
+    if (text > maximumQuotationLength) throw new Meteor.Error('too-long');
     
     Counters.update({ _id: 'quote_id' }, { $inc: { seq: 1 } });
     
@@ -433,9 +431,7 @@ Meteor.methods({
     if (true) { // use currentQuote.length == undefined to only update undefined
       var n = quotation.length;
 
-      //console.log(quoteId);
-      //console.log(quotation);
-      //console.log(n);
+      if (n > maximumQuotationLength) return false; // i don't like massive quotes and i cannot lie
 
       if (n <= 40) Quotes.update({ _id: quoteId }, { $set: { length: 'tiny' }});
       if (n > 40 && n <= 120) Quotes.update({ _id: quoteId }, { $set: { length: 'short' }});
@@ -443,6 +439,8 @@ Meteor.methods({
       if (n > 300 && n <= 500) Quotes.update({ _id: quoteId }, { $set: { length: 'long' }});
       if (n > 500) Quotes.update({ _id: quoteId }, { $set: { length: 'gigantic' }});
     }
+
+    return true;
   },
 
   // testing ip getting on the client side
@@ -588,7 +586,6 @@ Router.route('/create', {
         }
       }
     });
-    //console.log(Meteor.user().admin); // testing the admin setting
   }
 });
 
@@ -672,8 +669,6 @@ Router.route('/quotes/:_quote_slug', {
   },
     onBeforeAction: function() {
       Session.set('sessionQuoteId', this.params._quote_slug);
-      console.log(Session.get('sessionQuote'));
-      //Meteor.call('incQuoteViewCounter', this.params._quote_slug); // +1 to view count
       Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?
       this.next();
   },

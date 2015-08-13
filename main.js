@@ -392,8 +392,12 @@ if (Meteor.isServer) {
   Meteor.publish("userData", function () {
     if (this.userId) {
       return Meteor.users.find({_id: this.userId},
-                               {fields: {'admin': 1}});
+        { fields: {'admin': 1, 'liked': 1 }
+      });
     } else {
+      return Meteor.users.find({},
+        { fields: {'liked': 1, 'username': 1 }
+      });
       this.ready();
     }
   });
@@ -751,7 +755,7 @@ Router.route('/quotes/:_quote_slug/:_extra_text', {
 
 
 Router.route('/random', {
-  onBeforeAction: function() {
+  onBeforeAction: function () {
     Meteor.call('getRandomQuoteId', function (error, result) {
       var randomId = result;
       Router.go('/quotes/' + randomId);
@@ -870,19 +874,44 @@ Router.route('/:_username', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
+    // This apparently we need for asyc stuff or something
+    return Meteor.subscribe("userData"); 
+  },
+
+  onBeforeAction: function () {
 
     
+    // var quoteArray = Meteor.call('getDogearedQuotes', this.userId, function (error, result) {
+    //   Session.set('quoteArray', result);
+    //   array = result;
+    //   console.log(array);
+    //   quotesData = Quotes.find({ _id: { $in: array } }, {sort: {createdAt: -1}, limit: Session.get('limit') });
+    //   console.log(quotesData);
+    //   return quotesData;
+    // });
+
+
+    this.next();
+
   },
 
   action: function () {
-    var username_to_lookup = this.params._username; //to pass it into the function, someone help with this
-
     this.render('Header', {to: 'header'});
+    var usernameParam = this.params._username; //to pass it into the function, someone help with this
+    var user = Meteor.users.findOne( { username: this.params._username });
+      
+    console.log(user.liked);
+
+    
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ _id: { $in: [ 'PmbgztgP9Qs2Fbikv', '6wD4XpGDdetXW38uZ' ] } }, {sort: {createdAt: -1}, limit: Session.get('limit') });
-        }
+          return Quotes.find({ _id: { $in: user.liked } }, {sort: {upcount: -1}, limit: Session.get('limit') });
+
+
+        },
+        username: function () { return usernameParam },
+
       }
     });
   }

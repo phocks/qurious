@@ -68,7 +68,7 @@ Meteor.methods({
   // likes list and then update the 
   dogearQuote: function (quoteId) {
     if (Meteor.userId()) {
-      var user = Meteor.users.findOne({_id:this.userId,liked:{$ne:quoteId}});
+      var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}});
       
 
       if (!user) {
@@ -86,5 +86,12 @@ Meteor.methods({
       return true;
     }
   },
+
+  getDogearedQuotes: function (userId) {
+
+
+    list = [ 'PmbgztgP9Qs2Fbikv', '6wD4XpGDdetXW38uZ' ];
+    return list;
+  }
 
 });

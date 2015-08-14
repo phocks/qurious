@@ -1,8 +1,8 @@
-<!-- Here is the main head for all the pages -->
+<!-- Here is the main head for all the html pages etc -->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel='shortcut icon' type='image/png' href='/favicon.png' />
   <title>Qurious</title>
 </head>
@@ -14,7 +14,7 @@
     {{> yield "header"}}
   </header>
   <div class="body-container">
-    {{> yield}} 
+    {{> yield}}
   </div>
   <footer>
     {{> Footer}}
@@ -39,9 +39,9 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="{{isActivePath '/quotes'}} hidden"><a href="/quotes">Explore</a></li>             
-              
-              
+              <li class="{{isActivePath '/quotes'}} hidden"><a href="/quotes">Explore</a></li>
+
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="{{isActivePath '/popular'}} hidden"><a href="/popular">Popular</a></li>
@@ -49,18 +49,18 @@
               {{#unless currentUser}}
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
               {{/unless}}
-              {{#if currentUser}}                
+              {{#if currentUser}}
                 <li class="dropdown {{isActivePath currentUsername}}">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUsername}} <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li><a href="/{{currentUsername}}">Your Dogears</a></li>
                     <li role="separator" class="divider"></li>
                     <li class="dropdown-header hidden">Nav header</li>
-                    <li><a href="/logout">Logout</a></li>                    
+                    <li><a href="/logout">Logout</a></li>
                   </ul>
-                </li> 
-              {{/if}}      
-              
+                </li>
+              {{/if}}
+
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -74,12 +74,12 @@
 
 
 <!-- The front landing page / or root page the first thing many people will see -->
-<template name="Home"> 
+<template name="Home">
   <div class="content-container">
     <div class="homepage-title">
       <div class="container-fluid">
       <div class="row">
-        <div class="col-md-6 col-md-offset-3">                 
+        <div class="col-md-6 col-md-offset-3">
         <h1 class="hidden">Qurious</h1><h1><img width="500px" src="/qurious_logo.png"></h1>
         <p class="subtitle">Hello, Alpha phase testers.</p>
         <br><br>
@@ -121,7 +121,7 @@
             <li><a href="contact">Contact Us</a></li>
           </ul>
         </div>
-        <div class="col-sm-3">&copy; <a href="http://meag.re">Meagre</a> 2015 <span class="hidden"><img src="/q-loader.gif"></span></div>    
+        <div class="col-sm-3">&copy; <a href="http://meag.re">Meagre</a> 2015 <span class="hidden"><img src="/q-loader.gif"></span></div>
       </div>
     </div>
   </div>
@@ -136,15 +136,15 @@
 <template name="SingleQuote">
   <div class="vertical-container">
     <div class="single-quote {{theme}}">
-      <div class="container-fluid">    
+      <div class="container-fluid">
         <div class="row">
           <div class="col-md-8 col-md-offset-2">
-            <div class="quotation {{length}}">          
-              &ldquo;{{quotation}}&rdquo;          
-            </div>        
+            <div class="quotation {{length}}">
+              &ldquo;{{quotation}}&rdquo;
+            </div>
             <div class="attribution">
               <span class="dash">&mdash;</span>{{attribution}}
-            </div>                
+            </div>
           </div>
         </div>
       </div>
@@ -158,20 +158,20 @@
     </div>
     {{/if}}
     <div class="meta hidden">
-      <ol class="breadcrumb">                
+      <ol class="breadcrumb">
         <li class="active">{{username}}</li>
         <li >{{views}}</li>
         <li><img width="20px" class="collect" src="/ui/dogear.png"></li>
         <li>{{upcount}}</li>
       </ol>
-    </div> 
+    </div>
   </div>
 </template>
 
 
 
 <template name="TextPageNavigation">
-  <ul class="nav nav-pills nav-stacked">
+  <ul class="nav nav-pills nav-stacked text-page-navigation">
     <li><a href="/about">About</a></li>
     <li><a href="/privacy">Privacy Policy</a></li>
     <li><a href="/terms">Terms &amp; Conditions</a></li>
@@ -206,7 +206,7 @@
 </template>
 
 
-<template name="Login"> 
+<template name="Login">
   <div class="container-fluid content-container login-container">
   <div class="col-md-6 col-md-offset-3">
     {{> atForm}}
@@ -214,7 +214,7 @@
   </div>
 </template>
 
-<template name="SignUp"> 
+<template name="SignUp">
   <div class="container-fluid content-container signup-container">
   <div class="col-md-6 col-md-offset-3">
     {{> atForm state='signUp'}}
@@ -237,7 +237,7 @@
         </div>
       </div>
     </div>
-  
+
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         {{#each quotes}}
@@ -246,12 +246,12 @@
       </div>
     </div>
 
-    
+
       <div class="load-more">
         <button class="btn btn-primary raised center-block give-me-more">More Posts</button>
       </div>
-    
-  
+
+
   </div>
 </template>
 
@@ -270,7 +270,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="quotation">
       <p>&ldquo;{{ quotation }}&rdquo;</p>
     </div>
@@ -295,11 +295,11 @@
 
 
 <template name="Create">
-  
+
 
   {{#unless currentUser}}
     {{> NoticeLogin}}
-  {{/unless}}  
+  {{/unless}}
 
 
 
@@ -317,8 +317,8 @@
             <div class="form-group">
               <label for="attributionText">Attribution</label>
               <input type="text" class="form-control" id="attributionText" name="attribution" placeholder="Attribution">
-            </div>          
-      
+            </div>
+
             <button type="submit" class="btn btn-primary raised">Submit</button>
           </form>
         </div>
@@ -352,13 +352,13 @@
     <div class="container-fluid">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-      
+
       <div class="quotation">
-        
+
         <p>&ldquo;404. You are looking for something that is not in the database.&rdquo;</p>
-        
+
       </div>
-      
+
       <div class="attribution">
         Qurious
       </div>
@@ -378,13 +378,13 @@
     <div class="container-fluid">
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-      
+
       <div class="quotation">
-        
+
         <p>&ldquo;404. You are lost.&rdquo;</p>
-        
+
       </div>
-      
+
       <div class="attribution">
         Qurious
       </div>

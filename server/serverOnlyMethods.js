@@ -40,18 +40,18 @@ Meteor.methods({
       // This checks the user doc to see if the quote _id is in the list
       var user = Meteor.users.findOne({_id:this.userId, quotesVisited:{$ne:quoteId}});
 
- 
+
       // Here we are trying to stop view refresh hacking
       // Please someone find a better way of doing this later, cheers
       if (activeQuote.lastViewedBy != this.userId) {
-      
+
         Quotes.update( { _id: quoteId }, {$inc: { views: 1 }});
-        
+
         Meteor.users.update({_id:this.userId},{$addToSet:{ quotesVisited:quoteId}});
       }
 
       // Update last viewed by
-      Quotes.update({ _id: quoteId }, { $set: { lastViewedBy: this.userId }});      
+      Quotes.update({ _id: quoteId }, { $set: { lastViewedBy: this.userId }});
     }
     else {
       if (activeQuote.lastViewedBy != clientIp) {
@@ -63,13 +63,13 @@ Meteor.methods({
     return true;
   },
 
-  
+
   // This is a feature to "Like" a quotation. It should put the quote in the user's
-  // likes list and then update the 
+  // likes list and then update the upcount in the quote db
   dogearQuote: function (quoteId) {
     if (Meteor.userId()) {
       var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}});
-      
+
 
       if (!user) {
         Meteor.users.update({_id:this.userId},{$pull:{liked:quoteId}});
@@ -78,7 +78,7 @@ Meteor.methods({
         return false;
       }
 
-      
+
       console.log("user " + this.userId + " collected the quote " + quoteId );
 
       Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });

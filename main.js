@@ -360,7 +360,7 @@ if (Meteor.isServer) {
       limit = 0;
     }
 
-    return Quotes.find({}, { sort: {views: -1}, limit: limit });
+    return Quotes.find({}, { sort: {upcount: -1, views: -1}, limit: limit });
     self.ready();
   });
 
@@ -633,27 +633,11 @@ Router.route('/create', {
 });
 
 
-Router.route('/popular', {
+Router.route('/quotes', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
-    // return one handle, a function, or an array
-    //return Meteor.subscribe('quotesAll');
-    //quotesPaginated = Meteor.subscribeWithPagination('quotesAll', 5);
-    //return quotesPaginated;
 
-
-    // Tracker.autorun(function() {
-    //   Meteor.subscribe('quotesPopular', Session.get('limit'));
-    // });
-
-
-
-    // return Meteor.subscribe('quotesPopular', 5);
-
-
-
-    //return Meteor.subscribe('quotesPopular', 1);
   },
 
   action: function () {
@@ -661,7 +645,7 @@ Router.route('/popular', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({}, {sort: {views: -1}, limit: Session.get('limit') });
+          return Quotes.find({}, {sort: {upcount: -1, views: -1}, limit: Session.get('limit') });
         }
       }
     });
@@ -680,10 +664,6 @@ Router.route('/latest', {
     // });
 
     // return Meteor.subscribe('quotesLatest', 5);
-
-
-
-
     // return one handle, a function, or an array
     //return Meteor.subscribe('quotesLatest', 1);
   },

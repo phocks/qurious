@@ -1,12 +1,12 @@
-// ___  ___                          
-// |  \/  |                          
-// | .  . | ___  __ _  __ _ _ __ ___ 
+// ___  ___
+// |  \/  |
+// | .  . | ___  __ _  __ _ _ __ ___
 // | |\/| |/ _ \/ _` |/ _` | '__/ _ \
 // | |  | |  __/ (_| | (_| | | |  __/
 // \_|  |_/\___|\__,_|\__, |_|  \___|
-//                     __/ |         
-//                    |___/          
-// 
+//                     __/ |
+//                    |___/
+//
 // Qurious, a web app for creating and sharing quotes
 // Copyright Meagre 2015- All rights reserved
 
@@ -32,7 +32,7 @@ maximumQuotationLength = 1000;
 if (Meteor.isClient) { // only runs on the client
 
 
-  
+
 
   // We need to tell the client to subscribe explicitly to data collections
   // Later we don't want to subscribe to the whole thing
@@ -45,7 +45,7 @@ if (Meteor.isClient) { // only runs on the client
   // Just trying something with subscriptions
   // var latestSubscription = Meteor.subscribeWithPagination('quotesLatest', loadMoreLimit);
   // var popularSubscription = Meteor.subscribeWithPagination('quotesPopular', loadMoreLimit);
-  
+
 
   // Template.Quotes.events({
   //   'click .give-me-more': function (event) {
@@ -86,7 +86,7 @@ if (Meteor.isClient) { // only runs on the client
       Meteor.call('viewQuote', quoteId, function(e,r) {
         if (r)
           console.log("Quote " + quoteId + " was viewed.");
-        else 
+        else
           console.log("Quote " + quoteId + " is doing something wrong " + Meteor.userId());
       });
     }
@@ -95,7 +95,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
   // Here we work out what kind of signups we want to use
-  // One of 'USERNAME_AND_EMAIL', 'USERNAME_AND_OPTIONAL_EMAIL', 
+  // One of 'USERNAME_AND_EMAIL', 'USERNAME_AND_OPTIONAL_EMAIL',
   // 'USERNAME_ONLY', or 'EMAIL_ONLY' (default).
   // Note: this doesn't do anything when using useraccounts:core
   Accounts.ui.config({
@@ -116,7 +116,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
   // We have a package that gets us to the top when we navigate
-  // This changes the animation period, set to zero for none 
+  // This changes the animation period, set to zero for none
   IronRouterAutoscroll.animationDuration = 200;
 
 
@@ -181,7 +181,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-  
+
   incrementLimit = function(inc) { // this is defining a new global function
     var inc = loadMoreLimit;
     newLimit = Session.get('limit') + inc;
@@ -194,10 +194,10 @@ if (Meteor.isClient) { // only runs on the client
     // Deps.autorun() automatically rerun the subscription whenever Session.get('limit') changes
     // http://docs.meteor.com/#deps_autorun
     // Changed to 'Tracker' in newer versions of Meteor
-    Tracker.autorun(function() {      
+    Tracker.autorun(function() {
       Meteor.subscribe('quotesPopular', Session.get('limit'));
       Meteor.subscribe('quotesLatest', Session.get('limit'));
-      Meteor.subscribe('quotesCurrentUser', Session.get('limit'));      
+      Meteor.subscribe('quotesCurrentUser', Session.get('limit'));
     });
   }
 
@@ -215,7 +215,7 @@ if (Meteor.isClient) { // only runs on the client
 
   Template.Quotes.events({
     'click .give-me-more': function(evt) {
-      incrementLimit();      
+      incrementLimit();
     }
   });
 
@@ -254,7 +254,7 @@ if (Meteor.isClient) { // only runs on the client
       Meteor.call('dogearQuote', this._id);
     }
   });
-  
+
 
   // this isn't even used any more but yeah
   Template.Quotes.events({
@@ -286,7 +286,7 @@ if (Meteor.isClient) { // only runs on the client
       event.target.text.value = "";
       event.target.attribution.value = "";
 
-      
+
       // Prevent default action from form submit
       return false;
     },
@@ -311,7 +311,7 @@ if (Meteor.isServer) {
     // init the counters in case mongo reset
     if (Counters.find().count() === 0) {
       Counters.insert( { _id: "quote_id", seq: 0 } );
-    } 
+    }
 
     //process.env.HTTP_FORWARDED_COUNT = 2; // this seems to shift x-forwarded-for list for ip
 
@@ -321,7 +321,7 @@ if (Meteor.isServer) {
 
       // Here is another way using headers
       var forwardedFor = conn.httpHeaders['x-forwarded-for'].split(",");
-      clientIp = forwardedFor[0];     
+      clientIp = forwardedFor[0];
 
 
     });
@@ -336,11 +336,11 @@ if (Meteor.isServer) {
 
 
 
-  
+
 
 
   // Get the server to publish our collections
-  Meteor.publish("quotesAll", function () {  
+  Meteor.publish("quotesAll", function () {
     return Quotes.find({}, { sort: {createdAt: -1} });
     self.ready();
   });
@@ -358,8 +358,8 @@ if (Meteor.isServer) {
   Meteor.publish("quotesPopular", function (limit) {
     if (limit > Quotes.find().count()) {
       limit = 0;
-    }    
-    
+    }
+
     return Quotes.find({}, { sort: {views: -1}, limit: limit });
     self.ready();
   });
@@ -427,17 +427,17 @@ Meteor.methods({
     if (! Meteor.userId()) throw new Meteor.Error("not-authorized");
 
     if (text > maximumQuotationLength) throw new Meteor.Error('too-long');
-    
+
     Counters.update({ _id: 'quote_id' }, { $inc: { seq: 1 } });
-    
+
     var counter = Counters.findOne({ query: { _id: 'quote_id' } });
-                
-    var newQuote = Quotes.insert({      
+
+    var newQuote = Quotes.insert({
       attribution: attribution,
       quotation: text,
       createdAt: new Date(), // current time
       username: Meteor.user().username, // username of quote
-      owner: Meteor.userId(),  // _id of logged in user      
+      owner: Meteor.userId(),  // _id of logged in user
       quote_id: counter.seq.toString()
     });
 
@@ -459,13 +459,13 @@ Meteor.methods({
   // Here we are going to check the size of the quote and then
   // set a value to it so that we can display long quotes with smaller font
   // etc etc
-  checkQuoteSize: function(quoteId) {    
+  checkQuoteSize: function(quoteId) {
 
     var currentQuote = Quotes.findOne(quoteId);
     var quotation = currentQuote.quotation;
 
     //console.log(currentQuote.length);
-    
+
     if (true) { // use currentQuote.length == undefined to only update undefined
       var n = quotation.length;
 
@@ -486,7 +486,7 @@ Meteor.methods({
   /*getClientIp: function() {
     clientIp = this.connection.clientAddress;
     console.log("Client IP is: " + clientIp);
-  },-------------------doesn't work with client so deleting*/ 
+  },-------------------doesn't work with client so deleting*/
 
 
 
@@ -513,7 +513,7 @@ Meteor.methods({
       try {
       Authors.insert({
         name: author,
-        slug: slug,   
+        slug: slug,
         createdAt: new Date(), // current time
       });
     } catch (e) {
@@ -536,7 +536,7 @@ Meteor.methods({
     }
   },
 
-  
+
 
 
 
@@ -564,23 +564,23 @@ Router.onBeforeAction(function() {
 // First some static pages with About Us and Privacy etc.
 
 
-Router.route('/about', function() { 
-  this.render('Header', {to: 'header'}); 
+Router.route('/about', function() {
+  this.render('Header', {to: 'header'});
   this.render('AboutText');
 });
 
-Router.route('/privacy', function() { 
-  this.render('Header', {to: 'header'}); 
+Router.route('/privacy', function() {
+  this.render('Header', {to: 'header'});
   this.render('PrivacyText');
 });
 
-Router.route('/terms', function() { 
-  this.render('Header', {to: 'header'}); 
+Router.route('/terms', function() {
+  this.render('Header', {to: 'header'});
   this.render('TermsText');
 });
 
-Router.route('/contact', function() { 
-  this.render('Header', {to: 'header'}); 
+Router.route('/contact', function() {
+  this.render('Header', {to: 'header'});
   this.render('ContactText');
 });
 
@@ -643,21 +643,21 @@ Router.route('/popular', {
     //return quotesPaginated;
 
 
-    // Tracker.autorun(function() {      
-    //   Meteor.subscribe('quotesPopular', Session.get('limit'));     
+    // Tracker.autorun(function() {
+    //   Meteor.subscribe('quotesPopular', Session.get('limit'));
     // });
 
-    
+
 
     // return Meteor.subscribe('quotesPopular', 5);
 
-    
 
-    //return Meteor.subscribe('quotesPopular', 1);     
+
+    //return Meteor.subscribe('quotesPopular', 1);
   },
 
   action: function () {
-    this.render('Header', {to: 'header'});    
+    this.render('Header', {to: 'header'});
     this.render('Quotes', {
       data: {
         quotes: function () {
@@ -678,18 +678,18 @@ Router.route('/latest', {
     // Tracker.autorun(function() {
     //   Meteor.subscribe('quotesLatest', Session.get('limit'));
     // });
-    
+
     // return Meteor.subscribe('quotesLatest', 5);
 
-    
-    
+
+
 
     // return one handle, a function, or an array
     //return Meteor.subscribe('quotesLatest', 1);
   },
 
   action: function () {
-    this.render('Header', {to: 'header'});   
+    this.render('Header', {to: 'header'});
     this.render('Quotes', {
       data: {
         quotes: function () {
@@ -726,11 +726,11 @@ Router.route('/quotes/:_quote_slug', {
         var quote = Quotes.findOne({ _id: this.params._quote_slug });
         if (!quote) {
           this.render('NotFound');
-        } else {      
+        } else {
           return quote;
-        }    
+        }
       }
-    });  
+    });
   }
 });
 
@@ -753,11 +753,11 @@ Router.route('/quotes/:_quote_slug/:_extra_text', {
         var quote = Quotes.findOne({ _id: this.params._quote_slug });
         if (!quote) {
           this.render('NotFound');
-        } else {      
+        } else {
           return quote;
-        }    
+        }
       }
-    });  
+    });
   }
 });
 
@@ -776,7 +776,7 @@ Router.route('/random', {
   },
   action: function () {
     this.render('Header', {to: 'header'});
-    
+
   },
 });
 
@@ -787,7 +787,7 @@ Router.route('/mine', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
-      
+
     return Meteor.subscribe('quotesCurrentUser', 5);
 
 
@@ -817,10 +817,10 @@ Router.route('/users/:_username', {
 
     // var username_to_lookup = this.params._username; //to pass it into the autorun for some reason..???
 
-    // Tracker.autorun(function() {      
+    // Tracker.autorun(function() {
     //   Meteor.subscribe('quotesSlugUser', username_to_lookup);
     // });
-      
+
     //return Meteor.subscribe('quotesSlugUser', this.params._username);
 
 
@@ -849,7 +849,7 @@ Router.route('/', {
     return Meteor.subscribe('quotes');
   },*/
   action: function () {
-    this.render('Header', { 
+    this.render('Header', {
       to: 'header',
       data: {
         frontPage: true
@@ -875,7 +875,7 @@ Router.route('/', {
 
 
 // Just to test the loader
-Router.route('/loading', function() {  
+Router.route('/loading', function() {
   this.render('Loading');
 });
 
@@ -886,12 +886,12 @@ Router.route('/:_username', {
 
   waitOn: function () {
     // This apparently we need for asyc stuff or something
-    return Meteor.subscribe("userData"); 
+    return Meteor.subscribe("userData");
   },
 
   onBeforeAction: function () {
 
-    
+
     // var quoteArray = Meteor.call('getDogearedQuotes', this.userId, function (error, result) {
     //   Session.set('quoteArray', result);
     //   array = result;
@@ -910,12 +910,12 @@ Router.route('/:_username', {
     this.render('Header', {to: 'header'});
     var usernameParam = this.params._username; //to pass it into the function, someone help with this
     var user = Meteor.users.findOne( { username: this.params._username });
-      
+
     console.log(user.liked);
 
     Meteor.subscribe('quotesInArray', user.liked);
 
-    
+
     this.render('Quotes', {
       data: {
         quotes: function () {

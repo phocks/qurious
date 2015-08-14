@@ -21,10 +21,12 @@ Meteor.methods({
     var lucky = Quotes.findOne({}, {skip:lucky_index});
 
     // keep grabbing a quote until a good one comes up.
-    while (lucky.upcount < 1 ) {
+    for (i = 0; i < 1000; i++ ) {
       var count = Quotes.find().count();
       var lucky_index = Math.floor(Math.random() * (count));
       var lucky = Quotes.findOne({}, {skip:lucky_index});
+
+      if (lucky.upcount > 4) break;
     }
 
     return lucky._id;

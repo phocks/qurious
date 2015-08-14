@@ -51,6 +51,7 @@ img.dogear {
   left: -3px;
   cursor: pointer;
   width: 22px;
+  margin-left: 3px;
 }
 
 .text-content p, .text-content li {

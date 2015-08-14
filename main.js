@@ -772,6 +772,22 @@ Router.route('/random', {
 });
 
 
+Router.route('/lucky', {
+  onBeforeAction: function () {
+    Meteor.call('getLuckyQuoteId', function (error, result) {
+      var luckyId = result;
+      Router.go('/quotes/' + luckyId);
+    });
+
+    this.next()
+  },
+  action: function () {
+    this.render('Header', {to: 'header'});
+
+  },
+});
+
+
 
 
 

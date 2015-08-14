@@ -54,6 +54,12 @@ img.dogear {
   margin-left: 3px;
 }
 
+img.about-logo {
+  width: 200px;
+  position: relative;
+  top: -20px;
+}
+
 .text-content p, .text-content li {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
@@ -176,7 +182,6 @@ img.dogear {
 
 .homepage-title {
   padding-top: 80px;
-  padding-bottom: 150px;
   text-align: center;
 }
 
@@ -196,7 +201,6 @@ img.dogear {
 @media (max-width: 767px) { 
   .homepage-title {
     padding-top: 40px;
-    padding-bottom: 80px;
   }
 
   .homepage-title h1 {
@@ -212,12 +216,29 @@ img.dogear {
   }
 }
 
-.homepage-about {
-  background-color: #777;
-  padding-top: 100px;
-  padding-bottom: 100px;
+.home-about-row {
+  background-color: #5BB2B5;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
+.home-about-text {
+  font-family: Aleo, serif;
+  font-size: 200%;
+  color: white;
+  text-align: left;
+}
+
+.front-content-row {
+  padding-bottom: 200px;
+}
+
+
+
+
+
+
+/* -------------------------------- Now Explore stuff ------------*/
 .explore-lead {
   margin-top: 100px;
   padding-bottom: 40px;

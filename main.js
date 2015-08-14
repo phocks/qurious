@@ -20,7 +20,7 @@ Counters = new Mongo.Collection('counters');
 // Initial setup of some things below
 // like some variables etc
 
-loadMoreLimit = 5;
+loadMoreLimit = 3;
 maximumQuotationLength = 1000;
 
 

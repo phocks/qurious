@@ -44,8 +44,9 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="{{isActivePath '/popular'}} hidden"><a href="/popular">Popular</a></li>
-              <li class="{{isActivePath '/latest'}} hidden"><a href="/latest">Latest</a></li>
+              {{#if currentUser}}
+                <li class="{{isActivePath '/quotes'}}"><a href="/quotes">Explore</a></li>
+              {{/if}}
               {{#unless currentUser}}
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
               {{/unless}}

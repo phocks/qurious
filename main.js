@@ -640,7 +640,7 @@ Router.route('/create', {
 });
 
 
-Router.route('/quotes', {
+Router.route('/popular', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
@@ -648,7 +648,7 @@ Router.route('/quotes', {
   },
 
   action: function () {
-    Session.set("DocumentTitle", "Exploring Qurious");
+    Session.set("DocumentTitle", "Popular Quotes - Qurious");
     this.render('Header', {to: 'header'});
     this.render('Quotes', {
       data: {
@@ -794,11 +794,63 @@ Router.route('/users/:_username', {
       data: {
         quotes: function () {
           return Quotes.find({ username: username_to_lookup }, {sort: {createdAt: -1}, limit: Session.get('limit') });
-        }
+        },
+        usernameToShow: function () { return username_to_lookup },
       }
     });
   }
 });
+
+
+
+
+
+
+
+
+Router.route('/users/:_username/dogears', {
+  loadingTemplate: 'Loading',
+
+  waitOn: function () {
+    // This apparently we need for asyc stuff or something
+    return Meteor.subscribe("userData");
+  },
+
+  onBeforeAction: function () {
+
+    Session.set("DocumentTitle", this.params._username + " Dogears - Qurious");
+
+    this.next();
+
+  },
+
+  action: function () {
+    this.render('Header', {to: 'header'});
+    //to pass it into the function, someone help with this
+    var usernameParam = this.params._username;
+    var user = Meteor.users.findOne( { username: this.params._username });
+
+    console.log(user.liked);
+
+    Meteor.subscribe('quotesInArray', user.liked);
+
+
+    this.render('Quotes', {
+      data: {
+        quotes: function () {
+          return Quotes.find({ _id: { $in: user.liked } },
+            {sort: {upcount: -1, views: -1}, limit: Session.get('limit') });
+        },
+        usernameToShow: function () { return usernameParam },
+
+      }
+    });
+  }
+});
+
+
+
+
 
 
 
@@ -841,45 +893,7 @@ Router.route('/loading', function() {
 
 
 
-Router.route('/:_username', {
-  loadingTemplate: 'Loading',
 
-  waitOn: function () {
-    // This apparently we need for asyc stuff or something
-    return Meteor.subscribe("userData");
-  },
-
-  onBeforeAction: function () {
-
-    Session.set("DocumentTitle","Exploring " + this.params._username + " - Qurious");
-
-    this.next();
-
-  },
-
-  action: function () {
-    this.render('Header', {to: 'header'});
-    //to pass it into the function, someone help with this
-    var usernameParam = this.params._username;
-    var user = Meteor.users.findOne( { username: this.params._username });
-
-    console.log(user.liked);
-
-    Meteor.subscribe('quotesInArray', user.liked);
-
-
-    this.render('Quotes', {
-      data: {
-        quotes: function () {
-          return Quotes.find({ _id: { $in: user.liked } },
-            {sort: {upcount: -1, views: -1}, limit: Session.get('limit') });
-        },
-        username: function () { return usernameParam },
-
-      }
-    });
-  }
-});
 
 
 

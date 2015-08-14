@@ -38,23 +38,22 @@
             <a class="{{#if isActivePath '/'}}hidden{{/if}} navbar-brand" href="/"><img height="40px" src="/qurious_logo.png"></a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="{{isActivePath '/quotes'}} hidden"><a href="/quotes">Explore</a></li>
-
-
+            <ul class="nav navbar-nav">    
             </ul>
             <ul class="nav navbar-nav navbar-right">
               {{#if currentUser}}
-                <li class="{{isActivePath '/quotes'}}"><a href="/quotes">Explore</a></li>
+                <li class="{{isActivePath '/popular'}}"><a href="/popular">Popular</a></li>
+                <li class="{{isActivePath '/latest'}}"><a href="/latest">Latest</a></li>
               {{/if}}
               {{#unless currentUser}}
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
               {{/unless}}
               {{#if currentUser}}
-                <li class="dropdown {{isActivePath currentUsername}}">
+                <li class="dropdown {{isActivePath regex='\/users\/'}}">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUsername}} <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="/{{currentUsername}}">Your Dogears</a></li>
+                    <li><a href="/users/{{currentUsername}}">Contributed Quotes</a></li>
+                    <li><a href="/users/{{currentUsername}}/dogears">Your Dogears</a></li>
                     <li role="separator" class="divider"></li>
                     <li class="dropdown-header hidden">Nav header</li>
                     <li><a href="/logout">Logout</a></li>
@@ -87,6 +86,10 @@
           {{#unless currentUser}}
             <a href="/signup" class="btn btn-info raised" role="button">Alpha sign up</a>
           {{/unless}}
+          {{#if currentUser}}
+            <a href="/create" class="btn btn-info raised" role="button">Compose quotation</a>
+            <a href="/random" class="btn btn-info raised" role="button">I'm feeling lucky!</a>
+          {{/if}}
           </div>
         </div>
         <div class="row home-about-row">
@@ -164,7 +167,7 @@
     <div class="meta">
       <ol class="breadcrumb">
         <li >Views: <span class="badge">{{views}}</span></li>
-        <li><img class="dogear {{#if dogeared}}desaturate{{/if}}" src="/ui/dogear.png"><span class="badge">{{upcount}}</span></li>
+        <li><img class="dogear {{#if dogeared}}desaturate{{/if}}" src="/ui/dogear.png" title="Dogear this quote"><span class="badge">{{upcount}}</span></li>
       </ol>
     </div>
     {{/if}}
@@ -241,9 +244,9 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <div class="explore-lead">
-          <h1 class="text-center text-uppercase">Explore {{username}}</h1>
-          {{#if isActivePath '/mine'}}
-            <h2 class="text-center">Contributed by: <a href="/{{currentUsername}}">{{currentUsername}}</a></h2>
+          <h1 class="text-center">Exploring {{usernameToShow}}</h1>
+          {{#if isActivePath regex='\/dogears'}}
+            <h2 class="text-center">dogears</h2>
           {{/if}}
         </div>
       </div>
@@ -271,13 +274,13 @@
   <div class="list-quote">
     <div class="row">
       <div class="col-xs-7">
-        <div class="contrib">
+        <div class="contrib hidden">
             <p>Contributed by <a href="/{{username}}">{{username}}</a> <!-- - {{views}} views --></p>
           </div>
       </div>
       <div class="col-xs-5">
         <div class="read-more">
-          <p class="text-right">{{formatTime createdAt}}</p>
+          <p class="text-right hidden">{{formatTime createdAt}}</p>
         </div>
       </div>
     </div>
@@ -323,11 +326,11 @@
           <form class="new-quote">
             <div class="form-group">
               <label for="quotationText">Quotation text</label>
-              <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Quotation" autocomplete="off"></textarea>
+              <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Enter the text of the quotation here. Please do not include the &ldquo; or &rdquo; quotation marks or any line breaks or special characters. Please keep it brief." autocomplete="off"></textarea>
             </div>
             <div class="form-group">
               <label for="attributionText">Attribution</label>
-              <input type="text" class="form-control" id="attributionText" name="attribution" placeholder="Attribution">
+              <input type="text" class="form-control" id="attributionText" name="attribution" placeholder="Albert Einstein">
             </div>
 
             <button type="submit" class="btn btn-primary raised">Submit</button>

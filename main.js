@@ -706,21 +706,21 @@ Router.route('/quotes/:_quote_slug', {
     this.render('Header', {to: 'header'});
     this.render('SingleQuote', {
       data: function () {
-        var quote = Quotes.findOne({ _id: this.params._quote_slug });
+          var quote = Quotes.findOne({ _id: this.params._quote_slug });
 
-        // Let's try to get substring some text for the Title Bar
-        // this regular expression is gold (i didn't write it btw)
-        var titleText = quote.quotation.replace(/^(.{80}[^\s]*).*/, "$1"); 
+          // Let's try to get substring some text for the Title Bar
+          // this regular expression is gold (i didn't write it btw)
+          var titleText = quote.quotation.replace(/^(.{80}[^\s]*).*/, "$1");
 
-        Session.set("DocumentTitle", titleText + " - Qurious");
+          Session.set("DocumentTitle", titleText + " - Qurious");
 
 
-        if (!quote) {
-          this.render('NotFound');
-        } else {
-          return quote;
+          if (!quote) {
+            this.render('NotFound');
+          } else {
+            return quote;
+          }
         }
-      }
     });
   }
 });

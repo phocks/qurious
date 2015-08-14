@@ -339,10 +339,6 @@ img.dogear {
 
 
 
-.content-container {
-
-}
-
 
 .text-content {
   padding-top: 30px;
@@ -362,6 +358,10 @@ img.dogear {
   .text-content .content-column {
     border-left: none;
   }
+}
+
+.text-page-navigation li {
+  font-family: "Roboto Slab", serif;
 }
 
 

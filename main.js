@@ -908,7 +908,8 @@ Router.route('/:_username', {
 
   action: function () {
     this.render('Header', {to: 'header'});
-    var usernameParam = this.params._username; //to pass it into the function, someone help with this
+    //to pass it into the function, someone help with this
+    var usernameParam = this.params._username;
     var user = Meteor.users.findOne( { username: this.params._username });
 
     console.log(user.liked);
@@ -919,9 +920,8 @@ Router.route('/:_username', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ _id: { $in: user.liked } }, {sort: {upcount: -1, views: -1}, limit: Session.get('limit') });
-
-
+          return Quotes.find({ _id: { $in: user.liked } },
+            {sort: {upcount: -1, views: -1}, limit: Session.get('limit') });
         },
         username: function () { return usernameParam },
 

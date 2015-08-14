@@ -360,7 +360,7 @@ if (Meteor.isServer) {
       limit = 0;
     }
 
-    return Quotes.find({}, { sort: {upcount: -1, views: -1}, limit: limit });
+    return Quotes.find({}, { sort: {views: -1}, limit: limit });
     self.ready();
   });
 
@@ -565,21 +565,25 @@ Router.onBeforeAction(function() {
 
 
 Router.route('/about', function() {
+  Session.set("DocumentTitle", "Qurious About Us?");
   this.render('Header', {to: 'header'});
   this.render('AboutText');
 });
 
 Router.route('/privacy', function() {
+  Session.set("DocumentTitle", "Privacy Policy - Qurious");
   this.render('Header', {to: 'header'});
   this.render('PrivacyText');
 });
 
 Router.route('/terms', function() {
+  Session.set("DocumentTitle", "Terms & Conditions - Qurious");
   this.render('Header', {to: 'header'});
   this.render('TermsText');
 });
 
 Router.route('/contact', function() {
+  Session.set("DocumentTitle", "Contacting Qurious");
   this.render('Header', {to: 'header'});
   this.render('ContactText');
 });
@@ -594,11 +598,13 @@ Router.route('/contact', function() {
 
 
 Router.route('/login', function() {
+  Session.set("DocumentTitle", "Login - Qurious");
   this.render('Header', {to: 'header'});
   this.render('Login');
 });
 
 Router.route('/signup', function() {
+  Session.set("DocumentTitle", "Sign Up - Qurious");
   this.render('Header', {to: 'header'});
   this.render('SignUp');
 });
@@ -620,6 +626,7 @@ Router.route('/create', {
   },
 
   action: function () {
+    Session.set("DocumentTitle", "Create a Quote - Qurious");
     this.render('Header', {to: 'header'});
     this.render('Create', {
       data: {
@@ -641,11 +648,12 @@ Router.route('/quotes', {
   },
 
   action: function () {
+    Session.set("DocumentTitle", "Exploring Qurious");
     this.render('Header', {to: 'header'});
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({}, {sort: {upcount: -1, views: -1}, limit: Session.get('limit') });
+          return Quotes.find({}, {sort: {views: -1}, limit: Session.get('limit') });
         }
       }
     });
@@ -659,16 +667,11 @@ Router.route('/latest', {
 
   waitOn: function () {
 
-    // Tracker.autorun(function() {
-    //   Meteor.subscribe('quotesLatest', Session.get('limit'));
-    // });
-
-    // return Meteor.subscribe('quotesLatest', 5);
-    // return one handle, a function, or an array
-    //return Meteor.subscribe('quotesLatest', 1);
   },
 
   action: function () {
+    Session.set("DocumentTitle", "Latest Quotes - Qurious");
+
     this.render('Header', {to: 'header'});
     this.render('Quotes', {
       data: {
@@ -692,7 +695,7 @@ Router.route('/quotes/:_quote_slug', {
   },
     onBeforeAction: function() {
       Session.set('sessionQuoteId', this.params._quote_slug);
-      Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?
+      Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big? 
       this.next();
   },
     onAfterAction: function() {
@@ -704,6 +707,14 @@ Router.route('/quotes/:_quote_slug', {
     this.render('SingleQuote', {
       data: function () {
         var quote = Quotes.findOne({ _id: this.params._quote_slug });
+
+        // Let's try to get substring some text for the Title Bar
+        // this regular expression is gold (i didn't write it btw)
+        var titleText = quote.quotation.replace(/^(.{80}[^\s]*).*/, "$1"); 
+
+        Session.set("DocumentTitle", titleText + " - Qurious");
+
+
         if (!quote) {
           this.render('NotFound');
         } else {
@@ -763,52 +774,19 @@ Router.route('/random', {
 
 
 
-Router.route('/mine', {
-  loadingTemplate: 'Loading',
-
-  waitOn: function () {
-
-    return Meteor.subscribe('quotesCurrentUser', 5);
-
-
-    // return one handle, a function, or an array
-    //return Meteor.subscribe('quotesCurrentUser');
-  },
-
-  action: function () {
-    this.render('Header', {to: 'header'});
-    this.render('Quotes', {
-      data: {
-        quotes: function () {
-          return Quotes.find({ owner: Meteor.userId() }, {sort: {createdAt: -1}, limit: Session.get('limit') });
-        }
-      }
-    });
-  }
-});
-
-
-
 
 Router.route('/users/:_username', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
 
-    // var username_to_lookup = this.params._username; //to pass it into the autorun for some reason..???
-
-    // Tracker.autorun(function() {
-    //   Meteor.subscribe('quotesSlugUser', username_to_lookup);
-    // });
-
-    //return Meteor.subscribe('quotesSlugUser', this.params._username);
-
-
-    // return one handle, a function, or an array
-    //return Meteor.subscribe('quotesCurrentUser');
+  
   },
 
   action: function () {
+    Session.set("DocumentTitle","Exploring " + this.params._username + " - Qurious");
+
+
     var username_to_lookup = this.params._username; //to pass it into the function, someone help with this
 
     this.render('Header', {to: 'header'});
@@ -829,6 +807,7 @@ Router.route('/', {
     return Meteor.subscribe('quotes');
   },*/
   action: function () {
+    Session.set("DocumentTitle","Qurious - quotes etc.");
     this.render('Header', {
       to: 'header',
       data: {
@@ -856,6 +835,7 @@ Router.route('/', {
 
 // Just to test the loader
 Router.route('/loading', function() {
+  Session.set("DocumentTitle","Loading - Qurious");
   this.render('Loading');
 });
 
@@ -871,16 +851,7 @@ Router.route('/:_username', {
 
   onBeforeAction: function () {
 
-
-    // var quoteArray = Meteor.call('getDogearedQuotes', this.userId, function (error, result) {
-    //   Session.set('quoteArray', result);
-    //   array = result;
-    //   console.log(array);
-    //   quotesData = Quotes.find({ _id: { $in: array } }, {sort: {createdAt: -1}, limit: Session.get('limit') });
-    //   console.log(quotesData);
-    //   return quotesData;
-    // });
-
+    Session.set("DocumentTitle","Exploring " + this.params._username + " - Qurious");
 
     this.next();
 
@@ -912,8 +883,9 @@ Router.route('/:_username', {
 
 
 
-// This is our catch all for unknown things
+// This is our catch all for all other unknown things
 Router.route('/(.*)', function() {
+  Session.set("DocumentTitle","404 - Qurious");
   this.render('Header', {to: 'header'});
   this.render('404');
 });

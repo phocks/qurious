@@ -87,11 +87,6 @@ Meteor.methods({
     }
   },
 
-  getDogearedQuotes: function (userId) {
-
-
-    list = [ 'PmbgztgP9Qs2Fbikv', '6wD4XpGDdetXW38uZ' ];
-    return list;
-  }
+  
 
 });

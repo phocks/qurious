@@ -42,8 +42,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               {{#if currentUser}}
-                <!-- <li class="{{isActivePath '/popular'}}"><a href="/popular">Popular</a></li>
-                <li class="{{isActivePath '/latest'}}"><a href="/latest">Latest</a></li> -->
+                <li class="{{isActivePath '/popular'}}"><a href="/popular">Popular</a></li>
+                <li class="{{isActivePath '/latest'}}"><a href="/latest">Latest</a></li>
               {{/if}}
               {{#unless currentUser}}
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
@@ -52,9 +52,9 @@
                 <li class="dropdown {{isActivePath regex='\/users\/'}}">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUsername}} <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <!-- <li><a href="/users/{{currentUsername}}">Contributed Quotes</a></li>
-                    <li><a href="/users/{{currentUsername}}/dogears">Your Dogears</a></li> -->
-                    <!-- <li role="separator" class="divider"></li> -->
+                    <li><a href="/users/{{currentUsername}}">Contributed Quotes</a></li>
+                    <li><a href="/users/{{currentUsername}}/dogears">Your Dogears</a></li>
+                    <li role="separator" class="divider"></li>
                     <li class="dropdown-header hidden">Nav header</li>
                     <li><a href="/logout">Logout</a></li>
                   </ul>
@@ -87,7 +87,8 @@
             <a href="/login" class="btn btn-info raised" role="button">Alpha testers</a>
           {{/unless}}
           {{#if currentUser}}
-            <a href="/create" class="btn btn-info raised" role="button">Add a quote!</a>
+            <a href="/create" class="btn btn-info raised" role="button">Add a quote</a>
+            <a href="/random" class="btn btn-info raised" role="button">I'm feeling lucky!</a>
           {{/if}}
           </div>
         </div>

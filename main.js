@@ -154,6 +154,8 @@ if (Meteor.isClient) { // only runs on the client
       }
   });
 
+
+  // We are making a field that accepts username + email
   var pwd = AccountsTemplates.removeField('password');
   AccountsTemplates.removeField('email');
   AccountsTemplates.addFields([
@@ -162,7 +164,7 @@ if (Meteor.isClient) { // only runs on the client
         type: "text",
         displayName: "username",
         required: true,
-        minLength: 5,
+        minLength: 3,
     },
     {
         _id: 'email',
@@ -869,11 +871,8 @@ Router.route('/users/:_username/dogears', {
 
 
 
-
+// The front landing page
 Router.route('/', {
-  /*waitOn: function () {
-    return Meteor.subscribe('quotes');
-  },*/
   action: function () {
     Session.set("DocumentTitle","Qurious - quotes etc.");
     this.render('Header', {
@@ -883,20 +882,7 @@ Router.route('/', {
       }
     });
 
-
-
     this.render('Home');
-/*
-    this.render('Home', {
-      data: function() {
-        var count = Quotes.find().count();
-        var random_index = Math.floor(Math.random() * (count));
-        var random_object = Quotes.findOne({}, {skip:random_index}
-        );
-        return random_object;
-      }
-    });
-*/
   }
 });
 
@@ -906,8 +892,6 @@ Router.route('/loading', function() {
   Session.set("DocumentTitle","Loading - Qurious");
   this.render('Loading');
 });
-
-
 
 
 

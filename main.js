@@ -72,7 +72,8 @@ if (Meteor.isClient) { // only runs on the client
         if (r)
           console.log("Quote " + quoteId + " was viewed.");
         else
-          console.log("Quote " + quoteId + " is doing something wrong " + Meteor.userId());
+          console.log("Quote " + quoteId + " is doing something wrong "
+            + Meteor.userId());
       });
     }
   });
@@ -693,7 +694,7 @@ Router.route('/quotes/:_quote_slug', {
     //return Meteor.subscribe('quotesSlug', this.params._quote_slug);
   },
     onBeforeAction: function() {
-      
+
       this.next();
   },
     onAfterAction: function() {
@@ -704,12 +705,12 @@ Router.route('/quotes/:_quote_slug', {
     this.render('Header', {to: 'header'});
     this.render('SingleQuote', {
       data: function () {
-          var quote = Quotes.findOne({ _id: this.params._quote_slug }); 
+          var quote = Quotes.findOne({ _id: this.params._quote_slug });
           if (!quote) {
             this.render('NotFound');
           } else {
             Session.set('sessionQuoteId', this.params._quote_slug);
-            Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big? 
+            Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?
 
             // Let's try to get substring some text for the Title Bar
             // this regular expression is gold (i didn't write it btw)
@@ -795,7 +796,7 @@ Router.route('/users/:_username', {
 
   waitOn: function () {
 
-  
+
   },
 
   action: function () {

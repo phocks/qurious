@@ -1,7 +1,7 @@
 /* CSS declarations go here */
 
 
-/*  some fonts 
+/*  some fonts
     probably consider cutting these down to essentials */
 
 @import url(//fonts.googleapis.com/css?family=Roboto);
@@ -23,12 +23,12 @@
 
 @font-face {
   font-family: 'Aleo Light';
-  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot'); 
-  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot?#iefix') format('embedded-opentype'), 
+  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot');
+  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot?#iefix') format('embedded-opentype'),
        url('/fonts/Aleo/Light/aleo-light-webfont.woff2') format('woff2'),
        url('/fonts/Aleo/Light/aleo-light-webfont.woff') format('woff'),
-       url('/fonts/Aleo/Light/aleo-light-webfont.ttf')  format('truetype'), 
-       url('/fonts/Aleo/Light/aleo-light-webfont.svg#aleolight') format('svg'); 
+       url('/fonts/Aleo/Light/aleo-light-webfont.ttf')  format('truetype'),
+       url('/fonts/Aleo/Light/aleo-light-webfont.svg#aleolight') format('svg');
 }
 
 
@@ -56,33 +56,28 @@ img.dogear {
 
 
 
-.text-content p, .text-content li {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-}
- 
 .body-container {
-  background-color: #FEFCF9; 
+  background-color: #FEFCF9;
   min-height: 400px
 }
 
-.quote { 
-  font-size: 1.7em; 
-  list-style-type: none; 
-  padding: 1em 0 1em; 
+.quote {
+  font-size: 1.7em;
+  list-style-type: none;
+  padding: 1em 0 1em;
 }
 
-.single-quote { 
+.single-quote {
   text-align: center;
   min-width: 320px;
 }
 
-.meta {  
+.meta {
   padding-top: 10px;
 
   position: relative;
   top: 80px;
-  
+
 }
 
 .meta .breadcrumb {
@@ -92,7 +87,7 @@ img.dogear {
 
 
 .single-quote .quotation {
-  font-family: 'Aleo', serif;  
+  font-family: 'Aleo', serif;
   font-weight: 600;
   font-size: 170%;
 }
@@ -118,7 +113,7 @@ img.dogear {
 }
 
 .single-quote .attribution {
-  font-family: 'Aleo', serif; 
+  font-family: 'Aleo', serif;
   font-weight: 700;
   font-size: 160%;
   margin-top: 1em;
@@ -136,14 +131,14 @@ img.dogear {
 }
 
 .single-quote.default .attribution {
-  
+
   color: #f48365;
-  
+
 }
 
 
 
-@media (max-width: 767px) { 
+@media (max-width: 767px) {
 
   .single-quote .quotation {
     font-size: 120%;
@@ -193,7 +188,7 @@ img.dogear {
 }
 
 /* Landscape phone to portrait tablet */
-@media (max-width: 767px) { 
+@media (max-width: 767px) {
   .homepage-title {
     padding-top: 40px;
   }
@@ -228,13 +223,14 @@ img.about-logo {
   width: 200px;
   position: relative;
   top: -20px;
+  left: -20px;
 }
 
 .front-content-row {
   padding-bottom: 200px;
 }
 
-@media (max-width: 767px) { 
+@media (max-width: 767px) {
   img.about-logo {
     width: 170px;
   }
@@ -255,7 +251,7 @@ img.about-logo {
   font-style: italic;
 }
 
-.list-quote {  
+.list-quote {
   background-color: #FEFCF9;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -267,8 +263,8 @@ img.about-logo {
 }
 
 /* use this eventually to do things with alternating quotes perhaps
-.list-quote:nth-child(odd) { 
-  background-color:#eee; 
+.list-quote:nth-child(odd) {
+  background-color:#eee;
 }
 */
 
@@ -283,7 +279,7 @@ img.about-logo {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical; 
+  -webkit-box-orient: vertical;
 
   -o-text-overflow: ellipsis;
   -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
@@ -344,7 +340,7 @@ img.about-logo {
 
 .vertical-container {
   background-color: #FEFCF9;
-  
+
   min-height: 95vh;
   display: -webkit-flex;
   display:         flex;
@@ -355,7 +351,7 @@ img.about-logo {
           justify-content: center;
 
 
-  
+
   overflow: hidden;
   justify-content: center;
   flex-direction: column;
@@ -363,16 +359,27 @@ img.about-logo {
 }
 
 
+/* -------------------- Text Content Pages like About Us etc -----------*/
 
+
+.text-content p, .text-content li {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  line-height: 170%;
+}
+
+.text-content h1 {
+  margin-bottom: 1em;
+}
 
 
 .text-content {
-  padding-top: 30px;
-  padding-bottom: 50px;
+  padding-top: 100px;
+  padding-bottom: 150px;
 }
 
 .text-content .content-column {
-  border-left: 1px solid #999;
+  /*border-left: 1px solid #999;*/
 }
 
 .text-content .content-column h1 {
@@ -380,7 +387,7 @@ img.about-logo {
 }
 
 
-@media (max-width: 767px) { 
+@media (max-width: 767px) {
   .text-content .content-column {
     border-left: none;
   }
@@ -422,7 +429,7 @@ img.about-logo {
 }
 
 
-@media (max-width: 767px) { 
+@media (max-width: 767px) {
   .footer {
     text-align: right;
   }
@@ -537,13 +544,13 @@ img.about-logo {
 
 
 /*******************************************
-     Some navigation styles 
+     Some navigation styles
 *******************************************/
 
 
 
-.navbar-default .navbar-nav > .active > a, 
-.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
       color: #fff;
       background: #F58465;

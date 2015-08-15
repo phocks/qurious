@@ -6,12 +6,12 @@
 
 meteor-platform
 twbs:bootstrap
-accounts-password
 iron:router
 momentjs:moment
 useraccounts:bootstrap
 useraccounts:core
-accounts-ui
 zimme:active-route
 okgrow:iron-router-autoscroll
 percolate:paginated-subscription
+accounts-ui
+accounts-password

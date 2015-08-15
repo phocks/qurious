@@ -168,6 +168,7 @@
       <ol class="breadcrumb">
         <li >Views: <span class="badge">{{views}}</span></li>
         <li><img class="dogear {{#if dogeared}}desaturate{{/if}}" src="/ui/dogear.png" title="Dogear this quote"><span class="badge">{{upcount}}</span></li>
+        {{#if isOwner}}<li><button class="delete">delete</button></li>{{/if}}
       </ol>
     </div>
     {{/if}}

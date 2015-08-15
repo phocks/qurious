@@ -26,7 +26,6 @@ maximumQuotationLength = 1000;
 
 
 
-
 // Here we have stuff that will only run on the client's browser
 
 if (Meteor.isClient) { // only runs on the client
@@ -336,7 +335,8 @@ if (Meteor.isServer) {
 
   });  // end of code to do at startup
 
-
+  // This is a monitoring tool
+  Kadira.connect('wYiFPMyqaBcyKp7QK', '1f136ced-05f9-4e73-a92b-ef609cda56ce');
 
 
 

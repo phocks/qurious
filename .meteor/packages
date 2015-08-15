@@ -15,3 +15,4 @@ okgrow:iron-router-autoscroll
 percolate:paginated-subscription
 accounts-ui
 accounts-password
+useraccounts:iron-routing

@@ -127,6 +127,8 @@ if (Meteor.isClient) { // only runs on the client
     homeRoutePath: '/',
     redirectTimeout: 4000,
 
+    defaultLayout: 'ApplicationLayout',
+
     texts: { // Here we enter some custom error messages
         errors: {
             accountsCreationDisabled: "Client side accounts creation is disabled!!!",
@@ -164,6 +166,8 @@ if (Meteor.isClient) { // only runs on the client
     },
     pwd
   ]);
+
+
 
 
   // We are setting up Infinite Scrolling here
@@ -595,12 +599,11 @@ Router.route('/contact', function() {
 // Now here are the main routes
 
 
-Router.route('/login', function() {
-  Session.set("DocumentTitle", "Login - Qurious");
-  this.render('Header', {to: 'header'});
-  this.render('Login');
-});
-
+// Router.route('/login', function() {
+//   Session.set("DocumentTitle", "Login - Qurious");
+//   this.render('Header', {to: 'header'});
+//   this.render('Login');
+// });
 
 
 // Router.route('/signup', function() {
@@ -608,6 +611,14 @@ Router.route('/login', function() {
 //   this.render('Header', {to: 'header'});
 //   this.render('SignUp');
 // });
+
+
+AccountsTemplates.configureRoute('signIn', {
+    name: 'signin',
+    path: '/login',
+    template: 'Login',
+    redirect: '/',
+});
 
 
 Router.route('/logout', function() {

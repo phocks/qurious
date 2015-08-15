@@ -362,7 +362,7 @@ if (Meteor.isServer) {
       limit = 0;
     }
 
-    return Quotes.find({}, { sort: {views: -1}, limit: limit });
+    return Quotes.find({}, { sort: {upcount: -1, views: -1}, limit: limit });
     self.ready();
   });
 
@@ -664,7 +664,7 @@ Router.route('/popular', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({}, {sort: {views: -1}, limit: Session.get('limit') });
+          return Quotes.find({}, {sort: {upcount: -1, views: -1}, limit: Session.get('limit') });
         }
       }
     });

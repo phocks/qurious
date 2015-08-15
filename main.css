@@ -54,11 +54,7 @@ img.dogear {
   margin-left: 3px;
 }
 
-img.about-logo {
-  width: 200px;
-  position: relative;
-  top: -20px;
-}
+
 
 .text-content p, .text-content li {
   font-family: 'Roboto', sans-serif;
@@ -228,11 +224,21 @@ img.about-logo {
   text-align: left;
 }
 
+img.about-logo {
+  width: 200px;
+  position: relative;
+  top: -20px;
+}
+
 .front-content-row {
   padding-bottom: 200px;
 }
 
-
+@media (max-width: 767px) { 
+  img.about-logo {
+    width: 170px;
+  }
+}
 
 
 

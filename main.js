@@ -13,8 +13,8 @@
 
 
 // First up we are going to create a few collections
-Quotes = new Mongo.Collection('quotes');
-Counters = new Mongo.Collection('counters');
+Quotes = new Mongo.Collection('quotes');  // Our main quote db
+Counters = new Mongo.Collection('counters'); // Handles numbering
 
 
 // Initial setup of some things below
@@ -42,23 +42,10 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-  // Just trying something with subscriptions
-  // var latestSubscription = Meteor.subscribeWithPagination('quotesLatest', loadMoreLimit);
-  // var popularSubscription = Meteor.subscribeWithPagination('quotesPopular', loadMoreLimit);
-
-
-  // Template.Quotes.events({
-  //   'click .give-me-more': function (event) {
-  //     event.preventDefault();
-  //     latestSubscription.loadNextPage();
-  //     popularSubscription.loadNextPage();
-  //   }
-  // });
-
-
 
 
   // Font experiment to see if we can load fonts on demand
+  // and YES it looks like we can.
   WebFontConfig = {
       google: { families: [ 'Vollkorn::latin' ] }
     };
@@ -75,9 +62,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-
-
-  // I'm going to set up some things to be tracked.
+  // I'm going to set up some things to be tracked automatically
 
   Tracker.autorun(function () {
     var quoteId = Session.get("sessionQuoteId");
@@ -117,6 +102,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // We have a package that gets us to the top when we navigate
   // This changes the animation period, set to zero for none
+  // Doesn't seem to work with mobile (or sometimes at all)
   IronRouterAutoscroll.animationDuration = 200;
 
 
@@ -136,26 +122,27 @@ if (Meteor.isClient) { // only runs on the client
     enablePasswordChange: true,
     showForgotPasswordLink: true,
     lowercaseUsername: true,
-  });
 
+    homeRoutePath: '/',
+    redirectTimeout: 4000,
 
-  AccountsTemplates.configure({ // Here we enter some custom error messages
-      texts: {
-          errors: {
-              accountsCreationDisabled: "Client side accounts creation is disabled!!!",
-              cannotRemoveService: "Cannot remove the only active service!",
-              captchaVerification: "Captcha verification failed!",
-              loginForbidden: "error.accounts.User or password incorrect",
-              mustBeLoggedIn: "error.accounts.Must be logged in",
-              pwdMismatch: "error.pwdsDontMatch",
-              validationErrors: "Validation Errors",
-              verifyEmailFirst: "Please verify your email first. Check the email and follow the link!",
-          }
-      }
+    texts: { // Here we enter some custom error messages
+        errors: {
+            accountsCreationDisabled: "Client side accounts creation is disabled!!!",
+            cannotRemoveService: "Cannot remove the only active service!",
+            captchaVerification: "Captcha verification failed!",
+            loginForbidden: "error.accounts.User or password incorrect",
+            mustBeLoggedIn: "error.accounts.Must be logged in",
+            pwdMismatch: "error.pwdsDontMatch",
+            validationErrors: "Validation Errors",
+            verifyEmailFirst: "Please verify your email first. Check the email and follow the link!",
+        }
+    },
   });
 
 
   // We are making a field that accepts username + email
+  // This is so that a user can log in with either
   var pwd = AccountsTemplates.removeField('password');
   AccountsTemplates.removeField('email');
   AccountsTemplates.addFields([
@@ -178,10 +165,8 @@ if (Meteor.isClient) { // only runs on the client
   ]);
 
 
-  // We are setting up Infinite Scrolling
-
-
-
+  // We are setting up Infinite Scrolling here
+  // This is not a very elegant way of doing it. Please change in future
 
 
   incrementLimit = function(inc) { // this is defining a new global function
@@ -215,6 +200,7 @@ if (Meteor.isClient) { // only runs on the client
   }
   */
 
+  // Enable the "Load more" button
   Template.Quotes.events({
     'click .give-me-more': function(evt) {
       incrementLimit();
@@ -228,12 +214,13 @@ if (Meteor.isClient) { // only runs on the client
   // Here are the helpers to put data into Templates etc
 
 
+  // This sets the time format using the moment package
   UI.registerHelper('formatTime', function(context, options) {
     if(context)
       return moment(context).format('DD/MM/YYYY, hh:mm a');
   });
 
-
+  // Gives us a {{username}} variable to use in html
   Template.registerHelper('currentUsername', function () {
       return Meteor.user().username;
     }
@@ -605,11 +592,13 @@ Router.route('/login', function() {
   this.render('Login');
 });
 
-Router.route('/signup', function() {
-  Session.set("DocumentTitle", "Sign Up - Qurious");
-  this.render('Header', {to: 'header'});
-  this.render('SignUp');
-});
+
+
+// Router.route('/signup', function() {
+//   Session.set("DocumentTitle", "Sign Up - Qurious");
+//   this.render('Header', {to: 'header'});
+//   this.render('SignUp');
+// });
 
 
 Router.route('/logout', function() {

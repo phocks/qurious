@@ -16,3 +16,4 @@ percolate:paginated-subscription
 accounts-ui
 accounts-password
 useraccounts:iron-routing
+meteorhacks:kadira

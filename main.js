@@ -213,6 +213,14 @@ if (Meteor.isClient) { // only runs on the client
 
   // Here are the helpers to put data into Templates etc
 
+  Template.SingleQuote.helpers({
+    isOwner: true
+  });
+
+
+
+
+  // And some global helpers etc
 
   // This sets the time format using the moment package
   UI.registerHelper('formatTime', function(context, options) {
@@ -682,11 +690,10 @@ Router.route('/quotes/:_quote_slug', {
   loadingTemplate: 'Loading',
   waitOn: function () {
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotesSlug', this.params._quote_slug);
+    //return Meteor.subscribe('quotesSlug', this.params._quote_slug);
   },
     onBeforeAction: function() {
-      Session.set('sessionQuoteId', this.params._quote_slug);
-      Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big? 
+      
       this.next();
   },
     onAfterAction: function() {
@@ -697,18 +704,19 @@ Router.route('/quotes/:_quote_slug', {
     this.render('Header', {to: 'header'});
     this.render('SingleQuote', {
       data: function () {
-          var quote = Quotes.findOne({ _id: this.params._quote_slug });
-
-          // Let's try to get substring some text for the Title Bar
-          // this regular expression is gold (i didn't write it btw)
-          var titleText = quote.quotation.replace(/^(.{80}[^\s]*).*/, "$1");
-
-          Session.set("DocumentTitle", titleText + " - Qurious");
-
-
+          var quote = Quotes.findOne({ _id: this.params._quote_slug }); 
           if (!quote) {
             this.render('NotFound');
           } else {
+            Session.set('sessionQuoteId', this.params._quote_slug);
+            Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big? 
+
+            // Let's try to get substring some text for the Title Bar
+            // this regular expression is gold (i didn't write it btw)
+            var titleText = quote.quotation.replace(/^(.{80}[^\s]*).*/, "$1");
+
+            Session.set("DocumentTitle", titleText + " - Qurious");
+
             return quote;
           }
         }

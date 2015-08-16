@@ -218,7 +218,10 @@ if (Meteor.isClient) { // only runs on the client
   // Here are the helpers to put data into Templates etc
 
   Template.SingleQuote.helpers({
-    isOwner: true
+    isOwner: function () {
+      return true;
+    },
+    dogeared: true
   });
 
 
@@ -247,7 +250,9 @@ if (Meteor.isClient) { // only runs on the client
   // Let's finally set up a delete
   Template.SingleQuote.events({
     "click .delete": function () {
-      Meteor.call('deleteQuote', this._id);
+      if (confirm('Really delete ?')) {
+        Meteor.call('deleteQuote', this._id);
+      }
     },
 
     // Put the quotation into the users collection!

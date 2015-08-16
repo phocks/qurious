@@ -139,14 +139,17 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 .quote-info .dogear {
   
-  position: relative;
-  top: 7px;
   cursor: pointer;
    
 }
 
 .quote-info img.dogear {
-  width: 40px;
+  margin-bottom: 5px;
+  height: 30px;
+}
+
+.quote-info .delete {
+  cursor: pointer;
 }
 
 

@@ -144,7 +144,8 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 }
 
 .quote-info img.dogear {
-  margin-bottom: 5px;
+  margin-top: 4px;
+  margin-bottom: 3px;
   height: 30px;
 }
 

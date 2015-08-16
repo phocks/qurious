@@ -12,8 +12,6 @@ useraccounts:bootstrap
 useraccounts:core
 zimme:active-route
 okgrow:iron-router-autoscroll
-percolate:paginated-subscription
 accounts-ui
 accounts-password
 useraccounts:iron-routing
-meteorhacks:kadira

@@ -40,19 +40,10 @@ a:focus {
 
 body {
   font-family: 'Roboto Slab', serif;
-  background-color: #282828;
+  background-color: #171717;
 }
 
 img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
-
-img.dogear {
-  position: relative;
-  top: -2px;
-  left: -3px;
-  cursor: pointer;
-  width: 22px;
-  margin-left: 3px;
-}
 
 
 
@@ -70,19 +61,6 @@ img.dogear {
 .single-quote {
   text-align: center;
   min-width: 320px;
-}
-
-.meta {
-  padding-top: 10px;
-
-  position: relative;
-  top: 80px;
-
-}
-
-.meta .breadcrumb {
-  display: inline-block;
-  background-color: #5BB2B5;
 }
 
 
@@ -135,6 +113,42 @@ img.dogear {
   color: #f48365;
 
 }
+
+.meta {
+  padding-top: 10px;
+  position: relative;
+  top: 80px;
+
+}
+
+.meta .breadcrumb {
+  display: inline-block;
+  background-color: #5BB2B5;
+}
+
+.quote-info {
+  background-color: #5ab2b5;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: white;
+}
+
+.quote-info .digit {
+  font-size: 2.1em;
+}
+
+.quote-info .dogear {
+  
+  position: relative;
+  top: 7px;
+  cursor: pointer;
+   
+}
+
+.quote-info img.dogear {
+  width: 40px;
+}
+
 
 
 
@@ -341,7 +355,7 @@ img.about-logo {
 .vertical-container {
   background-color: #FEFCF9;
 
-  min-height: 95vh;
+  min-height: calc(100vh - 54px);
   display: -webkit-flex;
   display:         flex;
   display: -ms-flexbox;
@@ -439,7 +453,14 @@ img.about-logo {
   }
 }
 
+.post-footer {
+  background-color: #171717;
+  color: #444;
+}
 
+.post-footer a {
+  color: #444;
+}
 
 
 
@@ -587,3 +608,4 @@ img.about-logo {
   display: none;
 }
 */
+

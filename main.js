@@ -218,7 +218,7 @@ if (Meteor.isClient) { // only runs on the client
   // Here are the helpers to put data into Templates etc
 
   Template.SingleQuote.helpers({
-    isOwner: false
+    isOwner: true
   });
 
 
@@ -336,7 +336,7 @@ if (Meteor.isServer) {
   });  // end of code to do at startup
 
   // This is a monitoring tool
-  Kadira.connect('wYiFPMyqaBcyKp7QK', '1f136ced-05f9-4e73-a92b-ef609cda56ce');
+  //Kadira.connect('wYiFPMyqaBcyKp7QK', '1f136ced-05f9-4e73-a92b-ef609cda56ce');
 
 
 

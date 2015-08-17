@@ -385,6 +385,10 @@ img.about-logo {
   color: #999;
 }
 
+.read-more a:hover {
+  color: #999;
+}
+
 
 @media (max-width: 767px) {
   .list-quote .quotation {

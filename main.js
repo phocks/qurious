@@ -233,7 +233,8 @@ if (Meteor.isClient) { // only runs on the client
     dogeared: function () {
       var quoteId = Session.get("sessionQuoteId");
       var user = Meteor.users.findOne({_id:Meteor.userId(), liked:{ $ne:quoteId }});
-      console.log(user);
+      if (user) return false;
+      else return true;
     }
   });
 

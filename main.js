@@ -17,6 +17,8 @@ Quotes = new Mongo.Collection('quotes');  // Our main quote db
 Counters = new Mongo.Collection('counters'); // Handles numbering
 
 
+
+
 // Initial setup of some things below
 // like some variables etc
 
@@ -894,7 +896,18 @@ Router.route('/', {
 // Just to test the loader
 Router.route('/loading', function() {
   Session.set("DocumentTitle","Loading - Qurious");
+
   this.render('Loading');
+});
+
+
+
+
+// Easy search feature test
+Router.route('/search', function() {
+  Session.set("DocumentTitle","Search - Qurious");
+  this.render('Header', {to: 'header'});
+  this.render('Search');
 });
 
 

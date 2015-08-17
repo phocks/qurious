@@ -237,6 +237,7 @@ if (Meteor.isClient) { // only runs on the client
     },
     // works out if user has dogeared quote or not
     dogeared: function () {
+      if (!Meteor.user()) return false;
       var quoteId = Session.get("sessionQuoteId");
       var user = Meteor.users.findOne({_id:Meteor.userId(), liked:{ $ne:quoteId }});
       if (user) return false;

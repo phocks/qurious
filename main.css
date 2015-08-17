@@ -48,7 +48,7 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
 .body-container {
-  background-color: #FEFCF9;
+  background-color: #fdfbf8;
   min-height: 400px
 }
 
@@ -67,7 +67,9 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 .single-quote .quotation {
   font-family: 'Aleo', serif;
   font-weight: normal;
+  letter-spacing: 1px;
   font-size: 170%;
+  color: #282828;
 }
 
 .single-quote .quotation.tiny {
@@ -92,12 +94,13 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 .single-quote .attribution {
   font-family: 'Aleo', serif;
-  font-weight: 700;
-  font-size: 160%;
-  margin-top: 1em;
+  font-weight: normal;
+  font-size: 120%;
+  margin-top: 2em;
   margin-bottom: 1em;
-  color: #999;
-  /*text-transform: uppercase;*/
+  color: #f48365;
+  letter-spacing: 2px;
+text-transform: uppercase;
 }
 
 /* We are going to do some themes here for the quotations */
@@ -609,7 +612,7 @@ img.about-logo {
   border-top: 4px #F58465 solid;
   margin-bottom: 0;
   border-bottom: 0;
-  background-color: #FEFCF9;
+  background-color: #fdfbf8;
 }
 
 .navbar-brand {

@@ -237,7 +237,7 @@ if (Meteor.isClient) { // only runs on the client
     },
     // works out if user has dogeared quote or not
     dogeared: function () {
-      if (!Meteor.user()) return false;
+      if (!Meteor.user()) return false; // if not logged in just undogear
       var quoteId = Session.get("sessionQuoteId");
       var user = Meteor.users.findOne({_id:Meteor.userId(), liked:{ $ne:quoteId }});
       if (user) return false;
@@ -565,6 +565,30 @@ Meteor.methods({
   },
 
 
+
+
+  // This is a feature to "Like" a quotation. It should put the quote in the user's
+  // likes list and then update the upcount in the quote db
+  dogearQuote: function (quoteId) {
+    if (Meteor.userId()) {
+      var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}});
+
+
+      if (!user) {
+        Meteor.users.update({_id:this.userId},{$pull:{liked:quoteId}});
+        Quotes.update( { _id: quoteId }, {$inc: { upcount: -1 } });
+
+        return false;
+      }
+
+
+      console.log("user " + this.userId + " collected the quote " + quoteId );
+
+      Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
+      Meteor.users.update({_id:this.userId},{$addToSet:{liked:quoteId}});
+      return true;
+    }
+  },
 
 
 

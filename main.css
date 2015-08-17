@@ -40,7 +40,7 @@ a:focus {
 
 body {
   font-family: 'Roboto Slab', serif;
-  background-color: #fdfbf8;
+  background-color: #171717;
 }
 
 img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
@@ -340,13 +340,16 @@ img.about-logo {
 
 .list-quote .attribution {
   text-transform: uppercase;
-  color: #999;
-  font-size: 1.2em;
+  color: #f48365;
+  letter-spacing: 2px;
+  font-size: 120%;
+  padding-top: 20px;
 }
 
 .list-quote .contrib {
   margin-bottom: 50px;
   color: #999;
+  font-size: 100%;
 }
 
 .list-quote .contrib a {
@@ -357,7 +360,16 @@ img.about-logo {
 .list-quote .read-more {
   color: #999;
   font-size: 1.2em;
+  padding-top: 20px;
+  letter-spacing: 0.5px;
 }
+
+.list-quote .time-stamp {
+  color: #999;
+  font-size: 100%;
+  letter-spacing: 0.5px;
+}
+
 
 .list-quote .read-more .glyphicon {
   position: relative;

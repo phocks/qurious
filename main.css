@@ -235,13 +235,21 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
   font-size: 200%;
   color: white;
   text-align: left;
+  letter-spacing: 1px;
 }
+
+.home-about-readmore {
+  font-family: 'Aleo', serif;
+  font-size: 150%;
+  color: #282828;
+  text-align: left;
+  letter-spacing: 1px;
+  padding-top: 20px;
+}
+
 
 img.about-logo {
   width: 200px;
-  position: relative;
-  top: -20px;
-  left: -20px;
 }
 
 .front-content-row {

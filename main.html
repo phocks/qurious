@@ -41,10 +41,8 @@
             <ul class="nav navbar-nav">
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              {{#if currentUser}}
                 <li class="{{isActivePath '/popular'}}"><a href="/popular">Popular</a></li>
                 <li class="{{isActivePath '/latest'}}"><a href="/latest">Latest</a></li>
-              {{/if}}
               {{#unless currentUser}}
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
               {{/unless}}
@@ -187,7 +185,7 @@
         <div class="col-sm-3 text-center info-div"><span class="digit"><img class="dogear {{#if dogeared}}desaturate{{/if}}" src="/ui/dogear.png" title="Dogear this quote"></span><br>dogear</div>
         <div class="col-sm-3 text-center info-div"><span class="digit">{{upcount}}</span><br>dogears</div>
         <div class="col-sm-3 text-center info-div"><span class="digit">{{views}}</span><br>views</div>
-        <div class="col-sm-3 text-center info-div">{{#if isOwner}}<span class="digit"><i class="glyphicon glyphicon-remove delete"></i></span><br>delete{{/if}}</div>
+        <div class="col-sm-3 text-center info-div"><span class="digit"><i class="glyphicon glyphicon-remove {{#if isOwner}}delete{{/if}}"></i></span><br>delete</div>
       </div>
     </div>
   </div>

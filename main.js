@@ -218,6 +218,7 @@ if (Meteor.isClient) { // only runs on the client
   // Here are the helpers to put data into Templates etc
 
   Template.SingleQuote.helpers({
+    // determines if user submitted quote
     isOwner: function () {
       var quoteId = Session.get("sessionQuoteId");
       var currentQuote = Quotes.findOne({ _id: quoteId });
@@ -228,7 +229,12 @@ if (Meteor.isClient) { // only runs on the client
       }
       else return false;
     },
-    dogeared: true
+    // works out if user has dogeared quote or not
+    dogeared: function () {
+      var quoteId = Session.get("sessionQuoteId");
+      var user = Meteor.users.findOne({_id:Meteor.userId(), liked:{ $ne:quoteId }});
+      console.log(user);
+    }
   });
 
 

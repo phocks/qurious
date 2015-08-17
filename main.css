@@ -286,6 +286,21 @@ img.about-logo {
   }
 }
 
+/* -------------------------------- Create Page ------------*/
+
+label {
+  font-weight: normal;
+  font-size: 120%;
+  color: #282828;
+  letter-spacing: 0.5px;
+}
+
+.form-control {
+  font-size: 105%;
+  color: #999;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+}
 
 
 

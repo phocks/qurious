@@ -2,7 +2,9 @@
 
 
 /*  some fonts
-    probably consider cutting these down to essentials */
+    probably consider cutting these down to essentials 
+    also, there is a way to selectively load fonts via javascript, see in js files
+    */
 
 @import url(//fonts.googleapis.com/css?family=Roboto);
 @import url(//fonts.googleapis.com/css?family=Roboto+Slab);

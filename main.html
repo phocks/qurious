@@ -189,7 +189,7 @@
         <div class="col-sm-3 text-center info-div"><span class="digit"><img class="dogear {{#if dogeared}}desaturate{{/if}}" src="/ui/dogear.png" title="Dogear this quote"></span><br>dogear</div>
         <div class="col-sm-3 text-center info-div"><span class="digit">{{upcount}}</span><br>dogears</div>
         <div class="col-sm-3 text-center info-div"><span class="digit">{{views}}</span><br>views</div>
-        <div class="col-sm-3 text-center info-div"><span class="digit"><i class="glyphicon glyphicon-remove delete"></i></span><br>delete</div>
+        <div class="col-sm-3 text-center info-div">{{#if isOwner}}<span class="digit"><i class="glyphicon glyphicon-remove delete"></i></span><br>delete{{/if}}</div>
       </div>
     </div>
   </div>

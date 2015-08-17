@@ -84,26 +84,5 @@ Meteor.methods({
   },
 
 
-  // This is a feature to "Like" a quotation. It should put the quote in the user's
-  // likes list and then update the upcount in the quote db
-  dogearQuote: function (quoteId) {
-    if (Meteor.userId()) {
-      var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}});
-
-
-      if (!user) {
-        Meteor.users.update({_id:this.userId},{$pull:{liked:quoteId}});
-        Quotes.update( { _id: quoteId }, {$inc: { upcount: -1 } });
-
-        return false;
-      }
-
-
-      console.log("user " + this.userId + " collected the quote " + quoteId );
-
-      Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
-      Meteor.users.update({_id:this.userId},{$addToSet:{liked:quoteId}});
-      return true;
-    }
-  },
+  
 });

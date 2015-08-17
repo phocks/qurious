@@ -95,6 +95,10 @@ if (Meteor.isClient) { // only runs on the client
   Router.configure({
     layoutTemplate: 'ApplicationLayout',
     loadingTemplate: "Loading",
+    yieldTemplates: {
+        Header: {to: 'header'},
+        Footer: {to: 'footer'},
+    },
     //notFoundTemplate: '404' //this is used for somewhat custom 404s
   });
 

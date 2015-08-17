@@ -47,6 +47,7 @@ npm-bcrypt@0.7.8_2
 observe-sequence@1.0.6
 okgrow:iron-router-autoscroll@0.0.8
 ordered-dict@1.0.3
+pagebakers:ionicons@2.0.1_1
 random@1.0.3
 reactive-dict@1.1.0
 reactive-var@1.0.5

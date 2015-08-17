@@ -219,7 +219,14 @@ if (Meteor.isClient) { // only runs on the client
 
   Template.SingleQuote.helpers({
     isOwner: function () {
-      return true;
+      var quoteId = Session.get("sessionQuoteId");
+      var currentQuote = Quotes.findOne({ _id: quoteId });
+
+      if (currentQuote.owner == Meteor.userId()) {
+        console.log("match!")
+        return true;
+      }
+      else return false;
     },
     dogeared: true
   });

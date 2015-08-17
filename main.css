@@ -40,7 +40,7 @@ a:focus {
 
 body {
   font-family: 'Roboto Slab', serif;
-  background-color: #171717;
+  background-color: #fdfbf8;
 }
 
 img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
@@ -66,7 +66,7 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 .single-quote .quotation {
   font-family: 'Aleo', serif;
-  font-weight: 600;
+  font-weight: normal;
   font-size: 170%;
 }
 
@@ -224,10 +224,14 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
   }
 }
 
+
+
+/* -------------------------------- Homescreen About Section ------------*/
+
 .home-about-row {
   background-color: #5BB2B5;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .home-about-text {
@@ -247,9 +251,21 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
   padding-top: 20px;
 }
 
+.home-about-readmore a{
+  color: #282828;
+}
+
+.home-about-readmore a:hover{
+  text-decoration: none;
+  color: #282828;
+}
+
 
 img.about-logo {
   width: 200px;
+  margin-right: 40px;
+  float: left;
+  padding-bottom: 120px;
 }
 
 .front-content-row {
@@ -258,7 +274,7 @@ img.about-logo {
 
 @media (max-width: 767px) {
   img.about-logo {
-    width: 170px;
+    display: none;
   }
 }
 

@@ -170,19 +170,29 @@
       </div>
     </div>
     {{#if currentUser}}
-    <div class="meta hidden">
+    <!-- <div class="meta hidden">
       <ol class="breadcrumb">
         <li >Views: <span class="badge">{{views}}</span></li>
-        <li><img class="dogear {{#if dogeared}}desaturate{{/if}}" src="/ui/dogear.png" title="Dogear this quote"><span class="badge">{{upcount}}</span></li>
+        {{#if dogeared}}
+          <li><img class="dogear" src="/ui/qurious_dogear-active.png" title="Dogeared already!"><span class="badge">{{upcount}}</span></li>
+        {{/if}}
+        {{#unless dogeared}}
+          <li><img class="dogear" src="/ui/qurious_dogear-active.png" title="Dogeared already!"><span class="badge">{{upcount}}</span></li>
+        {{/unless}}
         {{#if isOwner}}<li><a class="delete">delete</a></li>{{/if}}
       </ol>
-    </div>
+    </div> -->
     {{/if}}
   </div>
   <div class="quote-info">
     <div class="container">
       <div class="row">
-        <div class="col-sm-3 text-center info-div"><span class="digit"><img class="dogear {{#if dogeared}}desaturate{{/if}}" src="/ui/dogear.png" title="Dogear this quote"></span><br>dogear</div>
+        {{#if dogeared}}
+          <div class="col-sm-3 text-center info-div"><span class="digit"><img class="dogear" src="/ui/qurious_dogear-active.png" title="Dogear this quote"></span><br>dogear</div>
+        {{/if}}
+        {{#unless dogeared}}
+          <div class="col-sm-3 text-center info-div"><span class="digit"><img class="dogear" src="/ui/qurious_dogear-inactive.png" title="Dogear this quote"></span><br>dogear</div>
+        {{/unless}}
         <div class="col-sm-3 text-center info-div"><span class="digit">{{upcount}}</span><br>dogears</div>
         <div class="col-sm-3 text-center info-div"><span class="digit">{{views}}</span><br>views</div>
         <div class="col-sm-3 text-center info-div"><span class="digit"><i class="glyphicon glyphicon-remove {{#if isOwner}}delete{{/if}}"></i></span><br>delete</div>

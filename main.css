@@ -390,6 +390,10 @@ label {
   position: relative;
 }
 
+.list-quote .quotation {
+	letter-spacing: 1px;
+}
+
 .list-quote .attribution {
   text-transform: uppercase;
   color: #f48365;

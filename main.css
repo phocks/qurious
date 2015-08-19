@@ -438,7 +438,7 @@ label {
 
 
 .load-more {
-	width: 100%;
+\	width: 100%;
 }
 
 @media (max-width: 767px) {
@@ -621,7 +621,8 @@ label {
 
 .btn-primary.raised.center-block.give-me-more {
 	width: 100%;
-	margin-bottom: 80px;
+	margin-bottom: 40px;
+	margin-top: 40px;
 }
 
 

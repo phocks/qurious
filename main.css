@@ -490,7 +490,7 @@ label {
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
   font-size: 105%;
-  line-height: 170%;
+  line-height: 150%;
   letter-spacing: 0.5px;
 }
 
@@ -506,6 +506,20 @@ label {
 
 .text-content h1 {
   margin-bottom: 30px;
+}
+
+.text-content h3 {
+	font-size: 150%;
+	color: #999;
+	letter-spacing: 1px;
+	margin-top: 45px;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+}
+
+.text-content h4 {
+	letter-spacing: 0.5px;
+	margin-top: 1.5em;
 }
 
 

@@ -503,6 +503,24 @@ label {
 }
 
 
+.text-content p.contact {
+	font-size: 130%;
+	letter-spacing: 0.5px;
+	margin-bottom: 20px;
+	line-height: 140%
+}
+
+p.contact a {
+	color: #282828;
+	text-decoration: underline;
+	letter-spacing: 1px;
+}
+
+p.contact a:hover {
+	color: #999;
+}
+
+
 
 .text-content h1 {
   margin-bottom: 30px;

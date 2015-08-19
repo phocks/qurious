@@ -411,6 +411,11 @@ label {
 .list-quote .contrib a {
   color: #F58465;
   font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+.list-quote .contrib a:hover {
+	text-decoration: none;
 }
 
 .list-quote .read-more {
@@ -438,6 +443,7 @@ label {
 
 .read-more a:hover {
   color: #999;
+  text-decoration: none;
 }
 
 

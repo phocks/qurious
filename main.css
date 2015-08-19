@@ -288,6 +288,10 @@ img.about-logo {
   }
 }
 
+/*-------------------------Login Page-----------------------*/
+
+
+
 /* -------------------------------- Create Page ------------*/
 
 label {
@@ -429,6 +433,10 @@ label {
 }
 
 
+.load-more {
+	width: 100%;
+}
+
 @media (max-width: 767px) {
   .list-quote .quotation {
     font-size: 1.5em;
@@ -555,11 +563,11 @@ label {
 
 
 /* This is a custom button pack that we may not use */
-.btn {
+/*.btn {
   padding: 14px 24px;
   border: 0 none;
   letter-spacing: 1px;
-}
+}*/
 
 .btn:focus, .btn:active:focus, .btn.active:focus {
   outline: 0 none;
@@ -585,9 +593,34 @@ label {
   RAISED BUTTONS
 ******************************************************/
 
-.btn-primary.raised {
-  box-shadow: 0 3px 0 0 #007299;
+/*button style edited 19/08/2015*/
+
+.btn {
+	border-radius: 0px; 
+	border: none;
+	padding:12px 12px;
+	background: #5ab2b5;
+	letter-spacing: 2px;
+	font-size: 105%;
+
 }
+
+.btn-primary.create {
+	width: 100%;
+	margin-bottom: 80px;	
+/*  box-shadow: 0 3px 0 0 #007299;
+*/}
+
+.btn-primary.raised {	
+/*  box-shadow: 0 3px 0 0 #007299;
+*/}
+
+.btn-primary.raised.center-block.give-me-more {
+	width: 100%;
+	margin-bottom: 80px;
+}
+
+
 .btn-primary.raised:active, .btn-primary.raised.active {
   background: #33a6cc;
   box-shadow: none;
@@ -604,8 +637,8 @@ label {
   top: 3px;
 }
 .btn-info.raised {
-  box-shadow: 0 3px 0 0 #35a2b5;
-}
+/*  box-shadow: 0 3px 0 0 #35a2b5;
+*/}
 .btn-info.raised:active, .btn-info.raised.active {
   background: #5fd4e8;
   box-shadow: none;

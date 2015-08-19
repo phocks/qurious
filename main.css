@@ -205,15 +205,17 @@ text-transform: uppercase;
 }
 
 .homepage-title .subtitle {
-  font-size: 110%;
-  top: 40px;
-  color: #777;
+  font-size: 300%;
+  top: 10px;
+  color: #787878;
+  font-weight: normal;
+  margin-bottom: 40px;
 }
 
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
   .homepage-title {
-    padding-top: 40px;
+    padding-top: 10px;
   }
 
   .homepage-title h1 {
@@ -225,7 +227,9 @@ text-transform: uppercase;
   }
 
   .homepage-title .subtitle {
-    font-size: 90%
+    font-size: 180%;
+    top:20px;
+    margin-bottom: 40px;
   }
 }
 
@@ -639,6 +643,11 @@ label {
 .btn-info.raised {
 /*  box-shadow: 0 3px 0 0 #35a2b5;
 */}
+
+
+
+
+
 .btn-info.raised:active, .btn-info.raised.active {
   background: #5fd4e8;
   box-shadow: none;

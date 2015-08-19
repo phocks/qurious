@@ -300,8 +300,22 @@ label {
 .form-control {
   font-size: 105%;
   color: #999;
-  letter-spacing: 0.5px;
-  margin-bottom: 20px;
+  letter-spacing: 0.75px;
+  margin-bottom: 30px;
+  border-radius: 0px;
+  border-color: #999;
+}
+
+.submissionText {
+	font-size: 95%;
+	text-align: center;
+	color: #999;
+	letter-spacing: 1px;
+	line-height: 22px;
+}
+
+.submissionText a {
+	color: #f48365;
 }
 
 

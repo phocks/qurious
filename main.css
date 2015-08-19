@@ -438,7 +438,7 @@ label {
 
 
 .load-more {
-\	width: 100%;
+	width: 100%;
 }
 
 @media (max-width: 767px) {
@@ -526,11 +526,18 @@ label {
   background-color: #282828;
   padding-top:40px;
   padding-bottom: 50px;
+  letter-spacing: 0.5px;
+  line-height: 24px;
 }
 
 
 .footer a {
   color: #999;
+}
+
+.footer a:hover {
+	text-decoration: none;
+	color: #C1C3C6;
 }
 
 
@@ -547,7 +554,7 @@ label {
 
 @media (max-width: 767px) {
   .footer {
-    text-align: right;
+    text-align: left;
   }
 
   .footer .footer-title img {

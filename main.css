@@ -306,17 +306,25 @@ label {
   border-color: #999;
 }
 
+.form-control:focus {
+	border-color: #787878;
+	box-shadow: none;
+}
+
 .submissionText {
 	font-size: 95%;
-	text-align: center;
 	color: #999;
 	letter-spacing: 1px;
 	line-height: 22px;
+	text-align: center;
+	margin-bottom: 30px;
 }
 
 .submissionText a {
 	color: #f48365;
 }
+
+
 
 
 

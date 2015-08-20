@@ -40,7 +40,7 @@ if (Meteor.isClient) { // only runs on the client
 
 if (Meteor.isServer) {
   SearchSource.defineSource('quotes', function(searchText, options) {
-    var options = {sort: {createdAt: -1}, limit: 20};
+    var options = {sort: {createdAt: -1}, limit: 5};
     
     if(searchText) {
       var regExp = buildRegExp(searchText);

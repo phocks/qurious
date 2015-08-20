@@ -22,8 +22,8 @@ Counters = new Mongo.Collection('counters'); // Handles numbering
 // Initial setup of some things below
 // like some variables etc
 
-loadMoreLimit = 5;
-maximumQuotationLength = 1000;
+loadMoreLimit = 5;  // for infinite scrolling, how many per load
+maximumQuotationLength = 1000; // in characters
 
 
 
@@ -34,13 +34,11 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-
   // We need to tell the client to subscribe explicitly to data collections
   // Later we don't want to subscribe to the whole thing
   // moved to individual routes // Meteor.subscribe("quotes");
   Meteor.subscribe("counters");
   Meteor.subscribe("userData"); // for admin access etc.
-
 
 
 
@@ -400,12 +398,14 @@ if (Meteor.isServer) {
 
 
   Meteor.publish("quotesSlugUser", function (user_slug) {
+    check(user_slug, String);
     return Quotes.find({ username: user_slug }, { sort: {createdAt: -1}});
     self.ready();
   });
 
 
   Meteor.publish("quotesSlug", function (slug) {
+    check(slug, String);
     return Quotes.find({ _id: slug });
     self.ready();
   });
@@ -489,6 +489,8 @@ Meteor.methods({
   // etc etc
   checkQuoteSize: function(quoteId) {
 
+    check(quoteId, String);
+
     var currentQuote = Quotes.findOne(quoteId);
     var quotation = currentQuote.quotation;
 
@@ -552,17 +554,6 @@ Meteor.methods({
     Authors.remove(authorId);
   },
 
-
-
-
-// We are not using this either
-  changeTheme: function (quoteId, quoteTheme) {
-    if (quoteTheme == "blue") {
-      Quotes.update({ _id: quoteId }, { $set: { theme: 'green' }});
-    } else {
-      Quotes.update({ _id: quoteId }, { $set: { theme: 'blue' }});
-    }
-  },
 
 
 
@@ -642,27 +633,7 @@ Router.route('/contact', function() {
 
 
 
-
-
-
-
-// Now here are the main routes
-
-
-// Router.route('/login', function() {
-//   Session.set("DocumentTitle", "Login - Qurious");
-//   this.render('Header', {to: 'header'});
-//   this.render('Login');
-// });
-
-
-// Router.route('/signup', function() {
-//   Session.set("DocumentTitle", "Sign Up - Qurious");
-//   this.render('Header', {to: 'header'});
-//   this.render('SignUp');
-// });
-
-
+// This route is for useraccounts
 AccountsTemplates.configureRoute('signIn', {
     name: 'signin',
     path: '/login',
@@ -671,13 +642,18 @@ AccountsTemplates.configureRoute('signIn', {
 });
 
 
+
+
+
+// Now here are the main routes
+
 Router.route('/logout', function() {
   Meteor.logout();
   Router.go('/');
 });
 
 
-
+// Adding and submitting a new quote
 Router.route('/create', {
   loadingTemplate: 'Loading',
 
@@ -701,6 +677,7 @@ Router.route('/create', {
 });
 
 
+// Quotes sorted by popularity, dogears etc.
 Router.route('/popular', {
   loadingTemplate: 'Loading',
 

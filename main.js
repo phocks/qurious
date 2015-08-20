@@ -398,12 +398,14 @@ if (Meteor.isServer) {
 
 
   Meteor.publish("quotesSlugUser", function (user_slug) {
+    check(user_slug, String);
     return Quotes.find({ username: user_slug }, { sort: {createdAt: -1}});
     self.ready();
   });
 
 
   Meteor.publish("quotesSlug", function (slug) {
+    check(slug, String);
     return Quotes.find({ _id: slug });
     self.ready();
   });
@@ -486,6 +488,8 @@ Meteor.methods({
   // set a value to it so that we can display long quotes with smaller font
   // etc etc
   checkQuoteSize: function(quoteId) {
+
+    check(quoteId, String);
 
     var currentQuote = Quotes.findOne(quoteId);
     var quotation = currentQuote.quotation;

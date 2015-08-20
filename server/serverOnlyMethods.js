@@ -36,6 +36,7 @@ Meteor.methods({
   // This happens each time the user looks at a quotation
   viewQuote: function (quoteId) {
 
+    check(quoteId, String);
     var activeQuote = Quotes.findOne({ _id: quoteId });
 
     // Just make sure we have a dogear attribute

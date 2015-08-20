@@ -239,8 +239,8 @@ text-transform: uppercase;
 
 .home-about-row {
   background-color: #5BB2B5;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 50px;
+  padding-bottom: 0px;
 }
 
 .home-about-text {

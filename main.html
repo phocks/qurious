@@ -7,6 +7,10 @@
   <title>Qurious</title>
 </head>
 
+<body>
+  <!-- Any body text first up..... pretty much useless -->
+</body>
+
 
 <!-- First up we have the iron-router main layout -->
 <template name="ApplicationLayout">
@@ -173,20 +177,6 @@
         </div>
       </div>
     </div>
-    {{#if currentUser}}
-    <!-- <div class="meta hidden">
-      <ol class="breadcrumb">
-        <li >Views: <span class="badge">{{views}}</span></li>
-        {{#if dogeared}}
-          <li><img class="dogear" src="/ui/qurious_dogear-active.png" title="Dogeared already!"><span class="badge">{{upcount}}</span></li>
-        {{/if}}
-        {{#unless dogeared}}
-          <li><img class="dogear" src="/ui/qurious_dogear-active.png" title="Dogeared already!"><span class="badge">{{upcount}}</span></li>
-        {{/unless}}
-        {{#if isOwner}}<li><a class="delete">delete</a></li>{{/if}}
-      </ol>
-    </div> -->
-    {{/if}}
   </div>
   <div class="quote-info">
     <div class="container">
@@ -231,7 +221,6 @@
 
 
 <template name="Loading">
-  {{> Header}}
   <div class="content-container">
   <div class="single-quote">
     <div class="container">
@@ -295,7 +284,7 @@
     <div class="row">
       <div class="col-xs-7">
         <div class="contrib">
-            <p>Contributed by <a href="/{{username}}">{{username}}</a> <!-- - {{views}} views --></p>
+            <p>Contributed by <a href="/users/{{username}}">{{username}}</a> <!-- - {{views}} views --></p>
           </div>
       </div>
       <div class="col-xs-5">
@@ -443,7 +432,17 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6 col-md-offset-3 front-content-row">
-            <p>Implement a search here</p>
+            <input type="text" id="search-box" placeholder="search here" />
+            {{#each getQuotes}}
+            <div class="package">
+              <h4 class="name">
+                <i>{{{quotation}}}</i>
+              </h4>
+              <div class="description">
+                {{{attribution}}}
+              </div>
+            </div>
+            {{/each}}
           </div>
         </div>
       </div>

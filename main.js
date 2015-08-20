@@ -553,17 +553,6 @@ Meteor.methods({
 
 
 
-// We are not using this either
-  changeTheme: function (quoteId, quoteTheme) {
-    if (quoteTheme == "blue") {
-      Quotes.update({ _id: quoteId }, { $set: { theme: 'green' }});
-    } else {
-      Quotes.update({ _id: quoteId }, { $set: { theme: 'blue' }});
-    }
-  },
-
-
-
 
   // This is a feature to "Like" a quotation. It should put the quote in the user's
   // likes list and then update the upcount in the quote db
@@ -640,27 +629,7 @@ Router.route('/contact', function() {
 
 
 
-
-
-
-
-// Now here are the main routes
-
-
-// Router.route('/login', function() {
-//   Session.set("DocumentTitle", "Login - Qurious");
-//   this.render('Header', {to: 'header'});
-//   this.render('Login');
-// });
-
-
-// Router.route('/signup', function() {
-//   Session.set("DocumentTitle", "Sign Up - Qurious");
-//   this.render('Header', {to: 'header'});
-//   this.render('SignUp');
-// });
-
-
+// This route is for useraccounts
 AccountsTemplates.configureRoute('signIn', {
     name: 'signin',
     path: '/login',
@@ -669,13 +638,18 @@ AccountsTemplates.configureRoute('signIn', {
 });
 
 
+
+
+
+// Now here are the main routes
+
 Router.route('/logout', function() {
   Meteor.logout();
   Router.go('/');
 });
 
 
-
+// Adding and submitting a new quote
 Router.route('/create', {
   loadingTemplate: 'Loading',
 
@@ -699,6 +673,7 @@ Router.route('/create', {
 });
 
 
+// Quotes sorted by popularity, dogears etc.
 Router.route('/popular', {
   loadingTemplate: 'Loading',
 

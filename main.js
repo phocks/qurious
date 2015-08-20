@@ -22,8 +22,8 @@ Counters = new Mongo.Collection('counters'); // Handles numbering
 // Initial setup of some things below
 // like some variables etc
 
-loadMoreLimit = 5;
-maximumQuotationLength = 1000;
+loadMoreLimit = 5;  // for infinite scrolling, how many per load
+maximumQuotationLength = 1000; // in characters
 
 
 
@@ -34,13 +34,11 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-
   // We need to tell the client to subscribe explicitly to data collections
   // Later we don't want to subscribe to the whole thing
   // moved to individual routes // Meteor.subscribe("quotes");
   Meteor.subscribe("counters");
   Meteor.subscribe("userData"); // for admin access etc.
-
 
 
 

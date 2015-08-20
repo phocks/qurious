@@ -432,7 +432,17 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6 col-md-offset-3 front-content-row">
-            <p>Implement a search here</p>
+            <input type="text" id="search-box" placeholder="search here" />
+            {{#each getQuotes}}
+            <div class="package">
+              <h4 class="name">
+                <i>{{{quotation}}}</i>
+              </h4>
+              <div class="description">
+                {{{attribution}}}
+              </div>
+            </div>
+            {{/each}}
           </div>
         </div>
       </div>

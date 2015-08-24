@@ -1,0 +1,10 @@
+{
+  "awsBucket": "my-example-staging",
+  "awsAccessKeyId": "AABBCCddEEff12123131",
+  "awsSecretKey": "AABBCCddEEff12123131+AABBCCddEEff12123131",
+  "public": {
+    "awsBucketUrl": "https://my-meteor-example.s3.amazonaws.com",
+    "environment": "staging"
+  },
+  "googleApiKey": "AABBCCddEEff12123131"
+}

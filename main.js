@@ -347,9 +347,9 @@ if (Meteor.isServer) {
       // Here is another way using headers
       var forwardedFor = conn.httpHeaders['x-forwarded-for'].split(",");
       clientIp = forwardedFor[0];
-
-
     });
+
+    console.log(Meteor.settings.mailGunUrl);
 
 /* had to remove due to unstyled accounts for some reason
   Accounts.config({

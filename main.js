@@ -638,7 +638,7 @@ AccountsTemplates.configureRoute('signIn', {
     name: 'signin',
     path: '/login',
     template: 'Login',
-    redirect: '/',
+    redirect: '/random',
 });
 
 
@@ -752,7 +752,7 @@ Router.route('/quotes/:_quote_slug', {
 
             // Let's try to get substring some text for the Title Bar
             // this regular expression is gold (i didn't write it btw)
-            var titleText = quote.quotation.replace(/^(.{80}[^\s]*).*/, "$1");
+            var titleText = quote.quotation.replace(/^(.{50}[^\s]*).*/, "$1");
 
             Session.set("DocumentTitle", titleText + " - Qurious");
 

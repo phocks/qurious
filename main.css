@@ -6,8 +6,7 @@
     also, there is a way to selectively load fonts via javascript, see in js files
     */
 
-@import url(//fonts.googleapis.com/css?family=Roboto);
-@import url(//fonts.googleapis.com/css?family=Roboto+Slab);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 /*@import url(//fonts.googleapis.com/css?family=Cardo:400,700);*/
 /* commenting because this is now replaced by images
 @import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic); */
@@ -199,12 +198,11 @@ text-transform: uppercase;
 }
 
 .homepage-title h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 150px;
-  font-style: italic;
+
 }
 
 .homepage-title .subtitle {
+  font-family: Aleo, sans-serif;
   font-size: 300%;
   top: 10px;
   color: #787878;
@@ -395,6 +393,7 @@ label {
 }
 
 .list-quote .attribution {
+  font-family: Aleo, sans-serif;
   text-transform: uppercase;
   color: #f48365;
   letter-spacing: 2px;
@@ -497,7 +496,6 @@ label {
 }
 
 .text-content p.body {
-  font-family: 'Roboto', sans-serif;
   font-weight: normal;
   font-size: 105%;
   line-height: 150%;
@@ -505,7 +503,6 @@ label {
 }
 
 .text-content li {
-  font-family: 'Roboto', sans-serif;
   font-weight: normal;
   font-size: 105%;
   line-height: 170%;
@@ -572,7 +569,7 @@ p.contact a:hover {
 }
 
 .text-page-navigation li {
-  font-family: "Roboto Slab", serif;
+  
 }
 
 
@@ -611,7 +608,6 @@ p.contact a:hover {
 
 
 .footer-title {
-  font-family: "Playfair Display", serif;
   font-style: italic;
   font-size: 130%;
   display: relative;
@@ -680,9 +676,9 @@ p.contact a:hover {
 	border: none;
 	padding:12px 12px;
 	background: #5ab2b5;
-	letter-spacing: 2px;
-	font-size: 105%;
-
+	/*letter-spacing: 2px;*/
+	/*font-size: 105%;*/
+  font-weight: bold;
 }
 
 .btn-primary.create {
@@ -794,7 +790,6 @@ p.contact a:hover {
 }
 
 .navbar-brand {
-  font-family: "Playfair Display", serif;
   font-style: italic;
   opacity: 1;
 }

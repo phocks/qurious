@@ -197,8 +197,8 @@ text-transform: uppercase;
   text-align: center;
 }
 
-.homepage-title h1 {
-
+.homepage-title h1 img {
+  width: 600px;
 }
 
 .homepage-title .subtitle {

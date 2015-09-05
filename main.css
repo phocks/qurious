@@ -778,20 +778,26 @@ p.contact a:hover {
 .navbar-default .navbar-nav > .active > a,
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
-      color: #fff;
-      background: #F58465;
+  color: #fff;
+  background: #F58465;
  }
 
  .navbar {
   border-top: 4px #F58465 solid;
   margin-bottom: 0;
-  border-bottom: 0;
-  background-color: #fdfbf8;
+  /*border-bottom: 0;*/
+  /*background-color: #fdfbf8;*/
+  background-color: #fff;
 }
 
 .navbar-brand {
-  font-style: italic;
-  opacity: 1;
+  
+}
+
+.navbar-brand img {
+  height: 34px; 
+  position: relative;
+  top: -6px;
 }
 
 .load-more {

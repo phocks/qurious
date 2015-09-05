@@ -111,7 +111,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
   // Call this at any time to set the <title>
-  Session.set("DocumentTitle","Qurious - quotes etc.");
+  Session.set("DocumentTitle","Qurious - Curiously Quotable");
 
   // Sets up automatically setting <title> in head
   Tracker.autorun(function(){
@@ -454,7 +454,7 @@ Meteor.methods({
     // Make sure the user is logged in otherwise throw and error
     if (! Meteor.userId()) throw new Meteor.Error("not-authorized");
 
-    if (text > maximumQuotationLength) throw new Meteor.Error('too-long');
+    if (text.length > maximumQuotationLength) throw new Meteor.Error('too-long');
 
     Counters.update({ _id: 'quote_id' }, { $inc: { seq: 1 } });
 

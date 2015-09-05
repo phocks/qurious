@@ -454,7 +454,7 @@ Meteor.methods({
     // Make sure the user is logged in otherwise throw and error
     if (! Meteor.userId()) throw new Meteor.Error("not-authorized");
 
-    if (text > maximumQuotationLength) throw new Meteor.Error('too-long');
+    if (text.length > maximumQuotationLength) throw new Meteor.Error('too-long');
 
     Counters.update({ _id: 'quote_id' }, { $inc: { seq: 1 } });
 

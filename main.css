@@ -193,7 +193,7 @@ text-transform: uppercase;
 
 
 .homepage-title {
-  padding-top: 80px;
+  padding-top: 220px;
   text-align: center;
 }
 
@@ -208,6 +208,10 @@ text-transform: uppercase;
   color: #787878;
   font-weight: normal;
   margin-bottom: 40px;
+}
+
+.front-content-row { /* comes after the title image */
+  padding-bottom: 220px;
 }
 
 /* Landscape phone to portrait tablet */
@@ -280,9 +284,7 @@ img.about-logo {
   padding-bottom: 120px;
 }
 
-.front-content-row {
-  padding-bottom: 200px;
-}
+
 
 @media (max-width: 767px) {
   img.about-logo {

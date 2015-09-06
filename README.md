@@ -3,4 +3,4 @@ Welcome to Qurious—a new way to explore and discover the best quotations from 
 
 ## License
 
-Copyright code 2015- all rights reserved.
+Copyright 2015- all rights reserved.

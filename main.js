@@ -919,6 +919,15 @@ Router.route('/search', function() {
 
 
 
+// Experimental search function
+Router.route('/search/:_searchTerm', function() {
+  Session.set("DocumentTitle","Searching - Qurious");
+  
+  this.render('SearchTerms');
+});
+
+
+
 
 
 // This is our catch all for all other unknown things

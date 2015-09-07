@@ -45,7 +45,8 @@ if (Meteor.isClient) { // only runs on the client
 
   // Font experiment to see if we can load fonts on demand
   // and YES it looks like we can.
-  WebFontConfig = {
+  if (false) {  // for now let's just disable this
+    WebFontConfig = {
       google: { families: [ 'Vollkorn::latin' ] }
     };
     (function() {
@@ -57,7 +58,7 @@ if (Meteor.isClient) { // only runs on the client
       var s = document.getElementsByTagName('script')[0];
       s.parentNode.insertBefore(wf, s);
     })();
-
+  }
 
 
 
@@ -410,7 +411,7 @@ if (Meteor.isServer) {
     self.ready();
   });
 
-
+  // Pusblish quotes given IDs in an array as input
   Meteor.publish("quotesInArray", function (array) {
     return Quotes.find({ _id: { $in: array } }, {sort: {upcount: -1}});
     self.ready();

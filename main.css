@@ -640,6 +640,12 @@ p.contact a:hover {
   color: #444;
 }
 
+@media (max-width: 767px) {
+  .post-footer {
+    margin-right: 20px;
+  }
+}
+
 
 
 /* This is a custom button pack that we may not use */

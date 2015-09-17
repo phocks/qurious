@@ -218,7 +218,7 @@ text-transform: uppercase;
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
   .homepage-title {
-    padding-top: 10px;
+    /*padding-top: 10px;*/
   }
 
   .homepage-title h1 {

@@ -161,11 +161,15 @@ text-transform: uppercase;
   margin-left: 15px;
 }
 
-.dogear-inactive {
+img.dogear-button {
   height: 28px;
   float: right;
   margin-right: 20px;
   margin-top: 16px;
+}
+
+.quote-info .dogear-button {  
+  cursor: pointer;   
 }
 
 .quote-info .digit {
@@ -182,7 +186,7 @@ text-transform: uppercase;
 
 .views-num {
   position: relative;
-  left: 10px;
+  left: 8px;
   top: 3px;
   text-align: left;
 
@@ -191,14 +195,10 @@ text-transform: uppercase;
 
 
 
-/* INFO BAR ORIGINAL */
+/* INFO BAR ORIGINAL 
 
-
-
-.quote-info .dogear {
-  
-  cursor: pointer;
-   
+/*.quote-info .dogear {  
+  cursor: pointer;   
 }
 
 .quote-info img.dogear {
@@ -209,13 +209,10 @@ text-transform: uppercase;
 
 .quote-info .delete {
   cursor: pointer;
-}
+}*/
 
 
 @media (max-width: 970px) {
-
-
-
 }
 
 @media (max-width: 767px) {

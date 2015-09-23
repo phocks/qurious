@@ -7,8 +7,7 @@
   also, there is a way to selectively load fonts via javascript, see in js files
   */
 
-
-@import url(https://fonts.googleapis.com/css?family=Oxygen:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
 /*@import url(//fonts.googleapis.com/css?family=Cardo:400,700);*/
 /* commenting because this is now replaced by images
 @import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic); */
@@ -141,6 +140,7 @@ text-transform: uppercase;
   color: white;
 }
 
+/* QUOTE INFO BAR 23-09-2015 */
 
 .info-bar {
   background-color: #5ab2b5;
@@ -149,9 +149,37 @@ text-transform: uppercase;
   margin: 0 auto;
 }
 
-.quote-info .digit {
-  font-size: 2.1em;
+.info-bar .dogears {
+  height: 20px;
+  margin-left: 21px;
+  margin-top: 7px;
 }
+
+.info-bar .views {
+  height: 17px;
+  margin-top: 8px;
+  margin-left: 15px;
+}
+
+.dogear-inactive {
+  height: 28px;
+  float: right;
+  margin-right: 20px;
+  margin-top: 16px;
+}
+
+.quote-info .digit {
+  font-size: 0.9em;
+  font-weight: 700;
+}
+
+
+
+
+
+/* INFO BAR ORIGINAL */
+
+
 
 .quote-info .dogear {
   
@@ -172,10 +200,7 @@ text-transform: uppercase;
 
 @media (max-width: 970px) {
 
-  /*  .info-bar {
-    margin-left: 10px;
-    margin-right: 10px;
-  }*/
+
 
 }
 

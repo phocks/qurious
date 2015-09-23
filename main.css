@@ -167,7 +167,14 @@ text-transform: uppercase;
 }
 
 
+@media (max-width: 970px) {
 
+  /*  .info-bar {
+    margin-left: 10px;
+    margin-right: 10px;
+  }*/
+
+}
 
 @media (max-width: 767px) {
 
@@ -198,7 +205,15 @@ text-transform: uppercase;
   .single-quote .attribution {
     font-size: 100%;
   }
+
+  /*.info-bar {
+    margin-left: 10px;
+    margin-right: 10px;
+  }*/
 }
+
+
+
 
 
 .homepage-title {

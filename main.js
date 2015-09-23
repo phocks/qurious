@@ -870,7 +870,7 @@ Router.route('/users/:_username/dogears', {
       data: {
         quotes: function () {
           return Quotes.find({ _id: { $in: user.liked } },
-            {sort: { views: -1, upcount: -1 }, limit: Session.get('limit') });
+            {sort: { createdAt: -1 }, limit: Session.get('limit') });
         },
         usernameToShow: function () { return usernameParam },
 

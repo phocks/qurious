@@ -19,8 +19,14 @@
   {{#if currentUser}}
   <div class="quote-info">
     <div class="container-fluid">
-      <div class="row">
-      <div class="info-bar">INFO BAR</div>
+      <div class="info-bar">
+      <img class="info-icon dogears" src="/ui/qurious_icon_dogears.png"><span class="digit dogears-num">{{upcount}}</span>
+      <img class="dogear-inactive" src="/ui/qurious_dogear_inactive.png">
+      <br>
+      <img class="info-icon views" src="/ui/qurious_icon_views.png"><span class="digit views-num">{{views}}</span>
+
+
+      </div>
 
         
         <!-- info bar test 23-09-2015
@@ -34,7 +40,6 @@
           <img class="dogear hidden" src="/ui/qurious_dogear-active.png" title="Dogear this quote">
         {{/unless}}
         <div class="col-sm-3 text-center info-div"><span class="digit"><i class="glyphicon glyphicon-remove {{#if isOwner}}delete{{/if}}"></i></span><br>delete</div>-->
-      </div>
     </div>
   </div>
 

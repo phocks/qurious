@@ -135,10 +135,14 @@ text-transform: uppercase;
 }
 
 .quote-info {
-  background-color: #5ab2b5;
+  background-color: #fdfbf8;
   padding-top: 40px;
   padding-bottom: 40px;
   color: white;
+}
+
+.info-bar {
+  background-color: #5ab2b5;
 }
 
 .quote-info .digit {

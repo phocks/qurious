@@ -173,6 +173,20 @@ text-transform: uppercase;
   font-weight: 700;
 }
 
+.dogears-num {
+  position: relative;
+  left: 15px;
+  top: 4px;
+  text-align: left;
+}
+
+.views-num {
+  position: relative;
+  left: 10px;
+  top: 3px;
+  text-align: left;
+
+}
 
 
 

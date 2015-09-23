@@ -565,8 +565,9 @@ Meteor.methods({
     if (Meteor.userId()) { // Only process if user logged in
 
       // Looks for quoteId in Users collection
-      var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}});
+      // var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}});
 
+      // var user = Meteor.users.findOne({username:"plasticsunshine", liked:{$ne:quoteId}});
       
 
 
@@ -590,11 +591,15 @@ Meteor.methods({
 
       console.log(user.liked);
 
-      var userLiked = user.liked;
+      // var userLiked = user.liked;
 
-      userLiked.forEach(function(entry) {
-        console.log(entry);
-      });
+      // userLiked.forEach(function(entry) {
+        
+      //   Meteor.users.update({ username: "plasticsunshine" },
+      //     { $push: { dogeared: { quoteId: entry, dogearedAt: new Date() }}});
+
+      //   console.log(entry);
+      // });
 
 
       console.log("user " + this.userId + " collected the quote " + quoteId );

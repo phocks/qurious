@@ -799,6 +799,7 @@ p.contact a:hover {
   margin-bottom: 0;
   border-bottom: 0;
   background-color: #fdfbf8;
+  opacity: 1;
 }
 
 .navbar-brand {

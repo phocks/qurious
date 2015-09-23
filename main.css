@@ -144,6 +144,7 @@ text-transform: uppercase;
 
 .info-bar {
   background-color: #5ab2b5;
+  max-width: 560px;
 }
 
 .quote-info .digit {

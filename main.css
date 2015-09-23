@@ -145,6 +145,8 @@ text-transform: uppercase;
 .info-bar {
   background-color: #5ab2b5;
   max-width: 560px;
+  height: 60px;
+  margin: 0 auto;
 }
 
 .quote-info .digit {
@@ -207,10 +209,9 @@ text-transform: uppercase;
     font-size: 100%;
   }
 
-  /*.info-bar {
-    margin-left: 10px;
-    margin-right: 10px;
-  }*/
+  .info-bar {
+    max-width: 280px;
+  }
 }
 
 

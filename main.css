@@ -7,7 +7,8 @@
   also, there is a way to selectively load fonts via javascript, see in js files
   */
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+@import url(https://fonts.googleapis.com/css?family=Oxygen:400,300,700);
 /*@import url(//fonts.googleapis.com/css?family=Cardo:400,700);*/
 /* commenting because this is now replaced by images
 @import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic); */
@@ -33,7 +34,7 @@
        url('/fonts/Aleo/Light/aleo-light-webfont.svg#aleolight') format('svg');
 }
 
-@import url(https://fonts.googleapis.com/css?family=Oxygen:400,300,700);
+
 
 
 a, /* this gets rid of the dotty outline in Firefox. */
@@ -469,7 +470,7 @@ label {
 }
 
 .vertical-container {
-  background-color: #FEFCF9;
+  
 
   min-height: calc(100vh - 54px);
   display: -webkit-flex;
@@ -799,7 +800,6 @@ p.contact a:hover {
   margin-bottom: 0;
   border-bottom: 0;
   background-color: #fdfbf8;
-  opacity: 1;
 }
 
 .navbar-brand {

@@ -562,15 +562,29 @@ Meteor.methods({
   // This is a feature to "Like" a quotation. It should put the quote in the user's
   // likes list and then update the upcount in the quote db
   dogearQuote: function (quoteId) {
-    if (Meteor.userId()) {
+    if (Meteor.userId()) { // Only process if user logged in
+
+      // Looks for quoteId in Users collection
       var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}});
 
+      console.log(user);
 
-      if (!user) {
+
+      if (!user) { // returns null or undefined 
+
+        // Old way, no time stamp
         Meteor.users.update({_id:this.userId},{$pull:{liked:quoteId}});
+
+        // New way with timestamp
+        Meteor.users.update({_id:this.userId},{$pull:{dogeared: { quoteId: quoteId } }},
+          { multi: true });
+
+
+
+
         Quotes.update( { _id: quoteId }, {$inc: { upcount: -1 } });
 
-        return false;
+        return false; // exits the function
       }
 
 
@@ -578,6 +592,12 @@ Meteor.methods({
 
       Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
       Meteor.users.update({_id:this.userId},{$addToSet:{liked:quoteId}});
+
+      // New Dogear feature that adds date as well
+      Meteor.users.update({ _id: this.userId },
+        { $push: { dogeared: { quoteId: quoteId, likedAt: new Date() }}});
+
+
       return true;
     }
   },

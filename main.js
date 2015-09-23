@@ -567,7 +567,7 @@ Meteor.methods({
       // Looks for quoteId in Users collection
       var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}});
 
-      console.log(user);
+      
 
 
       if (!user) { // returns null or undefined 
@@ -588,6 +588,15 @@ Meteor.methods({
       }
 
 
+      console.log(user.liked);
+
+      var userLiked = user.liked;
+
+      userLiked.forEach(function(entry) {
+        console.log(entry);
+      });
+
+
       console.log("user " + this.userId + " collected the quote " + quoteId );
 
       Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
@@ -595,7 +604,7 @@ Meteor.methods({
 
       // New Dogear feature that adds date as well
       Meteor.users.update({ _id: this.userId },
-        { $push: { dogeared: { quoteId: quoteId, likedAt: new Date() }}});
+        { $push: { dogeared: { quoteId: quoteId, dogearedAt: new Date() }}});
 
 
       return true;
@@ -879,7 +888,7 @@ Router.route('/users/:_username/dogears', {
     this.render('Header', {to: 'header'});
     //to pass it into the function, someone help with this
     var usernameParam = this.params._username;
-    var user = Meteor.users.findOne( { username: this.params._username });
+    var user = Meteor.users.findOne( { username: this.params._username } );
 
     console.log(user.liked);
 

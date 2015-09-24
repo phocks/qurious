@@ -218,14 +218,14 @@ text-transform: uppercase;
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
   .homepage-title {
-    padding-top: 10px;
+    /*padding-top: 10px;*/
   }
 
   .homepage-title h1 {
     font-size: 70px;
   }
 
-  .homepage-title img {
+  .homepage-title h1 img {
     width: 280px;
   }
 

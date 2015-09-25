@@ -4,16 +4,29 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
 twbs:bootstrap
 iron:router
 momentjs:moment
 useraccounts:bootstrap
 useraccounts:core
 zimme:active-route
-okgrow:iron-router-autoscroll
 accounts-ui
 accounts-password
 useraccounts:iron-routing
 pagebakers:ionicons
 meteorhacks:search-source
+standard-minifiers
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
+okgrow:router-autoscroll

@@ -8,33 +8,31 @@ Hopefully this all works as expected.
 
 */
 
-/*---------------------------------------------------------
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    function pausecomp(millis)
-     {
-      var date = new Date();
-      var curDate = null;
-      do { curDate = new Date(); }
-      while(curDate-date < millis);
-    }
-
-    var users = Meteor.users.find().fetch();
 
 
-    users.forEach(function (doc) {
-      if (doc.liked) {
-        doc.liked.forEach(function (quoteId) {
-          Meteor.users.update(doc._id, { $push: { dogeared: { quoteId: quoteId, dogearedAt: new Date() } } });
-          console.log("done " + doc.liked);
-          pausecomp(1000);
+// if (Meteor.isServer) {
+//   Meteor.startup(function () {
+//     function pausecomp(millis)
+//      {
+//       var date = new Date();
+//       var curDate = null;
+//       do { curDate = new Date(); }
+//       while(curDate-date < millis);
+//     }
 
-        });
-      }
-    });
-    console.log('finished migrating');
-  });
-}
+//     var users = Meteor.users.find().fetch();
 
-/*---------------------------------------------------------
+
+//     users.forEach(function (doc) {
+//       if (doc.liked) {
+//         doc.liked.forEach(function (quoteId) {
+//           Meteor.users.update(doc._id, { $push: { dogeared: { quoteId: quoteId, dogearedAt: new Date() } } });
+//           console.log("done " + doc.liked);
+//           pausecomp(1000);
+
+//         });
+//       }
+//     });
+//     console.log('finished migrating');
+//   });
+// }

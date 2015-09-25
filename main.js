@@ -414,7 +414,7 @@ if (Meteor.isServer) {
 
   // Pusblish quotes given IDs in an array as input
   Meteor.publish("quotesInArray", function (array) {
-    return Quotes.find({ _id: { $in: array } }, {sort: {upcount: -1}});
+    return Quotes.find({ _id: { $in: array } }, {sort: {createdAt: -1}});
     self.ready();
   });
 

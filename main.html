@@ -59,13 +59,7 @@ Thanks. Josh.
             <ul class="nav navbar-nav">
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                {{#if currentUser}}
-                <li class="{{isActivePath '/create'}}">
-                  <a href="/create" title="Create a quote">
-                    <i class="glyphicon glyphicon-plus"></i>
-                  </a>
-                </li>
-                {{/if}}
+                
                 <li class="{{isActivePath '/popular'}}"><a href="/popular">Popular</a></li>
                 <li class="{{isActivePath '/latest'}}"><a href="/latest">Latest</a></li>
 
@@ -84,6 +78,13 @@ Thanks. Josh.
                     <li><a href="/logout">Logout</a></li>
                   </ul>
                 </li>
+              {{/if}}
+              {{#if currentUser}}
+              <li class="{{isActivePath '/create'}}">
+                <a href="/create" title="Create a quote">
+                  <i class="glyphicon glyphicon-plus"></i>
+                </a>
+              </li>
               {{/if}}
 
             </ul>

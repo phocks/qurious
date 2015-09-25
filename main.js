@@ -108,7 +108,7 @@ if (Meteor.isClient) { // only runs on the client
   // We have a package that gets us to the top when we navigate
   // This changes the animation period, set to zero for none
   // Doesn't seem to work with mobile (or sometimes at all)
-  IronRouterAutoscroll.animationDuration = 200;
+  RouterAutoscroll.animationDuration = 200;
 
 
   // Call this at any time to set the <title>
@@ -278,6 +278,7 @@ if (Meteor.isClient) { // only runs on the client
     // Put the quotation into the users collection!
     "click .dogear-button": function () {
       Meteor.call('dogearQuote', this._id);
+      console.log("yep");
     }
   });
 
@@ -565,9 +566,8 @@ Meteor.methods({
     if (Meteor.userId()) { // Only process if user logged in
 
       // Looks for quoteId in Users collection
-      // var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}});
+      var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}})
 
-      // var user = Meteor.users.findOne({username:"plasticsunshine", liked:{$ne:quoteId}});
       
 
 
@@ -588,18 +588,7 @@ Meteor.methods({
         return false; // exits the function
       }
 
-
-      console.log(user.liked);
-
-      // var userLiked = user.liked;
-
-      // userLiked.forEach(function(entry) {
-        
-      //   Meteor.users.update({ username: "plasticsunshine" },
-      //     { $push: { dogeared: { quoteId: entry, dogearedAt: new Date() }}});
-
-      //   console.log(entry);
-      // });
+  
 
 
       console.log("user " + this.userId + " collected the quote " + quoteId );

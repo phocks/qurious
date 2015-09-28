@@ -8,7 +8,7 @@
   */
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
-@import url(https://fonts.googleapis.com/css?family=Antic+Slab);
+@import url(https://fonts.googleapis.com/css?family=Podkova:400,700);
 /*@import url(//fonts.googleapis.com/css?family=Cardo:400,700);*/
 /* commenting because this is now replaced by images
 @import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic); */
@@ -70,7 +70,7 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
 .single-quote .quotation {
-  font-family: "Antic Slab", 'Aleo', serif;
+  font-family: Podkova, 'Aleo', serif;
   font-weight: normal;
   letter-spacing: 1px;
   font-size: 170%;

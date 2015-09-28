@@ -62,7 +62,6 @@ mongo-id@1.0.1
 npm-bcrypt@0.7.8_2
 npm-mongo@1.4.39_1
 observe-sequence@1.0.7
-okgrow:router-autoscroll@0.1.0
 ordered-dict@1.0.4
 pagebakers:ionicons@2.0.1_1
 promise@0.4.8

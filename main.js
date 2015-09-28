@@ -10,6 +10,8 @@
 // Qurious, a web app for creating and sharing quotes
 // Copyright Meagre 2015- All rights reserved
 
+/* This file originally created by Joshua Byrd for Meagre. */
+
 
 
 // First up we are going to create a few collections

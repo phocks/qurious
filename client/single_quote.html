@@ -16,21 +16,29 @@
       </div>
     </div>
   </div>
-  {{#if currentUser}}
+  
   <div class="quote-info">
     <div class="container-fluid">
       <div class="info-bar">
+
+      {{#if dogeared}}
+      <img class="dogear-button" src="/ui/qurious_dogear_on.png" title="Dogear this quote">
+      {{/if}}
+
+      {{#unless dogeared}}
+      <img class="dogear-button" src="/ui/qurious_dogear_off.png" title="Dogear this quote">
+      {{/unless}}
+
+      
       <img class="info-icon dogears" src="/ui/qurious_icon_dogears.png">
       <span class="digit dogears-num">{{upcount}}</span>
 
-    
-      <img class="dogear-button" src="/ui/qurious_dogear-off.png" title="Dogear this quote">
 
       <br>
       <img class="info-icon views" src="/ui/qurious_icon_views.png">
       <span class="digit views-num">{{views}}</span>
 
-
+      
 
 
         </div>
@@ -75,5 +83,5 @@
   </div> -->
 
 
-  {{/if}}
+  
 </template>

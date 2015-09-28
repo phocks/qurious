@@ -10,6 +10,8 @@
 // Qurious, a web app for creating and sharing quotes
 // Copyright Meagre 2015- All rights reserved
 
+/* This file originally created by Joshua Byrd for Meagre. */
+
 
 
 // First up we are going to create a few collections
@@ -108,7 +110,7 @@ if (Meteor.isClient) { // only runs on the client
   // We have a package that gets us to the top when we navigate
   // This changes the animation period, set to zero for none
   // Doesn't seem to work with mobile (or sometimes at all)
-  IronRouterAutoscroll.animationDuration = 200;
+  RouterAutoscroll.animationDuration = 200;
 
 
   // Call this at any time to set the <title>
@@ -278,6 +280,7 @@ if (Meteor.isClient) { // only runs on the client
     // Put the quotation into the users collection!
     "click .dogear-button": function () {
       Meteor.call('dogearQuote', this._id);
+      console.log("yep");
     }
   });
 
@@ -363,7 +366,7 @@ if (Meteor.isServer) {
   // This is a monitoring tool
   //Kadira.connect('wYiFPMyqaBcyKp7QK', '1f136ced-05f9-4e73-a92b-ef609cda56ce');
 
-
+  
 
 
   // Get the server to publish our collections
@@ -413,7 +416,7 @@ if (Meteor.isServer) {
 
   // Pusblish quotes given IDs in an array as input
   Meteor.publish("quotesInArray", function (array) {
-    return Quotes.find({ _id: { $in: array } }, {sort: {upcount: -1}});
+    return Quotes.find({ _id: { $in: array } }); // , {sort: {createdAt: -1}} taken out as test
     self.ready();
   });
 
@@ -565,9 +568,8 @@ Meteor.methods({
     if (Meteor.userId()) { // Only process if user logged in
 
       // Looks for quoteId in Users collection
-      // var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}});
+      var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}})
 
-      // var user = Meteor.users.findOne({username:"plasticsunshine", liked:{$ne:quoteId}});
       
 
 
@@ -588,18 +590,7 @@ Meteor.methods({
         return false; // exits the function
       }
 
-
-      console.log(user.liked);
-
-      // var userLiked = user.liked;
-
-      // userLiked.forEach(function(entry) {
-        
-      //   Meteor.users.update({ username: "plasticsunshine" },
-      //     { $push: { dogeared: { quoteId: entry, dogearedAt: new Date() }}});
-
-      //   console.log(entry);
-      // });
+  
 
 
       console.log("user " + this.userId + " collected the quote " + quoteId );
@@ -904,7 +895,7 @@ Router.route('/users/:_username/dogears', {
       data: {
         quotes: function () {
           return Quotes.find({ _id: { $in: user.liked } },
-            {sort: { createdAt: -1 }, limit: Session.get('limit') });
+            { limit: Session.get('limit') }); //sort: { createdAt: -1 },
         },
         usernameToShow: function () { return usernameParam },
 

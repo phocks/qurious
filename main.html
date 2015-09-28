@@ -189,45 +189,7 @@ Thanks. Josh.
 
 
 
-<template name="SingleQuote">
-  <div class="vertical-container">
-    <div class="single-quote {{theme}}">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2">
-            <div class="quotation {{length}}">
-              <!-- &ldquo; -->{{quotation}}<!-- &rdquo; --> <!-- Everyone knows it's a quote -->
-            </div>
-            <div class="attribution">
-              <span class="dash"></span>{{attribution}}
-            </div>
-          </div>
 
-        </div>
-      </div>
-    </div>
-  </div>
-  {{#if currentUser}}
-  <div class="quote-info">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-3 text-center info-div"><span class="digit">{{views}}</span><br>views</div>
-        <div class="col-sm-3 text-center info-div"><span class="digit">{{upcount}}</span><br>dogears</div>
-        
-        {{#if dogeared}}
-          <div class="col-sm-3 text-center info-div"><span class="digit"><img class="dogear" src="/ui/qurious_dogear-active.png" title="Dogear this quote"></span><br>dogear</div>
-          <img class="dogear hidden" src="/ui/qurious_dogear-inactive.png" title="Dogear this quote">
-        {{/if}}
-        {{#unless dogeared}}
-          <div class="col-sm-3 text-center info-div"><span class="digit"><img class="dogear" src="/ui/qurious_dogear-inactive.png" title="Dogear this quote"></span><br>dogear</div>
-          <img class="dogear hidden" src="/ui/qurious_dogear-active.png" title="Dogear this quote">
-        {{/unless}}
-        <div class="col-sm-3 text-center info-div"><span class="digit"><i class="glyphicon glyphicon-remove {{#if isOwner}}delete{{/if}}"></i></span><br>delete</div>
-      </div>
-    </div>
-  </div>
-  {{/if}}
-</template>
 
 
 

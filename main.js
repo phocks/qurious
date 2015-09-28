@@ -414,7 +414,7 @@ if (Meteor.isServer) {
 
   // Pusblish quotes given IDs in an array as input
   Meteor.publish("quotesInArray", function (array) {
-    return Quotes.find({ _id: { $in: array } }, {sort: {createdAt: -1}});
+    return Quotes.find({ _id: { $in: array } }); // , {sort: {createdAt: -1}} taken out as test
     self.ready();
   });
 
@@ -893,7 +893,7 @@ Router.route('/users/:_username/dogears', {
       data: {
         quotes: function () {
           return Quotes.find({ _id: { $in: user.liked } },
-            {sort: { createdAt: -1 }, limit: Session.get('limit') });
+            { limit: Session.get('limit') }); //sort: { createdAt: -1 },
         },
         usernameToShow: function () { return usernameParam },
 

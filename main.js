@@ -108,7 +108,7 @@ if (Meteor.isClient) { // only runs on the client
   // We have a package that gets us to the top when we navigate
   // This changes the animation period, set to zero for none
   // Doesn't seem to work with mobile (or sometimes at all)
-  IronRouterAutoscroll.animationDuration = 200;
+  RouterAutoscroll.animationDuration = 200;
 
 
   // Call this at any time to set the <title>
@@ -276,8 +276,9 @@ if (Meteor.isClient) { // only runs on the client
     },
 
     // Put the quotation into the users collection!
-    "click .dogear": function () {
+    "click .dogear-button": function () {
       Meteor.call('dogearQuote', this._id);
+      console.log("yep");
     }
   });
 
@@ -363,7 +364,7 @@ if (Meteor.isServer) {
   // This is a monitoring tool
   //Kadira.connect('wYiFPMyqaBcyKp7QK', '1f136ced-05f9-4e73-a92b-ef609cda56ce');
 
-
+  
 
 
   // Get the server to publish our collections
@@ -387,7 +388,7 @@ if (Meteor.isServer) {
       limit = 0;
     }
 
-    return Quotes.find({}, { sort: {upcount: -1, views: -1}, limit: limit });
+    return Quotes.find({}, { sort: {views: -1, upcount: -1}, limit: limit });
     self.ready();
   });
 
@@ -413,7 +414,7 @@ if (Meteor.isServer) {
 
   // Pusblish quotes given IDs in an array as input
   Meteor.publish("quotesInArray", function (array) {
-    return Quotes.find({ _id: { $in: array } }, {sort: {upcount: -1}});
+    return Quotes.find({ _id: { $in: array } }, {sort: {createdAt: -1}});
     self.ready();
   });
 
@@ -562,22 +563,44 @@ Meteor.methods({
   // This is a feature to "Like" a quotation. It should put the quote in the user's
   // likes list and then update the upcount in the quote db
   dogearQuote: function (quoteId) {
-    if (Meteor.userId()) {
-      var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}});
+    if (Meteor.userId()) { // Only process if user logged in
+
+      // Looks for quoteId in Users collection
+      var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}})
+
+      
 
 
-      if (!user) {
+      if (!user) { // returns null or undefined 
+
+        // Old way, no time stamp
         Meteor.users.update({_id:this.userId},{$pull:{liked:quoteId}});
+
+        // New way with timestamp
+        Meteor.users.update({_id:this.userId},{$pull:{dogeared: { quoteId: quoteId } }},
+          { multi: true });
+
+
+
+
         Quotes.update( { _id: quoteId }, {$inc: { upcount: -1 } });
 
-        return false;
+        return false; // exits the function
       }
+
+  
 
 
       console.log("user " + this.userId + " collected the quote " + quoteId );
 
       Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
       Meteor.users.update({_id:this.userId},{$addToSet:{liked:quoteId}});
+
+      // New Dogear feature that adds date as well
+      Meteor.users.update({ _id: this.userId },
+        { $push: { dogeared: { quoteId: quoteId, dogearedAt: new Date() }}});
+
+
       return true;
     }
   },
@@ -692,7 +715,7 @@ Router.route('/popular', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({}, {sort: {upcount: -1, views: -1}, limit: Session.get('limit') });
+          return Quotes.find({}, {sort: {views: -1, upcount: -1}, limit: Session.get('limit') });
         }
       }
     });
@@ -859,7 +882,7 @@ Router.route('/users/:_username/dogears', {
     this.render('Header', {to: 'header'});
     //to pass it into the function, someone help with this
     var usernameParam = this.params._username;
-    var user = Meteor.users.findOne( { username: this.params._username });
+    var user = Meteor.users.findOne( { username: this.params._username } );
 
     console.log(user.liked);
 
@@ -870,7 +893,7 @@ Router.route('/users/:_username/dogears', {
       data: {
         quotes: function () {
           return Quotes.find({ _id: { $in: user.liked } },
-            {sort: { views: -1, upcount: -1 }, limit: Session.get('limit') });
+            {sort: { createdAt: -1 }, limit: Session.get('limit') });
         },
         usernameToShow: function () { return usernameParam },
 

@@ -7,7 +7,7 @@
   also, there is a way to selectively load fonts via javascript, see in js files
   */
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
 /*@import url(//fonts.googleapis.com/css?family=Cardo:400,700);*/
 /* commenting because this is now replaced by images
 @import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic); */
@@ -32,6 +32,8 @@
        url('/fonts/Aleo/Light/aleo-light-webfont.ttf')  format('truetype'),
        url('/fonts/Aleo/Light/aleo-light-webfont.svg#aleolight') format('svg');
 }
+
+
 
 
 a, /* this gets rid of the dotty outline in Firefox. */
@@ -132,20 +134,71 @@ text-transform: uppercase;
 }
 
 .quote-info {
-  background-color: #5ab2b5;
+  background-color: #fdfbf8;
   padding-top: 40px;
   padding-bottom: 40px;
   color: white;
 }
 
-.quote-info .digit {
-  font-size: 2.1em;
+/* QUOTE INFO BAR 23-09-2015 */
+
+.info-bar {
+  background-color: #5ab2b5;
+  max-width: 560px;
+  height: 60px;
+  margin: 0 auto;
 }
 
-.quote-info .dogear {
-  
-  cursor: pointer;
-   
+.info-bar .dogears {
+  height: 20px;
+  margin-left: 21px;
+  margin-top: 7px;
+}
+
+.info-bar .views {
+  height: 17px;
+  margin-top: 8px;
+  margin-left: 15px;
+}
+
+img.dogear-button {
+  height: 28px;
+  float: right;
+  margin-right: 20px;
+  margin-top: 16px;
+}
+
+.quote-info .dogear-button {  
+  cursor: pointer;   
+}
+
+.quote-info .digit {
+  font-size: 0.9em;
+  font-weight: 700;
+}
+
+.dogears-num {
+  position: relative;
+  left: 15px;
+  top: 4px;
+  text-align: left;
+}
+
+.views-num {
+  position: relative;
+  left: 8px;
+  top: 3px;
+  text-align: left;
+
+}
+
+
+
+
+/* INFO BAR ORIGINAL 
+
+/*.quote-info .dogear {  
+  cursor: pointer;   
 }
 
 .quote-info img.dogear {
@@ -156,10 +209,11 @@ text-transform: uppercase;
 
 .quote-info .delete {
   cursor: pointer;
+}*/
+
+
+@media (max-width: 970px) {
 }
-
-
-
 
 @media (max-width: 767px) {
 
@@ -190,7 +244,14 @@ text-transform: uppercase;
   .single-quote .attribution {
     font-size: 100%;
   }
+
+  .info-bar {
+    max-width: 280px;
+  }
 }
+
+
+
 
 
 .homepage-title {
@@ -467,7 +528,7 @@ label {
 }
 
 .vertical-container {
-  background-color: #FEFCF9;
+  
 
   min-height: calc(100vh - 54px);
   display: -webkit-flex;

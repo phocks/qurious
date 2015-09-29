@@ -9,6 +9,9 @@
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
 @import url(https://fonts.googleapis.com/css?family=Bitter:400,400italic,700);
+@import url(https://fonts.googleapis.com/css?family=Vollkorn:400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Cardo:400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic);
 /*@import url(//fonts.googleapis.com/css?family=Cardo:400,700);*/
 /* commenting because this is now replaced by images
 @import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic); */
@@ -70,10 +73,8 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
 .single-quote .quotation {
-  font-family: Bitter, 'Aleo', serif;
-  font-weight: normal;
-  letter-spacing: 1px;
-  font-size: 170%;
+  font-family: 'Vollkorn', serif;
+  letter-spacing: 0.2px;
   color: #282828;
 }
 
@@ -98,7 +99,7 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 }
 
 .single-quote .attribution {
-  font-family: 'Aleo', serif;
+  font-family: 'Vollkorn', serif;
   font-weight: normal;
   font-size: 120%;
   margin-top: 2em;
@@ -265,7 +266,7 @@ img.dogear-button {
 }
 
 .homepage-title .subtitle {
-  font-family: Aleo, sans-serif;
+  font-family: 'Vollkorn', sans-serif;
   font-size: 300%;
   top: 10px;
   color: #787878;
@@ -309,7 +310,7 @@ img.dogear-button {
 }
 
 .home-about-text {
-  font-family: 'Aleo', serif;
+  font-family: 'Vollkorn', serif;
   font-size: 200%;
   color: white;
   text-align: left;
@@ -317,7 +318,7 @@ img.dogear-button {
 }
 
 .home-about-readmore {
-  font-family: 'Aleo', serif;
+  font-family: 'Vollkorn', serif;
   font-size: 150%;
   color: #282828;
   text-align: left;
@@ -443,7 +444,8 @@ label {
   -o-text-overflow: ellipsis;
   -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
 
-  font-family: 'Aleo', serif;
+  font-family: 'Vollkorn', serif;
+  letter-spacing: 0.2px;
   font-weight: 400;
   font-size: 2.3em;
   margin-bottom: 20px;
@@ -453,12 +455,9 @@ label {
   position: relative;
 }
 
-.list-quote .quotation {
-	letter-spacing: 1px;
-}
 
 .list-quote .attribution {
-  font-family: Aleo, sans-serif;
+  font-family: 'Vollkorn', sans-serif;
   text-transform: uppercase;
   color: #f48365;
   letter-spacing: 2px;

@@ -278,7 +278,7 @@ if (Meteor.isClient) { // only runs on the client
     },
 
     // Put the quotation into the users collection!
-    "click .dogear-button": function () {
+    "click .dogear-click": function () {
       Meteor.call('dogearQuote', this._id);
       console.log("yep");
     }

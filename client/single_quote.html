@@ -21,13 +21,22 @@
     <div class="container-fluid">
       <div class="info-bar">
 
+      {{#unless currentUser}}
+      <img class="dogear-button" src="/ui/qurious_dogear_off.png" href="/login" title="Dogear this quote">
+      {{/unless}}
+
+
+      {{#if currentUser}}
+
       {{#if dogeared}}
-      <img class="dogear-button" src="/ui/qurious_dogear_on.png" title="Dogear this quote">
+      <img class="dogear-button dogear-click" src="/ui/qurious_dogear_on.png" title="Dogear this quote">
       {{/if}}
 
       {{#unless dogeared}}
-      <img class="dogear-button" src="/ui/qurious_dogear_off.png" title="Dogear this quote">
+      <img class="dogear-button dogear-click" src="/ui/qurious_dogear_off.png" title="Dogear this quote">
       {{/unless}}
+
+      {{/if}}
 
       
       <img class="info-icon dogears" src="/ui/qurious_icon_dogears.png">

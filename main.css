@@ -153,7 +153,7 @@ text-transform: uppercase;
 
 .info-bar .dogears {
   height: 20px;
-  margin-left: 21px;
+  margin-left: 22px;
   margin-top: 8px;
 }
 
@@ -176,7 +176,6 @@ img.dogear-remove {
 	margin-right: 20px;
   	margin-top: 16px;
   	cursor: pointer;
-
 }
 
 img.quote-trash {
@@ -184,7 +183,7 @@ img.quote-trash {
 	float: right;
 	margin-right: 20px;
 	margin-top: 17px;
-
+	cursor: pointer;
 }
 
 .quote-info .dogear-button {  

@@ -331,6 +331,59 @@ img.quote-trash {
 
 
 
+@media (max-width: 970px) {
+
+/*	Single quotation handheld-device styles */
+
+ .single-quote .quotation.gigantic {
+    font-size: 2em;
+    max-width: 750px;
+  }
+
+}
+
+ 
+
+
+@media (max-width: 767px) {
+
+/*	Single quotation handheld-device styles */
+
+  .single-quote .quotation {
+    font-size: 1.5em;
+  }
+
+  .single-quote .quotation.tiny {
+    font-size: 1.5em;
+  }
+
+  .single-quote .quotation.short {
+    font-size: 1.5em;
+  }
+
+  .single-quote .quotation.medium {
+    font-size: 1.5em;
+  }
+
+  .single-quote .quotation.long {
+    font-size: 1.5em;
+  }
+
+  .single-quote .quotation.gigantic {
+    font-size: 1.5em;
+    max-width: 420px;
+  }
+
+  .single-quote .attribution {
+    font-size: 1em;
+  }
+
+  .info-bar {
+    max-width: 280px;
+  }
+}
+>>>>>>> origin/master
+
 
 
 
@@ -345,12 +398,8 @@ img.quote-trash {
   width: 600px;
 }
 
-.homepage-title .subtitle {
-  font-family: 'Vollkorn', serif;}
-
 /*.homepage-title .subtitle {
   font-family: 'Vollkorn', sans-serif;
->>>>>>> origin/master
   font-size: 300%;
   top: 10px;
   color: #787878;

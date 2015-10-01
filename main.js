@@ -918,11 +918,17 @@ Router.route('/', {
     this.render('Header', {
       to: 'header',
       data: {
-        frontPage: true
+        frontPage: true // This boolean data is sent to the Header
       }
     });
 
-    this.render('Home');
+    Meteor.subscribe('quotesPopular', 1);
+
+    this.render('Home', {
+      data: function () {
+        return Quotes.findOne({});
+      }
+    });
   }
 });
 

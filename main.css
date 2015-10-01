@@ -70,7 +70,6 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 	color: #282828;
 	line-height: 1.5;
 	letter-spacing: 0.2px;
-
 }
 
 
@@ -104,19 +103,100 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 .single-quote .quotation.gigantic {
 	font-size: 2em;
 	max-width: 750px;
-
 }
 
 .single-quote .attribution {
   font-family: 'Vollkorn', serif;
-  font-weight: normal;
-  font-size: 120%;
+  font-size: 1.2em;
   margin-top: 2em;
   margin-bottom: 1em;
   color: #f48365;
   letter-spacing: 2px;
- text-transform: uppercase;
- text-align: center;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+
+@media (max-width: 970px) {
+
+/*  Single quotation tablet-device styles */
+
+.single-quote .quotation.tiny {
+  font-size: 2em;
+  max-width: 750px;
+
+}
+
+.single-quote .quotation.short {
+  font-size: 2em;
+  max-width: 750px;
+
+}
+
+.single-quote .quotation.medium {
+  font-size: 2em;
+  max-width: 750px;
+
+}
+
+.single-quote .quotation.long {
+  font-size: 2em;
+  max-width: 750px;
+
+}
+
+ .single-quote .quotation.gigantic {
+    font-size: 2em;
+    max-width: 750px;
+  }
+}
+
+@media (max-width: 767px) {
+
+/*  Single quotation handheld-device styles */
+
+  .single-quote .quotation {
+  }
+
+  .single-quote .quotation.tiny {
+    font-size: 1.5em;
+    letter-spacing: none;
+    max-width: 290px;
+    margin: 0 auto;
+  }
+
+  .single-quote .quotation.short {
+    font-size: 1.5em;
+    letter-spacing: none;
+    max-width: 290px;
+    margin: 0 auto;
+  }
+
+  .single-quote .quotation.medium {
+    font-size: 1.5em;
+    letter-spacing: none;
+    max-width: 290px;
+    margin: 0 auto;
+  }
+
+  .single-quote .quotation.long {
+    font-size: 1.5em;
+    letter-spacing: none;
+    max-width: 290px;
+    margin: 0 auto;
+  }
+
+  .single-quote .quotation.gigantic {
+    font-size: 1.5em;
+    letter-spacing: none;
+    max-width: 290px;
+    margin: 0 auto;
+  }
+
+  .single-quote .attribution {
+    font-size: 1em;
+  }
+
 }
 
 /* We are going to do some themes here for the quotations */
@@ -220,6 +300,16 @@ img.quote-trash {
 
 }
 
+@media (max-width: 767px) {
+
+/*  Info Bar handheld-device styles */
+
+.info-bar {
+    max-width: 280px;
+  }
+
+}
+
 
 
 
@@ -239,59 +329,7 @@ img.quote-trash {
   cursor: pointer;
 }*/
 
-/* Responsive Layouts */
 
-@media (max-width: 970px) {
-
-/*	Single quotation handheld-device styles */
-
- .single-quote .quotation.gigantic {
-    font-size: 2em;
-    max-width: 600px;
-  }
-
-}
-
- 
-
-
-@media (max-width: 767px) {
-
-/*	Single quotation handheld-device styles */
-
-  .single-quote .quotation {
-    font-size: 1.5em;
-  }
-
-  .single-quote .quotation.tiny {
-    font-size: 1.5em;
-  }
-
-  .single-quote .quotation.short {
-    font-size: 1.5em;
-  }
-
-  .single-quote .quotation.medium {
-    font-size: 1.5em;
-  }
-
-  .single-quote .quotation.long {
-    font-size: 1.5em;
-  }
-
-  .single-quote .quotation.gigantic {
-    font-size: 1.5em;
-    max-width: 420px;
-  }
-
-  .single-quote .attribution {
-    font-size: 1em;
-  }
-
-  .info-bar {
-    max-width: 280px;
-  }
-}
 
 
 
@@ -452,7 +490,8 @@ label {
 
 
 
-/* -------------------------------- Now Explore stuff ------------*/
+/*  Explore List Quote Styles   */
+
 .explore-lead {
   margin-top: 100px;
   padding-bottom: 40px;
@@ -499,7 +538,8 @@ label {
   font-family: 'Vollkorn', serif;
   letter-spacing: 0.2px;
   font-weight: 400;
-  font-size: 2.3em;
+  font-size: 2em;
+  line-height: 1.5;
   margin-bottom: 20px;
 
   /*line-height: 1.4em;
@@ -513,14 +553,14 @@ label {
   text-transform: uppercase;
   color: #f48365;
   letter-spacing: 2px;
-  font-size: 120%;
+  font-size: 1.2em;
   padding-top: 30px;
 }
 
 .list-quote .contrib {
   margin-bottom: 50px;
   color: #999;
-  font-size: 105%;
+  font-size: 1em;
 }
 
 .list-quote .contrib a {
@@ -535,14 +575,14 @@ label {
 
 .list-quote .read-more {
   color: #999;
-  font-size: 1.2em;
+  font-size: 1em;
   padding-top: 30px;
   letter-spacing: 0.5px;
 }
 
 .list-quote .time-stamp {
   color: #999;
-  font-size: 105%;
+  font-size: 1em;
   letter-spacing: 0.5px;
 }
 
@@ -561,14 +601,18 @@ label {
   text-decoration: none;
 }
 
-
 .load-more {
 	width: 100%;
 }
 
+/*  -------------------- Explore List Quote Styles handheld-device --------------------   */
+
+
 @media (max-width: 767px) {
+  
   .list-quote .quotation {
     font-size: 1.5em;
+    letter-spacing: none;
   }
   .list-quote .attribution {
     font-size: 1em;
@@ -578,6 +622,8 @@ label {
     font-size: 1em;
   }
 }
+
+
 
 .vertical-container {
   

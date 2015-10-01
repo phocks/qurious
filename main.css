@@ -426,11 +426,11 @@ img.quote-trash {
     width: 280px;
   }
 
-  .homepage-title .subtitle {
+  /*.homepage-title .subtitle {
     font-size: 180%;
     top:20px;
     margin-bottom: 40px;
-  }
+  }*/
 }
 
 
@@ -450,7 +450,7 @@ img.quote-trash {
 
 .home-about-text {
   font-family: 'Vollkorn', serif;
-  font-size: 200%;
+  font-size: 2em;
   color: white;
   text-align: left;
   letter-spacing: 1px;
@@ -458,7 +458,7 @@ img.quote-trash {
 
 .home-about-readmore {
   font-family: 'Vollkorn', serif;
-  font-size: 150%;
+  font-size: 1.5em;
   color: #282828;
   text-align: left;
   letter-spacing: 1px;
@@ -492,6 +492,14 @@ img.about-logo {
 @media (max-width: 767px) {
   img.about-logo {
     width: 150px;
+  }
+
+  .home-about-text {
+    font-size: 1.5em;
+  }
+
+  .home-about-readmore {
+    font-size: 1.3em
   }
 }
 

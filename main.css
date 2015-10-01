@@ -154,13 +154,13 @@ text-transform: uppercase;
 .info-bar .dogears {
   height: 20px;
   margin-left: 21px;
-  margin-top: 7px;
+  margin-top: 8px;
 }
 
 .info-bar .views {
-  height: 17px;
+  height: 15px;
   margin-top: 8px;
-  margin-left: 15px;
+  margin-left: 17px;
 }
 
 img.dogear-button {
@@ -168,6 +168,23 @@ img.dogear-button {
   float: right;
   margin-right: 20px;
   margin-top: 16px;
+}
+
+img.dogear-remove {
+	height: 28px;
+	float: right;
+	margin-right: 20px;
+  	margin-top: 16px;
+  	cursor: pointer;
+
+}
+
+img.quote-trash {
+	height: 26px;
+	float: right;
+	margin-right: 20px;
+	margin-top: 17px;
+
 }
 
 .quote-info .dogear-button {  
@@ -181,15 +198,15 @@ img.dogear-button {
 
 .dogears-num {
   position: relative;
-  left: 15px;
-  top: 4px;
+  left: 12px;
+  top: 5px;
   text-align: left;
 }
 
 .views-num {
   position: relative;
   left: 8px;
-  top: 3px;
+  top: 4px;
   text-align: left;
 
 }

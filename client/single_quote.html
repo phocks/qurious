@@ -21,20 +21,25 @@
     <div class="container-fluid">
       <div class="info-bar">
 
-      {{#unless currentUser}}
+      {{#unless currentUser}} <!-- not logged in / dogear quote -->
       <a href="/login"><img class="dogear-button" src="/ui/qurious_dogear_off.png" title="Dogear this quote"></a>
       {{/unless}}
 
 
       {{#if currentUser}}
 
-      {{#if dogeared}}
-      <img class="dogear-button dogear-click" src="/ui/qurious_dogear_on.png" title="Dogear this quote">
+      {{#if dogeared}} <!-- logged in / dogeared quote -->
+      <img class="dogear-remove" src="/ui/qurious_dogear_remove.png" title="Remove this quote from your dogeared list">
+      <img class="dogear-button" src="/ui/qurious_dogear_on.png" title="You've already dogeared this quote">
       {{/if}}
 
-      {{#unless dogeared}}
+      {{#unless dogeared}} <!-- logged in / quote not dogeared -->
       <img class="dogear-button dogear-click" src="/ui/qurious_dogear_off.png" title="Dogear this quote">
       {{/unless}}
+
+      {{#if isOwner}}<!-- contributor - logged in / trash this quote -->
+      <img class="quote-trash delete-click" src="/ui/qurious_quote_trash.png" title="Delete this quote">
+      {{/if}}
 
 
       {{/if}}

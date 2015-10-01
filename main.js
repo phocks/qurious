@@ -281,7 +281,9 @@ if (Meteor.isClient) { // only runs on the client
     "click .dogear-click": function () {
       Meteor.call('dogearQuote', this._id);
       console.log("yep");
-    }
+    },
+
+    // Remove the quotation into the users collection!
   });
 
 

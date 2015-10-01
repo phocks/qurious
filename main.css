@@ -67,7 +67,7 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 }
 
 .single-quote {
-  text-align: center;
+  text-align: left;
   min-width: 320px;
 }
 
@@ -95,7 +95,8 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 }
 
 .single-quote .quotation.gigantic {
-  font-size: 150%;
+  font-size: 2.3em;
+  line-height: 1.4;
 }
 
 .single-quote .attribution {
@@ -106,7 +107,8 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
   margin-bottom: 1em;
   color: #f48365;
   letter-spacing: 2px;
-text-transform: uppercase;
+ text-transform: uppercase;
+ text-align: center;
 }
 
 /* We are going to do some themes here for the quotations */
@@ -282,7 +284,7 @@ img.quote-trash {
 }
 
 .homepage-title .subtitle {
-  font-family: 'Vollkorn', sans-serif;
+  font-family: 'Vollkorn', serif;
   font-size: 300%;
   top: 10px;
   color: #787878;
@@ -473,7 +475,7 @@ label {
 
 
 .list-quote .attribution {
-  font-family: 'Vollkorn', sans-serif;
+  font-family: 'Vollkorn', serif;
   text-transform: uppercase;
   color: #f48365;
   letter-spacing: 2px;

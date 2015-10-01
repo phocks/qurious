@@ -271,7 +271,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // Let's finally set up a delete
   Template.SingleQuote.events({
-    "click .delete": function () {
+    "click .delete-click": function () {
       if (confirm('Really delete ?')) {
         Meteor.call('deleteQuote', this._id);
       }
@@ -287,7 +287,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // this isn't even used any more but yeah
   Template.Quotes.events({
-    "click .delete": function () {
+    "click .delete-click": function () {
       Meteor.call('deleteQuote', this._id);
     },
 

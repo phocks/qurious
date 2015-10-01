@@ -152,7 +152,7 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
   color: white;
 }
 
-/* QUOTE INFO BAR 23-09-2015 */
+/* Quotation Info Bar */
 
 .info-bar {
   background-color: #5ab2b5;
@@ -239,38 +239,53 @@ img.quote-trash {
   cursor: pointer;
 }*/
 
+/* Responsive Layouts */
 
 @media (max-width: 970px) {
+
+/*	Single quotation handheld-device styles */
+
+ .single-quote .quotation.gigantic {
+    font-size: 2em;
+    max-width: 750px;
+  }
+
 }
+
+ 
+
 
 @media (max-width: 767px) {
 
+/*	Single quotation handheld-device styles */
+
   .single-quote .quotation {
-    font-size: 120%;
+    font-size: 1.5em;
   }
 
   .single-quote .quotation.tiny {
-    font-size: 190%;
+    font-size: 1.5em;
   }
 
   .single-quote .quotation.short {
-    font-size: 160%;
+    font-size: 1.5em;
   }
 
   .single-quote .quotation.medium {
-    font-size: 140%;
+    font-size: 1.5em;
   }
 
   .single-quote .quotation.long {
-    font-size: 120%;
+    font-size: 1.5em;
   }
 
   .single-quote .quotation.gigantic {
-    font-size: 100%;
+    font-size: 1.5em;
+    max-width: 420px;
   }
 
   .single-quote .attribution {
-    font-size: 100%;
+    font-size: 1em;
   }
 
   .info-bar {

@@ -247,7 +247,7 @@ img.quote-trash {
 
  .single-quote .quotation.gigantic {
     font-size: 2em;
-    max-width: 750px;
+    max-width: 600px;
   }
 
 }
@@ -307,10 +307,9 @@ img.quote-trash {
   width: 600px;
 }
 
-<<<<<<< HEAD
 .homepage-title .subtitle {
-  font-family: 'Vollkorn', serif;
-=======
+  font-family: 'Vollkorn', serif;}
+
 /*.homepage-title .subtitle {
   font-family: 'Vollkorn', sans-serif;
 >>>>>>> origin/master

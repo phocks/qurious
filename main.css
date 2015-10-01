@@ -60,43 +60,51 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
   min-height: 400px
 }
 
-.quote {
-  font-size: 1.7em;
-  list-style-type: none;
-  padding: 1em 0 1em;
-}
+
+/*	Single quotation master styles 	*/
 
 .single-quote {
-  text-align: left;
-  min-width: 320px;
+	font-family: 'Vollkorn', serif; 
+	text-align: left; 
+	min-width: 320px;
+	color: #282828;
+	line-height: 1.5;
+	letter-spacing: 0.2px;
+
 }
 
 
 .single-quote .quotation {
-  font-family: 'Vollkorn', serif;
-  letter-spacing: 0.2px;
-  color: #282828;
 }
 
 .single-quote .quotation.tiny {
-  font-size: 390%;
+	font-size: 2em;
+	max-width: 750px;
+
 }
 
 .single-quote .quotation.short {
-  font-size: 330%;
+	font-size: 2em;
+	max-width: 750px;
+
 }
 
 .single-quote .quotation.medium {
-  font-size: 220%;
+	font-size: 2em;
+	max-width: 750px;
+
 }
 
 .single-quote .quotation.long {
-  font-size: 190%;
+	font-size: 2em;
+	max-width: 750px;
+
 }
 
 .single-quote .quotation.gigantic {
-  font-size: 2.3em;
-  line-height: 1.4;
+	font-size: 2em;
+	max-width: 750px;
+
 }
 
 .single-quote .attribution {

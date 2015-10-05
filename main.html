@@ -149,15 +149,6 @@ Thanks. Josh.
 
 
 
-
-
-
-
-
-
-
-
-
 <template name="Footer">
   <div class="footer">
     <div class="container">
@@ -200,46 +191,12 @@ Thanks. Josh.
 
 
 
-
-
-
-
-
-<template name="TextPageNavigation">
-  <div class="navigation-column col-md-3 hidden">
-    <ul class="nav nav-pills nav-stacked text-page-navigation">
-      <li><a href="/about">About</a></li>
-      <li><a href="/privacy">Privacy Policy</a></li>
-      <li><a href="/terms">Terms &amp; Conditions</a></li>
-      <li><a href="/contact">Contact Us</a></li>
-    </ul>
-  </div>
-</template>
-
-
-
-
 <!-- the AboutText etc templates are now in their own files under /client/about.html etc -->
 
 
 
 
 
-<template name="Loading">
-  <div class="body-container">
-  <div class="single-quote">
-    <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-      <div class="loading">
-        <img width="50px" src="/q-loader.gif">
-      </div>
-      </div>
-    </div>
-    </div>
-  </div>
-  </div>
-</template>
 
 
 <template name="Login">
@@ -284,6 +241,8 @@ Thanks. Josh.
 </template>
 
 
+
+<!-- This is rendered on the Explore quotes pages for each quote -->
 <template name="Quote">
   <div class="list-quote">
     <div class="row">
@@ -376,7 +335,7 @@ Thanks. Josh.
 
 
 
-
+<!-- This renders when a quote is not found in the database -->
 <template name="NotFound">
   <div class="vertical-container">
   <div class="single-quote"> <!-- quote emulation -->
@@ -431,6 +390,65 @@ Thanks. Josh.
 
 
 
+
+<!-- This template is just to test the loading animation -->
+<template name="Loading">
+  <div class="body-container">
+  <div class="single-quote">
+    <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+      <div class="loading">
+        <img width="50px" src="/q-loader.gif">
+      </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+</template>
+
+
+
+
+<!-- 
+Below here is old code that probably 
+isn't needed anymore.
+-->
+
+
+
+
+<!-- <template name="TextPageNavigation">
+  <div class="navigation-column col-md-3 hidden">
+    <ul class="nav nav-pills nav-stacked text-page-navigation">
+      <li><a href="/about">About</a></li>
+      <li><a href="/privacy">Privacy Policy</a></li>
+      <li><a href="/terms">Terms &amp; Conditions</a></li>
+      <li><a href="/contact">Contact Us</a></li>
+    </ul>
+  </div>
+</template> -->
+
+
+
+<!-- <template name="SearchTerms">
+  <div class="content-container">
+    <div class="homepage-title">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 front-content-row">
+            Searching, you are.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template> -->
+
+
+
+<!--
 <template name="Search">
   <div class="content-container">
     <div class="homepage-title">
@@ -454,20 +472,4 @@ Thanks. Josh.
     </div>
   </div>
 </template>
-
-
-
-
-<template name="SearchTerms">
-  <div class="content-container">
-    <div class="homepage-title">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3 front-content-row">
-            Searching, you are.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
+-->

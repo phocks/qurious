@@ -47,7 +47,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // Font experiment to see if we can load fonts on demand
   // and YES it looks like we can.
-  if (false) {  // for now let's just disable this
+  if (false) {  // for now let's just disable this, but bring it back later
     WebFontConfig = {
       google: { families: [ 'Vollkorn::latin' ] }
     };
@@ -200,16 +200,16 @@ if (Meteor.isClient) { // only runs on the client
   }
 
   // This is an auto load feature when we have reached the bottom
-  /* disabling for now
+  
   Template.Quotes.rendered = function() {
     // is triggered every time we scroll
     $(window).scroll(function() {
-      if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+      if ($(window).scrollTop() + $(window).height() > $(document).height() - 50) {
         incrementLimit();
       }
     });
   }
-  */
+  
 
   // Enable the "Load more" button
   Template.Quotes.events({
@@ -231,7 +231,7 @@ if (Meteor.isClient) { // only runs on the client
       var currentQuote = Quotes.findOne({ _id: quoteId });
 
       if (currentQuote.owner == Meteor.userId()) {
-        console.log("match!")
+        console.log("The current user has submitted this quote.")
         return true;
       }
       else return false;
@@ -287,7 +287,7 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
-  // this isn't even used any more but yeah
+  // this isn't even used any more but yeah it's for a delete button on Explore
   Template.Quotes.events({
     "click .delete-click": function () {
       Meteor.call('deleteQuote', this._id);
@@ -372,6 +372,8 @@ if (Meteor.isServer) {
 
 
   // Get the server to publish our collections
+  // Basically we only want to publish the quotes from our server which we are
+  // actually interested in using on the client side.
   Meteor.publish("quotesAll", function () {
     return Quotes.find({}, { sort: {createdAt: -1} });
     self.ready();
@@ -453,7 +455,7 @@ if (Meteor.isServer) {
 
 
 // Meteor methods can be called by the client to do server things
-// They can also be called by the server, I think... maybe
+// They can also be called by the server, I think... maybe, yes they can
 Meteor.methods({
 
   addQuote: function (text, attribution) {
@@ -572,7 +574,6 @@ Meteor.methods({
       // Looks for quoteId in Users collection
       var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}})
 
-      
 
 
       if (!user) { // returns null or undefined 
@@ -593,7 +594,6 @@ Meteor.methods({
       }
 
   
-
 
       console.log("user " + this.userId + " collected the quote " + quoteId );
 
@@ -943,27 +943,9 @@ Router.route('/loading', function() {
 
 
 
-// Easy search feature test
-Router.route('/search', function() {
-  Session.set("DocumentTitle","Search - Qurious");
-  this.render('Header', {to: 'header'});
-  this.render('Search');
-});
-
-
-
-// Experimental search function
-Router.route('/search/:_searchTerm', function() {
-  Session.set("DocumentTitle","Searching - Qurious");
-  
-  this.render('SearchTerms');
-});
-
-
-
-
-
 // This is our catch all for all other unknown things
+// Probably won't be called all that much
+// Especially after we implement qurious.cc/phocks user pages
 Router.route('/(.*)', function() {
   Session.set("DocumentTitle","404 - Qurious");
   this.render('Header', {to: 'header'});

@@ -864,6 +864,10 @@ p.contact a:hover {
   color: #444;
 }
 
+.post-footer h5 {
+  text-align: right;
+}
+
 @media (max-width: 767px) {
   .post-footer {
     margin-right: 20px;

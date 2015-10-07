@@ -200,7 +200,7 @@ if (Meteor.isClient) { // only runs on the client
   }
 
   // This is an auto load feature when we have reached the bottom
-  
+  /*
   Template.Quotes.rendered = function() {
     // is triggered every time we scroll
     $(window).scroll(function() {
@@ -209,7 +209,7 @@ if (Meteor.isClient) { // only runs on the client
       }
     });
   }
-  
+  */
 
   // Enable the "Load more" button
   Template.Quotes.events({

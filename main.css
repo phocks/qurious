@@ -8,7 +8,36 @@
   */
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Bitter:400,400italic,700);
 @import url(https://fonts.googleapis.com/css?family=Vollkorn:400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Cardo:400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic);
+/*@import url(//fonts.googleapis.com/css?family=Cardo:400,700);*/
+/* commenting because this is now replaced by images
+@import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic); */
+
+@font-face {
+  font-family: 'Aleo';
+  src: url('/fonts/Aleo/Regular/aleo-regular-webfont.eot'); /* IE9 Compat Modes */
+  src: url('/fonts/Aleo/Regular/aleo-regular-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/fonts/Aleo/Regular/aleo-regular-webfont.woff2') format('woff2'),
+       url('/fonts/Aleo/Regular/aleo-regular-webfont.woff') format('woff'),
+       url('/fonts/Aleo/Regular/aleo-regular-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/fonts/Aleo/Regular/aleo-regular-webfont.svg#aleoregular') format('svg'); /* Legacy iOS */
+}
+
+
+@font-face {
+  font-family: 'Aleo Light';
+  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot');
+  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/fonts/Aleo/Light/aleo-light-webfont.woff2') format('woff2'),
+       url('/fonts/Aleo/Light/aleo-light-webfont.woff') format('woff'),
+       url('/fonts/Aleo/Light/aleo-light-webfont.ttf')  format('truetype'),
+       url('/fonts/Aleo/Light/aleo-light-webfont.svg#aleolight') format('svg');
+}
+
+
 
 
 a, /* this gets rid of the dotty outline in Firefox. */
@@ -359,6 +388,8 @@ img.quote-trash {
 
 
 
+/*
+
 .homepage-title {
   padding-top: 100px;
   padding-bottom: 100px;
@@ -369,6 +400,8 @@ img.quote-trash {
   width: 600px;
 }
 
+*/
+
 /*.homepage-title .subtitle {
   font-family: 'Vollkorn', sans-serif;
   font-size: 300%;
@@ -378,10 +411,14 @@ img.quote-trash {
   margin-bottom: 40px;
 }*/
 
-/* comes after the title image */
-/*.front-content-row { 
-  padding-bottom: 20px;
-}*/
+
+
+/* holds the logo etc */
+.front-content-row { 
+  padding-top: 150px;
+  padding-bottom: 150px;
+  text-align: center;
+}
 
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
@@ -1005,6 +1042,16 @@ p.contact a:hover {
 
 
 /* ---------------- Extra styles - keep em coming ------- */
+
+/*
+.at-signup-link {
+  display: none;
+}
+
+.signup-container .at-signin-link {
+  display: none;
+}
+*/
 
 .loading {
   margin-top: 100px;

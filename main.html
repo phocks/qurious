@@ -102,47 +102,56 @@ Thanks. Josh.
 
 <!-- The front landing page / or root page the first thing many people will see -->
 <template name="Home">
-  <div class="body-container">
-    <div class="homepage-title">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="front-content-row">
+  <div class="body-container">    
+    <div class="container-fluid">
+      
 
 
-          
-            <img class="about-logo" src="/about_logo.png">
-  
+      <div class="row">
+        <div class="front-content-row">        
+          <img class="about-logo" src="/about_logo.png">
 
 
 
-          <!-- <h1 class="hidden">Qurious</h1><h1><img src="/qurious_logo.png"></h1> -->
-          <!-- <p class="subtitle">Curiously quotable</p>
-          <br><br>
-          {{#unless currentUser}}
-            <a href="/login" class="btn btn-info raised" role="button">LOGIN or SIGN UP</a>
-          {{/unless}}
-          {{#if currentUser}}
-            <a href="/create" class="btn btn-info raised" role="button">Add a quote</a>
-            <a href="/random" class="btn btn-info raised" role="button">Randomise!</a>
-          {{/if}} -->
-          </div>
+        <!-- <h1 class="hidden">Qurious</h1><h1><img src="/qurious_logo.png"></h1> -->
+        <!-- <p class="subtitle">Curiously quotable</p>
+        <br><br>
+        {{#unless currentUser}}
+          <a href="/login" class="btn btn-info raised" role="button">LOGIN or SIGN UP</a>
+        {{/unless}}
+        {{#if currentUser}}
+          <a href="/create" class="btn btn-info raised" role="button">Add a quote</a>
+          <a href="/random" class="btn btn-info raised" role="button">Randomise!</a>
+        {{/if}} -->
         </div>
       </div>
-    </div>
-  </div>  
-  <div class="row home-about-row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="home-about">
-    
-        <p class="home-about-text">Welcome to Qurious—a new way to explore and discover the best quotations from writers, thinkers, politicians, and artists throughout history.</p>
-        
-        <p class="home-about-readmore"><a href="/about" class="home-readmore-link">Qurious? Read more <i class="icon ion-arrow-right-c"></i></a> </p>
 
-    </div>
-      
-    </div>
-  </div>
+      <div class="row home-about-row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="home-about">
+        
+            <p class="home-about-text">Welcome to Qurious—a new way to explore and discover the best quotations from writers, thinkers, politicians, and artists throughout history.</p>
+            
+            <p class="home-about-readmore"><a href="/about" class="home-readmore-link">Qurious? Read more <i class="icon ion-arrow-right-c"></i></a> </p>
+
+        </div>
+          
+        </div>
+      </div>
+
+    </div> <!-- end container -->
+  </div>  
+  
 </template>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -191,12 +200,46 @@ Thanks. Josh.
 
 
 
+
+
+
+
+
+<template name="TextPageNavigation">
+  <div class="navigation-column col-md-3 hidden">
+    <ul class="nav nav-pills nav-stacked text-page-navigation">
+      <li><a href="/about">About</a></li>
+      <li><a href="/privacy">Privacy Policy</a></li>
+      <li><a href="/terms">Terms &amp; Conditions</a></li>
+      <li><a href="/contact">Contact Us</a></li>
+    </ul>
+  </div>
+</template>
+
+
+
+
 <!-- the AboutText etc templates are now in their own files under /client/about.html etc -->
 
 
 
 
 
+<template name="Loading">
+  <div class="body-container">
+  <div class="single-quote">
+    <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+      <div class="loading">
+        <img width="50px" src="/q-loader.gif">
+      </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+</template>
 
 
 <template name="Login">
@@ -241,8 +284,6 @@ Thanks. Josh.
 </template>
 
 
-
-<!-- This is rendered on the Explore quotes pages for each quote -->
 <template name="Quote">
   <div class="list-quote">
     <div class="row">
@@ -335,7 +376,7 @@ Thanks. Josh.
 
 
 
-<!-- This renders when a quote is not found in the database -->
+
 <template name="NotFound">
   <div class="vertical-container">
   <div class="single-quote"> <!-- quote emulation -->
@@ -390,65 +431,6 @@ Thanks. Josh.
 
 
 
-
-<!-- This template is just to test the loading animation -->
-<template name="Loading">
-  <div class="body-container">
-  <div class="single-quote">
-    <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-      <div class="loading">
-        <img width="50px" src="/q-loader.gif">
-      </div>
-      </div>
-    </div>
-    </div>
-  </div>
-  </div>
-</template>
-
-
-
-
-<!-- 
-Below here is old code that probably 
-isn't needed anymore.
--->
-
-
-
-
-<!-- <template name="TextPageNavigation">
-  <div class="navigation-column col-md-3 hidden">
-    <ul class="nav nav-pills nav-stacked text-page-navigation">
-      <li><a href="/about">About</a></li>
-      <li><a href="/privacy">Privacy Policy</a></li>
-      <li><a href="/terms">Terms &amp; Conditions</a></li>
-      <li><a href="/contact">Contact Us</a></li>
-    </ul>
-  </div>
-</template> -->
-
-
-
-<!-- <template name="SearchTerms">
-  <div class="content-container">
-    <div class="homepage-title">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3 front-content-row">
-            Searching, you are.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template> -->
-
-
-
-<!--
 <template name="Search">
   <div class="content-container">
     <div class="homepage-title">
@@ -472,4 +454,20 @@ isn't needed anymore.
     </div>
   </div>
 </template>
--->
+
+
+
+
+<template name="SearchTerms">
+  <div class="content-container">
+    <div class="homepage-title">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 front-content-row">
+            Searching, you are.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

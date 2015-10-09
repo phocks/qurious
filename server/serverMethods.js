@@ -16,6 +16,8 @@ Meteor.methods({
 
   // Like random, now with less randomness!
   getLuckyQuoteId: function() {
+    var returnQuotesAbove = 2;
+
     var count = Quotes.find().count();
     var lucky_index = Math.floor(Math.random() * (count));
     var lucky = Quotes.findOne({}, {skip:lucky_index});
@@ -26,7 +28,7 @@ Meteor.methods({
       var lucky_index = Math.floor(Math.random() * (count));
       var lucky = Quotes.findOne({}, {skip:lucky_index});
 
-      if (lucky.upcount > 4) break;
+      if (lucky.upcount > returnQuotesAbove) break;
     }
 
     return lucky._id;

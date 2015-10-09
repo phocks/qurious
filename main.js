@@ -830,7 +830,8 @@ Router.route('/random', {
   onBeforeAction: function () {
     Meteor.call('getRandomQuoteId', function (error, result) {
       var randomId = result;
-      Router.go('/quotes/' + randomId,{}, {replaceState:true});
+      // replaceState keeps the browser from duplicating history
+      Router.go('/quotes/' + randomId, {}, {replaceState:true});
     });
 
     this.next()
@@ -846,7 +847,8 @@ Router.route('/lucky', {
   onBeforeAction: function () {
     Meteor.call('getLuckyQuoteId', function (error, result) {
       var luckyId = result;
-      Router.go('/quotes/' + luckyId);
+      // replaceState keeps the browser from duplicating history
+      Router.go('/quotes/' + luckyId, {}, {replaceState:true});
     });
 
     this.next()

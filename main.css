@@ -418,8 +418,8 @@ img.quote-trash {
 
 .home-about-row {
   background-color: #5BB2B5;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 80px;
+  padding-bottom: 70px;
 }
 
 .home-about {
@@ -458,18 +458,23 @@ position: relative;
   top: 2px;
 }
 
+.about-logo {
+  text-align: center;
+}
 
-img.about-logo {
+
+.about-logo img {
   width: 200px;
+  overflow: hidden;
   /*margin-right: 40px;*/
   /*float: left;*/
-  /*padding-bottom: 120px;*/
+  padding-bottom: 40px;
 }
 
 
 
 @media (max-width: 767px) {
-  img.about-logo {
+.about-logo img {
     width: 150px;
   }
 
@@ -788,7 +793,7 @@ p.contact a:hover {
 .footer {
   color: #999;
   background-color: #282828;
-  padding-top:40px;
+  padding-top:50px;
   padding-bottom: 50px;
   letter-spacing: 0.5px;
   line-height: 24px;

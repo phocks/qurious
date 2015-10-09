@@ -928,7 +928,7 @@ Router.route('/users/:_username/dogears', {
 
 
 
-// NOT WORKING YET KEEP GOING
+// What we want to do here is search for a tag
 Router.route('/tagged/:_tag', {
   loadingTemplate: 'Loading',
 
@@ -942,15 +942,14 @@ Router.route('/tagged/:_tag', {
 
 
     var tag_to_lookup = this.params._tag; // someone explain why we need to do this please
-    var regex_tag_to_lookup = "/" + tag_to_lookup + "/" // THIS DOESN"T WORK YET
 
     this.render('Header', {to: 'header'});
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ "quotation": regex_tag_to_lookup }, {sort: {createdAt: -1}, limit: Session.get('limit') });
+          return Quotes.find({ "quotation": { '$regex': tag_to_lookup} }, {sort: {views: -1}, limit: Session.get('limit') });
         },
-        usernameToShow: function () { return tag_to_lookup },
+        exploreToShow: function () { return tag_to_lookup },
       }
     });
   }

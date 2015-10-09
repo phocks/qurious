@@ -830,7 +830,7 @@ Router.route('/random', {
   onBeforeAction: function () {
     Meteor.call('getRandomQuoteId', function (error, result) {
       var randomId = result;
-      Router.go('/quotes/' + randomId);
+      Router.go('/quotes/' + randomId,{}, {replaceState:true});
     });
 
     this.next()

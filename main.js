@@ -376,7 +376,6 @@ if (Meteor.isServer) {
   // actually interested in using on the client side.
   Meteor.publish("quotesAll", function () {
     return Quotes.find({}, { sort: {createdAt: -1} });
-    self.ready();
   });
 
 
@@ -385,7 +384,6 @@ if (Meteor.isServer) {
       limit = 0;
     }
     return Quotes.find({}, { sort: {createdAt: -1}, limit: limit });
-    self.ready();
   });
 
 
@@ -395,33 +393,28 @@ if (Meteor.isServer) {
     }
 
     return Quotes.find({}, { sort: {views: -1, upcount: -1}, limit: limit });
-    self.ready();
   });
 
 
   Meteor.publish("quotesCurrentUser", function () {
     return Quotes.find({ owner: this.userId });
-    self.ready();
   });
 
 
   Meteor.publish("quotesSlugUser", function (user_slug) {
     check(user_slug, String);
     return Quotes.find({ username: user_slug }, { sort: {createdAt: -1}});
-    self.ready();
   });
 
 
   Meteor.publish("quotesSlug", function (slug) {
     check(slug, String);
     return Quotes.find({ _id: slug });
-    self.ready();
   });
 
   // Pusblish quotes given IDs in an array as input
   Meteor.publish("quotesInArray", function (array) {
     return Quotes.find({ _id: { $in: array } }); // , {sort: {createdAt: -1}} taken out as test
-    self.ready();
   });
 
 
@@ -435,7 +428,7 @@ if (Meteor.isServer) {
     return Meteor.users.find({},
       { fields: {'admin':1, 'liked': 1, 'username': 1 }
     });
-    this.ready();
+    
 
     /*if (this.userId) {
       return Meteor.users.find({_id: this.userId},
@@ -935,6 +928,33 @@ Router.route('/users/:_username/dogears', {
 
 
 
+// NOT WORKING YET KEEP GOING
+Router.route('/tagged/:_tag', {
+  loadingTemplate: 'Loading',
+
+  waitOn: function () {
+
+
+  },
+
+  action: function () {
+    Session.set("DocumentTitle","Quotes tagged: " + this.params._username + " - Qurious");
+
+
+    var tag_to_lookup = this.params._tag; // someone explain why we need to do this please
+    var regex_tag_to_lookup = "/" + tag_to_lookup + "/" // THIS DOESN"T WORK YET
+
+    this.render('Header', {to: 'header'});
+    this.render('Quotes', {
+      data: {
+        quotes: function () {
+          return Quotes.find({ "quotation": regex_tag_to_lookup }, {sort: {createdAt: -1}, limit: Session.get('limit') });
+        },
+        usernameToShow: function () { return tag_to_lookup },
+      }
+    });
+  }
+});
 
 
 

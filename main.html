@@ -61,12 +61,26 @@ Thanks. Josh.
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 
-                <li class="{{isActivePath '/popular'}}"><a href="/popular">Popular</a></li>
+                <li class="{{isActivePath '/explore'}}"><a href="/explore">Explore</a></li>
+                <li class="{{isActivePath '/random'}}"><a href="/random">Random</a></li>
+                <!-- Let's remove this Latest and put it in under Explore
                 <li class="{{isActivePath '/latest'}}"><a href="/latest">Latest</a></li>
+                -->
+
 
               {{#unless currentUser}}
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
               {{/unless}}
+
+              {{#if currentUser}}
+              <li class="{{isActivePath '/create'}}">
+                <a href="/create" title="Create a quote">
+                  Contribute
+                </a>
+              </li>
+              {{/if}}
+              
+              
               {{#if currentUser}}
                 <li class="dropdown {{isActivePath regex='\/users\/'}}">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUsername}} <span class="caret"></span></a>
@@ -80,13 +94,7 @@ Thanks. Josh.
                   </ul>
                 </li>
               {{/if}}
-              {{#if currentUser}}
-              <li class="{{isActivePath '/create'}}">
-                <a href="/create" title="Create a quote">
-                  <i class="glyphicon glyphicon-plus"></i>
-                </a>
-              </li>
-              {{/if}}
+              
 
             </ul>
           </div><!--/.nav-collapse -->

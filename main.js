@@ -728,6 +728,31 @@ Router.route('/popular', {
 
 
 
+
+// Quotes sorted by popularity, dogears etc.
+Router.route('/explore', {
+  loadingTemplate: 'Loading',
+
+  waitOn: function () {
+
+  },
+
+  action: function () {
+    Session.set("DocumentTitle", "Popular Quotes - Qurious");
+    this.render('Header', {to: 'header'});
+    this.render('Quotes', {
+      data: {
+        quotes: function () {
+          return Quotes.find({}, {sort: {views: -1, upcount: -1}, limit: Session.get('limit') });
+        }
+      }
+    });
+  }
+});
+
+
+
+
 Router.route('/latest', {
   loadingTemplate: 'Loading',
 
@@ -922,6 +947,7 @@ Router.route('/', {
       }
     });
 
+    // Here we send a quote to the front page if required
     Meteor.subscribe('quotesPopular', 1);
 
     this.render('Home', {

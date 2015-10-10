@@ -960,7 +960,7 @@ Router.route('/tagged/:_tag', {
 // The front landing page
 Router.route('/', {
   action: function () {
-    Session.set("DocumentTitle","Qurious - quotes etc.");
+    Session.set("DocumentTitle","Qurious");
     this.render('Header', {
       to: 'header',
       data: {

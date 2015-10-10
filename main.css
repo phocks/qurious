@@ -493,6 +493,10 @@ position: relative;
 
 /* -------------------------------- Create Page ------------*/
 
+.create-block {
+  margin-bottom: 30px;
+}
+
 label {
   font-weight: normal;
   font-size: 120%;
@@ -789,8 +793,6 @@ p.contact a:hover {
 
 
 
-
-
 .footer {
   color: #999;
   background-color: #282828;
@@ -855,6 +857,10 @@ p.contact a:hover {
 /* Totally new awesome uncomplicated button styles Bootstrap compatible */
 .btn {
   border-radius: 1px;
+}
+
+.btn.create {
+  width: 100%;
 }
 
 
@@ -1008,6 +1014,8 @@ p.contact a:hover {
 
 
 
+
+
 .navbar-brand img {
   height: 34px; 
   position: relative;
@@ -1020,20 +1028,8 @@ p.contact a:hover {
 }
 
 
-
-/* ---------------- Extra styles - keep em coming ------- */
-
-/*
-.at-signup-link {
-  display: none;
-}
-
-.signup-container .at-signin-link {
-  display: none;
-}
-*/
-
 .loading {
   margin-top: 100px;
   margin-bottom: 100px;
+  text-align: center;
 }

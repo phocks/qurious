@@ -501,12 +501,13 @@ label {
 }
 
 .form-control {
-  font-size: 105%;
-  color: #282828;
+  border-radius: 1px;
+  height: inherit;
+  /*color: #282828;
   letter-spacing: 0.75px;
-  margin-bottom: 30px;
-  border-radius: 0px;
-  border-color: #999;
+  margin-bottom: 30px;*/
+  
+  
 }
 
 .form-control:focus {
@@ -851,6 +852,11 @@ p.contact a:hover {
 }
 
 
+/* Totally new awesome uncomplicated button styles Bootstrap compatible */
+.btn {
+  border-radius: 1px;
+}
+
 
 /* This is a custom button pack that we may not use */
 /*.btn {
@@ -859,7 +865,7 @@ p.contact a:hover {
   letter-spacing: 1px;
 }*/
 
-.btn:focus, .btn:active:focus, .btn.active:focus {
+/*.btn:focus, .btn:active:focus, .btn.active:focus {
   outline: 0 none;
 }
 
@@ -876,7 +882,7 @@ p.contact a:hover {
 .btn-primary:active, .btn-primary.active {
   background: #007299;
   box-shadow: none;
-}
+}*/
 
 
 
@@ -886,25 +892,23 @@ p.contact a:hover {
 
 /*button style edited 19/08/2015*/
 
+/* Resetting button styles */
+/*
 .btn {
-	border-radius: 0px; 
+	border-radius: 2px; 
 	border: none;
 	padding:12px 12px;
 	background: #5ab2b5;
-	/*letter-spacing: 2px;*/
-	/*font-size: 105%;*/
   font-weight: bold;
 }
 
 .btn-primary.create {
 	width: 100%;
 	margin-bottom: 80px;	
-/*  box-shadow: 0 3px 0 0 #007299;
-*/}
+}
 
 .btn-primary.raised {	
-/*  box-shadow: 0 3px 0 0 #007299;
-*/}
+}
 
 .btn-primary.raised.center-block.give-me-more {
 	width: 100%;
@@ -929,8 +933,7 @@ p.contact a:hover {
   top: 3px;
 }
 .btn-info.raised {
-/*  box-shadow: 0 3px 0 0 #35a2b5;
-*/}
+}
 
 
 
@@ -959,19 +962,18 @@ p.contact a:hover {
   box-shadow: none;
   position: relative;
   top: 3px;
-}
+}*/
 
 
 
 /* useraccounts button styles override as easier than messing around with code */
-.at-btn {
-  box-shadow: 0 3px 0 0 #007299;
+/*.at-btn {
   background: #0099cc;
   color: #ffffff;
 }
 
 .at-btn:active {
-  position: relative; /* to avoid the whole page going up */
+  position: relative; 
   top: 3px;
   background: #33a6cc;
   box-shadow: none;
@@ -980,7 +982,7 @@ p.contact a:hover {
 .at-btn:hover, .at-btn:focus  {
   background: #33a6cc;
   color: white;
-}
+}*/
 
 
 
@@ -998,15 +1000,13 @@ p.contact a:hover {
  }
 
  .navbar {
-  border-top: 4px #F58465 solid;
+  /*border-top: 4px #F58465 solid;*/
   margin-bottom: 0;
   border-bottom: none;
   background-color: #fdfbf8;
 }
 
-.navbar-brand {
-  
-}
+
 
 .navbar-brand img {
   height: 34px; 

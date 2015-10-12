@@ -347,6 +347,28 @@ if (Meteor.isClient) { // only runs on the client
       // Prevent default action from form submit
       return false;
     },
+
+    // This will enable instant search if we want it
+    // "keyup .form-control": function (event) {
+    //   var q = event.target.value;
+
+    //   console.log("key pressed in header search");
+
+    //   // if (q == "") {
+    //   //   Router.go('/explore/latest');
+    //   //   return false; 
+
+    //   // }
+
+    //   //event.target.q.value = "";
+
+
+    //   Router.go('/search/' + q);
+
+
+    //   // Prevent default action from form submit
+    //   return false;
+    // },
     
   });
 
@@ -958,7 +980,7 @@ Router.route('/users/:_username/dogears', {
 
 
 // What we want to do here is search for a tag
-Router.route('/search/:_tag', {
+Router.route('/search/:_terms', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
@@ -967,18 +989,18 @@ Router.route('/search/:_tag', {
   },
 
   action: function () {
-    Session.set("DocumentTitle","Quotes tagged: " + this.params._username + " - Qurious");
+    Session.set("DocumentTitle","Quotes with: " + this.params._terms + " - Qurious");
 
 
-    var tag_to_lookup = this.params._tag; // someone explain why we need to do this please
+    var terms_to_lookup = this.params._terms; // someone explain why we need to do this please
 
     this.render('Header', {to: 'header'});
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ "quotation": { '$regex': tag_to_lookup, $options: 'i'} }, {sort: {views: -1}, limit: Session.get('limit') });
+          return Quotes.find({ "quotation": { '$regex': terms_to_lookup, $options: 'i'} }, {sort: {views: -1}, limit: Session.get('limit') });
         },
-        exploreToShow: function () { return tag_to_lookup },
+        exploreToShow: function () { return terms_to_lookup },
       }
     });
   }

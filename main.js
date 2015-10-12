@@ -328,6 +328,24 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
+    Template.Header.events({
+    "submit .search-form": function (event) {
+      var q = event.target.q.value;
+
+      event.target.q.value = "";
+
+
+      Router.go('/search/' + q);
+
+
+      // Prevent default action from form submit
+      return false;
+    },
+    
+  });
+
+
+
 } // this marks the end of the client code
 
 
@@ -929,7 +947,7 @@ Router.route('/users/:_username/dogears', {
 
 
 // What we want to do here is search for a tag
-Router.route('/tagged/:_tag', {
+Router.route('/search/:_tag', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {

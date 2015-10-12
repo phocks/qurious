@@ -82,6 +82,19 @@ Thanks. Josh.
             <ul class="nav navbar-nav navbar-right">
                 
                 <li class="{{isActivePath '/explore'}}"><a href="/explore">Explore</a></li>
+
+
+                <!-- <li class="dropdown {{isActivePath regex='\/explore\/'}}">
+                  <a href="/explore" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/explore/popular">Popular</a></li>
+                    <li><a href="/explore/latest">Latest</a></li>
+                  </ul>
+                </li> -->
+
+
+
+
                 <li class="{{isActivePath '/random'}}"><a href="/random">Random</a></li>
                 <!-- Let's remove this Latest and put it in under Explore
                 <li class="{{isActivePath '/latest'}}"><a href="/latest">Latest</a></li>
@@ -93,11 +106,11 @@ Thanks. Josh.
               {{/unless}}
 
               {{#if currentUser}}
-              <li class="{{isActivePath '/create'}}">
+              <!-- <li class="{{isActivePath '/create'}}">
                 <a href="/create" title="Create a quote">
                   Contribute
                 </a>
-              </li>
+              </li> -->
               {{/if}}
 
 

@@ -34,6 +34,13 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 /*	Single quotation master styles 	*/
 
+
+.single-quote-container {
+  
+  
+  
+}
+
 .single-quote {
 	font-family: 'Vollkorn', serif; 
 	text-align: left; 
@@ -41,10 +48,13 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 	color: #282828;
 	line-height: 1.5;
 	letter-spacing: 0.2px;
+  padding-top: 90px;
+  padding-bottom: 50px;
 }
 
 
 .single-quote .quotation {
+  margin: auto;
 }
 
 .single-quote .quotation.tiny {
@@ -634,7 +644,7 @@ label {
 }
 
 
-
+/* This was used to get a full screen effect */
 .vertical-container {
   
 
@@ -654,6 +664,10 @@ label {
   flex-direction: column;
   -ms-flex-direction: row;
 }
+
+
+
+
 
 
 /* -------------------- Text Content Pages - About / Terms / Privacy -----------*/
@@ -873,131 +887,3 @@ p.contact a:hover {
 
 
 
-
-
-
-/* This is a custom button pack that we may not use */
-/*.btn {
-  padding: 14px 24px;
-  border: 0 none;
-  letter-spacing: 1px;
-}*/
-
-/*.btn:focus, .btn:active:focus, .btn.active:focus {
-  outline: 0 none;
-}
-
-.btn-primary {
-  background: #0099cc;
-  color: #ffffff;
-}
-
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, 
-.btn-primary.active, .open > .dropdown-toggle.btn-primary {
-  background: #33a6cc;
-}
-
-.btn-primary:active, .btn-primary.active {
-  background: #007299;
-  box-shadow: none;
-}*/
-
-
-
-/******************************************************
-  RAISED BUTTONS
-******************************************************/
-
-/*button style edited 19/08/2015*/
-
-/* Resetting button styles */
-/*
-.btn {
-  border-radius: 2px; 
-  border: none;
-  padding:12px 12px;
-  background: #5ab2b5;
-  font-weight: bold;
-}
-
-.btn-primary.create {
-  width: 100%;
-  margin-bottom: 80px;  
-}
-
-.btn-primary.raised { 
-}
-
-.btn-primary.raised.center-block.give-me-more {
-  width: 100%;
-  margin-bottom: 40px;
-  margin-top: 40px;
-}
-
-
-.btn-primary.raised:active, .btn-primary.raised.active {
-  background: #33a6cc;
-  box-shadow: none;
-  position: relative;
-  top: 3px;
-}
-.btn-success.raised {
-  box-shadow: 0 3px 0 0 #008c52;
-}
-.btn-success.raised:active, .btn-success.raised.active {
-  background: #39bf87;
-  box-shadow: none;
-  position: relative;
-  top: 3px;
-}
-.btn-info.raised {
-}
-
-
-
-
-
-.btn-info.raised:active, .btn-info.raised.active {
-  background: #5fd4e8;
-  box-shadow: none;
-  position: relative;
-  top: 3px;
-}
-.btn-warning.raised {
-  box-shadow: 0 3px 0 0 #b87430;
-}
-.btn-warning.raised:active, .btn-warning.raised.active {
-  background: #eba259;
-  box-shadow: none;
-  position: relative;
-  top: 3px;
-}
-.btn-danger.raised {
-  box-shadow: 0 3px 0 0 #bf4343;
-}
-.btn-danger.raised:active, .btn-danger.raised.active {
-  background: #f26d6d;
-  box-shadow: none;
-  position: relative;
-  top: 3px;
-}*/
-
-
-
-/* useraccounts button styles override as easier than messing around with code */
-/*.at-btn {
-  background: #0099cc;
-  color: #ffffff;
-}
-
-.at-btn:active {
-  position: relative; 
-  top: 3px;
-  background: #33a6cc;
-  box-shadow: none;
-}
-
-.at-btn:hover, .at-btn:focus  {
-  background: #33a6cc;
-  color: white;
-}*/

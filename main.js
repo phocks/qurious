@@ -332,6 +332,8 @@ if (Meteor.isClient) { // only runs on the client
     "submit .search-form": function (event) {
       var q = event.target.q.value;
 
+      if (q == "") return false; // prevent empty strings being submitted
+
       event.target.q.value = "";
 
 
@@ -716,26 +718,7 @@ Router.route('/create', {
 });
 
 
-// Quotes sorted by popularity, dogears etc.
-Router.route('/popular', {
-  loadingTemplate: 'Loading',
 
-  waitOn: function () {
-
-  },
-
-  action: function () {
-    Session.set("DocumentTitle", "Popular Quotes - Qurious");
-    this.render('Header', {to: 'header'});
-    this.render('Quotes', {
-      data: {
-        quotes: function () {
-          return Quotes.find({}, {sort: {views: -1, upcount: -1}, limit: Session.get('limit') });
-        }
-      }
-    });
-  }
-});
 
 
 
@@ -764,7 +747,31 @@ Router.route('/explore', {
 
 
 
-Router.route('/latest', {
+// Quotes sorted by popularity, dogears etc.
+Router.route('/explore/popular', {
+  loadingTemplate: 'Loading',
+
+  waitOn: function () {
+
+  },
+
+  action: function () {
+    Session.set("DocumentTitle", "Popular Quotes - Qurious");
+    this.render('Header', {to: 'header'});
+    this.render('Quotes', {
+      data: {
+        quotes: function () {
+          return Quotes.find({}, {sort: {views: -1, upcount: -1}, limit: Session.get('limit') });
+        }
+      }
+    });
+  }
+});
+
+
+
+
+Router.route('/explore/latest', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {

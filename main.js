@@ -332,7 +332,11 @@ if (Meteor.isClient) { // only runs on the client
     "submit .search-form": function (event) {
       var q = event.target.q.value;
 
-      if (q == "") return false; // prevent empty strings being submitted
+      if (q == "") {
+        Router.go('/explore/latest');
+        return false; 
+
+      }
 
       //event.target.q.value = "";
 
@@ -972,7 +976,7 @@ Router.route('/search/:_tag', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ "quotation": { '$regex': tag_to_lookup} }, {sort: {views: -1}, limit: Session.get('limit') });
+          return Quotes.find({ "quotation": { '$regex': tag_to_lookup, $options: 'i'} }, {sort: {views: -1}, limit: Session.get('limit') });
         },
         exploreToShow: function () { return tag_to_lookup },
       }

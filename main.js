@@ -334,7 +334,7 @@ if (Meteor.isClient) { // only runs on the client
 
       if (q == "") return false; // prevent empty strings being submitted
 
-      event.target.q.value = "";
+      //event.target.q.value = "";
 
 
       Router.go('/search/' + q);

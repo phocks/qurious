@@ -284,24 +284,6 @@ img.quote-trash {
 
 
 
-/* INFO BAR ORIGINAL 
-
-/*.quote-info .dogear {  
-  cursor: pointer;   
-}
-
-.quote-info img.dogear {
-  margin-top: 4px;
-  margin-bottom: 3px;
-  height: 30px;
-}
-
-.quote-info .delete {
-  cursor: pointer;
-}*/
-
-
-
 @media (max-width: 970px) {
 
 /*	Single quotation handheld-device styles */
@@ -355,32 +337,6 @@ img.quote-trash {
 }
 
 
-
-
-
-
-/*
-
-.homepage-title {
-  padding-top: 100px;
-  padding-bottom: 100px;
-  text-align: center;
-}
-
-.homepage-title h1 img {
-  width: 600px;
-}
-
-*/
-
-/*.homepage-title .subtitle {
-  font-family: 'Vollkorn', sans-serif;
-  font-size: 300%;
-  top: 10px;
-  color: #787878;
-  font-weight: normal;
-  margin-bottom: 40px;
-}*/
 
 
 
@@ -651,6 +607,14 @@ label {
 	width: 100%;
 }
 
+.give-me-more {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: #5BB2B5;
+}
+
 /*  -------------------- Explore List Quote Styles handheld-device --------------------   */
 
 
@@ -864,6 +828,54 @@ p.contact a:hover {
 }
 
 
+
+/*******************************************
+     Some navigation styles
+*******************************************/
+
+
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #fff;
+  background: #F58465;
+ }
+
+ .navbar {
+  /*border-top: 4px #F58465 solid;*/
+  margin-bottom: 0;
+  border-bottom: none;
+  background-color: #fdfbf8;
+}
+
+
+
+
+
+.navbar-brand img {
+  height: 34px; 
+  position: relative;
+  top: -6px;
+}
+
+.load-more {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+.loading {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+
+
+
+
+
 /* This is a custom button pack that we may not use */
 /*.btn {
   padding: 14px 24px;
@@ -901,25 +913,25 @@ p.contact a:hover {
 /* Resetting button styles */
 /*
 .btn {
-	border-radius: 2px; 
-	border: none;
-	padding:12px 12px;
-	background: #5ab2b5;
+  border-radius: 2px; 
+  border: none;
+  padding:12px 12px;
+  background: #5ab2b5;
   font-weight: bold;
 }
 
 .btn-primary.create {
-	width: 100%;
-	margin-bottom: 80px;	
+  width: 100%;
+  margin-bottom: 80px;  
 }
 
-.btn-primary.raised {	
+.btn-primary.raised { 
 }
 
 .btn-primary.raised.center-block.give-me-more {
-	width: 100%;
-	margin-bottom: 40px;
-	margin-top: 40px;
+  width: 100%;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 
@@ -989,47 +1001,3 @@ p.contact a:hover {
   background: #33a6cc;
   color: white;
 }*/
-
-
-
-/*******************************************
-     Some navigation styles
-*******************************************/
-
-
-
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-  color: #fff;
-  background: #F58465;
- }
-
- .navbar {
-  /*border-top: 4px #F58465 solid;*/
-  margin-bottom: 0;
-  border-bottom: none;
-  background-color: #fdfbf8;
-}
-
-
-
-
-
-.navbar-brand img {
-  height: 34px; 
-  position: relative;
-  top: -6px;
-}
-
-.load-more {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-
-.loading {
-  margin-top: 100px;
-  margin-bottom: 100px;
-  text-align: center;
-}

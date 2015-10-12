@@ -55,18 +55,65 @@ Thanks. Josh.
             </button>
             <!-- to hide this on a certain page use: {{#if isActivePath '/'}}hidden{{/if}} in the class-->
             <a class="navbar-brand" href="/"><img src="/qurious_logo.png"></a>
+
           </div>
+
+          <!-- <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+          </form> -->
+
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
+              <form class="navbar-form search-form" role="search">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search" name="q">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                  </div>
+                </div>
+              </form>            
             </ul>
+
+
+
+            
             <ul class="nav navbar-nav navbar-right">
                 
-                <li class="{{isActivePath '/popular'}}"><a href="/popular">Popular</a></li>
+                <li class="{{isActivePath '/explore'}}"><a href="/explore">Explore</a></li>
+
+
+                <!-- <li class="dropdown {{isActivePath regex='\/explore\/'}}">
+                  <a href="/explore" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/explore/popular">Popular</a></li>
+                    <li><a href="/explore/latest">Latest</a></li>
+                  </ul>
+                </li> -->
+
+
+
+
+                <li class="{{isActivePath '/random'}}"><a href="/random">Random</a></li>
+                <!-- Let's remove this Latest and put it in under Explore
                 <li class="{{isActivePath '/latest'}}"><a href="/latest">Latest</a></li>
+                -->
+
 
               {{#unless currentUser}}
                 <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
               {{/unless}}
+
+              {{#if currentUser}}
+              <!-- <li class="{{isActivePath '/create'}}">
+                <a href="/create" title="Create a quote">
+                  Contribute
+                </a>
+              </li> -->
+              {{/if}}
+
+
               {{#if currentUser}}
                 <li class="dropdown {{isActivePath regex='\/users\/'}}">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUsername}} <span class="caret"></span></a>
@@ -80,15 +127,14 @@ Thanks. Josh.
                   </ul>
                 </li>
               {{/if}}
-              {{#if currentUser}}
-              <li class="{{isActivePath '/create'}}">
-                <a href="/create" title="Create a quote">
-                  <i class="glyphicon glyphicon-plus"></i>
-                </a>
-              </li>
-              {{/if}}
+              
 
             </ul>
+
+
+              
+                            
+
           </div><!--/.nav-collapse -->
         </div>
       </nav>
@@ -107,9 +153,9 @@ Thanks. Josh.
       
 
 
-      <div class="row">
-        <div class="front-content-row">        
-          <img class="about-logo" src="/about_logo.png">
+      <!-- <div class="row"> -->
+        <!-- <div class="front-content-row">  -->      
+          
 
 
 
@@ -123,11 +169,12 @@ Thanks. Josh.
           <a href="/create" class="btn btn-info raised" role="button">Add a quote</a>
           <a href="/random" class="btn btn-info raised" role="button">Randomise!</a>
         {{/if}} -->
-        </div>
-      </div>
+        <!-- </div>
+      </div> -->
 
       <div class="row home-about-row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-lg-2 col-lg-offset-2 about-logo"><img src="/about_logo.png"></div>
+        <div class="col-lg-6">
           <div class="home-about">
         
             <p class="home-about-text">Welcome to Qurious—a new way to explore and discover the best quotations from writers, thinkers, politicians, and artists throughout history.</p>
@@ -258,7 +305,7 @@ Thanks. Josh.
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <div class="explore-lead">
-          <h1 class="text-center">Exploring {{usernameToShow}}</h1>
+          <h1 class="text-center">Exploring {{exploreToShow}}</h1>
           {{#if isActivePath regex='\/dogears'}}
             <h2 class="text-center">dogears</h2>
           {{/if}}
@@ -275,11 +322,22 @@ Thanks. Josh.
     </div>
 
 
-      <div class="load-more">
-        <button class="btn btn-primary raised center-block give-me-more">MORE POSTS</button>
-      </div>
+    <!-- 
+
+    Trying a thing to get full width load more
+
+    <div class="load-more">
+      <button class="btn btn-primary raised center-block give-me-more">MORE POSTS</button>
+    </div> -->
 
 
+  </div>
+  <div class="container-fluid">
+  <div class="row give-me-more text-center">
+    
+    Load more
+    
+  </div>
   </div>
 </template>
 
@@ -336,7 +394,7 @@ Thanks. Josh.
   {{#if currentUser}}
     <div class="container">
       <div class="col-md-6 col-md-offset-3">
-        <div class="create">
+        <div class="create-block">
           <form class="new-quote">
             <div class="form-group">
               <label for="quotationText">Quotation text</label>
@@ -430,44 +488,3 @@ Thanks. Josh.
 
 
 
-
-<template name="Search">
-  <div class="content-container">
-    <div class="homepage-title">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3 front-content-row">
-            <input type="text" id="search-box" placeholder="search here" />
-            {{#each getQuotes}}
-            <div class="package">
-              <h4 class="name">
-                <i>{{{quotation}}}</i>
-              </h4>
-              <div class="description">
-                {{{attribution}}}
-              </div>
-            </div>
-            {{/each}}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
-
-
-
-<template name="SearchTerms">
-  <div class="content-container">
-    <div class="homepage-title">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3 front-content-row">
-            Searching, you are.
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>

@@ -6,37 +6,8 @@
   probably consider cutting these down to essentials 
   also, there is a way to selectively load fonts via javascript, see in js files
   */
-
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
-@import url(https://fonts.googleapis.com/css?family=Bitter:400,400italic,700);
 @import url(https://fonts.googleapis.com/css?family=Vollkorn:400,400italic);
-@import url(https://fonts.googleapis.com/css?family=Cardo:400,400italic);
-@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic);
-/*@import url(//fonts.googleapis.com/css?family=Cardo:400,700);*/
-/* commenting because this is now replaced by images
-@import url(//fonts.googleapis.com/css?family=Playfair+Display:400italic); */
-
-@font-face {
-  font-family: 'Aleo';
-  src: url('/fonts/Aleo/Regular/aleo-regular-webfont.eot'); /* IE9 Compat Modes */
-  src: url('/fonts/Aleo/Regular/aleo-regular-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/fonts/Aleo/Regular/aleo-regular-webfont.woff2') format('woff2'),
-       url('/fonts/Aleo/Regular/aleo-regular-webfont.woff') format('woff'),
-       url('/fonts/Aleo/Regular/aleo-regular-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-       url('/fonts/Aleo/Regular/aleo-regular-webfont.svg#aleoregular') format('svg'); /* Legacy iOS */
-}
-
-
-@font-face {
-  font-family: 'Aleo Light';
-  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot');
-  src: url('/fonts/Aleo/Light/aleo-light-webfont.eot?#iefix') format('embedded-opentype'),
-       url('/fonts/Aleo/Light/aleo-light-webfont.woff2') format('woff2'),
-       url('/fonts/Aleo/Light/aleo-light-webfont.woff') format('woff'),
-       url('/fonts/Aleo/Light/aleo-light-webfont.ttf')  format('truetype'),
-       url('/fonts/Aleo/Light/aleo-light-webfont.svg#aleolight') format('svg');
-}
-
 
 
 
@@ -63,6 +34,13 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 /*	Single quotation master styles 	*/
 
+
+.single-quote-container {
+  
+  
+  
+}
+
 .single-quote {
 	font-family: 'Vollkorn', serif; 
 	text-align: left; 
@@ -70,10 +48,13 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 	color: #282828;
 	line-height: 1.5;
 	letter-spacing: 0.2px;
+  padding-top: 90px;
+  padding-bottom: 50px;
 }
 
 
 .single-quote .quotation {
+  margin: auto;
 }
 
 .single-quote .quotation.tiny {
@@ -313,24 +294,6 @@ img.quote-trash {
 
 
 
-/* INFO BAR ORIGINAL 
-
-/*.quote-info .dogear {  
-  cursor: pointer;   
-}
-
-.quote-info img.dogear {
-  margin-top: 4px;
-  margin-bottom: 3px;
-  height: 30px;
-}
-
-.quote-info .delete {
-  cursor: pointer;
-}*/
-
-
-
 @media (max-width: 970px) {
 
 /*	Single quotation handheld-device styles */
@@ -387,32 +350,6 @@ img.quote-trash {
 
 
 
-
-/*
-
-.homepage-title {
-  padding-top: 100px;
-  padding-bottom: 100px;
-  text-align: center;
-}
-
-.homepage-title h1 img {
-  width: 600px;
-}
-
-*/
-
-/*.homepage-title .subtitle {
-  font-family: 'Vollkorn', sans-serif;
-  font-size: 300%;
-  top: 10px;
-  color: #787878;
-  font-weight: normal;
-  margin-bottom: 40px;
-}*/
-
-
-
 /* holds the logo etc */
 .front-content-row { 
   padding-top: 150px;
@@ -447,8 +384,8 @@ img.quote-trash {
 
 .home-about-row {
   background-color: #5BB2B5;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 80px;
+  padding-bottom: 70px;
 }
 
 .home-about {
@@ -487,18 +424,23 @@ position: relative;
   top: 2px;
 }
 
+.about-logo {
+  text-align: center;
+}
 
-img.about-logo {
+
+.about-logo img {
   width: 200px;
+  overflow: hidden;
   /*margin-right: 40px;*/
   /*float: left;*/
-  /*padding-bottom: 120px;*/
+  padding-bottom: 40px;
 }
 
 
 
 @media (max-width: 767px) {
-  img.about-logo {
+.about-logo img {
     width: 150px;
   }
 
@@ -517,6 +459,10 @@ img.about-logo {
 
 /* -------------------------------- Create Page ------------*/
 
+.create-block {
+  margin-bottom: 30px;
+}
+
 label {
   font-weight: normal;
   font-size: 120%;
@@ -525,12 +471,13 @@ label {
 }
 
 .form-control {
-  font-size: 105%;
-  color: #282828;
+  border-radius: 1px;
+  height: inherit;
+  /*color: #282828;
   letter-spacing: 0.75px;
-  margin-bottom: 30px;
-  border-radius: 0px;
-  border-color: #999;
+  margin-bottom: 30px;*/
+  
+  
 }
 
 .form-control:focus {
@@ -670,6 +617,14 @@ label {
 	width: 100%;
 }
 
+.give-me-more {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: #5BB2B5;
+}
+
 /*  -------------------- Explore List Quote Styles handheld-device --------------------   */
 
 
@@ -689,7 +644,7 @@ label {
 }
 
 
-
+/* This was used to get a full screen effect */
 .vertical-container {
   
 
@@ -709,6 +664,10 @@ label {
   flex-direction: column;
   -ms-flex-direction: row;
 }
+
+
+
+
 
 
 /* -------------------- Text Content Pages - About / Terms / Privacy -----------*/
@@ -812,12 +771,10 @@ p.contact a:hover {
 
 
 
-
-
 .footer {
   color: #999;
   background-color: #282828;
-  padding-top:40px;
+  padding-top:50px;
   padding-bottom: 50px;
   letter-spacing: 0.5px;
   line-height: 24px;
@@ -875,6 +832,61 @@ p.contact a:hover {
 }
 
 
+/* Totally new awesome uncomplicated button styles Bootstrap compatible */
+.btn {
+  border-radius: 1px;
+}
+
+.btn.create {
+  width: 100%;
+}
+
+
+
+/*******************************************
+     Some navigation styles
+*******************************************/
+
+
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #fff;
+  background: #F58465;
+ }
+
+ .navbar {
+  /*border-top: 4px #F58465 solid;*/
+  margin-bottom: 0;
+  border-bottom: none;
+  background-color: #fdfbf8;
+}
+
+
+
+
+
+.navbar-brand img {
+  height: 34px; 
+  position: relative;
+  top: -6px;
+}
+
+.load-more {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+.loading {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+
+
 
 /* This is a custom button pack that we may not use */
 /*.btn {
@@ -883,7 +895,7 @@ p.contact a:hover {
   letter-spacing: 1px;
 }*/
 
-.btn:focus, .btn:active:focus, .btn.active:focus {
+/*.btn:focus, .btn:active:focus, .btn.active:focus {
   outline: 0 none;
 }
 
@@ -900,7 +912,7 @@ p.contact a:hover {
 .btn-primary:active, .btn-primary.active {
   background: #007299;
   box-shadow: none;
-}
+}*/
 
 
 
@@ -910,30 +922,28 @@ p.contact a:hover {
 
 /*button style edited 19/08/2015*/
 
+/* Resetting button styles */
+/*
 .btn {
-	border-radius: 0px; 
-	border: none;
-	padding:12px 12px;
-	background: #5ab2b5;
-	/*letter-spacing: 2px;*/
-	/*font-size: 105%;*/
+  border-radius: 2px; 
+  border: none;
+  padding:12px 12px;
+  background: #5ab2b5;
   font-weight: bold;
 }
 
 .btn-primary.create {
-	width: 100%;
-	margin-bottom: 80px;	
-/*  box-shadow: 0 3px 0 0 #007299;
-*/}
+  width: 100%;
+  margin-bottom: 80px;  
+}
 
-.btn-primary.raised {	
-/*  box-shadow: 0 3px 0 0 #007299;
-*/}
+.btn-primary.raised { 
+}
 
 .btn-primary.raised.center-block.give-me-more {
-	width: 100%;
-	margin-bottom: 40px;
-	margin-top: 40px;
+  width: 100%;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 
@@ -953,8 +963,7 @@ p.contact a:hover {
   top: 3px;
 }
 .btn-info.raised {
-/*  box-shadow: 0 3px 0 0 #35a2b5;
-*/}
+}
 
 
 
@@ -983,19 +992,18 @@ p.contact a:hover {
   box-shadow: none;
   position: relative;
   top: 3px;
-}
+}*/
 
 
 
 /* useraccounts button styles override as easier than messing around with code */
-.at-btn {
-  box-shadow: 0 3px 0 0 #007299;
+/*.at-btn {
   background: #0099cc;
   color: #ffffff;
 }
 
 .at-btn:active {
-  position: relative; /* to avoid the whole page going up */
+  position: relative; 
   top: 3px;
   background: #33a6cc;
   box-shadow: none;
@@ -1004,60 +1012,4 @@ p.contact a:hover {
 .at-btn:hover, .at-btn:focus  {
   background: #33a6cc;
   color: white;
-}
-
-
-
-/*******************************************
-     Some navigation styles
-*******************************************/
-
-
-
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-  color: #fff;
-  background: #F58465;
- }
-
- .navbar {
-  border-top: 4px #F58465 solid;
-  margin-bottom: 0;
-  border-bottom: none;
-  background-color: #fdfbf8;
-}
-
-.navbar-brand {
-  
-}
-
-.navbar-brand img {
-  height: 34px; 
-  position: relative;
-  top: -6px;
-}
-
-.load-more {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-
-
-/* ---------------- Extra styles - keep em coming ------- */
-
-/*
-.at-signup-link {
-  display: none;
-}
-
-.signup-container .at-signin-link {
-  display: none;
-}
-*/
-
-.loading {
-  margin-top: 100px;
-  margin-bottom: 100px;
-}
+}*/

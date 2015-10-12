@@ -328,6 +328,52 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
+    Template.Header.events({
+    "submit .search-form": function (event) {
+      var q = event.target.q.value;
+
+      if (q == "") {
+        Router.go('/explore/latest');
+        return false; 
+
+      }
+
+      //event.target.q.value = "";
+
+
+      Router.go('/search/' + q);
+
+
+      // Prevent default action from form submit
+      return false;
+    },
+
+    // This will enable instant search if we want it
+    // "keyup .form-control": function (event) {
+    //   var q = event.target.value;
+
+    //   console.log("key pressed in header search");
+
+    //   // if (q == "") {
+    //   //   Router.go('/explore/latest');
+    //   //   return false; 
+
+    //   // }
+
+    //   //event.target.q.value = "";
+
+
+    //   Router.go('/search/' + q);
+
+
+    //   // Prevent default action from form submit
+    //   return false;
+    // },
+    
+  });
+
+
+
 } // this marks the end of the client code
 
 
@@ -376,7 +422,6 @@ if (Meteor.isServer) {
   // actually interested in using on the client side.
   Meteor.publish("quotesAll", function () {
     return Quotes.find({}, { sort: {createdAt: -1} });
-    self.ready();
   });
 
 
@@ -385,7 +430,6 @@ if (Meteor.isServer) {
       limit = 0;
     }
     return Quotes.find({}, { sort: {createdAt: -1}, limit: limit });
-    self.ready();
   });
 
 
@@ -395,33 +439,28 @@ if (Meteor.isServer) {
     }
 
     return Quotes.find({}, { sort: {views: -1, upcount: -1}, limit: limit });
-    self.ready();
   });
 
 
   Meteor.publish("quotesCurrentUser", function () {
     return Quotes.find({ owner: this.userId });
-    self.ready();
   });
 
 
   Meteor.publish("quotesSlugUser", function (user_slug) {
     check(user_slug, String);
     return Quotes.find({ username: user_slug }, { sort: {createdAt: -1}});
-    self.ready();
   });
 
 
   Meteor.publish("quotesSlug", function (slug) {
     check(slug, String);
     return Quotes.find({ _id: slug });
-    self.ready();
   });
 
   // Pusblish quotes given IDs in an array as input
   Meteor.publish("quotesInArray", function (array) {
     return Quotes.find({ _id: { $in: array } }); // , {sort: {createdAt: -1}} taken out as test
-    self.ready();
   });
 
 
@@ -435,7 +474,7 @@ if (Meteor.isServer) {
     return Meteor.users.find({},
       { fields: {'admin':1, 'liked': 1, 'username': 1 }
     });
-    this.ready();
+    
 
     /*if (this.userId) {
       return Meteor.users.find({_id: this.userId},
@@ -705,8 +744,13 @@ Router.route('/create', {
 });
 
 
+
+
+
+
+
 // Quotes sorted by popularity, dogears etc.
-Router.route('/popular', {
+Router.route('/explore', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
@@ -728,7 +772,32 @@ Router.route('/popular', {
 
 
 
-Router.route('/latest', {
+
+// Quotes sorted by popularity, dogears etc.
+Router.route('/explore/popular', {
+  loadingTemplate: 'Loading',
+
+  waitOn: function () {
+
+  },
+
+  action: function () {
+    Session.set("DocumentTitle", "Popular Quotes - Qurious");
+    this.render('Header', {to: 'header'});
+    this.render('Quotes', {
+      data: {
+        quotes: function () {
+          return Quotes.find({}, {sort: {views: -1, upcount: -1}, limit: Session.get('limit') });
+        }
+      }
+    });
+  }
+});
+
+
+
+
+Router.route('/explore/latest', {
   loadingTemplate: 'Loading',
 
   waitOn: function () {
@@ -805,7 +874,8 @@ Router.route('/random', {
   onBeforeAction: function () {
     Meteor.call('getRandomQuoteId', function (error, result) {
       var randomId = result;
-      Router.go('/quotes/' + randomId);
+      // replaceState keeps the browser from duplicating history
+      Router.go('/quotes/' + randomId, {}, {replaceState:true});
     });
 
     this.next()
@@ -821,7 +891,8 @@ Router.route('/lucky', {
   onBeforeAction: function () {
     Meteor.call('getLuckyQuoteId', function (error, result) {
       var luckyId = result;
-      Router.go('/quotes/' + luckyId);
+      // replaceState keeps the browser from duplicating history
+      Router.go('/quotes/' + luckyId, {}, {replaceState:true});
     });
 
     this.next()
@@ -908,13 +979,39 @@ Router.route('/users/:_username/dogears', {
 
 
 
+// What we want to do here is search for a tag
+Router.route('/search/:_terms', {
+  loadingTemplate: 'Loading',
+
+  waitOn: function () {
+
+
+  },
+
+  action: function () {
+    Session.set("DocumentTitle","Quotes with: " + this.params._terms + " - Qurious");
+
+
+    var terms_to_lookup = this.params._terms; // someone explain why we need to do this please
+
+    this.render('Header', {to: 'header'});
+    this.render('Quotes', {
+      data: {
+        quotes: function () {
+          return Quotes.find({ "quotation": { '$regex': terms_to_lookup, $options: 'i'} }, {sort: {views: -1}, limit: Session.get('limit') });
+        },
+        exploreToShow: function () { return terms_to_lookup },
+      }
+    });
+  }
+});
 
 
 
 // The front landing page
 Router.route('/', {
   action: function () {
-    Session.set("DocumentTitle","Qurious - quotes etc.");
+    Session.set("DocumentTitle","Qurious");
     this.render('Header', {
       to: 'header',
       data: {
@@ -922,6 +1019,7 @@ Router.route('/', {
       }
     });
 
+    // Here we send a quote to the front page if required
     Meteor.subscribe('quotesPopular', 1);
 
     this.render('Home', {

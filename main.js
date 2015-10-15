@@ -998,7 +998,9 @@ Router.route('/search/:_terms', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ "quotation": { '$regex': terms_to_lookup, $options: 'i'} }, {sort: {views: -1}, limit: Session.get('limit') });
+          return Quotes.find({ $or: [ { quotation: { '$regex': terms_to_lookup, $options: 'i'} }, { attribution: { '$regex': terms_to_lookup, $options: 'i'}} ] }, {sort: {views: -1}, limit: Session.get('limit') });
+          //return Quotes.find({ "quotation": { '$regex': terms_to_lookup, $options: 'i'} }, {sort: {views: -1}, limit: Session.get('limit') });
+          //console.log(Users.find({$or: [{email: 'some@mail.com'},{city: 'atlanta'}]}).fetch());
         },
         exploreToShow: function () { return terms_to_lookup },
       }

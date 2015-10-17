@@ -348,6 +348,12 @@ if (Meteor.isClient) { // only runs on the client
       return false;
     },
 
+    // I was trying to create a delete button here but it was too hard
+    // so I quit doing it
+    // "click .searchclear": function (event, template) {
+    //   $('.search-form')[0].reset();
+    // }
+
     // This will enable instant search if we want it
     // "keyup .form-control": function (event) {
     //   var q = event.target.value;

@@ -864,14 +864,26 @@ p.contact a:hover {
 }
 
 
-
-
-
 .navbar-brand img {
   height: 34px; 
   position: relative;
   top: -6px;
 }
+
+/*#searchclear {
+  position: relative;
+  top: 8px;
+  left: -60px;
+  height: 14px;
+  margin: auto;
+  font-size: 14px;
+  cursor: pointer;
+  color: #ccc;
+  z-index: 100;
+}*/
+
+
+
 
 .load-more {
   margin-top: 20px;

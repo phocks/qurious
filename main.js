@@ -16,7 +16,7 @@
 
 // First up we are going to create a few collections
 Quotes = new Mongo.Collection('quotes');  // Our main quote db
-Counters = new Mongo.Collection('counters'); // Handles numbering
+Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use)
 
 
 
@@ -117,6 +117,7 @@ if (Meteor.isClient) { // only runs on the client
   Session.set("DocumentTitle","Qurious - Curiously Quotable");
 
   // Sets up automatically setting <title> in head
+  // Simply do Session.set("DocumentTitle", "Whatever you want"); 
   Tracker.autorun(function(){
     document.title = Session.get("DocumentTitle");
   });
@@ -348,7 +349,7 @@ if (Meteor.isClient) { // only runs on the client
       return false;
     },
 
-    // I was trying to create a delete button here but it was too hard
+    // I was trying to create a delete x here but it was too hard
     // so I quit doing it
     // "click .searchclear": function (event, template) {
     //   $('.search-form')[0].reset();
@@ -619,8 +620,6 @@ Meteor.methods({
       // Looks for quoteId in Users collection
       var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}})
 
-
-
       if (!user) { // returns null or undefined 
 
         // Old way, no time stamp
@@ -629,8 +628,6 @@ Meteor.methods({
         // New way with timestamp
         Meteor.users.update({_id:this.userId},{$pull:{dogeared: { quoteId: quoteId } }},
           { multi: true });
-
-
 
 
         Quotes.update( { _id: quoteId }, {$inc: { upcount: -1 } });
@@ -643,11 +640,14 @@ Meteor.methods({
       console.log("user " + this.userId + " collected the quote " + quoteId );
 
       Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
-      Meteor.users.update({_id:this.userId},{$addToSet:{liked:quoteId}});
+      Meteor.users.update({_id:this.userId},{ $addToSet:{liked:quoteId} });
 
       // New Dogear feature that adds date as well
       Meteor.users.update({ _id: this.userId },
         { $push: { dogeared: { quoteId: quoteId, dogearedAt: new Date() }}});
+
+      // Even newer dogearing adds username to the quote
+      Quotes.update({ _id: quoteId }, { $addToSet: { usersWhoDogeared: Meteor.user().username } });
 
 
       return true;
@@ -684,24 +684,28 @@ Router.route('/about', function() {
   Session.set("DocumentTitle", "Qurious About Us?");
   this.render('Header', {to: 'header'});
   this.render('AboutText');
+  this.render('Footer', {to: 'footer'});
 });
 
 Router.route('/privacy', function() {
   Session.set("DocumentTitle", "Privacy Policy - Qurious");
   this.render('Header', {to: 'header'});
   this.render('PrivacyText');
+  this.render('Footer', {to: 'footer'});
 });
 
 Router.route('/terms', function() {
   Session.set("DocumentTitle", "Terms & Conditions - Qurious");
   this.render('Header', {to: 'header'});
   this.render('TermsText');
+  this.render('Footer', {to: 'footer'});
 });
 
 Router.route('/contact', function() {
   Session.set("DocumentTitle", "Contacting Qurious");
   this.render('Header', {to: 'header'});
   this.render('ContactText');
+  this.render('Footer', {to: 'footer'});
 });
 
 
@@ -746,6 +750,8 @@ Router.route('/create', {
         }
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -773,6 +779,8 @@ Router.route('/explore', {
         }
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -797,6 +805,8 @@ Router.route('/explore/popular', {
         }
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -821,6 +831,8 @@ Router.route('/explore/latest', {
         }
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -863,6 +875,8 @@ Router.route('/quotes/:_quote_slug', {
           }
         }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -936,6 +950,8 @@ Router.route('/users/:_username', {
         usernameToShow: function () { return username_to_lookup },
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -980,12 +996,14 @@ Router.route('/users/:_username/dogears', {
 
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
 
 
-// What we want to do here is search for a tag
+// What we want to do here is search
 Router.route('/search/:_terms', {
   loadingTemplate: 'Loading',
 
@@ -1004,13 +1022,14 @@ Router.route('/search/:_terms', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ $or: [ { quotation: { '$regex': terms_to_lookup, $options: 'i'} }, { attribution: { '$regex': terms_to_lookup, $options: 'i'}} ] }, {sort: {views: -1}, limit: Session.get('limit') });
-          //return Quotes.find({ "quotation": { '$regex': terms_to_lookup, $options: 'i'} }, {sort: {views: -1}, limit: Session.get('limit') });
-          //console.log(Users.find({$or: [{email: 'some@mail.com'},{city: 'atlanta'}]}).fetch());
+          return Quotes.find({ $or: [ { quotation: { '$regex': terms_to_lookup, $options: 'i'} }, 
+            { attribution: { '$regex': terms_to_lookup, $options: 'i'}} ] }, 
+            {sort: {views: -1}, limit: Session.get('limit') });
         },
         exploreToShow: function () { return terms_to_lookup },
       }
     });
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -1035,6 +1054,8 @@ Router.route('/', {
         return Quotes.findOne({});
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -1042,6 +1063,14 @@ Router.route('/', {
 // Just to test the loader
 Router.route('/loading', function() {
   Session.set("DocumentTitle","Loading - Qurious");
+
+  this.render('Loading');
+});
+
+
+// Super secret next step forward
+Router.route('/lite', function() {
+  Session.set("DocumentTitle","Qurious");
 
   this.render('Loading');
 });
@@ -1056,4 +1085,5 @@ Router.route('/(.*)', function() {
   Session.set("DocumentTitle","404 - Qurious");
   this.render('Header', {to: 'header'});
   this.render('404');
+  this.render('Footer', {to: 'footer'});
 });

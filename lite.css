@@ -1,0 +1,9 @@
+/* Qurious Lite Styles */
+.lite-container {
+  font-family: 'Vollkorn', serif;
+  font-size: 60px;
+}
+
+.lite-container .attribution {
+  font-style: italic;
+}

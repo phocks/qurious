@@ -2,7 +2,7 @@
 
 
 /*  
-  some fonts
+  some fonts. these need to be up top
   probably consider cutting these down to essentials 
   also, there is a way to selectively load fonts via javascript, see in js files
   */
@@ -42,7 +42,7 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 }
 
 .single-quote {
-	font-family: 'Vollkorn', serif; 
+	font-family: 'Vollkorn', serif;
 	text-align: left; 
 	min-width: 320px;
 	color: #282828;
@@ -896,6 +896,8 @@ p.contact a:hover {
   margin-bottom: 100px;
   text-align: center;
 }
+
+
 
 
 

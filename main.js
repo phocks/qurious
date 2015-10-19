@@ -280,8 +280,8 @@ if (Meteor.isClient) { // only runs on the client
 
     // Put the quotation into the users collection!
     "click .dogear-click": function () {
+      console.log("Calling function to dogear this quote");
       Meteor.call('dogearQuote', this._id);
-      console.log("yep");
     },
 
     // Remove the quotation into the users collection!
@@ -377,6 +377,16 @@ if (Meteor.isClient) { // only runs on the client
     //   return false;
     // },
     
+  });
+
+
+
+  // trying out this router hook thing to reset the post limit
+  Router.onBeforeAction(function() {
+    Session.set('limit', loadMoreLimit); // set the infinite scroll limit back to default
+    //$(window).scrollTop(0); // this replaces the auto scroll package
+
+    this.next();
   });
 
 
@@ -614,20 +624,25 @@ Meteor.methods({
 
   // This is a feature to "Like" a quotation. It should put the quote in the user's
   // likes list and then update the upcount in the quote db
+  // If a user has already like the quote, this function also "Unlikes" it
   dogearQuote: function (quoteId) {
     if (Meteor.userId()) { // Only process if user logged in
 
       // Looks for quoteId in Users collection
       var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}})
 
+      // Test to see if user has already dogeared this quote
       if (!user) { // returns null or undefined 
 
         // Old way, no time stamp
-        Meteor.users.update({_id:this.userId},{$pull:{liked:quoteId}});
+        Meteor.users.update({_id:this.userId},{ $pull:{liked:quoteId} });
 
         // New way with timestamp
-        Meteor.users.update({_id:this.userId},{$pull:{dogeared: { quoteId: quoteId } }},
+        Meteor.users.update({_id:this.userId},{ $pull:{ dogeared: { quoteId: quoteId } }},
           { multi: true });
+
+        // Even newer dogearing removes username from the quote
+        Quotes.update({ _id: quoteId }, { $pull: { usersWhoDogeared: Meteor.user().username } });
 
 
         Quotes.update( { _id: quoteId }, {$inc: { upcount: -1 } });
@@ -635,7 +650,7 @@ Meteor.methods({
         return false; // exits the function
       }
 
-  
+      // Otherwise dogear this quote below  
 
       console.log("user " + this.userId + " collected the quote " + quoteId );
 
@@ -663,14 +678,7 @@ Meteor.methods({
 
 
 
-// trying out this router hook thing to reset the post limit
 
-Router.onBeforeAction(function() {
-  Session.set('limit', loadMoreLimit); // set the infinite scroll limit back to default
-  //$(window).scrollTop(0); // this replaces the auto scroll package
-
-  this.next();
-});
 
 
 // Here come our routes which catch and process URLs -----------------
@@ -848,7 +856,7 @@ Router.route('/quotes/:_quote_slug', {
   },
     onBeforeAction: function() {
 
-      this.next();
+      this.next(); // does this do anything? i don't think so
   },
     onAfterAction: function() {
       // if (Meteor.userId()) currentUserId = Meteor.userId();
@@ -1068,12 +1076,16 @@ Router.route('/loading', function() {
 });
 
 
-// Super secret next step forward
-Router.route('/lite', function() {
-  Session.set("DocumentTitle","Qurious");
 
-  this.render('Loading');
-});
+
+
+
+// Let's test out an API call for funsies
+Router.route('/api', function () {
+  var req = this.request;
+  var res = this.response;
+  res.end('hello from the server\n');
+}, {where: 'server'});
 
 
 

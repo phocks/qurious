@@ -2,14 +2,21 @@
 .lite-container {
   font-family: 'Vollkorn', serif;
   font-size: 200%;
+  text-align: justify;
   min-height: 100vh;
-  padding: 5%;
+  padding: 6% 8%;
 }
 
 .lite-container .attribution {
   font-style: italic;
+  
+}
+
+.lite-container .dash {
+  
 }
 
 .lite-container .lite-footer {
   text-align: center;
+  padding: 32px;
 }

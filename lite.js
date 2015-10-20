@@ -15,13 +15,12 @@ Router.route('/', {
 });
 
 Router.route('/q/:_quote_id', {
-  // waitOn: function () {
-  //   // return one handle, a function, or an array
-  //   return Meteor.subscribe('quotesAll');
-  // },
-  
-  action: function () {
+  onBeforeAction: function () {
+    // return one handle, a function, or an array
     Meteor.subscribe('quotesAll');
+    this.next();
+  },
+  action: function () {
     this.render('Lite', {
       data: function () {
         var quote = Quotes.findOne({ _id: this.params._quote_id });
@@ -30,6 +29,8 @@ Router.route('/q/:_quote_id', {
         }
         if (!quote) {
           // this.render('NotFound');
+          // had to comment out as this was flashing not found briefly due to the split second
+          // it takes for the variable "quote" to be assigned..
         } 
         else {
           // Session.set('sessionQuoteId', this.params._quote_id);

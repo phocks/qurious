@@ -1042,7 +1042,7 @@ Router.route('/search/:_terms', {
 
 
 // The front landing page
-Router.route('/home', {
+Router.route('/admin', {
   action: function () {
     Session.set("DocumentTitle","Qurious");
     this.render('Header', {

@@ -249,11 +249,10 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-
   // And some global helpers etc
 
   // This sets the time format using the moment package
-  UI.registerHelper('formatTime', function(context, options) {
+  Template.registerHelper('formatTime', function(context, options) {
     if(context)
       return moment(context).format('DD/MM/YYYY, hh:mm a');
   });
@@ -263,7 +262,6 @@ if (Meteor.isClient) { // only runs on the client
       return Meteor.user().username;
     }
   );
-
 
 
 

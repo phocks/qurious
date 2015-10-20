@@ -2,8 +2,10 @@
 .lite-container {
   font-family: 'Vollkorn', serif;
   font-size: 60px;
+  min-height: 100vh;
 }
 
 .lite-container .attribution {
   font-style: italic;
 }
+

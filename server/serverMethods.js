@@ -10,6 +10,13 @@ Meteor.methods({
     var random_index = Math.floor(Math.random() * (count));
     var random_object = Quotes.findOne({}, {skip:random_index});
     return random_object._id;
+  },
+
+  getRandomQuoteIdShort: function() {
+    var count = Quotes.find().count();
+    var random_index = Math.floor(Math.random() * (count));
+    var random_object = Quotes.findOne({}, {skip:random_index});
+    return random_object.quote_id;
   }, 
   // ps. look at the Random function built-in to Meteor alternatively
 

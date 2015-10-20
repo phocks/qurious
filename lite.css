@@ -1,11 +1,15 @@
 /* Qurious Lite Styles */
 .lite-container {
   font-family: 'Vollkorn', serif;
-  font-size: 60px;
+  font-size: 200%;
   min-height: 100vh;
+  padding: 5%;
 }
 
 .lite-container .attribution {
   font-style: italic;
 }
 
+.lite-container .lite-footer {
+  text-align: center;
+}

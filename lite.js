@@ -1,26 +1,25 @@
 // Super secret next step forward
-Router.route('/', {
-  action: function () {
-    Session.set("DocumentTitle","Qurious");    
+Router.route('/', function () {
+  this.layout('LiteLayout');
+  Session.set("DocumentTitle","Qurious");    
 
-    // Here we send a quote to the front page if required
-    Meteor.subscribe('quotesLatest', 1);
+  // Here we send a quote to the front page if required
+  Meteor.subscribe('quotesLatest', 1);
 
-    this.render('Lite', {
-      data: function () {
-        return Quotes.findOne({});
-      }
-    });
-  }
+  this.render('Lite', {
+    data: function () {
+      return Quotes.findOne({});
+    }
+  });
 });
 
 Router.route('/q/:_quote_id', {
-  onBeforeAction: function () {
+  waitOn: function () {
     // return one handle, a function, or an array
-    Meteor.subscribe('quotesAll');
-    this.next();
+    return Meteor.subscribe('quotesAll');
   },
   action: function () {
+    this.layout('LiteLayout');
     this.render('Lite', {
       data: function () {
         var quote = Quotes.findOne({ _id: this.params._quote_id });
@@ -46,15 +45,21 @@ Router.route('/q/:_quote_id', {
         }
       }
     });
-  }
+  },
 });
 
-Router.route('/r', {  
-  action: function () {
-    Meteor.call('getRandomQuoteIdShort', function (error, result) {
+Router.route('/r', function () {
+    Meteor.call('getRandomQuoteId', function (error, result) {
       var randomId = result;
       // replaceState keeps the browser from duplicating history
       Router.go('/q/' + randomId, {}, {replaceState:true});
     });
-  },
+});
+
+// Testing the Lite loader
+Router.route('/load', function() {
+  this.layout('LiteLayout');
+  Session.set("DocumentTitle","Loading - Qurious");
+
+  this.render('LiteLoad');
 });

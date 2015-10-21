@@ -93,13 +93,14 @@ if (Meteor.isClient) { // only runs on the client
 
   // Some more configs to run initially
 
-  Router.configure({
-    layoutTemplate: 'ApplicationLayout',
-    loadingTemplate: "Loading",
-    yieldTemplates: {
-        Header: {to: 'header'},
-        Footer: {to: 'footer'},
-    },
+  Router.configure({ // commenting out default due to Lite layout change
+    // sets default layout so you don't have to set it in the route
+    // layoutTemplate: 'ApplicationLayout',
+    // loadingTemplate: "Loading",
+    // yieldTemplates: {
+    //     Header: {to: 'header'},
+    //     Footer: {to: 'footer'},
+    // },
     //notFoundTemplate: '404' //this is used for somewhat custom 404s
   });
 
@@ -687,6 +688,7 @@ Meteor.methods({
 
 
 Router.route('/about', function() {
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Qurious About Us?");
   this.render('Header', {to: 'header'});
   this.render('AboutText');
@@ -694,6 +696,7 @@ Router.route('/about', function() {
 });
 
 Router.route('/privacy', function() {
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Privacy Policy - Qurious");
   this.render('Header', {to: 'header'});
   this.render('PrivacyText');
@@ -701,6 +704,7 @@ Router.route('/privacy', function() {
 });
 
 Router.route('/terms', function() {
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Terms & Conditions - Qurious");
   this.render('Header', {to: 'header'});
   this.render('TermsText');
@@ -708,6 +712,7 @@ Router.route('/terms', function() {
 });
 
 Router.route('/contact', function() {
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Contacting Qurious");
   this.render('Header', {to: 'header'});
   this.render('ContactText');
@@ -722,6 +727,10 @@ AccountsTemplates.configureRoute('signIn', {
     path: '/login',
     template: 'Login',
     redirect: '/random',
+    yieldTemplates: {
+        Header: {to: 'header'},
+        Footer: {to: 'footer'},
+    }
 });
 
 
@@ -732,7 +741,7 @@ AccountsTemplates.configureRoute('signIn', {
 
 Router.route('/logout', function() {
   Meteor.logout();
-  Router.go('/');
+  Router.go('/home');
 });
 
 
@@ -746,6 +755,7 @@ Router.route('/create', {
   },
 
   action: function () {
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Create a Quote - Qurious");
     this.render('Header', {to: 'header'});
     this.render('Create', {
@@ -776,6 +786,7 @@ Router.route('/explore', {
   },
 
   action: function () {
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Popular Quotes - Qurious");
     this.render('Header', {to: 'header'});
     this.render('Quotes', {
@@ -802,6 +813,7 @@ Router.route('/explore/popular', {
   },
 
   action: function () {
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Popular Quotes - Qurious");
     this.render('Header', {to: 'header'});
     this.render('Quotes', {
@@ -827,6 +839,7 @@ Router.route('/explore/latest', {
   },
 
   action: function () {
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Latest Quotes - Qurious");
 
     this.render('Header', {to: 'header'});
@@ -861,6 +874,7 @@ Router.route('/quotes/:_quote_slug', {
       // Meteor.users.update({_id:currentUserId},{$addToSet:{quotesVisited:this.params._quote_slug}});
     },
   action: function () {
+    this.layout('ApplicationLayout');
     this.render('Header', {to: 'header'});
     this.render('SingleQuote', {
       data: function () {
@@ -942,6 +956,7 @@ Router.route('/users/:_username', {
   },
 
   action: function () {
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle","Exploring " + this.params._username + " - Qurious");
 
 
@@ -982,6 +997,7 @@ Router.route('/users/:_username/dogears', {
   },
 
   action: function () {
+    this.layout('ApplicationLayout');
     this.render('Header', {to: 'header'});
     //to pass it into the function, someone help with this
     var usernameParam = this.params._username;
@@ -1019,6 +1035,7 @@ Router.route('/search/:_terms', {
   },
 
   action: function () {
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle","Quotes with: " + this.params._terms + " - Qurious");
 
 
@@ -1042,8 +1059,9 @@ Router.route('/search/:_terms', {
 
 
 // The front landing page
-Router.route('/admin', {
+Router.route('/home', {
   action: function () {
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle","Qurious");
     this.render('Header', {
       to: 'header',
@@ -1068,6 +1086,7 @@ Router.route('/admin', {
 
 // Just to test the loader
 Router.route('/loading', function() {
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle","Loading - Qurious");
 
   this.render('Loading');
@@ -1092,6 +1111,7 @@ Router.route('/api', function () {
 // Probably won't be called all that much
 // Especially after we implement qurious.cc/phocks user pages
 Router.route('/(.*)', function() {
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle","404 - Qurious");
   this.render('Header', {to: 'header'});
   this.render('404');

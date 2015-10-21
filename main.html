@@ -22,22 +22,25 @@ Thanks. Josh.
 </head>
 
 <body>
+  
   <!-- Any body text first up..... pretty much useless maybeeeeee if we were adding analytics or something -->
-
+  
 </body>
 
 
 <!-- First up we have the iron-router main layout -->
 <template name="ApplicationLayout">
-  <header>
-    {{> yield "header"}}
-  </header>
-  <div class="body-container">
-    {{> yield}}
+  <div class="master-container">
+    <header>
+      {{> yield "header"}}
+    </header>
+    <div class="body-container">
+      {{> yield}}
+    </div>
+    <footer>
+      {{> yield "footer"}}
+    </footer>
   </div>
-  <footer>
-    {{> yield "footer"}}
-  </footer>
 </template>
 
 
@@ -55,7 +58,7 @@ Thanks. Josh.
               <span class="icon-bar"></span>
             </button>
             <!-- to hide this on a certain page use: {{#if isActivePath '/'}}hidden{{/if}} in the class-->
-            <a class="navbar-brand" href="/"><img src="/qurious_logo.png"></a>
+            <a class="navbar-brand" href="/home"><img src="/qurious_logo.png"></a>
 
           </div>
 

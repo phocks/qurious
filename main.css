@@ -19,12 +19,15 @@ a:focus {
 
 body {
   font-family: "Open Sans", sans-serif;
-  background-color: #171717;
+  background-color: #fdfbf8;  /*#171717*/
 }
 
 img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
-
+.master-container {
+  background-color: #171717;
+  min-height: 100vh;
+}
 
 .body-container {
   background-color: #fdfbf8;

@@ -57,11 +57,13 @@ Router.route('/q/:_quote_id', {
 });
 
 Router.route('/r', function () {
-    Meteor.call('getRandomQuoteId', function (error, result) {
-      var randomId = result;
-      // replaceState keeps the browser from duplicating history
-      Router.go('/q/' + randomId, {}, {replaceState:true});
-    });
+  this.layout('LiteLayout');
+  this.render('LiteLoad');
+  Meteor.call('getRandomQuoteId', function (error, result) {
+    var randomId = result;
+    // replaceState keeps the browser from duplicating history
+    Router.go('/q/' + randomId, {}, {replaceState:true});
+  });
 });
 
 // Testing the Lite loader

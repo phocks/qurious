@@ -1,7 +1,7 @@
-/* Qurious Lite Styles */
+/* Qurious Lite Mobile First Styles */
 .lite-container {
   font-family: 'Vollkorn', serif;
-  font-size: 200%;
+  font-size: 1.6em;
   text-align: justify;
   min-height: 100vh;
   max-width: 1170px;
@@ -10,7 +10,6 @@
 
 .lite-container .attribution {
   font-style: italic;
-  
 }
 
 .lite-container .dash {
@@ -20,4 +19,8 @@
 .lite-container .lite-footer {
   text-align: center;
   padding: 32px;
+}
+
+.lite-footer img {
+  width: 60px;
 }

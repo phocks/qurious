@@ -15,9 +15,7 @@
   <div class="lite-container container">
     <p>{{{quotation}}}</p>
     <div class="attribution"><span class="dash">&mdash;</span>{{attribution}}</div>
-    <div class="lite-footer">
-      <a href="/r"><img width="80px" src="/qurious_footer_logo.png"></a>
-    </div>
+    {{> LiteFooter}}
   </div>
 </template>
 
@@ -27,8 +25,12 @@
     <p class="text-center">
       loading..
     </p>
-    <div class="lite-footer">
-      <a href="/r"><img width="80px" src="/qurious_footer_logo.png"></a>
-    </div>
+    {{> LiteFooter}}
+  </div>
+</template>
+
+<template name="LiteFooter">
+  <div class="lite-footer">
+    <a href="/r"><img src="/qurious_footer_logo.png"></a>
   </div>
 </template>

@@ -33,3 +33,5 @@ App.configurePlugin('com.phonegap.plugins.facebookconnect', {
   APP_ID: '1234567890',
   API_KEY: 'supersecretapikey'
 });
+
+App.accessRule('*');

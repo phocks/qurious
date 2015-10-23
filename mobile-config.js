@@ -7,4 +7,7 @@ App.accessRule('*');
 
 // Overlay the background color over the status bar
 // Watch out that the content doesn't bunch up.
-App.setPreference('StatusBarOverlaysWebView', 'true');
+// This was causing issues with content so disabling for now.
+// App.setPreference('StatusBarOverlaysWebView', 'true');
+
+App.setPreference('StatusBarBackgroundColor', "#fdfbf8");

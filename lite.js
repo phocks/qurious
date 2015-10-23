@@ -24,7 +24,7 @@ Router.route('/q/:_quote_id', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotesAll');
+    return Meteor.subscribe('quotesSlug', this.params._quote_id);
   },
   action: function () {
     this.layout('LiteLayout');

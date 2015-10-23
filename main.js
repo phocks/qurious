@@ -17,7 +17,7 @@
 // First up we are going to create a few collections
 Quotes = new Mongo.Collection('quotes');  // Our main quote db
 Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use)
-
+// There is also a Users collection by default in Meteor
 
 
 

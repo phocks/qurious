@@ -1,4 +1,4 @@
-// Super secret next step forward
+// Mobile first minimal spectacular
 Router.route('/', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
@@ -17,6 +17,7 @@ Router.route('/', {
         return Quotes.findOne({});
       }      
     });
+    this.render('LiteFooter', { to: 'footer'});
   }
 });
 
@@ -53,11 +54,11 @@ Router.route('/q/:_quote_id', {
         }
       }
     });
+    this.render('LiteFooter', { to: 'footer'});
   },
 });
 
 Router.route('/r', function () {
-  this.layout('LiteLayout');
   this.render('LiteLoad');
   Meteor.call('getRandomQuoteId', function (error, result) {
     var randomId = result;

@@ -1,30 +1,27 @@
 <!-- An iron-router Layout -->
 <template name="LiteLayout">
-  <header>
-    {{> yield "header"}}
-  </header>
-  <div class="body-container">
-    {{> yield}}
+  <div class="lite-container container">
+    <header>
+      {{> yield "header"}}
+    </header>
+    <div class="body-container">
+      {{> yield}}
+    </div>
+    <footer>
+      {{> yield "footer"}}
+    </footer>
   </div>
-  <footer>
-    {{> yield "footer"}}
-  </footer>
 </template>
 
 <template name="Lite">
-  <div class="lite-container container">
     <p class="quotation">{{{quotation}}}</p>
     <div class="attribution"><span class="dash">&mdash;</span>{{attribution}}</div>
-    {{> LiteFooter}}
-  </div>
 </template>
 
 <!-- This template is for the loading spinner -->
 <template name="LiteLoad">
-  <div class="lite-container container-fluid">
-    <p class="text-center">
-      loading..
-    </p>
+  <div class="lite-container container">
+    <p class="quotation">loading..</p>
     {{> LiteFooter}}
   </div>
 </template>

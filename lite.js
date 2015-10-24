@@ -1,4 +1,7 @@
 // Mobile first minimal spectacular
+
+
+// The root home route landing for qurious.cc/
 Router.route('/', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
@@ -21,6 +24,7 @@ Router.route('/', {
   }
 });
 
+// Takes the doc _id and displays quote
 Router.route('/q/:_quote_id', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
@@ -58,8 +62,8 @@ Router.route('/q/:_quote_id', {
   },
 });
 
+// gets a random quote and redirects to the page
 Router.route('/r', function () {
-  this.render('LiteLoad');
   Meteor.call('getRandomQuoteId', function (error, result) {
     var randomId = result;
     // replaceState keeps the browser from duplicating history

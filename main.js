@@ -115,7 +115,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
   // Call this at any time to set the <title>
-  Session.set("DocumentTitle","Qurious - Curiously Quotable");
+  Session.set("DocumentTitle","Qurious");
 
   // Sets up automatically setting <title> in head
   // Simply do Session.set("DocumentTitle", "Whatever you want"); 
@@ -471,7 +471,10 @@ if (Meteor.isServer) {
 
   Meteor.publish("quotesSlug", function (slug) {
     check(slug, String);
-    return Quotes.find({ _id: slug });
+    var quote = Quotes.find({ _id: slug });
+    // console.log(quote); // trying to get counter quotes working too../....
+    // if (!quote) quote = Quotes.find({ quote_id: slug });
+    return quote;
   });
 
   // Pusblish quotes given IDs in an array as input

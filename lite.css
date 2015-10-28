@@ -1,29 +1,23 @@
 /* Qurious Lite Mobile First Styles */
+
 .lite-container {
   font-family: 'Vollkorn', serif;
-  font-size: 1.4em;
+  font-size: 1.6em;
   min-height: 100vh;
-  max-width: 1170px;
-  padding: 6%;
-}
-
-.lite-container .quotation {
-  text-align: justify;
+  padding-bottom: 70px;
 }
 
 .lite-container .attribution {
   font-style: italic;
 }
 
-.lite-container .dash {
-  
-}
-
-.lite-container .lite-footer {
+.lite-container .lite-header {
+  line-height: 32px;
+  padding: 32px 0;
   text-align: center;
-  padding: 32px;
 }
 
-.lite-footer img {
-  width: 60px;
+
+.lite-container .lite-header img {
+  width: 32px;
 }

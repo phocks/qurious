@@ -10,12 +10,13 @@ Router.route('/', {
   },
   action: function () {
     this.layout('LiteLayout');
-    Session.set("DocumentTitle","Qurious");    
+    Session.set("DocumentTitle","Qurious");
+    this.render('LiteHeader', { to: 'header'});
 
     // Here we send a quote to the front page if required
     Meteor.subscribe('quotesLatest', 1);
 
-    this.render('Lite', {
+    this.render('LiteQuote', {
       data: function () {
         return Quotes.findOne({});
       }      
@@ -33,7 +34,8 @@ Router.route('/q/:_quote_id', {
   },
   action: function () {
     this.layout('LiteLayout');
-    this.render('Lite', {
+    this.render('LiteHeader', { to: 'header'});
+    this.render('LiteQuote', {
       data: function () {
         var quote = Quotes.findOne({ _id: this.params._quote_id });
         if (!quote) {

@@ -1,6 +1,6 @@
 <!-- An iron-router Layout -->
 <template name="LiteLayout">
-  <div class="lite-container container">
+  <div class="lite-container container-fluid">
     <header>
       {{> yield "header"}}
     </header>
@@ -10,12 +10,27 @@
     <footer>
       {{> yield "footer"}}
     </footer>
+    <!-- <nav class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/r">
+            <i class="glyphicon glyphicon-flash" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </nav> -->
   </div>
 </template>
 
-<template name="Lite">
+<template name="LiteHeader">
+  <div class="lite-header">
+    <a href="/r"><img src="/qurious_footer_logo.png"></a>
+  </div>
+</template>
+
+<template name="LiteQuote">
     <p class="quotation">{{{quotation}}}</p>
-    <div class="attribution"><span class="dash">&mdash;</span>{{attribution}}</div>
+    <p class="attribution"><span class="dash">&mdash;</span>{{attribution}}</p>
 </template>
 
 <!-- This template is for the loading spinner -->
@@ -28,6 +43,6 @@
 
 <template name="LiteFooter">
   <div class="lite-footer">
-    <a href="/r"><img src="/qurious_footer_logo.png"></a>
+    <!-- <a href="/r"><img src="/qurious_footer_logo.png"></a> -->
   </div>
 </template>

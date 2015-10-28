@@ -20,6 +20,7 @@ a:focus {
 body {
   font-family: "Open Sans", sans-serif;
   background-color: #fdfbf8;  /* old background #171717*/
+  /*font-size: 16px;*/ /*change this for base font size*/
 }
 
 img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }

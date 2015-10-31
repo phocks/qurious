@@ -79,3 +79,30 @@ Router.route('/load', function() {
   Session.set("DocumentTitle","Loading - Qurious");
   this.render('LiteLoad');
 });
+
+
+
+
+
+if (Meteor.isClient) {
+  // Here we are experimenting with Dropcaps
+  // This adds a span to the first letter so we can style it
+
+  Template.LiteQuote.onRendered(function () { 
+      console.log('Inserting dropcaps span');
+      var node = $("p").contents().filter(function () { return this.nodeType == 3 }).first(),
+          text = node.text().trim(),
+          first = text.slice(0, 1);
+      
+      if (!node.length) {
+          console.log('not done');
+          return;
+        }
+      
+      node[0].nodeValue = text.slice(first.length);
+      node.before('<span id="dropcap">' + first + '</span>');
+
+      var dropcap = document.getElementById("dropcap");
+      window.Dropcap.layout(dropcap, 2, 2);
+  });
+}

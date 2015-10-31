@@ -8,13 +8,13 @@
 
 .lite-container.container-fluid {
   padding: 0;
+  padding-bottom: 70px;
 }
 
 .lite-container {
   font-family: 'Vollkorn', serif;
   font-size: 1.6em;
   min-height: 100vh;
-  padding-bottom: 70px;
 }
 
 /* The Header up top */
@@ -29,15 +29,36 @@
 
 /* Body where the quote goes */
 .lite-container .body-container {
-  
   padding: 1em 0;
 }
 
-.body-container .container {
-  max-width: 700px;
+.lite-container .container {
+  max-width: 500px;
 }
 
 .lite-container .attribution {
   font-style: italic;
+}
+
+#dropcap {
+  color: #f48365;
+}
+
+/* Footer section */
+.lite-container .lite-footer {
+  text-align: center;
+}
+
+.lite-container .lite-footer img {
+  width: 32px;
+}
+
+.lite-container .lite-nav-foot {
+  text-align: center;
+}
+
+.lite-container .lite-nav-foot img {
+  max-height: 50px;
+  padding: 10px;
 }
 

@@ -1,38 +1,30 @@
 <!-- An iron-router Layout -->
 <template name="LiteLayout">
   <div class="lite-container container-fluid">
-    <header>
-      {{> yield "header"}}
-    </header>
-    <div class="body-container">
-      <div class="container">
+    <div class="container">
+      <header>
+        {{> yield "header"}}
+      </header>
+      <div class="body-container">
         {{> yield}}
       </div>
+      <footer>
+        {{> yield "footer"}}
+        {{> LiteNavFoot}}
+      </footer>
     </div>
-    <footer>
-      {{> yield "footer"}}
-    </footer>
-    <!-- <nav class="navbar navbar-default navbar-fixed-bottom">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/r">
-            <i class="glyphicon glyphicon-flash" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-    </nav> -->
   </div>
 </template>
 
 <template name="LiteHeader">
   <div class="lite-header">
-    <a href="/r"><img src="/qurious_footer_logo.png"></a>
+    
   </div>
 </template>
 
 <template name="LiteQuote">
-    <p class="quotation">{{{quotation}}}</p>
-    <p class="attribution"><span class="dash">&mdash;</span>{{attribution}}</p>
+  <p class="quotation">{{{quotation}}}</p>
+  <p class="attribution"><span class="dash">&mdash;</span>{{attribution}}</p>
 </template>
 
 <!-- This template is for the loading spinner -->
@@ -45,6 +37,19 @@
 
 <template name="LiteFooter">
   <div class="lite-footer">
-    <!-- <a href="/r"><img src="/qurious_footer_logo.png"></a> -->
+    
   </div>
+</template>
+
+<template name="LiteNavFoot">
+  <nav class="navbar navbar-default navbar-fixed-bottom lite-nav-foot">
+    <div class="container">
+      <!-- <div class="navbar-header"> -->
+        <a class="logo" href="/r">
+          <img alt="Brand" src="/qurious_footer_logo.png">
+        </a>
+      <!-- </div> -->
+      <!-- <a href="/r"><img src="/qurious_footer_logo.png"></a> --> 
+    </div>
+  </nav>
 </template>

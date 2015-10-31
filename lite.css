@@ -1,4 +1,14 @@
-/* Qurious Lite Mobile First Styles */
+/* Qurious Lite Mobile First Styles
+---------------------------------------------------*/
+
+/* Master styles whole page */
+.lite-container p {
+  margin: 5px 0;
+}
+
+.lite-container.container-fluid {
+  padding: 0;
+}
 
 .lite-container {
   font-family: 'Vollkorn', serif;
@@ -7,17 +17,27 @@
   padding-bottom: 70px;
 }
 
-.lite-container .attribution {
-  font-style: italic;
-}
-
+/* The Header up top */
 .lite-container .lite-header {
-  line-height: 32px;
   padding: 32px 0;
   text-align: center;
 }
 
-
 .lite-container .lite-header img {
   width: 32px;
 }
+
+/* Body where the quote goes */
+.lite-container .body-container {
+  
+  padding: 1em 0;
+}
+
+.body-container .container {
+  max-width: 700px;
+}
+
+.lite-container .attribution {
+  font-style: italic;
+}
+

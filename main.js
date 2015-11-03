@@ -258,6 +258,11 @@ if (Meteor.isClient) { // only runs on the client
       return moment(context).format('DD/MM/YYYY, hh:mm a');
   });
 
+  Template.registerHelper('howLongAgo', function(context, options) {
+    if(context)
+      return moment(context).fromNow();
+  });
+
   // Gives us a {{username}} variable to use in html
   Template.registerHelper('currentUsername', function () {
       return Meteor.user().username;

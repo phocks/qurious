@@ -10,7 +10,6 @@
       </div>
       <footer>
         {{> yield "footer"}}
-        {{> LiteNavFoot}}
       </footer>
     </div>
   </div>
@@ -23,8 +22,14 @@
 </template>
 
 <template name="LiteQuote">
-  <p class="quotation">{{{quotation}}}</p>
-  <p class="attribution"><span class="dash">&mdash;</span>{{attribution}}</p>
+  <div class="lite-quote">
+    <p class="quotation">{{{quotation}}}</p>
+    <p class="attribution"><span class="dash">&mdash;</span>{{attribution}}</p>
+  </div>
+  <hr>
+  <div class="lite-info">
+    <p>Created: {{howLongAgo createdAt}}</p>
+  </div>
 </template>
 
 <!-- This template is for the loading spinner -->
@@ -41,15 +46,3 @@
   </div>
 </template>
 
-<template name="LiteNavFoot">
-  <nav class="navbar navbar-default navbar-fixed-bottom lite-nav-foot">
-    <div class="container">
-      <!-- <div class="navbar-header"> -->
-        <a class="logo" href="/r">
-          <img alt="Brand" src="/qurious_footer_logo.png">
-        </a>
-      <!-- </div> -->
-      <!-- <a href="/r"><img src="/qurious_footer_logo.png"></a> --> 
-    </div>
-  </nav>
-</template>

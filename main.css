@@ -7,7 +7,12 @@
   also, there is a way to selectively load fonts via javascript, see in js files
   */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+
+/*
 @import url(https://fonts.googleapis.com/css?family=Vollkorn:400,400italic);
+Importing Volkorn has been moved to the main.js due to 
+dropcap.js not playing well with CSS @imports
+*/
 
 
 

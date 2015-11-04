@@ -47,7 +47,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // Font experiment to see if we can load fonts on demand
   // and YES it looks like we can.
-  if (false) {  // for now let's just disable this, but bring it back later
+  if (true) {  // We are enabling this now, as dropcap.js doesn't work well with @import CSS
     WebFontConfig = {
       google: { families: [ 'Vollkorn::latin' ] }
     };

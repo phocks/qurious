@@ -38,7 +38,7 @@
 /* The Header up top */
 .lite-container .lite-header {
   /*text-align: center;*/
-  padding: 32px 0 18px;
+  padding: 32px 0 24px;
 }
 
 .lite-container .lite-header img {
@@ -55,7 +55,7 @@
 }
 
 .lite-quote p.quotation {
-  padding: 42px 0 32px;
+  padding: 42px 0 26px;
 }
 
 .lite-quote p.attribution {

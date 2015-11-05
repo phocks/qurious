@@ -8,8 +8,13 @@
   margin: 5px 0;
 }
 
+.lite-container .container {
+  /* hacky way of restricting width. do better later */
+  /*max-width: 700px;*/
+}
+
 .lite-container hr {
-  margin: 10px 0;
+  margin: 0;
 }
 
 .lite-container.container-fluid {
@@ -20,6 +25,7 @@
 .lite-container {
   font-family: "Open Sans", sans-serif;
   min-height: 100vh;
+  color: #787878;
 }
 
 .lite-quote {
@@ -32,23 +38,28 @@
 /* The Header up top */
 .lite-container .lite-header {
   /*text-align: center;*/
-  padding: 2em 0;
+  padding: 32px 0 18px;
 }
 
 .lite-container .lite-header img {
-  width: 32px;
+  height: 32px;
 }
 
 /* Body where the quote goes */
 .lite-container .body-container {
+
+}
+
+.lite-quote {
+  background-color: #F0ECE9;
 }
 
 .lite-quote p.quotation {
-  padding: 1em 0;
+  padding: 42px 0 32px;
 }
 
 .lite-quote p.attribution {
-  padding: 0 0 1em;
+  padding: 0 0 42px;
 }
 
 .lite-container .container {
@@ -57,13 +68,21 @@
 
 .lite-container .attribution {
   font-style: italic;
+  color: #999;
 }
 
 #dropcap {
   color: #f48365;
 }
 
+.lite-container .lite-info {
+  padding: 8px 0 0;
+}
 
+.lite-container .lite-controls {
+  font-size: 2em;
+  text-align: center;
+}
 
 /* Footer section */
 .lite-container .lite-footer {
@@ -75,7 +94,41 @@
 }
 
 
-
+/* Text shadows for effect */
 .simpleshadow {
   text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+/* 5 columns for Bootstrap */
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.col-xs-15 {
+  width: 20%;
+  float: left;
+}
+@media (min-width: 768px) {
+.col-sm-15 {
+  width: 20%;
+  float: left;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-15 {
+  width: 20%;
+  float: left;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-15 {
+    width: 20%;
+    float: left;
+  }
 }

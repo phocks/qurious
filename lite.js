@@ -71,6 +71,7 @@ Router.route('/r', function () {
     // replaceState keeps the browser from duplicating history
     Router.go('/q/' + randomId, {}, {replaceState:true});
   });
+  this.render('LiteLoad');
 });
 
 // Testing the Lite loader
@@ -103,6 +104,6 @@ if (Meteor.isClient) {
       node.before('<span id="dropcap">' + first + '</span>');
 
       var dropcap = document.getElementById("dropcap");
-      window.Dropcap.layout(dropcap, 3, 2);
+      window.Dropcap.layout(dropcap, 2.4, 2);
   });
 }

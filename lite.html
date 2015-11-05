@@ -1,40 +1,63 @@
 <!-- An iron-router Layout -->
 <template name="LiteLayout">
   <div class="lite-container container-fluid">
-    <div class="container">
-      <header>
-        {{> yield "header"}}
-      </header>
-      <div class="body-container">
-        {{> yield}}
-      </div>
-      <footer>
-        {{> yield "footer"}}
-      </footer>
+    <header>
+      {{> yield "header"}}
+    </header>
+    <div class="body-container">
+      {{> yield}}
     </div>
+    <footer>
+      {{> yield "footer"}}
+    </footer>
   </div>
 </template>
 
 <template name="LiteHeader">
   <div class="lite-header">
-    <a href="/r"><img src="/qurious_footer_logo.png"></a>
+    <div class="container">
+      <a href="/r"><img src="/qurious_footer_logo.png"></a> urious quotations.
+    </div>
   </div>
 </template>
 
 <template name="LiteQuote">
-  <hr>
-  <div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-8">
-    <div class="lite-quote">
+  
+  
+  <div class="lite-quote">
+    <div class="container">
       <p class="quotation simpleshadow">{{{quotation}}}</p>
       <p class="attribution simpleshadow"><span class="dash">&mdash;</span>{{attribution}}</p>
     </div>
-    </div>
-    <div class="col-xs-6 col-md-4"></div>
   </div>
-  <hr>
+
+  <!-- <div class="lite-controls">
+  <div class="container">
+  <div class="row">
+      <div class="col-xs-15">
+      
+      </div>
+      <div class="col-xs-15">
+      
+      </div>
+      <div class="col-xs-15">
+      <i class="icon ion-refresh"></i>
+      </div>
+      <div class="col-xs-15">
+      
+      </div>
+      <div class="col-xs-15">
+      
+      </div>
+  </div>
+  </div>
+  </div> -->
+    
+  
   <div class="lite-info">
-    <p>Created: {{howLongAgo createdAt}}</p>
+    <div class="container">
+      <p>Created: {{howLongAgo createdAt}}</p>
+    </div>
   </div>
 </template>
 

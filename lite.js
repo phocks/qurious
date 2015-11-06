@@ -47,7 +47,7 @@ Router.route('/q/:_quote_id', {
           // it takes for the variable "quote" to be assigned..
         } 
         else {
-          // Session.set('sessionQuoteId', this.params._quote_id);
+          Session.set('sessionQuoteId', this.params._quote_id);
           // Meteor.call('checkQuoteSize', this.params._quote_id); // small or big?
 
           // Let's try to get substring some text for the Title Bar

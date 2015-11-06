@@ -31,7 +31,8 @@
     </div>
   </div>
 
-  <!-- <div class="lite-controls">
+  <!-- This is five columns sort of like Twitter app etc at the bottom.
+  <div class="lite-controls">
   <div class="container">
   <div class="row">
       <div class="col-xs-15">
@@ -57,7 +58,8 @@
   <div class="lite-info">
     <div class="container">
       <ul>
-        <li><i class="icon ion-quote"></i> Created: {{howLongAgo createdAt}}</li>
+        <li><i class="icon ion-clock"></i> Created: {{howLongAgo createdAt}}</li>
+        <li><i class="icon ion-quote"></i> By: {{username}}</li>
         <li><i class="icon ion-eye"></i> Views: {{views}}</li>
       </ul>
     </div>
@@ -66,7 +68,7 @@
 
 <!-- This template is for the loading spinner -->
 <template name="LiteLoad">
-  <div class="lite-container container">
+  <div class="lite-container">
     <!-- <p class="quotation">loading..</p>
     {{> LiteFooter}} -->
   </div>
@@ -78,3 +80,8 @@
   </div>
 </template>
 
+<template name="LiteError">
+  <br>
+  <br>
+  <h1 class="text-center">404</h1>
+</template>

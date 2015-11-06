@@ -10,7 +10,7 @@
 
 .lite-container .container {
   /* hacky way of restricting width. do better later */
-  /*max-width: 700px;*/
+  max-width: 960px;
 }
 
 .lite-container hr {
@@ -84,20 +84,24 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+  line-height: 1.8em;
 }
 
 .lite-container .lite-info ul li {
   display: inline;
+  white-space: nowrap;
   padding-right: 8px;
 }
 
-.lite-container .lite-info ul li:after {
+/*.lite-container .lite-info ul li:after {
   content: " "
 }
 
 .lite-container .lite-info ul li:last-child:after {
   content: '';
-}
+}*/
+
+
 .lite-container .lite-controls {
   font-size: 2em;
   text-align: center;

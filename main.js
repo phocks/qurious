@@ -1119,9 +1119,7 @@ Router.route('/api', function () {
 // Probably won't be called all that much
 // Especially after we implement qurious.cc/phocks user pages
 Router.route('/(.*)', function() {
-  this.layout('ApplicationLayout');
-  Session.set("DocumentTitle","404 - Qurious");
-  this.render('Header', {to: 'header'});
-  this.render('404');
-  this.render('Footer', {to: 'footer'});
+  this.layout('LiteLayout');
+  Session.set("DocumentTitle","404 Qurious");
+  this.render('LiteError');
 });

@@ -58,9 +58,10 @@
   <div class="lite-info">
     <div class="container">
       <ul>
-        <li><i class="icon ion-clock"></i> Created: {{howLongAgo createdAt}}</li>
-        <li><i class="icon ion-quote"></i> By: {{username}}</li>
-        <li><i class="icon ion-eye"></i> Views: {{views}}</li>
+        <!-- Do we really need to show these? -->
+        <!-- <li><a href="/q/{{_id}}"><i class="icon ion-clock"></i> {{howLongAgo createdAt}}</a></li>
+        <li><i class="icon ion-quote"></i> By {{username}}</li> -->
+        <li><i class="icon ion-eye"></i> {{views}} views</li>
       </ul>
     </div>
   </div>

@@ -80,6 +80,10 @@
   padding: 8px 0 0;
 }
 
+.lite-container .lite-info a {
+  color: inherit;
+}
+
 .lite-container .lite-info ul {
   list-style-type: none;
   margin: 0;
@@ -90,7 +94,7 @@
 .lite-container .lite-info ul li {
   display: inline;
   white-space: nowrap;
-  padding-right: 8px;
+  margin-right: 8px;
 }
 
 /*.lite-container .lite-info ul li:after {

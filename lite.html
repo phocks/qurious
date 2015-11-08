@@ -16,14 +16,22 @@
 <template name="LiteHeader">
   <div class="lite-header">
     <div class="container">
-      <a href="/r"><img src="/grey-logo.png"></a> <!-- urious quotes. -->
+      <a href="/"><img src="/grey-logo.png"></a> <!-- urious quotes. -->
     </div>
   </div>
 </template>
 
+
+<template name="LiteHome">
+<div class="lite-quote">
+  <div class="container">
+    <p class="quotation simpleshadow">Something is coming soon.</p>
+    <p class="attribution simpleshadow"><span class="dash">&mdash;</span>Qurious</p>
+  </div>
+</div>
+</template>
+
 <template name="LiteQuote">
-  
-  
   <div class="lite-quote">
     <div class="container">
       <p class="quotation simpleshadow">{{{quotation}}}</p>
@@ -69,10 +77,9 @@
 
 <!-- This template is for the loading spinner -->
 <template name="LiteLoad">
-  <div class="lite-container">
-    <!-- <p class="quotation">loading..</p>
-    {{> LiteFooter}} -->
-  </div>
+  <br>
+  <br>
+  <h1 class="text-center"></h1>
 </template>
 
 <template name="LiteFooter">

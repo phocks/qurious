@@ -16,10 +16,10 @@ Router.route('/', {
     // Here we send a quote to the front page if required
     Meteor.subscribe('quotesLatest', 1);
 
-    this.render('LiteQuote', {
-      data: function () {
-        return Quotes.findOne({});
-      }      
+    this.render('LiteHome', {
+      // data: function () {
+      //   return Quotes.findOne({});
+      // }      
     });
     this.render('LiteFooter', { to: 'footer'});
   }
@@ -89,7 +89,25 @@ if (Meteor.isClient) {
   // Here we are experimenting with Dropcaps
   // This adds a span to the first letter so we can style it
 
-  Template.LiteQuote.onRendered(function () { 
+  Template.LiteQuote.onRendered(function () {
+      console.log('Inserting dropcaps span');
+      var node = $("p").contents().filter(function () { return this.nodeType == 3 }).first(),
+          text = node.text().trim(),
+          first = text.slice(0, 1);
+      
+      if (!node.length) {
+          console.log('not done');
+          return;
+        }
+      
+      node[0].nodeValue = text.slice(first.length);
+      node.before('<span id="dropcap">' + first + '</span>');
+
+      var dropcap = document.getElementById("dropcap");
+      window.Dropcap.layout(dropcap, 2.4, 2);
+  });
+
+  Template.LiteHome.onRendered(function () {
       console.log('Inserting dropcaps span');
       var node = $("p").contents().filter(function () { return this.nodeType == 3 }).first(),
           text = node.text().trim(),

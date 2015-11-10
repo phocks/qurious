@@ -16,26 +16,31 @@
 <template name="LiteHeader">
   <div class="lite-header">
     <div class="container">
-      <a href="/r"><img src="/grey-logo.png"></a> <!-- urious quotes. -->
+      <a href="/"><img src="/grey-logo.png"></a> | Hello there.<!-- urious quotations. -->
     </div>
   </div>
 </template>
 
 
 <template name="LiteHome">
-<div class="lite-quote">
-  <div class="container">
-    <p class="quotation simpleshadow">Someone once said that words and ideas have the power to change the world. We&rsquo;ve been hard at work on something new and exciting. Want to be the first to know? Use the form below to be notified as soon as it&rsquo;s ready.</p>
-    <p class="attribution simpleshadow"><span class="dash">&mdash;</span>The Qurious Team</p>
+  <div class="lite-quote">
+    <div class="container">
+      <div class="quotation simpleshadow">
+        <p>We&rsquo;ve been hard at work these past few months building something new from the ground up. Words and ideas can change the world. <em> Qurious</em> is an effort to organise the world&rsquo;s words and ideas in new and meaningful ways. We are not quite launch ready just yet, so use the form below to stay updated!</p>
+
+        <p class="attribution simpleshadow"><span class="dash">&mdash;</span>The Qurious Team.</p>
+      </div>
+    </div>
   </div>
-</div>
 </template>
 
 <template name="LiteQuote">
   <div class="lite-quote">
     <div class="container">
-      <p class="quotation simpleshadow">{{{quotation}}}</p>
-      <p class="attribution simpleshadow"><span class="dash">&mdash;</span>{{attribution}}</p>
+      <div class="quotation simpleshadow">
+        <p>{{{quotation}}}</p>
+        <p class="attribution simpleshadow"><span class="dash">&mdash;</span>{{attribution}}</p>
+      </div>
     </div>
   </div>
 
@@ -67,9 +72,9 @@
     <div class="container">
       <ul>
         <!-- Do we really need to show these? -->
-        <!-- <li><a href="/q/{{_id}}"><i class="icon ion-clock"></i> {{howLongAgo createdAt}}</a></li>
-        <li><i class="icon ion-quote"></i> By {{username}}</li> -->
         <li><i class="icon ion-eye"></i> {{views}} views</li>
+        <li><a href="/q/{{_id}}"><i class="icon ion-clock"></i> {{howLongAgo createdAt}}</a></li>
+        <li><i class="icon ion-quote"></i> By {{username}}</li>
       </ul>
     </div>
   </div>
@@ -97,7 +102,7 @@
           <div class="response" id="mce-success-response" style="display:none"></div>
         </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
           <div style="position: absolute; left: -5000px;"><input type="text" name="b_cf9d60bafd106d479eaf9a181_e0e0728735" tabindex="-1" value=""></div>
-          <div class="clear"><input type="submit" value="Notify me" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+          <div class="clear"><input type="submit" value="Sign me up" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
           </div>
       </form>
       </div>

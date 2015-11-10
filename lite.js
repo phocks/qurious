@@ -121,7 +121,9 @@ if (Meteor.isClient) {
       node[0].nodeValue = text.slice(first.length);
       node.before('<span id="dropcap">' + first + '</span>');
 
-      var dropcap = document.getElementById("dropcap");
-      window.Dropcap.layout(dropcap, 2.4, 2);
+      // $(window).resize(function(evt) {
+        var dropcap = document.getElementById("dropcap");
+        window.Dropcap.layout(dropcap, 2.4, 2);
+      // });
   });
 }

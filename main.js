@@ -49,7 +49,7 @@ if (Meteor.isClient) { // only runs on the client
   // and YES it looks like we can.
   if (true) {  // We are enabling this now, as dropcap.js doesn't work well with @import CSS
     WebFontConfig = {
-      google: { families: [ 'Vollkorn::latin' ] }
+      google: { families: [ 'Vollkorn:400,400italic:latin' ] }
     };
     (function() {
       var wf = document.createElement('script');
@@ -118,7 +118,7 @@ if (Meteor.isClient) { // only runs on the client
   Session.set("DocumentTitle","Qurious");
 
   // Sets up automatically setting <title> in head
-  // Simply do Session.set("DocumentTitle", "Whatever you want"); 
+  // Simply do Session.set("DocumentTitle", "Whatever you want");
   Tracker.autorun(function(){
     document.title = Session.get("DocumentTitle");
   });
@@ -339,7 +339,7 @@ if (Meteor.isClient) { // only runs on the client
 
       if (q == "") {
         Router.go('/explore/latest');
-        return false; 
+        return false;
 
       }
 
@@ -367,7 +367,7 @@ if (Meteor.isClient) { // only runs on the client
 
     //   // if (q == "") {
     //   //   Router.go('/explore/latest');
-    //   //   return false; 
+    //   //   return false;
 
     //   // }
 
@@ -380,7 +380,7 @@ if (Meteor.isClient) { // only runs on the client
     //   // Prevent default action from form submit
     //   return false;
     // },
-    
+
   });
 
 
@@ -435,7 +435,7 @@ if (Meteor.isServer) {
   // This is a monitoring tool
   //Kadira.connect('wYiFPMyqaBcyKp7QK', '1f136ced-05f9-4e73-a92b-ef609cda56ce');
 
-  
+
 
 
   // Get the server to publish our collections
@@ -498,7 +498,7 @@ if (Meteor.isServer) {
     return Meteor.users.find({},
       { fields: {'admin':1, 'liked': 1, 'username': 1 }
     });
-    
+
 
     /*if (this.userId) {
       return Meteor.users.find({_id: this.userId},
@@ -639,7 +639,7 @@ Meteor.methods({
       var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}})
 
       // Test to see if user has already dogeared this quote
-      if (!user) { // returns null or undefined 
+      if (!user) { // returns null or undefined
 
         // Old way, no time stamp
         Meteor.users.update({_id:this.userId},{ $pull:{liked:quoteId} });
@@ -657,7 +657,7 @@ Meteor.methods({
         return false; // exits the function
       }
 
-      // Otherwise dogear this quote below  
+      // Otherwise dogear this quote below
 
       console.log("user " + this.userId + " collected the quote " + quoteId );
 
@@ -1053,8 +1053,8 @@ Router.route('/search/:_terms', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ $or: [ { quotation: { '$regex': terms_to_lookup, $options: 'i'} }, 
-            { attribution: { '$regex': terms_to_lookup, $options: 'i'}} ] }, 
+          return Quotes.find({ $or: [ { quotation: { '$regex': terms_to_lookup, $options: 'i'} },
+            { attribution: { '$regex': terms_to_lookup, $options: 'i'}} ] },
             {sort: {views: -1}, limit: Session.get('limit') });
         },
         exploreToShow: function () { return terms_to_lookup },

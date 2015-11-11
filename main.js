@@ -127,7 +127,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // Setting up the useraccounts:core
   AccountsTemplates.configure({
-    forbidClientAccountCreation: false,
+    forbidClientAccountCreation: true,
     enablePasswordChange: true,
     showForgotPasswordLink: true,
     lowercaseUsername: true,
@@ -696,6 +696,8 @@ Meteor.methods({
 
 
 Router.route('/about', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
   this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Qurious About Us?");
   this.render('Header', {to: 'header'});
@@ -704,6 +706,8 @@ Router.route('/about', function() {
 });
 
 Router.route('/privacy', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
   this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Privacy Policy - Qurious");
   this.render('Header', {to: 'header'});
@@ -712,6 +716,8 @@ Router.route('/privacy', function() {
 });
 
 Router.route('/terms', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
   this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Terms & Conditions - Qurious");
   this.render('Header', {to: 'header'});
@@ -720,6 +726,8 @@ Router.route('/terms', function() {
 });
 
 Router.route('/contact', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
   this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Contacting Qurious");
   this.render('Header', {to: 'header'});
@@ -763,6 +771,8 @@ Router.route('/create', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
     this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Create a Quote - Qurious");
     this.render('Header', {to: 'header'});
@@ -794,6 +804,8 @@ Router.route('/explore', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
     this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Popular Quotes - Qurious");
     this.render('Header', {to: 'header'});
@@ -821,6 +833,8 @@ Router.route('/explore/popular', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
     this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Popular Quotes - Qurious");
     this.render('Header', {to: 'header'});
@@ -847,6 +861,8 @@ Router.route('/explore/latest', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
     this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Latest Quotes - Qurious");
 
@@ -882,6 +898,8 @@ Router.route('/quotes/:_quote_slug', {
       // Meteor.users.update({_id:currentUserId},{$addToSet:{quotesVisited:this.params._quote_slug}});
     },
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
     this.layout('ApplicationLayout');
     this.render('Header', {to: 'header'});
     this.render('SingleQuote', {
@@ -1005,6 +1023,8 @@ Router.route('/users/:_username/dogears', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+    
     this.layout('ApplicationLayout');
     this.render('Header', {to: 'header'});
     //to pass it into the function, someone help with this
@@ -1043,6 +1063,8 @@ Router.route('/search/:_terms', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
     this.layout('ApplicationLayout');
     Session.set("DocumentTitle","Quotes with: " + this.params._terms + " - Qurious");
 
@@ -1069,6 +1091,8 @@ Router.route('/search/:_terms', {
 // The front landing page
 Router.route('/home', {
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
     this.layout('ApplicationLayout');
     Session.set("DocumentTitle","Qurious");
     this.render('Header', {
@@ -1094,6 +1118,8 @@ Router.route('/home', {
 
 // Just to test the loader
 Router.route('/loading', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
   this.layout('ApplicationLayout');
   Session.set("DocumentTitle","Loading - Qurious");
 

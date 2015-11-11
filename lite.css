@@ -46,6 +46,14 @@
   height: 32px;
 }
 
+.lite-container .lite-header a {
+  color: inherit; /* hiding random quote easter egg */
+}
+
+
+
+
+
 /* Body where the quote goes */
 .lite-container .body-container {
 

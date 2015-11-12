@@ -22,21 +22,25 @@ Thanks. Josh.
 </head>
 
 <body>
-  <!-- Any body text first up..... pretty much useless -->
+  
+  <!-- Any body text first up..... pretty much useless maybeeeeee if we were adding analytics or something -->
+  
 </body>
 
 
 <!-- First up we have the iron-router main layout -->
 <template name="ApplicationLayout">
-  <header>
-    {{> yield "header"}}
-  </header>
-  <div class="body-container">
-    {{> yield}}
+  <div class="master-container">
+    <header>
+      {{> yield "header"}}
+    </header>
+    <div class="body-container">
+      {{> yield}}
+    </div>
+    <footer>
+      {{> yield "footer"}}
+    </footer>
   </div>
-  <footer>
-    {{> Footer}}
-  </footer>
 </template>
 
 
@@ -45,7 +49,7 @@ Thanks. Josh.
 <!-- This is the Navigation Bar up top for Logo etc. -->
 <template name="Header">
   <nav class="navbar navbar-default navbar-static-top">
-        <div class="container-fluid">
+        <div class="container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
               <span class="sr-only">Expand navigation</span>
@@ -54,7 +58,7 @@ Thanks. Josh.
               <span class="icon-bar"></span>
             </button>
             <!-- to hide this on a certain page use: {{#if isActivePath '/'}}hidden{{/if}} in the class-->
-            <a class="navbar-brand" href="/"><img src="/qurious_logo.png"></a>
+            <a class="navbar-brand" href="/home"><img src="/qurious_logo.png"></a>
 
           </div>
 
@@ -71,6 +75,7 @@ Thanks. Josh.
                   <input type="text" class="form-control" placeholder="Search" name="q">
                   <div class="input-group-btn">
                     <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    <!-- <span id="searchclear" class="glyphicon glyphicon-remove-circle"></span> -->
                   </div>
                 </div>
               </form>            
@@ -80,7 +85,6 @@ Thanks. Josh.
 
             
             <ul class="nav navbar-nav navbar-right">
-                
                 <li class="{{isActivePath '/explore'}}"><a href="/explore">Explore</a></li>
 
 
@@ -126,15 +130,8 @@ Thanks. Josh.
                     <li><a href="/logout">Logout</a></li>
                   </ul>
                 </li>
-              {{/if}}
-              
-
+              {{/if}}              
             </ul>
-
-
-              
-                            
-
           </div><!--/.nav-collapse -->
         </div>
       </nav>
@@ -156,8 +153,6 @@ Thanks. Josh.
       <!-- <div class="row"> -->
         <!-- <div class="front-content-row">  -->      
           
-
-
 
         <!-- <h1 class="hidden">Qurious</h1><h1><img src="/qurious_logo.png"></h1> -->
         <!-- <p class="subtitle">Curiously quotable</p>
@@ -202,14 +197,11 @@ Thanks. Josh.
 
 
 
-
-
-
 <template name="Footer">
   <div class="footer">
     <div class="container">
       <div class="row">
-        <div class="col-sm-3 footer-title"><a href="/"><img class="" width="80px" src="/qurious_footer-logo.png" alt="Qurious"></a></div>
+        <div class="col-sm-3 footer-title"><a href="/"><img class="" width="80px" src="/grey-logo.png" alt="Qurious"></a></div>
         <div class="col-sm-3">
             <ul class="list-unstyled">
               <li><a href="/">Home</a></li>
@@ -226,7 +218,7 @@ Thanks. Josh.
         </div>
         <div class="col-sm-3">
           <ul class="list-unstyled">
-            <li><a href="https://github.com/meagre/qurious"><i class="icon ion-social-github"></i> GitHub</a></li>
+            <!-- <li><a href="https://github.com/meagre/qurious"><i class="icon ion-social-github"></i> GitHub</a></li> -->
             <li>&copy; <a href="http://meag.re/">Meagre</a> 2015</li>      
           </ul>          
           <span class="hidden"><img src="/q-loader.gif"></span></div> <!-- Preload our spinner -->
@@ -483,8 +475,3 @@ Thanks. Josh.
   </div>
   </div>
 </template>
-
-
-
-
-

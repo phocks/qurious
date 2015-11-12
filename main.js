@@ -16,8 +16,8 @@
 
 // First up we are going to create a few collections
 Quotes = new Mongo.Collection('quotes');  // Our main quote db
-Counters = new Mongo.Collection('counters'); // Handles numbering
-
+Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use)
+// There is also a Users collection by default in Meteor
 
 
 
@@ -47,9 +47,9 @@ if (Meteor.isClient) { // only runs on the client
 
   // Font experiment to see if we can load fonts on demand
   // and YES it looks like we can.
-  if (false) {  // for now let's just disable this, but bring it back later
+  if (true) {  // We are enabling this now, as dropcap.js doesn't work well with @import CSS
     WebFontConfig = {
-      google: { families: [ 'Vollkorn::latin' ] }
+      google: { families: [ 'Vollkorn:400,400italic:latin' ] }
     };
     (function() {
       var wf = document.createElement('script');
@@ -93,13 +93,14 @@ if (Meteor.isClient) { // only runs on the client
 
   // Some more configs to run initially
 
-  Router.configure({
-    layoutTemplate: 'ApplicationLayout',
-    loadingTemplate: "Loading",
-    yieldTemplates: {
-        Header: {to: 'header'},
-        Footer: {to: 'footer'},
-    },
+  Router.configure({ // commenting out default due to Lite layout change
+    // sets default layout so you don't have to set it in the route
+    // layoutTemplate: 'ApplicationLayout',
+    // loadingTemplate: "Loading",
+    // yieldTemplates: {
+    //     Header: {to: 'header'},
+    //     Footer: {to: 'footer'},
+    // },
     //notFoundTemplate: '404' //this is used for somewhat custom 404s
   });
 
@@ -114,9 +115,10 @@ if (Meteor.isClient) { // only runs on the client
 
 
   // Call this at any time to set the <title>
-  Session.set("DocumentTitle","Qurious - Curiously Quotable");
+  Session.set("DocumentTitle","Qurious");
 
   // Sets up automatically setting <title> in head
+  // Simply do Session.set("DocumentTitle", "Whatever you want");
   Tracker.autorun(function(){
     document.title = Session.get("DocumentTitle");
   });
@@ -125,7 +127,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // Setting up the useraccounts:core
   AccountsTemplates.configure({
-    forbidClientAccountCreation: false,
+    forbidClientAccountCreation: true,
     enablePasswordChange: true,
     showForgotPasswordLink: true,
     lowercaseUsername: true,
@@ -248,13 +250,17 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-
   // And some global helpers etc
 
   // This sets the time format using the moment package
-  UI.registerHelper('formatTime', function(context, options) {
+  Template.registerHelper('formatTime', function(context, options) {
     if(context)
       return moment(context).format('DD/MM/YYYY, hh:mm a');
+  });
+
+  Template.registerHelper('howLongAgo', function(context, options) {
+    if(context)
+      return moment(context).fromNow();
   });
 
   // Gives us a {{username}} variable to use in html
@@ -262,7 +268,6 @@ if (Meteor.isClient) { // only runs on the client
       return Meteor.user().username;
     }
   );
-
 
 
 
@@ -279,8 +284,8 @@ if (Meteor.isClient) { // only runs on the client
 
     // Put the quotation into the users collection!
     "click .dogear-click": function () {
+      console.log("Calling function to dogear this quote");
       Meteor.call('dogearQuote', this._id);
-      console.log("yep");
     },
 
     // Remove the quotation into the users collection!
@@ -334,7 +339,7 @@ if (Meteor.isClient) { // only runs on the client
 
       if (q == "") {
         Router.go('/explore/latest');
-        return false; 
+        return false;
 
       }
 
@@ -348,6 +353,12 @@ if (Meteor.isClient) { // only runs on the client
       return false;
     },
 
+    // I was trying to create a delete x here but it was too hard
+    // so I quit doing it
+    // "click .searchclear": function (event, template) {
+    //   $('.search-form')[0].reset();
+    // }
+
     // This will enable instant search if we want it
     // "keyup .form-control": function (event) {
     //   var q = event.target.value;
@@ -356,7 +367,7 @@ if (Meteor.isClient) { // only runs on the client
 
     //   // if (q == "") {
     //   //   Router.go('/explore/latest');
-    //   //   return false; 
+    //   //   return false;
 
     //   // }
 
@@ -369,7 +380,17 @@ if (Meteor.isClient) { // only runs on the client
     //   // Prevent default action from form submit
     //   return false;
     // },
-    
+
+  });
+
+
+
+  // trying out this router hook thing to reset the post limit
+  Router.onBeforeAction(function() {
+    Session.set('limit', loadMoreLimit); // set the infinite scroll limit back to default
+    //$(window).scrollTop(0); // this replaces the auto scroll package
+
+    this.next();
   });
 
 
@@ -414,7 +435,7 @@ if (Meteor.isServer) {
   // This is a monitoring tool
   //Kadira.connect('wYiFPMyqaBcyKp7QK', '1f136ced-05f9-4e73-a92b-ef609cda56ce');
 
-  
+
 
 
   // Get the server to publish our collections
@@ -455,7 +476,10 @@ if (Meteor.isServer) {
 
   Meteor.publish("quotesSlug", function (slug) {
     check(slug, String);
-    return Quotes.find({ _id: slug });
+    var quote = Quotes.find({ _id: slug });
+    // console.log(quote); // trying to get counter quotes working too../....
+    // if (!quote) quote = Quotes.find({ quote_id: slug });
+    return quote;
   });
 
   // Pusblish quotes given IDs in an array as input
@@ -474,7 +498,7 @@ if (Meteor.isServer) {
     return Meteor.users.find({},
       { fields: {'admin':1, 'liked': 1, 'username': 1 }
     });
-    
+
 
     /*if (this.userId) {
       return Meteor.users.find({_id: this.userId},
@@ -607,24 +631,25 @@ Meteor.methods({
 
   // This is a feature to "Like" a quotation. It should put the quote in the user's
   // likes list and then update the upcount in the quote db
+  // If a user has already like the quote, this function also "Unlikes" it
   dogearQuote: function (quoteId) {
     if (Meteor.userId()) { // Only process if user logged in
 
       // Looks for quoteId in Users collection
       var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}})
 
-
-
-      if (!user) { // returns null or undefined 
+      // Test to see if user has already dogeared this quote
+      if (!user) { // returns null or undefined
 
         // Old way, no time stamp
-        Meteor.users.update({_id:this.userId},{$pull:{liked:quoteId}});
+        Meteor.users.update({_id:this.userId},{ $pull:{liked:quoteId} });
 
         // New way with timestamp
-        Meteor.users.update({_id:this.userId},{$pull:{dogeared: { quoteId: quoteId } }},
+        Meteor.users.update({_id:this.userId},{ $pull:{ dogeared: { quoteId: quoteId } }},
           { multi: true });
 
-
+        // Even newer dogearing removes username from the quote
+        Quotes.update({ _id: quoteId }, { $pull: { usersWhoDogeared: Meteor.user().username } });
 
 
         Quotes.update( { _id: quoteId }, {$inc: { upcount: -1 } });
@@ -632,16 +657,19 @@ Meteor.methods({
         return false; // exits the function
       }
 
-  
+      // Otherwise dogear this quote below
 
       console.log("user " + this.userId + " collected the quote " + quoteId );
 
       Quotes.update( { _id: quoteId }, {$inc: { upcount: 1 } });
-      Meteor.users.update({_id:this.userId},{$addToSet:{liked:quoteId}});
+      Meteor.users.update({_id:this.userId},{ $addToSet:{liked:quoteId} });
 
       // New Dogear feature that adds date as well
       Meteor.users.update({ _id: this.userId },
         { $push: { dogeared: { quoteId: quoteId, dogearedAt: new Date() }}});
+
+      // Even newer dogearing adds username to the quote
+      Quotes.update({ _id: quoteId }, { $addToSet: { usersWhoDogeared: Meteor.user().username } });
 
 
       return true;
@@ -657,14 +685,7 @@ Meteor.methods({
 
 
 
-// trying out this router hook thing to reset the post limit
 
-Router.onBeforeAction(function() {
-  Session.set('limit', loadMoreLimit); // set the infinite scroll limit back to default
-  //$(window).scrollTop(0); // this replaces the auto scroll package
-
-  this.next();
-});
 
 
 // Here come our routes which catch and process URLs -----------------
@@ -675,27 +696,43 @@ Router.onBeforeAction(function() {
 
 
 Router.route('/about', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Qurious About Us?");
   this.render('Header', {to: 'header'});
   this.render('AboutText');
+  this.render('Footer', {to: 'footer'});
 });
 
 Router.route('/privacy', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Privacy Policy - Qurious");
   this.render('Header', {to: 'header'});
   this.render('PrivacyText');
+  this.render('Footer', {to: 'footer'});
 });
 
 Router.route('/terms', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Terms & Conditions - Qurious");
   this.render('Header', {to: 'header'});
   this.render('TermsText');
+  this.render('Footer', {to: 'footer'});
 });
 
 Router.route('/contact', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Contacting Qurious");
   this.render('Header', {to: 'header'});
   this.render('ContactText');
+  this.render('Footer', {to: 'footer'});
 });
 
 
@@ -706,6 +743,10 @@ AccountsTemplates.configureRoute('signIn', {
     path: '/login',
     template: 'Login',
     redirect: '/random',
+    yieldTemplates: {
+        Header: {to: 'header'},
+        Footer: {to: 'footer'},
+    }
 });
 
 
@@ -716,7 +757,7 @@ AccountsTemplates.configureRoute('signIn', {
 
 Router.route('/logout', function() {
   Meteor.logout();
-  Router.go('/');
+  Router.go('/home');
 });
 
 
@@ -730,6 +771,9 @@ Router.route('/create', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Create a Quote - Qurious");
     this.render('Header', {to: 'header'});
     this.render('Create', {
@@ -740,6 +784,8 @@ Router.route('/create', {
         }
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -758,6 +804,9 @@ Router.route('/explore', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Popular Quotes - Qurious");
     this.render('Header', {to: 'header'});
     this.render('Quotes', {
@@ -767,6 +816,8 @@ Router.route('/explore', {
         }
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -782,6 +833,9 @@ Router.route('/explore/popular', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Popular Quotes - Qurious");
     this.render('Header', {to: 'header'});
     this.render('Quotes', {
@@ -791,6 +845,8 @@ Router.route('/explore/popular', {
         }
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -805,6 +861,9 @@ Router.route('/explore/latest', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Latest Quotes - Qurious");
 
     this.render('Header', {to: 'header'});
@@ -815,6 +874,8 @@ Router.route('/explore/latest', {
         }
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -830,13 +891,16 @@ Router.route('/quotes/:_quote_slug', {
   },
     onBeforeAction: function() {
 
-      this.next();
+      this.next(); // does this do anything? i don't think so
   },
     onAfterAction: function() {
       // if (Meteor.userId()) currentUserId = Meteor.userId();
       // Meteor.users.update({_id:currentUserId},{$addToSet:{quotesVisited:this.params._quote_slug}});
     },
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     this.render('Header', {to: 'header'});
     this.render('SingleQuote', {
       data: function () {
@@ -857,6 +921,8 @@ Router.route('/quotes/:_quote_slug', {
           }
         }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -916,6 +982,7 @@ Router.route('/users/:_username', {
   },
 
   action: function () {
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle","Exploring " + this.params._username + " - Qurious");
 
 
@@ -930,6 +997,8 @@ Router.route('/users/:_username', {
         usernameToShow: function () { return username_to_lookup },
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
@@ -954,6 +1023,9 @@ Router.route('/users/:_username/dogears', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+    
+    this.layout('ApplicationLayout');
     this.render('Header', {to: 'header'});
     //to pass it into the function, someone help with this
     var usernameParam = this.params._username;
@@ -974,12 +1046,14 @@ Router.route('/users/:_username/dogears', {
 
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
 
 
-// What we want to do here is search for a tag
+// What we want to do here is search
 Router.route('/search/:_terms', {
   loadingTemplate: 'Loading',
 
@@ -989,6 +1063,9 @@ Router.route('/search/:_terms', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle","Quotes with: " + this.params._terms + " - Qurious");
 
 
@@ -998,21 +1075,25 @@ Router.route('/search/:_terms', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ $or: [ { quotation: { '$regex': terms_to_lookup, $options: 'i'} }, { attribution: { '$regex': terms_to_lookup, $options: 'i'}} ] }, {sort: {views: -1}, limit: Session.get('limit') });
-          //return Quotes.find({ "quotation": { '$regex': terms_to_lookup, $options: 'i'} }, {sort: {views: -1}, limit: Session.get('limit') });
-          //console.log(Users.find({$or: [{email: 'some@mail.com'},{city: 'atlanta'}]}).fetch());
+          return Quotes.find({ $or: [ { quotation: { '$regex': terms_to_lookup, $options: 'i'} },
+            { attribution: { '$regex': terms_to_lookup, $options: 'i'}} ] },
+            {sort: {views: -1}, limit: Session.get('limit') });
         },
         exploreToShow: function () { return terms_to_lookup },
       }
     });
+    this.render('Footer', {to: 'footer'});
   }
 });
 
 
 
 // The front landing page
-Router.route('/', {
+Router.route('/home', {
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle","Qurious");
     this.render('Header', {
       to: 'header',
@@ -1029,12 +1110,17 @@ Router.route('/', {
         return Quotes.findOne({});
       }
     });
+
+    this.render('Footer', {to: 'footer'});
   }
 });
 
 
 // Just to test the loader
 Router.route('/loading', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle","Loading - Qurious");
 
   this.render('Loading');
@@ -1043,11 +1129,23 @@ Router.route('/loading', function() {
 
 
 
+
+
+// Let's test out an API call for funsies
+Router.route('/api', function () {
+  var req = this.request;
+  var res = this.response;
+  res.end('hello from the server\n');
+}, {where: 'server'});
+
+
+
+
 // This is our catch all for all other unknown things
 // Probably won't be called all that much
 // Especially after we implement qurious.cc/phocks user pages
 Router.route('/(.*)', function() {
-  Session.set("DocumentTitle","404 - Qurious");
-  this.render('Header', {to: 'header'});
-  this.render('404');
+  this.layout('LiteLayout');
+  Session.set("DocumentTitle","404 Qurious");
+  this.render('LiteError');
 });

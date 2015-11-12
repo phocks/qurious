@@ -1,11 +1,208 @@
-/* Qurious Lite Styles */
+/* Qurious Lite Mobile First Styles
+---------------------------------------------------*/
+
+
+
+/* Master styles whole page */
+.lite-container p {
+  margin: 5px 0;
+}
+
+.lite-container .container {
+  /* hacky way of restricting width. do better later */
+  max-width: 700px;
+}
+
+.lite-container hr {
+  margin: 0;
+}
+
+.lite-container.container-fluid {
+  padding: 0;
+  /*padding-bottom: 70px; use if fixed bottom buttons */
+}
+
 .lite-container {
-  font-family: 'Vollkorn', serif;
-  font-size: 60px;
+  font-family: "Open Sans", sans-serif;
   min-height: 100vh;
+  color: #787878;
+}
+
+.lite-quote {
+  font-family: 'Vollkorn', serif;
+  font-size: 1.5em;
+}
+
+
+
+/* The Header up top */
+.lite-container .lite-header {
+  /*text-align: center;*/
+  padding: 32px 0 24px;
+  font-size: 1.2em;
+}
+
+.lite-container .lite-header img {
+  height: 32px;
+}
+
+.lite-container .lite-header a {
+  color: inherit; /* hiding random quote easter egg */
+}
+
+
+
+
+
+/* Body where the quote goes */
+.lite-container .body-container {
+
+}
+
+.lite-quote {
+  background-color: #F0ECE9;
+}
+
+.lite-quote .quotation {
+  padding: 42px 0 0;
+}
+
+.lite-quote .quotation p {
+  padding-bottom: 1em;
+}
+
+.lite-quote p.attribution {
+  padding: 0 0 42px;
+}
+
+.lite-container .container {
+  /*max-width: 500px;*/
 }
 
 .lite-container .attribution {
   font-style: italic;
+  color: #999;
 }
 
+#dropcap {
+  color: #f48365;
+}
+
+.lite-container .lite-info {
+  padding: 8px 0 0;
+}
+
+.lite-container .lite-info a {
+  color: inherit;
+}
+
+.lite-container .lite-info ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1.8em;
+}
+
+.lite-container .lite-info ul li {
+  display: inline;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+/*.lite-container .lite-info ul li:after {
+  content: " "
+}
+
+.lite-container .lite-info ul li:last-child:after {
+  content: '';
+}*/
+
+
+.lite-container .lite-controls {
+  font-size: 2em;
+  text-align: center;
+}
+
+/* Footer section */
+.lite-container .lite-footer {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.lite-container .lite-footer img {
+  width: 32px;
+}
+
+
+/* Text shadows for effect */
+.simpleshadow {
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+/* 5 columns for Bootstrap */
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.col-xs-15 {
+  width: 20%;
+  float: left;
+}
+@media (min-width: 768px) {
+.col-sm-15 {
+  width: 20%;
+  float: left;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-15 {
+  width: 20%;
+  float: left;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-15 {
+    width: 20%;
+    float: left;
+  }
+}
+
+
+
+
+
+
+
+/* Style for the temporary MailChimp email form */
+
+#mc_embed_signup { border: none; text-align: center; width: 100%; } /* Signup form container */
+
+.mc-field-group { display: inline-block; } /* positions input field horizontally */
+
+#mce-EMAIL { font-family: "Open Sans", 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1em; border: 2px solid #ABB0B2 ; color: #343434; background-color: #fff; padding: .7em 9em .7em 1em; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; display: inline-block; margin: 0; } /* Input Styles */
+
+.clear { display: inline-block; } /* positions button horizontally in line with input */
+
+.button { font-family: "Open Sans", 'Helvetica Neue', Helvetica,  Arial, sans-serif; font-size: 1em; letter-spacing: .03em; color: #fff; background-color: #f48365 ; padding: .7em 2em; border: 2px solid #f48365 ; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; display: inline-block; margin: 0; } /* Button Styles */
+
+:-webkit-input-placeholder { color: #ABB0B2 ; } /* WebKit browsers */ 
+:-moz-placeholder { color: #ABB0B2 ; } /* Mozilla Firefox 4 to 18 */
+::-moz-placeholder { color: #ABB0B2 ; } /* Mozilla Firefox 19+ */
+:-ms-input-placeholder { color: #ABB0B2 ; } /* Internet Explorer 10+ */
+
+
+/* positions input field and button underneath each other with 100% width for tablet and mobile */
+@media (max-width: 768px) { 
+  
+.mc-field-group { display: block; max-width: 100%; }
+#mce-EMAIL { padding: .7em 0 .7em 1em; width: 100%; margin: 0; }
+.clear { display: block; width: 100% }
+.button { width: 100%; margin: .5em 0 0 0; }
+  
+}

@@ -7,7 +7,12 @@
   also, there is a way to selectively load fonts via javascript, see in js files
   */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+
+/*
 @import url(https://fonts.googleapis.com/css?family=Vollkorn:400,400italic);
+Importing Volkorn has been moved to the main.js due to 
+dropcap.js not playing well with CSS @imports
+*/
 
 
 
@@ -19,12 +24,16 @@ a:focus {
 
 body {
   font-family: "Open Sans", sans-serif;
-  background-color: #171717;
+  background-color: #fdfbf8;  /* old background #171717*/
+  /*font-size: 16px;*/ /*change this for base font size*/
 }
 
 img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
-
+.master-container {
+  background-color: #171717;
+  min-height: 100vh;
+}
 
 .body-container {
   background-color: #fdfbf8;

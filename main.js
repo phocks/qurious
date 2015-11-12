@@ -17,7 +17,7 @@
 // First up we are going to create a few collections
 Quotes = new Mongo.Collection('quotes');  // Our main quote db
 Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use)
-
+// There is also a Users collection by default in Meteor
 
 
 
@@ -47,9 +47,9 @@ if (Meteor.isClient) { // only runs on the client
 
   // Font experiment to see if we can load fonts on demand
   // and YES it looks like we can.
-  if (false) {  // for now let's just disable this, but bring it back later
+  if (true) {  // We are enabling this now, as dropcap.js doesn't work well with @import CSS
     WebFontConfig = {
-      google: { families: [ 'Vollkorn::latin' ] }
+      google: { families: [ 'Vollkorn:400,400italic:latin' ] }
     };
     (function() {
       var wf = document.createElement('script');
@@ -93,13 +93,14 @@ if (Meteor.isClient) { // only runs on the client
 
   // Some more configs to run initially
 
-  Router.configure({
-    layoutTemplate: 'ApplicationLayout',
-    loadingTemplate: "Loading",
-    yieldTemplates: {
-        Header: {to: 'header'},
-        Footer: {to: 'footer'},
-    },
+  Router.configure({ // commenting out default due to Lite layout change
+    // sets default layout so you don't have to set it in the route
+    // layoutTemplate: 'ApplicationLayout',
+    // loadingTemplate: "Loading",
+    // yieldTemplates: {
+    //     Header: {to: 'header'},
+    //     Footer: {to: 'footer'},
+    // },
     //notFoundTemplate: '404' //this is used for somewhat custom 404s
   });
 
@@ -114,10 +115,10 @@ if (Meteor.isClient) { // only runs on the client
 
 
   // Call this at any time to set the <title>
-  Session.set("DocumentTitle","Qurious - Curiously Quotable");
+  Session.set("DocumentTitle","Qurious");
 
   // Sets up automatically setting <title> in head
-  // Simply do Session.set("DocumentTitle", "Whatever you want"); 
+  // Simply do Session.set("DocumentTitle", "Whatever you want");
   Tracker.autorun(function(){
     document.title = Session.get("DocumentTitle");
   });
@@ -126,7 +127,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // Setting up the useraccounts:core
   AccountsTemplates.configure({
-    forbidClientAccountCreation: false,
+    forbidClientAccountCreation: true,
     enablePasswordChange: true,
     showForgotPasswordLink: true,
     lowercaseUsername: true,
@@ -257,6 +258,11 @@ if (Meteor.isClient) { // only runs on the client
       return moment(context).format('DD/MM/YYYY, hh:mm a');
   });
 
+  Template.registerHelper('howLongAgo', function(context, options) {
+    if(context)
+      return moment(context).fromNow();
+  });
+
   // Gives us a {{username}} variable to use in html
   Template.registerHelper('currentUsername', function () {
       return Meteor.user().username;
@@ -333,7 +339,7 @@ if (Meteor.isClient) { // only runs on the client
 
       if (q == "") {
         Router.go('/explore/latest');
-        return false; 
+        return false;
 
       }
 
@@ -361,7 +367,7 @@ if (Meteor.isClient) { // only runs on the client
 
     //   // if (q == "") {
     //   //   Router.go('/explore/latest');
-    //   //   return false; 
+    //   //   return false;
 
     //   // }
 
@@ -374,7 +380,7 @@ if (Meteor.isClient) { // only runs on the client
     //   // Prevent default action from form submit
     //   return false;
     // },
-    
+
   });
 
 
@@ -429,7 +435,7 @@ if (Meteor.isServer) {
   // This is a monitoring tool
   //Kadira.connect('wYiFPMyqaBcyKp7QK', '1f136ced-05f9-4e73-a92b-ef609cda56ce');
 
-  
+
 
 
   // Get the server to publish our collections
@@ -470,7 +476,10 @@ if (Meteor.isServer) {
 
   Meteor.publish("quotesSlug", function (slug) {
     check(slug, String);
-    return Quotes.find({ _id: slug });
+    var quote = Quotes.find({ _id: slug });
+    // console.log(quote); // trying to get counter quotes working too../....
+    // if (!quote) quote = Quotes.find({ quote_id: slug });
+    return quote;
   });
 
   // Pusblish quotes given IDs in an array as input
@@ -489,7 +498,7 @@ if (Meteor.isServer) {
     return Meteor.users.find({},
       { fields: {'admin':1, 'liked': 1, 'username': 1 }
     });
-    
+
 
     /*if (this.userId) {
       return Meteor.users.find({_id: this.userId},
@@ -630,7 +639,7 @@ Meteor.methods({
       var user = Meteor.users.findOne({_id:this.userId, liked:{$ne:quoteId}})
 
       // Test to see if user has already dogeared this quote
-      if (!user) { // returns null or undefined 
+      if (!user) { // returns null or undefined
 
         // Old way, no time stamp
         Meteor.users.update({_id:this.userId},{ $pull:{liked:quoteId} });
@@ -648,7 +657,7 @@ Meteor.methods({
         return false; // exits the function
       }
 
-      // Otherwise dogear this quote below  
+      // Otherwise dogear this quote below
 
       console.log("user " + this.userId + " collected the quote " + quoteId );
 
@@ -687,6 +696,9 @@ Meteor.methods({
 
 
 Router.route('/about', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Qurious About Us?");
   this.render('Header', {to: 'header'});
   this.render('AboutText');
@@ -694,6 +706,9 @@ Router.route('/about', function() {
 });
 
 Router.route('/privacy', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Privacy Policy - Qurious");
   this.render('Header', {to: 'header'});
   this.render('PrivacyText');
@@ -701,6 +716,9 @@ Router.route('/privacy', function() {
 });
 
 Router.route('/terms', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Terms & Conditions - Qurious");
   this.render('Header', {to: 'header'});
   this.render('TermsText');
@@ -708,6 +726,9 @@ Router.route('/terms', function() {
 });
 
 Router.route('/contact', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle", "Contacting Qurious");
   this.render('Header', {to: 'header'});
   this.render('ContactText');
@@ -722,6 +743,10 @@ AccountsTemplates.configureRoute('signIn', {
     path: '/login',
     template: 'Login',
     redirect: '/random',
+    yieldTemplates: {
+        Header: {to: 'header'},
+        Footer: {to: 'footer'},
+    }
 });
 
 
@@ -732,7 +757,7 @@ AccountsTemplates.configureRoute('signIn', {
 
 Router.route('/logout', function() {
   Meteor.logout();
-  Router.go('/');
+  Router.go('/home');
 });
 
 
@@ -746,6 +771,9 @@ Router.route('/create', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Create a Quote - Qurious");
     this.render('Header', {to: 'header'});
     this.render('Create', {
@@ -776,6 +804,9 @@ Router.route('/explore', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Popular Quotes - Qurious");
     this.render('Header', {to: 'header'});
     this.render('Quotes', {
@@ -802,6 +833,9 @@ Router.route('/explore/popular', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Popular Quotes - Qurious");
     this.render('Header', {to: 'header'});
     this.render('Quotes', {
@@ -827,6 +861,9 @@ Router.route('/explore/latest', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle", "Latest Quotes - Qurious");
 
     this.render('Header', {to: 'header'});
@@ -861,6 +898,9 @@ Router.route('/quotes/:_quote_slug', {
       // Meteor.users.update({_id:currentUserId},{$addToSet:{quotesVisited:this.params._quote_slug}});
     },
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     this.render('Header', {to: 'header'});
     this.render('SingleQuote', {
       data: function () {
@@ -942,6 +982,7 @@ Router.route('/users/:_username', {
   },
 
   action: function () {
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle","Exploring " + this.params._username + " - Qurious");
 
 
@@ -982,6 +1023,9 @@ Router.route('/users/:_username/dogears', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+    
+    this.layout('ApplicationLayout');
     this.render('Header', {to: 'header'});
     //to pass it into the function, someone help with this
     var usernameParam = this.params._username;
@@ -1019,6 +1063,9 @@ Router.route('/search/:_terms', {
   },
 
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle","Quotes with: " + this.params._terms + " - Qurious");
 
 
@@ -1028,8 +1075,8 @@ Router.route('/search/:_terms', {
     this.render('Quotes', {
       data: {
         quotes: function () {
-          return Quotes.find({ $or: [ { quotation: { '$regex': terms_to_lookup, $options: 'i'} }, 
-            { attribution: { '$regex': terms_to_lookup, $options: 'i'}} ] }, 
+          return Quotes.find({ $or: [ { quotation: { '$regex': terms_to_lookup, $options: 'i'} },
+            { attribution: { '$regex': terms_to_lookup, $options: 'i'}} ] },
             {sort: {views: -1}, limit: Session.get('limit') });
         },
         exploreToShow: function () { return terms_to_lookup },
@@ -1042,8 +1089,11 @@ Router.route('/search/:_terms', {
 
 
 // The front landing page
-Router.route('/', {
+Router.route('/home', {
   action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
     Session.set("DocumentTitle","Qurious");
     this.render('Header', {
       to: 'header',
@@ -1068,6 +1118,9 @@ Router.route('/', {
 
 // Just to test the loader
 Router.route('/loading', function() {
+  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+  this.layout('ApplicationLayout');
   Session.set("DocumentTitle","Loading - Qurious");
 
   this.render('Loading');
@@ -1092,8 +1145,7 @@ Router.route('/api', function () {
 // Probably won't be called all that much
 // Especially after we implement qurious.cc/phocks user pages
 Router.route('/(.*)', function() {
-  Session.set("DocumentTitle","404 - Qurious");
-  this.render('Header', {to: 'header'});
-  this.render('404');
-  this.render('Footer', {to: 'footer'});
+  this.layout('LiteLayout');
+  Session.set("DocumentTitle","404 Qurious");
+  this.render('LiteError');
 });

@@ -6,6 +6,7 @@
 /* Master styles whole page */
 .lite-container p {
   margin: 5px 0;
+  padding-bottom: 1em;
 }
 
 .lite-container .container {

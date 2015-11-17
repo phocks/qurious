@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-meteor run --settings settings.json --production
+(cd /home/ubuntu/Sites/qurious && exec meteor run --settings settings.json --production)

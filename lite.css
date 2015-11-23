@@ -20,7 +20,7 @@
 
 .lite-container.container-fluid {
   padding: 0;
-  /*padding-bottom: 70px; use if fixed bottom buttons */
+  /*padding-bottom: 70px; use if fixed bottom button nav */
 }
 
 .lite-container {
@@ -137,7 +137,8 @@
 
 /* Text shadows for effect */
 .simpleshadow {
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+  /*disabling for now*/
+  /*text-shadow: 1px 1px 1px rgba(0,0,0,0.1);*/
 }
 
 /* 5 columns for Bootstrap */
@@ -192,18 +193,18 @@
 
 .button { font-family: "Open Sans", 'Helvetica Neue', Helvetica,  Arial, sans-serif; font-size: 1em; letter-spacing: .03em; color: #fff; background-color: #f48365 ; padding: .7em 2em; border: 2px solid #f48365 ; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; display: inline-block; margin: 0; } /* Button Styles */
 
-:-webkit-input-placeholder { color: #ABB0B2 ; } /* WebKit browsers */ 
+:-webkit-input-placeholder { color: #ABB0B2 ; } /* WebKit browsers */
 :-moz-placeholder { color: #ABB0B2 ; } /* Mozilla Firefox 4 to 18 */
 ::-moz-placeholder { color: #ABB0B2 ; } /* Mozilla Firefox 19+ */
 :-ms-input-placeholder { color: #ABB0B2 ; } /* Internet Explorer 10+ */
 
 
 /* positions input field and button underneath each other with 100% width for tablet and mobile */
-@media (max-width: 768px) { 
-  
+@media (max-width: 768px) {
+
 .mc-field-group { display: block; max-width: 100%; }
 #mce-EMAIL { padding: .7em 0 .7em 1em; width: 100%; margin: 0; }
 .clear { display: block; width: 100% }
 .button { width: 100%; margin: .5em 0 0 0; }
-  
+
 }

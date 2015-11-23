@@ -10,6 +10,9 @@
     <footer>
       {{> yield "footer"}}
     </footer>
+    <nav>
+      {{> yield "nav"}}
+    </nav>
   </div>
 </template>
 
@@ -25,10 +28,10 @@
 <template name="LiteHome">
   <div class="lite-quote">
     <div class="container">
-      <div class="quotation simpleshadow">
+      <div class="quotation">
         <p>We&rsquo;ve been hard at work building something new from the ground up.</p>
         <p>&ldquo;Qurious&rdquo; is an effort to organise the world&rsquo;s words and ideas in new and meaningful ways.</p>
-        <p class="attribution simpleshadow"><span class="dash">&mdash;</span>The Qurious Team</p>
+        <p class="attribution"><span class="dash">&mdash;</span>The Qurious Team</p>
       </div>
     </div>
   </div>
@@ -40,36 +43,12 @@
 <template name="LiteQuote">
   <div class="lite-quote">
     <div class="container">
-      <div class="quotation simpleshadow">
+      <div class="quotation">
         <p>{{{quotation}}}</p>
-        <p class="attribution simpleshadow"><span class="dash">&mdash;</span>{{attribution}}</p>
+        <p class="attribution"><span class="dash">&mdash;</span>{{attribution}}</p>
       </div>
     </div>
   </div>
-
-  <!-- This is five columns sort of like Twitter app etc at the bottom.
-  <div class="lite-controls">
-  <div class="container">
-  <div class="row">
-      <div class="col-xs-15">
-
-      </div>
-      <div class="col-xs-15">
-
-      </div>
-      <div class="col-xs-15">
-      <i class="icon ion-refresh"></i>
-      </div>
-      <div class="col-xs-15">
-
-      </div>
-      <div class="col-xs-15">
-
-      </div>
-  </div>
-  </div>
-  </div> -->
-
 
   <div class="lite-info">
     <div class="container">
@@ -119,4 +98,58 @@
   <br>
   <br>
   <h1 class="text-center">404</h1>
+</template>
+
+
+<template name="LiteAuthor">
+  <div class="author">
+    <div class="container">
+      Author
+    </div>
+  </div>
+</template>
+
+<template name="LiteNav">
+  <div class="navbar navbar-default navbar-fixed-bottom lite-nav">
+
+  
+    
+
+    <div class="container">
+      <a href="/"><img src="/grey-logo.png"></a> | Curiously quotable.
+    </div>
+
+
+
+        <!-- This is five columns sort of like Twitter app etc at the bottom. -->
+<!--         <div class="container">
+<div class="lite-controls">
+          <div class="row">
+            <div class="col-xs-15">
+
+            </div>
+            <div class="col-xs-15">
+
+            </div>
+            <div class="col-xs-15">
+            <i class="icon ion-refresh"></i>
+            </div>
+            <div class="col-xs-15">
+
+            </div>
+            <div class="col-xs-15">
+
+            </div>
+          </div>
+          </div>
+        </div> -->
+
+
+
+      
+  </div>
+
+
+  
+  
 </template>

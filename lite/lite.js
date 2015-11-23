@@ -34,7 +34,7 @@ Router.route('/q/:_quote_id', {
   },
   action: function () {
     this.layout('LiteLayout');
-    this.render('LiteHeader', { to: 'header'});
+    // this.render('LiteHeader', { to: 'header'});
     this.render('LiteQuote', {
       data: function () {
         var quote = Quotes.findOne({ _id: this.params._quote_id });
@@ -61,6 +61,7 @@ Router.route('/q/:_quote_id', {
       }
     });
     this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
   },
 });
 
@@ -81,6 +82,21 @@ Router.route('/load', function() {
   this.layout('LiteLayout');
   Session.set("DocumentTitle","Loading - Qurious");
   this.render('LiteLoad');
+});
+
+
+Router.route('/:_author_slug', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    // this.render('LiteHeader', { to: 'header'});
+    this.render('LiteAuthor');
+    // this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
+  },
 });
 
 

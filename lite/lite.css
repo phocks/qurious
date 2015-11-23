@@ -20,7 +20,7 @@
 
 .lite-container.container-fluid {
   padding: 0;
-  /*padding-bottom: 70px; use if fixed bottom button nav */
+  padding-bottom: 85px; /* use if fixed bottom button nav */
 }
 
 .lite-container {
@@ -61,7 +61,7 @@
 }
 
 .lite-quote {
-  background-color: #F0ECE9;
+  /*background-color: #F0ECE9;*/
 }
 
 .lite-quote .quotation {
@@ -134,11 +134,25 @@
   width: 32px;
 }
 
+.lite-container .navbar {
+  min-height: inherit;
+}
+
+.lite-container .lite-nav {
+  /*text-align: center;*/
+  padding: 24px 0 24px;
+  font-size: 1.2em;
+}
+
+.lite-container .lite-nav img {
+  height: 32px;
+}
+
 
 /* Text shadows for effect */
 .simpleshadow {
   /*disabling for now*/
-  /*text-shadow: 1px 1px 1px rgba(0,0,0,0.1);*/
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
 }
 
 /* 5 columns for Bootstrap */

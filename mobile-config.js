@@ -1,5 +1,4 @@
-// This section sets up some basic app metadata,
-// the entire section is optional.
+// This info is for iOS and Android etc apps.
 
 // App.accessRule('*'); allows access to other sites.
 // Consider changing this to only allow Google Fonts etc as needed

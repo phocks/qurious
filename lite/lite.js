@@ -64,6 +64,8 @@ Router.route('/q/:_quote_id', {
   },
 });
 
+
+
 // gets a random quote and redirects to the page
 Router.route('/r', function () {
   Meteor.call('getRandomQuoteId', function (error, result) {

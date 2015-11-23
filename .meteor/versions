@@ -51,7 +51,7 @@ logging@1.0.8
 meteor@1.1.10
 meteor-base@1.0.1
 meteorhacks:picker@1.0.3
-meteorhacks:search-source@1.4.1
+meteorhacks:search-source@1.4.2
 minifiers@1.1.7
 minimongo@1.0.10
 mobile-experience@1.0.1
@@ -62,7 +62,7 @@ mongo-id@1.0.1
 npm-bcrypt@0.7.8_2
 npm-mongo@1.4.39_1
 observe-sequence@1.0.7
-okgrow:router-autoscroll@0.1.0
+okgrow:router-autoscroll@0.1.4
 ordered-dict@1.0.4
 pagebakers:ionicons@2.0.1_1
 promise@0.5.1
@@ -76,7 +76,7 @@ routepolicy@1.0.6
 service-configuration@1.0.5
 session@1.1.1
 sha@1.0.4
-softwarerero:accounts-t9n@1.1.4
+softwarerero:accounts-t9n@1.1.6
 spacebars@1.0.7
 spacebars-compiler@1.0.7
 srp@1.0.4

@@ -9,6 +9,10 @@
   padding-bottom: 1em;
 }
 
+.lite-container .top-spacing {
+  min-height: 7vh;
+}
+
 .lite-container .container {
   /* hacky way of restricting width. do better later */
   max-width: 700px;
@@ -29,17 +33,15 @@
   color: #787878;
 }
 
-.lite-quote {
-  font-family: 'Vollkorn', serif;
-  font-size: 1.5em;
-}
+
 
 
 
 /* The Header up top */
+/* Will probably get rid of this completely soon */
 .lite-container .lite-header {
   /*text-align: center;*/
-  padding: 32px 0 24px;
+  padding: 0 0 24px;
   font-size: 1.2em;
 }
 
@@ -61,11 +63,12 @@
 }
 
 .lite-quote {
-  /*background-color: #F0ECE9;*/
+  font-family: 'Vollkorn', serif;
+  font-size: 1.5em;
 }
 
 .lite-quote .quotation {
-  padding: 42px 0 0;
+  /*padding: 42px 0 0;*/
 }
 
 .lite-quote .quotation p {
@@ -90,7 +93,7 @@
 }
 
 .lite-container .lite-info {
-  padding: 8px 0 0;
+  /*padding: 8px 0 0;*/
 }
 
 .lite-container .lite-info a {

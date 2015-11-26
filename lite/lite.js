@@ -11,7 +11,7 @@ Router.route('/', {
   action: function () {
     this.layout('LiteLayout');
     Session.set("DocumentTitle","Qurious");
-    this.render('LiteHeader', { to: 'header'});
+    // this.render('LiteHeader', { to: 'header'});
 
     // Here we send a quote to the front page if required
     Meteor.subscribe('quotesLatest', 1);

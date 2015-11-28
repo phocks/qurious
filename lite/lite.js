@@ -85,7 +85,7 @@ Router.route('/load', function() {
 });
 
 
-Router.route('/:_author_slug', {
+Router.route('/author/:_author_slug', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
     
@@ -151,8 +151,8 @@ if (Meteor.isClient) {
     node[0].nodeValue = text.slice(first.length);
     node.before('<span id="dropcap">' + first + '</span>');
 
-    var dropcap = document.getElementById("dropcap");
-    window.Dropcap.layout(dropcap, 2.2, 2);
+    dropcap = document.getElementById("dropcap");
+    window.Dropcap.layout(dropcap, 2, 2);    
   
   });
 
@@ -172,13 +172,38 @@ if (Meteor.isClient) {
       node.before('<span id="dropcap">' + first + '</span>');
 
       
-      var dropcap = document.getElementById("dropcap");
-      window.Dropcap.layout(dropcap, 2.2, 2);
+      dropcap = document.getElementById("dropcap");
+      window.Dropcap.layout(dropcap, 2, 2);
       
   });
 
-
   // Media queries for javascript pretty much
+  // Finally got it working
+  var tablet = window.matchMedia("(min-width: 768px)");
+  var desktop = window.matchMedia("(min-width: 992px)");
+  var largeDesktop = window.matchMedia("(min-width: 1200px)");  
+
+  var handleMediaChange = function (mediaQueryList) {
+      if (mediaQueryList.matches) {
+        console.log("Media query greater than triggered")
+        window.Dropcap.layout(dropcap, 2, 2);
+      }
+      else {
+        // The browser window is less than 480px wide
+        console.log("Media query js smaller than triggered")
+        window.Dropcap.layout(dropcap, 2, 2);
+      }
+  }
+
+  tablet.addListener(handleMediaChange);
+  desktop.addListener(handleMediaChange);
+  largeDesktop.addListener(handleMediaChange);
+  // handleMediaChange(tablet);  
+  // handleMediaChange(desktop);  
+  // handleMediaChange(largeDesktop);
+
+
+  // Couln't get it working so got it going another way
   // screenSize = "mobile";
 
 
@@ -228,41 +253,7 @@ if (Meteor.isClient) {
     }
 
     
-
-
-
-    
   });*/
-
-
-
-  // Finally got it working
-  var tablet = window.matchMedia("(min-width: 768px)");
-  var desktop = window.matchMedia("(min-width: 992px)");
-  var largeDesktop = window.matchMedia("(min-width: 1200px)");  
-
-  var handleMediaChange = function (mediaQueryList) {
-      if (mediaQueryList.matches) {
-        console.log("Media query greater than triggered")
-        var dropcap = document.getElementById("dropcap");
-        window.Dropcap.layout(dropcap, 2.2, 2);
-      }
-      else {
-        // The browser window is less than 480px wide
-        console.log("Media query js smaller than triggered")
-        var dropcap = document.getElementById("dropcap");
-        window.Dropcap.layout(dropcap, 2.2, 2);
-      }
-  }
-
-
-  tablet.addListener(handleMediaChange);
-  desktop.addListener(handleMediaChange);
-  largeDesktop.addListener(handleMediaChange);
-  handleMediaChange(tablet);  
-  handleMediaChange(desktop);  
-  handleMediaChange(largeDesktop);
-
 
 
 } // end client only

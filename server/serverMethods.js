@@ -68,7 +68,8 @@ Meteor.methods({
     if (Meteor.userId()) {
 
       // This checks the user doc to see if the quote _id is in the list
-      var user = Meteor.users.findOne({_id:this.userId, quotesVisited:{$ne:quoteId}});
+      // No longer using this as clogs up user doc
+      // var user = Meteor.users.findOne({_id:this.userId, quotesVisited:{$ne:quoteId}});
 
 
       // Here we are trying to stop view refresh hacking
@@ -77,7 +78,8 @@ Meteor.methods({
 
         Quotes.update( { _id: quoteId }, {$inc: { views: 1 }});
 
-        Meteor.users.update({_id:this.userId},{$addToSet:{ quotesVisited:quoteId}});
+        // Don't clog up the user doc please
+        // Meteor.users.update({_id:this.userId},{$addToSet:{ quotesVisited:quoteId}});
       }
 
       // Update last viewed by

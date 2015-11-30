@@ -15,7 +15,7 @@
 
 .lite-container .container {
   /* hacky way of restricting width. do better later */
-  /*max-width: 700px;*/
+  max-width: 720px;
 }
 
 .lite-container hr {

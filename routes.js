@@ -296,7 +296,7 @@ Router.route('/users/:_username', {
     Session.set("DocumentTitle","Exploring " + this.params._username + " - Qurious");
 
 
-    var username_to_lookup = this.params._username; //to pass it into the function, someone help with this
+    var username_to_lookup = this.params._username; //to pass it into the function
 
     this.render('Header', {to: 'header'});
     this.render('Quotes', {

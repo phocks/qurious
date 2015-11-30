@@ -1,4 +1,4 @@
-// Here come our routes which catch and process URLs -----------------
+// This file handles all the URL routes. It uses the iron:router Meteor package.
 
 
 
@@ -477,6 +477,7 @@ Router.route('/', {
       // }      
     });
     this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
   }
 });
 

@@ -152,6 +152,22 @@
 }
 
 
+.lite-home .home-text h1 img {
+  max-width:100%;
+  max-height:100%;
+}
+
+.lite-container ul.authors {
+  list-style-type: none;
+}
+
+.lite-container ul.authors li {
+  display: inline;
+}
+
+
+
+
 /* Text shadows for effect */
 .simpleshadow {
   /*disabling for now*/

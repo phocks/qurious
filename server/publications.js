@@ -90,3 +90,9 @@ Meteor.publish("userData", function () {
     this.ready();
   }*/
 });
+
+
+
+Meteor.publish("authors", function () {
+  return Authors.find();
+});

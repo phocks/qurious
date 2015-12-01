@@ -10,12 +10,11 @@
 // Qurious, a web app for creating and sharing quotes
 // Copyright Meagre 2015- All rights reserved
 
-/* This file originally created by Joshua Byrd for Meagre. */
-
 
 
 // First up we are going to create a few collections
 Quotes = new Mongo.Collection('quotes');  // Our main quote db
+Authors = new Mongo.Collection('authors'); // People who say stuff
 Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use)
 // There is also a Users collection by default in Meteor
 
@@ -40,7 +39,8 @@ if (Meteor.isClient) { // only runs on the client
   // Later we don't want to subscribe to the whole thing
   // moved to individual routes // Meteor.subscribe("quotes");
   Meteor.subscribe("counters");
-  Meteor.subscribe("userData"); // for admin access etc.
+  Meteor.subscribe("userData"); // for admin account login access etc.
+  Meteor.subscribe("authors"); // subscribe only to certain ones later
 
 
 
@@ -249,6 +249,13 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
+  Template.ListAuthors.helpers({
+    authors: function () {
+      return Authors.find({}, {sort: {name: 1}});
+    }
+  });
+
+
 
   // And some global helpers etc
 
@@ -331,6 +338,26 @@ if (Meteor.isClient) { // only runs on the client
     }
   });
 
+
+    Template.ListAuthors.events({
+      "submit .new-author": function (event) {      
+        var author = event.target.author.value;
+        if (author == "") return false; // prevent empty strings
+
+        Meteor.call('addAuthor', author);
+
+        // Clear form      
+        event.target.author.value = "";
+
+        // Prevent default action from form submit
+        return false;
+      },
+      "click .delete": function () {
+        if (confirm('Really delete ?')) {
+          Meteor.call('deleteAuthor', this._id);
+        }
+      }
+    });
 
 
     Template.Header.events({
@@ -442,16 +469,3 @@ if (Meteor.isServer) {
 
 
 } // end of the server only code
-
-
-
-
-
-
-
-
-
-
-
-
-

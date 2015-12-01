@@ -481,6 +481,9 @@ Router.route('/', {
   }
 });
 
+
+
+
 // Takes the doc _id and displays quote
 Router.route('/q/:_quote_id', {
   loadingTemplate: 'LiteLoad',
@@ -510,7 +513,8 @@ Router.route('/q/:_quote_id', {
           // this regular expression is gold (i didn't write it btw)
           var titleText = quote.quotation.replace(/^(.{50}[^\s]*).*/, "$1");
 
-          Session.set("DocumentTitle", titleText + " - Qurious");
+          Session.set("DocumentTitle", quote.attribution + " · " + titleText + " - Qurious");
+
 
           return quote;
         }
@@ -519,6 +523,31 @@ Router.route('/q/:_quote_id', {
     this.render('LiteFooter', { to: 'footer'});
     this.render('LiteNav', { to: 'nav'});
   },
+});
+
+
+Router.route('/authors', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    this.render('ListAuthors');
+    this.render('LiteNav', { to: 'nav'});
+  }
+});
+
+
+Router.route('/a/:_slug', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    this.render('LiteNav', { to: 'nav'});
+  }
 });
 
 
@@ -541,7 +570,7 @@ Router.route('/load', function() {
 });
 
 
-Router.route('/author/:_author_slug', {
+Router.route('/a/:_author_slug', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
     

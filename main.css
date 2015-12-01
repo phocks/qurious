@@ -480,8 +480,9 @@ label {
 }
 
 .form-control {
-  border-radius: 1px;
+  /*border-radius: 2px;*/
   height: inherit;
+  border-width: 2px;
   /*color: #282828;
   letter-spacing: 0.75px;
   margin-bottom: 30px;*/
@@ -843,7 +844,7 @@ p.contact a:hover {
 
 /* Totally new awesome uncomplicated button styles Bootstrap compatible */
 .btn {
-  border-radius: 1px;
+  border-width: 2px;
 }
 
 .btn.create {

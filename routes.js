@@ -456,30 +456,7 @@ Router.route('/api', function () {
 
 
 
-// The root home route landing for qurious.cc/
-Router.route('/', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    // return one handle, a function, or an array
-    return Meteor.subscribe('quotesAll');
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    Session.set("DocumentTitle","Qurious");
-    // this.render('LiteHeader', { to: 'header'});
 
-    // Here we send a quote to the front page if required
-    Meteor.subscribe('quotesLatest', 1);
-
-    this.render('LiteHome', {
-      // data: function () {
-      //   return Quotes.findOne({});
-      // }      
-    });
-    this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
-  }
-});
 
 
 
@@ -552,6 +529,7 @@ Router.route('/a/:_slug', {
 
 
 
+
 // gets a random quote and redirects to the page
 Router.route('/r', function () {
   Meteor.call('getRandomQuoteId', function (error, result) {
@@ -583,6 +561,37 @@ Router.route('/a/:_author_slug', {
     this.render('LiteNav', { to: 'nav'});
   },
 });
+
+
+
+/* The root home route landing for qurious.cc/
+---------------------------------------------------------------------------------------*/
+Router.route('/', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe('quotesAll');
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    Session.set("DocumentTitle","Qurious");
+    // this.render('LiteHeader', { to: 'header'});
+
+    // Here we send a quote to the front page if required
+    Meteor.subscribe('quotesLatest', 1);
+
+    this.render('LiteHome', {
+      // data: function () {
+      //   return Quotes.findOne({});
+      // }      
+    });
+    this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
+  }
+});
+
+
+
 
 
 // This is our catch all for all other unknown things

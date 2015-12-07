@@ -11,6 +11,7 @@
   also, there is a way to selectively load fonts via javascript, see in js files
   */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 /*
 @import url(https://fonts.googleapis.com/css?family=Vollkorn:400,400italic);
@@ -947,7 +948,7 @@ p.contact a:hover {
 
 .lite-container .container {
   /* hacky way of restricting width. do better later */
-  /*max-width: 720px;*/
+  max-width: 720px;
 }
 
 .lite-container hr {
@@ -959,8 +960,9 @@ p.contact a:hover {
   padding-bottom: 85px; /* use if fixed bottom button nav */
 }
 
+/* This goes around all content */
 .lite-container {
-  font-family: "Open Sans", sans-serif;
+  font-family: Montserrat, sans-serif;
   min-height: 100vh;
   color: #787878;
 }
@@ -1077,6 +1079,7 @@ p.contact a:hover {
   /*text-align: center;*/
   padding: 24px 0 24px;
   font-size: 1.2em;
+  color: #999;
 }
 
 .lite-container .lite-nav img {
@@ -1199,13 +1202,25 @@ p.contact a:hover {
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .lite-quote {
-    font-size: 2.7em;
+    font-size: 2.2em;
   }
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .lite-quote {
-    font-size: 3em;
+    font-size: 2.3em;
   }
+}
+
+
+
+
+
+/* Custom ampersand */
+span.amp {
+  font-family:Baskerville,"Goudy Old Style","Palatino","Book Antiqua",serif;
+  font-size:110%;
+  font-style:italic;
+  color: LightGray;
 }

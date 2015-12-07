@@ -12,6 +12,18 @@
 
 
 
+/*
+|--------------------------------------------------------------------------
+| Title
+|--------------------------------------------------------------------------
+|
+| Comments can go here and description
+| that spans multi lines.
+|
+*/
+
+
+
 // First up we are going to create a few collections
 Quotes = new Mongo.Collection('quotes');  // Our main quote db
 Authors = new Mongo.Collection('authors'); // People who say stuff
@@ -379,35 +391,6 @@ if (Meteor.isClient) { // only runs on the client
       // Prevent default action from form submit
       return false;
     },
-
-    // I was trying to create a delete x here but it was too hard
-    // so I quit doing it
-    // "click .searchclear": function (event, template) {
-    //   $('.search-form')[0].reset();
-    // }
-
-    // This will enable instant search if we want it
-    // "keyup .form-control": function (event) {
-    //   var q = event.target.value;
-
-    //   console.log("key pressed in header search");
-
-    //   // if (q == "") {
-    //   //   Router.go('/explore/latest');
-    //   //   return false;
-
-    //   // }
-
-    //   //event.target.q.value = "";
-
-
-    //   Router.go('/search/' + q);
-
-
-    //   // Prevent default action from form submit
-    //   return false;
-    // },
-
   });
 
 
@@ -461,22 +444,30 @@ if (Meteor.isClient) { // only runs on the client
         }
     }
 
+    // When screen size changes shoot off an event and change things
     tablet.addListener(handleMediaChange);
     desktop.addListener(handleMediaChange);
     largeDesktop.addListener(handleMediaChange);
-
-  
   });
 
 
 
-} // this marks the end of the client code
+} // Client only code end
 
 
 
 
 
-// ---------------- Code for the server only goes below
+/*
+|--------------------------------------------------------------------------
+| Server Only Main Code
+|--------------------------------------------------------------------------
+|
+| This is code that only runs on the server
+|
+|
+*/
+
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
@@ -497,7 +488,8 @@ if (Meteor.isServer) {
       clientIp = forwardedFor[0];
     });
 
-    console.log(Meteor.settings.mailGunUrl);
+    if (!Meteor.settings.mailGunUrl) console.log('Warning: email config not done.');
+    else console.log("Email config address: " + Meteor.settings.mailGunUrl);
 
 /* had to remove due to unstyled accounts for some reason
   Accounts.config({
@@ -511,9 +503,7 @@ if (Meteor.isServer) {
   //Kadira.connect('wYiFPMyqaBcyKp7QK', '1f136ced-05f9-4e73-a92b-ef609cda56ce');
 
 
-
   // Meteor publish publication functions moved to /server/pulbications.js
-  
 
 
 } // end of the server only code

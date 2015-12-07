@@ -18,13 +18,13 @@
   </div>
 </template>
 
-<template name="LiteHeader">
+<!-- <template name="LiteHeader">
   <div class="lite-header">
     <div class="container">
       <a href="/"><img src="/grey-logo.png"></a> | Curiously quotable.
     </div>
   </div>
-</template>
+</template> -->
 
 
 <template name="LiteHome">
@@ -32,7 +32,7 @@
     <div class="container">
       <div class="home-text">
         <div class="logo"><img alt="Qurious" src="/qurious_logo.png"></div>
-        <p>Welcome</p>
+        <p><a class="btn btn-default" href="/r">Curious?</a></p>
       </div>
     </div>
   </div>
@@ -67,7 +67,7 @@
   </div>
 </template>
 
-<!-- This template is for the loading spinner -->
+<!-- This template is to show the loading spinner -->
 <template name="LiteLoad">
   <div class="lite-container container-fluid">
     <div class="top-spacing">
@@ -159,16 +159,9 @@
 
 <template name="LiteNav">
   <div class="navbar navbar-default navbar-fixed-bottom lite-nav">
-
-  
-    
-
     <div class="container">
-      <a href="/r"><img src="/grey-logo.png"></a> | Curiously quotable.
+      <a href="/"><img src="/grey-logo.png"></a> | Curiously quotable.
     </div>
-
-
-
         <!-- This is five columns sort of like Twitter app etc at the bottom. -->
 <!--         <div class="container">
 <div class="lite-controls">
@@ -191,10 +184,6 @@
           </div>
           </div>
         </div> -->
-
-
-
-      
   </div> 
 </template>
 
@@ -203,10 +192,6 @@
 <template name="SingleAuthor">
 <li class="author"><a href="/{{slug}}">{{name}}</a> <i class="fa fa-times-circle-o delete"></i></li>
 </template>
-
-
-
-
 
 
 
@@ -223,6 +208,8 @@
           <input type="submit" id="submit"/>
         </form>
     {{/if}} -->
+
+
 
 
     <form class="new-author">

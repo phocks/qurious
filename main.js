@@ -55,6 +55,10 @@ if (Meteor.isClient) { // only runs on the client
   Meteor.subscribe("authors"); // subscribe only to certain ones later
 
 
+  
+
+
+
 
 
   // Font experiment to see if we can load fonts on demand
@@ -114,6 +118,10 @@ if (Meteor.isClient) { // only runs on the client
     //     Footer: {to: 'footer'},
     // },
     //notFoundTemplate: '404' //this is used for somewhat custom 404s
+
+    // for the loading up top thing
+    progressSpinner : false,
+    progressDelay : 50,
   });
 
 
@@ -450,6 +458,23 @@ if (Meteor.isClient) { // only runs on the client
     largeDesktop.addListener(handleMediaChange);
   });
 
+
+  // This is a little loading stripe up the top.
+  // Use: nanobar.go( 30 ); to make it go 30%
+  // Meteor.startup(function () {
+  //   // Setup nanobar progress
+  //   var options = {
+  //       bg: '#f48365',
+  //       // leave target blank for global nanobar
+  //       // target: document.getElementById('myDivId'),
+  //       // id for new nanobar
+  //       id: 'mynano'
+  //   };
+
+  //   var nanobar = new Nanobar( options );
+
+    
+  //   });
 
 
 } // Client only code end

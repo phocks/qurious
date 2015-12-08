@@ -912,11 +912,12 @@ p.contact a:hover {
 }
 
 
+/* Disabled because it was messing with the lading bar
 .loading {
   margin-top: 100px;
   margin-bottom: 100px;
   text-align: center;
-}
+}*/
 
 
 
@@ -1223,4 +1224,11 @@ span.amp {
   font-size:110%;
   font-style:italic;
   color: LightGray;
+}
+
+
+
+#iron-router-progress {
+    background-color: #5ab2b5;
+    box-shadow: 0 0 2px #5ab2b5;
 }

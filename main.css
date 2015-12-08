@@ -1202,14 +1202,14 @@ p.contact a:hover {
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .lite-quote {
-    font-size: 2.2em;
+    font-size: 2.3em;
   }
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .lite-quote {
-    font-size: 2.3em;
+    font-size: 2.4em;
   }
 }
 

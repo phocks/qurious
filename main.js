@@ -121,7 +121,7 @@ if (Meteor.isClient) { // only runs on the client
 
     // for the loading up top thing
     progressSpinner : false,
-    // progressDelay : 100,
+    progressDelay : 100,
   });
 
 

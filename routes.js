@@ -570,7 +570,7 @@ Router.route('/', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
     // return one handle, a function, or an array
-    return Meteor.subscribe('quotesAll');
+    //return Meteor.subscribe('quotesAll');
   },
   action: function () {
     this.layout('LiteLayout');

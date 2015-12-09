@@ -120,8 +120,8 @@ if (Meteor.isClient) { // only runs on the client
     //notFoundTemplate: '404' //this is used for somewhat custom 404s
 
     // for the loading up top thing
-    progressSpinner : false,
-    progressDelay : 100,
+    progressSpinner: false,
+    progressDelay: 40,
   });
 
 

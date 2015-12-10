@@ -121,7 +121,7 @@ if (Meteor.isClient) { // only runs on the client
 
     // for the loading up top thing
     progressSpinner: false,
-    progressDelay: 40,
+    progressDelay: 100,
   });
 
 
@@ -516,12 +516,15 @@ if (Meteor.isServer) {
     if (!Meteor.settings.mailGunUrl) console.log('Warning: email config not done.');
     else console.log("Email config address: " + Meteor.settings.mailGunUrl);
 
-/* had to remove due to unstyled accounts for some reason
-  Accounts.config({
-    forbidClientAccountCreation : false  // set this to true to disable signup
-    });
-*/
+    /* had to remove due to unstyled accounts for some reason
+      Accounts.config({
+        forbidClientAccountCreation : false  // set this to true to disable signup
+        });
+    */
 
+    
+
+    
   });  // end of code to do at startup
 
   // This is a monitoring tool

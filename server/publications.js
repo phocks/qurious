@@ -50,6 +50,14 @@ Meteor.publish("quotesSlug", function (slug) {
   var quote = Quotes.find({ _id: slug });
   // console.log(quote); // trying to get counter quotes working too../....
   // if (!quote) quote = Quotes.find({ quote_id: slug });
+
+  
+
+  // Simulated latency\
+  var timeToSleep = getRandomInt(300,1000)
+  console.log("Simulating latency for " + timeToSleep + " milliseconds.");
+  Meteor._sleepForMs(timeToSleep); 
+
   return quote;
 });
 

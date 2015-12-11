@@ -55,6 +55,7 @@ Meteor.publish("quotesSlug", function (slug) {
 
   // Simulated latency\
   var timeToSleep = getRandomInt(300,1000)
+  
   console.log("Simulating latency for " + timeToSleep + " milliseconds.");
   Meteor._sleepForMs(timeToSleep); 
 

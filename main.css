@@ -1091,6 +1091,7 @@ p.contact a:hover {
   max-width: 500px;
   margin: auto;
   padding-bottom: 16px;
+  margin-top: 30px;
 }
 
 .lite-container .lite-home .home-text .logo img {
@@ -1231,4 +1232,15 @@ span.amp {
 #iron-router-progress {
     background-color: #5ab2b5;
     box-shadow: 0 0 0px #5ab2b5;
+}
+
+
+
+.spaced {
+  padding-bottom: 30px !important;
+}
+
+
+.menu {
+  font-size: 32px;
 }

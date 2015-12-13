@@ -594,6 +594,19 @@ Router.route('/', {
 
 
 
+Router.route('/menu', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    this.render('Menu');
+    this.render('LiteNav', { to: 'nav'});
+  }
+});
+
+
 
 // This is our catch all for all other unknown things
 // Probably won't be called all that much

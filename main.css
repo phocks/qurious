@@ -1083,6 +1083,10 @@ p.contact a:hover {
   color: #999;
 }
 
+.lite-container .lite-nav a {
+  color: gray;
+}
+
 .lite-container .lite-nav img {
   height: 32px;
 }
@@ -1244,3 +1248,5 @@ span.amp {
 .menu {
   font-size: 32px;
 }
+
+

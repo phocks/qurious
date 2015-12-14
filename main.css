@@ -11,7 +11,7 @@
   also, there is a way to selectively load fonts via javascript, see in js files
   */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 /*
 @import url(https://fonts.googleapis.com/css?family=Vollkorn:400,400italic);
@@ -1250,3 +1250,11 @@ span.amp {
 }
 
 
+ul.menu-group {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 64px;
+  font-weight: bold;
+}

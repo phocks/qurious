@@ -1195,34 +1195,6 @@ p.contact a:hover {
 
 
 
-/* Extra small devices (phones, less than 768px) */
-/* No media query since this is the default in Bootstrap */
-
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .lite-quote {
-    font-size: 2.1em;
-  }
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .lite-quote {
-    font-size: 2.3em;
-  }
-}
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  .lite-quote {
-    font-size: 2.4em;
-  }
-}
-
-
-
-
-
 /* Custom ampersand */
 span.amp {
   font-family:Baskerville,"Goudy Old Style","Palatino","Book Antiqua",serif;
@@ -1255,6 +1227,56 @@ ul.menu-group {
   margin: 0;
   padding: 0;
   text-align: center;
-  font-size: 64px;
+  font-size: 32px;
   font-weight: bold;
+}
+
+ul.menu-group a {
+  color: #999;
+  text-decoration: none;
+}
+
+ul.menu-group a:hover {
+  color: #787878;
+}
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Media Queries Main
+|--------------------------------------------------------------------------
+|
+| Main media queries go after here.
+|
+|
+*/
+
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .lite-quote {
+    font-size: 2.1em;
+  }
+
+  ul.menu-group {
+    font-size: 64px;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .lite-quote {
+    font-size: 2.3em;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .lite-quote {
+    font-size: 2.4em;
+  }
 }

@@ -1093,9 +1093,9 @@ p.contact a:hover {
 
 .lite-container .lite-home .home-text .logo {
   max-width: 500px;
-  margin: auto;
-  padding-bottom: 16px;
-  margin-top: 30px;
+  margin: auto;  
+  margin-top: 32px;
+  padding-bottom: 32px;
 }
 
 .lite-container .lite-home .home-text .logo img {
@@ -1270,13 +1270,13 @@ ul.menu-group a:hover {
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .lite-quote {
-    font-size: 2.3em;
+    font-size: 2.4em;
   }
 }
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .lite-quote {
-    font-size: 2.4em;
+    font-size: 2.7em;
   }
 }

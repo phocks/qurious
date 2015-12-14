@@ -3,4 +3,4 @@ Welcome to Qurious—a new way to explore and discover the best quotations from 
 
 ## License
 
-All code and other intellectual property Copyright 2015- all rights reserved.
+All code and other intellectual property Copyright 2015- by Meagre. All rights reserved.

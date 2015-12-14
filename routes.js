@@ -606,6 +606,18 @@ Router.route('/menu', {
   }
 });
 
+Router.route('/about-us', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    this.render('About');
+    this.render('LiteNav', { to: 'nav'});
+  }
+});
+
 
 
 // This is our catch all for all other unknown things

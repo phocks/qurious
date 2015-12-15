@@ -19,7 +19,11 @@ Importing Volkorn has been moved to the main.js due to
 dropcap.js not playing well with CSS @imports
 */
 
-
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
 
 a, /* this gets rid of the dotty outline in Firefox. */
 a:hover,
@@ -1197,9 +1201,16 @@ p.contact a:hover {
 
 /* Custom ampersand */
 span.amp {
-  font-family:Baskerville,"Goudy Old Style","Palatino","Book Antiqua",serif;
-  font-size:110%;
-  font-style:italic;
+  font-family: Baskerville,"Goudy Old Style","Palatino","Book Antiqua",serif;
+  font-size: 110%;
+  font-style: italic;
+  color: LightGray;
+}
+
+span.quo {
+  font-family: Baskerville,"Goudy Old Style","Palatino","Book Antiqua",serif;
+  font-size: 64px;
+  font-style: italic;
   color: LightGray;
 }
 
@@ -1242,6 +1253,9 @@ ul.menu-group a:hover {
 
 
 
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Media Queries Main
@@ -1259,7 +1273,7 @@ ul.menu-group a:hover {
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
   .lite-quote {
-    font-size: 2.1em;
+    font-size: 2.2em;
   }
 
   ul.menu-group {
@@ -1277,6 +1291,6 @@ ul.menu-group a:hover {
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .lite-quote {
-    font-size: 2.7em;
+    font-size: 2.6em;
   }
 }

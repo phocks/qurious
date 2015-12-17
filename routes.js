@@ -462,7 +462,7 @@ Router.route('/api', function () {
 
 
 // Takes the doc _id and displays quote
-Router.route('/q/:_quote_id', {
+Router.route('/quote/:_quote_id', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
     // return one handle, a function, or an array
@@ -535,7 +535,7 @@ Router.route('/r', function () {
   Meteor.call('getRandomQuoteId', function (error, result) {
     var randomId = result;
     // replaceState keeps the browser from duplicating history
-    Router.go('/q/' + randomId, {}, {replaceState:true});
+    Router.go('/quote/' + randomId, {}, {replaceState:true});
   });
   this.render('LiteLoad');
 });

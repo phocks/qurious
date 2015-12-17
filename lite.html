@@ -26,7 +26,10 @@
     <div class="container">
       <div class="home-text">
         <div class="logo"><img alt="Qurious" src="/qurious_logo.png"></div>
-        <p><a class="btn btn-default" href="/r">Curious?</a> <a class="btn btn-default" href="/about">What is this?</a></p>
+        <p>
+          <a class="btn btn-default" href="/r">Curious?</a>
+          <!-- <a class="btn btn-default" href="/about">What the?</a> -->
+        </p>
       </div>
     </div>
   </div>
@@ -60,6 +63,13 @@
       </ul>
     </div>
   </div>
+
+  <div class="lite-controls">
+    <div class="container">
+      <a class="btn btn-default" href="/r">Another?</a>
+    </div>
+  </div>
+
 </template>
 
 <!-- This template is to show the loading spinner -->
@@ -183,7 +193,11 @@
 <div class="lite-text-content">
   <div class="container">
     <h1 class="text-center">About</h1>
-    <p class="lead">Qurious is a website about quotes and stuff. We are still building things. Use the form below to get early access.</p>
+    <p class="lead">Qurious is a website about quotes, words, and ideas. We are still in the process of putting everything together.</p>
+
+    <!-- <p class="lead">If you have an account please <a href="/login">login here</a>, or else to learn more and get early access please enter your details below.</p>
+    <p>{{> LiteFooterSubscribe}}</p>
+    <p class="lead">Developed by Meagre. Email <a href="mailto:jb@meag.re">jb@meag.re</a> for all enquires.</p> -->
     <p class="text-center"><span class="quo">&rdquo;</span></p>
   </div>
 </div>
@@ -194,9 +208,8 @@
 
 <template name="LiteFooterSubscribe">
   <div class="lite-footer">
-    <div class="container">
-      <!-- Begin MailChimp Signup Form -->
-      <div id="mc_embed_signup">
+    <!-- Begin MailChimp Signup Form -->
+    <div id="mc_embed_signup">
       <form action="//qurious.us1.list-manage.com/subscribe/post?u=cf9d60bafd106d479eaf9a181&amp;id=e0e0728735" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
           <div id="mc_embed_signup_scroll">
       <div class="mc-field-group">
@@ -212,7 +225,6 @@
       </form>
       </div>
       <!--End mc_embed_signup-->
-    </div>
   </div>
 </template>
 

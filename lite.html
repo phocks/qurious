@@ -26,11 +26,16 @@
     <div class="container">
       <div class="home-text">
         <div class="logo"><img alt="Qurious" src="/qurious_logo.png"></div>
-        <p><input type="text" class="form-control" id="word"></p>
+        <p>
+          <form class="word-search">
+            <input type="text" class="form-control" id="word" name="word">
+            <!-- <input type="submit"/> -->
+          </form>
+        </p>
 
         <p>
-          <!-- <a class="btn btn-defaultk" href="/r">Curious?</a> -->
-          <!-- <a class="btn btn-default" href="/about">What the?</a> -->
+          <a class="btn btn-default" href="/about">Curious?</a>
+          <a class="btn btn-default" href="/r">I'm feeling lucky</a>
         </p>
       </div>
     </div>
@@ -50,7 +55,7 @@
     <!-- <p class="lead">If you have an account please <a href="/login">login here</a>, or else to learn more and get early access please enter your details below.</p>
     <p>{{> LiteFooterSubscribe}}</p>
     <p class="lead">Developed by Meagre. Email <a href="mailto:jb@meag.re">jb@meag.re</a> for all enquires.</p> -->
-    <p class="text-center"><span class="quo">&rdquo;</span></p>
+    <p class="text-center"><span class="quo"><i class="fa fa-quote-right"></i></span></p>
   </div>
 </div>
 </template>

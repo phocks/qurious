@@ -358,25 +358,41 @@ if (Meteor.isClient) { // only runs on the client
 
 
     Template.Header.events({
-    "submit .search-form": function (event) {
-      var q = event.target.q.value;
+      "submit .search-form": function (event) {
+        var q = event.target.q.value;
 
-      if (q == "") {
-        Router.go('/explore/latest');
+        if (q == "") {
+          Router.go('/explore/latest');
+          return false;
+
+        }
+
+        //event.target.q.value = "";
+
+
+        Router.go('/search/' + q);
+
+
+        // Prevent default action from form submit
         return false;
-
-      }
-
-      //event.target.q.value = "";
+      },
+    });
 
 
-      Router.go('/search/' + q);
+
+    Template.LiteHome.events({
+      "submit .word-search": function (event) {
+        
+        Router.go('/about');
 
 
-      // Prevent default action from form submit
-      return false;
-    },
-  });
+        // Prevent default action from form submit
+        return false;
+      },
+    });
+
+
+
 
 
 

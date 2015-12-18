@@ -1180,7 +1180,7 @@ span.amp {
 
 span.quo {
   font-family: Baskerville,"Goudy Old Style","Palatino","Book Antiqua",serif;
-  font-size: 64px;
+  font-size: 32px;
   font-style: italic;
   color: LightGray;
 }
@@ -1275,7 +1275,9 @@ input#word {
   -webkit-box-shadow: none !important;
   -moz-box-shadow: none !important;
   box-shadow: none !important;
-  /*background-color: #f7f6f4;*/
-  border-bottom: 1px solid #999;
+  background-color: white;
+  border-bottom: 2px solid LightGray;
   border-radius: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }

@@ -26,17 +26,15 @@
     <div class="container">
       <div class="home-text">
         <div class="logo"><img alt="Qurious" src="/qurious_logo.png"></div>
-        <p>
           <form class="word-search">
-            <input type="text" class="form-control" id="word" name="word">
-            <!-- <input type="submit"/> -->
+            <div class="form-group">
+              <input type="text" class="form-control" id="word" name="word">              
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-default" href="/about">Curious?</button>
+              <a class="btn btn-default" href="/r">I'm feeling lucky</a>
+            </div>
           </form>
-        </p>
-
-        <p>
-          <a class="btn btn-default" href="/about">Curious?</a>
-          <a class="btn btn-default" href="/r">I'm feeling lucky</a>
-        </p>
       </div>
     </div>
   </div>
@@ -59,6 +57,21 @@
   </div>
 </div>
 </template>
+
+
+
+
+<template name="Menu">
+  <div class="container">
+    <ul class="menu-group full-screen-menu">
+      <li class="menu-group-item"><a href="/">Home</a></li>
+      <li class="menu-group-item"><a href="/about">About</a></li>
+      <!-- <li class="menu-group-item"><a href="/r">Random</a></li> -->
+    </ul>
+  </div>
+</template>
+
+
 
 
 
@@ -143,15 +156,7 @@
 </template>
 
 
-<template name="Menu">
-  <div class="container">
-    <ul class="menu-group full-screen-menu">
-      <li class="menu-group-item"><a href="/">Home</a></li>
-      <li class="menu-group-item"><a href="/about">About</a></li>
-      <!-- <li class="menu-group-item"><a href="/r">Random</a></li> -->
-    </ul>
-  </div>
-</template>
+
 
 
 

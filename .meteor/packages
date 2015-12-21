@@ -14,7 +14,6 @@ accounts-ui
 accounts-password
 useraccounts:iron-routing
 pagebakers:ionicons
-meteorhacks:search-source
 standard-minifiers
 meteor-base
 mobile-experience
@@ -31,3 +30,6 @@ spacebars
 check
 okgrow:router-autoscroll
 less
+fortawesome:fontawesome
+multiply:iron-router-progress
+email

@@ -3,7 +3,7 @@
 // actually interested in using on the client side.
 // These have become so messy. Think about cleaning up.
 Meteor.publish("quotesAll", function () {
-  return Quotes.find({}, { sort: {createdAt: -1} });
+  return Quotes.find({});
 });
 
 
@@ -50,6 +50,15 @@ Meteor.publish("quotesSlug", function (slug) {
   var quote = Quotes.find({ _id: slug });
   // console.log(quote); // trying to get counter quotes working too../....
   // if (!quote) quote = Quotes.find({ quote_id: slug });
+
+  
+
+  // Simulated latency
+  var timeToSleep = getRandomInt(100,1000)
+  
+  console.log("Simulating latency for " + timeToSleep + " milliseconds.");
+  Meteor._sleepForMs(timeToSleep); 
+
   return quote;
 });
 
@@ -89,4 +98,16 @@ Meteor.publish("userData", function () {
     });
     this.ready();
   }*/
+});
+
+
+
+Meteor.publish("authors", function () {
+  return Authors.find();
+});
+
+
+
+Meteor.publish("words", function () {
+  return Words.find();
 });

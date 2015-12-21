@@ -1,6 +1,8 @@
 <!-- An iron-router Layout -->
 <template name="LiteLayout">
   <div class="lite-container container-fluid">
+    <div class="top-spacing">
+    </div>
     <header>
       {{> yield "header"}}
     </header>
@@ -10,29 +12,70 @@
     <footer>
       {{> yield "footer"}}
     </footer>
+    <nav>
+      {{> yield "nav"}}
+    </nav>
   </div>
 </template>
 
-<template name="LiteHeader">
-  <div class="lite-header">
-    <div class="container">
-      <a href="/"><img src="/grey-logo.png"></a> | Curiously quotable.
-    </div>
-  </div>
-</template>
+
 
 
 <template name="LiteHome">
-  <div class="lite-quote">
+  <div class="lite-home">
     <div class="container">
-      <div class="quotation simpleshadow">
-        <p>We&rsquo;ve been hard at work building something new from the ground up.</p>
-        <p>&ldquo;Qurious&rdquo; is an effort to organise the world&rsquo;s words and ideas in new and meaningful ways.</p>
-        <p class="attribution simpleshadow"><span class="dash">&mdash;</span>The Qurious Team</p>
+      <div class="home-text">
+        <div class="logo"><img alt="Qurious" src="/qurious_logo.png"></div>
+          <form class="word-search" name="search-form">
+            <div class="form-group">
+              <input type="text" class="form-control" id="word" name="search">              
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-default" href="/about">Curious?</button>
+              <a class="btn btn-default" href="/r">I'm feeling lucky</a>
+            </div>
+          </form>
       </div>
     </div>
   </div>
 </template>
+
+
+
+
+
+<template name="About">
+<div class="lite-text-content">
+  <div class="container">
+    <h1 class="text-center">About</h1>
+    <p class="lead">Qurious is a website about quotes, words, and ideas, or something like that anyway. We are still in the process of putting everything together. So sit tight and we'll be up and running before you know it. Enter your email below for early access.</p>
+
+    <!-- <p class="lead">If you have an account please <a href="/login">login here</a>, or else to learn more and get early access please enter your details below.</p>
+    <p>{{> LiteFooterSubscribe}}</p>
+    <p class="lead">Developed by Meagre. Email <a href="mailto:jb@meag.re">jb@meag.re</a> for all enquires.</p> -->
+    <p class="text-center"><span class="quo"><i class="fa fa-quote-right"></i></span></p>
+
+    <p>{{> LiteFooterSubscribe}}</p>
+  </div>
+</div>
+</template>
+
+
+
+
+<template name="Menu">
+  <div class="container">
+    <ul class="menu-group full-screen-menu">
+      <li class="menu-group-item"><a href="/">Home</a></li>
+      <li class="menu-group-item"><a href="/about">About</a></li>
+      <!-- <li class="menu-group-item"><a href="/login">Login</a></li> -->
+      <!-- <li class="menu-group-item"><a href="/all_quotes">All Quotes</a></li> -->
+      <!-- <li class="menu-group-item"><a href="/r">Random</a></li> -->
+    </ul>
+  </div>
+</template>
+
+
 
 
 
@@ -40,62 +83,159 @@
 <template name="LiteQuote">
   <div class="lite-quote">
     <div class="container">
-      <div class="quotation simpleshadow">
+      <div class="quotation">
         <p>{{{quotation}}}</p>
-        <p class="attribution simpleshadow"><span class="dash">&mdash;</span>{{attribution}}</p>
+        <p class="attribution">
+        {{#if attribution}}
+          <span class="dash">&mdash;</span>{{attribution}}
+        {{/if}}
+        </p>
+        <p class="text-center"><span class="amp">&amp;</span></p>
       </div>
     </div>
   </div>
-
-  <!-- This is five columns sort of like Twitter app etc at the bottom.
-  <div class="lite-controls">
-  <div class="container">
-  <div class="row">
-      <div class="col-xs-15">
-
-      </div>
-      <div class="col-xs-15">
-
-      </div>
-      <div class="col-xs-15">
-      <i class="icon ion-refresh"></i>
-      </div>
-      <div class="col-xs-15">
-
-      </div>
-      <div class="col-xs-15">
-
-      </div>
-  </div>
-  </div>
-  </div> -->
-
 
   <div class="lite-info">
     <div class="container">
       <ul>
         <!-- Do we really need to show these? -->
-        <li><i class="icon ion-eye"></i> {{views}} views</li>
-        <li><a href="/q/{{_id}}"><i class="icon ion-clock"></i> {{howLongAgo createdAt}}</a></li>
-        <li><i class="icon ion-quote"></i> By {{username}}</li>
+        <!-- <li><i class="icon ion-eye"></i> {{views}} views</li>
+        <li><i class="icon ion-clock"></i> {{howLongAgo createdAt}}</li>
+        <li><i class="icon ion-quote"></i> By {{username}}</li> -->
       </ul>
     </div>
   </div>
+
+  <div class="lite-controls">
+    <div class="container">
+      <!-- <a class="btn btn-default" href="/r">Another?</a> -->
+    </div>
+  </div>
+
 </template>
 
-<!-- This template is for the loading spinner -->
-<template name="LiteLoad">
-  <br>
-  <br>
-  <h1 class="text-center"></h1>
-</template>
+
+
+
 
 <template name="LiteFooter">
   <div class="lite-footer">
     <div class="container">
-    <p>Click for <a href="/r">more</a>. Or use this form to get early access.</p>
-      <!-- Begin MailChimp Signup Form -->
-      <div id="mc_embed_signup">
+    <!-- <p>Click for <a href="/r">more</a>.</p> -->
+    </div>
+  </div>
+</template>
+
+
+
+
+
+<template name="LiteError">
+  <br>
+  <br>
+  <h1 class="text-center">404</h1>
+  {{> LiteNav}}
+</template>
+
+
+<template name="LiteAuthor">
+  <div class="author">
+    <div class="container">
+      Author
+    </div>
+  </div>
+</template>
+
+
+
+<!-- This is the fixed nav at the bottom -->
+<template name="LiteNav">
+  <div class="navbar navbar-default navbar-fixed-bottom lite-nav">
+    <div class="container">
+      <div class="pull-right">
+        <a href="/menu"><i class="fa fa-bars menu"></i></a>
+      </div>
+      <a href="/"><img src="/grey-logo.png"></a> | Curiously quotable.
+    </div>
+  </div> 
+</template>
+
+
+
+
+
+
+<template name="SingleAuthor">
+<li class="author"><a href="/{{slug}}">{{name}}</a> <i class="fa fa-times-circle-o delete"></i></li>
+</template>
+
+
+
+
+
+
+<template name="ListAuthors">
+  <div class="container">
+
+    <!-- {{#if currentUser}}
+        <form class="new-author">
+          <input type="text" name="author" placeholder="New author" />
+          <input type="text" name="slug" placeholder="Author slug" />
+          <input type="submit" id="submit"/>
+        </form>
+    {{/if}} -->
+
+
+
+    <form class="new-author">
+      <div class="form-group">
+        <label for="fullNameInput1">Full name</label>
+        <input type="text" class="form-control" id="fullNameInput1" name="author" placeholder="Full name">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    
+    <ul class="authors">
+    {{#each authors}}
+      {{> SingleAuthor}}
+    {{/each}}
+    </ul>
+  </div>
+</template>
+
+
+
+
+
+
+<!-- This template is to show the loading spinner -->
+<template name="LiteLoad">
+  <div class="lite-container container-fluid">
+    <div class="top-spacing">
+    </div>
+    <header>
+      
+    </header>
+    <div class="body-container">
+      <!-- Do something else for the loader maybe a top bar -->
+      <!-- <p class="text-center"><img width="50px" src="/q-loader.gif"></p> -->
+    </div>
+    <footer>
+      
+    </footer>
+    <nav>
+      {{>LiteNav}}
+    </nav>
+  </div>
+</template>
+
+
+
+
+<template name="LiteFooterSubscribe">
+  <div class="lite-footer">
+    <!-- Begin MailChimp Signup Form -->
+    <div id="mc_embed_signup">
       <form action="//qurious.us1.list-manage.com/subscribe/post?u=cf9d60bafd106d479eaf9a181&amp;id=e0e0728735" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
           <div id="mc_embed_signup_scroll">
       <div class="mc-field-group">
@@ -111,12 +251,73 @@
       </form>
       </div>
       <!--End mc_embed_signup-->
+  </div>
+</template>
+
+
+
+
+<template name="AdminAllQuotes">
+  <div class="admin-all-quote">
+    <div class="container">
+      {{#each quotes}}
+        {{> AdminSingleQuote}}
+      {{/each}}
     </div>
   </div>
 </template>
 
-<template name="LiteError">
-  <br>
-  <br>
-  <h1 class="text-center">404</h1>
+<template name="AdminSingleQuote">
+  <div class="quotation">
+    <p>{{{quotation}}}</p>
+    <p class="attribution">
+    {{#if attribution}}
+      <span class="dash">&mdash;</span>{{attribution}}
+    {{/if}}
+    </p>
+  </div>
 </template>
+
+
+
+
+
+
+
+<template name="AllWords">
+  <div class="words">
+    <div class="container">
+      {{#each words}}
+        {{word}}
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+
+
+
+
+<template name="AddWords">
+  <div class="add-words text-center">
+  <div class="container">
+    <form class="new-word">
+        <div class="form-group">
+          <label for="wordInput">Word</label>
+          <input type="text" class="form-control" id="wordInput" name="word" placeholder="word">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+  </div>
+</template>
+
+<!-- <template name="LiteHeader">
+  <div class="lite-header">
+    <div class="container">
+      <a href="/"><img src="/grey-logo.png"></a> | Curiously quotable.
+    </div>
+  </div>
+</template> -->
+
+

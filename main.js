@@ -27,8 +27,11 @@
 // First up we are going to create a few collections
 Quotes = new Mongo.Collection('quotes');  // Our main quote db
 Authors = new Mongo.Collection('authors'); // People who say stuff
-Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use)
+Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use really)
+Words = new Mongo.Collection('words'); // Words are the basis of ideas
 // There is also a Users collection by default in Meteor
+
+
 
 
 
@@ -357,34 +360,56 @@ if (Meteor.isClient) { // only runs on the client
     });
 
 
-    Template.Header.events({
-      "submit .search-form": function (event) {
-        var q = event.target.q.value;
 
-        if (q == "") {
-          Router.go('/explore/latest');
-          return false;
+    Template.AddWords.events({
+      "submit .new-word": function (event) {      
+        var word = event.target.word.value;
+        if (word == "") return false; // prevent empty strings
 
-        }
+        Meteor.call('addWord', word);
 
-        //event.target.q.value = "";
-
-
-        Router.go('/search/' + q);
-
+        // Clear form      
+        event.target.word.value = "";
 
         // Prevent default action from form submit
         return false;
-      },
+      },      
     });
+
+
+    // Template.Header.events({
+    //   "submit .search-form": function (event) {
+    //     var q = event.target.q.value;
+
+    //     if (q == "") {
+    //       Router.go('/explore/latest');
+    //       return false;
+
+    //     }
+
+    //     //event.target.q.value = "";
+
+
+    //     Router.go('/search/' + q);
+
+
+    //     // Prevent default action from form submit
+    //     return false;
+    //   },
+    // });
 
 
 
     Template.LiteHome.events({
       "submit .word-search": function (event) {
+        var q = event.target.search.value;
         
-        Router.go('/about');
 
+        // Re enable this to work on a search
+        // if (q == "") return false;
+        // Router.go('/word/' + q);
+
+        Router.go('/about');
 
         // Prevent default action from form submit
         return false;
@@ -452,22 +477,6 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
-  // This is a little loading stripe up the top.
-  // Use: nanobar.go( 30 ); to make it go 30%
-  // Meteor.startup(function () {
-  //   // Setup nanobar progress
-  //   var options = {
-  //       bg: '#f48365',
-  //       // leave target blank for global nanobar
-  //       // target: document.getElementById('myDivId'),
-  //       // id for new nanobar
-  //       id: 'mynano'
-  //   };
-
-  //   var nanobar = new Nanobar( options );
-
-    
-  //   });
 
 
 } // Client only code end
@@ -515,7 +524,8 @@ if (Meteor.isServer) {
         });
     */
 
-    
+    // Make sure some indexes are unique and can't be 2 or more of them
+    Words._ensureIndex({word: 1}, {unique: 1});
 
     
   });  // end of code to do at startup

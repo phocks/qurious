@@ -105,3 +105,9 @@ Meteor.publish("userData", function () {
 Meteor.publish("authors", function () {
   return Authors.find();
 });
+
+
+
+Meteor.publish("words", function () {
+  return Words.find();
+});

@@ -210,6 +210,42 @@ Router.route('/all_quotes', {
 
 
 
+Router.route('/words', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe("words");
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    // this.render('LiteHeader', { to: 'header'});
+    this.render('AllWords', {
+      data: {
+        words: function () {  
+          Session.set("DocumentTitle", "All Words");
+
+          return Words.find({});
+          }
+        }
+      });
+    this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
+  },
+});
+
+
+
+
+Router.route('/add-words', {
+  action: function () {
+    this.layout('LiteLayout');
+    // this.render('LiteHeader', { to: 'header'});
+    this.render('AddWords');
+    this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
+  },
+});
+
 
 
 
@@ -673,9 +709,3 @@ Router.route('/(.*)', function() {
 
 //   this.render('Loading');
 // });
-
-
-
-
-
-

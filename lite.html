@@ -66,6 +66,8 @@
     <ul class="menu-group full-screen-menu">
       <li class="menu-group-item"><a href="/">Home</a></li>
       <li class="menu-group-item"><a href="/about">About</a></li>
+      <li class="menu-group-item"><a href="/login">Login</a></li>
+      <li class="menu-group-item"><a href="/all_quotes">All Quotes</a></li>
       <!-- <li class="menu-group-item"><a href="/r">Random</a></li> -->
     </ul>
   </div>
@@ -130,6 +132,7 @@
   <br>
   <br>
   <h1 class="text-center">404</h1>
+  {{> LiteNav}}
 </template>
 
 
@@ -252,6 +255,26 @@
 
 
 
+<template name="AdminAllQuotes">
+  <div class="admin-all-quote">
+    <div class="container">
+      {{#each quotes}}
+        {{> AdminSingleQuote}}
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="AdminSingleQuote">
+  <div class="quotation">
+    <p>{{{quotation}}}</p>
+    <p class="attribution">
+    {{#if attribution}}
+      <span class="dash">&mdash;</span>{{attribution}}
+    {{/if}}
+    </p>
+  </div>
+</template>
 
 
 
@@ -265,3 +288,4 @@
     </div>
   </div>
 </template> -->
+

@@ -3,7 +3,7 @@
 // actually interested in using on the client side.
 // These have become so messy. Think about cleaning up.
 Meteor.publish("quotesAll", function () {
-  return Quotes.find({}, { sort: {createdAt: -1} });
+  return Quotes.find({});
 });
 
 

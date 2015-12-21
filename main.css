@@ -1277,6 +1277,9 @@ input#word {
   box-shadow: none !important;
   background-color: white;
   border-bottom: 2px solid LightGray;
+  border-top: 1px #f4f4f4 solid;
+  border-left: 1px #f4f4f4 solid;
+  border-right: 1px #f4f4f4 solid;
   border-radius: 0;
   padding-top: 15px;
   padding-bottom: 15px;

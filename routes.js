@@ -2,6 +2,244 @@
 
 
 
+
+// Let's test out an API call for funsies
+Router.route('/api', function () {
+  var req = this.request;
+  var res = this.response;
+  res.end('hello from the server\n');
+}, {where: 'server'});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Takes the doc _id and displays quote
+Router.route('/quote/:_quote_id', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe('quotesSlug', this.params._quote_id);
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    // this.render('LiteHeader', { to: 'header'});
+    this.render('LiteQuote', {
+      data: function () {
+        var quote = Quotes.findOne({ _id: this.params._quote_id });
+        if (!quote) {
+          quote = Quotes.findOne({ quote_id: this.params._quote_id });
+        }
+        if (!quote) {
+          // this.render('NotFound');
+          // had to comment out as this was flashing not found briefly due to the split second
+          // it takes for the variable "quote" to be assigned..
+        } 
+        else {
+          Session.set('sessionQuoteId', this.params._quote_id);
+          // Meteor.call('checkQuoteSize', this.params._quote_id); // small or big?
+
+          // Let's try to get substring some text for the Title Bar
+          // this regular expression is gold (i didn't write it btw)
+          var titleText = quote.quotation.replace(/^(.{50}[^\s]*).*/, "$1");
+
+          Session.set("DocumentTitle", quote.attribution + " · " + titleText + " - Qurious");
+
+
+          return quote;
+        }
+      }
+    });
+    this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
+  },
+});
+
+
+Router.route('/authors', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    this.render('ListAuthors');
+    this.render('LiteNav', { to: 'nav'});
+  }
+});
+
+
+Router.route('/a/:_slug', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    this.render('LiteNav', { to: 'nav'});
+  }
+});
+
+
+
+
+// gets a random quote and redirects to the page
+Router.route('/r', function () {
+  Meteor.call('getRandomQuoteId', function (error, result) {
+    var randomId = result;
+    // replaceState keeps the browser from duplicating history
+    Router.go('/quote/' + randomId, {}, {replaceState:true});
+  });
+  this.render('LiteLoad');
+});
+
+// Testing the Lite loader
+Router.route('/load', function() {
+  this.layout('LiteLayout');
+  Session.set("DocumentTitle","Loading - Qurious");
+  this.render('LiteLoad');
+});
+
+
+Router.route('/a/:_author_slug', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    // this.render('LiteHeader', { to: 'header'});
+    this.render('LiteAuthor');
+    // this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
+  },
+});
+
+
+
+/* The root home route landing for qurious.cc/
+---------------------------------------------------------------------------------------*/
+Router.route('/', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    // return one handle, a function, or an array
+    // We are not returning anything to the home screen any more
+    // return Meteor.subscribe('quotesAll');
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    Session.set("DocumentTitle","Qurious");
+    // this.render('LiteHeader', { to: 'header'});
+
+    // Here we send a quote to the front page if required
+    Meteor.subscribe('quotesLatest', 1);
+
+    this.render('LiteHome', {
+      // data: function () {
+      //   return Quotes.findOne({});
+      // }      
+    });
+    this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
+  }
+});
+
+
+
+
+Router.route('/menu', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    Session.set("DocumentTitle","Qurious");
+    this.render('Menu');
+    this.render('LiteNav', { to: 'nav'});
+  }
+});
+
+Router.route('/about', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    Session.set("DocumentTitle","About Qurious");
+    this.render('About');
+    this.render('LiteNav', { to: 'nav'});
+  }
+});
+
+
+
+Router.route('/all_quotes', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe("quotesAll");
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    // this.render('LiteHeader', { to: 'header'});
+    this.render('AdminAllQuotes', {
+      data: {
+        quotes: function () {  
+          Session.set("DocumentTitle", "All Quotes");
+
+          return Quotes.find({}, { sort: { quotation: 1 }});
+          }
+        }
+      });
+    this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
+  },
+});
+
+
+
+
+
+
+
+
+// This is our catch all for all other unknown things
+// Probably won't be called all that much
+// Especially after we implement qurious.cc/phocks user pages
+Router.route('/(.*)', function() {
+  this.layout('LiteLayout');
+  Session.set("DocumentTitle","404 Qurious");
+  this.render('LiteError');
+});
+
+
+
+// DONT PUT ROUTES BELOW HERE BECAUSE THEY WON'T WORK
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // First some static pages with About Us and Privacy etc.
 
 
@@ -441,192 +679,3 @@
 
 
 
-// Let's test out an API call for funsies
-Router.route('/api', function () {
-  var req = this.request;
-  var res = this.response;
-  res.end('hello from the server\n');
-}, {where: 'server'});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Takes the doc _id and displays quote
-Router.route('/quote/:_quote_id', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    // return one handle, a function, or an array
-    return Meteor.subscribe('quotesSlug', this.params._quote_id);
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    // this.render('LiteHeader', { to: 'header'});
-    this.render('LiteQuote', {
-      data: function () {
-        var quote = Quotes.findOne({ _id: this.params._quote_id });
-        if (!quote) {
-          quote = Quotes.findOne({ quote_id: this.params._quote_id });
-        }
-        if (!quote) {
-          // this.render('NotFound');
-          // had to comment out as this was flashing not found briefly due to the split second
-          // it takes for the variable "quote" to be assigned..
-        } 
-        else {
-          Session.set('sessionQuoteId', this.params._quote_id);
-          // Meteor.call('checkQuoteSize', this.params._quote_id); // small or big?
-
-          // Let's try to get substring some text for the Title Bar
-          // this regular expression is gold (i didn't write it btw)
-          var titleText = quote.quotation.replace(/^(.{50}[^\s]*).*/, "$1");
-
-          Session.set("DocumentTitle", quote.attribution + " · " + titleText + " - Qurious");
-
-
-          return quote;
-        }
-      }
-    });
-    this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
-  },
-});
-
-
-Router.route('/authors', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    this.render('ListAuthors');
-    this.render('LiteNav', { to: 'nav'});
-  }
-});
-
-
-Router.route('/a/:_slug', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    this.render('LiteNav', { to: 'nav'});
-  }
-});
-
-
-
-
-// gets a random quote and redirects to the page
-Router.route('/r', function () {
-  Meteor.call('getRandomQuoteId', function (error, result) {
-    var randomId = result;
-    // replaceState keeps the browser from duplicating history
-    Router.go('/quote/' + randomId, {}, {replaceState:true});
-  });
-  this.render('LiteLoad');
-});
-
-// Testing the Lite loader
-Router.route('/load', function() {
-  this.layout('LiteLayout');
-  Session.set("DocumentTitle","Loading - Qurious");
-  this.render('LiteLoad');
-});
-
-
-Router.route('/a/:_author_slug', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    // this.render('LiteHeader', { to: 'header'});
-    this.render('LiteAuthor');
-    // this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
-  },
-});
-
-
-
-/* The root home route landing for qurious.cc/
----------------------------------------------------------------------------------------*/
-Router.route('/', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    // return one handle, a function, or an array
-    // We are not returning anything to the home screen any more
-    // return Meteor.subscribe('quotesAll');
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    Session.set("DocumentTitle","Qurious");
-    // this.render('LiteHeader', { to: 'header'});
-
-    // Here we send a quote to the front page if required
-    Meteor.subscribe('quotesLatest', 1);
-
-    this.render('LiteHome', {
-      // data: function () {
-      //   return Quotes.findOne({});
-      // }      
-    });
-    this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
-  }
-});
-
-
-
-
-Router.route('/menu', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    Session.set("DocumentTitle","Qurious");
-    this.render('Menu');
-    this.render('LiteNav', { to: 'nav'});
-  }
-});
-
-Router.route('/about', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    Session.set("DocumentTitle","About Qurious");
-    this.render('About');
-    this.render('LiteNav', { to: 'nav'});
-  }
-});
-
-
-
-// This is our catch all for all other unknown things
-// Probably won't be called all that much
-// Especially after we implement qurious.cc/phocks user pages
-Router.route('/(.*)', function() {
-  this.layout('LiteLayout');
-  Session.set("DocumentTitle","404 Qurious");
-  this.render('LiteError');
-});

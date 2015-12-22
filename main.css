@@ -1273,6 +1273,7 @@ ul.menu-group a:hover {
 /* This is a test front search box style without border etc */
 input#word {
   border: 0;
+  -webkit-appearance: none;
   -webkit-box-shadow: none !important;
   -moz-box-shadow: none !important;
   box-shadow: none !important;

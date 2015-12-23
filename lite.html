@@ -35,6 +35,13 @@
               <a class="btn btn-default" href="/r">I'm feeling lucky</a>
             </div>
           </form>
+
+
+          <ul class="home-word-list">
+            {{#each words}}
+              <li><a href="/word/{{word}}">{{word}}</a></li>
+            {{/each}}
+          </ul>
       </div>
     </div>
   </div>

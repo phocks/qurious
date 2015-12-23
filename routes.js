@@ -131,9 +131,7 @@ Router.route('/a/:_author_slug', {
 Router.route('/', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
-    // return one handle, a function, or an array
-    // We are not returning anything to the home screen any more
-    // return Meteor.subscribe('quotesAll');
+    return Meteor.subscribe("words");
   },
   action: function () {
     this.layout('LiteLayout');
@@ -144,9 +142,11 @@ Router.route('/', {
     Meteor.subscribe('quotesLatest', 1);
 
     this.render('LiteHome', {
-      // data: function () {
-      //   return Quotes.findOne({});
-      // }      
+      data: { 
+        words: function () {
+          return Words.find({});
+          }
+        }  
     });
     this.render('LiteFooter', { to: 'footer'});
     this.render('LiteNav', { to: 'nav'});

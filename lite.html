@@ -307,12 +307,13 @@
 
 
 
-<template name="AddWords">
-  <div class="add-words text-center">
+<template name="AdminStation">
+  <div class="admin-station text-center">
   <div class="container">
+    {{> atForm}}
     <form class="new-word">
         <div class="form-group">
-          <label for="wordInput">This is an admin page, use it to add and delete words.</label>
+          <label for="wordInput">This is an admin page, please don't do anything stupid.</label>
           <input type="text" class="form-control" id="wordInput" name="word" placeholder="word">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
@@ -320,6 +321,12 @@
       <p>
         {{#each words}}
           {{word}} <i class="fa fa-times-circle-o delete"></i> &nbsp;
+        {{/each}}
+      </p>
+
+      <p>
+        {{#each quotes}}
+          {{> AdminSingleQuote}}
         {{/each}}
       </p>
     </div>

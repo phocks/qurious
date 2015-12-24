@@ -2,7 +2,7 @@
 // Basically we only want to publish the quotes from our server which we are
 // actually interested in using on the client side.
 // These have become so messy. Think about cleaning up.
-Meteor.publish("quotesAll", function () {
+Meteor.publish("quotes", function () {
   return Quotes.find({});
 });
 

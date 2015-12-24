@@ -110,12 +110,14 @@ Router.route('/random/:_word', function () {
     var randomId = result;
 
     if (!randomId) {
-      Router.go('/notfound',{}, {replaceState:true});
+      Router.go('/notfound', {}, {replaceState:true});
       return false;
     }
     // replaceState keeps the browser from duplicating history, needs the {} as 2nd arg
+
     Router.go('/quote/' + randomId, {}, {replaceState:true});
   });
+
   this.render('LiteLoad');
 });
 
@@ -260,18 +262,27 @@ Router.route('/words', {
 
 
 
-Router.route('/add-words', {
+Router.route('/admin-station', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
-    return Meteor.subscribe("words");
+    Meteor.subscribe("words");
+    return Meteor.subscribe("quotes");
   },
   action: function () {
     this.layout('LiteLayout');
-    // this.render('LiteHeader', { to: 'header'});
-    this.render('AddWords', {
+    
+
+    console.log("current user is: " + Meteor.userId());
+    if (Meteor.userId() !== "jNX4BenrzyEgsMqTY") Router.go('/');
+
+
+    this.render('AdminStation', {
       data: { 
         words: function () {
           return Words.find({});
+          },
+        quotes: function () {
+          return Quotes.find({});
           }
         }
       });
@@ -298,6 +309,14 @@ Router.route('/word/:_word_text', {
     this.render('LiteFooter', { to: 'footer'});
     this.render('LiteNav', { to: 'nav'});
   },
+});
+
+
+
+
+Router.route('/logout', function() {
+  AccountsTemplates.logout();
+  Router.go('/');
 });
 
 
@@ -393,10 +412,7 @@ Router.route('/(.*)', function() {
 
 // // Now here are the main routes
 
-// Router.route('/logout', function() {
-//   Meteor.logout();
-//   Router.go('/home');
-// });
+
 
 
 // // Adding and submitting a new quote

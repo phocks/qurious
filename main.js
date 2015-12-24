@@ -361,7 +361,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-    Template.AddWords.events({
+    Template.AdminStation.events({
       "submit .new-word": function (event) {      
         var word = event.target.word.value;
         if (word == "") return false; // prevent empty strings

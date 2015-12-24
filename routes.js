@@ -237,10 +237,40 @@ Router.route('/words', {
 
 
 Router.route('/add-words', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    return Meteor.subscribe("words");
+  },
   action: function () {
     this.layout('LiteLayout');
     // this.render('LiteHeader', { to: 'header'});
-    this.render('AddWords');
+    this.render('AddWords', {
+      data: { 
+        words: function () {
+          return Words.find({});
+          }
+        }
+      });
+    this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
+  },
+});
+
+
+Router.route('/word/:_word_text', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    return Meteor.subscribe("words");
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    // this.render('LiteHeader', { to: 'header'});
+    this.render('WordProcess', {
+      data: function () {
+        var word = Words.findOne({word: this.params._word_text});
+        return word;
+      }
+    });
     this.render('LiteFooter', { to: 'footer'});
     this.render('LiteNav', { to: 'nav'});
   },

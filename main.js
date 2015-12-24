@@ -373,7 +373,12 @@ if (Meteor.isClient) { // only runs on the client
 
         // Prevent default action from form submit
         return false;
-      },      
+      }, 
+      "click .delete": function () {
+        if (confirm('Really delete ?')) {
+          Meteor.call('deleteWord', this._id);
+        }
+      }     
     });
 
 

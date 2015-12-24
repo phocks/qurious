@@ -138,10 +138,12 @@
 
 
 <template name="LiteError">
-  <br>
-  <br>
-  <h1 class="text-center">404</h1>
-  {{> LiteNav}}
+  <div>
+    <br>
+    <br>
+    <h1 class="text-center">404 error. Where is it?</h1>
+    {{> LiteNav}}
+  </div>
 </template>
 
 
@@ -173,7 +175,7 @@
 
 
 <template name="SingleAuthor">
-<li class="author"><a href="/{{slug}}">{{name}}</a> <i class="fa fa-times-circle-o delete"></i></li>
+  <li class="author"><a href="/{{slug}}">{{name}}</a> <i class="fa fa-times-circle-o delete"></i></li>
 </template>
 
 
@@ -310,12 +312,28 @@
   <div class="container">
     <form class="new-word">
         <div class="form-group">
-          <label for="wordInput">Word</label>
+          <label for="wordInput">This is an admin page, use it to add and delete words.</label>
           <input type="text" class="form-control" id="wordInput" name="word" placeholder="word">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
+      <p>
+        {{#each words}}
+          {{word}} <i class="fa fa-times-circle-o delete"></i> &nbsp;
+        {{/each}}
+      </p>
     </div>
+  </div>
+</template>
+
+
+
+
+<template name="WordProcess">
+  <div class="word-process text-center">
+    <div class="container">
+      <h1>{{word}}</h1>
+    </div>    
   </div>
 </template>
 

@@ -1108,7 +1108,7 @@ p.contact a:hover {
 
 .lite-container .lite-nav {
   /*text-align: center;*/
-  padding: 24px 0 24px;
+  padding: 16px 0 16px;
   font-size: 1.2em;
   color: #999;
 }
@@ -1295,6 +1295,7 @@ input#word {
   list-style-type: none;
   /*text-align: left;*/
   font-size: 1.5em;
+  line-height: 2em;
   /*font-weight: bold;*/
 }
 

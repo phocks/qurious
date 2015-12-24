@@ -39,7 +39,7 @@
 
           <ul class="home-word-list">
             {{#each words}}
-              <li><a href="/random/{{word}}">{{word}}</a></li>
+              <li><a href="/word/{{word}}">{{word}}</a></li>
             {{/each}}
           </ul>
       </div>
@@ -339,7 +339,7 @@
 <template name="WordProcess">
   <div class="word-process text-center">
     <div class="container">
-      <h1>{{word}}</h1>
+      <h1 class="really-big dont-break">{{word}}</h1>
     </div>    
   </div>
 </template>

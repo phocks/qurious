@@ -382,7 +382,30 @@ if (Meteor.isClient) { // only runs on the client
     });
 
 
-    // Template.Header.events({
+    
+
+
+
+    Template.LiteHome.events({
+      "submit .word-search": function (event) {
+        var q = event.target.search.value;
+        
+
+        
+        if (q == "") return false;
+        Router.go('/word/' + q);
+
+        // Router.go('/about');
+
+        // Prevent default action from form submit
+        return false;
+      },
+    });
+
+
+
+
+// Template.Header.events({
     //   "submit .search-form": function (event) {
     //     var q = event.target.q.value;
 
@@ -402,26 +425,6 @@ if (Meteor.isClient) { // only runs on the client
     //     return false;
     //   },
     // });
-
-
-
-    Template.LiteHome.events({
-      "submit .word-search": function (event) {
-        var q = event.target.search.value;
-        
-
-        
-        if (q == "") return false;
-        Router.go('/random/' + q);
-
-        // Router.go('/about');
-
-        // Prevent default action from form submit
-        return false;
-      },
-    });
-
-
 
 
 

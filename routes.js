@@ -273,6 +273,8 @@ Router.route('/admin-station', {
     
 
     console.log("current user is: " + Meteor.userId());
+
+    // for now only phocks can do this
     if (Meteor.userId() !== "jNX4BenrzyEgsMqTY") Router.go('/');
 
 

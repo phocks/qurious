@@ -412,7 +412,7 @@ if (Meteor.isClient) { // only runs on the client
 
         
         if (q == "") return false;
-        Router.go('/word/' + q);
+        Router.go('/random/' + q);
 
         // Router.go('/about');
 

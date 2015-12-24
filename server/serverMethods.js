@@ -21,6 +21,16 @@ Meteor.methods({
   // ps. look at the Random function built-in to Meteor alternatively
 
 
+    // Throw the dice with all the db docs
+    getRandomQuoteIdWithWord: function(word) {      
+      var count = Quotes.find({quotation: { '$regex': word, $options: 'i'}}).count();
+      var random_index = Math.floor(Math.random() * (count));
+      var random_object = Quotes.findOne({quotation: { '$regex': word, $options: 'i'}}, {skip:random_index});
+      if (random_object !== undefined) return random_object._id;
+      else return false;
+    },
+
+
   // Like random, now with less randomness!
   getLuckyQuoteId: function() {
     var returnQuotesAbove = 2;

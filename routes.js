@@ -93,7 +93,7 @@ Router.route('/a/:_slug', {
 
 
 // gets a random quote and redirects to the page
-Router.route('/r', function () {
+Router.route('/random', function () {
   Meteor.call('getRandomQuoteId', function (error, result) {
     var randomId = result;
     // replaceState keeps the browser from duplicating history
@@ -102,12 +102,36 @@ Router.route('/r', function () {
   this.render('LiteLoad');
 });
 
+
+
+// Random with word search specified
+Router.route('/random/:_word', function () {
+  Meteor.call('getRandomQuoteIdWithWord', this.params._word, function (error, result) {
+    var randomId = result;
+
+    if (!randomId) {
+      Router.go('/notfound',{}, {replaceState:true});
+      return false;
+    }
+    // replaceState keeps the browser from duplicating history, needs the {} as 2nd arg
+    Router.go('/quote/' + randomId, {}, {replaceState:true});
+  });
+  this.render('LiteLoad');
+});
+
+
+
 // Testing the Lite loader
 Router.route('/load', function() {
   this.layout('LiteLayout');
   Session.set("DocumentTitle","Loading - Qurious");
   this.render('LiteLoad');
 });
+
+
+
+
+
 
 
 Router.route('/a/:_author_slug', {

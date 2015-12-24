@@ -1300,9 +1300,17 @@ input#word {
 
 .home-word-list li {
   display: inline;
-  padding: 3px;
 }
 
 .home-word-list li a {
   color: inherit;
+  padding: 3px;
+  background-color: #f2f1ef;
+}
+
+.home-word-list li a:hover,
+.home-word-list li a:active {
+  text-decoration: none;
+  background-color: #5ab2b5;
+  color: white;
 }

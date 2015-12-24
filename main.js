@@ -405,11 +405,11 @@ if (Meteor.isClient) { // only runs on the client
         var q = event.target.search.value;
         
 
-        // Re enable this to work on a search
-        // if (q == "") return false;
-        // Router.go('/word/' + q);
+        
+        if (q == "") return false;
+        Router.go('/word/' + q);
 
-        Router.go('/about');
+        // Router.go('/about');
 
         // Prevent default action from form submit
         return false;

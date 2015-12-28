@@ -1361,3 +1361,9 @@ input#word {
   margin-left: 10px;
   margin-right: 10px;
 }
+
+
+.lite-controls ul.controls li:hover {
+  color: crimson;
+  cursor: pointer;
+}

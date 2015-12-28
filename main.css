@@ -1040,7 +1040,7 @@ p.contact a:hover {
 }
 
 .lite-quote p.attribution {
-  padding: 0 0 42px;
+  padding: 0 0 7vh;
 }
 
 .lite-container .container {
@@ -1088,7 +1088,7 @@ p.contact a:hover {
 
 .lite-container .lite-controls {
   /*font-size: 2em;*/
-  text-align: center;
+  /*text-align: center;*/
 }
 
 /* Footer section */
@@ -1336,4 +1336,28 @@ input#word {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+
+
+.lite-controls ul.controls {
+  padding: 0;
+  list-style-type: none;
+  font-size: 2.4em;
+  color: #ccc;
+
+  /* This justifies icons across width. We maybe want this later
+  display: flex;
+  justify-content: space-around;
+  -webkit-justify-content: space-around; */
+
+  /* this spaces between*/
+  display: flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+
+.lite-controls ul.controls li {
+  display: inline;
+  margin-left: 10px;
+  margin-right: 10px;
 }

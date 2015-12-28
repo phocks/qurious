@@ -94,10 +94,10 @@
         <p>{{{quotation}}}</p>
         <p class="attribution">
         {{#if attribution}}
-          <span class="dash">&mdash;</span>{{attribution}}
+          <span class="dash">&mdash;</span>{{{attribution}}}
         {{/if}}
         </p>
-        <p class="text-center"><span class="amp">&amp;</span></p>
+        <!-- <p class="text-center"><span class="amp">&amp;</span></p> -->
       </div>
     </div>
   </div>
@@ -116,6 +116,13 @@
   <div class="lite-controls">
     <div class="container">
       <!-- <a class="btn btn-default" href="/r">Another?</a> -->
+      <hr>
+      <ul class="controls text-left">
+        <li><i class="ionicons ion-android-favorite-outline"></i></li>
+        <li><i class="ionicons ion-more"></i></li>
+        <!-- <li><i class="ionicons ion-heart"></i></li> -->
+        <!-- <li><i class="ionicons ion-heart-broken"></i></li>         -->
+      </ul>
     </div>
   </div>
 
@@ -339,8 +346,9 @@
 <template name="WordProcess">
   <div class="word-process text-center">
     <div class="container">
-      <h1 class="really-big dont-break">{{word}}</h1>
-    </div>    
+      <h1 class="really-big dont-break text-capitalize">{{word}}</h1>
+      <!-- <p><a class="btn btn-default" href="/random/{{word}}">Explore {{word}}</a></p> -->
+    </div>
   </div>
 </template>
 

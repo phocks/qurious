@@ -14,7 +14,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| Title
+| Title template
 |--------------------------------------------------------------------------
 |
 | Comments can go here and description
@@ -47,6 +47,9 @@ maximumQuotationLength = 1000; // in characters
 // Here we have stuff that will only run on the client's browser
 
 if (Meteor.isClient) { // only runs on the client
+
+
+
 
 
 
@@ -106,6 +109,15 @@ if (Meteor.isClient) { // only runs on the client
 
 
   Router.plugin('dataNotFound', {notFoundTemplate: 'NotFound'});
+
+
+  // trying out this router hook thing to reset the post limit
+  // Router.onBeforeAction(function() {
+  //   Session.set('limit', loadMoreLimit); // set the infinite scroll limit back to default
+  //   //$(window).scrollTop(0); // this replaces the auto scroll package
+
+  //   this.next();
+  // });
 
 
   // We have a package that gets us to the top when we navigate
@@ -429,18 +441,19 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-  // trying out this router hook thing to reset the post limit
-  Router.onBeforeAction(function() {
-    Session.set('limit', loadMoreLimit); // set the infinite scroll limit back to default
-    //$(window).scrollTop(0); // this replaces the auto scroll package
-
-    this.next();
-  });
+ 
 
 
+  // Template.LiteQuote.onRendered(function () {
+  //   // Make Bootstrap popovers work?
+    
+  //     $('[data-toggle="popover"]').popover()
+    
+  // });
 
 
-  // Dropcaps for Quotes
+
+  // Dropcaps for Quotes do it once rendered
   Template.LiteQuote.onRendered(function () {
 
     console.log('Inserting dropcaps span');

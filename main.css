@@ -1364,6 +1364,13 @@ input#word {
 
 
 .lite-controls ul.controls li:hover {
-  color: crimson;
+  /*color: crimson;*/
   cursor: pointer;
+}
+
+
+.popover {
+  box-shadow: none; /*0px 1px 4px rgba(0, 0, 0, .25);*/
+  border-radius: 4px;
+  font-family: Montserrat;
 }

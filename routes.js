@@ -294,43 +294,57 @@ Router.route('/admin-station', {
 });
 
 
-Router.route('/add/:_word_to_add', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
+// Router.route('/add/:_word_to_add', {
+//   loadingTemplate: 'LiteLoad',
+//   waitOn: function () {
     
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    // this.render('LiteHeader', { to: 'header'});
-    this.render('WordProcess', {
-      data: function () {
-        var word = Words.findOne({word: this.params._word_text});
+//   },
+//   action: function () {
+//     this.layout('LiteLayout');
+//     // this.render('LiteHeader', { to: 'header'});
+//     this.render('WordProcess', {
+//       data: function () {
+//         var word = Words.findOne({word: this.params._word_text});
         
-        return word;
-      }
-    });
-    this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
-  },
-  onAfterAction: function () {
+//         return word;
+//       }
+//     });
+//     this.render('LiteFooter', { to: 'footer'});
+//     this.render('LiteNav', { to: 'nav'});
+//   },
+//   onAfterAction: function () {
     
-  }
-});
+//   }
+// });
 
 
 Router.route('/word/:_word_text', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
-    return Meteor.subscribe("words");
+    // only return at the end
+    Meteor.subscribe("words");
+    return Meteor.subscribe("quotes");
   },
   action: function () {
     this.layout('LiteLayout');
     // this.render('LiteHeader', { to: 'header'});
+
+    var wordText = this.params._word_text; // this has to be a var for some reason to work
+
+    // console.log(s.slugify("Hello world!")); // just a test
+
+
+
     this.render('WordProcess', {
-      data: function () {
-        var word = Words.findOne({word: this.params._word_text});
-        if (word == undefined) Router.go('/add/' + this.params._word_text, {}, {replaceState:true});
-        return word;
+      data: {
+        words: function () {
+          var word = Words.findOne({word: wordText});
+          if (word == undefined) Router.go('/add/' + wordText, {}, {replaceState:true});
+          return word;
+        },
+        quotes: function () {
+          return Quotes.find({ quotation: { '$regex': wordText, $options: 'i'} });
+        }
       }
     });
     this.render('LiteFooter', { to: 'footer'});

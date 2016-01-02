@@ -62,7 +62,7 @@ multiply:iron-router-progress@1.0.2
 npm-bcrypt@0.7.8_2
 npm-mongo@1.4.39_1
 observe-sequence@1.0.7
-okgrow:router-autoscroll@0.1.4
+okgrow:router-autoscroll@0.1.6
 ordered-dict@1.0.4
 pagebakers:ionicons@2.0.1_1
 promise@0.5.1
@@ -76,7 +76,7 @@ routepolicy@1.0.6
 service-configuration@1.0.5
 session@1.1.1
 sha@1.0.4
-softwarerero:accounts-t9n@1.1.7
+softwarerero:accounts-t9n@1.2.0
 spacebars@1.0.7
 spacebars-compiler@1.0.7
 srp@1.0.4
@@ -87,10 +87,11 @@ tracker@1.0.9
 twbs:bootstrap@3.3.6
 ui@1.0.8
 underscore@1.0.4
+underscorestring:underscore.string@3.2.2
 url@1.0.5
-useraccounts:bootstrap@1.13.0
-useraccounts:core@1.13.0
-useraccounts:iron-routing@1.13.0
+useraccounts:bootstrap@1.13.1
+useraccounts:core@1.13.1
+useraccounts:iron-routing@1.13.1
 webapp@1.2.3
 webapp-hashing@1.0.5
 zimme:active-route@2.3.2

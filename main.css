@@ -1351,9 +1351,9 @@ input#word {
   -webkit-justify-content: space-around; */
 
   /* this spaces between*/
-  display: flex;
+  /*display: flex;
   justify-content: space-between;
-  -webkit-justify-content: space-between;
+  -webkit-justify-content: space-between;*/
 }
 
 .lite-controls ul.controls li {
@@ -1373,4 +1373,9 @@ input#word {
   box-shadow: none; /*0px 1px 4px rgba(0, 0, 0, .25);*/
   border-radius: 4px;
   font-family: Montserrat;
+}
+
+p.quotation {
+  font-family: 'Vollkorn', serif;
+  font-size: 1.6em;
 }

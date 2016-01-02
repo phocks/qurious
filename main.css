@@ -1028,7 +1028,7 @@ p.contact a:hover {
 
 .lite-quote {
   font-family: 'Vollkorn', serif;
-  font-size: 1.5em;
+  font-size: 1.8em;
 }
 
 .lite-quote .quotation {
@@ -1270,7 +1270,8 @@ ul.menu-group a:hover {
 
 
 
-/* This is a test front search box style without border etc */
+/* This is a test front search box style without border etc
+And yes it works, so we're keeping it. */
 input#word {
   border: 0;
   -webkit-appearance: none;
@@ -1316,9 +1317,6 @@ input#word {
   color: white;
 }
 
-.really-big {
-  font-size: 4em;
-}
 
 .dont-break {
   /* These are technically the same, but use both */
@@ -1336,6 +1334,10 @@ input#word {
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+}
+
+.word-process p {
+  font-size: 21px;
 }
 
 

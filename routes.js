@@ -334,6 +334,16 @@ Router.route('/word/:_word_text', {
     // console.log(s.slugify("Hello world!")); // just a test
 
 
+    Meteor.setTimeout(function(){
+
+      // Move to a new location or you can do something else
+      // window.location.href = "/random/" + wordText;
+
+      Router.go("/random/" + wordText);
+
+    }, 3000);
+
+
 
     this.render('WordProcess', {
       data: {

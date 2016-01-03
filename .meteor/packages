@@ -31,6 +31,6 @@ check
 okgrow:router-autoscroll
 less
 fortawesome:fontawesome
-multiply:iron-router-progress
 email
 underscorestring:underscore.string
+multiply:iron-router-progress

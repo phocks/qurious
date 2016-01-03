@@ -318,12 +318,70 @@ Router.route('/admin-station', {
 // });
 
 
+
+// Router.route('/word/:_word_text', {
+//   subscriptions: function() {
+//     // returning a subscription handle or an array of subscription handles
+//     // adds them to the wait list.
+//     return Meteor.subscribe("words");
+//   },
+
+
+
+
+//   action: function () {
+    
+    
+
+//     if (this.ready()) {
+//       this.layout('LiteLayout');
+//       var wordText = this.params._word_text; // this has to be a var for some reason to work
+
+//       // console.log(s.slugify("Hello world!")); // just a test
+
+
+
+//       this.render('WordProcess', {
+
+//         data: {
+//           words: function () {
+//             var word = Words.findOne({word: wordText});
+//             if (word == undefined) Router.go('/add/' + wordText, {}, {replaceState:true});
+//             return word;
+//           },
+//           // quotes: function () {
+//           //   return Quotes.find({ quotation: { '$regex': wordText, $options: 'i'} });
+//           // }
+//         }
+//       });
+//       this.render('LiteFooter', { to: 'footer'});
+//       this.render('LiteNav', { to: 'nav'});
+
+
+    
+    
+//       console.log("Sleeping for 3 seconds");
+//       Meteor.setTimeout(function(){
+
+//         // Move to a new location or you can do something else
+//         // window.location.href = "/random/" + wordText;
+
+//         Router.go("/random/" + wordText);
+
+//       }, 3000);
+//     }
+//   }
+// });
+
+
+
+
 Router.route('/word/:_word_text', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
     // only return at the end
-    Meteor.subscribe("words");
-    return Meteor.subscribe("quotes");
+    // Meteor.subscribe('Quotes');
+    return Meteor.subscribe("words");
   },
   action: function () {
     this.layout('LiteLayout');
@@ -334,34 +392,51 @@ Router.route('/word/:_word_text', {
     // console.log(s.slugify("Hello world!")); // just a test
 
 
-    Meteor.setTimeout(function(){
-
-      // Move to a new location or you can do something else
-      // window.location.href = "/random/" + wordText;
-
-      Router.go("/random/" + wordText);
-
-    }, 3000);
-
-
 
     this.render('WordProcess', {
+
       data: {
         words: function () {
           var word = Words.findOne({word: wordText});
           if (word == undefined) Router.go('/add/' + wordText, {}, {replaceState:true});
           return word;
         },
-        quotes: function () {
-          return Quotes.find({ quotation: { '$regex': wordText, $options: 'i'} });
-        }
+        // quotes: function () {
+        //   return Quotes.find({ quotation: { '$regex': wordText, $options: 'i'} });
+        // }
       }
     });
     this.render('LiteFooter', { to: 'footer'});
     this.render('LiteNav', { to: 'nav'});
+
+
+    
   },
   onAfterAction: function () {
+    var wordText = this.params._word_text; // this has to be a var for some reason to work
+
+    // Afterwards we want to go somewhere after a while
+    // The random was tripping 2 timeouts for some reason
+    // Probably something to do with callbacks
+
+    // Due to multiply:iron-router-progress calling actions twice we need this
+    if (Tracker.currentComputation.firstRun) {
+
+      var timeout = getRandomInt(1000,4000);
+
+      console.log("Sleeping for " + timeout + "ms");      
     
+      
+      Meteor.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        // window.location.href = "/random/" + wordText;
+
+        Router.go("/random/" + wordText);
+
+      }, timeout);
+    }
+        
   }
 });
 

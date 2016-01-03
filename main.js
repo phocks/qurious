@@ -288,6 +288,11 @@ if (Meteor.isClient) { // only runs on the client
     }
   );
 
+  Template.registerHelper('currentWord', function () {
+      return Session.get('currentWord');
+    }
+  );
+
 
 
 
@@ -389,6 +394,31 @@ if (Meteor.isClient) { // only runs on the client
       "click .delete": function () {
         if (confirm('Really delete ?')) {
           Meteor.call('deleteWord', this._id);
+        }
+      }     
+    });
+
+
+    Template.LiteQuote.events({
+      "submit .new-word": function (event) {      
+        var word = event.target.word.value;
+        var quote_id = Session.get('sessionQuoteId');
+        console.log(quote_id);
+        if (word == "") return false; // prevent empty strings
+
+        Meteor.call('addWordToQuote', word, quote_id);
+
+        // Clear form      
+        event.target.word.value = "";
+
+        // Prevent default action from form submit
+        return false;
+      }, 
+      "click .delete": function () {
+        var word = this.toString();
+        var quote_id = Session.get('sessionQuoteId');
+        if (confirm('Really delete ?')) {
+          Meteor.call('deleteWordFromQuote', word, quote_id);
         }
       }     
     });

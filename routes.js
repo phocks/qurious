@@ -33,6 +33,9 @@ Router.route('/quote/:_quote_id', {
   action: function () {
     this.layout('LiteLayout');
     // this.render('LiteHeader', { to: 'header'});
+
+    console.log(Session.get('currentWord'));
+
     this.render('LiteQuote', {
       data: function () {
         var quote = Quotes.findOne({ _id: this.params._quote_id });
@@ -94,6 +97,7 @@ Router.route('/a/:_slug', {
 
 // gets a random quote and redirects to the page
 Router.route('/random', function () {
+  Session.set('currentWord', undefined);
   Meteor.call('getRandomQuoteId', function (error, result) {
     var randomId = result;
     // replaceState keeps the browser from duplicating history
@@ -108,6 +112,7 @@ Router.route('/random', function () {
 Router.route('/random/:_word', function () {
   Meteor.call('getRandomQuoteIdWithWord', this.params._word, function (error, result) {
     var randomId = result;
+
 
     if (!randomId) {
       Router.go('/notfound', {}, {replaceState:true});
@@ -152,32 +157,7 @@ Router.route('/a/:_author_slug', {
 
 
 
-/* The root home route landing for qurious.cc/
----------------------------------------------------------------------------------------*/
-Router.route('/', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    return Meteor.subscribe("words");
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    Session.set("DocumentTitle","Qurious");
-    // this.render('LiteHeader', { to: 'header'});
 
-    // Here we send a quote to the front page if required
-    Meteor.subscribe('quotesLatest', 1);
-
-    this.render('LiteHome', {
-      data: { 
-        words: function () {
-          return Words.find({});
-          }
-        }  
-    });
-    this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
-  }
-});
 
 
 
@@ -319,59 +299,7 @@ Router.route('/admin-station', {
 
 
 
-// Router.route('/word/:_word_text', {
-//   subscriptions: function() {
-//     // returning a subscription handle or an array of subscription handles
-//     // adds them to the wait list.
-//     return Meteor.subscribe("words");
-//   },
 
-
-
-
-//   action: function () {
-    
-    
-
-//     if (this.ready()) {
-//       this.layout('LiteLayout');
-//       var wordText = this.params._word_text; // this has to be a var for some reason to work
-
-//       // console.log(s.slugify("Hello world!")); // just a test
-
-
-
-//       this.render('WordProcess', {
-
-//         data: {
-//           words: function () {
-//             var word = Words.findOne({word: wordText});
-//             if (word == undefined) Router.go('/add/' + wordText, {}, {replaceState:true});
-//             return word;
-//           },
-//           // quotes: function () {
-//           //   return Quotes.find({ quotation: { '$regex': wordText, $options: 'i'} });
-//           // }
-//         }
-//       });
-//       this.render('LiteFooter', { to: 'footer'});
-//       this.render('LiteNav', { to: 'nav'});
-
-
-    
-    
-//       console.log("Sleeping for 3 seconds");
-//       Meteor.setTimeout(function(){
-
-//         // Move to a new location or you can do something else
-//         // window.location.href = "/random/" + wordText;
-
-//         Router.go("/random/" + wordText);
-
-//       }, 3000);
-//     }
-//   }
-// });
 
 
 
@@ -391,15 +319,23 @@ Router.route('/word/:_word_text', {
 
     // console.log(s.slugify("Hello world!")); // just a test
 
+    var word = Words.findOne({word: wordText});
+    
+    if (word == undefined) { // does the word exist in the database?
+      Router.go('/word/' + wordText + "/add", {}, {replaceState:true});
+      return false; // get me out of here
+    }
+
+    Session.set('currentWord', wordText);
+    console.log("Setting session word: " + wordText);
+
 
 
     this.render('WordProcess', {
 
       data: {
-        words: function () {
-          var word = Words.findOne({word: wordText});
-          if (word == undefined) Router.go('/add/' + wordText, {}, {replaceState:true});
-          return word;
+        word: function () {
+          return wordText;
         },
         // quotes: function () {
         //   return Quotes.find({ quotation: { '$regex': wordText, $options: 'i'} });
@@ -409,15 +345,6 @@ Router.route('/word/:_word_text', {
     this.render('LiteFooter', { to: 'footer'});
     this.render('LiteNav', { to: 'nav'});
 
-
-    
-  },
-  onAfterAction: function () {
-    var wordText = this.params._word_text; // this has to be a var for some reason to work
-
-    // Afterwards we want to go somewhere after a while
-    // The random was tripping 2 timeouts for some reason
-    // Probably something to do with callbacks
 
     // Due to multiply:iron-router-progress calling actions twice we need this
     if (Tracker.currentComputation.firstRun) {
@@ -436,7 +363,7 @@ Router.route('/word/:_word_text', {
 
       }, timeout);
     }
-        
+    
   }
 });
 
@@ -447,6 +374,39 @@ Router.route('/logout', function() {
   AccountsTemplates.logout();
   Router.go('/');
 });
+
+
+
+
+
+/* The root home route landing for qurious.cc/
+---------------------------------------------------------------------------------------*/
+Router.route('/', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    return Meteor.subscribe("words");
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    Session.set("DocumentTitle","Qurious");
+    // this.render('LiteHeader', { to: 'header'});
+
+    // Here we send a quote to the front page if required
+    Meteor.subscribe('quotesLatest', 1);
+
+    this.render('LiteHome', {
+      data: { 
+        words: function () {
+          return Words.find({});
+          }
+        }  
+    });
+    this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
+  }
+});
+
+
 
 
 

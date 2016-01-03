@@ -1289,7 +1289,7 @@ input#word {
 }
 
 
-
+/* Little list on the home page that displays popular words */
 .home-word-list {
   padding: 0;
   margin-top: 36px;
@@ -1312,6 +1312,36 @@ input#word {
 
 .home-word-list li a:hover,
 .home-word-list li a:active {
+  text-decoration: none;
+  background-color: #5ab2b5;
+  color: white;
+}
+
+
+/* List under the quotes that displays the words associated */
+.lite-controls ul.words {
+  padding: 0;
+  margin-top: 12px;
+  list-style-type: none;
+  /*text-align: left;*/
+  font-size: 1.5em;
+  line-height: 2em;
+  /*font-weight: bold;*/
+}
+
+
+.lite-controls ul.words li {
+  display: inline;
+}
+
+.lite-controls ul.words li a {
+  color: inherit;
+  padding: 3px;
+  background-color: #f2f1ef;
+}
+
+.lite-controls ul.words li a:hover,
+.lite-controls ul.words li a:active {
   text-decoration: none;
   background-color: #5ab2b5;
   color: white;
@@ -1357,6 +1387,9 @@ input#word {
   justify-content: space-between;
   -webkit-justify-content: space-between;*/
 }
+
+
+
 
 .lite-controls ul.controls li {
   display: inline;

@@ -53,7 +53,7 @@
 <template name="About">
 <div class="lite-text-content">
   <div class="container">
-    <h1 class="text-center">About</h1>
+    <h1 class="text-center">About Qurious</h1>
     <p class="lead">Qurious is a website about quotes, words, and ideas, or something like that anyway. We are still in the process of putting everything together. So sit tight and we'll be up and running before you know it. Enter your email below for early access.</p>
 
     <!-- <p class="lead">If you have an account please <a href="/login">login here</a>, or else to learn more and get early access please enter your details below.</p>
@@ -123,6 +123,27 @@
         <!-- <li><i class="ionicons ion-heart"></i></li> -->
         <!-- <li><i class="ionicons ion-heart-broken"></i></li>         -->
       </ul>
+
+      <p class="text-center"><a class="btn btn-default" href="/random/{{currentWord}}">More {{currentWord}}</a></p>
+
+      <!-- <ul class="text-center words">
+        {{#each words}}
+          <li><a href="/random/{{this}}">{{this}}</a> <span class="delete">-</span> &nbsp;</li>
+        {{/each}}
+        <li><a href="#">+</a></li>
+      </ul>
+
+
+      <form class="new-word">
+        <div class="form-group">
+          <label for="wordInput"></label>
+          <input type="text" class="form-control" id="wordInput" name="word" placeholder="Add new word">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+ -->
+
+
     </div>
   </div>
 
@@ -319,12 +340,12 @@
   <div class="container">
     {{> atForm}}
     <form class="new-word">
-        <div class="form-group">
-          <label for="wordInput">This is an admin page, please don't do anything stupid.</label>
-          <input type="text" class="form-control" id="wordInput" name="word" placeholder="word">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
+      <div class="form-group">
+        <label for="wordInput">This is an admin page, please don't do anything stupid.</label>
+        <input type="text" class="form-control" id="wordInput" name="word" placeholder="word">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
       <p>
         {{#each words}}
           {{word}} <i class="fa fa-times-circle-o delete"></i> &nbsp;
@@ -346,11 +367,7 @@
 <template name="WordProcess">
   <div class="word-process">
     <div class="container">
-      <p class="text-center dont-break ">Finding
-      {{#with words}}
-        <span>{{word}}</span>..
-      {{/with}}
-      </p>
+      <p class="text-center dont-break ">Finding <span>{{word}}</span>.. please wait a few moments.</p>
 
       
       <!-- {{#each quotes}}

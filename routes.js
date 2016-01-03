@@ -321,10 +321,10 @@ Router.route('/word/:_word_text', {
 
     var word = Words.findOne({word: wordText});
     
-    if (word == undefined) { // does the word exist in the database?
-      Router.go('/word/' + wordText + "/add", {}, {replaceState:true});
-      return false; // get me out of here
-    }
+    // if (word == undefined) { // does the word exist in the database?
+    //   Router.go('/word/' + wordText + "/add", {}, {replaceState:true});
+    //   return false; // get me out of here
+    // }
 
     Session.set('currentWord', wordText);
     console.log("Setting session word: " + wordText);

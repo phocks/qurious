@@ -43,6 +43,7 @@ iron:location@1.0.11
 iron:middleware-stack@1.0.11
 iron:router@1.0.12
 iron:url@1.0.11
+jazeee:spiderable-longer-timeout@1.2.13
 jquery@1.11.4
 launch-screen@1.0.4
 less@2.5.1
@@ -64,6 +65,7 @@ npm-mongo@1.4.39_1
 observe-sequence@1.0.7
 okgrow:router-autoscroll@0.1.6
 ordered-dict@1.0.4
+ostrio:meteor-root@1.0.2
 pagebakers:ionicons@2.0.1_1
 promise@0.5.1
 random@1.0.5

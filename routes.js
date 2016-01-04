@@ -128,6 +128,7 @@ Router.route('/random/:_word', function () {
 
 
 
+
 // Testing the Lite loader
 Router.route('/load', function() {
   this.layout('LiteLayout');

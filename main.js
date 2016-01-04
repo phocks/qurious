@@ -288,6 +288,7 @@ if (Meteor.isClient) { // only runs on the client
     }
   );
 
+  // This lets us access {{currentWord}} in the Spacebars html 
   Template.registerHelper('currentWord', function () {
       return Session.get('currentWord');
     }

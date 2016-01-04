@@ -166,12 +166,13 @@
 
 
 <template name="LiteError">
-  <div>
+  <div class="container">
     <br>
     <br>
     <h1 class="text-center">This is not the 404 not found error you are looking for..</h1>
-    {{> LiteNav}}
+    
   </div>
+  {{> LiteNav}}
 </template>
 
 
@@ -367,7 +368,7 @@
 <template name="WordProcess">
   <div class="word-process">
     <div class="container">
-      <p class="text-center dont-break">Finding <span>{{word}}</span>... please wait a few moments.</p>
+      <p class="text-center dont-break">Finding <a href="/random/{{word}}">{{word}}</a>...</p>
 
       
       <!-- {{#each quotes}}

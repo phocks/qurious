@@ -1370,6 +1370,14 @@ input#word {
   font-size: 2.6em;
 }
 
+.word-process p a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.word-process p a:hover {
+  text-decoration: underline;
+}
 
 .lite-controls ul.controls {
   padding: 0;

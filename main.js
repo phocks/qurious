@@ -475,11 +475,16 @@ if (Meteor.isClient) { // only runs on the client
  
 
 
-  // Template.LiteQuote.onRendered(function () {
-  //   // Make Bootstrap popovers work?
+  Template.LiteQuote.onRendered(function () {
     
-  //     $('[data-toggle="popover"]').popover()
     
+    // $('[data-toggle="popover"]').popover()
+     $('[data-toggle="tooltip"]').tooltip()
+    
+  });
+
+  // Template.LiteHome.onRendered(function () {
+  //   $('[data-toggle="tooltip"]').tooltip()
   // });
 
 

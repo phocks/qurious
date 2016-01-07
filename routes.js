@@ -13,7 +13,33 @@ Router.route('/api', function () {
 
 
 
+// Adding and submitting a new quote
+Router.route('/create', {
+  loadingTemplate: 'Loading',
 
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe('userData');
+  },
+
+  action: function () {
+    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+    this.layout('ApplicationLayout');
+    Session.set("DocumentTitle", "Create a Quote - Qurious");
+    this.render('Header', {to: 'header'});
+    this.render('Create', {
+      data: {
+        isAdmin: function() {
+          if (Meteor.user().admin) return true;
+          else return false;
+        }
+      }
+    });
+
+    this.render('Footer', {to: 'footer'});
+  }
+});
 
 
 
@@ -350,7 +376,7 @@ Router.route('/word/:_word_text', {
     // Due to multiply:iron-router-progress calling actions twice we need this
     if (Tracker.currentComputation.firstRun) {
 
-      var timeout = getRandomInt(1000,4000);
+      var timeout = getRandomInt(500,2000);
 
       console.log("Sleeping for " + timeout + "ms");      
     
@@ -505,33 +531,7 @@ Router.route('/(.*)', function() {
 
 
 
-// // Adding and submitting a new quote
-// Router.route('/create', {
-//   loadingTemplate: 'Loading',
 
-//   waitOn: function () {
-//     // return one handle, a function, or an array
-//     return Meteor.subscribe('userData');
-//   },
-
-//   action: function () {
-//     if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//     this.layout('ApplicationLayout');
-//     Session.set("DocumentTitle", "Create a Quote - Qurious");
-//     this.render('Header', {to: 'header'});
-//     this.render('Create', {
-//       data: {
-//         isAdmin: function() {
-//           if (Meteor.user().admin) return true;
-//           else return false;
-//         }
-//       }
-//     });
-
-//     this.render('Footer', {to: 'footer'});
-//   }
-// });
 
 
 

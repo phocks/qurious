@@ -31,6 +31,13 @@ a:focus {
   outline: none;
 }
 
+
+/* removes outline for Bootstrap Buttons */
+.btn:focus, .btn:active:focus, .btn.active:focus { 
+  outline: none !important; 
+  outline-style: none; }
+
+
 body {
   font-family: "Open Sans", sans-serif;
   background-color: #fdfbf8;  /* old background #171717*/
@@ -1422,3 +1429,4 @@ p.quotation {
   font-family: 'Vollkorn', serif;
   font-size: 1.6em;
 }
+

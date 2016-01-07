@@ -41,6 +41,9 @@
               <li><a href="/word/{{word}}">{{word}}</a></li>
             {{/each}}
           </ul>
+
+
+          
       </div>
     </div>
   </div>
@@ -119,7 +122,7 @@
       <hr>
       <ul class="controls text-right">
         <!-- <li><i class="ionicons ion-android-favorite-outline"></i></li> -->
-        <li><i class="ionicons ion-more"></i></li>
+        <li data-toggle="tooltip" data-placement="left" title="More options coming soon"><i class="ionicons ion-more"></i></li>
         <!-- <li><i class="ionicons ion-heart"></i></li> -->
         <!-- <li><i class="ionicons ion-heart-broken"></i></li>         -->
       </ul>
@@ -368,7 +371,7 @@
 <template name="WordProcess">
   <div class="word-process">
     <div class="container">
-      <p class="text-center dont-break">Finding <a href="/random/{{word}}">{{word}}</a>...</p>
+      <p class="text-center">Finding <a href="/random/{{word}}">{{word}}</a>...</p>
 
       
       <!-- {{#each quotes}}

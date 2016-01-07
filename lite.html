@@ -127,13 +127,21 @@
         <!-- <li><i class="ionicons ion-heart-broken"></i></li>         -->
       </ul>
 
-      <p class="text-center">
+      <!-- <p class="text-center">
       {{#if currentWord}}
         <a class="btn btn-default" href="/random/{{currentWord}}">More {{currentWord}}</a>
       {{else}}
         <a class="btn btn-default" href="/random">Another?</a>
       {{/if}}
-      </p>
+      </p> -->
+
+
+      <form class="form-inline text-center quotePageAnother">
+        <div class="form-group">          
+          <input type="text" class="form-control" id="wordInput" name="word" placeholder="Curious about?" value="{{currentWord}}">
+        </div>        
+        <button type="submit" class="btn btn-default">Another?</button>
+      </form>
 
       <!-- <ul class="text-center words">
         {{#each words}}

@@ -1279,7 +1279,7 @@ ul.menu-group a:hover {
 
 /* This is a test front search box style without border etc
 And yes it works, so we're keeping it. */
-input#word {
+.word-search input#word {
   border: 0;
   -webkit-appearance: none;
   -webkit-box-shadow: none !important;

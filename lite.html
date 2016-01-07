@@ -1,4 +1,4 @@
-<!-- An iron-router Layout -->
+
 <template name="LiteLayout">
   <div class="lite-container container-fluid">
     <div class="top-spacing">
@@ -127,7 +127,13 @@
         <!-- <li><i class="ionicons ion-heart-broken"></i></li>         -->
       </ul>
 
-      <p class="text-center"><a class="btn btn-default" href="/random/{{currentWord}}">More {{currentWord}}</a></p>
+      <p class="text-center">
+      {{#if currentWord}}
+        <a class="btn btn-default" href="/random/{{currentWord}}">More {{currentWord}}</a>
+      {{else}}
+        <a class="btn btn-default" href="/random">Another?</a>
+      {{/if}}
+      </p>
 
       <!-- <ul class="text-center words">
         {{#each words}}
@@ -156,13 +162,7 @@
 
 
 
-<template name="LiteFooter">
-  <div class="lite-footer">
-    <div class="container">
-    <!-- <p>Click for <a href="/r">more</a>.</p> -->
-    </div>
-  </div>
-</template>
+
 
 
 
@@ -172,20 +172,13 @@
   <div class="container">
     <br>
     <br>
-    <h1 class="text-center">This is not the 404 not found error you are looking for..</h1>
+    <h1 class="text-center">This is not the 404 error you are looking for..</h1>
     
   </div>
   {{> LiteNav}}
 </template>
 
 
-<template name="LiteAuthor">
-  <div class="author">
-    <div class="container">
-      Author
-    </div>
-  </div>
-</template>
 
 
 
@@ -206,43 +199,9 @@
 
 
 
-<template name="SingleAuthor">
-  <li class="author"><a href="/{{slug}}">{{name}}</a> <i class="fa fa-times-circle-o delete"></i></li>
-</template>
 
 
 
-
-
-
-<template name="ListAuthors">
-  <div class="container">
-
-    <!-- {{#if currentUser}}
-        <form class="new-author">
-          <input type="text" name="author" placeholder="New author" />
-          <input type="text" name="slug" placeholder="Author slug" />
-          <input type="submit" id="submit"/>
-        </form>
-    {{/if}} -->
-
-
-
-    <form class="new-author">
-      <div class="form-group">
-        <label for="fullNameInput1">Full name</label>
-        <input type="text" class="form-control" id="fullNameInput1" name="author" placeholder="Full name">
-      </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-    
-    <ul class="authors">
-    {{#each authors}}
-      {{> SingleAuthor}}
-    {{/each}}
-    </ul>
-  </div>
-</template>
 
 
 
@@ -298,26 +257,6 @@
 
 
 
-<template name="AdminAllQuotes">
-  <div class="admin-all-quote">
-    <div class="container">
-      {{#each quotes}}
-        {{> AdminSingleQuote}}
-      {{/each}}
-    </div>
-  </div>
-</template>
-
-<template name="AdminSingleQuote">
-  <div class="quotation">
-    <p>{{{quotation}}}</p>
-    <p class="attribution">
-    {{#if attribution}}
-      <span class="dash">&mdash;</span>{{attribution}}
-    {{/if}}
-    </p>
-  </div>
-</template>
 
 
 
@@ -325,15 +264,6 @@
 
 
 
-<template name="AllWords">
-  <div class="words">
-    <div class="container">
-      {{#each words}}
-        {{word}}
-      {{/each}}
-    </div>
-  </div>
-</template>
 
 
 
@@ -364,6 +294,16 @@
     </div>
   </div>
 </template>
+<template name="AdminSingleQuote">
+  <div class="quotation">
+    <p>{{{quotation}}}</p>
+    <p class="attribution">
+    {{#if attribution}}
+      <span class="dash">&mdash;</span>{{attribution}}
+    {{/if}}
+    </p>
+  </div>
+</template>
 
 
 
@@ -383,6 +323,39 @@
   </div>
 </template>
 
+
+
+
+<template name="LiteFooter">
+  <div class="lite-footer">
+    <div class="container">
+    <!-- <p>Click for <a href="/r">more</a>.</p> -->
+    <!-- Not really being used any more but still being rendered sometimes -->
+    </div>
+  </div>
+</template>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Not used below here -->
+
+
+
+
+
+
+
+
+
+
 <!-- <template name="LiteHeader">
   <div class="lite-header">
     <div class="container">
@@ -390,3 +363,88 @@
     </div>
   </div>
 </template> -->
+
+
+
+
+
+
+<!-- <template name="ListAuthors">
+  <div class="container"> -->
+
+    <!-- {{#if currentUser}}
+        <form class="new-author">
+          <input type="text" name="author" placeholder="New author" />
+          <input type="text" name="slug" placeholder="Author slug" />
+          <input type="submit" id="submit"/>
+        </form>
+    {{/if}} -->
+
+
+
+   <!--  <form class="new-author">
+      <div class="form-group">
+        <label for="fullNameInput1">Full name</label>
+        <input type="text" class="form-control" id="fullNameInput1" name="author" placeholder="Full name">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    
+    <ul class="authors">
+    {{#each authors}}
+      {{> SingleAuthor}}
+    {{/each}}
+    </ul>
+  </div>
+</template> -->
+
+
+
+
+<!-- <template name="AllWords">
+  <div class="words">
+    <div class="container">
+      {{#each words}}
+        {{word}}
+      {{/each}}
+    </div>
+  </div>
+</template> -->
+
+
+
+
+<!-- <template name="AdminAllQuotes">
+  <div class="admin-all-quote">
+    <div class="container">
+      {{#each quotes}}
+        {{> AdminSingleQuote}}
+      {{/each}}
+    </div>
+  </div>
+</template>
+ -->
+
+
+
+
+
+
+<!-- <template name="LiteAuthor">
+  <div class="author">
+    <div class="container">
+      Author
+    </div>
+  </div>
+</template> -->
+
+
+
+
+<!-- 
+<template name="SingleAuthor">
+  <li class="author"><a href="/{{slug}}">{{name}}</a> <i class="fa fa-times-circle-o delete"></i></li>
+</template>
+
+
+ -->

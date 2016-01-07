@@ -2,8 +2,7 @@
 
 
 
-
-// Let's test out an API call for funsies
+// Let's test out an API call for use in the future
 Router.route('/api', function () {
   var req = this.request;
   var res = this.response;
@@ -13,34 +12,34 @@ Router.route('/api', function () {
 
 
 
-// Adding and submitting a new quote
-Router.route('/create', {
-  loadingTemplate: 'Loading',
 
+
+/* The root home route landing for qurious.cc/   */
+
+Router.route('/', {
+  loadingTemplate: 'LiteLoad',
   waitOn: function () {
-    // return one handle, a function, or an array
-    return Meteor.subscribe('userData');
+    return Meteor.subscribe("words");
   },
-
   action: function () {
-    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+    this.layout('LiteLayout');
+    Session.set("DocumentTitle","Qurious");
+    // this.render('LiteHeader', { to: 'header'});
 
-    this.layout('ApplicationLayout');
-    Session.set("DocumentTitle", "Create a Quote - Qurious");
-    this.render('Header', {to: 'header'});
-    this.render('Create', {
-      data: {
-        isAdmin: function() {
-          if (Meteor.user().admin) return true;
-          else return false;
-        }
-      }
+    // Here we send a quote to the front page if required
+    Meteor.subscribe('quotesLatest', 1);
+
+    this.render('LiteHome', {
+      data: { 
+        words: function () {
+          return Words.find({});
+          }
+        }  
     });
-
-    this.render('Footer', {to: 'footer'});
+    this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
   }
 });
-
 
 
 
@@ -60,7 +59,7 @@ Router.route('/quote/:_quote_id', {
     this.layout('LiteLayout');
     // this.render('LiteHeader', { to: 'header'});
 
-    console.log(Session.get('currentWord'));
+    console.log("Current word in session: " + Session.get('currentWord'));
 
     this.render('LiteQuote', {
       data: function () {
@@ -91,31 +90,6 @@ Router.route('/quote/:_quote_id', {
     this.render('LiteFooter', { to: 'footer'});
     this.render('LiteNav', { to: 'nav'});
   },
-});
-
-
-Router.route('/authors', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    this.render('ListAuthors');
-    this.render('LiteNav', { to: 'nav'});
-  }
-});
-
-
-Router.route('/a/:_slug', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    this.render('LiteNav', { to: 'nav'});
-  }
 });
 
 
@@ -217,28 +191,7 @@ Router.route('/about', {
 
 
 
-Router.route('/all_quotes', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    // return one handle, a function, or an array
-    return Meteor.subscribe("quotesAll");
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    // this.render('LiteHeader', { to: 'header'});
-    this.render('AdminAllQuotes', {
-      data: {
-        quotes: function () {  
-          Session.set("DocumentTitle", "All Quotes");
 
-          return Quotes.find({}, { sort: { quotation: 1 }});
-          }
-        }
-      });
-    this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
-  },
-});
 
 
 
@@ -269,7 +222,7 @@ Router.route('/words', {
 
 
 
-Router.route('/admin-station', {
+Router.route('/admin', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
     Meteor.subscribe("words");
@@ -282,7 +235,7 @@ Router.route('/admin-station', {
     console.log("current user is: " + Meteor.userId());
 
     // for now only phocks can do this
-    if (Meteor.userId() !== "jNX4BenrzyEgsMqTY") Router.go('/');
+    // if (Meteor.userId() !== "jNX4BenrzyEgsMqTY") Router.go('/');
 
 
     this.render('AdminStation', {
@@ -301,28 +254,7 @@ Router.route('/admin-station', {
 });
 
 
-// Router.route('/add/:_word_to_add', {
-//   loadingTemplate: 'LiteLoad',
-//   waitOn: function () {
-    
-//   },
-//   action: function () {
-//     this.layout('LiteLayout');
-//     // this.render('LiteHeader', { to: 'header'});
-//     this.render('WordProcess', {
-//       data: function () {
-//         var word = Words.findOne({word: this.params._word_text});
-        
-//         return word;
-//       }
-//     });
-//     this.render('LiteFooter', { to: 'footer'});
-//     this.render('LiteNav', { to: 'nav'});
-//   },
-//   onAfterAction: function () {
-    
-//   }
-// });
+
 
 
 
@@ -374,29 +306,29 @@ Router.route('/word/:_word_text', {
 
 
     // Due to multiply:iron-router-progress calling actions twice we need this
-    if (Tracker.currentComputation.firstRun) {
+    // if (Tracker.currentComputation.firstRun) {
 
-      var timeout = getRandomInt(500,2000);
+    //   var timeout = getRandomInt(500,2000);
 
-      console.log("Sleeping for " + timeout + "ms");      
+    //   console.log("Sleeping for " + timeout + "ms");      
     
       
-      Meteor.setTimeout(function(){
+    //   Meteor.setTimeout(function(){
 
-        // Move to a new location or you can do something else
-        // window.location.href = "/random/" + wordText;
+    //     // Move to a new location or you can do something else
+    //     // window.location.href = "/random/" + wordText;
 
-        Router.go("/random/" + wordText);
+    //     Router.go("/random/" + wordText);
 
-      }, timeout);
-    }
+    //   }, timeout);
+    // }
     
   }
 });
 
 
 
-
+// Quick and easy logouts
 Router.route('/logout', function() {
   AccountsTemplates.logout();
   Router.go('/');
@@ -406,32 +338,7 @@ Router.route('/logout', function() {
 
 
 
-/* The root home route landing for qurious.cc/
----------------------------------------------------------------------------------------*/
-Router.route('/', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    return Meteor.subscribe("words");
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    Session.set("DocumentTitle","Qurious");
-    // this.render('LiteHeader', { to: 'header'});
 
-    // Here we send a quote to the front page if required
-    Meteor.subscribe('quotesLatest', 1);
-
-    this.render('LiteHome', {
-      data: { 
-        words: function () {
-          return Words.find({});
-          }
-        }  
-    });
-    this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
-  }
-});
 
 
 
@@ -868,4 +775,110 @@ Router.route('/(.*)', function() {
 //   Session.set("DocumentTitle","Loading - Qurious");
 
 //   this.render('Loading');
+// });
+
+
+
+// Router.route('/all_quotes', {
+//   loadingTemplate: 'LiteLoad',
+//   waitOn: function () {
+//     // return one handle, a function, or an array
+//     return Meteor.subscribe("quotesAll");
+//   },
+//   action: function () {
+//     this.layout('LiteLayout');
+//     // this.render('LiteHeader', { to: 'header'});
+//     this.render('AdminAllQuotes', {
+//       data: {
+//         quotes: function () {  
+//           Session.set("DocumentTitle", "All Quotes");
+
+//           return Quotes.find({}, { sort: { quotation: 1 }});
+//           }
+//         }
+//       });
+//     this.render('LiteFooter', { to: 'footer'});
+//     this.render('LiteNav', { to: 'nav'});
+//   },
+// });
+
+
+
+// // Adding and submitting a new quote
+// Router.route('/create', {
+//   loadingTemplate: 'Loading',
+
+//   waitOn: function () {
+//     // return one handle, a function, or an array
+//     return Meteor.subscribe('userData');
+//   },
+
+//   action: function () {
+//     if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
+
+//     this.layout('ApplicationLayout');
+//     Session.set("DocumentTitle", "Create a Quote - Qurious");
+//     this.render('Header', {to: 'header'});
+//     this.render('Create', {
+//       data: {
+//         isAdmin: function() {
+//           if (Meteor.user().admin) return true;
+//           else return false;
+//         }
+//       }
+//     });
+
+//     this.render('Footer', {to: 'footer'});
+//   }
+// });
+
+
+
+// Router.route('/add/:_word_to_add', {
+//   loadingTemplate: 'LiteLoad',
+//   waitOn: function () {
+    
+//   },
+//   action: function () {
+//     this.layout('LiteLayout');
+//     // this.render('LiteHeader', { to: 'header'});
+//     this.render('WordProcess', {
+//       data: function () {
+//         var word = Words.findOne({word: this.params._word_text});
+        
+//         return word;
+//       }
+//     });
+//     this.render('LiteFooter', { to: 'footer'});
+//     this.render('LiteNav', { to: 'nav'});
+//   },
+//   onAfterAction: function () {
+    
+//   }
+// });
+
+
+
+// Router.route('/authors', {
+//   loadingTemplate: 'LiteLoad',
+//   waitOn: function () {
+    
+//   },
+//   action: function () {
+//     this.layout('LiteLayout');
+//     this.render('ListAuthors');
+//     this.render('LiteNav', { to: 'nav'});
+//   }
+// });
+
+
+// Router.route('/a/:_slug', {
+//   loadingTemplate: 'LiteLoad',
+//   waitOn: function () {
+    
+//   },
+//   action: function () {
+//     this.layout('LiteLayout');
+//     this.render('LiteNav', { to: 'nav'});
+//   }
 // });

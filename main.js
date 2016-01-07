@@ -433,9 +433,16 @@ if (Meteor.isClient) { // only runs on the client
       "submit .word-search": function (event) {
         var q = event.target.search.value;
         
-
+        if (/\s/.test(q)) { // tests for spaces/single words only please
+          // It has any kind of whitespace
+          alert("Qurious search is limited to single words for the time being.")
+          return false;
+        }
         
         if (q == "") return false;
+
+
+
         Router.go('/word/' + q);
 
         // Router.go('/about');

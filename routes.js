@@ -110,7 +110,7 @@ Router.route('/random', function () {
 
 // Random with word search specified
 Router.route('/random/:_word', function () {
-  Meteor.call('getRandomQuoteIdWithWord', this.params._word, function (error, result) {
+  Meteor.call('getRandomQuoteIdWithStringAllFields', this.params._word, function (error, result) {
     var randomId = result;
 
 
@@ -129,32 +129,12 @@ Router.route('/random/:_word', function () {
 
 
 
-// Testing the Lite loader
-Router.route('/load', function() {
-  this.layout('LiteLayout');
-  Session.set("DocumentTitle","Loading - Qurious");
-  this.render('LiteLoad');
-});
 
 
 
 
 
 
-
-Router.route('/a/:_author_slug', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    // this.render('LiteHeader', { to: 'header'});
-    this.render('LiteAuthor');
-    // this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
-  },
-});
 
 
 
@@ -196,27 +176,77 @@ Router.route('/about', {
 
 
 
-Router.route('/words', {
+
+
+
+
+
+
+
+Router.route('/word/:_word_text', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
-    // return one handle, a function, or an array
+    // only return at the end
+    // Meteor.subscribe('Quotes');
     return Meteor.subscribe("words");
   },
   action: function () {
     this.layout('LiteLayout');
     // this.render('LiteHeader', { to: 'header'});
-    this.render('AllWords', {
-      data: {
-        words: function () {  
-          Session.set("DocumentTitle", "All Words");
 
-          return Words.find({});
-          }
-        }
-      });
+    var wordText = this.params._word_text; // this has to be a var for some reason to work
+
+    // console.log(s.slugify("Hello world!")); // just a test
+
+    var word = Words.findOne({word: wordText});
+    
+    // if (word == undefined) { // does the word exist in the database?
+    //   Router.go('/word/' + wordText + "/add", {}, {replaceState:true});
+    //   return false; // get me out of here
+    // }
+
+    Session.set('currentWord', wordText);
+    console.log("Setting session word: " + wordText);
+
+
+    Router.go('/random/' + wordText, {}, {replaceState:true});
+
+
+
+    this.render('WordProcess', {
+
+      data: {
+        word: function () {
+          return wordText;
+        },
+        // quotes: function () {
+        //   return Quotes.find({ quotation: { '$regex': wordText, $options: 'i'} });
+        // }
+      }
+    });
     this.render('LiteFooter', { to: 'footer'});
     this.render('LiteNav', { to: 'nav'});
-  },
+
+
+    // Due to multiply:iron-router-progress calling actions twice we need this
+    // if (Tracker.currentComputation.firstRun) {
+
+    //   var timeout = getRandomInt(500,2000);
+
+    //   console.log("Sleeping for " + timeout + "ms");      
+    
+      
+    //   Meteor.setTimeout(function(){
+
+    //     // Move to a new location or you can do something else
+    //     // window.location.href = "/random/" + wordText;
+
+    //     Router.go("/random/" + wordText);
+
+    //   }, timeout);
+    // }
+    
+  }
 });
 
 
@@ -259,75 +289,6 @@ Router.route('/admin', {
 
 
 
-
-
-
-
-Router.route('/word/:_word_text', {
-  loadingTemplate: 'LiteLoad',
-  waitOn: function () {
-    // only return at the end
-    // Meteor.subscribe('Quotes');
-    return Meteor.subscribe("words");
-  },
-  action: function () {
-    this.layout('LiteLayout');
-    // this.render('LiteHeader', { to: 'header'});
-
-    var wordText = this.params._word_text; // this has to be a var for some reason to work
-
-    // console.log(s.slugify("Hello world!")); // just a test
-
-    var word = Words.findOne({word: wordText});
-    
-    // if (word == undefined) { // does the word exist in the database?
-    //   Router.go('/word/' + wordText + "/add", {}, {replaceState:true});
-    //   return false; // get me out of here
-    // }
-
-    Session.set('currentWord', wordText);
-    console.log("Setting session word: " + wordText);
-
-
-
-    this.render('WordProcess', {
-
-      data: {
-        word: function () {
-          return wordText;
-        },
-        // quotes: function () {
-        //   return Quotes.find({ quotation: { '$regex': wordText, $options: 'i'} });
-        // }
-      }
-    });
-    this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
-
-
-    // Due to multiply:iron-router-progress calling actions twice we need this
-    // if (Tracker.currentComputation.firstRun) {
-
-    //   var timeout = getRandomInt(500,2000);
-
-    //   console.log("Sleeping for " + timeout + "ms");      
-    
-      
-    //   Meteor.setTimeout(function(){
-
-    //     // Move to a new location or you can do something else
-    //     // window.location.href = "/random/" + wordText;
-
-    //     Router.go("/random/" + wordText);
-
-    //   }, timeout);
-    // }
-    
-  }
-});
-
-
-
 // Quick and easy logouts
 Router.route('/logout', function() {
   AccountsTemplates.logout();
@@ -338,6 +299,15 @@ Router.route('/logout', function() {
 
 
 
+
+
+
+// Testing the Lite loader
+Router.route('/load', function() {
+  this.layout('LiteLayout');
+  Session.set("DocumentTitle","Loading - Qurious");
+  this.render('LiteLoad');
+});
 
 
 
@@ -881,4 +851,48 @@ Router.route('/(.*)', function() {
 //     this.layout('LiteLayout');
 //     this.render('LiteNav', { to: 'nav'});
 //   }
+// });
+
+
+
+
+// Router.route('/words', {
+//   loadingTemplate: 'LiteLoad',
+//   waitOn: function () {
+//     // return one handle, a function, or an array
+//     return Meteor.subscribe("words");
+//   },
+//   action: function () {
+//     this.layout('LiteLayout');
+//     // this.render('LiteHeader', { to: 'header'});
+//     this.render('AllWords', {
+//       data: {
+//         words: function () {  
+//           Session.set("DocumentTitle", "All Words");
+
+//           return Words.find({});
+//           }
+//         }
+//       });
+//     this.render('LiteFooter', { to: 'footer'});
+//     this.render('LiteNav', { to: 'nav'});
+//   },
+// });
+
+
+
+
+
+// Router.route('/a/:_author_slug', {
+//   loadingTemplate: 'LiteLoad',
+//   waitOn: function () {
+    
+//   },
+//   action: function () {
+//     this.layout('LiteLayout');
+//     // this.render('LiteHeader', { to: 'header'});
+//     this.render('LiteAuthor');
+//     // this.render('LiteFooter', { to: 'footer'});
+//     this.render('LiteNav', { to: 'nav'});
+//   },
 // });

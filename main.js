@@ -442,7 +442,10 @@ if (Meteor.isClient) { // only runs on the client
           return false;
         }
         
-        if (q == "") return false;
+        if (q == "") {
+          Router.go("/random");
+          return false;
+        }
 
 
 
@@ -482,6 +485,9 @@ if (Meteor.isClient) { // only runs on the client
 
   // Dropcaps for Quotes do it once rendered
   Template.LiteQuote.onRendered(function () {
+
+    // focus cursor on the input    
+    //this.$('button.another-button').focus();
 
     console.log('Inserting dropcaps span');
     var node = $("p").contents().filter(function () { return this.nodeType == 3 }).first(),

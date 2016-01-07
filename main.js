@@ -388,12 +388,12 @@ if (Meteor.isClient) { // only runs on the client
       var quote_id = Session.get('sessionQuoteId');
       console.log("Current quote ID: " + quote_id);
       if (word == "") {
-        Router.go("/random");
+        Router.go("/flip");
         return false;
       }
       else {
         Session.set('currentWord', word);
-        Router.go("/random/" + word);
+        Router.go("/flip/" + word);
       }
 
            
@@ -443,7 +443,7 @@ if (Meteor.isClient) { // only runs on the client
         }
         
         if (q == "") {
-          Router.go("/random");
+          Router.go("/flip");
           return false;
         }
 

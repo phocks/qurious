@@ -96,7 +96,7 @@ Router.route('/quote/:_quote_id', {
 
 
 // gets a random quote and redirects to the page
-Router.route('/random', function () {
+Router.route('/flip', function () {
   Session.set('currentWord', undefined);
   Meteor.call('getRandomQuoteId', function (error, result) {
     var randomId = result;
@@ -109,7 +109,7 @@ Router.route('/random', function () {
 
 
 // Random with word search specified
-Router.route('/random/:_word', function () {
+Router.route('/flip/:_word', function () {
   Meteor.call('getRandomQuoteIdWithStringAllFields', this.params._word, function (error, result) {
     var randomId = result;
 
@@ -209,7 +209,7 @@ Router.route('/word/:_word_text', {
     console.log("Setting session word: " + wordText);
 
 
-    Router.go('/random/' + wordText, {}, {replaceState:true});
+    Router.go('/flip/' + wordText, {}, {replaceState:true});
 
 
 

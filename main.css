@@ -1419,6 +1419,11 @@ And yes it works, so we're keeping it. */
 }
 
 
+.lite-controls ul.controls li a {
+  color: inherit;
+}
+
+
 .popover {
   box-shadow: none; /*0px 1px 4px rgba(0, 0, 0, .25);*/
   border-radius: 4px;
@@ -1430,3 +1435,6 @@ p.quotation {
   font-size: 1.6em;
 }
 
+.at-form p {
+  padding-bottom: 0;
+}

@@ -1,3 +1,17 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel='shortcut icon' type='image/png' sizes="16x16 32x32" href='/favicon.png?v=2' />
+  <title>Qurious</title>
+</head>
+
+
+<!-- Any body text first up..... pretty much useless maybeeeeee if we were adding analytics or something -->
+<body></body>
+
+
+
 
 <template name="LiteLayout">
   <div class="lite-container container-fluid">
@@ -94,6 +108,90 @@
     <div class="container">
       <div class="quotation">
         <p>{{{quotation}}}</p>
+        <p class="attribution">
+        {{#if attribution}}
+          <span class="dash">&mdash;</span>{{{attribution}}}
+        {{/if}}
+        </p>
+        <p class="text-center"><span class="quo"><i class="fa fa-quote-right"></i></span></p>
+        <!-- <p class="text-center"><span class="amp">&amp;</span></p> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="lite-info">
+    <div class="container">
+      <ul>
+        <!-- Do we really need to show these? -->
+        <!-- <li><i class="icon ion-eye"></i> {{views}} views</li>
+        <li><i class="icon ion-clock"></i> {{howLongAgo createdAt}}</li>
+        <li><i class="icon ion-quote"></i> By {{username}}</li> -->
+      </ul>
+    </div>
+  </div>
+
+  <div class="lite-controls">
+    <div class="container">
+      <!-- <a class="btn btn-default" href="/r">Another?</a> -->
+      <hr>
+      <ul class="controls text-right">
+        <!-- <li><i class="ionicons ion-android-favorite-outline"></i></li> -->
+        <li><a href="/about"><i class="ionicons ion-more"></i></a></li>
+        <!-- <li><i class="ionicons ion-heart"></i></li> -->
+        <!-- <li><i class="ionicons ion-heart-broken"></i></li>         -->
+      </ul>
+
+      <!-- <p class="text-center">
+      {{#if currentWord}}
+        <a class="btn btn-default" href="/random/{{currentWord}}">More {{currentWord}}</a>
+      {{else}}
+        <a class="btn btn-default" href="/random">Another?</a>
+      {{/if}}
+      </p> -->
+
+
+      <form class="form-inline text-center quotePageAnother">
+        <div class="form-group">          
+          <input type="text" class="form-control" id="wordInput" name="word" placeholder="Curious about?" value="{{currentWord}}">
+        </div>        
+        <button type="submit" class="btn btn-default another-button">Another?</button>
+      </form>
+
+      <!-- <ul class="text-center words">
+        {{#each words}}
+          <li><a href="/random/{{this}}">{{this}}</a> <span class="delete">-</span> &nbsp;</li>
+        {{/each}}
+        <li><a href="#">+</a></li>
+      </ul>
+
+
+      <form class="new-word">
+        <div class="form-group">
+          <label for="wordInput"></label>
+          <input type="text" class="form-control" id="wordInput" name="word" placeholder="Add new word">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+ -->
+
+
+    </div>
+  </div>
+
+</template>
+
+
+
+
+
+
+
+
+<template name="LiteQuoteEdit">
+  <div class="lite-quote">
+    <div class="container">
+      <div class="quotation">
+        <p><textarea class="form-control" rows="3">{{quotation}}</textarea></p>
         <p class="attribution">
         {{#if attribution}}
           <span class="dash">&mdash;</span>{{{attribution}}}
@@ -268,17 +366,69 @@
 
 
 
+<template name="Admin">
+  <div class="container">      
+      <div class="create-block">
+        <form class="new-quote">
+          <div class="form-group">
+            <label for="quotationText">Quotation text</label>
+            <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Enter your quotation here. Please do not include quotation marks, line breaks or special characters. Please keep it brief." autocomplete="off"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="attributionText">Attribution</label>
+            <input type="text" class="form-control" id="attributionText" name="attribution" placeholder="e.g. Albert Einstein">
+          </div>
+          <div class="submissionText">
+          <p>By submitting your quotation you agree to our <a href="/terms">Terms and Conditions</a> and <a href="/privacy">Privacy Policy</a>.</p>
+          </div>
+
+          <button type="submit" class="btn btn-primary create">Submit</button>
+        </form>
+      </div>
+    </div>
+</template>
 
 
 
 
 
 
+<template name="Login">
+<div class="container text-center">
+  {{> atForm}}
+</div>
+</template>
 
 
 
+
+<!-- This will be defunt soon -->
 <template name="AdminStation">
   <div class="admin-station text-center">
+
+    <div class="container">      
+        <div class="create-block">
+          <form class="new-quote">
+            <div class="form-group">
+              <label for="quotationText">Quotation text</label>
+              <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Enter your quotation here. Please do not include quotation marks, line breaks or special characters. Please keep it brief." autocomplete="off"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="attributionText">Attribution</label>
+              <input type="text" class="form-control" id="attributionText" name="attribution" placeholder="e.g. Albert Einstein">
+            </div>
+            <div class="submissionText">
+            <p>By submitting your quotation you agree to our <a href="/terms">Terms and Conditions</a> and <a href="/privacy">Privacy Policy</a>.</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary create">Submit</button>
+          </form>
+        </div>
+      </div>
+
+
+
+  
   <div class="container">
     {{> atForm}}
     <form class="new-word">
@@ -341,6 +491,45 @@
     <!-- Not really being used any more but still being rendered sometimes -->
     </div>
   </div>
+</template>
+
+
+
+
+
+<!-- Replaces default UserAccounts form -->
+<template name="AtFormQurious">
+{{#unless hide}}
+    <div class="at-form">
+      {{#if showTitle}}
+        {{> atTitle}}
+      {{/if}}
+      {{#if showError}}
+        {{> atError}}
+      {{/if}}
+      {{#if showResult}}
+        {{> atResult}}
+      {{/if}}
+      {{#if showOauthServices}}
+        {{> atOauth}}
+      {{/if}}
+      {{#if showServicesSeparator}}
+        {{> atSep}}
+      {{/if}}
+      {{#if showPwdForm}}
+        {{> atPwdForm}}
+      {{/if}}
+      {{#if showTermsLink}}
+        {{> atTermsLink}}
+      {{/if}}
+      {{#if showSignInLink}}
+        {{> atSigninLink}}
+      {{/if}}
+      {{#if showSignUpLink}}
+        {{> atSignupLink}}
+      {{/if}}
+    </div>
+  {{/unless}}
 </template>
 
 
@@ -454,5 +643,4 @@
   <li class="author"><a href="/{{slug}}">{{name}}</a> <i class="fa fa-times-circle-o delete"></i></li>
 </template>
 
-
- -->
+-->

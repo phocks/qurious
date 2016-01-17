@@ -239,8 +239,9 @@ if (Meteor.isClient) { // only runs on the client
     }
   });
 
-
-
+  // So we can customise the login form so much more
+  // Requires aldeed:template-extension
+  Template.AtFormQurious.replaces("atForm");
 
 
   // Here are the helpers to put data into Templates etc
@@ -329,10 +330,7 @@ if (Meteor.isClient) { // only runs on the client
 
   
 
-
-
-
-    Template.Create.events({
+Template.AdminStation.events({
     "submit .new-quote": function (event) {
       var text = event.target.text.value;
       var attribution = event.target.attribution.value;
@@ -340,7 +338,7 @@ if (Meteor.isClient) { // only runs on the client
 
       Meteor.call('addQuote', text, attribution, function(error, result) {
         var newQuoteId = result;
-        Router.go('/quotes/' + newQuoteId);
+        Router.go('/quote/' + newQuoteId);
       });
 
       // Clear form
@@ -355,6 +353,7 @@ if (Meteor.isClient) { // only runs on the client
       Meteor.call('deleteQuote', this._id);
     }
   });
+
 
 
   
@@ -428,7 +427,29 @@ if (Meteor.isClient) { // only runs on the client
     });
 
 
-    
+      // Template.Create.events({
+  //   "submit .new-quote": function (event) {
+  //     var text = event.target.text.value;
+  //     var attribution = event.target.attribution.value;
+  //     if (text == "" || attribution == "") return false; // prevent empty strings
+
+  //     Meteor.call('addQuote', text, attribution, function(error, result) {
+  //       var newQuoteId = result;
+  //       Router.go('/quotes/' + newQuoteId);
+  //     });
+
+  //     // Clear form
+  //     event.target.text.value = "";
+  //     event.target.attribution.value = "";
+
+
+  //     // Prevent default action from form submit
+  //     return false;
+  //   },
+  //   "click .delete": function () {
+  //     Meteor.call('deleteQuote', this._id);
+  //   }
+  // });
 
 
 
@@ -436,11 +457,11 @@ if (Meteor.isClient) { // only runs on the client
       "submit .word-search": function (event) {
         var q = event.target.search.value;
         
-        if (/\s/.test(q)) { // tests for spaces/single words only please
-          // It has any kind of whitespace
-          alert("Qurious search is limited to single words for the time being.")
-          return false;
-        }
+        // if (/\s/.test(q)) { // tests for spaces/single words only please
+        //   // It has any kind of whitespace
+        //   alert("Qurious search is limited to single words for the time being.")
+        //   return false;
+        // }
         
         if (q == "") {
           Router.go("/flip");

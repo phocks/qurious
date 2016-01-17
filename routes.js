@@ -61,6 +61,8 @@ Router.route('/quote/:_quote_id', {
 
     console.log("Current word in session: " + Session.get('currentWord'));
 
+    
+
     this.render('LiteQuote', {
       data: function () {
         var quote = Quotes.findOne({ _id: this.params._quote_id });
@@ -91,6 +93,55 @@ Router.route('/quote/:_quote_id', {
     this.render('LiteNav', { to: 'nav'});
   },
 });
+
+
+
+
+
+// Takes the doc _id and displays quote with edit functions
+Router.route('/quote/:_quote_id/edit', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    // return one handle, a function, or an array
+    return Meteor.subscribe('quotesSlug', this.params._quote_id);
+  },
+  action: function () {
+    this.layout('LiteLayout');
+    // this.render('LiteHeader', { to: 'header'});
+
+    console.log("Current word in session: " + Session.get('currentWord'));
+
+    this.render('LiteQuoteEdit', {
+      data: function () {
+        var quote = Quotes.findOne({ _id: this.params._quote_id });
+        if (!quote) {
+          quote = Quotes.findOne({ quote_id: this.params._quote_id });
+        }
+        if (!quote) {
+          // this.render('NotFound');
+          // had to comment out as this was flashing not found briefly due to the split second
+          // it takes for the variable "quote" to be assigned..
+        } 
+        else {
+          Session.set('sessionQuoteId', this.params._quote_id);
+          // Meteor.call('checkQuoteSize', this.params._quote_id); // small or big?
+
+          // Let's try to get substring some text for the Title Bar
+          // this regular expression is gold (i didn't write it btw)
+          var titleText = quote.quotation.replace(/^(.{50}[^\s]*).*/, "$1");
+
+          Session.set("DocumentTitle", quote.attribution + " · " + titleText + " - Qurious");
+
+
+          return quote;
+        }
+      }
+    });
+    this.render('LiteFooter', { to: 'footer'});
+    this.render('LiteNav', { to: 'nav'});
+  },
+});
+
 
 
 
@@ -138,11 +189,6 @@ Router.route('/flip/:_word', function () {
 
 
 
-
-
-
-
-
 Router.route('/menu', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
@@ -155,6 +201,13 @@ Router.route('/menu', {
     this.render('LiteNav', { to: 'nav'});
   }
 });
+
+
+
+
+
+
+
 
 Router.route('/about', {
   loadingTemplate: 'LiteLoad',
@@ -265,7 +318,10 @@ Router.route('/admin', {
     console.log("current user is: " + Meteor.userId());
 
     // for now only phocks can do this
-    // if (Meteor.userId() !== "jNX4BenrzyEgsMqTY") Router.go('/');
+    if (Meteor.userId() !== "jNX4BenrzyEgsMqTY") Router.go('/');
+
+    // Only logged in users
+    // if (!Meteor.user()) Router.go('/login');
 
 
     this.render('AdminStation', {
@@ -285,6 +341,21 @@ Router.route('/admin', {
 
 
 
+
+
+Router.route('/login', {
+  loadingTemplate: 'LiteLoad',
+  waitOn: function () {
+    
+  },
+  action: function () {
+    if (Meteor.user() ) Router.go('/'); // deny not logged in
+    this.layout('LiteLayout');
+    Session.set("DocumentTitle","Qurious Login");
+    this.render('Login');
+    this.render('LiteNav', { to: 'nav'});
+  }
+});
 
 
 

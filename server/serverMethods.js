@@ -21,6 +21,36 @@ Meteor.methods({
   // ps. look at the Random function built-in to Meteor alternatively
 
 
+  // Throw the dice with all the db docs
+  getRandomQuoteIdWithWord: function(word) {      
+    var count = Quotes.find({quotation: { '$regex': word, $options: 'i'}}).count();
+    var random_index = Math.floor(Math.random() * (count));
+    var random_object = Quotes.findOne({quotation: { '$regex': word, $options: 'i'}}, {skip:random_index});
+    if (random_object !== undefined) return random_object._id;
+    else return false;
+  },
+
+
+  getRandomQuoteIdWithStringAllFields: function(word) {      
+    var count = Quotes.find({quotation: { '$regex': word, $options: 'i'}}).count();
+    var random_index = Math.floor(Math.random() * (count));
+    var random_object = Quotes.findOne({ $or: [ { quotation: { '$regex': word, $options: 'i'}},
+                                                { attribution: { '$regex': word, $options: 'i'}} ]},
+                                                {skip:random_index}
+                                              );
+    if (random_object !== undefined) return random_object._id;
+    else return false;
+  },
+
+
+
+
+  // $or: [ { quotation: { '$regex': terms_to_lookup, $options: 'i'} },
+//             { attribution: { '$regex': terms_to_lookup, $options: 'i'}} ]
+
+
+
+
   // Like random, now with less randomness!
   getLuckyQuoteId: function() {
     var returnQuotesAbove = 2;
@@ -68,7 +98,8 @@ Meteor.methods({
     if (Meteor.userId()) {
 
       // This checks the user doc to see if the quote _id is in the list
-      var user = Meteor.users.findOne({_id:this.userId, quotesVisited:{$ne:quoteId}});
+      // No longer using this as clogs up user doc
+      // var user = Meteor.users.findOne({_id:this.userId, quotesVisited:{$ne:quoteId}});
 
 
       // Here we are trying to stop view refresh hacking
@@ -77,7 +108,8 @@ Meteor.methods({
 
         Quotes.update( { _id: quoteId }, {$inc: { views: 1 }});
 
-        Meteor.users.update({_id:this.userId},{$addToSet:{ quotesVisited:quoteId}});
+        // Don't clog up the user doc please
+        // Meteor.users.update({_id:this.userId},{$addToSet:{ quotesVisited:quoteId}});
       }
 
       // Update last viewed by

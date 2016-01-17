@@ -10,14 +10,28 @@
 // Qurious, a web app for creating and sharing quotes
 // Copyright Meagre 2015- All rights reserved
 
-/* This file originally created by Joshua Byrd for Meagre. */
+
+
+/*
+|--------------------------------------------------------------------------
+| Title template
+|--------------------------------------------------------------------------
+|
+| Comments can go here and description
+| that spans multi lines.
+|
+*/
 
 
 
 // First up we are going to create a few collections
 Quotes = new Mongo.Collection('quotes');  // Our main quote db
-Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use)
+Authors = new Mongo.Collection('authors'); // People who say stuff
+Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use really)
+Words = new Mongo.Collection('words'); // Words are the basis of ideas
 // There is also a Users collection by default in Meteor
+
+
 
 
 
@@ -26,6 +40,13 @@ Counters = new Mongo.Collection('counters'); // Handles numbering (which we no l
 
 loadMoreLimit = 5;  // for infinite scrolling, how many per load
 maximumQuotationLength = 1000; // in characters
+
+// Deny public from editing profile. May prevent DoS attack
+Meteor.users.deny({
+  update: function() {
+    return true;
+  }
+});
 
 
 
@@ -36,31 +57,16 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
+
+
+
   // We need to tell the client to subscribe explicitly to data collections
   // Later we don't want to subscribe to the whole thing
   // moved to individual routes // Meteor.subscribe("quotes");
   Meteor.subscribe("counters");
-  Meteor.subscribe("userData"); // for admin access etc.
+  Meteor.subscribe("userData"); // for admin account login access etc.
+  Meteor.subscribe("authors"); // subscribe only to certain ones later
 
-
-
-
-  // Font experiment to see if we can load fonts on demand
-  // and YES it looks like we can.
-  if (true) {  // We are enabling this now, as dropcap.js doesn't work well with @import CSS
-    WebFontConfig = {
-      google: { families: [ 'Vollkorn:400,400italic:latin' ] }
-    };
-    (function() {
-      var wf = document.createElement('script');
-      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-      wf.type = 'text/javascript';
-      wf.async = 'true';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(wf, s);
-    })();
-  }
 
 
 
@@ -102,10 +108,23 @@ if (Meteor.isClient) { // only runs on the client
     //     Footer: {to: 'footer'},
     // },
     //notFoundTemplate: '404' //this is used for somewhat custom 404s
+
+    // for the loading up top thing
+    progressSpinner: false,
+    progressDelay: 100,
   });
 
 
   Router.plugin('dataNotFound', {notFoundTemplate: 'NotFound'});
+
+
+  // trying out this router hook thing to reset the post limit
+  // Router.onBeforeAction(function() {
+  //   Session.set('limit', loadMoreLimit); // set the infinite scroll limit back to default
+  //   //$(window).scrollTop(0); // this replaces the auto scroll package
+
+  //   this.next();
+  // });
 
 
   // We have a package that gets us to the top when we navigate
@@ -182,24 +201,24 @@ if (Meteor.isClient) { // only runs on the client
   // This is not a very elegant way of doing it. Please change in future
 
 
-  incrementLimit = function(inc) { // this is defining a new global function
-    var inc = loadMoreLimit;
-    newLimit = Session.get('limit') + inc;
-    Session.set('limit', newLimit);
-  }
+  // incrementLimit = function(inc) { // this is defining a new global function
+  //   var inc = loadMoreLimit;
+  //   newLimit = Session.get('limit') + inc;
+  //   Session.set('limit', newLimit);
+  // }
 
-  Template.Quotes.created = function() {
-    Session.set('limit', loadMoreLimit);  // use Session.setDefault maybe
+  // Template.Quotes.created = function() {
+  //   Session.set('limit', loadMoreLimit);  // use Session.setDefault maybe
 
-    // Deps.autorun() automatically rerun the subscription whenever Session.get('limit') changes
-    // http://docs.meteor.com/#deps_autorun
-    // Changed to 'Tracker' in newer versions of Meteor
-    Tracker.autorun(function() {
-      Meteor.subscribe('quotesPopular', Session.get('limit'));
-      Meteor.subscribe('quotesLatest', Session.get('limit'));
-      Meteor.subscribe('quotesCurrentUser', Session.get('limit'));
-    });
-  }
+  //   // Deps.autorun() automatically rerun the subscription whenever Session.get('limit') changes
+  //   // http://docs.meteor.com/#deps_autorun
+  //   // Changed to 'Tracker' in newer versions of Meteor
+  //   Tracker.autorun(function() {
+  //     Meteor.subscribe('quotesPopular', Session.get('limit'));
+  //     Meteor.subscribe('quotesLatest', Session.get('limit'));
+  //     Meteor.subscribe('quotesCurrentUser', Session.get('limit'));
+  //   });
+  // }
 
   // This is an auto load feature when we have reached the bottom
   /*
@@ -220,11 +239,54 @@ if (Meteor.isClient) { // only runs on the client
     }
   });
 
-
-
+  // So we can customise the login form so much more
+  // Requires aldeed:template-extension
+  Template.AtFormQurious.replaces("atForm");
 
 
   // Here are the helpers to put data into Templates etc
+
+  
+
+
+  // Template.ListAuthors.helpers({
+  //   authors: function () {
+  //     return Authors.find({}, {sort: {name: 1}});
+  //   }
+  // });
+
+
+
+  // And some global helpers etc
+
+  // This sets the time format using the moment package
+  Template.registerHelper('formatTime', function(context, options) {
+    if(context)
+      return moment(context).format('DD/MM/YYYY, hh:mm a');
+  });
+
+  Template.registerHelper('howLongAgo', function(context, options) {
+    if(context)
+      return moment(context).fromNow();
+  });
+
+  // Gives us a {{username}} variable to use in html
+  Template.registerHelper('currentUsername', function () {
+      return Meteor.user().username;
+    }
+  );
+
+  // This lets us access {{currentWord}} in the Spacebars html 
+  Template.registerHelper('currentWord', function () {
+      return Session.get('currentWord');
+    }
+  );
+
+
+
+
+// Events that drive things like clicks etc
+
 
   Template.SingleQuote.helpers({
     // determines if user submitted quote
@@ -248,32 +310,6 @@ if (Meteor.isClient) { // only runs on the client
     }
   });
 
-
-
-  // And some global helpers etc
-
-  // This sets the time format using the moment package
-  Template.registerHelper('formatTime', function(context, options) {
-    if(context)
-      return moment(context).format('DD/MM/YYYY, hh:mm a');
-  });
-
-  Template.registerHelper('howLongAgo', function(context, options) {
-    if(context)
-      return moment(context).fromNow();
-  });
-
-  // Gives us a {{username}} variable to use in html
-  Template.registerHelper('currentUsername', function () {
-      return Meteor.user().username;
-    }
-  );
-
-
-
-
-// Events that drive things like clicks etc
-
   // Let's finally set up a delete
   Template.SingleQuote.events({
     "click .delete-click": function () {
@@ -292,22 +328,9 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
-  // this isn't even used any more but yeah it's for a delete button on Explore
-  Template.Quotes.events({
-    "click .delete-click": function () {
-      Meteor.call('deleteQuote', this._id);
-    },
+  
 
-
-    /*"click .list-quote": function () {
-      Router.go('/quotes/' + this._id);
-    } this was commented out in favour of a direct read more link */
-  });
-
-
-
-
-    Template.Create.events({
+Template.AdminStation.events({
     "submit .new-quote": function (event) {
       var text = event.target.text.value;
       var attribution = event.target.attribution.value;
@@ -315,7 +338,7 @@ if (Meteor.isClient) { // only runs on the client
 
       Meteor.call('addQuote', text, attribution, function(error, result) {
         var newQuoteId = result;
-        Router.go('/quotes/' + newQuoteId);
+        Router.go('/quote/' + newQuoteId);
       });
 
       // Clear form
@@ -333,75 +356,277 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-    Template.Header.events({
-    "submit .search-form": function (event) {
-      var q = event.target.q.value;
+  
 
-      if (q == "") {
-        Router.go('/explore/latest');
+
+
+    Template.AdminStation.events({
+      "submit .new-word": function (event) {      
+        var word = event.target.word.value;
+        if (word == "") return false; // prevent empty strings
+
+        Meteor.call('addWord', word);
+
+        // Clear form      
+        event.target.word.value = "";
+
+        // Prevent default action from form submit
         return false;
+      }, 
+      "click .delete": function () {
+        if (confirm('Really delete ?')) {
+          Meteor.call('deleteWord', this._id);
+        }
+      }     
+    });
 
+
+    Template.LiteQuote.events({
+      "submit .quotePageAnother": function (event) {      
+      var word = event.target.word.value;
+      var quote_id = Session.get('sessionQuoteId');
+      console.log("Current quote ID: " + quote_id);
+      if (word == "") {
+        Router.go("/flip");
+        return false;
+      }
+      else {
+        Session.set('currentWord', word);
+        Router.go("/flip/" + word);
       }
 
-      //event.target.q.value = "";
-
-
-      Router.go('/search/' + q);
-
+           
 
       // Prevent default action from form submit
       return false;
-    },
 
-    // I was trying to create a delete x here but it was too hard
-    // so I quit doing it
-    // "click .searchclear": function (event, template) {
-    //   $('.search-form')[0].reset();
-    // }
-
-    // This will enable instant search if we want it
-    // "keyup .form-control": function (event) {
-    //   var q = event.target.value;
-
-    //   console.log("key pressed in header search");
-
-    //   // if (q == "") {
-    //   //   Router.go('/explore/latest');
-    //   //   return false;
-
-    //   // }
-
-    //   //event.target.q.value = "";
+    }
 
 
-    //   Router.go('/search/' + q);
+      // "submit .new-word": function (event) {      
+      //   var word = event.target.word.value;
+      //   var quote_id = Session.get('sessionQuoteId');
+      //   console.log(quote_id);
+      //   if (word == "") return false; // prevent empty strings
+
+      //   Meteor.call('addWordToQuote', word, quote_id);
+
+      //   // Clear form      
+      //   event.target.word.value = "";
+
+      //   // Prevent default action from form submit
+      //   return false;
+      // }, 
+      // "click .delete": function () {
+      //   var word = this.toString();
+      //   var quote_id = Session.get('sessionQuoteId');
+      //   if (confirm('Really delete ?')) {
+      //     Meteor.call('deleteWordFromQuote', word, quote_id);
+      //   }
+      // }
+    });
 
 
-    //   // Prevent default action from form submit
-    //   return false;
-    // },
+      // Template.Create.events({
+  //   "submit .new-quote": function (event) {
+  //     var text = event.target.text.value;
+  //     var attribution = event.target.attribution.value;
+  //     if (text == "" || attribution == "") return false; // prevent empty strings
 
+  //     Meteor.call('addQuote', text, attribution, function(error, result) {
+  //       var newQuoteId = result;
+  //       Router.go('/quotes/' + newQuoteId);
+  //     });
+
+  //     // Clear form
+  //     event.target.text.value = "";
+  //     event.target.attribution.value = "";
+
+
+  //     // Prevent default action from form submit
+  //     return false;
+  //   },
+  //   "click .delete": function () {
+  //     Meteor.call('deleteQuote', this._id);
+  //   }
+  // });
+
+
+
+    Template.LiteHome.events({
+      "submit .word-search": function (event) {
+        var q = event.target.search.value;
+        
+        // if (/\s/.test(q)) { // tests for spaces/single words only please
+        //   // It has any kind of whitespace
+        //   alert("Qurious search is limited to single words for the time being.")
+        //   return false;
+        // }
+        
+        if (q == "") {
+          Router.go("/flip");
+          return false;
+        }
+
+
+
+        Router.go('/word/' + q);
+
+        // Router.go('/about');
+
+        // Prevent default action from form submit
+        return false;
+      },
+    });
+
+
+
+
+
+
+
+
+
+ 
+
+
+  Template.LiteQuote.onRendered(function () {
+    
+    
+    // $('[data-toggle="popover"]').popover()
+     $('[data-toggle="tooltip"]').tooltip()
+    
+  });
+
+  // Template.LiteHome.onRendered(function () {
+  //   $('[data-toggle="tooltip"]').tooltip()
+  // });
+
+
+
+  // Dropcaps for Quotes do it once rendered
+  Template.LiteQuote.onRendered(function () {
+
+    // focus cursor on the input    
+    //this.$('button.another-button').focus();
+
+    console.log('Inserting dropcaps span');
+    var node = $("p").contents().filter(function () { return this.nodeType == 3 }).first(),
+        text = node.text().trim(),
+        first = text.slice(0, 1);
+    
+    if (!node.length) {
+        console.log('not done');
+        return;
+      }
+    
+    node[0].nodeValue = text.slice(first.length);
+    node.before('<span id="dropcap">' + first + '</span>');
+
+    dropcap = document.getElementById("dropcap");
+    window.Dropcap.layout(dropcap, 2, 2);
+
+    // Media queries for javascript pretty much
+    // Finally got it working. This triggers re-rendering for dropcaps
+    // on window resize
+    var tablet = window.matchMedia("(min-width: 768px)");
+    var desktop = window.matchMedia("(min-width: 992px)");
+    var largeDesktop = window.matchMedia("(min-width: 1200px)");  
+
+    var handleMediaChange = function (mediaQueryList) {
+        if (mediaQueryList.matches) {
+          console.log("Media query greater than triggered")
+          window.Dropcap.layout(dropcap, 2, 2);
+        }
+        else {
+          // The browser window is less than 480px wide
+          console.log("Media query js smaller than triggered")
+          window.Dropcap.layout(dropcap, 2, 2);
+        }
+    }
+
+    // When screen size changes shoot off an event and change things
+    tablet.addListener(handleMediaChange);
+    desktop.addListener(handleMediaChange);
+    largeDesktop.addListener(handleMediaChange);
   });
 
 
 
-  // trying out this router hook thing to reset the post limit
-  Router.onBeforeAction(function() {
-    Session.set('limit', loadMoreLimit); // set the infinite scroll limit back to default
-    //$(window).scrollTop(0); // this replaces the auto scroll package
+// Template.ListAuthors.events({
+//   "submit .new-author": function (event) {      
+//     var author = event.target.author.value;
+//     if (author == "") return false; // prevent empty strings
 
-    this.next();
-  });
+//     Meteor.call('addAuthor', author);
+
+//     // Clear form      
+//     event.target.author.value = "";
+
+//     // Prevent default action from form submit
+//     return false;
+//   },
+//   "click .delete": function () {
+//     if (confirm('Really delete ?')) {
+//       Meteor.call('deleteAuthor', this._id);
+//     }
+//   }
+// });
+
+
+// Template.Header.events({
+//   "submit .search-form": function (event) {
+//     var q = event.target.q.value;
+
+//     if (q == "") {
+//       Router.go('/explore/latest');
+//       return false;
+
+//     }
+
+//     //event.target.q.value = "";
+
+
+//     Router.go('/search/' + q);
+
+
+//     // Prevent default action from form submit
+//     return false;
+//   },
+// });
+
+
+// this isn't even used any more but yeah it's for a delete button on Explore
+  // Template.Quotes.events({
+  //   "click .delete-click": function () {
+  //     Meteor.call('deleteQuote', this._id);
+  //   },
+
+
+  //   "click .list-quote": function () {
+  //     Router.go('/quotes/' + this._id);
+  //   } this was commented out in favour of a direct read more link 
+  // });
 
 
 
-} // this marks the end of the client code
+
+} // Client only code end
 
 
 
 
 
-// ---------------- Code for the server only goes below
+/*
+|--------------------------------------------------------------------------
+| Server Only Main Code
+|--------------------------------------------------------------------------
+|
+| This is code that only runs on the server
+|
+|
+*/
+
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
@@ -422,497 +647,26 @@ if (Meteor.isServer) {
       clientIp = forwardedFor[0];
     });
 
-    console.log(Meteor.settings.mailGunUrl);
+    if (!Meteor.settings.mailGunUrl) console.log('Warning: email config not done.');
+    else console.log("Email config address: " + Meteor.settings.mailGunUrl);
 
-/* had to remove due to unstyled accounts for some reason
-  Accounts.config({
-    forbidClientAccountCreation : false  // set this to true to disable signup
-    });
-*/
+    /* had to remove due to unstyled accounts for some reason
+      Accounts.config({
+        forbidClientAccountCreation : false  // set this to true to disable signup
+        });
+    */
 
+    // Make sure some indexes are unique and can't be 2 or more of them
+    Words._ensureIndex({word: 1}, {unique: 1});
+
+    
   });  // end of code to do at startup
 
   // This is a monitoring tool
   //Kadira.connect('wYiFPMyqaBcyKp7QK', '1f136ced-05f9-4e73-a92b-ef609cda56ce');
 
 
-
   // Meteor publish publication functions moved to /server/pulbications.js
-  
 
 
 } // end of the server only code
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Here come our routes which catch and process URLs -----------------
-
-
-
-// First some static pages with About Us and Privacy etc.
-
-
-Router.route('/about', function() {
-  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-  this.layout('ApplicationLayout');
-  Session.set("DocumentTitle", "Qurious About Us?");
-  this.render('Header', {to: 'header'});
-  this.render('AboutText');
-  this.render('Footer', {to: 'footer'});
-});
-
-Router.route('/privacy', function() {
-  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-  this.layout('ApplicationLayout');
-  Session.set("DocumentTitle", "Privacy Policy - Qurious");
-  this.render('Header', {to: 'header'});
-  this.render('PrivacyText');
-  this.render('Footer', {to: 'footer'});
-});
-
-Router.route('/terms', function() {
-  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-  this.layout('ApplicationLayout');
-  Session.set("DocumentTitle", "Terms & Conditions - Qurious");
-  this.render('Header', {to: 'header'});
-  this.render('TermsText');
-  this.render('Footer', {to: 'footer'});
-});
-
-Router.route('/contact', function() {
-  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-  this.layout('ApplicationLayout');
-  Session.set("DocumentTitle", "Contacting Qurious");
-  this.render('Header', {to: 'header'});
-  this.render('ContactText');
-  this.render('Footer', {to: 'footer'});
-});
-
-
-
-// This route is for useraccounts
-AccountsTemplates.configureRoute('signIn', {
-    name: 'signin',
-    path: '/login',
-    template: 'Login',
-    redirect: '/random',
-    yieldTemplates: {
-        Header: {to: 'header'},
-        Footer: {to: 'footer'},
-    }
-});
-
-
-
-
-
-// Now here are the main routes
-
-Router.route('/logout', function() {
-  Meteor.logout();
-  Router.go('/home');
-});
-
-
-// Adding and submitting a new quote
-Router.route('/create', {
-  loadingTemplate: 'Loading',
-
-  waitOn: function () {
-    // return one handle, a function, or an array
-    return Meteor.subscribe('userData');
-  },
-
-  action: function () {
-    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-    this.layout('ApplicationLayout');
-    Session.set("DocumentTitle", "Create a Quote - Qurious");
-    this.render('Header', {to: 'header'});
-    this.render('Create', {
-      data: {
-        isAdmin: function() {
-          if (Meteor.user().admin) return true;
-          else return false;
-        }
-      }
-    });
-
-    this.render('Footer', {to: 'footer'});
-  }
-});
-
-
-
-
-
-
-
-// Quotes sorted by popularity, dogears etc.
-Router.route('/explore', {
-  loadingTemplate: 'Loading',
-
-  waitOn: function () {
-
-  },
-
-  action: function () {
-    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-    this.layout('ApplicationLayout');
-    Session.set("DocumentTitle", "Popular Quotes - Qurious");
-    this.render('Header', {to: 'header'});
-    this.render('Quotes', {
-      data: {
-        quotes: function () {
-          return Quotes.find({}, {sort: {views: -1, upcount: -1}, limit: Session.get('limit') });
-        }
-      }
-    });
-
-    this.render('Footer', {to: 'footer'});
-  }
-});
-
-
-
-
-// Quotes sorted by popularity, dogears etc.
-Router.route('/explore/popular', {
-  loadingTemplate: 'Loading',
-
-  waitOn: function () {
-
-  },
-
-  action: function () {
-    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-    this.layout('ApplicationLayout');
-    Session.set("DocumentTitle", "Popular Quotes - Qurious");
-    this.render('Header', {to: 'header'});
-    this.render('Quotes', {
-      data: {
-        quotes: function () {
-          return Quotes.find({}, {sort: {views: -1, upcount: -1}, limit: Session.get('limit') });
-        }
-      }
-    });
-
-    this.render('Footer', {to: 'footer'});
-  }
-});
-
-
-
-
-Router.route('/explore/latest', {
-  loadingTemplate: 'Loading',
-
-  waitOn: function () {
-
-  },
-
-  action: function () {
-    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-    this.layout('ApplicationLayout');
-    Session.set("DocumentTitle", "Latest Quotes - Qurious");
-
-    this.render('Header', {to: 'header'});
-    this.render('Quotes', {
-      data: {
-        quotes: function () {
-          return Quotes.find( { }, {sort: {createdAt: -1}, limit: Session.get('limit') });
-        }
-      }
-    });
-
-    this.render('Footer', {to: 'footer'});
-  }
-});
-
-
-
-// Here is a nice little route that gives a single quote
-// given a specified _id in the quotes collection as URL param
-Router.route('/quotes/:_quote_slug', {
-  loadingTemplate: 'Loading',
-  waitOn: function () {
-    // return one handle, a function, or an array
-    return Meteor.subscribe('quotesSlug', this.params._quote_slug);
-  },
-    onBeforeAction: function() {
-
-      this.next(); // does this do anything? i don't think so
-  },
-    onAfterAction: function() {
-      // if (Meteor.userId()) currentUserId = Meteor.userId();
-      // Meteor.users.update({_id:currentUserId},{$addToSet:{quotesVisited:this.params._quote_slug}});
-    },
-  action: function () {
-    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-    this.layout('ApplicationLayout');
-    this.render('Header', {to: 'header'});
-    this.render('SingleQuote', {
-      data: function () {
-          var quote = Quotes.findOne({ _id: this.params._quote_slug });
-          if (!quote) {
-            this.render('NotFound');
-          } else {
-            Session.set('sessionQuoteId', this.params._quote_slug);
-            Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?
-
-            // Let's try to get substring some text for the Title Bar
-            // this regular expression is gold (i didn't write it btw)
-            var titleText = quote.quotation.replace(/^(.{50}[^\s]*).*/, "$1");
-
-            Session.set("DocumentTitle", titleText + " - Qurious");
-
-            return quote;
-          }
-        }
-    });
-
-    this.render('Footer', {to: 'footer'});
-  }
-});
-
-// Identical route but handles extra text for SEO (but disregarded)
-// Please keep up to date with previous or figure out how to replicate automatically
-Router.route('/quotes/:_quote_slug/:_extra_text', {
-  /* blah blah blah  probably better look for a wilcard thing */
-});
-
-
-
-
-
-Router.route('/random', {
-  onBeforeAction: function () {
-    Meteor.call('getRandomQuoteId', function (error, result) {
-      var randomId = result;
-      // replaceState keeps the browser from duplicating history
-      Router.go('/quotes/' + randomId, {}, {replaceState:true});
-    });
-
-    this.next()
-  },
-  action: function () {
-    this.render('Header', {to: 'header'});
-
-  },
-});
-
-
-Router.route('/lucky', {
-  onBeforeAction: function () {
-    Meteor.call('getLuckyQuoteId', function (error, result) {
-      var luckyId = result;
-      // replaceState keeps the browser from duplicating history
-      Router.go('/quotes/' + luckyId, {}, {replaceState:true});
-    });
-
-    this.next()
-  },
-  action: function () {
-    this.render('Header', {to: 'header'});
-
-  },
-});
-
-
-
-
-
-Router.route('/users/:_username', {
-  loadingTemplate: 'Loading',
-
-  waitOn: function () {
-
-
-  },
-
-  action: function () {
-    this.layout('ApplicationLayout');
-    Session.set("DocumentTitle","Exploring " + this.params._username + " - Qurious");
-
-
-    var username_to_lookup = this.params._username; //to pass it into the function, someone help with this
-
-    this.render('Header', {to: 'header'});
-    this.render('Quotes', {
-      data: {
-        quotes: function () {
-          return Quotes.find({ username: username_to_lookup }, {sort: {createdAt: -1}, limit: Session.get('limit') });
-        },
-        usernameToShow: function () { return username_to_lookup },
-      }
-    });
-
-    this.render('Footer', {to: 'footer'});
-  }
-});
-
-
-
-
-
-
-
-
-Router.route('/users/:_username/dogears', {
-  loadingTemplate: 'Loading',
-
-  waitOn: function () {
-    // This apparently we need for asyc stuff or something
-    return Meteor.subscribe("userData");
-  },
-
-  onBeforeAction: function () {
-    Session.set("DocumentTitle", this.params._username + " Dogears - Qurious");
-    this.next();
-  },
-
-  action: function () {
-    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-    
-    this.layout('ApplicationLayout');
-    this.render('Header', {to: 'header'});
-    //to pass it into the function, someone help with this
-    var usernameParam = this.params._username;
-    var user = Meteor.users.findOne( { username: this.params._username } );
-
-    console.log(user.liked);
-
-    Meteor.subscribe('quotesInArray', user.liked);
-
-
-    this.render('Quotes', {
-      data: {
-        quotes: function () {
-          return Quotes.find({ _id: { $in: user.liked } },
-            { limit: Session.get('limit') }); //sort: { createdAt: -1 },
-        },
-        usernameToShow: function () { return usernameParam },
-
-      }
-    });
-
-    this.render('Footer', {to: 'footer'});
-  }
-});
-
-
-
-// What we want to do here is search
-Router.route('/search/:_terms', {
-  loadingTemplate: 'Loading',
-
-  waitOn: function () {
-
-
-  },
-
-  action: function () {
-    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-    this.layout('ApplicationLayout');
-    Session.set("DocumentTitle","Quotes with: " + this.params._terms + " - Qurious");
-
-
-    var terms_to_lookup = this.params._terms; // someone explain why we need to do this please
-
-    this.render('Header', {to: 'header'});
-    this.render('Quotes', {
-      data: {
-        quotes: function () {
-          return Quotes.find({ $or: [ { quotation: { '$regex': terms_to_lookup, $options: 'i'} },
-            { attribution: { '$regex': terms_to_lookup, $options: 'i'}} ] },
-            {sort: {views: -1}, limit: Session.get('limit') });
-        },
-        exploreToShow: function () { return terms_to_lookup },
-      }
-    });
-    this.render('Footer', {to: 'footer'});
-  }
-});
-
-
-
-// The front landing page
-Router.route('/home', {
-  action: function () {
-    if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-    this.layout('ApplicationLayout');
-    Session.set("DocumentTitle","Qurious");
-    this.render('Header', {
-      to: 'header',
-      data: {
-        frontPage: true // This boolean data is sent to the Header
-      }
-    });
-
-    // Here we send a quote to the front page if required
-    Meteor.subscribe('quotesPopular', 1);
-
-    this.render('Home', {
-      data: function () {
-        return Quotes.findOne({});
-      }
-    });
-
-    this.render('Footer', {to: 'footer'});
-  }
-});
-
-
-// Just to test the loader
-Router.route('/loading', function() {
-  if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-  this.layout('ApplicationLayout');
-  Session.set("DocumentTitle","Loading - Qurious");
-
-  this.render('Loading');
-});
-
-
-
-
-
-
-// Let's test out an API call for funsies
-Router.route('/api', function () {
-  var req = this.request;
-  var res = this.response;
-  res.end('hello from the server\n');
-}, {where: 'server'});
-
-
-
-
-// This is our catch all for all other unknown things
-// Probably won't be called all that much
-// Especially after we implement qurious.cc/phocks user pages
-Router.route('/(.*)', function() {
-  this.layout('LiteLayout');
-  Session.set("DocumentTitle","404 Qurious");
-  this.render('LiteError');
-});

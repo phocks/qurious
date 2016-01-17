@@ -1438,3 +1438,10 @@ p.quotation {
 .at-form p {
   padding-bottom: 0;
 }
+
+
+@media (max-width: 768px) {
+  .quotePageAnother button {
+    width: 100%;
+  }
+}

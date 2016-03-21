@@ -233,11 +233,11 @@ if (Meteor.isClient) { // only runs on the client
   */
 
   // Enable the "Load more" button
-  Template.Quotes.events({
-    'click .give-me-more': function(evt) {
-      incrementLimit();
-    }
-  });
+  // Template.Quotes.events({
+  //   'click .give-me-more': function(evt) {
+  //     incrementLimit();
+  //   }
+  // });
 
   // So we can customise the login form so much more
   // Requires aldeed:template-extension
@@ -288,44 +288,44 @@ if (Meteor.isClient) { // only runs on the client
 // Events that drive things like clicks etc
 
 
-  Template.SingleQuote.helpers({
-    // determines if user submitted quote
-    isOwner: function () {
-      var quoteId = Session.get("sessionQuoteId");
-      var currentQuote = Quotes.findOne({ _id: quoteId });
+  // Template.SingleQuote.helpers({
+  //   // determines if user submitted quote
+  //   isOwner: function () {
+  //     var quoteId = Session.get("sessionQuoteId");
+  //     var currentQuote = Quotes.findOne({ _id: quoteId });
 
-      if (currentQuote.owner == Meteor.userId()) {
-        console.log("The current user has submitted this quote.")
-        return true;
-      }
-      else return false;
-    },
-    // works out if user has dogeared quote or not
-    dogeared: function () {
-      if (!Meteor.user()) return false; // if not logged in just undogear
-      var quoteId = Session.get("sessionQuoteId");
-      var user = Meteor.users.findOne({_id:Meteor.userId(), liked:{ $ne:quoteId }});
-      if (user) return false;
-      else return true;
-    }
-  });
+  //     if (currentQuote.owner == Meteor.userId()) {
+  //       console.log("The current user has submitted this quote.")
+  //       return true;
+  //     }
+  //     else return false;
+  //   },
+  //   // works out if user has dogeared quote or not
+  //   dogeared: function () {
+  //     if (!Meteor.user()) return false; // if not logged in just undogear
+  //     var quoteId = Session.get("sessionQuoteId");
+  //     var user = Meteor.users.findOne({_id:Meteor.userId(), liked:{ $ne:quoteId }});
+  //     if (user) return false;
+  //     else return true;
+  //   }
+  // });
 
   // Let's finally set up a delete
-  Template.SingleQuote.events({
-    "click .delete-click": function () {
-      if (confirm('Really delete ?')) {
-        Meteor.call('deleteQuote', this._id);
-      }
-    },
+  // Template.SingleQuote.events({
+  //   "click .delete-click": function () {
+  //     if (confirm('Really delete ?')) {
+  //       Meteor.call('deleteQuote', this._id);
+  //     }
+  //   },
 
-    // Put the quotation into the users collection!
-    "click .dogear-click": function () {
-      console.log("Calling function to dogear this quote");
-      Meteor.call('dogearQuote', this._id);
-    },
+  //   // Put the quotation into the users collection!
+  //   "click .dogear-click": function () {
+  //     console.log("Calling function to dogear this quote");
+  //     Meteor.call('dogearQuote', this._id);
+  //   },
 
-    // Remove the quotation into the users collection!
-  });
+  //   // Remove the quotation into the users collection!
+  // });
 
 
   

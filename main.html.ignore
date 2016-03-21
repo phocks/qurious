@@ -16,7 +16,7 @@ Thanks. Josh.
 
 
 <!-- First up we have the iron-router main layout -->
-<template name="ApplicationLayout">
+<!-- <template name="ApplicationLayout">
   <div class="master-container">
     <header>
       {{> yield "header"}}
@@ -28,7 +28,7 @@ Thanks. Josh.
       {{> yield "footer"}}
     </footer>
   </div>
-</template>
+</template> -->
 
 
 

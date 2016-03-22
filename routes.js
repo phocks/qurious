@@ -11,9 +11,6 @@ Router.route('/api', function () {
 
 
 
-
-
-
 /* The root home route landing for qurious.cc/   */
 
 Router.route('/', {
@@ -22,14 +19,14 @@ Router.route('/', {
     return Meteor.subscribe("words");
   },
   action: function () {
-    this.layout('LiteLayout');
+    this.layout('BeliefLayout');
     Session.set("DocumentTitle","Qurious");
     // this.render('LiteHeader', { to: 'header'});
 
     // Here we send a quote to the front page if required
     Meteor.subscribe('quotesLatest', 1);
 
-    this.render('LiteHome', {
+    this.render('BeliefHome', {
       data: { 
         words: function () {
           return Words.find({});
@@ -40,9 +37,6 @@ Router.route('/', {
     this.render('LiteNav', { to: 'nav'});
   }
 });
-
-
-
 
 
 
@@ -217,7 +211,7 @@ Router.route('/about', {
   action: function () {
     this.layout('LiteLayout');
     Session.set("DocumentTitle","About Qurious");
-    this.render('About');
+    this.render('BeliefAbout');
     this.render('LiteNav', { to: 'nav'});
   }
 });

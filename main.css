@@ -54,25 +54,13 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
 
-.master-container {
-  background-color: #171717;
-  min-height: 100vh;
-}
 
-.body-container {
-  background-color: #fdfbf8;
-  /*min-height: 400px*/
-}
+
 
 
 /*	Single quotation master styles 	*/
 
 
-.single-quote-container {
-  
-  
-  
-}
 
 .single-quote {
 	font-family: 'Vollkorn', serif;
@@ -891,7 +879,7 @@ p.contact a:hover {
  .navbar {
   /*border-top: 4px #F58465 solid;*/
   margin-bottom: 0;
-  /*border-bottom: none;*/
+  border: none;
   background-color: #fdfbf8;
 }
 
@@ -969,7 +957,7 @@ p.contact a:hover {
 
 .lite-container.container-fluid {
   padding: 0;
-  padding-bottom: 85px; /* use if fixed bottom button nav */
+  padding-bottom: 65px; /* use if fixed bottom button nav */
 }
 
 /* This goes around all content */
@@ -1030,7 +1018,8 @@ p.contact a:hover {
 
 /* Body where the quote goes */
 .lite-container .body-container {
-
+  background-color: #fdfbf8;
+  /*min-height: 400px*/
 }
 
 .lite-quote {
@@ -1102,7 +1091,7 @@ p.contact a:hover {
 .lite-container .lite-footer {
   text-align: center;
   padding: 0;
-  margin-top: 5px;
+  /*margin-top: 5px;*/
 }
 
 .lite-container .lite-footer img {
@@ -1444,4 +1433,9 @@ p.quotation {
   .quotePageAnother button {
     width: 100%;
   }
+}
+
+.belief-list-quote {
+  background-color: #aaa;
+  min-height: 100vh;
 }

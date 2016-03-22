@@ -1,0 +1,40 @@
+<!-- Here we have the templates for the Belief release -->
+
+<template name="BeliefLayout">
+  <div class="lite-container container-fluid">
+    <header>
+      {{> yield "header"}}
+    </header>
+    <div class="body-container">
+      {{> yield}}
+    </div>
+    <footer>
+      {{> yield "footer"}}
+    </footer>
+    <nav>
+      {{> yield "nav"}}
+    </nav>
+  </div>
+</template>
+
+<template name="BeliefHome">
+  <div class="belief-list-quote">
+    
+  </div>
+</template>
+
+<template name="BeliefAbout">
+<div class="lite-text-content">
+  <div class="container">
+    <h1 class="text-center">What is this?</h1>
+    <p class="lead">Qurious is a website about quotes, words, and ideas. Or at least it will be in the near future. We are still in the process of putting everything together. So sit tight and we'll be up and running before you know it.</p>
+
+    <!-- <p class="lead">If you have an account please <a href="/login">login here</a>, or else to learn more and get early access please enter your details below.</p>
+    <p>{{> LiteFooterSubscribe}}</p>
+    <p class="lead">Developed by Meagre. Email <a href="mailto:jb@meag.re">jb@meag.re</a> for all enquires.</p> -->
+    <p class="text-center"><span class="quo"><i class="fa fa-quote-right"></i></span></p>
+
+  
+  </div>
+</div>
+</template>

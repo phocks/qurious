@@ -14,29 +14,34 @@ Router.route('/api', function () {
 /* The root home route landing for qurious.cc/   */
 
 Router.route('/', {
-  loadingTemplate: 'LiteLoad',
   waitOn: function () {
-    return Meteor.subscribe("words");
+    // return Meteor.subscribe("words");
   },
   action: function () {
-    this.layout('BeliefLayout');
+    // this.layout('Layout');
     Session.set("DocumentTitle","Qurious");
     // this.render('LiteHeader', { to: 'header'});
 
     // Here we send a quote to the front page if required
-    Meteor.subscribe('quotesLatest', 1);
+    // Meteor.subscribe('quotesLatest', 1);
 
-    this.render('BeliefHome', {
-      data: { 
-        words: function () {
-          return Words.find({});
-          }
-        }  
+    this.render('Home', {
+      // data: { 
+      //   words: function () {
+      //     return Words.find({});
+      //     }
+      //   }  
     });
-    this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
+    // this.render('LiteFooter', { to: 'footer'});
+    this.render('Nav', { to: 'nav'});
   }
 });
+
+
+
+
+
+
 
 
 
@@ -50,7 +55,7 @@ Router.route('/quote/:_quote_id', {
     return Meteor.subscribe('quotesSlug', this.params._quote_id);
   },
   action: function () {
-    this.layout('LiteLayout');
+    this.layout('Layout');
     // this.render('LiteHeader', { to: 'header'});
 
     console.log("Current word in session: " + Session.get('currentWord'));
@@ -84,7 +89,7 @@ Router.route('/quote/:_quote_id', {
       }
     });
     this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
+    this.render('Nav', { to: 'nav'});
   },
 });
 
@@ -100,7 +105,7 @@ Router.route('/quote/:_quote_id/edit', {
     return Meteor.subscribe('quotesSlug', this.params._quote_id);
   },
   action: function () {
-    this.layout('LiteLayout');
+    this.layout('Layout');
     // this.render('LiteHeader', { to: 'header'});
 
     console.log("Current word in session: " + Session.get('currentWord'));
@@ -132,7 +137,7 @@ Router.route('/quote/:_quote_id/edit', {
       }
     });
     this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
+    this.render('Nav', { to: 'nav'});
   },
 });
 
@@ -189,10 +194,10 @@ Router.route('/menu', {
     
   },
   action: function () {
-    this.layout('LiteLayout');
+    this.layout('Layout');
     Session.set("DocumentTitle","Qurious");
     this.render('Menu');
-    this.render('LiteNav', { to: 'nav'});
+    this.render('Nav', { to: 'nav'});
   }
 });
 
@@ -209,10 +214,10 @@ Router.route('/about', {
     
   },
   action: function () {
-    this.layout('LiteLayout');
+    this.layout('Layout');
     Session.set("DocumentTitle","About Qurious");
     this.render('BeliefAbout');
-    this.render('LiteNav', { to: 'nav'});
+    this.render('Nav', { to: 'nav'});
   }
 });
 
@@ -238,7 +243,7 @@ Router.route('/word/:_word_text', {
     return Meteor.subscribe("words");
   },
   action: function () {
-    this.layout('LiteLayout');
+    this.layout('Layout');
     // this.render('LiteHeader', { to: 'header'});
 
     var wordText = this.params._word_text; // this has to be a var for some reason to work
@@ -272,7 +277,7 @@ Router.route('/word/:_word_text', {
       }
     });
     this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
+    this.render('Nav', { to: 'nav'});
 
 
     // Due to multiply:iron-router-progress calling actions twice we need this
@@ -306,7 +311,7 @@ Router.route('/admin', {
     return Meteor.subscribe("quotes");
   },
   action: function () {
-    this.layout('LiteLayout');
+    this.layout('Layout');
     
 
     console.log("current user is: " + Meteor.userId());
@@ -329,7 +334,7 @@ Router.route('/admin', {
         }
       });
     this.render('LiteFooter', { to: 'footer'});
-    this.render('LiteNav', { to: 'nav'});
+    this.render('Nav', { to: 'nav'});
   },
 });
 
@@ -344,10 +349,10 @@ Router.route('/login', {
   },
   action: function () {
     if (Meteor.user() ) Router.go('/'); // deny not logged in
-    this.layout('LiteLayout');
+    this.layout('Layout');
     Session.set("DocumentTitle","Qurious Login");
     this.render('Login');
-    this.render('LiteNav', { to: 'nav'});
+    this.render('Nav', { to: 'nav'});
   }
 });
 
@@ -369,9 +374,9 @@ Router.route('/logout', function() {
 
 // Testing the Lite loader
 Router.route('/load', function() {
-  this.layout('LiteLayout');
+  this.layout('Layout');
   Session.set("DocumentTitle","Loading - Qurious");
-  this.render('LiteLoad');
+  this.render('Loading');
 });
 
 
@@ -385,7 +390,7 @@ Router.route('/load', function() {
 // Probably won't be called all that much
 // Especially after we implement qurious.cc/phocks user pages
 Router.route('/(.*)', function() {
-  this.layout('LiteLayout');
+  this.layout('Layout');
   Session.set("DocumentTitle","404 Qurious");
   this.render('LiteError');
 });

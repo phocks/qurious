@@ -101,7 +101,7 @@ if (Meteor.isClient) { // only runs on the client
 
   Router.configure({ // commenting out default due to Lite layout change
     // sets default layout so you don't have to set it in the route
-    // layoutTemplate: 'ApplicationLayout',
+    layoutTemplate: 'Layout',
     // loadingTemplate: "Loading",
     // yieldTemplates: {
     //     Header: {to: 'header'},
@@ -112,6 +112,7 @@ if (Meteor.isClient) { // only runs on the client
     // for the loading up top thing
     progressSpinner: false,
     progressDelay: 100,
+    loadingTemplate: 'Loading',
   });
 
 

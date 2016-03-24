@@ -10,20 +10,13 @@
   probably consider cutting these down to essentials 
   also, there is a way to selectively load fonts via javascript, see in js files
   */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-/*
-@import url(https://fonts.googleapis.com/css?family=Vollkorn:400,400italic);
-Importing Volkorn has been moved to the main.js due to 
-dropcap.js not playing well with CSS @imports
-*/
-
-h1, .h1, h2, .h2, h3, .h3 {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-weight: bold;
+body {
+  background-color: #fdfbf8;
+  font-family: "Montserrat", sans-serif;
 }
+
 
 a, /* this gets rid of the dotty outline in Firefox. */
 a:hover,
@@ -38,12 +31,7 @@ a:focus {
   outline-style: none; }
 
 
-body {
-  font-family: "Open Sans", sans-serif;
-  background-color: #fdfbf8;  /* old background #171717*/
-  /*font-size: 16px;*/ /*change this for base font size*/
-}
-
+/* Handy class that makes an image black and white */
 img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
@@ -52,500 +40,12 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 }
 
 
+/* Bootstrap overrides */
 
-
-
-
-
-
-/*	Single quotation master styles 	*/
-
-
-
-.single-quote {
-	font-family: 'Vollkorn', serif;
-	text-align: left; 
-	min-width: 320px;
-	color: #282828;
-	line-height: 1.5;
-	letter-spacing: 0.2px;
-  padding-top: 90px;
-  padding-bottom: 50px;
-}
-
-
-.single-quote .quotation {
-  margin: auto;
-}
-
-.single-quote .quotation.tiny {
-	font-size: 2em;
-	max-width: 750px;
-
-}
-
-.single-quote .quotation.short {
-	font-size: 2em;
-	max-width: 750px;
-
-}
-
-.single-quote .quotation.medium {
-	font-size: 2em;
-	max-width: 750px;
-
-}
-
-.single-quote .quotation.long {
-	font-size: 2em;
-	max-width: 750px;
-
-}
-
-.single-quote .quotation.gigantic {
-	font-size: 2em;
-	max-width: 750px;
-}
-
-.single-quote .attribution {
-  font-family: 'Vollkorn', serif;
-  font-size: 1.2em;
-  margin-top: 2em;
-  margin-bottom: 1em;
-  color: #f48365;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-
-@media (max-width: 970px) {
-
-/*  Single quotation tablet-device styles */
-
-.single-quote .quotation.tiny {
-  font-size: 2em;
-  max-width: 750px;
-
-}
-
-.single-quote .quotation.short {
-  font-size: 2em;
-  max-width: 750px;
-
-}
-
-.single-quote .quotation.medium {
-  font-size: 2em;
-  max-width: 750px;
-
-}
-
-.single-quote .quotation.long {
-  font-size: 2em;
-  max-width: 750px;
-
-}
-
- .single-quote .quotation.gigantic {
-    font-size: 2em;
-    max-width: 750px;
-  }
-}
-
-@media (max-width: 767px) {
-
-/*  Single quotation handheld-device styles */
-
-  .single-quote .quotation {
-  }
-
-  .single-quote .quotation.tiny {
-    font-size: 1.5em;
-    letter-spacing: none;
-    max-width: 290px;
-    margin: 0 auto;
-  }
-
-  .single-quote .quotation.short {
-    font-size: 1.5em;
-    letter-spacing: none;
-    max-width: 290px;
-    margin: 0 auto;
-  }
-
-  .single-quote .quotation.medium {
-    font-size: 1.5em;
-    letter-spacing: none;
-    max-width: 290px;
-    margin: 0 auto;
-  }
-
-  .single-quote .quotation.long {
-    font-size: 1.5em;
-    letter-spacing: none;
-    max-width: 290px;
-    margin: 0 auto;
-  }
-
-  .single-quote .quotation.gigantic {
-    font-size: 1.5em;
-    letter-spacing: none;
-    max-width: 290px;
-    margin: 0 auto;
-  }
-
-  .single-quote .attribution {
-    font-size: 1em;
-  }
-
-}
-
-/* We are going to do some themes here for the quotations */
-
-.single-quote.default {
-  background-color: #ddd;
-  padding-top: 170px;
-  padding-bottom: 150px;
-}
-
-.single-quote.default .attribution {
-
-  color: #f48365;
-
-}
-
-.meta {
-  padding-top: 10px;
-  position: relative;
-  top: 80px;
-
-}
-
-.meta .breadcrumb {
-  display: inline-block;
-  background-color: #5BB2B5;
-}
-
-.quote-info {
+.navbar-default {
   background-color: #fdfbf8;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  color: white;
 }
 
-/* Quotation Info Bar */
-
-.info-bar {
-  background-color: #5ab2b5;
-  max-width: 560px;
-  height: 60px;
-  margin: 0 auto;
-}
-
-.info-bar .dogears {
-  height: 20px;
-  margin-left: 22px;
-  margin-top: 8px;
-}
-
-.info-bar .views {
-  height: 15px;
-  margin-top: 8px;
-  margin-left: 17px;
-}
-
-img.dogear-button {
-  height: 28px;
-  float: right;
-  margin-right: 20px;
-  margin-top: 16px;
-}
-
-img.dogear-remove {
-	height: 28px;
-	float: right;
-	margin-right: 20px;
-  	margin-top: 16px;
-  	cursor: pointer;
-}
-
-img.quote-trash {
-	height: 26px;
-	float: right;
-	margin-right: 20px;
-	margin-top: 17px;
-	cursor: pointer;
-}
-
-.quote-info .dogear-button {  
-  cursor: pointer;   
-}
-
-.quote-info .digit {
-  font-size: 0.9em;
-  font-weight: 700;
-}
-
-.dogears-num {
-  position: relative;
-  left: 12px;
-  top: 5px;
-  text-align: left;
-}
-
-.views-num {
-  position: relative;
-  left: 8px;
-  top: 4px;
-  text-align: left;
-
-}
-
-@media (max-width: 767px) {
-
-/*  Info Bar handheld-device styles */
-
-.info-bar {
-    max-width: 280px;
-  }
-
-}
-
-
-
-
-@media (max-width: 970px) {
-
-/*	Single quotation handheld-device styles */
-
- .single-quote .quotation.gigantic {
-    font-size: 2em;
-    max-width: 750px;
-  }
-
-}
-
- 
-
-
-@media (max-width: 767px) {
-
-/*	Single quotation handheld-device styles */
-
-  .single-quote .quotation {
-    font-size: 1.5em;
-  }
-
-  .single-quote .quotation.tiny {
-    font-size: 1.5em;
-  }
-
-  .single-quote .quotation.short {
-    font-size: 1.5em;
-  }
-
-  .single-quote .quotation.medium {
-    font-size: 1.5em;
-  }
-
-  .single-quote .quotation.long {
-    font-size: 1.5em;
-  }
-
-  .single-quote .quotation.gigantic {
-    font-size: 1.5em;
-    max-width: 420px;
-  }
-
-  .single-quote .attribution {
-    font-size: 1em;
-  }
-
-  .info-bar {
-    max-width: 280px;
-  }
-}
-
-
-
-
-
-/* holds the logo etc */
-.front-content-row { 
-  padding-top: 150px;
-  padding-bottom: 150px;
-  text-align: center;
-}
-
-/* Landscape phone to portrait tablet */
-@media (max-width: 767px) {
-  .homepage-title {
-    /*padding-top: 10px;*/
-  }
-
-  .homepage-title h1 {
-    font-size: 70px;
-  }
-
-  .homepage-title h1 img {
-    width: 280px;
-  }
-
-  /*.homepage-title .subtitle {
-    font-size: 180%;
-    top:20px;
-    margin-bottom: 40px;
-  }*/
-}
-
-
-
-/* -------------------------------- Homescreen About Section ------------*/
-
-.home-about-row {
-  background-color: #5BB2B5;
-  padding-top: 80px;
-  padding-bottom: 70px;
-}
-
-.home-about {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.home-about-text {
-  font-family: 'Vollkorn', serif;
-  font-size: 2em;
-  color: white;
-  text-align: left;
-  letter-spacing: 1px;
-}
-
-.home-about-readmore {
-  font-family: 'Vollkorn', serif;
-  font-size: 1.5em;
-  color: #282828;
-  text-align: left;
-  letter-spacing: 1px;
-  padding-top: 20px;
-}
-
-.home-about-readmore a{
-  color: #282828;
-}
-
-.home-about-readmore a:hover{
-  text-decoration: none;
-  color: #282828;
-}
-
-.home-about-readmore .icon{
-position: relative;
-  top: 2px;
-}
-
-.about-logo {
-  text-align: center;
-}
-
-
-.about-logo img {
-  width: 200px;
-  overflow: hidden;
-  /*margin-right: 40px;*/
-  /*float: left;*/
-  padding-bottom: 40px;
-}
-
-
-
-@media (max-width: 767px) {
-.about-logo img {
-    width: 150px;
-  }
-
-  .home-about-text {
-    font-size: 1.5em;
-  }
-
-  .home-about-readmore {
-    font-size: 1.3em
-  }
-}
-
-/*-------------------------Login Page-----------------------*/
-
-
-
-/* -------------------------------- Create Page ------------*/
-
-.create-block {
-  margin-bottom: 30px;
-}
-
-label {
-  font-weight: normal;
-  font-size: 120%;
-  color: #282828;
-  letter-spacing: 0.5px;
-}
-
-.form-control {
-  /*border-radius: 2px;*/
-  height: inherit;
-  border-width: 2px;
-  /*color: #282828;
-  letter-spacing: 0.75px;
-  margin-bottom: 30px;*/
-  
-  
-}
-
-.form-control:focus {
-	border-color: #787878;
-	box-shadow: none;
-}
-
-.submissionText {
-	font-size: 95%;
-	color: #999;
-	letter-spacing: 1px;
-	line-height: 22px;
-	text-align: center;
-	margin-bottom: 30px;
-}
-
-.submissionText a {
-	color: #f48365;
-}
-
-
-
-
-
-/*  Explore List Quote Styles   */
-
-.explore-lead {
-  margin-top: 100px;
-  padding-bottom: 40px;
-  border-bottom: #999 solid 1px;
-}
-
-.explore-lead a {
-  color: #F58465;
-  font-style: italic;
-}
-
-.list-quote {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #999;
-  /*cursor: pointer; */
-  padding-top: 70px;
-  padding-bottom: 50px;
-
-}
 
 /* use this eventually to do things with alternating quotes perhaps
 .list-quote:nth-child(odd) {
@@ -553,370 +53,7 @@ label {
 }
 */
 
-.list-quote .quotation {
-  /*white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
-*/
-  /*overflow : hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
 
-  -o-text-overflow: ellipsis;
-  -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');*/
-
-  font-family: 'Vollkorn', serif;
-  letter-spacing: 0.2px;
-  font-weight: 400;
-  font-size: 2em;
-  line-height: 1.5;
-  margin-bottom: 20px;
-
-  /*line-height: 1.4em;
-  max-height: 2.8em;
-  position: relative;*/
-}
-
-
-.list-quote .attribution {
-  font-family: 'Vollkorn', serif;
-  text-transform: uppercase;
-  color: #f48365;
-  letter-spacing: 2px;
-  font-size: 1.2em;
-  padding-top: 30px;
-}
-
-.list-quote .contrib {
-  margin-bottom: 50px;
-  color: #999;
-  font-size: 1em;
-}
-
-.list-quote .contrib a {
-  color: #F58465;
-  font-style: italic;
-  letter-spacing: 0.5px;
-}
-
-.list-quote .contrib a:hover {
-	text-decoration: none;
-}
-
-.list-quote .read-more {
-  color: #999;
-  font-size: 1em;
-  padding-top: 30px;
-  letter-spacing: 0.5px;
-}
-
-.list-quote .time-stamp {
-  color: #999;
-  font-size: 1em;
-  letter-spacing: 0.5px;
-}
-
-
-.list-quote .read-more .icon {
-  position: relative;
-  top: 1px;
-}
-
-.list-quote .read-more a {
-  color: #999;
-}
-
-.read-more a:hover {
-  color: #999;
-  text-decoration: none;
-}
-
-.load-more {
-	width: 100%;
-}
-
-.give-me-more {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin-top: 20px;
-  cursor: pointer;
-  background-color: #5BB2B5;
-}
-
-/*  -------------------- Explore List Quote Styles handheld-device --------------------   */
-
-
-@media (max-width: 767px) {
-  
-  .list-quote .quotation {
-    font-size: 1.5em;
-    letter-spacing: none;
-  }
-  .list-quote .attribution {
-    font-size: 1em;
-  }
-
-  .list-quote .read-more {
-    font-size: 1em;
-  }
-}
-
-
-/* This was used to get a full screen effect */
-.vertical-container {
-  
-
-  min-height: calc(100vh - 54px);
-  display: -webkit-flex;
-  display:         flex;
-  display: -ms-flexbox;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-
-
-
-  overflow: hidden;
-  justify-content: center;
-  flex-direction: column;
-  -ms-flex-direction: row;
-}
-
-
-
-
-
-
-/* -------------------- Text Content Pages - About / Terms / Privacy -----------*/
-
-
-.text-content p.lead {
-	color: #282828;
-	font-size: 150%;
-	letter-spacing: 1px;
-	line-height: 150%;
-	margin-bottom: 20px;
-}
-
-.text-content p.body {
-  font-weight: normal;
-  font-size: 105%;
-  line-height: 150%;
-  letter-spacing: 0.5px;
-}
-
-.text-content li {
-  font-weight: normal;
-  font-size: 105%;
-  line-height: 170%;
-  letter-spacing: 0.5px;
-}
-
-
-.text-content p.contact {
-	font-size: 130%;
-	letter-spacing: 0.5px;
-	margin-bottom: 20px;
-	line-height: 140%
-}
-
-p.contact a {
-	color: #282828;
-	text-decoration: underline;
-	letter-spacing: 1px;
-}
-
-p.contact a:hover {
-	color: #999;
-}
-
-
-
-.text-content h1 {
-  margin-bottom: 30px;
-}
-
-.text-content h3 {
-	font-size: 150%;
-	color: #999;
-	letter-spacing: 1px;
-	margin-top: 45px;
-	margin-bottom: 10px;
-	text-transform: uppercase;
-}
-
-.text-content h4 {
-	letter-spacing: 0.5px;
-	margin-top: 1.5em;
-}
-
-
-.text-content {
-  padding-top: 100px;
-  padding-bottom: 150px;
-}
-
-.text-content .content-column {
-  /*border-left: 1px solid #999;*/
-}
-
-.text-content .content-column h1 {
-  margin-top: 0;
-}
-
-
-@media (max-width: 767px) {
-  .text-content .content-column {
-    border-left: none;
-  }
-}
-
-.text-page-navigation li {
-  
-}
-
-
-
-
-.new-quote {
-  margin-top: 50px;
-}
-
-
-
-/* -------------------- Footer -----------*/
-
-
-
-.footer {
-  color: #999;
-  background-color: #282828;
-  padding-top:50px;
-  padding-bottom: 50px;
-  letter-spacing: 0.5px;
-  line-height: 24px;
-  font-size: 0.9em;
-}
-
-
-.footer a {
-  color: #999;
-}
-
-.footer a:hover {
-	text-decoration: none;
-	color: #C1C3C6;
-}
-
-
-.footer-title {
-  font-style: italic;
-  font-size: 130%;
-  display: relative;
-  top: -4px;
-  margin-bottom: .6em;
-
-}
-
-
-@media (max-width: 767px) {
-  .footer {
-    text-align: left;
-  }
-
-  .footer .footer-title img {
-    width: 40px;
-  }
-}
-
-.post-footer {
-  background-color: #171717;
-  color: #444;
-}
-
-.post-footer a {
-  color: #444;
-}
-
-.post-footer h5 {
-  text-align: right;
-}
-
-@media (max-width: 767px) {
-  .post-footer {
-    margin-right: 20px;
-  }
-}
-
-
-
-
-
-.btn.create {
-  width: 100%;
-}
-
-
-
-/*******************************************
-     Some navigation styles
-*******************************************/
-
-
-
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-  color: #fff;
-  background: #F58465;
- }
-
- .navbar {
-  /*border-top: 4px #F58465 solid;*/
-  margin-bottom: 0;
-  border: none;
-  background-color: #fdfbf8;
-}
-
-
-.navbar-brand img {
-  height: 34px; 
-  position: relative;
-  top: -6px;
-}
-
-/*#searchclear {
-  position: relative;
-  top: 8px;
-  left: -60px;
-  height: 14px;
-  margin: auto;
-  font-size: 14px;
-  cursor: pointer;
-  color: #ccc;
-  z-index: 100;
-}*/
-
-
-
-
-.load-more {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-
-/* Disabled because it was messing with the lading bar
-.loading {
-  margin-top: 100px;
-  margin-bottom: 100px;
-  text-align: center;
-}*/
 
 
 
@@ -948,7 +85,7 @@ p.contact a:hover {
 
 .lite-container .container {
   /* hacky way of restricting width. do better later */
-  max-width: 720px;
+  /*max-width: 720px;*/
 }
 
 .lite-container hr {
@@ -962,7 +99,7 @@ p.contact a:hover {
 
 /* This goes around all content */
 .lite-container {
-  font-family: Montserrat, sans-serif;
+  
   min-height: 100vh;
   color: #787878;
 }
@@ -1098,24 +235,7 @@ p.contact a:hover {
   width: 32px;
 }
 
-.lite-container .navbar {
-  min-height: inherit;
-}
 
-.lite-container .lite-nav {
-  /*text-align: center;*/
-  padding: 16px 0 16px;
-  font-size: 1.2em;
-  color: #999;
-}
-
-.lite-container .lite-nav a {
-  color: gray;
-}
-
-.lite-container .lite-nav img {
-  height: 32px;
-}
 
 
 
@@ -1224,44 +344,9 @@ ul.menu-group a:hover {
 
 
 
-/*
-|--------------------------------------------------------------------------
-| Media Queries Main
-|--------------------------------------------------------------------------
-|
-| Main media queries go after here.
-|
-|
-*/
 
 
-/* Extra small devices (phones, less than 768px) */
-/* No media query since this is the default in Bootstrap */
 
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .lite-quote {
-    font-size: 2.2em;
-  }
-
-  ul.menu-group {
-    font-size: 64px;
-  }
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .lite-quote {
-    font-size: 2.4em;
-  }
-}
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  .lite-quote {
-    font-size: 2.6em;
-  }
-}
 
 
 
@@ -1435,7 +520,82 @@ p.quotation {
   }
 }
 
-.belief-list-quote {
-  background-color: #aaa;
-  min-height: 100vh;
+
+
+/* 
+
+Belief release CSS mainly from here 
+
+Keep it clean
+
+*/
+
+.full-container {
+  padding: 0;
+}
+
+.quote-box {
+  background-color: antiquewhite;
+}
+
+/* Bottom nav */
+
+.navbar {
+  min-height: inherit;
+}
+
+.nav {
+  /*text-align: center;*/
+  padding: 16px 0 16px;
+  font-size: 1.2em;
+  color: #999;
+}
+
+.nav a {
+  color: gray;
+}
+
+.nav img {
+  height: 32px;
+}
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Media Queries Main
+|--------------------------------------------------------------------------
+|
+| Main media queries go after here.
+|
+*/
+
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .lite-quote {
+    font-size: 2.2em;
+  }
+
+  ul.menu-group {
+    font-size: 64px;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .lite-quote {
+    font-size: 2.4em;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .lite-quote {
+    font-size: 2.6em;
+  }
 }

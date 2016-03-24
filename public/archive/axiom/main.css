@@ -1,0 +1,1441 @@
+/*
+|--------------------------------------------------------------------------
+| Main Qurious CSS Styles
+|--------------------------------------------------------------------------
+*/
+
+
+/*  
+  some fonts. these need to be up top
+  probably consider cutting these down to essentials 
+  also, there is a way to selectively load fonts via javascript, see in js files
+  */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic);
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+/*
+@import url(https://fonts.googleapis.com/css?family=Vollkorn:400,400italic);
+Importing Volkorn has been moved to the main.js due to 
+dropcap.js not playing well with CSS @imports
+*/
+
+h1, .h1, h2, .h2, h3, .h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+a, /* this gets rid of the dotty outline in Firefox. */
+a:hover,
+a:focus {
+  outline: none;
+}
+
+
+/* removes outline for Bootstrap Buttons */
+.btn:focus, .btn:active:focus, .btn.active:focus { 
+  outline: none !important; 
+  outline-style: none; }
+
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background-color: #fdfbf8;  /* old background #171717*/
+  /*font-size: 16px;*/ /*change this for base font size*/
+}
+
+img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
+
+
+.btn {
+  border-width: 2px;
+}
+
+
+
+
+
+
+
+
+/*	Single quotation master styles 	*/
+
+
+
+.single-quote {
+	font-family: 'Vollkorn', serif;
+	text-align: left; 
+	min-width: 320px;
+	color: #282828;
+	line-height: 1.5;
+	letter-spacing: 0.2px;
+  padding-top: 90px;
+  padding-bottom: 50px;
+}
+
+
+.single-quote .quotation {
+  margin: auto;
+}
+
+.single-quote .quotation.tiny {
+	font-size: 2em;
+	max-width: 750px;
+
+}
+
+.single-quote .quotation.short {
+	font-size: 2em;
+	max-width: 750px;
+
+}
+
+.single-quote .quotation.medium {
+	font-size: 2em;
+	max-width: 750px;
+
+}
+
+.single-quote .quotation.long {
+	font-size: 2em;
+	max-width: 750px;
+
+}
+
+.single-quote .quotation.gigantic {
+	font-size: 2em;
+	max-width: 750px;
+}
+
+.single-quote .attribution {
+  font-family: 'Vollkorn', serif;
+  font-size: 1.2em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  color: #f48365;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+
+@media (max-width: 970px) {
+
+/*  Single quotation tablet-device styles */
+
+.single-quote .quotation.tiny {
+  font-size: 2em;
+  max-width: 750px;
+
+}
+
+.single-quote .quotation.short {
+  font-size: 2em;
+  max-width: 750px;
+
+}
+
+.single-quote .quotation.medium {
+  font-size: 2em;
+  max-width: 750px;
+
+}
+
+.single-quote .quotation.long {
+  font-size: 2em;
+  max-width: 750px;
+
+}
+
+ .single-quote .quotation.gigantic {
+    font-size: 2em;
+    max-width: 750px;
+  }
+}
+
+@media (max-width: 767px) {
+
+/*  Single quotation handheld-device styles */
+
+  .single-quote .quotation {
+  }
+
+  .single-quote .quotation.tiny {
+    font-size: 1.5em;
+    letter-spacing: none;
+    max-width: 290px;
+    margin: 0 auto;
+  }
+
+  .single-quote .quotation.short {
+    font-size: 1.5em;
+    letter-spacing: none;
+    max-width: 290px;
+    margin: 0 auto;
+  }
+
+  .single-quote .quotation.medium {
+    font-size: 1.5em;
+    letter-spacing: none;
+    max-width: 290px;
+    margin: 0 auto;
+  }
+
+  .single-quote .quotation.long {
+    font-size: 1.5em;
+    letter-spacing: none;
+    max-width: 290px;
+    margin: 0 auto;
+  }
+
+  .single-quote .quotation.gigantic {
+    font-size: 1.5em;
+    letter-spacing: none;
+    max-width: 290px;
+    margin: 0 auto;
+  }
+
+  .single-quote .attribution {
+    font-size: 1em;
+  }
+
+}
+
+/* We are going to do some themes here for the quotations */
+
+.single-quote.default {
+  background-color: #ddd;
+  padding-top: 170px;
+  padding-bottom: 150px;
+}
+
+.single-quote.default .attribution {
+
+  color: #f48365;
+
+}
+
+.meta {
+  padding-top: 10px;
+  position: relative;
+  top: 80px;
+
+}
+
+.meta .breadcrumb {
+  display: inline-block;
+  background-color: #5BB2B5;
+}
+
+.quote-info {
+  background-color: #fdfbf8;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: white;
+}
+
+/* Quotation Info Bar */
+
+.info-bar {
+  background-color: #5ab2b5;
+  max-width: 560px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.info-bar .dogears {
+  height: 20px;
+  margin-left: 22px;
+  margin-top: 8px;
+}
+
+.info-bar .views {
+  height: 15px;
+  margin-top: 8px;
+  margin-left: 17px;
+}
+
+img.dogear-button {
+  height: 28px;
+  float: right;
+  margin-right: 20px;
+  margin-top: 16px;
+}
+
+img.dogear-remove {
+	height: 28px;
+	float: right;
+	margin-right: 20px;
+  	margin-top: 16px;
+  	cursor: pointer;
+}
+
+img.quote-trash {
+	height: 26px;
+	float: right;
+	margin-right: 20px;
+	margin-top: 17px;
+	cursor: pointer;
+}
+
+.quote-info .dogear-button {  
+  cursor: pointer;   
+}
+
+.quote-info .digit {
+  font-size: 0.9em;
+  font-weight: 700;
+}
+
+.dogears-num {
+  position: relative;
+  left: 12px;
+  top: 5px;
+  text-align: left;
+}
+
+.views-num {
+  position: relative;
+  left: 8px;
+  top: 4px;
+  text-align: left;
+
+}
+
+@media (max-width: 767px) {
+
+/*  Info Bar handheld-device styles */
+
+.info-bar {
+    max-width: 280px;
+  }
+
+}
+
+
+
+
+@media (max-width: 970px) {
+
+/*	Single quotation handheld-device styles */
+
+ .single-quote .quotation.gigantic {
+    font-size: 2em;
+    max-width: 750px;
+  }
+
+}
+
+ 
+
+
+@media (max-width: 767px) {
+
+/*	Single quotation handheld-device styles */
+
+  .single-quote .quotation {
+    font-size: 1.5em;
+  }
+
+  .single-quote .quotation.tiny {
+    font-size: 1.5em;
+  }
+
+  .single-quote .quotation.short {
+    font-size: 1.5em;
+  }
+
+  .single-quote .quotation.medium {
+    font-size: 1.5em;
+  }
+
+  .single-quote .quotation.long {
+    font-size: 1.5em;
+  }
+
+  .single-quote .quotation.gigantic {
+    font-size: 1.5em;
+    max-width: 420px;
+  }
+
+  .single-quote .attribution {
+    font-size: 1em;
+  }
+
+  .info-bar {
+    max-width: 280px;
+  }
+}
+
+
+
+
+
+/* holds the logo etc */
+.front-content-row { 
+  padding-top: 150px;
+  padding-bottom: 150px;
+  text-align: center;
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+  .homepage-title {
+    /*padding-top: 10px;*/
+  }
+
+  .homepage-title h1 {
+    font-size: 70px;
+  }
+
+  .homepage-title h1 img {
+    width: 280px;
+  }
+
+  /*.homepage-title .subtitle {
+    font-size: 180%;
+    top:20px;
+    margin-bottom: 40px;
+  }*/
+}
+
+
+
+/* -------------------------------- Homescreen About Section ------------*/
+
+.home-about-row {
+  background-color: #5BB2B5;
+  padding-top: 80px;
+  padding-bottom: 70px;
+}
+
+.home-about {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.home-about-text {
+  font-family: 'Vollkorn', serif;
+  font-size: 2em;
+  color: white;
+  text-align: left;
+  letter-spacing: 1px;
+}
+
+.home-about-readmore {
+  font-family: 'Vollkorn', serif;
+  font-size: 1.5em;
+  color: #282828;
+  text-align: left;
+  letter-spacing: 1px;
+  padding-top: 20px;
+}
+
+.home-about-readmore a{
+  color: #282828;
+}
+
+.home-about-readmore a:hover{
+  text-decoration: none;
+  color: #282828;
+}
+
+.home-about-readmore .icon{
+position: relative;
+  top: 2px;
+}
+
+.about-logo {
+  text-align: center;
+}
+
+
+.about-logo img {
+  width: 200px;
+  overflow: hidden;
+  /*margin-right: 40px;*/
+  /*float: left;*/
+  padding-bottom: 40px;
+}
+
+
+
+@media (max-width: 767px) {
+.about-logo img {
+    width: 150px;
+  }
+
+  .home-about-text {
+    font-size: 1.5em;
+  }
+
+  .home-about-readmore {
+    font-size: 1.3em
+  }
+}
+
+/*-------------------------Login Page-----------------------*/
+
+
+
+/* -------------------------------- Create Page ------------*/
+
+.create-block {
+  margin-bottom: 30px;
+}
+
+label {
+  font-weight: normal;
+  font-size: 120%;
+  color: #282828;
+  letter-spacing: 0.5px;
+}
+
+.form-control {
+  /*border-radius: 2px;*/
+  height: inherit;
+  border-width: 2px;
+  /*color: #282828;
+  letter-spacing: 0.75px;
+  margin-bottom: 30px;*/
+  
+  
+}
+
+.form-control:focus {
+	border-color: #787878;
+	box-shadow: none;
+}
+
+.submissionText {
+	font-size: 95%;
+	color: #999;
+	letter-spacing: 1px;
+	line-height: 22px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.submissionText a {
+	color: #f48365;
+}
+
+
+
+
+
+/*  Explore List Quote Styles   */
+
+.explore-lead {
+  margin-top: 100px;
+  padding-bottom: 40px;
+  border-bottom: #999 solid 1px;
+}
+
+.explore-lead a {
+  color: #F58465;
+  font-style: italic;
+}
+
+.list-quote {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #999;
+  /*cursor: pointer; */
+  padding-top: 70px;
+  padding-bottom: 50px;
+
+}
+
+/* use this eventually to do things with alternating quotes perhaps
+.list-quote:nth-child(odd) {
+  background-color:#eee;
+}
+*/
+
+.list-quote .quotation {
+  /*white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');
+*/
+  /*overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  -o-text-overflow: ellipsis;
+  -moz-binding: url('assets/xml/ellipsis.xml#ellipsis');*/
+
+  font-family: 'Vollkorn', serif;
+  letter-spacing: 0.2px;
+  font-weight: 400;
+  font-size: 2em;
+  line-height: 1.5;
+  margin-bottom: 20px;
+
+  /*line-height: 1.4em;
+  max-height: 2.8em;
+  position: relative;*/
+}
+
+
+.list-quote .attribution {
+  font-family: 'Vollkorn', serif;
+  text-transform: uppercase;
+  color: #f48365;
+  letter-spacing: 2px;
+  font-size: 1.2em;
+  padding-top: 30px;
+}
+
+.list-quote .contrib {
+  margin-bottom: 50px;
+  color: #999;
+  font-size: 1em;
+}
+
+.list-quote .contrib a {
+  color: #F58465;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+.list-quote .contrib a:hover {
+	text-decoration: none;
+}
+
+.list-quote .read-more {
+  color: #999;
+  font-size: 1em;
+  padding-top: 30px;
+  letter-spacing: 0.5px;
+}
+
+.list-quote .time-stamp {
+  color: #999;
+  font-size: 1em;
+  letter-spacing: 0.5px;
+}
+
+
+.list-quote .read-more .icon {
+  position: relative;
+  top: 1px;
+}
+
+.list-quote .read-more a {
+  color: #999;
+}
+
+.read-more a:hover {
+  color: #999;
+  text-decoration: none;
+}
+
+.load-more {
+	width: 100%;
+}
+
+.give-me-more {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: #5BB2B5;
+}
+
+/*  -------------------- Explore List Quote Styles handheld-device --------------------   */
+
+
+@media (max-width: 767px) {
+  
+  .list-quote .quotation {
+    font-size: 1.5em;
+    letter-spacing: none;
+  }
+  .list-quote .attribution {
+    font-size: 1em;
+  }
+
+  .list-quote .read-more {
+    font-size: 1em;
+  }
+}
+
+
+/* This was used to get a full screen effect */
+.vertical-container {
+  
+
+  min-height: calc(100vh - 54px);
+  display: -webkit-flex;
+  display:         flex;
+  display: -ms-flexbox;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+
+
+
+  overflow: hidden;
+  justify-content: center;
+  flex-direction: column;
+  -ms-flex-direction: row;
+}
+
+
+
+
+
+
+/* -------------------- Text Content Pages - About / Terms / Privacy -----------*/
+
+
+.text-content p.lead {
+	color: #282828;
+	font-size: 150%;
+	letter-spacing: 1px;
+	line-height: 150%;
+	margin-bottom: 20px;
+}
+
+.text-content p.body {
+  font-weight: normal;
+  font-size: 105%;
+  line-height: 150%;
+  letter-spacing: 0.5px;
+}
+
+.text-content li {
+  font-weight: normal;
+  font-size: 105%;
+  line-height: 170%;
+  letter-spacing: 0.5px;
+}
+
+
+.text-content p.contact {
+	font-size: 130%;
+	letter-spacing: 0.5px;
+	margin-bottom: 20px;
+	line-height: 140%
+}
+
+p.contact a {
+	color: #282828;
+	text-decoration: underline;
+	letter-spacing: 1px;
+}
+
+p.contact a:hover {
+	color: #999;
+}
+
+
+
+.text-content h1 {
+  margin-bottom: 30px;
+}
+
+.text-content h3 {
+	font-size: 150%;
+	color: #999;
+	letter-spacing: 1px;
+	margin-top: 45px;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+}
+
+.text-content h4 {
+	letter-spacing: 0.5px;
+	margin-top: 1.5em;
+}
+
+
+.text-content {
+  padding-top: 100px;
+  padding-bottom: 150px;
+}
+
+.text-content .content-column {
+  /*border-left: 1px solid #999;*/
+}
+
+.text-content .content-column h1 {
+  margin-top: 0;
+}
+
+
+@media (max-width: 767px) {
+  .text-content .content-column {
+    border-left: none;
+  }
+}
+
+.text-page-navigation li {
+  
+}
+
+
+
+
+.new-quote {
+  margin-top: 50px;
+}
+
+
+
+/* -------------------- Footer -----------*/
+
+
+
+.footer {
+  color: #999;
+  background-color: #282828;
+  padding-top:50px;
+  padding-bottom: 50px;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+  font-size: 0.9em;
+}
+
+
+.footer a {
+  color: #999;
+}
+
+.footer a:hover {
+	text-decoration: none;
+	color: #C1C3C6;
+}
+
+
+.footer-title {
+  font-style: italic;
+  font-size: 130%;
+  display: relative;
+  top: -4px;
+  margin-bottom: .6em;
+
+}
+
+
+@media (max-width: 767px) {
+  .footer {
+    text-align: left;
+  }
+
+  .footer .footer-title img {
+    width: 40px;
+  }
+}
+
+.post-footer {
+  background-color: #171717;
+  color: #444;
+}
+
+.post-footer a {
+  color: #444;
+}
+
+.post-footer h5 {
+  text-align: right;
+}
+
+@media (max-width: 767px) {
+  .post-footer {
+    margin-right: 20px;
+  }
+}
+
+
+
+
+
+.btn.create {
+  width: 100%;
+}
+
+
+
+/*******************************************
+     Some navigation styles
+*******************************************/
+
+
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #fff;
+  background: #F58465;
+ }
+
+ .navbar {
+  /*border-top: 4px #F58465 solid;*/
+  margin-bottom: 0;
+  border: none;
+  background-color: #fdfbf8;
+}
+
+
+.navbar-brand img {
+  height: 34px; 
+  position: relative;
+  top: -6px;
+}
+
+/*#searchclear {
+  position: relative;
+  top: 8px;
+  left: -60px;
+  height: 14px;
+  margin: auto;
+  font-size: 14px;
+  cursor: pointer;
+  color: #ccc;
+  z-index: 100;
+}*/
+
+
+
+
+.load-more {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+/* Disabled because it was messing with the lading bar
+.loading {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  text-align: center;
+}*/
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Qurious Lite Styles
+|--------------------------------------------------------------------------
+|
+| Getting Qurious ready for public consumption led us to do up a 'lite'
+| version of the web app. We are currently now integrating the other
+| functionality into the app and getting it all working again.
+|
+|
+*/
+
+
+
+/* Master styles whole page */
+.lite-container p {
+  margin: 5px 0;
+  padding-bottom: 1em;
+}
+
+.lite-container .top-spacing {
+  min-height: 7vh;
+}
+
+.lite-container .container {
+  /* hacky way of restricting width. do better later */
+  max-width: 720px;
+}
+
+.lite-container hr {
+  margin: 0;
+}
+
+.lite-container.container-fluid {
+  padding: 0;
+  padding-bottom: 65px; /* use if fixed bottom button nav */
+}
+
+/* This goes around all content */
+.lite-container {
+  font-family: Montserrat, sans-serif;
+  min-height: 100vh;
+  color: #787878;
+}
+
+
+
+
+.lite-container .lite-home .home-text .logo {
+  max-width: 400px;
+  margin: auto;  
+  margin-top: 32px;
+  padding-bottom: 32px;
+}
+
+.lite-container .lite-home .home-text .logo img {
+  max-width:100%;
+  text-align: center;
+}
+
+.lite-container .lite-home .home-text {
+  text-align: center;
+}
+
+
+
+
+/* The Header up top */
+/* Will probably get rid of this completely soon
+    And now it's gone */
+.lite-container .lite-header {
+  /*text-align: center;*/
+  padding: 0 0 24px;
+  font-size: 1.2em;
+}
+
+.lite-container .lite-header img {
+  height: 32px;
+}
+
+.lite-container .lite-header a {
+  color: inherit; /* hiding random quote easter egg */
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Body where the quote goes */
+.lite-container .body-container {
+  background-color: #fdfbf8;
+  /*min-height: 400px*/
+}
+
+.lite-quote {
+  font-family: 'Vollkorn', serif;
+  font-size: 1.8em;
+}
+
+.lite-quote .quotation {
+  /*padding: 42px 0 0;*/
+}
+
+.lite-quote .quotation p {
+  padding-bottom: 1em;
+}
+
+.lite-quote p.attribution {
+  padding: 0 0 7vh;
+}
+
+.lite-container .container {
+  /*max-width: 500px;*/
+}
+
+.lite-container .attribution {
+  font-style: italic;
+  color: #999;
+}
+
+#dropcap {
+  color: #f48365;
+}
+
+.lite-container .lite-info {
+  /*padding: 8px 0 0;*/
+}
+
+.lite-container .lite-info a {
+  color: inherit;
+}
+
+.lite-container .lite-info ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1.8em;
+}
+
+.lite-container .lite-info ul li {
+  display: inline;
+  white-space: nowrap;
+  margin-right: 8px;
+}
+
+/*.lite-container .lite-info ul li:after {
+  content: " "
+}
+
+.lite-container .lite-info ul li:last-child:after {
+  content: '';
+}*/
+
+
+.lite-container .lite-controls {
+  /*font-size: 2em;*/
+  /*text-align: center;*/
+}
+
+/* Footer section */
+.lite-container .lite-footer {
+  text-align: center;
+  padding: 0;
+  /*margin-top: 5px;*/
+}
+
+.lite-container .lite-footer img {
+  width: 32px;
+}
+
+.lite-container .navbar {
+  min-height: inherit;
+}
+
+.lite-container .lite-nav {
+  /*text-align: center;*/
+  padding: 16px 0 16px;
+  font-size: 1.2em;
+  color: #999;
+}
+
+.lite-container .lite-nav a {
+  color: gray;
+}
+
+.lite-container .lite-nav img {
+  height: 32px;
+}
+
+
+
+.lite-container ul.authors {
+  list-style-type: none;
+}
+
+.lite-container ul.authors li {
+  display: inline;
+}
+
+
+
+
+
+
+
+
+
+
+/* Style for the temporary MailChimp email form */
+
+#mc_embed_signup { border: none; text-align: center; width: 100%; } /* Signup form container */
+
+.mc-field-group { display: inline-block; } /* positions input field horizontally */
+
+#mce-EMAIL { font-family: Montserrat, "Open Sans", 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1em; border: 2px solid #ABB0B2 ; color: #343434; background-color: #fff; padding: .7em 9em .7em 1em; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; display: inline-block; margin: 0; } /* Input Styles */
+
+.clear { display: inline-block; } /* positions button horizontally in line with input */
+
+.button { font-family: Montserrat, "Open Sans", 'Helvetica Neue', Helvetica,  Arial, sans-serif; font-size: 1em; letter-spacing: .03em; color: #fff; background-color: #f48365 ; padding: .7em 2em; border: 2px solid #f48365 ; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; display: inline-block; margin: 0; } /* Button Styles */
+
+:-webkit-input-placeholder { color: #ABB0B2 ; } /* WebKit browsers */
+:-moz-placeholder { color: #ABB0B2 ; } /* Mozilla Firefox 4 to 18 */
+::-moz-placeholder { color: #ABB0B2 ; } /* Mozilla Firefox 19+ */
+:-ms-input-placeholder { color: #ABB0B2 ; } /* Internet Explorer 10+ */
+
+
+/* positions input field and button underneath each other with 100% width for tablet and mobile */
+@media (max-width: 768px) {
+
+.mc-field-group { display: block; max-width: 100%; }
+#mce-EMAIL { padding: .7em 0 .7em 1em; width: 100%; margin: 0; }
+.clear { display: block; width: 100% }
+.button { width: 100%; margin: .5em 0 0 0; }
+
+}
+
+
+
+
+/* Custom ampersand */
+span.amp {
+  font-family: Baskerville,"Goudy Old Style","Palatino","Book Antiqua",serif;
+  font-size: 110%;
+  font-style: italic;
+  color: LightGray;
+}
+
+span.quo {
+  font-family: Baskerville,"Goudy Old Style","Palatino","Book Antiqua",serif;
+  font-size: 32px;
+  font-style: italic;
+  color: LightGray;
+}
+
+
+
+#iron-router-progress {
+    background-color: #5ab2b5;
+    box-shadow: 0 0 0px #5ab2b5;
+}
+
+
+
+.spaced {
+  padding-bottom: 30px !important;
+}
+
+
+.menu {
+  font-size: 32px;
+}
+
+
+ul.menu-group {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 42px;
+  font-weight: bold;
+}
+
+ul.menu-group a {
+  color: #999;
+  text-decoration: none;
+}
+
+ul.menu-group a:hover {
+  color: #787878;
+}
+
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Media Queries Main
+|--------------------------------------------------------------------------
+|
+| Main media queries go after here.
+|
+|
+*/
+
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .lite-quote {
+    font-size: 2.2em;
+  }
+
+  ul.menu-group {
+    font-size: 64px;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .lite-quote {
+    font-size: 2.4em;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .lite-quote {
+    font-size: 2.6em;
+  }
+}
+
+
+
+
+/* This is a test front search box style without border etc
+And yes it works, so we're keeping it. */
+.word-search input#word {
+  border: 0;
+  -webkit-appearance: none;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+  background-color: white;
+  border-bottom: 2px solid LightGray;
+  border-top: 1px #f4f4f4 solid;
+  border-left: 1px #f4f4f4 solid;
+  border-right: 1px #f4f4f4 solid;
+  border-radius: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+
+/* Little list on the home page that displays popular words */
+.home-word-list {
+  padding: 0;
+  margin-top: 36px;
+  list-style-type: none;
+  /*text-align: left;*/
+  font-size: 1.5em;
+  line-height: 2em;
+  /*font-weight: bold;*/
+}
+
+.home-word-list li {
+  display: inline;
+}
+
+.home-word-list li a {
+  color: inherit;
+  padding: 3px;
+  background-color: #f2f1ef;
+}
+
+.home-word-list li a:hover,
+.home-word-list li a:active {
+  text-decoration: none;
+  background-color: #5ab2b5;
+  color: white;
+}
+
+
+/* List under the quotes that displays the words associated */
+.lite-controls ul.words {
+  padding: 0;
+  margin-top: 12px;
+  list-style-type: none;
+  /*text-align: left;*/
+  font-size: 1.5em;
+  line-height: 2em;
+  /*font-weight: bold;*/
+}
+
+
+.lite-controls ul.words li {
+  display: inline;
+}
+
+.lite-controls ul.words li a {
+  color: inherit;
+  padding: 3px;
+  background-color: #f2f1ef;
+}
+
+.lite-controls ul.words li a:hover,
+.lite-controls ul.words li a:active {
+  text-decoration: none;
+  background-color: #5ab2b5;
+  color: white;
+}
+
+
+.dont-break {
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.word-process p {
+  font-size: 2.6em;
+}
+
+.word-process p a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.word-process p a:hover {
+  text-decoration: underline;
+}
+
+.lite-controls ul.controls {
+  padding: 0;
+  list-style-type: none;
+  font-size: 2.4em;
+  color: #ccc;
+
+  /* This justifies icons across width. We maybe want this later
+  display: flex;
+  justify-content: space-around;
+  -webkit-justify-content: space-around; */
+
+  /* this spaces between*/
+  /*display: flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;*/
+}
+
+
+
+
+.lite-controls ul.controls li {
+  display: inline;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+.lite-controls ul.controls li:hover {
+  /*color: crimson;*/
+  cursor: pointer;
+}
+
+
+.lite-controls ul.controls li a {
+  color: inherit;
+}
+
+
+.popover {
+  box-shadow: none; /*0px 1px 4px rgba(0, 0, 0, .25);*/
+  border-radius: 4px;
+  font-family: Montserrat;
+}
+
+p.quotation {
+  font-family: 'Vollkorn', serif;
+  font-size: 1.6em;
+}
+
+.at-form p {
+  padding-bottom: 0;
+}
+
+
+@media (max-width: 768px) {
+  .quotePageAnother button {
+    width: 100%;
+  }
+}
+
+.belief-list-quote {
+  background-color: #aaa;
+  min-height: 100vh;
+}

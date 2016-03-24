@@ -1,0 +1,97 @@
+<!-- 
+
+This is the new Main HTML initially for the Belief release 
+
+Try to keep this uncluttered, as much as possible.
+
+-->
+
+<template name="Layout">
+  <div class="container-fluid full-container">
+    <header>
+      {{> yield "header"}}
+    </header>
+    <div class="body-container">
+      {{> yield}}
+    </div>
+    <footer>
+      {{> yield "footer"}}
+    </footer>
+    <nav>
+      {{> yield "nav"}}
+    </nav>
+  </div>
+</template>
+
+<template name="Home">
+  <div class="conatiner-fluid quote-box">
+    <div class="container quote">
+      <div class="quotation">
+        <p>Knowledge comes by eyes always open and working hands; and there is no knowledge that is not power.</p>
+      </div>
+      <div class="attribution">
+        Ralph Waldo Emerson
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="About">
+<div class="lite-text-content">
+  <div class="container">
+    <h1 class="text-center">What is this?</h1>
+    <p class="lead">Qurious is a website about quotes, words, and ideas. Or at least it will be in the near future. We are still in the process of putting everything together. So sit tight and we'll be up and running before you know it.</p>
+
+    <!-- <p class="lead">If you have an account please <a href="/login">login here</a>, or else to learn more and get early access please enter your details below.</p>
+    <p>{{> LiteFooterSubscribe}}</p>
+    <p class="lead">Developed by Meagre. Email <a href="mailto:jb@meag.re">jb@meag.re</a> for all enquires.</p> -->
+    <p class="text-center"><span class="quo"><i class="fa fa-quote-right"></i></span></p>
+  </div>
+</div>
+</template>
+
+<!-- This is the fixed nav at the bottom -->
+<template name="Nav">
+  <div class="navbar navbar-default navbar-fixed-bottom nav">
+    <div class="container">
+      <div class="pull-right">
+        <a href="#"><i class="fa fa-bars menu"></i></a>
+      </div>
+      <a href="/"><img src="/grey-logo.png"></a> | Curiously quotable.
+    </div>
+  </div> 
+</template>
+
+<!-- This is the fixed nav at the bottom -->
+<template name="LiteNav">
+  <div class="navbar navbar-default navbar-fixed-bottom lite-nav">
+    <div class="container">
+      <div class="pull-right">
+        <a href="/menu"><i class="fa fa-bars menu"></i></a>
+      </div>
+      <a href="/"><img src="/grey-logo.png"></a> | Curiously quotable.
+    </div>
+  </div> 
+</template>
+
+<!-- This template is to show the loading spinner -->
+<template name="Loading">
+  <div class="lite-container container-fluid">
+    <div class="top-spacing">
+    </div>
+    <header>
+      
+    </header>
+    <div class="body-container">
+      <!-- Do something else for the loader maybe a top bar -->
+      <!-- <p class="text-center"><img width="50px" src="/q-loader.gif"></p> -->
+      Loading
+    </div>
+    <footer>
+      
+    </footer>
+    <nav>
+      {{>LiteNav}}
+    </nav>
+  </div>
+</template>

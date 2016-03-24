@@ -13,7 +13,6 @@ zimme:active-route
 accounts-ui
 accounts-password
 useraccounts:iron-routing
-pagebakers:ionicons
 standard-minifiers
 meteor-base
 mobile-experience

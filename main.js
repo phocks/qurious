@@ -57,9 +57,6 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-
-
-
   // We need to tell the client to subscribe explicitly to data collections
   // Later we don't want to subscribe to the whole thing
   // moved to individual routes // Meteor.subscribe("quotes");
@@ -197,49 +194,6 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-
-  // We are setting up Infinite Scrolling here
-  // This is not a very elegant way of doing it. Please change in future
-
-
-  // incrementLimit = function(inc) { // this is defining a new global function
-  //   var inc = loadMoreLimit;
-  //   newLimit = Session.get('limit') + inc;
-  //   Session.set('limit', newLimit);
-  // }
-
-  // Template.Quotes.created = function() {
-  //   Session.set('limit', loadMoreLimit);  // use Session.setDefault maybe
-
-  //   // Deps.autorun() automatically rerun the subscription whenever Session.get('limit') changes
-  //   // http://docs.meteor.com/#deps_autorun
-  //   // Changed to 'Tracker' in newer versions of Meteor
-  //   Tracker.autorun(function() {
-  //     Meteor.subscribe('quotesPopular', Session.get('limit'));
-  //     Meteor.subscribe('quotesLatest', Session.get('limit'));
-  //     Meteor.subscribe('quotesCurrentUser', Session.get('limit'));
-  //   });
-  // }
-
-  // This is an auto load feature when we have reached the bottom
-  /*
-  Template.Quotes.rendered = function() {
-    // is triggered every time we scroll
-    $(window).scroll(function() {
-      if ($(window).scrollTop() + $(window).height() > $(document).height() - 50) {
-        incrementLimit();
-      }
-    });
-  }
-  */
-
-  // Enable the "Load more" button
-  // Template.Quotes.events({
-  //   'click .give-me-more': function(evt) {
-  //     incrementLimit();
-  //   }
-  // });
-
   // So we can customise the login form so much more
   // Requires aldeed:template-extension
   Template.AtFormQurious.replaces("atForm");
@@ -248,13 +202,6 @@ if (Meteor.isClient) { // only runs on the client
   // Here are the helpers to put data into Templates etc
 
   
-
-
-  // Template.ListAuthors.helpers({
-  //   authors: function () {
-  //     return Authors.find({}, {sort: {name: 1}});
-  //   }
-  // });
 
 
 

@@ -15,7 +15,22 @@ Router.route('/api', function () {
 
 Router.route('/', {
   waitOn: function () {
-    // return Meteor.subscribe("words");
+    
+  },
+  action: function () {    
+    Session.set("DocumentTitle","Qurious");      
+
+    this.render('Home', {
+    });
+    
+    this.render('Nav', { to: 'nav'});
+  }
+});
+
+
+Router.route('/authors', {
+  waitOn: function () {    
+    Meteor.subscribe('authors');
   },
   action: function () {
     // this.layout('Layout');
@@ -25,19 +40,24 @@ Router.route('/', {
     // Here we send a quote to the front page if required
     // Meteor.subscribe('quotesLatest', 1);
 
-    this.render('Home', {
+    
+
+    this.render('Authors', {
       // data: { 
       //   words: function () {
       //     return Words.find({});
       //     }
-      //   }  
+      //   }
+      data: { 
+        authors: function () {
+          return Authors.find({});
+          }
+        }
     });
     // this.render('LiteFooter', { to: 'footer'});
     this.render('Nav', { to: 'nav'});
   }
 });
-
-
 
 
 

@@ -24,15 +24,52 @@ Try to keep this uncluttered, as much as possible.
 </template>
 
 <template name="Home">
-  <div class="conatiner-fluid quote-box">
-    <div class="container quote">
-      <div class="quotation">
-        <p>Knowledge comes by eyes always open and working hands; and there is no knowledge that is not power.</p>
-      </div>
-      <div class="attribution">
-        Ralph Waldo Emerson
-      </div>
+  <div class="conatiner-fluid backdrop text-center">
+
+  {{#unless currentUser}}
+
+    <div class="home-text">
+      <h1>Qurious</h1>
+      <ul>        
+        <li><a href="/authors">explore</a></li>
+        <li><a href="/login">login</a></li>
+      </ul>
     </div>
+  
+
+  {{else}}
+
+    <div class="home-text">
+      <h1>Qurious</h1>
+      <ul>
+        <li><a href="/authors">explore</a></li>
+        <li><a href="/logout">logout</a></li>
+      </ul>
+    </div>
+    
+  {{/unless}}
+
+
+  </div>
+
+</template>
+
+<template name="Login">
+  <div class="conatiner-fluid backdrop text-center">
+    <div class="login-form">
+      {{> atForm}}
+    </div>
+  </div>
+</template>
+
+
+<template name="Authors">
+  <div class="conatiner-fluid backdrop text-center">
+    <ul class="home-author-list">
+      {{#each authors}}
+        <li><a href="#">{{name}}</a></li>
+      {{/each}}
+    </ul>
   </div>
 </template>
 
@@ -53,11 +90,11 @@ Try to keep this uncluttered, as much as possible.
 <!-- This is the fixed nav at the bottom -->
 <template name="Nav">
   <div class="navbar navbar-default navbar-fixed-bottom nav">
-    <div class="container">
-      <div class="pull-right">
+     <div class="container-fluid">
+      <!--<div class="pull-right">
         <a href="#"><i class="fa fa-bars menu"></i></a>
-      </div>
-      <a href="/"><img src="/grey-logo.png"></a> | Curiously quotable.
+      </div> -->
+      <a href="/"><img src="/grey-logo.png"></a>
     </div>
   </div> 
 </template>
@@ -94,4 +131,39 @@ Try to keep this uncluttered, as much as possible.
       {{>LiteNav}}
     </nav>
   </div>
+</template>
+
+<!-- Replaces default UserAccounts form -->
+<template name="AtFormQurious">
+{{#unless hide}}
+    <div class="at-form">
+      {{#if showTitle}}
+        {{> atTitle}}
+      {{/if}}
+      {{#if showError}}
+        {{> atError}}
+      {{/if}}
+      {{#if showResult}}
+        {{> atResult}}
+      {{/if}}
+      {{#if showOauthServices}}
+        {{> atOauth}}
+      {{/if}}
+      {{#if showServicesSeparator}}
+        {{> atSep}}
+      {{/if}}
+      {{#if showPwdForm}}
+        {{> atPwdForm}}
+      {{/if}}
+      {{#if showTermsLink}}
+        {{> atTermsLink}}
+      {{/if}}
+      {{#if showSignInLink}}
+        {{> atSigninLink}}
+      {{/if}}
+      {{#if showSignUpLink}}
+        {{> atSignupLink}}
+      {{/if}}
+    </div>
+  {{/unless}}
 </template>

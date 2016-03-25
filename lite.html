@@ -369,10 +369,10 @@
 
 
 
-<template name="Login">
-<div class="container text-center">
-  {{> atForm}}
-</div>
+<template name="LiteLogin">
+  <div class="container text-center">
+    {{> atForm}}
+  </div>
 </template>
 
 
@@ -473,40 +473,7 @@
 
 
 
-<!-- Replaces default UserAccounts form -->
-<template name="AtFormQurious">
-{{#unless hide}}
-    <div class="at-form">
-      {{#if showTitle}}
-        {{> atTitle}}
-      {{/if}}
-      {{#if showError}}
-        {{> atError}}
-      {{/if}}
-      {{#if showResult}}
-        {{> atResult}}
-      {{/if}}
-      {{#if showOauthServices}}
-        {{> atOauth}}
-      {{/if}}
-      {{#if showServicesSeparator}}
-        {{> atSep}}
-      {{/if}}
-      {{#if showPwdForm}}
-        {{> atPwdForm}}
-      {{/if}}
-      {{#if showTermsLink}}
-        {{> atTermsLink}}
-      {{/if}}
-      {{#if showSignInLink}}
-        {{> atSigninLink}}
-      {{/if}}
-      {{#if showSignUpLink}}
-        {{> atSignupLink}}
-      {{/if}}
-    </div>
-  {{/unless}}
-</template>
+
 
 
 

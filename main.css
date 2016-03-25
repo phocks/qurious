@@ -14,7 +14,19 @@
 
 body {
   background-color: #fdfbf8;
+  color: #999;
   font-family: "Montserrat", sans-serif;
+  font-size: 28px;
+}
+
+a {
+  color: #5ab2b5;
+  /*background-color: #eee;*/
+}
+a:hover {
+  color: #5ab2b5;
+  text-decoration: underline;
+  /*background-color: #5ab2b5;*/
 }
 
 
@@ -22,6 +34,10 @@ a, /* this gets rid of the dotty outline in Firefox. */
 a:hover,
 a:focus {
   outline: none;
+}
+
+h1 {
+  margin-top: 10px;
 }
 
 
@@ -36,7 +52,7 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
 .btn {
-  border-width: 2px;
+  /*border-width: 1px;*/
 }
 
 
@@ -44,6 +60,10 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 .navbar-default {
   background-color: #fdfbf8;
+}
+
+.btn-default {
+  color: #666;
 }
 
 
@@ -535,28 +555,96 @@ Keep it clean
 }
 
 .quote-box {
-  background-color: antiquewhite;
+  
+}
+
+.quote {
+  font-size: 64px;
+  padding-top: 128px;
+  padding-bottom: 128px;
 }
 
 /* Bottom nav */
 
 .navbar {
   min-height: inherit;
+  background-color: transparent;
 }
 
 .nav {
-  /*text-align: center;*/
-  padding: 16px 0 16px;
-  font-size: 1.2em;
+  padding: 15px 0 15px;
   color: #999;
+  border: 0;
 }
 
 .nav a {
-  color: gray;
+  color: #999;
+  background-color: inherit;
 }
 
 .nav img {
   height: 32px;
+  opacity: 0.4;
+  filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
+/* A list of Authors */
+
+ul.home-author-list {
+  /*font-size: 0;*/
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+ul.home-author-list li {
+  font-size: 28px;
+  display: inline-block;
+  padding: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+ul.home-author-list a {
+  text-decoration: none;
+  color: inherit;
+  padding: 8px 12px;
+  background-color: #f2f1ef;
+}
+
+ul.home-author-list a:hover {
+  background-color: #5ab2b5;
+  color: white;
+}
+
+
+
+/* Experimental text style */
+
+.backdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.home-text h1 {
+  /*display: inline-block;*/
+  font-size: 1em;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.home-text ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+
+/* Login form */
+.at-form .at-title,
+.at-form .control-label {
+  display: none;
 }
 
 

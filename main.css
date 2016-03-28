@@ -16,7 +16,7 @@ body {
   background-color: #fdfbf8;
   color: #999;
   font-family: "Montserrat", sans-serif;
-  font-size: 28px;
+  font-size: 16px;
 }
 
 a {
@@ -628,6 +628,10 @@ ul.home-author-list a:hover {
   min-height: 100vh;
 }
 
+.home-text {
+  font-size: 1.8em;
+}
+
 .home-text h1 {
   /*display: inline-block;*/
   font-size: 1em;
@@ -645,6 +649,18 @@ ul.home-author-list a:hover {
 .at-form .at-title,
 .at-form .control-label {
   display: none;
+}
+
+.at-form {
+  width: 256px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.at-form button,
+.at-form input,
+.at-form .alert {
+  border-radius: 0;
 }
 
 

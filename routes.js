@@ -12,53 +12,33 @@ Router.route('/api', function () {
 
 
 /* The root home route landing for qurious.cc/   */
-
 Router.route('/', {
-  waitOn: function () {
-    
-  },
-  action: function () {    
+  action: function () {
     Session.set("DocumentTitle","Qurious");      
-
-    this.render('Home', {
-    });
-    
+    this.render('Home', { });
     this.render('Nav', { to: 'nav'});
   }
 });
 
 
-Router.route('/authors', {
+
+// A page where you can click to see more
+Router.route('/explore', {
   waitOn: function () {    
     Meteor.subscribe('authors');
   },
   action: function () {
-    // this.layout('Layout');
     Session.set("DocumentTitle","Qurious");
-    // this.render('LiteHeader', { to: 'header'});
-
-    // Here we send a quote to the front page if required
-    // Meteor.subscribe('quotesLatest', 1);
-
-    
-
-    this.render('Authors', {
-      // data: { 
-      //   words: function () {
-      //     return Words.find({});
-      //     }
-      //   }
+    this.render('Explore', {
       data: { 
         authors: function () {
           return Authors.find({});
           }
         }
     });
-    // this.render('LiteFooter', { to: 'footer'});
     this.render('Nav', { to: 'nav'});
   }
 });
-
 
 
 
@@ -325,22 +305,21 @@ Router.route('/word/:_word_text', {
 
 
 Router.route('/admin', {
-  loadingTemplate: 'LiteLoad',
   waitOn: function () {
     Meteor.subscribe("words");
+    Meteor.subscribe("userData")
     return Meteor.subscribe("quotes");
   },
   action: function () {
-    this.layout('Layout');
     
-
-    console.log("current user is: " + Meteor.userId());
-
-    // for now only phocks can do this
-    if (Meteor.userId() !== "jNX4BenrzyEgsMqTY") Router.go('/');
-
     // Only logged in users
-    // if (!Meteor.user()) Router.go('/login');
+    if (Meteor.user()) {  
+
+      // Test for adminPermissions
+      if (!Meteor.user().isAdmin) Router.go('/');
+
+    } else { Router.go('/login'); }
+
 
 
     this.render('AdminStation', {
@@ -353,7 +332,7 @@ Router.route('/admin', {
           }
         }
       });
-    this.render('LiteFooter', { to: 'footer'});
+    // this.render('LiteFooter', { to: 'footer'});
     this.render('Nav', { to: 'nav'});
   },
 });
@@ -363,7 +342,6 @@ Router.route('/admin', {
 
 
 Router.route('/login', {
-  loadingTemplate: 'LiteLoad',
   waitOn: function () {
     
   },
@@ -404,6 +382,27 @@ Router.route('/load', function() {
 
 
 
+Router.route('/:_slug', {
+  waitOn: function () {    
+    return Meteor.subscribe('authors');
+  },
+  action: function () {
+    var slug = this.params._slug;
+    currentAuthor = Authors.findOne({slug: slug});
+    Session.set("DocumentTitle","Qurious - " + currentAuthor.name);
+    this.render('Author', {
+      data: { 
+        authors: function () {
+          return Authors.find({slug: slug});
+          }
+        }
+    });
+    this.render('Nav', { to: 'nav'});
+  }
+});
+
+
+
 
 
 // This is our catch all for all other unknown things
@@ -411,578 +410,10 @@ Router.route('/load', function() {
 // Especially after we implement qurious.cc/phocks user pages
 Router.route('/(.*)', function() {
   this.layout('Layout');
-  Session.set("DocumentTitle","404 Qurious");
+  Session.set("DocumentTitle","Qurious - 404 not found");
   this.render('LiteError');
 });
 
 
 
-// DONT PUT ROUTES BELOW HERE BECAUSE THEY WON'T WORK
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// First some static pages with About Us and Privacy etc.
-
-
-// Router.route('/about', function() {
-//   if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//   this.layout('ApplicationLayout');
-//   Session.set("DocumentTitle", "Qurious About Us?");
-//   this.render('Header', {to: 'header'});
-//   this.render('AboutText');
-//   this.render('Footer', {to: 'footer'});
-// });
-
-// Router.route('/privacy', function() {
-//   if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//   this.layout('ApplicationLayout');
-//   Session.set("DocumentTitle", "Privacy Policy - Qurious");
-//   this.render('Header', {to: 'header'});
-//   this.render('PrivacyText');
-//   this.render('Footer', {to: 'footer'});
-// });
-
-// Router.route('/terms', function() {
-//   if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//   this.layout('ApplicationLayout');
-//   Session.set("DocumentTitle", "Terms & Conditions - Qurious");
-//   this.render('Header', {to: 'header'});
-//   this.render('TermsText');
-//   this.render('Footer', {to: 'footer'});
-// });
-
-// Router.route('/contact', function() {
-//   if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//   this.layout('ApplicationLayout');
-//   Session.set("DocumentTitle", "Contacting Qurious");
-//   this.render('Header', {to: 'header'});
-//   this.render('ContactText');
-//   this.render('Footer', {to: 'footer'});
-// });
-
-
-
-// // This route is for useraccounts
-// AccountsTemplates.configureRoute('signIn', {
-//     name: 'signin',
-//     path: '/login',
-//     template: 'Login',
-//     redirect: '/random',
-//     yieldTemplates: {
-//         Header: {to: 'header'},
-//         Footer: {to: 'footer'},
-//     }
-// });
-
-
-
-
-
-// // Now here are the main routes
-
-
-
-
-
-
-
-
-
-
-
-
-// // Quotes sorted by popularity, dogears etc.
-// Router.route('/explore', {
-//   loadingTemplate: 'Loading',
-
-//   waitOn: function () {
-
-//   },
-
-//   action: function () {
-//     if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//     this.layout('ApplicationLayout');
-//     Session.set("DocumentTitle", "Popular Quotes - Qurious");
-//     this.render('Header', {to: 'header'});
-//     this.render('Quotes', {
-//       data: {
-//         quotes: function () {
-//           return Quotes.find({}, {sort: {views: -1, upcount: -1}, limit: Session.get('limit') });
-//         }
-//       }
-//     });
-
-//     this.render('Footer', {to: 'footer'});
-//   }
-// });
-
-
-
-
-// // Quotes sorted by popularity, dogears etc.
-// Router.route('/explore/popular', {
-//   loadingTemplate: 'Loading',
-
-//   waitOn: function () {
-
-//   },
-
-//   action: function () {
-//     if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//     this.layout('ApplicationLayout');
-//     Session.set("DocumentTitle", "Popular Quotes - Qurious");
-//     this.render('Header', {to: 'header'});
-//     this.render('Quotes', {
-//       data: {
-//         quotes: function () {
-//           return Quotes.find({}, {sort: {views: -1, upcount: -1}, limit: Session.get('limit') });
-//         }
-//       }
-//     });
-
-//     this.render('Footer', {to: 'footer'});
-//   }
-// });
-
-
-
-
-// Router.route('/explore/latest', {
-//   loadingTemplate: 'Loading',
-
-//   waitOn: function () {
-
-//   },
-
-//   action: function () {
-//     if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//     this.layout('ApplicationLayout');
-//     Session.set("DocumentTitle", "Latest Quotes - Qurious");
-
-//     this.render('Header', {to: 'header'});
-//     this.render('Quotes', {
-//       data: {
-//         quotes: function () {
-//           return Quotes.find( { }, {sort: {createdAt: -1}, limit: Session.get('limit') });
-//         }
-//       }
-//     });
-
-//     this.render('Footer', {to: 'footer'});
-//   }
-// });
-
-
-
-// // Here is a nice little route that gives a single quote
-// // given a specified _id in the quotes collection as URL param
-// Router.route('/quotes/:_quote_slug', {
-//   loadingTemplate: 'Loading',
-//   waitOn: function () {
-//     // return one handle, a function, or an array
-//     return Meteor.subscribe('quotesSlug', this.params._quote_slug);
-//   },
-//     onBeforeAction: function() {
-
-//       this.next(); // does this do anything? i don't think so
-//   },
-//     onAfterAction: function() {
-//       // if (Meteor.userId()) currentUserId = Meteor.userId();
-//       // Meteor.users.update({_id:currentUserId},{$addToSet:{quotesVisited:this.params._quote_slug}});
-//     },
-//   action: function () {
-//     if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//     this.layout('ApplicationLayout');
-//     this.render('Header', {to: 'header'});
-//     this.render('SingleQuote', {
-//       data: function () {
-//           var quote = Quotes.findOne({ _id: this.params._quote_slug });
-//           if (!quote) {
-//             this.render('NotFound');
-//           } else {
-//             Session.set('sessionQuoteId', this.params._quote_slug);
-//             Meteor.call('checkQuoteSize', this.params._quote_slug); // small or big?
-
-//             // Let's try to get substring some text for the Title Bar
-//             // this regular expression is gold (i didn't write it btw)
-//             var titleText = quote.quotation.replace(/^(.{50}[^\s]*).*/, "$1");
-
-//             Session.set("DocumentTitle", titleText + " - Qurious");
-
-//             return quote;
-//           }
-//         }
-//     });
-
-//     this.render('Footer', {to: 'footer'});
-//   }
-// });
-
-// // Identical route but handles extra text for SEO (but disregarded)
-// // Please keep up to date with previous or figure out how to replicate automatically
-// Router.route('/quotes/:_quote_slug/:_extra_text', {
-//   /* blah blah blah  probably better look for a wilcard thing */
-// });
-
-
-
-
-
-// Router.route('/random', {
-//   onBeforeAction: function () {
-//     Meteor.call('getRandomQuoteId', function (error, result) {
-//       var randomId = result;
-//       // replaceState keeps the browser from duplicating history
-//       Router.go('/quotes/' + randomId, {}, {replaceState:true});
-//     });
-
-//     this.next()
-//   },
-//   action: function () {
-//     this.render('Header', {to: 'header'});
-
-//   },
-// });
-
-
-// Router.route('/lucky', {
-//   onBeforeAction: function () {
-//     Meteor.call('getLuckyQuoteId', function (error, result) {
-//       var luckyId = result;
-//       // replaceState keeps the browser from duplicating history
-//       Router.go('/quotes/' + luckyId, {}, {replaceState:true});
-//     });
-
-//     this.next()
-//   },
-//   action: function () {
-//     this.render('Header', {to: 'header'});
-
-//   },
-// });
-
-
-
-
-
-// Router.route('/users/:_username', {
-//   loadingTemplate: 'Loading',
-
-//   waitOn: function () {
-
-
-//   },
-
-//   action: function () {
-//     this.layout('ApplicationLayout');
-//     Session.set("DocumentTitle","Exploring " + this.params._username + " - Qurious");
-
-
-//     var username_to_lookup = this.params._username; //to pass it into the function
-
-//     this.render('Header', {to: 'header'});
-//     this.render('Quotes', {
-//       data: {
-//         quotes: function () {
-//           return Quotes.find({ username: username_to_lookup }, {sort: {createdAt: -1}, limit: Session.get('limit') });
-//         },
-//         usernameToShow: function () { return username_to_lookup },
-//       }
-//     });
-
-//     this.render('Footer', {to: 'footer'});
-//   }
-// });
-
-
-
-
-
-
-
-
-// Router.route('/users/:_username/dogears', {
-//   loadingTemplate: 'Loading',
-
-//   waitOn: function () {
-//     // This apparently we need for asyc stuff or something
-//     return Meteor.subscribe("userData");
-//   },
-
-//   onBeforeAction: function () {
-//     Session.set("DocumentTitle", this.params._username + " Dogears - Qurious");
-//     this.next();
-//   },
-
-//   action: function () {
-//     if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-    
-//     this.layout('ApplicationLayout');
-//     this.render('Header', {to: 'header'});
-//     //to pass it into the function, someone help with this
-//     var usernameParam = this.params._username;
-//     var user = Meteor.users.findOne( { username: this.params._username } );
-
-//     console.log(user.liked);
-
-//     Meteor.subscribe('quotesInArray', user.liked);
-
-
-//     this.render('Quotes', {
-//       data: {
-//         quotes: function () {
-//           return Quotes.find({ _id: { $in: user.liked } },
-//             { limit: Session.get('limit') }); //sort: { createdAt: -1 },
-//         },
-//         usernameToShow: function () { return usernameParam },
-
-//       }
-//     });
-
-//     this.render('Footer', {to: 'footer'});
-//   }
-// });
-
-
-
-// // What we want to do here is search
-// Router.route('/search/:_terms', {
-//   loadingTemplate: 'Loading',
-
-//   waitOn: function () {
-
-
-//   },
-
-//   action: function () {
-//     if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//     this.layout('ApplicationLayout');
-//     Session.set("DocumentTitle","Quotes with: " + this.params._terms + " - Qurious");
-
-
-//     var terms_to_lookup = this.params._terms; // someone explain why we need to do this please
-
-//     this.render('Header', {to: 'header'});
-//     this.render('Quotes', {
-//       data: {
-//         quotes: function () {
-//           return Quotes.find({ $or: [ { quotation: { '$regex': terms_to_lookup, $options: 'i'} },
-//             { attribution: { '$regex': terms_to_lookup, $options: 'i'}} ] },
-//             {sort: {views: -1}, limit: Session.get('limit') });
-//         },
-//         exploreToShow: function () { return terms_to_lookup },
-//       }
-//     });
-//     this.render('Footer', {to: 'footer'});
-//   }
-// });
-
-
-
-// // The front landing page
-// Router.route('/home', {
-//   action: function () {
-//     if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//     this.layout('ApplicationLayout');
-//     Session.set("DocumentTitle","Qurious");
-//     this.render('Header', {
-//       to: 'header',
-//       data: {
-//         frontPage: true // This boolean data is sent to the Header
-//       }
-//     });
-
-//     // Here we send a quote to the front page if required
-//     Meteor.subscribe('quotesPopular', 1);
-
-//     this.render('Home', {
-//       data: function () {
-//         return Quotes.findOne({});
-//       }
-//     });
-
-//     this.render('Footer', {to: 'footer'});
-//   }
-// });
-
-
-// // Just to test the loader
-// Router.route('/loading', function() {
-//   if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//   this.layout('ApplicationLayout');
-//   Session.set("DocumentTitle","Loading - Qurious");
-
-//   this.render('Loading');
-// });
-
-
-
-// Router.route('/all_quotes', {
-//   loadingTemplate: 'LiteLoad',
-//   waitOn: function () {
-//     // return one handle, a function, or an array
-//     return Meteor.subscribe("quotesAll");
-//   },
-//   action: function () {
-//     this.layout('LiteLayout');
-//     // this.render('LiteHeader', { to: 'header'});
-//     this.render('AdminAllQuotes', {
-//       data: {
-//         quotes: function () {  
-//           Session.set("DocumentTitle", "All Quotes");
-
-//           return Quotes.find({}, { sort: { quotation: 1 }});
-//           }
-//         }
-//       });
-//     this.render('LiteFooter', { to: 'footer'});
-//     this.render('LiteNav', { to: 'nav'});
-//   },
-// });
-
-
-
-// // Adding and submitting a new quote
-// Router.route('/create', {
-//   loadingTemplate: 'Loading',
-
-//   waitOn: function () {
-//     // return one handle, a function, or an array
-//     return Meteor.subscribe('userData');
-//   },
-
-//   action: function () {
-//     if ( ! Meteor.user() ) Router.go('/'); // deny not logged in
-
-//     this.layout('ApplicationLayout');
-//     Session.set("DocumentTitle", "Create a Quote - Qurious");
-//     this.render('Header', {to: 'header'});
-//     this.render('Create', {
-//       data: {
-//         isAdmin: function() {
-//           if (Meteor.user().admin) return true;
-//           else return false;
-//         }
-//       }
-//     });
-
-//     this.render('Footer', {to: 'footer'});
-//   }
-// });
-
-
-
-// Router.route('/add/:_word_to_add', {
-//   loadingTemplate: 'LiteLoad',
-//   waitOn: function () {
-    
-//   },
-//   action: function () {
-//     this.layout('LiteLayout');
-//     // this.render('LiteHeader', { to: 'header'});
-//     this.render('WordProcess', {
-//       data: function () {
-//         var word = Words.findOne({word: this.params._word_text});
-        
-//         return word;
-//       }
-//     });
-//     this.render('LiteFooter', { to: 'footer'});
-//     this.render('LiteNav', { to: 'nav'});
-//   },
-//   onAfterAction: function () {
-    
-//   }
-// });
-
-
-
-// Router.route('/authors', {
-//   loadingTemplate: 'LiteLoad',
-//   waitOn: function () {
-    
-//   },
-//   action: function () {
-//     this.layout('LiteLayout');
-//     this.render('ListAuthors');
-//     this.render('LiteNav', { to: 'nav'});
-//   }
-// });
-
-
-// Router.route('/a/:_slug', {
-//   loadingTemplate: 'LiteLoad',
-//   waitOn: function () {
-    
-//   },
-//   action: function () {
-//     this.layout('LiteLayout');
-//     this.render('LiteNav', { to: 'nav'});
-//   }
-// });
-
-
-
-
-// Router.route('/words', {
-//   loadingTemplate: 'LiteLoad',
-//   waitOn: function () {
-//     // return one handle, a function, or an array
-//     return Meteor.subscribe("words");
-//   },
-//   action: function () {
-//     this.layout('LiteLayout');
-//     // this.render('LiteHeader', { to: 'header'});
-//     this.render('AllWords', {
-//       data: {
-//         words: function () {  
-//           Session.set("DocumentTitle", "All Words");
-
-//           return Words.find({});
-//           }
-//         }
-//       });
-//     this.render('LiteFooter', { to: 'footer'});
-//     this.render('LiteNav', { to: 'nav'});
-//   },
-// });
-
-
-
-
-
-// Router.route('/a/:_author_slug', {
-//   loadingTemplate: 'LiteLoad',
-//   waitOn: function () {
-    
-//   },
-//   action: function () {
-//     this.layout('LiteLayout');
-//     // this.render('LiteHeader', { to: 'header'});
-//     this.render('LiteAuthor');
-//     // this.render('LiteFooter', { to: 'footer'});
-//     this.render('LiteNav', { to: 'nav'});
-//   },
-// });
+// Please refrain from putting any routes below here as they will (probably) not work

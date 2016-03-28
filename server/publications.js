@@ -83,7 +83,7 @@ Meteor.publish("counters", function () {
 // in order to check if user is admin we need this
 Meteor.publish("userData", function () {
   return Meteor.users.find({},
-    { fields: {'admin':1, 'liked': 1, 'username': 1 }
+    { fields: {'isAdmin':1, 'liked': 1, 'username': 1 }
   });
 
 
@@ -102,7 +102,7 @@ Meteor.publish("userData", function () {
 
 
 Meteor.publish("authors", function () {
-  return Authors.find();
+  return Authors.find({ verified: true });
 });
 
 

@@ -23,6 +23,8 @@ Try to keep this uncluttered, as much as possible.
   </div>
 </template>
 
+
+
 <template name="Home">
   <div class="conatiner-fluid backdrop text-center">
 
@@ -31,7 +33,7 @@ Try to keep this uncluttered, as much as possible.
     <div class="home-text">
       <h1>Qurious</h1>
       <ul>        
-        <li><a href="/authors">explore</a></li>
+        <li><a href="/explore">explore</a></li>
         <li><a href="/login">login</a></li>
       </ul>
     </div>
@@ -42,7 +44,7 @@ Try to keep this uncluttered, as much as possible.
     <div class="home-text">
       <h1>Qurious</h1>
       <ul>
-        <li><a href="/authors">explore</a></li>
+        <li><a href="/explore">explore</a></li>
         <li><a href="/logout">logout</a></li>
       </ul>
     </div>
@@ -63,15 +65,29 @@ Try to keep this uncluttered, as much as possible.
 </template>
 
 
-<template name="Authors">
+<template name="Explore">
   <div class="conatiner-fluid backdrop text-center">
     <ul class="home-author-list">
       {{#each authors}}
-        <li><a href="#">{{name}}</a></li>
+        <li><a href="/{{slug}}">{{name}}</a></li>
       {{/each}}
     </ul>
   </div>
 </template>
+
+
+<template name="Author">
+  <div class="conatiner-fluid backdrop text-center">
+    <ul class="home-author-list">
+      {{#each authors}}
+        <li><a href="/{{slug}}">{{name}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+</template>
+
+
+
 
 <template name="About">
 <div class="lite-text-content">
@@ -87,6 +103,9 @@ Try to keep this uncluttered, as much as possible.
 </div>
 </template>
 
+
+
+
 <!-- This is the fixed nav at the bottom -->
 <template name="Nav">
   <div class="navbar navbar-default navbar-fixed-bottom nav">
@@ -99,7 +118,7 @@ Try to keep this uncluttered, as much as possible.
   </div> 
 </template>
 
-<!-- This is the fixed nav at the bottom -->
+<!-- This is the fixed nav at the bottom REMOVE SOON -->
 <template name="LiteNav">
   <div class="navbar navbar-default navbar-fixed-bottom lite-nav">
     <div class="container">
@@ -110,6 +129,9 @@ Try to keep this uncluttered, as much as possible.
     </div>
   </div> 
 </template>
+
+
+
 
 <!-- This template is to show the loading spinner -->
 <template name="Loading">
@@ -122,13 +144,12 @@ Try to keep this uncluttered, as much as possible.
     <div class="body-container">
       <!-- Do something else for the loader maybe a top bar -->
       <!-- <p class="text-center"><img width="50px" src="/q-loader.gif"></p> -->
-      Loading
     </div>
     <footer>
       
     </footer>
     <nav>
-      {{>LiteNav}}
+      {{>Nav}}
     </nav>
   </div>
 </template>
@@ -166,4 +187,81 @@ Try to keep this uncluttered, as much as possible.
       {{/if}}
     </div>
   {{/unless}}
+</template>
+
+
+<!-- Temporary Control Room for special people only -->
+<template name="AdminStation">
+  <div class="conatiner-fluid backdrop text-center">
+
+    <div class="container">
+        <div class="create-block">
+          <form class="new-quote">
+            <div class="form-group">
+              <label for="quotationText">Quotation text</label>
+              <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Enter your quotation here. Please do not include quotation marks, line breaks or special characters. Please keep it brief." autocomplete="off"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="attributionText">Attribution</label>
+              <input type="text" class="form-control" id="attributionText" name="attribution" placeholder="e.g. Albert Einstein">
+            </div>
+            <div class="submissionText">
+            <p>By submitting your quotation you agree to our <a href="/terms">Terms and Conditions</a> and <a href="/privacy">Privacy Policy</a>.</p>
+            </div>
+
+            <button type="submit" class="btn btn-primary create">Submit</button>
+          </form>
+        </div>
+      </div>
+
+
+
+
+ <!--  <div class="container">
+    {{> atForm}}
+    <form class="new-word">
+      <div class="form-group">
+        <label for="wordInput">This is an admin page, please don't do anything stupid.</label>
+        <input type="text" class="form-control" id="wordInput" name="word" placeholder="word">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+      <p>
+        {{#each words}}
+          {{word}} <i class="fa fa-times-circle-o delete"></i> &nbsp;
+        {{/each}}
+      </p>
+
+      <p>
+        {{#each quotes}}
+          {{> AdminSingleQuote}}
+        {{/each}}
+      </p>
+    </div> -->
+
+
+
+  </div>
+</template>
+
+
+<!-- <template name="AdminSingleQuote">
+  <div class="quotation">
+    <p>{{{quotation}}}</p>
+    <p class="attribution">
+    {{#if attribution}}
+      <span class="dash">&mdash;</span>{{attribution}}
+    {{/if}}
+    </p>
+  </div>
+</template> -->
+
+
+<template name="LiteError">
+  <div class="conatiner-fluid backdrop text-center">
+    
+    <h1>You are lost</h1>
+    
+  </div>
+  {{> Nav}}
 </template>

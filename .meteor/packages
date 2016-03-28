@@ -35,3 +35,5 @@ underscorestring:underscore.string
 multiply:iron-router-progress
 jazeee:spiderable-longer-timeout
 aldeed:template-extension
+aldeed:simple-schema
+aldeed:collection2

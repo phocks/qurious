@@ -260,15 +260,7 @@
 
 
 
-<template name="LiteError">
-  <div class="container">
-    <br>
-    <br>
-    <h1 class="text-center">This is not the 404 error you are looking for..</h1>
-    
-  </div>
-  {{> LiteNav}}
-</template>
+
 
 
 
@@ -378,66 +370,7 @@
 
 
 
-<!-- This will be defunt soon -->
-<template name="AdminStation">
-  <div class="admin-station text-center">
 
-    <div class="container">      
-        <div class="create-block">
-          <form class="new-quote">
-            <div class="form-group">
-              <label for="quotationText">Quotation text</label>
-              <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Enter your quotation here. Please do not include quotation marks, line breaks or special characters. Please keep it brief." autocomplete="off"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="attributionText">Attribution</label>
-              <input type="text" class="form-control" id="attributionText" name="attribution" placeholder="e.g. Albert Einstein">
-            </div>
-            <div class="submissionText">
-            <p>By submitting your quotation you agree to our <a href="/terms">Terms and Conditions</a> and <a href="/privacy">Privacy Policy</a>.</p>
-            </div>
-
-            <button type="submit" class="btn btn-primary create">Submit</button>
-          </form>
-        </div>
-      </div>
-
-
-
-
-  <div class="container">
-    {{> atForm}}
-    <form class="new-word">
-      <div class="form-group">
-        <label for="wordInput">This is an admin page, please don't do anything stupid.</label>
-        <input type="text" class="form-control" id="wordInput" name="word" placeholder="word">
-      </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-      <p>
-        {{#each words}}
-          {{word}} <i class="fa fa-times-circle-o delete"></i> &nbsp;
-        {{/each}}
-      </p>
-
-      <p>
-        {{#each quotes}}
-          {{> AdminSingleQuote}}
-        {{/each}}
-      </p>
-    </div>
-  </div>
-</template>
-<template name="AdminSingleQuote">
-  <div class="quotation">
-    <p>{{{quotation}}}</p>
-    <p class="attribution">
-    {{#if attribution}}
-      <span class="dash">&mdash;</span>{{attribution}}
-    {{/if}}
-    </p>
-  </div>
-</template>
 
 
 

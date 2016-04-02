@@ -67,7 +67,7 @@ Try to keep this uncluttered, as much as possible.
 
 <template name="Explore">
   <div class="conatiner-fluid backdrop text-center">
-    <ul class="home-author-list">
+    <ul class="author-list">
       {{#each authors}}
         <li><a href="/{{slug}}">{{name}}</a></li>
       {{/each}}
@@ -77,12 +77,10 @@ Try to keep this uncluttered, as much as possible.
 
 
 <template name="Author">
-  <div class="conatiner-fluid backdrop text-center">
-    <ul class="home-author-list">
-      {{#each authors}}
-        <li><a href="/{{slug}}">{{name}}</a></li>
-      {{/each}}
-    </ul>
+  <div class="conatiner-fluid backdrop text-center">    
+    {{#each authors}}
+      <h1>{{name}}</h1>
+    {{/each}}
   </div>
 </template>
 

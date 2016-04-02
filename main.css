@@ -57,7 +57,6 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
 /* Bootstrap overrides */
-
 .navbar-default {
   background-color: #fdfbf8;
 }
@@ -590,14 +589,14 @@ Keep it clean
 
 /* A list of Authors */
 
-ul.home-author-list {
+ul.author-list {
   /*font-size: 0;*/
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
 
-ul.home-author-list li {
+ul.author-list li {
   font-size: 28px;
   display: inline-block;
   padding: 0;
@@ -605,14 +604,14 @@ ul.home-author-list li {
   margin-bottom: 10px;
 }
 
-ul.home-author-list a {
+ul.author-list a {
   text-decoration: none;
   color: inherit;
   padding: 8px 12px;
   background-color: #f2f1ef;
 }
 
-ul.home-author-list a:hover {
+ul.author-list a:hover {
   background-color: #5ab2b5;
   color: white;
 }
@@ -621,11 +620,14 @@ ul.home-author-list a:hover {
 
 /* Experimental text style */
 
+
+/* keeps things in middle */
 .backdrop {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  flex-direction: column;
 }
 
 .home-text {

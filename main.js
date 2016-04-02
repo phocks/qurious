@@ -34,6 +34,24 @@ Words = new Mongo.Collection('words'); // Words are the basis of ideas
 
 
 
+// Let's set up some schemas so that our data doesn't get messy
+Authors.attachSchema(new SimpleSchema({
+  name: {
+    type: String,
+    label: "Name",
+    max: 200
+  },
+  slug: {
+    type: String,
+    label: "Slug",
+    max: 500
+  }
+}));
+
+
+
+
+
 
 // Initial setup of some things below
 // like some variables etc

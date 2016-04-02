@@ -47,6 +47,7 @@ Router.route('/explore', {
 
 
 
+
 // Takes the doc _id and displays quote
 Router.route('/quote/:_quote_id', {
   loadingTemplate: 'LiteLoad',
@@ -185,9 +186,6 @@ Router.route('/flip/:_word', function () {
 
 
 
-
-
-
 Router.route('/menu', {
   loadingTemplate: 'LiteLoad',
   waitOn: function () {
@@ -220,11 +218,6 @@ Router.route('/about', {
     this.render('Nav', { to: 'nav'});
   }
 });
-
-
-
-
-
 
 
 
@@ -368,20 +361,7 @@ Router.route('/logout', function() {
 
 
 
-
-
-// Testing the Lite loader
-Router.route('/load', function() {
-  this.layout('Layout');
-  Session.set("DocumentTitle","Loading - Qurious");
-  this.render('Loading');
-});
-
-
-
-
-
-
+// An exploration into the unknown
 Router.route('/:_slug', {
   waitOn: function () {    
     return Meteor.subscribe('authors');
@@ -389,7 +369,7 @@ Router.route('/:_slug', {
   action: function () {
     var slug = this.params._slug;
     currentAuthor = Authors.findOne({slug: slug});
-    Session.set("DocumentTitle","Qurious - " + currentAuthor.name);
+    Session.set("DocumentTitle", currentAuthor.name + " - Qurious");
     this.render('Author', {
       data: { 
         authors: function () {
@@ -417,3 +397,12 @@ Router.route('/(.*)', function() {
 
 
 // Please refrain from putting any routes below here as they will (probably) not work
+
+
+
+// Testing the Lite loader
+// Router.route('/load', function() {
+//   this.layout('Layout');
+//   Session.set("DocumentTitle","Loading - Qurious");
+//   this.render('Loading');
+// });

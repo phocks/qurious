@@ -31,7 +31,7 @@ Try to keep this uncluttered, as much as possible.
   {{#unless currentUser}}
 
     <div class="home-text">
-      <h1>Qurious</h1>
+      <h1>qurious</h1>
       <ul>        
         <li><a href="/explore">explore</a></li>
         <li><a href="/login">login</a></li>
@@ -42,7 +42,7 @@ Try to keep this uncluttered, as much as possible.
   {{else}}
 
     <div class="home-text">
-      <h1>Qurious</h1>
+      <h1>qurious</h1>
       <ul>
         <li><a href="/explore">explore</a></li>
         <li><a href="/logout">logout</a></li>
@@ -71,16 +71,29 @@ Try to keep this uncluttered, as much as possible.
       {{#each authors}}
         <li><a href="/{{slug}}">{{name}}</a></li>
       {{/each}}
+      <li><a href="#">+</a></li>
     </ul>
   </div>
 </template>
 
 
 <template name="Author">
+  <div class="conatiner-fluid backdrop-block text-center"> 
+    <h1>{{author.name}}</h1>
+    {{#if currentUser}}<a class="add-link" href="/{{author.slug}}/add">Add</a>{{/if}}
+  </div>
+</template>
+
+<template name="AddQuote">
   <div class="conatiner-fluid backdrop text-center">    
-    <!-- {{#each authors}}
-      <h1>{{name}}</h1>
-    {{/each}} -->
+    <div class="create-block">
+        <form class="add-quote">
+          <div class="form-group">
+            <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Enter your quotation here. Please do not include quotation marks, line breaks or special characters. Please keep it brief." autocomplete="off"></textarea>
+          </div> 
+          <button type="submit" class="btn btn-primary create">Submit</button>
+        </form>
+      </div>
   </div>
 </template>
 
@@ -92,10 +105,6 @@ Try to keep this uncluttered, as much as possible.
   <div class="container">
     <h1 class="text-center">What is this?</h1>
     <p class="lead">Qurious is a website about quotes, words, and ideas. Or at least it will be in the near future. We are still in the process of putting everything together. So sit tight and we'll be up and running before you know it.</p>
-
-    <!-- <p class="lead">If you have an account please <a href="/login">login here</a>, or else to learn more and get early access please enter your details below.</p>
-    <p>{{> LiteFooterSubscribe}}</p>
-    <p class="lead">Developed by Meagre. Email <a href="mailto:jb@meag.re">jb@meag.re</a> for all enquires.</p> -->
     <p class="text-center"><span class="quo"><i class="fa fa-quote-right"></i></span></p>
   </div>
 </div>

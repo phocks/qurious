@@ -254,70 +254,31 @@ if (Meteor.isClient) { // only runs on the client
 // Events that drive things like clicks etc
 
 
-  // Template.SingleQuote.helpers({
-  //   // determines if user submitted quote
-  //   isOwner: function () {
-  //     var quoteId = Session.get("sessionQuoteId");
-  //     var currentQuote = Quotes.findOne({ _id: quoteId });
-
-  //     if (currentQuote.owner == Meteor.userId()) {
-  //       console.log("The current user has submitted this quote.")
-  //       return true;
-  //     }
-  //     else return false;
-  //   },
-  //   // works out if user has dogeared quote or not
-  //   dogeared: function () {
-  //     if (!Meteor.user()) return false; // if not logged in just undogear
-  //     var quoteId = Session.get("sessionQuoteId");
-  //     var user = Meteor.users.findOne({_id:Meteor.userId(), liked:{ $ne:quoteId }});
-  //     if (user) return false;
-  //     else return true;
-  //   }
-  // });
-
-  // Let's finally set up a delete
-  // Template.SingleQuote.events({
-  //   "click .delete-click": function () {
-  //     if (confirm('Really delete ?')) {
-  //       Meteor.call('deleteQuote', this._id);
-  //     }
-  //   },
-
-  //   // Put the quotation into the users collection!
-  //   "click .dogear-click": function () {
-  //     console.log("Calling function to dogear this quote");
-  //     Meteor.call('dogearQuote', this._id);
-  //   },
-
-  //   // Remove the quotation into the users collection!
-  // });
-
 
   
 
 Template.AdminStation.events({
-    "submit .new-quote": function (event) {
-      var text = event.target.text.value;
-      var attribution = event.target.attribution.value;
-      if (text == "" || attribution == "") return false; // prevent empty strings
+  "submit .new-quote": function (event) {
+    var text = event.target.text.value;
+    var attribution = event.target.attribution.value;
+    if (text == "" || attribution == "") return false; // prevent empty strings
 
-      Meteor.call('addQuote', text, attribution, function(error, result) {
-        var newQuoteId = result;
-        Router.go('/quote/' + newQuoteId);
-      });
+    Meteor.call('addQuote', text, attribution, function(error, result) {
+      var newQuoteId = result;
+      Router.go('/quote/' + newQuoteId);
+    });
 
-      // Clear form
-      event.target.text.value = "";
-      event.target.attribution.value = "";
+    // Clear form
+    event.target.text.value = "";
+    event.target.attribution.value = "";
 
 
-      // Prevent default action from form submit
-      return false;
-    },
-    "click .delete": function () {
-      Meteor.call('deleteQuote', this._id);
-    }
+    // Prevent default action from form submit
+    return false;
+  },
+  "click .delete": function () {
+    Meteor.call('deleteQuote', this._id);
+  }
   });
 
 
@@ -326,129 +287,106 @@ Template.AdminStation.events({
 
 
 
-    Template.AdminStation.events({
-      "submit .new-word": function (event) {      
-        var word = event.target.word.value;
-        if (word == "") return false; // prevent empty strings
-
-        Meteor.call('addWord', word);
-
-        // Clear form      
-        event.target.word.value = "";
-
-        // Prevent default action from form submit
-        return false;
-      }, 
-      "click .delete": function () {
-        if (confirm('Really delete ?')) {
-          Meteor.call('deleteWord', this._id);
-        }
-      }     
-    });
-
-
-    Template.LiteQuote.events({
-      "submit .quotePageAnother": function (event) {      
+  Template.AdminStation.events({
+    "submit .new-word": function (event) {      
       var word = event.target.word.value;
-      var quote_id = Session.get('sessionQuoteId');
-      console.log("Current quote ID: " + quote_id);
-      if (word == "") {
-        Router.go("/flip");
-        return false;
-      }
-      else {
-        Session.set('currentWord', word);
-        Router.go("/flip/" + word);
-      }
+      if (word == "") return false; // prevent empty strings
 
-           
+      Meteor.call('addWord', word);
+
+      // Clear form      
+      event.target.word.value = "";
 
       // Prevent default action from form submit
       return false;
+    }, 
+    "click .delete": function () {
+      if (confirm('Really delete ?')) {
+        Meteor.call('deleteWord', this._id);
+      }
+    }     
+  });
 
+
+  Template.LiteQuote.events({
+    "submit .quotePageAnother": function (event) {      
+    var word = event.target.word.value;
+    var quote_id = Session.get('sessionQuoteId');
+    console.log("Current quote ID: " + quote_id);
+    if (word == "") {
+      Router.go("/flip");
+      return false;
+    }
+    else {
+      Session.set('currentWord', word);
+      Router.go("/flip/" + word);
     }
 
+         
 
-      // "submit .new-word": function (event) {      
-      //   var word = event.target.word.value;
-      //   var quote_id = Session.get('sessionQuoteId');
-      //   console.log(quote_id);
-      //   if (word == "") return false; // prevent empty strings
+    // Prevent default action from form submit
+    return false;
 
-      //   Meteor.call('addWordToQuote', word, quote_id);
+  }
 
-      //   // Clear form      
-      //   event.target.word.value = "";
 
-      //   // Prevent default action from form submit
+
+  });
+
+
+
+
+
+  Template.LiteHome.events({
+    "submit .word-search": function (event) {
+      var q = event.target.search.value;
+      
+      // if (/\s/.test(q)) { // tests for spaces/single words only please
+      //   // It has any kind of whitespace
+      //   alert("Qurious search is limited to single words for the time being.")
       //   return false;
-      // }, 
-      // "click .delete": function () {
-      //   var word = this.toString();
-      //   var quote_id = Session.get('sessionQuoteId');
-      //   if (confirm('Really delete ?')) {
-      //     Meteor.call('deleteWordFromQuote', word, quote_id);
-      //   }
       // }
-    });
-
-
-      // Template.Create.events({
-  //   "submit .new-quote": function (event) {
-  //     var text = event.target.text.value;
-  //     var attribution = event.target.attribution.value;
-  //     if (text == "" || attribution == "") return false; // prevent empty strings
-
-  //     Meteor.call('addQuote', text, attribution, function(error, result) {
-  //       var newQuoteId = result;
-  //       Router.go('/quotes/' + newQuoteId);
-  //     });
-
-  //     // Clear form
-  //     event.target.text.value = "";
-  //     event.target.attribution.value = "";
-
-
-  //     // Prevent default action from form submit
-  //     return false;
-  //   },
-  //   "click .delete": function () {
-  //     Meteor.call('deleteQuote', this._id);
-  //   }
-  // });
-
-
-
-    Template.LiteHome.events({
-      "submit .word-search": function (event) {
-        var q = event.target.search.value;
-        
-        // if (/\s/.test(q)) { // tests for spaces/single words only please
-        //   // It has any kind of whitespace
-        //   alert("Qurious search is limited to single words for the time being.")
-        //   return false;
-        // }
-        
-        if (q == "") {
-          Router.go("/flip");
-          return false;
-        }
-
-
-
-        Router.go('/word/' + q);
-
-        // Router.go('/about');
-
-        // Prevent default action from form submit
+      
+      if (q == "") {
+        Router.go("/flip");
         return false;
-      },
-    });
+      }
+
+
+
+      Router.go('/word/' + q);
+
+      // Router.go('/about');
+
+      // Prevent default action from form submit
+      return false;
+    },
+  });
 
 
 
 
+  Template.AddQuote.events({
+    "submit .add-quote": function (event) {
+      var text = event.target.text.value;
 
+      console.log(text);
+      
+      if (text == "") return false; // prevent empty strings
+
+      // Meteor.call('addQuoteToAuthor', text, attribution, function(error, result) {
+      //   var newQuoteId = result;
+      //   Router.go('/quote/' + newQuoteId);
+      // });
+
+      // Clear form
+      event.target.text.value = "";
+      
+
+      // Prevent default action from form submit
+      return false;
+    },
+  });
 
 
 

@@ -630,6 +630,10 @@ ul.author-list a:hover {
   flex-direction: column;
 }
 
+.backdrop-block {
+  
+}
+
 .home-text {
   font-size: 1.8em;
 }
@@ -665,6 +669,26 @@ ul.author-list a:hover {
   border-radius: 0;
 }
 
+
+/* Create form */
+.create-block {
+  min-width: 300px;
+}
+
+.create-block * {
+  border-radius: 0;
+}
+
+.create-block .btn {
+  display: block;
+  width: 100%;
+}
+
+.btn.btn-primary,
+.btn.btn-primary:active {
+  background-color: #f48365;
+  border-color: #f48365;
+}
 
 
 

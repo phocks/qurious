@@ -358,6 +358,19 @@ Router.route('/logout', function() {
 
 
 
+Router.route('/:_slug/add', {
+  waitOn: function () {    
+    return Meteor.subscribe('authors');
+  },
+  action: function () {
+    var slug = this.params._slug;
+    currentAuthor = Authors.findOne({slug: slug});
+    Session.set("DocumentTitle", "Add a " + currentAuthor.name + " quotation - Qurious");
+    this.render('AddQuote');
+    this.render('Nav', { to: 'nav'});
+  }
+});
+
 
 
 
@@ -372,8 +385,8 @@ Router.route('/:_slug', {
     Session.set("DocumentTitle", currentAuthor.name + " - Qurious");
     this.render('Author', {
       data: { 
-        authors: function () {
-          return Authors.find({slug: slug});
+        author: function () {
+          return Authors.findOne({slug: slug});
           }
         }
     });

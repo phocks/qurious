@@ -62,6 +62,11 @@ Meteor.publish("quotesSlug", function (slug) {
 });
 
 
+Meteor.publish("quotesAuthorId", function (authorId) {
+  return Quotes.find({ author: authorId });
+});
+
+
 
 
 // Pusblish quotes given IDs in an array as input

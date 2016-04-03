@@ -365,19 +365,20 @@ Template.AdminStation.events({
 
 
 
-
+  // When adding quotations from the Author
   Template.AddQuote.events({
     "submit .add-quote": function (event) {
       var text = event.target.text.value;
-
+      var authorId = Session.get('authorId');
       console.log(text);
       
       if (text == "") return false; // prevent empty strings
 
-      // Meteor.call('addQuoteToAuthor', text, attribution, function(error, result) {
-      //   var newQuoteId = result;
-      //   Router.go('/quote/' + newQuoteId);
-      // });
+      Meteor.call('addQuoteToAuthor', text, authorId, function(error, result) {
+        var newQuoteId = result;
+        console.log(newQuoteId);
+        Router.go('/explore');
+      });
 
       // Clear form
       event.target.text.value = "";

@@ -80,9 +80,17 @@ Try to keep this uncluttered, as much as possible.
 <template name="Author">
   <div class="conatiner-fluid backdrop-block text-center"> 
     <h1>{{author.name}}</h1>
+    {{#each quotes}}
+      <div>{{quotation}}</div>
+    {{/each}}
+    <div>
     {{#if currentUser}}<a class="add-link" href="/{{author.slug}}/add">Add</a>{{/if}}
+    </div>
   </div>
 </template>
+
+
+
 
 <template name="AddQuote">
   <div class="conatiner-fluid backdrop text-center">    

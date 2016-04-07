@@ -12,6 +12,8 @@
   */
 /*@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);*/
 
+@import url(https://fonts.googleapis.com/css?family=Neuton);
+
 
 /* Your local CSS File */
 /* latin */
@@ -714,6 +716,16 @@ ul.author-list a:hover {
 .btn.btn-primary:active {
   background-color: #f48365;
   border-color: #f48365;
+}
+
+.quotation {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  /*max-width: 300px;*/
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 32px;
+  font-family: "Neuton", "Vollkorn", serif;
 }
 
 

@@ -15,10 +15,9 @@
 
 <template name="Layout">
   <div class="container-fluid full-container">
-    <header>
-      {{> yield "header"}}
-    </header>
+    
     <div class="body-container">
+    {{> yield "header"}}
       {{> yield}}
     </div>
     <footer>
@@ -32,39 +31,42 @@
 
 
 
-<template name="Home">
-  <div class="conatiner-fluid backdrop text-center">
+<template name="Header">
+   <div class="header"><a href="/"><img class="logo" src="/grey-logo.png"></a></div>
+</template>
 
-  {{#unless currentUser}}
+
+
+<template name="Home">
+  <div class="container backdrop-block text-center">
+
+  
 
     <div class="home-text">
       <h1>qurious</h1>
       <ul>        
         <li><a href="/explore">explore</a></li>
-        <li><a href="/login">login</a></li>
+        <li>{{#unless currentUser}}<a href="/login">login</a>{{else}}<a href="/logout">logout</a>{{/unless}}</li>
       </ul>
     </div>
   
 
-  {{else}}
+  
 
-    <div class="home-text">
-      <h1>qurious</h1>
-      <ul>
-        <li><a href="/explore">explore</a></li>
-        <li><a href="/logout">logout</a></li>
-      </ul>
-    </div>
     
-  {{/unless}}
+  
 
 
   </div>
-
 </template>
 
+
+
+
+
+
 <template name="Login">
-  <div class="conatiner-fluid backdrop text-center">
+  <div class="container backdrop-block text-center">
     <div class="login-form">
       {{> atForm}}
     </div>
@@ -73,19 +75,30 @@
 
 
 <template name="Explore">
-  <div class="conatiner-fluid backdrop text-center">
+  <div class="container backdrop-block text-center">
     <ul class="author-list">
       {{#each authors}}
-        <li><a href="/{{slug}}">{{name}}</a></li>
+        <li><a href="/{{slug}}">{{name}}</a><!-- <span class="delete">x</span> --></li>
       {{/each}}
-      <li><a href="#">+</a></li>
+      <li><a href="/add">+</a></li>
     </ul>
+  </div>
+</template>
+
+<template name="Add">
+  <div class="container backdrop-block text-center">
+    <form class="add-author">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Text input" name="text">
+          </div> 
+          <button type="submit" class="btn btn-primary create">Submit</button>
+        </form>
   </div>
 </template>
 
 
 <template name="Author">
-  <div class="conatiner-fluid backdrop-block text-center">
+  <div class="container backdrop-block text-center">
     <div class="container">
       <!-- <h1>{{author.name}}</h1> -->
       {{#each quotes}}
@@ -104,7 +117,7 @@
 
 
 <template name="AddQuote">
-  <div class="conatiner-fluid backdrop text-center">    
+  <div class="container backdrop-block text-center">    
     <div class="create-block">
         <form class="add-quote">
           <div class="form-group">

@@ -174,22 +174,6 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
 
-/* The Header up top */
-/* Will probably get rid of this completely soon
-    And now it's gone */
-.lite-container .lite-header {
-  /*text-align: center;*/
-  padding: 0 0 24px;
-  font-size: 1.2em;
-}
-
-.lite-container .lite-header img {
-  height: 32px;
-}
-
-.lite-container .lite-header a {
-  color: inherit; /* hiding random quote easter egg */
-}
 
 
 
@@ -579,7 +563,7 @@ Keep it clean
 */
 
 .full-container {
-  padding: 0;
+  padding: 10px;
 }
 
 .quote-box {
@@ -711,7 +695,7 @@ ul.author-list a:hover {
 .at-form button,
 .at-form input,
 .at-form .alert {
-  border-radius: 0;
+  /*border-radius: 0;*/
 }
 
 
@@ -721,7 +705,7 @@ ul.author-list a:hover {
 }
 
 .create-block * {
-  border-radius: 0;
+  /*border-radius: 0;*/
 }
 
 .create-block .btn {
@@ -733,6 +717,8 @@ ul.author-list a:hover {
 .btn.btn-primary:active {
   background-color: #f48365;
   border-color: #f48365;
+  display: block;
+  width: 100%;
 }
 
 
@@ -807,4 +793,9 @@ ul.author-list a:hover {
   .lite-quote {
     font-size: 2.6em;
   }
+}
+
+
+.header img.logo {
+  max-width: 64px;
 }

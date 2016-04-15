@@ -14,9 +14,10 @@ Router.route('/api', function () {
 /* The root home route landing for qurious.cc/   */
 Router.route('/', {
   action: function () {
-    Session.set("DocumentTitle","Qurious");      
+    Session.set("DocumentTitle","Qurious");
+    this.render('Header', { to: 'header'});   
     this.render('Home', { });
-    this.render('Nav', { to: 'nav'});
+    // this.render('Nav', { to: 'nav'});
   }
 });
 
@@ -25,7 +26,7 @@ Router.route('/', {
 // A page where you can click to see more
 Router.route('/explore', {
   waitOn: function () {    
-    Meteor.subscribe('authors');
+    return Meteor.subscribe('authors');
   },
   action: function () {
     Session.set("DocumentTitle","Qurious");
@@ -36,13 +37,114 @@ Router.route('/explore', {
           }
         }
     });
-    this.render('Nav', { to: 'nav'});
+    // this.render('Nav', { to: 'nav'});
+  }
+});
+
+
+
+Router.route('/add');
+
+
+
+
+
+
+
+
+
+Router.route('/login', {
+  waitOn: function () {
+    
+  },
+  action: function () {
+    if (Meteor.user() ) Router.go('/'); // deny not logged in
+    this.layout('Layout');
+    Session.set("DocumentTitle","Qurious Login");
+    this.render('Login');
+    // this.render('Nav', { to: 'nav'});
   }
 });
 
 
 
 
+// Quick and easy logouts
+Router.route('/logout', function() {
+  AccountsTemplates.logout();
+  Router.go('/');
+});
+
+
+
+Router.route('/:_slug/add', {
+  waitOn: function () {    
+    return Meteor.subscribe('authors');
+  },
+  action: function () {
+    var slug = this.params._slug;
+    currentAuthor = Authors.findOne({slug: slug});
+    Session.set("DocumentTitle", "Add a " + currentAuthor.name + " quotation - Qurious");
+    Session.set("authorId", currentAuthor._id);
+    this.render('AddQuote');
+    // this.render('Nav', { to: 'nav'});
+  }
+});
+
+
+
+
+// An exploration into the unknown
+Router.route('/:_slug', {
+  waitOn: function () {    
+    return Meteor.subscribe('authors');
+  },
+  action: function () {
+    var slug = this.params._slug;
+    var currentAuthor = Authors.findOne({slug: slug});
+    
+    Session.set("DocumentTitle", currentAuthor.name + " - Qurious");
+    Meteor.subscribe('quotesAuthorId', currentAuthor._id);
+    this.render('Header', { to: 'header'});
+    this.render('Author', {
+      data: { 
+        author: function () {
+          return Authors.findOne({slug: slug});
+          },
+        quotes: function () {
+          return Quotes.find({author: currentAuthor._id});
+        }
+        }
+    });
+    // this.render('Nav', { to: 'nav'});
+  }
+});
+
+
+
+
+
+// This is our catch all for all other unknown things
+// Probably won't be called all that much
+// Especially after we implement qurious.cc/phocks user pages
+Router.route('/(.*)', function() {
+  this.layout('Layout');
+  Session.set("DocumentTitle","Qurious - 404 not found");
+  this.render('LiteError');
+});
+
+
+
+// Please refrain from putting any routes below here as they will (probably) not work
+
+
+
+// Testing the Lite loader
+// Router.route('/load', function() {
+//   this.layout('Layout');
+//   Session.set("DocumentTitle","Loading - Qurious");
+//   this.render('Loading');
+// });
 
 
 
@@ -330,101 +432,3 @@ Router.route('/admin', {
   },
 });
 
-
-
-
-
-Router.route('/login', {
-  waitOn: function () {
-    
-  },
-  action: function () {
-    if (Meteor.user() ) Router.go('/'); // deny not logged in
-    this.layout('Layout');
-    Session.set("DocumentTitle","Qurious Login");
-    this.render('Login');
-    this.render('Nav', { to: 'nav'});
-  }
-});
-
-
-
-
-// Quick and easy logouts
-Router.route('/logout', function() {
-  AccountsTemplates.logout();
-  Router.go('/');
-});
-
-
-
-Router.route('/:_slug/add', {
-  waitOn: function () {    
-    return Meteor.subscribe('authors');
-  },
-  action: function () {
-    var slug = this.params._slug;
-    currentAuthor = Authors.findOne({slug: slug});
-    Session.set("DocumentTitle", "Add a " + currentAuthor.name + " quotation - Qurious");
-    Session.set("authorId", currentAuthor._id);
-    this.render('AddQuote');
-    this.render('Nav', { to: 'nav'});
-  }
-});
-
-
-
-
-// An exploration into the unknown
-Router.route('/:_slug', {
-  waitOn: function () {    
-    Meteor.subscribe('authors');
-    var slug = this.params._slug;
-    currentAuthor = Authors.findOne({slug: slug});
-    if (currentAuthor){
-      console.log(currentAuthor._id);
-      return Meteor.subscribe('quotesAuthorId', currentAuthor._id);
-      Session.set("DocumentTitle", currentAuthor.name + " - Qurious");
-    }
-  },
-  action: function () {
-    var slug = this.params._slug;
-    this.render('Author', {
-      data: { 
-        author: function () {
-          return Authors.findOne({slug: slug});
-          },
-        quotes: function () {
-          return Quotes.find({author: currentAuthor._id});
-        }
-        }
-    });
-    this.render('Nav', { to: 'nav'});
-  }
-});
-
-
-
-
-
-// This is our catch all for all other unknown things
-// Probably won't be called all that much
-// Especially after we implement qurious.cc/phocks user pages
-Router.route('/(.*)', function() {
-  this.layout('Layout');
-  Session.set("DocumentTitle","Qurious - 404 not found");
-  this.render('LiteError');
-});
-
-
-
-// Please refrain from putting any routes below here as they will (probably) not work
-
-
-
-// Testing the Lite loader
-// Router.route('/load', function() {
-//   this.layout('Layout');
-//   Session.set("DocumentTitle","Loading - Qurious");
-//   this.render('Loading');
-// });

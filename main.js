@@ -132,10 +132,11 @@ if (Meteor.isClient) { // only runs on the client
     // sets default layout so you don't have to set it in the route
     layoutTemplate: 'Layout',
     // loadingTemplate: "Loading",
-    // yieldTemplates: {
-    //     Header: {to: 'header'},
-    //     Footer: {to: 'footer'},
-    // },
+    yieldTemplates: { // These don't seem to work with iron-router-progress installed
+        // Header: {to: 'header'},
+        // Footer: {to: 'footer'},
+        // Nav: {to: 'nav'},
+    },
     //notFoundTemplate: '404' //this is used for somewhat custom 404s
 
     // for the loading up top thing
@@ -405,6 +406,40 @@ Template.AdminStation.events({
     },
   });
 
+
+
+  // Adding another author
+  Template.Add.events({
+    "submit .add-author": function (event) {
+      var text = event.target.text.value;
+      var authorId = Session.get('authorId');
+      console.log(text);
+           
+      if (text == "") return false; // prevent empty strings
+
+      Meteor.call('addAuthor', text, function(error, result) {
+        var newAuthorId = result;
+        console.log(newAuthorId);
+        Router.go('/explore');
+      });
+
+      // Clear form
+      event.target.text.value = "";
+      
+
+      // Prevent default action from form submit
+      return false;
+    },
+  });
+
+
+  Template.Explore.events({
+    "click .delete": function () {
+      if (confirm('Really delete ?')) {
+        Meteor.call('deleteAuthor', this._id);
+      }
+    }
+  })
 
 
 

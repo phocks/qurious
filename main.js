@@ -71,7 +71,9 @@ Quotes.attachSchema(Schemas.Quote);
 loadMoreLimit = 5;  // for infinite scrolling, how many per load
 maximumQuotationLength = 1000; // in characters
 
-// Deny public from editing profile. May prevent DoS attack
+
+
+// Deny public from editing user profile. May prevent DoS attack
 Meteor.users.deny({
   update: function() {
     return true;
@@ -178,7 +180,7 @@ if (Meteor.isClient) { // only runs on the client
     enablePasswordChange: true,
     showForgotPasswordLink: true,
     lowercaseUsername: true,
-    // showReCaptcha: true,
+    showReCaptcha: true,
     sendVerificationEmail: true,
 
     homeRoutePath: '/',
@@ -469,64 +471,6 @@ Template.AdminStation.events({
     desktop.addListener(handleMediaChange);
     largeDesktop.addListener(handleMediaChange);
   });
-
-
-
-// Template.ListAuthors.events({
-//   "submit .new-author": function (event) {      
-//     var author = event.target.author.value;
-//     if (author == "") return false; // prevent empty strings
-
-//     Meteor.call('addAuthor', author);
-
-//     // Clear form      
-//     event.target.author.value = "";
-
-//     // Prevent default action from form submit
-//     return false;
-//   },
-//   "click .delete": function () {
-//     if (confirm('Really delete ?')) {
-//       Meteor.call('deleteAuthor', this._id);
-//     }
-//   }
-// });
-
-
-// Template.Header.events({
-//   "submit .search-form": function (event) {
-//     var q = event.target.q.value;
-
-//     if (q == "") {
-//       Router.go('/explore/latest');
-//       return false;
-
-//     }
-
-//     //event.target.q.value = "";
-
-
-//     Router.go('/search/' + q);
-
-
-//     // Prevent default action from form submit
-//     return false;
-//   },
-// });
-
-
-// this isn't even used any more but yeah it's for a delete button on Explore
-  // Template.Quotes.events({
-  //   "click .delete-click": function () {
-  //     Meteor.call('deleteQuote', this._id);
-  //   },
-
-
-  //   "click .list-quote": function () {
-  //     Router.go('/quotes/' + this._id);
-  //   } this was commented out in favour of a direct read more link 
-  // });
-
 
 
 

@@ -43,7 +43,7 @@
 
 body {
   background-color: #fdfbf8;
-  color: #666;
+  color: #888;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
 }
@@ -688,10 +688,25 @@ ul.author-list a:hover {
 }
 
 .at-form {
-  width: 256px;
+  width: 263px;
   margin-top: 0;
   margin-bottom: 0;
+  overflow: visible
 }
+
+.g-recaptcha {
+  transform:scale(0.77);
+  -webkit-transform:scale(0.77);
+  transform-origin:0 0;
+  -webkit-transform-origin:0 0;
+  box-shadow: none;
+}
+
+.g-recaptcha iframe {
+    border-radius: 5px;
+    width: 302px;
+    height: 76px;
+ }
 
 .at-form button,
 .at-form input,

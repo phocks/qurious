@@ -35,7 +35,10 @@ Words = new Mongo.Collection('words'); // Words are the basis of ideas
 
 
 // Let's set up some schemas so that our data doesn't get messy
-Authors.attachSchema(new SimpleSchema({
+var Schemas = {}; // sets it up in memory or something
+
+// Define the schemas
+Schemas.Author = new SimpleSchema({
   name: {
     type: String,
     label: "Name",
@@ -46,10 +49,19 @@ Authors.attachSchema(new SimpleSchema({
     label: "Slug",
     max: 500
   }
-}));
+});
 
+Schemas.Quote = new SimpleSchema({
+  author: { type: String },
+  quotation: { type: String },
+  createdAt: { type: Date },
+  username: { type: String },
+  owner: { type: String },
+});
 
-
+// Attach the schema objects to a collections
+Authors.attachSchema(Schemas.Author);
+Quotes.attachSchema(Schemas.Quote);
 
 
 
@@ -162,10 +174,12 @@ if (Meteor.isClient) { // only runs on the client
 
   // Setting up the useraccounts:core
   AccountsTemplates.configure({
-    forbidClientAccountCreation: true,
+    // forbidClientAccountCreation: true,
     enablePasswordChange: true,
     showForgotPasswordLink: true,
     lowercaseUsername: true,
+    // showReCaptcha: true,
+    sendVerificationEmail: true,
 
     homeRoutePath: '/',
     redirectTimeout: 4000,

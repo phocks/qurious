@@ -13,6 +13,7 @@
 /*@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);*/
 
 @import url(https://fonts.googleapis.com/css?family=Neuton);
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab:600,400);
 
 
 /* Your local CSS File */
@@ -42,7 +43,7 @@
 
 body {
   background-color: #fdfbf8;
-  color: #999;
+  color: #666;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
 }
@@ -602,6 +603,7 @@ Keep it clean
   padding: 15px 0 15px;
   color: #999;
   border: 0;
+  /*z-index: -100;*/
 }
 
 .nav a {
@@ -659,7 +661,7 @@ ul.author-list a:hover {
 }
 
 .backdrop-block {
-  
+  padding-bottom: 65px; /* use if fixed bottom button nav */
 }
 
 .home-text {
@@ -718,14 +720,38 @@ ul.author-list a:hover {
   border-color: #f48365;
 }
 
+
+
+
+.quote-container {
+  max-width: 500px;
+  margin-right: auto;
+  margin-left: auto;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /*border-radius: 2px
+  background-color: white;*/
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  /*box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.2s ease-in-out;*/
+}
+
+
 .quotation {
   margin-top: 32px;
   margin-bottom: 32px;
-  /*max-width: 300px;*/
+  /*padding-left: 24px;
+  padding-right: 24px;*/
   margin-left: auto;
   margin-right: auto;
   font-size: 32px;
-  font-family: "Neuton", "Vollkorn", serif;
+  font-family: "Josefin Slab", "Neuton", "Vollkorn", serif;
+
 }
 
 

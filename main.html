@@ -1,12 +1,3 @@
-<!-- 
-
-This is the new Main HTML initially for the Belief release 
-
-Try to keep this uncluttered, as much as possible.
-
--->
-
-
 
 <head>
   <meta charset="utf-8">
@@ -96,9 +87,11 @@ Try to keep this uncluttered, as much as possible.
 <template name="Author">
   <div class="conatiner-fluid backdrop-block text-center">
     <div class="container">
-      <h1>{{author.name}}</h1>
+      <!-- <h1>{{author.name}}</h1> -->
       {{#each quotes}}
-        <div class="quotation">&ldquo;{{quotation}}&rdquo;</div>
+        <div class="quote-container">
+          <div class="quotation">&ldquo;{{quotation}}&rdquo;</div>
+        </div>
       {{/each}}
       <div>
       {{#if currentUser}}<a class="add-link" href="/{{author.slug}}/add">Add</a>{{/if}}

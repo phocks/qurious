@@ -378,14 +378,17 @@ Router.route('/:_slug/add', {
 // An exploration into the unknown
 Router.route('/:_slug', {
   waitOn: function () {    
-    return Meteor.subscribe('authors');
+    Meteor.subscribe('authors');
+    var slug = this.params._slug;
+    currentAuthor = Authors.findOne({slug: slug});
+    if (currentAuthor){
+      console.log(currentAuthor._id);
+      return Meteor.subscribe('quotesAuthorId', currentAuthor._id);
+      Session.set("DocumentTitle", currentAuthor.name + " - Qurious");
+    }
   },
   action: function () {
     var slug = this.params._slug;
-    currentAuthor = Authors.findOne({slug: slug});
-    console.log(currentAuthor._id);
-    Meteor.subscribe('quotesAuthorId', currentAuthor._id);
-    Session.set("DocumentTitle", currentAuthor.name + " - Qurious");
     this.render('Author', {
       data: { 
         author: function () {

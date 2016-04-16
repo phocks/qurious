@@ -42,12 +42,13 @@ Schemas.Author = new SimpleSchema({
   name: {
     type: String,
     label: "Name",
-    max: 200
+    max: 200,
   },
   slug: {
     type: String,
     label: "Slug",
-    max: 500
+    unique: true,
+    max: 500,
   }
 });
 
@@ -265,6 +266,13 @@ if (Meteor.isClient) { // only runs on the client
     }
   );
 
+  Template.registerHelper('truncate', function(passedString) {
+    var n = 3; // how many words do you want?
+    var shortenedText = passedString.replace(/\s+/g," ").split(/(?=\s)/gi).slice(0, n).join('');
+    // This removes special characters except whitespace
+    shortenedText = shortenedText.replace(/[^a-zA-Z\d\s]/g, "");
+    return new Spacebars.SafeString(shortenedText);
+  });
 
 
 

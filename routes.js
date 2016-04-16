@@ -15,9 +15,10 @@ Router.route('/api', function () {
 Router.route('/', {
   action: function () {
     Session.set("DocumentTitle","Qurious");
-    this.render('Header', { to: 'header'});   
+
+    this.render('Nav', { to: 'nav'});
+
     this.render('Home', { });
-    // this.render('Nav', { to: 'nav'});
   }
 });
 
@@ -30,6 +31,9 @@ Router.route('/explore', {
   },
   action: function () {
     Session.set("DocumentTitle","Qurious");
+
+    this.render('Nav', { to: 'nav'});
+
     this.render('Explore', {
       data: { 
         authors: function () {
@@ -43,7 +47,20 @@ Router.route('/explore', {
 
 
 
-Router.route('/add');
+Router.route('/add', {
+  waitOn: function () {
+    
+  },
+  action: function () {
+    if (!Meteor.user() ) Router.go('/'); // deny not logged in
+    this.layout('Layout');
+    Session.set("DocumentTitle","Qurious - Add Author");
+
+    this.render('Nav', { to: 'nav'});
+    this.render('Add');
+    // this.render('Nav', { to: 'nav'});
+  }
+});
 
 
 
@@ -61,6 +78,8 @@ Router.route('/login', {
     if (Meteor.user() ) Router.go('/'); // deny not logged in
     this.layout('Layout');
     Session.set("DocumentTitle","Qurious Login");
+
+    this.render('Nav', { to: 'nav'});
     this.render('Login');
     // this.render('Nav', { to: 'nav'});
   }
@@ -86,6 +105,8 @@ Router.route('/:_slug/add', {
     currentAuthor = Authors.findOne({slug: slug});
     Session.set("DocumentTitle", "Add a " + currentAuthor.name + " quotation - Qurious");
     Session.set("authorId", currentAuthor._id);
+
+    this.render('Nav', { to: 'nav'});
     this.render('AddQuote');
     // this.render('Nav', { to: 'nav'});
   }
@@ -105,16 +126,17 @@ Router.route('/:_slug', {
     
     Session.set("DocumentTitle", currentAuthor.name + " - Qurious");
     Meteor.subscribe('quotesAuthorId', currentAuthor._id);
-    this.render('Header', { to: 'header'});
+    this.render('Nav', { to: 'nav'});
     this.render('Author', {
       data: { 
         author: function () {
           return Authors.findOne({slug: slug});
           },
         quotes: function () {
-          return Quotes.find({author: currentAuthor._id});
+          var quotes = Quotes.find({author: currentAuthor._id});          
+          return quotes;
         }
-        }
+      }
     });
     // this.render('Nav', { to: 'nav'});
   }

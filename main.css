@@ -14,27 +14,27 @@
 
 @import url(https://fonts.googleapis.com/css?family=Neuton);
 @import url(https://fonts.googleapis.com/css?family=Josefin+Slab:600,400);
-
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
 /* Your local CSS File */
 /* latin */
-@font-face {
+/*@font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 400;
   src: local('Montserrat-Regular'), url(/fonts/montserrat/Montserrat-Regular.ttf) format('truetype');
   src: local('Montserrat-Regular'), url(/fonts/montserrat/Montserrat-Regular.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
+}*/
 /* latin */
-@font-face {
+/*@font-face {
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   src: local('Montserrat-Bold'), url(/fonts/montserrat/Montserrat-Bold.ttf) format('truetype');
   src: local('Montserrat-Bold'), url(/fonts/montserrat/Montserrat-Bold.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
+}*/
 
 
 
@@ -563,7 +563,7 @@ Keep it clean
 */
 
 .full-container {
-  padding: 10px;
+  padding: 0;
 }
 
 .quote-box {
@@ -576,29 +576,55 @@ Keep it clean
   padding-bottom: 128px;
 }
 
-/* Bottom nav */
+/*  nav */
+
+.qurious-nav {
+  padding-top: 5vh;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #efefef;
+  margin-bottom: 3vh;
+}
+
+.qurious-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.qurious-nav li {
+  display: inline;
+}
+
+.qurious-nav li a {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.qurious-nav img {
+  max-height: 32px;
+}
 
 .navbar {
-  min-height: inherit;
+  /*min-height: inherit;*/
   background-color: transparent;
 }
 
-.nav {
+.navbar {
   padding: 15px 0 15px;
   color: #999;
-  border: 0;
+  /*border: 0;*/
   /*z-index: -100;*/
 }
 
-.nav a {
+.navbar a {
   color: #999;
   background-color: inherit;
 }
 
-.nav img {
+.navbar img {
   height: 32px;
-  opacity: 0.4;
-  filter: alpha(opacity=40); /* For IE8 and earlier */
+  /*opacity: 0.4;
+  filter: alpha(opacity=40);*/ /* For IE8 and earlier */
 }
 
 /* A list of Authors */
@@ -618,16 +644,33 @@ ul.author-list li {
   margin-bottom: 10px;
 }
 
-ul.author-list a {
+ul.author-list a,
+ul.quote-list a {
   text-decoration: none;
   color: inherit;
   padding: 8px 12px;
   background-color: #f2f1ef;
 }
 
-ul.author-list a:hover {
+ul.author-list a:hover,
+ul.quote-list a:hover {
   background-color: #5ab2b5;
   color: white;
+}
+
+
+ul.quote-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.quote-list li {
+  font-size: 28px;
+  display: inline-block;
+  padding: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 
@@ -675,7 +718,12 @@ ul.author-list a:hover {
   width: 263px;
   margin-top: 0;
   margin-bottom: 0;
-  overflow: visible
+  overflow: visible;
+  margin: initial;
+}
+
+.at-form * {
+  border-radius: 0;
 }
 
 .g-recaptcha {
@@ -726,8 +774,8 @@ ul.author-list a:hover {
 
 .quote-container {
   max-width: 500px;
-  margin-right: auto;
-  margin-left: auto;
+  /*margin-right: auto;
+  margin-left: auto;*/
   
   display: flex;
   flex-direction: column;
@@ -743,17 +791,38 @@ ul.author-list a:hover {
 }
 
 
+
+
 .quotation {
-  margin-top: 32px;
+  /*margin-top: 32px;
   margin-bottom: 32px;
-  /*padding-left: 24px;
-  padding-right: 24px;*/
   margin-left: auto;
   margin-right: auto;
   font-size: 32px;
-  font-family: "Josefin Slab", "Neuton", "Vollkorn", serif;
+  font-family: "Josefin Slab", "Neuton", "Vollkorn", serif;*/
 
 }
+
+
+
+
+
+.header {
+  text-align: center;
+}
+
+.header img.logo {
+  max-width: 64px;
+}
+
+
+form.add-author {
+  width: 300px;
+  /*margin-left: auto;
+  margin-right: auto;*/
+}
+
+
 
 
 
@@ -795,7 +864,3 @@ ul.author-list a:hover {
   }
 }
 
-
-.header img.logo {
-  max-width: 64px;
-}

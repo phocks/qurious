@@ -15,17 +15,19 @@
 
 <template name="Layout">
   <div class="container-fluid full-container">
-    
+    <nav>
+      {{> yield "nav"}}
+    </nav>
+    <header>
+      {{> yield "header"}}
+    </header>
     <div class="body-container">
-    {{> yield "header"}}
       {{> yield}}
     </div>
     <footer>
       {{> yield "footer"}}
     </footer>
-    <nav>
-      {{> yield "nav"}}
-    </nav>
+    
   </div>
 </template>
 
@@ -37,26 +39,28 @@
 
 
 
+<!-- This is the fixed nav at the bottom -->
+<template name="Nav">
+  <div class="container qurious-nav">
+    <ul>
+      <li><a href="/"><img src="/grey-logo.png"></a></li>
+      <li><a href="/explore">explore</a></li>
+      <li>{{#unless currentUser}}<a href="/login">login</a>{{else}}<a href="/logout">logout</a>{{/unless}}</li>
+    </ul>
+  </div>
+</template>
+
+
+
 <template name="Home">
   <div class="container backdrop-block text-center">
-
-  
-
     <div class="home-text">
-      <h1>qurious</h1>
+      <!-- <h1>qurious</h1>
       <ul>        
         <li><a href="/explore">explore</a></li>
         <li>{{#unless currentUser}}<a href="/login">login</a>{{else}}<a href="/logout">logout</a>{{/unless}}</li>
-      </ul>
+      </ul> -->
     </div>
-  
-
-  
-
-    
-  
-
-
   </div>
 </template>
 
@@ -75,7 +79,7 @@
 
 
 <template name="Explore">
-  <div class="container backdrop-block text-center">
+  <div class="container backdrop-block">
     <ul class="author-list">
       {{#each authors}}
         <li><a href="/{{slug}}">{{name}}</a><!-- <span class="delete">x</span> --></li>
@@ -98,18 +102,17 @@
 
 
 <template name="Author">
-  <div class="container backdrop-block text-center">
-    <div class="container">
-      <!-- <h1>{{author.name}}</h1> -->
+  <div class="container backdrop-block">
+    <!-- <h1>{{author.name}}</h1> -->
+    <div>
+      <ul class="quote-list">
       {{#each quotes}}
-        <div class="quote-container">
-          <div class="quotation">&ldquo;{{quotation}}&rdquo;</div>
-        </div>
+          <li class="quotation"><a href="#">{{truncate quotation}}</a></li>
       {{/each}}
-      <div>
-      {{#if currentUser}}<a class="add-link" href="/{{author.slug}}/add">Add</a>{{/if}}
-      </div>
+      <li><a href="{{author.slug}}/add">+</a></li>
+      </ul>
     </div>
+      <!-- {{#if currentUser}}<a class="add-link" href="/{{author.slug}}/add">Add</a>{{/if}} -->
   </div>
 </template>
 
@@ -145,17 +148,7 @@
 
 
 
-<!-- This is the fixed nav at the bottom -->
-<template name="Nav">
-  <div class="navbar navbar-default navbar-fixed-bottom nav">
-     <div class="container-fluid">
-      <!--<div class="pull-right">
-        <a href="#"><i class="fa fa-bars menu"></i></a>
-      </div> -->
-      <a href="/"><img src="/grey-logo.png"></a>
-    </div>
-  </div> 
-</template>
+
 
 <!-- This is the fixed nav at the bottom REMOVE SOON -->
 <template name="LiteNav">
@@ -188,10 +181,16 @@
       
     </footer>
     <nav>
-      {{>Nav}}
+      <!-- {{>Nav}} -->
     </nav>
   </div>
 </template>
+
+
+
+
+
+
 
 <!-- Replaces default UserAccounts form -->
 <template name="AtFormQurious">

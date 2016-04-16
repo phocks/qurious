@@ -16,6 +16,9 @@
 @import url(https://fonts.googleapis.com/css?family=Josefin+Slab:600,400);
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
+
+
+
 /* Your local CSS File */
 /* latin */
 /*@font-face {
@@ -100,185 +103,6 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
   background-color:#eee;
 }
 */
-
-
-
-
-
-
-
-/*
-|--------------------------------------------------------------------------
-| Qurious Lite Styles
-|--------------------------------------------------------------------------
-|
-| Getting Qurious ready for public consumption led us to do up a 'lite'
-| version of the web app. We are currently now integrating the other
-| functionality into the app and getting it all working again.
-|
-|
-*/
-
-
-
-/* Master styles whole page */
-.lite-container p {
-  margin: 5px 0;
-  padding-bottom: 1em;
-}
-
-.lite-container .top-spacing {
-  min-height: 7vh;
-}
-
-.lite-container .container {
-  /* hacky way of restricting width. do better later */
-  /*max-width: 720px;*/
-}
-
-.lite-container hr {
-  margin: 0;
-}
-
-.lite-container.container-fluid {
-  padding: 0;
-  padding-bottom: 65px; /* use if fixed bottom button nav */
-}
-
-/* This goes around all content */
-.lite-container {
-  
-  min-height: 100vh;
-  color: #787878;
-}
-
-
-
-
-.lite-container .lite-home .home-text .logo {
-  max-width: 400px;
-  margin: auto;  
-  margin-top: 32px;
-  padding-bottom: 32px;
-}
-
-.lite-container .lite-home .home-text .logo img {
-  max-width:100%;
-  text-align: center;
-}
-
-.lite-container .lite-home .home-text {
-  text-align: center;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Body where the quote goes */
-.lite-container .body-container {
-  background-color: #fdfbf8;
-  /*min-height: 400px*/
-}
-
-.lite-quote {
-  font-family: 'Vollkorn', serif;
-  font-size: 1.8em;
-}
-
-.lite-quote .quotation {
-  /*padding: 42px 0 0;*/
-}
-
-.lite-quote .quotation p {
-  padding-bottom: 1em;
-}
-
-.lite-quote p.attribution {
-  padding: 0 0 7vh;
-}
-
-.lite-container .container {
-  /*max-width: 500px;*/
-}
-
-.lite-container .attribution {
-  font-style: italic;
-  color: #999;
-}
-
-#dropcap {
-  color: #f48365;
-}
-
-.lite-container .lite-info {
-  /*padding: 8px 0 0;*/
-}
-
-.lite-container .lite-info a {
-  color: inherit;
-}
-
-.lite-container .lite-info ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  line-height: 1.8em;
-}
-
-.lite-container .lite-info ul li {
-  display: inline;
-  white-space: nowrap;
-  margin-right: 8px;
-}
-
-/*.lite-container .lite-info ul li:after {
-  content: " "
-}
-
-.lite-container .lite-info ul li:last-child:after {
-  content: '';
-}*/
-
-
-.lite-container .lite-controls {
-  /*font-size: 2em;*/
-  /*text-align: center;*/
-}
-
-/* Footer section */
-.lite-container .lite-footer {
-  text-align: center;
-  padding: 0;
-  /*margin-top: 5px;*/
-}
-
-.lite-container .lite-footer img {
-  width: 32px;
-}
-
-
-
-
-
-.lite-container ul.authors {
-  list-style-type: none;
-}
-
-.lite-container ul.authors li {
-  display: inline;
-}
-
 
 
 
@@ -571,9 +395,9 @@ Keep it clean
 }
 
 .quote {
-  font-size: 64px;
-  padding-top: 128px;
-  padding-bottom: 128px;
+  font-size: 48px;
+  /*padding-top: 28px;
+  padding-bottom: 28px;*/
 }
 
 /*  nav */
@@ -637,7 +461,7 @@ ul.author-list {
 }
 
 ul.author-list li {
-  font-size: 28px;
+  font-size: 24px;
   display: inline-block;
   padding: 0;
   margin-top: 10px;
@@ -666,7 +490,7 @@ ul.quote-list {
 }
 
 ul.quote-list li {
-  font-size: 28px;
+  font-size: 24px;
   display: inline-block;
   padding: 0;
   margin-top: 10px;
@@ -689,6 +513,11 @@ ul.quote-list li {
 
 .backdrop-block {
   padding-bottom: 65px; /* use if fixed bottom button nav */
+
+}
+
+.backdrop-block * {
+  border-radius: 0;
 }
 
 .home-text {
@@ -720,6 +549,7 @@ ul.quote-list li {
   margin-bottom: 0;
   overflow: visible;
   margin: initial;
+  text-align: center;
 }
 
 .at-form * {
@@ -747,19 +577,8 @@ ul.quote-list li {
 }
 
 
-/* Create form */
-.create-block {
-  min-width: 300px;
-}
 
-.create-block * {
-  /*border-radius: 0;*/
-}
 
-.create-block .btn {
-  display: block;
-  width: 100%;
-}
 
 .btn.btn-primary,
 .btn.btn-primary:active {
@@ -816,12 +635,21 @@ ul.quote-list li {
 }
 
 
-form.add-author {
+/*form.add-author {
   width: 300px;
-  /*margin-left: auto;
-  margin-right: auto;*/
+}*/
+
+
+.author-page h1 {
+  margin-bottom: 1em;
+  /*font-size: 42px;*/
 }
 
+
+.attribution {
+  margin-top: 32px;
+  /*font-size: 32px;*/
+}
 
 
 

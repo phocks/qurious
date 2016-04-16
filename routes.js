@@ -13,12 +13,21 @@ Router.route('/api', function () {
 
 /* The root home route landing for qurious.cc/   */
 Router.route('/', {
+  waitOn: function () {    
+    return Meteor.subscribe('authors');
+  },
   action: function () {
     Session.set("DocumentTitle","Qurious");
 
     this.render('Nav', { to: 'nav'});
 
-    this.render('Home', { });
+    this.render('Home', {
+      data: { 
+        authors: function () {
+          return Authors.find({}, { sort: {name: 1}});
+          }
+        }
+    });
   }
 });
 
@@ -52,7 +61,7 @@ Router.route('/add', {
     
   },
   action: function () {
-    if (!Meteor.user() ) Router.go('/'); // deny not logged in
+    if (!Meteor.user() ) Router.go('/login'); // deny not logged in
     this.layout('Layout');
     Session.set("DocumentTitle","Qurious - Add Author");
 
@@ -95,7 +104,7 @@ Router.route('/logout', function() {
 });
 
 
-
+// How to add an author
 Router.route('/:_slug/add', {
   waitOn: function () {    
     return Meteor.subscribe('authors');
@@ -113,9 +122,40 @@ Router.route('/:_slug/add', {
 });
 
 
+// Display the single quote you found
+Router.route('/:_author_slug/:_quote_slug', {
+  waitOn: function () {
+    Meteor.subscribe('quotesSlug', this.params._quote_slug); 
+    return Meteor.subscribe('authors');
+  },
+  action: function () {
+    var authorSlug = this.params._author_slug;
+    var quoteSlug = this.params._quote_slug;
+    console.log("Current quoteSlug is: " + quoteSlug );
+    currentAuthor = Authors.findOne({slug: authorSlug});
+    Session.set("DocumentTitle", "Add a " + currentAuthor.name + " quotation - Qurious");
+    Session.set("authorId", currentAuthor._id);
+
+    this.render('Nav', { to: 'nav'});
+    this.render('DisplayQuote', {
+      data: { 
+        author: function () {
+          return Authors.findOne({ slug: authorSlug });
+          },
+        quote: function () {
+          var quote = Quotes.findOne({ slug: quoteSlug });
+          return quote;
+        }
+      }
+    });
+    // this.render('Nav', { to: 'nav'});
+  }
+});
 
 
-// An exploration into the unknown
+
+
+// What quotes does the author have?
 Router.route('/:_slug', {
   waitOn: function () {    
     return Meteor.subscribe('authors');

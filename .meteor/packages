@@ -41,3 +41,4 @@ standard-minifier-js
 ecmascript
 alanning:roles
 underscore
+yasaricli:slugify

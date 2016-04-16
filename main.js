@@ -58,6 +58,13 @@ Schemas.Quote = new SimpleSchema({
   createdAt: { type: Date },
   username: { type: String },
   owner: { type: String },
+  slug: {
+    type: String,
+    label: "Slug",
+    // We can't make this unique until all Quotes have slugs and on second thoughts let's not anyway
+    // unique: true,
+    max: 500,
+  }
 });
 
 // Attach the schema objects to a collections
@@ -267,7 +274,9 @@ if (Meteor.isClient) { // only runs on the client
   );
 
   Template.registerHelper('truncate', function(passedString) {
-    var n = 3; // how many words do you want?
+    var n = 5; // how many words do you want?
+
+    // Take only the first n words
     var shortenedText = passedString.replace(/\s+/g," ").split(/(?=\s)/gi).slice(0, n).join('');
     // This removes special characters except whitespace
     shortenedText = shortenedText.replace(/[^a-zA-Z\d\s]/g, "");
@@ -395,13 +404,13 @@ Template.AdminStation.events({
     "submit .add-quote": function (event) {
       var text = event.target.text.value;
       var authorId = Session.get('authorId');
-      console.log(text);
+      console.log("This is the quote text: " + text);
       
       if (text == "") return false; // prevent empty strings
 
       Meteor.call('addQuoteToAuthor', text, authorId, function(error, result) {
         var newQuoteId = result;
-        console.log(newQuoteId);
+        console.log("New quote id: " + newQuoteId);
         Router.go('/explore');
       });
 
@@ -428,7 +437,7 @@ Template.AdminStation.events({
       Meteor.call('addAuthor', text, function(error, result) {
         var newAuthorId = result;
         console.log(newAuthorId);
-        Router.go('/explore');
+        Router.go('/');
       });
 
       // Clear form

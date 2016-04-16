@@ -47,13 +47,13 @@ Meteor.publish("quotesSlugUser", function (user_slug) {
 
 Meteor.publish("quotesSlug", function (slug) {
   check(slug, String);
-  var quote = Quotes.find({ _id: slug });
+  var quote = Quotes.find({ slug: slug });
   // console.log(quote); // trying to get counter quotes working too../....
   // if (!quote) quote = Quotes.find({ quote_id: slug });
 
   
 
-  // Simulated latency
+  // Simulated latency (doesn't do anything if doc already in miniMongo memory)
   var timeToSleep = getRandomInt(300,1000);
   console.log("Simulating latency for " + timeToSleep + " milliseconds.");
   Meteor._sleepForMs(timeToSleep); 

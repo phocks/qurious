@@ -44,7 +44,7 @@
   <div class="container qurious-nav">
     <ul>
       <li><a href="/"><img src="/grey-logo.png"></a></li>
-      <li><a href="/explore">explore</a></li>
+      <!-- <li><a href="/explore">explore</a></li> -->
       <li>{{#unless currentUser}}<a href="/login">login</a>{{else}}<a href="/logout">logout</a>{{/unless}}</li>
     </ul>
   </div>
@@ -53,13 +53,24 @@
 
 
 <template name="Home">
-  <div class="container backdrop-block text-center">
-    <div class="home-text">
-      <!-- <h1>qurious</h1>
-      <ul>        
-        <li><a href="/explore">explore</a></li>
-        <li>{{#unless currentUser}}<a href="/login">login</a>{{else}}<a href="/logout">logout</a>{{/unless}}</li>
-      </ul> -->
+  <div class="container backdrop-block">
+    <ul class="author-list">
+      {{#each authors}}
+        <li><a href="/{{slug}}/">{{name}}</a><!-- <span class="delete">x</span> --></li>
+      {{/each}}
+      <li><a href="/add">+</a></li>
+    </ul>
+  </div>
+</template>
+
+
+
+
+<template name="DisplayQuote">
+  <div class="container backdrop-block">
+    <div class="quote">
+      <div>{{quote.quotation}}</div>
+      <div class="attribution">{{author.name}}</div>
     </div>
   </div>
 </template>
@@ -70,7 +81,7 @@
 
 
 <template name="Login">
-  <div class="container backdrop-block text-center">
+  <div class="container backdrop-block">
     <div class="login-form">
       {{> atForm}}
     </div>
@@ -90,29 +101,37 @@
 </template>
 
 <template name="Add">
-  <div class="container backdrop-block text-center">
-    <form class="add-author">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Text input" name="text">
-          </div> 
-          <button type="submit" class="btn btn-primary create">Submit</button>
-        </form>
+  <div class="container backdrop-block">
+    <!-- <form class="add-author form-inline">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Text input" name="text">
+      </div> 
+      <button type="submit" class="btn btn-primary create">Submit</button>
+    </form> -->
+
+
+    <form class="add-author form-inline">
+      <div class="form-group">
+        <label class="sr-only" for="authorName">Author Name</label>
+        <input type="text" class="form-control" id="authorName" name="text" placeholder="Author name">
+      </div>
+      <button type="submit" class="btn btn-default">Create</button>
+    </form>
+
   </div>
 </template>
 
 
 <template name="Author">
-  <div class="container backdrop-block">
-    <!-- <h1>{{author.name}}</h1> -->
-    <div>
-      <ul class="quote-list">
-      {{#each quotes}}
-          <li class="quotation"><a href="#">{{truncate quotation}}</a></li>
-      {{/each}}
-      <li><a href="{{author.slug}}/add">+</a></li>
-      </ul>
-    </div>
-      <!-- {{#if currentUser}}<a class="add-link" href="/{{author.slug}}/add">Add</a>{{/if}} -->
+  <div class="container backdrop-block author-page">
+    <h1>{{author.name}}</h1>
+    <ul class="quote-list">
+    {{#each quotes}}
+        <li class="quotation"><a href="{{slug}}">{{truncate quotation}}</a></li>
+    {{/each}}
+    <li><a href="/{{author.slug}}/add">+</a></li>
+    </ul>
+    <!-- {{#if currentUser}}<a class="add-link" href="/{{author.slug}}/add">Add</a>{{/if}} -->
   </div>
 </template>
 
@@ -120,14 +139,24 @@
 
 
 <template name="AddQuote">
-  <div class="container backdrop-block text-center">    
+  <div class="container backdrop-block">    
     <div class="create-block">
-        <form class="add-quote">
+
+        <!-- <form class="add-quote">
           <div class="form-group">
             <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Enter your quotation here. Please do not include quotation marks, line breaks or special characters. Please keep it brief." autocomplete="off"></textarea>
           </div> 
           <button type="submit" class="btn btn-primary create">Submit</button>
+        </form> -->
+
+        <form class="add-quote form-inline">
+          <div class="form-group">
+            <label class="sr-only" for="quoteText">Quote Text</label>
+            <input type="text" class="form-control" id="quoteText" name="text" placeholder="Quotation text">
+          </div>
+          <button type="submit" class="btn btn-default">Add quote</button>
         </form>
+
       </div>
   </div>
 </template>

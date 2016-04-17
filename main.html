@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel='shortcut icon' type='image/png' sizes="16x16 32x32" href='/favicon.png?v=2' />
-  <title>Qurious</title> <!-- this isn't actually controlled here at all really -->
+  <title>Qurious</title>
 </head>
 
 
@@ -45,7 +45,8 @@
     <ul>
       <li><a href="/"><img src="/grey-logo.png"></a></li>
       <!-- <li><a href="/explore">explore</a></li> -->
-      <li>{{#unless currentUser}}<a href="/login">login</a>{{else}}<a href="/logout">logout</a>{{/unless}}</li>
+      <!-- <li>{{#unless currentUser}}<a href="/login">login</a>{{else}}<a href="/logout">logout</a>{{/unless}}</li> -->
+      <li>{{> loginButtons}}</li>
     </ul>
   </div>
 </template>
@@ -69,8 +70,9 @@
 <template name="DisplayQuote">
   <div class="container backdrop-block">
     <div class="quote">
-      <div>{{quote.quotation}}</div>
-      <div class="attribution">{{author.name}}</div>
+      <div>
+        {{quote.quotation}} <span class="attribution">&mdash;{{author.name}}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -83,7 +85,7 @@
 <template name="Login">
   <div class="container backdrop-block">
     <div class="login-form">
-      {{> atForm}}
+      make login form
     </div>
   </div>
 </template>
@@ -222,7 +224,7 @@
 
 
 <!-- Replaces default UserAccounts form -->
-<template name="AtFormQurious">
+<!-- <template name="AtFormQurious">
 {{#unless hide}}
     <div class="at-form">
       {{#if showTitle}}
@@ -255,7 +257,7 @@
     </div>
   {{/unless}}
 </template>
-
+ -->
 
 <!-- Temporary Control Room for special people only -->
 <template name="AdminStation">

@@ -30,9 +30,9 @@ Meteor.publish("quotesPopular", function (limit) {
 
 
 
-Meteor.publish("quotesCurrentUser", function () {
-  return Quotes.find({ owner: this.userId });
-});
+// Meteor.publish("quotesCurrentUser", function () {
+//   return Quotes.find({ owner: this.userId });
+// });
 
 
 
@@ -54,9 +54,9 @@ Meteor.publish("quotesSlug", function (slug) {
   
 
   // Simulated latency (doesn't do anything if doc already in miniMongo memory)
-  var timeToSleep = getRandomInt(300,1000);
-  console.log("Simulating latency for " + timeToSleep + " milliseconds.");
-  Meteor._sleepForMs(timeToSleep); 
+  // var timeToSleep = getRandomInt(300,1000);
+  // console.log("Simulating latency for " + timeToSleep + " milliseconds.");
+  // Meteor._sleepForMs(timeToSleep); 
 
   return quote;
 });
@@ -77,9 +77,9 @@ Meteor.publish("quotesInArray", function (array) {
 
 
 
-Meteor.publish("counters", function () {
-  return Counters.find();
-});
+// Meteor.publish("counters", function () {
+//   return Counters.find();
+// });
 
 
 
@@ -112,6 +112,6 @@ Meteor.publish("authors", function () {
 
 
 
-Meteor.publish("words", function () {
-  return Words.find();
-});
+// Meteor.publish("words", function () {
+//   return Words.find();
+// });

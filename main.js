@@ -27,8 +27,8 @@
 // First up we are going to create a few collections
 Quotes = new Mongo.Collection('quotes');  // Our main quote db
 Authors = new Mongo.Collection('authors'); // People who say stuff
-Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use really)
-Words = new Mongo.Collection('words'); // Words are the basis of ideas
+// Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use really)
+// Words = new Mongo.Collection('words'); // Words are the basis of ideas
 // There is also a Users collection by default in Meteor
 
 
@@ -57,12 +57,13 @@ Schemas.Quote = new SimpleSchema({
   quotation: { type: String },
   createdAt: { type: Date },
   username: { type: String },
-  owner: { type: String },
+  userId: { type: String },
   slug: {
     type: String,
     label: "Slug",
     // We can't make this unique until all Quotes have slugs and on second thoughts let's not anyway
-    // unique: true,
+    // Oh look we migrated all the quotes and now we can make it unique
+    unique: true,
     max: 500,
   }
 });
@@ -100,7 +101,7 @@ if (Meteor.isClient) { // only runs on the client
   // We need to tell the client to subscribe explicitly to data collections
   // Later we don't want to subscribe to the whole thing
   // moved to individual routes // Meteor.subscribe("quotes");
-  Meteor.subscribe("counters");
+  // Meteor.subscribe("counters");
   Meteor.subscribe("userData"); // for admin account login access etc.
   Meteor.subscribe("authors"); // subscribe only to certain ones later
 
@@ -184,62 +185,62 @@ if (Meteor.isClient) { // only runs on the client
 
 
   // Setting up the useraccounts:core
-  AccountsTemplates.configure({
-    // forbidClientAccountCreation: true,
-    enablePasswordChange: true,
-    showForgotPasswordLink: true,
-    lowercaseUsername: true,
-    showReCaptcha: true,
-    sendVerificationEmail: true,
+  // AccountsTemplates.configure({
+  //   forbidClientAccountCreation: false,
+  //   enablePasswordChange: true,
+  //   showForgotPasswordLink: true,
+  //   lowercaseUsername: true,
+  //   showReCaptcha: true,
+  //   sendVerificationEmail: true,
 
-    homeRoutePath: '/',
-    redirectTimeout: 4000,
+  //   homeRoutePath: '/',
+  //   redirectTimeout: 4000,
 
-    defaultLayout: 'ApplicationLayout',
+  //   defaultLayout: 'ApplicationLayout',
 
-    texts: { // Here we enter some custom error messages
-        errors: {
-            accountsCreationDisabled: "Client side accounts creation is disabled!!!",
-            cannotRemoveService: "Cannot remove the only active service!",
-            captchaVerification: "Captcha verification failed!",
-            loginForbidden: "error.accounts.User or password incorrect",
-            mustBeLoggedIn: "error.accounts.Must be logged in",
-            pwdMismatch: "error.pwdsDontMatch",
-            validationErrors: "Validation Errors",
-            verifyEmailFirst: "Please verify your email first. Check the email and follow the link!",
-        }
-    },
-  });
+  //   texts: { // Here we enter some custom error messages
+  //       errors: {
+  //           accountsCreationDisabled: "Client side accounts creation is disabled!!!",
+  //           cannotRemoveService: "Cannot remove the only active service!",
+  //           captchaVerification: "Captcha verification failed!",
+  //           loginForbidden: "error.accounts.User or password incorrect",
+  //           mustBeLoggedIn: "error.accounts.Must be logged in",
+  //           pwdMismatch: "error.pwdsDontMatch",
+  //           validationErrors: "Validation Errors",
+  //           verifyEmailFirst: "Please verify your email first. Check the email and follow the link!",
+  //       }
+  //   },
+  // });
 
 
   // We are making a field that accepts username + email
   // This is so that a user can log in with either
-  var pwd = AccountsTemplates.removeField('password');
-  AccountsTemplates.removeField('email');
-  AccountsTemplates.addFields([
-    {
-        _id: "username",
-        type: "text",
-        displayName: "username",
-        required: true,
-        minLength: 3,
-    },
-    {
-        _id: 'email',
-        type: 'email',
-        required: true,
-        displayName: "email",
-        re: /.+@(.+){2,}\.(.+){2,}/,
-        errStr: 'Invalid email',
-    },
-    pwd
-  ]);
+  // var pwd = AccountsTemplates.removeField('password');
+  // AccountsTemplates.removeField('email');
+  // AccountsTemplates.addFields([
+  //   {
+  //       _id: "username",
+  //       type: "text",
+  //       displayName: "username",
+  //       required: true,
+  //       minLength: 3,
+  //   },
+  //   {
+  //       _id: 'email',
+  //       type: 'email',
+  //       required: true,
+  //       displayName: "email",
+  //       re: /.+@(.+){2,}\.(.+){2,}/,
+  //       errStr: 'Invalid email',
+  //   },
+  //   pwd
+  // ]);
 
 
 
   // So we can customise the login form so much more
   // Requires aldeed:template-extension
-  Template.AtFormQurious.replaces("atForm");
+  // Template.AtFormQurious.replaces("atForm");
 
 
   // Here are the helpers to put data into Templates etc
@@ -411,7 +412,7 @@ Template.AdminStation.events({
       Meteor.call('addQuoteToAuthor', text, authorId, function(error, result) {
         var newQuoteId = result;
         console.log("New quote id: " + newQuoteId);
-        Router.go('/explore');
+        Router.go('/');
       });
 
       // Clear form
@@ -547,9 +548,9 @@ if (Meteor.isServer) {
     // code to run on server at startup
 
     // init the counters in case mongo reset
-    if (Counters.find().count() === 0) {
-      Counters.insert( { _id: "quote_id", seq: 0 } );
-    }
+    // if (Counters.find().count() === 0) {
+    //   Counters.insert( { _id: "quote_id", seq: 0 } );
+    // }
 
     //process.env.HTTP_FORWARDED_COUNT = 2; // this seems to shift x-forwarded-for list for ip
 
@@ -572,7 +573,7 @@ if (Meteor.isServer) {
     */
 
     // Make sure some indexes are unique and can't be 2 or more of them
-    Words._ensureIndex({word: 1}, {unique: 1});
+    // Words._ensureIndex({word: 1}, {unique: 1});
 
     
   });  // end of code to do at startup

@@ -7,12 +7,8 @@
 twbs:bootstrap
 iron:router
 momentjs:moment
-useraccounts:bootstrap
-useraccounts:core
 zimme:active-route
-accounts-ui
 accounts-password
-useraccounts:iron-routing
 meteor-base
 mobile-experience
 mongo
@@ -42,3 +38,7 @@ ecmascript
 alanning:roles
 underscore
 yasaricli:slugify
+accounts-ui
+msavin:mongol
+insecure
+autopublish

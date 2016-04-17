@@ -133,7 +133,7 @@ Router.route('/:_author_slug/:_quote_slug', {
     var quoteSlug = this.params._quote_slug;
     console.log("Current quoteSlug is: " + quoteSlug );
     currentAuthor = Authors.findOne({slug: authorSlug});
-    Session.set("DocumentTitle", "Add a " + currentAuthor.name + " quotation - Qurious");
+    Session.set("DocumentTitle", "A quote by " + currentAuthor.name + " - Qurious");
     Session.set("authorId", currentAuthor._id);
 
     this.render('Nav', { to: 'nav'});
@@ -173,7 +173,7 @@ Router.route('/:_slug', {
           return Authors.findOne({slug: slug});
           },
         quotes: function () {
-          var quotes = Quotes.find({author: currentAuthor._id});          
+          var quotes = Quotes.find({author: currentAuthor._id}, { sort: {quotation: 1}});          
           return quotes;
         }
       }

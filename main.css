@@ -390,12 +390,9 @@ Keep it clean
   padding: 0;
 }
 
-.quote-box {
-  
-}
 
 .quote {
-  font-size: 48px;
+  font-size: 42px;
   /*padding-top: 28px;
   padding-bottom: 28px;*/
 }
@@ -647,8 +644,10 @@ ul.quote-list li {
 
 
 .attribution {
-  margin-top: 32px;
-  /*font-size: 32px;*/
+  /*margin-top: 32px;*/
+  font-size: 42px;
+  color: #f48365;
+  white-space: nowrap;
 }
 
 

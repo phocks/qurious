@@ -5,9 +5,9 @@
 */
 
 
-/*  
+/*
   some fonts. these need to be up top
-  probably consider cutting these down to essentials 
+  probably consider cutting these down to essentials
   also, there is a way to selectively load fonts via javascript, see in js files
   */
 /*@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);*/
@@ -37,7 +37,7 @@
   src: local('Montserrat-Bold'), url(/fonts/montserrat/Montserrat-Bold.ttf) format('truetype');
   src: local('Montserrat-Bold'), url(/fonts/montserrat/Montserrat-Bold.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}*/
+} This didn't seem to work on mobile for some reason */
 
 
 
@@ -69,13 +69,13 @@ a:focus {
 }
 
 h1 {
-  margin-top: 10px;
+  /*margin-top: 10px;*/
 }
 
 
 /* removes outline for Bootstrap Buttons */
-.btn:focus, .btn:active:focus, .btn.active:focus { 
-  outline: none !important; 
+.btn:focus, .btn:active:focus, .btn.active:focus {
+  outline: none !important;
   outline-style: none; }
 
 
@@ -109,41 +109,7 @@ img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
 
-
-
-
-/* Style for the temporary MailChimp email form */
-
-#mc_embed_signup { border: none; text-align: center; width: 100%; } /* Signup form container */
-
-.mc-field-group { display: inline-block; } /* positions input field horizontally */
-
-#mce-EMAIL { font-family: Montserrat, "Open Sans", 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 1em; border: 2px solid #ABB0B2 ; color: #343434; background-color: #fff; padding: .7em 9em .7em 1em; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; display: inline-block; margin: 0; } /* Input Styles */
-
-.clear { display: inline-block; } /* positions button horizontally in line with input */
-
-.button { font-family: Montserrat, "Open Sans", 'Helvetica Neue', Helvetica,  Arial, sans-serif; font-size: 1em; letter-spacing: .03em; color: #fff; background-color: #f48365 ; padding: .7em 2em; border: 2px solid #f48365 ; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; display: inline-block; margin: 0; } /* Button Styles */
-
-:-webkit-input-placeholder { color: #ABB0B2 ; } /* WebKit browsers */
-:-moz-placeholder { color: #ABB0B2 ; } /* Mozilla Firefox 4 to 18 */
-::-moz-placeholder { color: #ABB0B2 ; } /* Mozilla Firefox 19+ */
-:-ms-input-placeholder { color: #ABB0B2 ; } /* Internet Explorer 10+ */
-
-
-/* positions input field and button underneath each other with 100% width for tablet and mobile */
-@media (max-width: 768px) {
-
-.mc-field-group { display: block; max-width: 100%; }
-#mce-EMAIL { padding: .7em 0 .7em 1em; width: 100%; margin: 0; }
-.clear { display: block; width: 100% }
-.button { width: 100%; margin: .5em 0 0 0; }
-
-}
-
-
-
-
-/* Custom ampersand */
+/* Custom ampersand for kicks no longer really used */
 span.amp {
   font-family: Baskerville,"Goudy Old Style","Palatino","Book Antiqua",serif;
   font-size: 110%;
@@ -378,9 +344,9 @@ p.quotation {
 
 
 
-/* 
+/*
 
-Belief release CSS mainly from here 
+Belief release CSS mainly from here
 
 Keep it clean
 
@@ -400,10 +366,11 @@ Keep it clean
 /*  nav */
 
 .qurious-nav {
-  padding-top: 5vh;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+  padding-top: 22px;
   padding-bottom: 22px;
   border-bottom: 1px solid #efefef;
-  margin-bottom: 3vh;
 }
 
 .qurious-nav ul {
@@ -483,6 +450,7 @@ ul.quote-list a:hover {
 ul.quote-list {
   list-style-type: none;
   margin: 0;
+  margin-top: 3vh;
   padding: 0;
 }
 
@@ -592,7 +560,7 @@ ul.quote-list li {
   max-width: 500px;
   /*margin-right: auto;
   margin-left: auto;*/
-  
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -636,11 +604,15 @@ ul.quote-list li {
   width: 300px;
 }*/
 
+.author-page .name-box {
+
+}
 
 .author-page h1 {
-  margin-bottom: 1em;
+  display: inline-block;
   /*font-size: 42px;*/
 }
+
 
 
 .attribution {
@@ -650,6 +622,32 @@ ul.quote-list li {
   white-space: nowrap;
 }
 
+
+
+/* Found a way to log in via Twitter */
+/* Styles need to be !important to override accounts-ui */
+#login-buttons {
+  /*float: right;*/
+}
+
+.login-display-name {
+  display: none !important;
+}
+
+.login-button {
+  background-color: white !important;
+  border-radius: 0 !important;
+  color: #999 !important;
+  border-color: #ccc !important;
+  font-family: inherit !important;
+}
+
+
+
+/* Another navigation section clean up soon */
+.navigation .brand {
+  margin-right: 8px;
+}
 
 
 
@@ -690,4 +688,3 @@ ul.quote-list li {
     font-size: 2.6em;
   }
 }
-

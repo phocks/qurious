@@ -27,26 +27,27 @@
     <footer>
       {{> yield "footer"}}
     </footer>
-    
   </div>
 </template>
 
 
 
 <template name="Header">
-   <div class="header"><a href="/"><img class="logo" src="/grey-logo.png"></a></div>
+   <nav class="header"><a href="/"><img class="logo" src="/grey-logo.png"></a></nav>
 </template>
 
 
 
-<!-- This is the fixed nav at the bottom -->
+<!-- This is the fixed nav -->
 <template name="Nav">
   <div class="container qurious-nav">
-    <ul>
-      <li><a href="/"><img src="/grey-logo.png"></a></li>
+    <ul class="navigation">
+      <li class="brand"><a href="/"><img src="/grey-logo.png"></a></li>
+      <!-- <li><a href="/faq">faq</a></li> -->
       <!-- <li><a href="/explore">explore</a></li> -->
       <!-- <li>{{#unless currentUser}}<a href="/login">login</a>{{else}}<a href="/logout">logout</a>{{/unless}}</li> -->
       <li>{{> loginButtons}}</li>
+
     </ul>
   </div>
 </template>
@@ -107,7 +108,7 @@
     <!-- <form class="add-author form-inline">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Text input" name="text">
-      </div> 
+      </div>
       <button type="submit" class="btn btn-primary create">Submit</button>
     </form> -->
 
@@ -126,7 +127,9 @@
 
 <template name="Author">
   <div class="container backdrop-block author-page">
-    <h1>{{author.name}}</h1>
+    <div class="author-title-box">
+      <h1 class="author-name">{{author.name}}</h1>
+    </div>
     <ul class="quote-list">
     {{#each quotes}}
         <li class="quotation"><a href="{{slug}}">{{truncate quotation}}</a></li>
@@ -138,16 +141,14 @@
 </template>
 
 
-
-
 <template name="AddQuote">
-  <div class="container backdrop-block">    
+  <div class="container backdrop-block">
     <div class="create-block">
 
         <!-- <form class="add-quote">
           <div class="form-group">
             <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Enter your quotation here. Please do not include quotation marks, line breaks or special characters. Please keep it brief." autocomplete="off"></textarea>
-          </div> 
+          </div>
           <button type="submit" class="btn btn-primary create">Submit</button>
         </form> -->
 
@@ -178,38 +179,20 @@
 
 
 
-
-
-
-<!-- This is the fixed nav at the bottom REMOVE SOON -->
-<template name="LiteNav">
-  <div class="navbar navbar-default navbar-fixed-bottom lite-nav">
-    <div class="container">
-      <div class="pull-right">
-        <a href="/menu"><i class="fa fa-bars menu"></i></a>
-      </div>
-      <a href="/"><img src="/grey-logo.png"></a> | Curiously quotable.
-    </div>
-  </div> 
-</template>
-
-
-
-
 <!-- This template is to show the loading spinner -->
 <template name="Loading">
-  <div class="lite-container container-fluid">
+  <div class="lite-container container">
     <div class="top-spacing">
     </div>
     <header>
-      
+
     </header>
     <div class="body-container">
       <!-- Do something else for the loader maybe a top bar -->
       <!-- <p class="text-center"><img width="50px" src="/q-loader.gif"></p> -->
     </div>
     <footer>
-      
+
     </footer>
     <nav>
       <!-- {{>Nav}} -->
@@ -218,187 +201,12 @@
 </template>
 
 
-
-
-
-
-
-<!-- Replaces default UserAccounts form -->
-<!-- <template name="AtFormQurious">
-{{#unless hide}}
-    <div class="at-form">
-      {{#if showTitle}}
-        {{> atTitle}}
-      {{/if}}
-      {{#if showError}}
-        {{> atError}}
-      {{/if}}
-      {{#if showResult}}
-        {{> atResult}}
-      {{/if}}
-      {{#if showOauthServices}}
-        {{> atOauth}}
-      {{/if}}
-      {{#if showServicesSeparator}}
-        {{> atSep}}
-      {{/if}}
-      {{#if showPwdForm}}
-        {{> atPwdForm}}
-      {{/if}}
-      {{#if showTermsLink}}
-        {{> atTermsLink}}
-      {{/if}}
-      {{#if showSignInLink}}
-        {{> atSigninLink}}
-      {{/if}}
-      {{#if showSignUpLink}}
-        {{> atSignupLink}}
-      {{/if}}
-    </div>
-  {{/unless}}
-</template>
- -->
-
-<!-- Temporary Control Room for special people only -->
-<template name="AdminStation">
-  <div class="conatiner-fluid backdrop text-center">
-
-    <div class="container">
-        <div class="create-block">
-          <form class="new-quote">
-            <div class="form-group">
-              <label for="quotationText">Quotation text</label>
-              <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Enter your quotation here. Please do not include quotation marks, line breaks or special characters. Please keep it brief." autocomplete="off"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="attributionText">Attribution</label>
-              <input type="text" class="form-control" id="attributionText" name="attribution" placeholder="e.g. Albert Einstein">
-            </div>
-            <div class="submissionText">
-            <p>By submitting your quotation you agree to our <a href="/terms">Terms and Conditions</a> and <a href="/privacy">Privacy Policy</a>.</p>
-            </div>
-
-            <button type="submit" class="btn btn-primary create">Submit</button>
-          </form>
-        </div>
-      </div>
-
-
-
-
- <!--  <div class="container">
-    {{> atForm}}
-    <form class="new-word">
-      <div class="form-group">
-        <label for="wordInput">This is an admin page, please don't do anything stupid.</label>
-        <input type="text" class="form-control" id="wordInput" name="word" placeholder="word">
-      </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-      <p>
-        {{#each words}}
-          {{word}} <i class="fa fa-times-circle-o delete"></i> &nbsp;
-        {{/each}}
-      </p>
-
-      <p>
-        {{#each quotes}}
-          {{> AdminSingleQuote}}
-        {{/each}}
-      </p>
-    </div> -->
-
-
-
+<template name="Faq">
+  <div class="container faq">
+    <h1>FAQ</h1>
+    <p>No one has asked any questions yet?</p>
   </div>
 </template>
-
-
-<!-- <template name="AdminSingleQuote">
-  <div class="quotation">
-    <p>{{{quotation}}}</p>
-    <p class="attribution">
-    {{#if attribution}}
-      <span class="dash">&mdash;</span>{{attribution}}
-    {{/if}}
-    </p>
-  </div>
-</template> -->
-
-
-<template name="LiteError">
-  <div class="conatiner-fluid backdrop text-center">
-    
-    <h1>You are lost</h1>
-    
-  </div>
-  {{> Nav}}
-</template>
-
-
-
-
-
-
-
-
-
-
-
-
-<template name="LiteLayout">
-  <div class="lite-container container-fluid">
-    <div class="top-spacing">
-    </div>
-    <header>
-      {{> yield "header"}}
-    </header>
-    <div class="body-container">
-      {{> yield}}
-    </div>
-    <footer>
-      {{> yield "footer"}}
-    </footer>
-    <nav>
-      {{> yield "nav"}}
-    </nav>
-  </div>
-</template>
-
-
-
-
-<template name="LiteHome">
-  <div class="lite-home">
-    <div class="container">
-      <div class="home-text">
-        <div class="logo"><img alt="Qurious" src="/qurious_logo.png"></div>
-          <form class="word-search" name="search-form">
-            <div class="form-group">
-              <input type="text" class="form-control" id="word" name="search" autofocus>              
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-default" href="/about">Curious?</button>
-              <a class="btn btn-default" href="/flip">I'm feeling lucky</a>
-            </div>
-          </form>
-
-          <ul class="home-word-list">
-            {{#each words}}
-              <li><a href="/word/{{word}}">{{word}}</a></li>
-            {{/each}}
-          </ul>
-
-
-          
-      </div>
-    </div>
-  </div>
-</template>
-
-
-
-
 
 
 
@@ -414,417 +222,3 @@
     </ul>
   </div>
 </template>
-
-
-
-
-
-
-<template name="LiteQuote">
-  <div class="lite-quote">
-    <div class="container">
-      <div class="quotation">
-        <p>{{{quotation}}}</p>
-        <p class="attribution">
-        {{#if attribution}}
-          <span class="dash">&mdash;</span>{{{attribution}}}
-        {{/if}}
-        </p>
-        <p class="text-center"><span class="quo"><i class="fa fa-quote-right"></i></span></p>
-        <!-- <p class="text-center"><span class="amp">&amp;</span></p> -->
-      </div>
-    </div>
-  </div>
-
-  <div class="lite-info">
-    <div class="container">
-      <ul>
-        <!-- Do we really need to show these? -->
-        <!-- <li><i class="icon ion-eye"></i> {{views}} views</li>
-        <li><i class="icon ion-clock"></i> {{howLongAgo createdAt}}</li>
-        <li><i class="icon ion-quote"></i> By {{username}}</li> -->
-      </ul>
-    </div>
-  </div>
-
-  <div class="lite-controls">
-    <div class="container">
-      <!-- <a class="btn btn-default" href="/r">Another?</a> -->
-      <hr>
-      <ul class="controls text-right">
-        <!-- <li><i class="ionicons ion-android-favorite-outline"></i></li> -->
-        <li><a href="/about"><i class="ionicons ion-more"></i></a></li>
-        <!-- <li><i class="ionicons ion-heart"></i></li> -->
-        <!-- <li><i class="ionicons ion-heart-broken"></i></li>         -->
-      </ul>
-
-      <!-- <p class="text-center">
-      {{#if currentWord}}
-        <a class="btn btn-default" href="/random/{{currentWord}}">More {{currentWord}}</a>
-      {{else}}
-        <a class="btn btn-default" href="/random">Another?</a>
-      {{/if}}
-      </p> -->
-
-
-      <form class="form-inline text-center quotePageAnother">
-        <div class="form-group">          
-          <input type="text" class="form-control" id="wordInput" name="word" placeholder="Curious about?" value="{{currentWord}}">
-        </div>        
-        <button type="submit" class="btn btn-default another-button">Another?</button>
-      </form>
-
-      <!-- <ul class="text-center words">
-        {{#each words}}
-          <li><a href="/random/{{this}}">{{this}}</a> <span class="delete">-</span> &nbsp;</li>
-        {{/each}}
-        <li><a href="#">+</a></li>
-      </ul>
-
-
-      <form class="new-word">
-        <div class="form-group">
-          <label for="wordInput"></label>
-          <input type="text" class="form-control" id="wordInput" name="word" placeholder="Add new word">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
- -->
-
-
-    </div>
-  </div>
-
-</template>
-
-
-
-
-
-
-
-
-<template name="LiteQuoteEdit">
-  <div class="lite-quote">
-    <div class="container">
-      <div class="quotation">
-        <p><textarea class="form-control" rows="3">{{quotation}}</textarea></p>
-        <p class="attribution">
-        {{#if attribution}}
-          <span class="dash">&mdash;</span>{{{attribution}}}
-        {{/if}}
-        </p>
-        <p class="text-center"><span class="quo"><i class="fa fa-quote-right"></i></span></p>
-        <!-- <p class="text-center"><span class="amp">&amp;</span></p> -->
-      </div>
-    </div>
-  </div>
-
-  <div class="lite-info">
-    <div class="container">
-      <ul>
-        <!-- Do we really need to show these? -->
-        <!-- <li><i class="icon ion-eye"></i> {{views}} views</li>
-        <li><i class="icon ion-clock"></i> {{howLongAgo createdAt}}</li>
-        <li><i class="icon ion-quote"></i> By {{username}}</li> -->
-      </ul>
-    </div>
-  </div>
-
-  <div class="lite-controls">
-    <div class="container">
-      <!-- <a class="btn btn-default" href="/r">Another?</a> -->
-      <hr>
-      <ul class="controls text-right">
-        <!-- <li><i class="ionicons ion-android-favorite-outline"></i></li> -->
-        <li data-toggle="tooltip" data-placement="left" title="More options coming soon"><i class="ionicons ion-more"></i></li>
-        <!-- <li><i class="ionicons ion-heart"></i></li> -->
-        <!-- <li><i class="ionicons ion-heart-broken"></i></li>         -->
-      </ul>
-
-      <!-- <p class="text-center">
-      {{#if currentWord}}
-        <a class="btn btn-default" href="/random/{{currentWord}}">More {{currentWord}}</a>
-      {{else}}
-        <a class="btn btn-default" href="/random">Another?</a>
-      {{/if}}
-      </p> -->
-
-
-      <form class="form-inline text-center quotePageAnother">
-        <div class="form-group">          
-          <input type="text" class="form-control" id="wordInput" name="word" placeholder="Curious about?" value="{{currentWord}}" autofocus>
-        </div>        
-        <button type="submit" class="btn btn-default another-button">Another?</button>
-      </form>
-
-      <!-- <ul class="text-center words">
-        {{#each words}}
-          <li><a href="/random/{{this}}">{{this}}</a> <span class="delete">-</span> &nbsp;</li>
-        {{/each}}
-        <li><a href="#">+</a></li>
-      </ul>
-
-
-      <form class="new-word">
-        <div class="form-group">
-          <label for="wordInput"></label>
-          <input type="text" class="form-control" id="wordInput" name="word" placeholder="Add new word">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
- -->
-
-
-    </div>
-  </div>
-
-</template>
-
-
-
-
-
-
-
-
-
-
-<!-- This template is to show the loading spinner -->
-<template name="LiteLoad">
-  <div class="lite-container container-fluid">
-    <div class="top-spacing">
-    </div>
-    <header>
-      
-    </header>
-    <div class="body-container">
-      <!-- Do something else for the loader maybe a top bar -->
-      <!-- <p class="text-center"><img width="50px" src="/q-loader.gif"></p> -->
-    </div>
-    <footer>
-      
-    </footer>
-    <nav>
-      {{>LiteNav}}
-    </nav>
-  </div>
-</template>
-
-
-
-
-<template name="LiteFooterSubscribe">
-  <div class="lite-footer">
-    <!-- Begin MailChimp Signup Form -->
-    <div id="mc_embed_signup">
-      <form action="//qurious.us1.list-manage.com/subscribe/post?u=cf9d60bafd106d479eaf9a181&amp;id=e0e0728735" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-          <div id="mc_embed_signup_scroll">
-      <div class="mc-field-group">
-        <input type="email" value="" placeholder="Your email" name="EMAIL" class="required email" id="mce-EMAIL">
-      </div>
-        <div id="mce-responses" class="clear">
-          <div class="response" id="mce-error-response" style="display:none"></div>
-          <div class="response" id="mce-success-response" style="display:none"></div>
-        </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-          <div style="position: absolute; left: -5000px;"><input type="text" name="b_cf9d60bafd106d479eaf9a181_e0e0728735" tabindex="-1" value=""></div>
-          <div class="clear"><input type="submit" value="Sign me up" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-          </div>
-      </form>
-      </div>
-      <!--End mc_embed_signup-->
-  </div>
-</template>
-
-
-
-
-
-
-
-<template name="Admin">
-  <div class="container">      
-      <div class="create-block">
-        <form class="new-quote">
-          <div class="form-group">
-            <label for="quotationText">Quotation text</label>
-            <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Enter your quotation here. Please do not include quotation marks, line breaks or special characters. Please keep it brief." autocomplete="off"></textarea>
-          </div>
-          <div class="form-group">
-            <label for="attributionText">Attribution</label>
-            <input type="text" class="form-control" id="attributionText" name="attribution" placeholder="e.g. Albert Einstein">
-          </div>
-          <div class="submissionText">
-          <p>By submitting your quotation you agree to our <a href="/terms">Terms and Conditions</a> and <a href="/privacy">Privacy Policy</a>.</p>
-          </div>
-
-          <button type="submit" class="btn btn-primary create">Submit</button>
-        </form>
-      </div>
-    </div>
-</template>
-
-
-
-
-
-
-<template name="LiteLogin">
-  <div class="container text-center">
-    {{> atForm}}
-  </div>
-</template>
-
-
-
-
-
-
-
-
-
-<template name="WordProcess">
-  <div class="word-process">
-    <div class="container">
-      <p class="text-center">Finding <a href="/flip/{{word}}">{{word}}</a>...</p>
-
-      
-      <!-- {{#each quotes}}
-        <p class="quotation">{{quotation}}</p>
-      {{/each}} -->
-      
-      <!-- <p><a class="btn btn-default" href="/random/{{word}}">Explore {{word}}</a></p> -->
-    </div>
-  </div>
-</template>
-
-
-
-
-<template name="LiteFooter">
-  <div class="lite-footer">
-    <div class="container">
-    <!-- <p>Click for <a href="/r">more</a>.</p> -->
-    <!-- Not really being used any more but still being rendered sometimes -->
-    </div>
-  </div>
-</template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Not used below here -->
-
-
-
-
-
-
-
-
-
-
-<!-- <template name="LiteHeader">
-  <div class="lite-header">
-    <div class="container">
-      <a href="/"><img src="/grey-logo.png"></a> | Curiously quotable.
-    </div>
-  </div>
-</template> -->
-
-
-
-
-
-
-<!-- <template name="ListAuthors">
-  <div class="container"> -->
-
-    <!-- {{#if currentUser}}
-        <form class="new-author">
-          <input type="text" name="author" placeholder="New author" />
-          <input type="text" name="slug" placeholder="Author slug" />
-          <input type="submit" id="submit"/>
-        </form>
-    {{/if}} -->
-
-
-
-   <!--  <form class="new-author">
-      <div class="form-group">
-        <label for="fullNameInput1">Full name</label>
-        <input type="text" class="form-control" id="fullNameInput1" name="author" placeholder="Full name">
-      </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-    
-    <ul class="authors">
-    {{#each authors}}
-      {{> SingleAuthor}}
-    {{/each}}
-    </ul>
-  </div>
-</template> -->
-
-
-
-
-<!-- <template name="AllWords">
-  <div class="words">
-    <div class="container">
-      {{#each words}}
-        {{word}}
-      {{/each}}
-    </div>
-  </div>
-</template> -->
-
-
-
-
-<!-- <template name="AdminAllQuotes">
-  <div class="admin-all-quote">
-    <div class="container">
-      {{#each quotes}}
-        {{> AdminSingleQuote}}
-      {{/each}}
-    </div>
-  </div>
-</template>
- -->
-
-
-
-
-
-
-<!-- <template name="LiteAuthor">
-  <div class="author">
-    <div class="container">
-      Author
-    </div>
-  </div>
-</template> -->
-
-
-
-
-<!-- 
-<template name="SingleAuthor">
-  <li class="author"><a href="/{{slug}}">{{name}}</a> <i class="fa fa-times-circle-o delete"></i></li>
-</template>
-
--->

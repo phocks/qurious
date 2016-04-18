@@ -56,7 +56,6 @@ Schemas.Quote = new SimpleSchema({
   author: { type: String },
   quotation: { type: String },
   createdAt: { type: Date },
-  username: { type: String },
   userId: { type: String },
   slug: {
     type: String,
@@ -77,7 +76,7 @@ Quotes.attachSchema(Schemas.Quote);
 // Initial setup of some things below
 // like some variables etc
 
-loadMoreLimit = 5;  // for infinite scrolling, how many per load
+// loadMoreLimit = 5;  // for infinite scrolling, how many per load
 maximumQuotationLength = 1000; // in characters
 
 
@@ -154,7 +153,7 @@ if (Meteor.isClient) { // only runs on the client
     loadingTemplate: 'Loading',
   });
 
-
+  // This will not work please update
   Router.plugin('dataNotFound', {notFoundTemplate: 'NotFound'});
 
 
@@ -184,68 +183,10 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-  // Setting up the useraccounts:core
-  // AccountsTemplates.configure({
-  //   forbidClientAccountCreation: false,
-  //   enablePasswordChange: true,
-  //   showForgotPasswordLink: true,
-  //   lowercaseUsername: true,
-  //   showReCaptcha: true,
-  //   sendVerificationEmail: true,
 
-  //   homeRoutePath: '/',
-  //   redirectTimeout: 4000,
-
-  //   defaultLayout: 'ApplicationLayout',
-
-  //   texts: { // Here we enter some custom error messages
-  //       errors: {
-  //           accountsCreationDisabled: "Client side accounts creation is disabled!!!",
-  //           cannotRemoveService: "Cannot remove the only active service!",
-  //           captchaVerification: "Captcha verification failed!",
-  //           loginForbidden: "error.accounts.User or password incorrect",
-  //           mustBeLoggedIn: "error.accounts.Must be logged in",
-  //           pwdMismatch: "error.pwdsDontMatch",
-  //           validationErrors: "Validation Errors",
-  //           verifyEmailFirst: "Please verify your email first. Check the email and follow the link!",
-  //       }
-  //   },
-  // });
-
-
-  // We are making a field that accepts username + email
-  // This is so that a user can log in with either
-  // var pwd = AccountsTemplates.removeField('password');
-  // AccountsTemplates.removeField('email');
-  // AccountsTemplates.addFields([
-  //   {
-  //       _id: "username",
-  //       type: "text",
-  //       displayName: "username",
-  //       required: true,
-  //       minLength: 3,
-  //   },
-  //   {
-  //       _id: 'email',
-  //       type: 'email',
-  //       required: true,
-  //       displayName: "email",
-  //       re: /.+@(.+){2,}\.(.+){2,}/,
-  //       errStr: 'Invalid email',
-  //   },
-  //   pwd
-  // ]);
-
-
-
-  // So we can customise the login form so much more
-  // Requires aldeed:template-extension
-  // Template.AtFormQurious.replaces("atForm");
 
 
   // Here are the helpers to put data into Templates etc
-
-  
 
 
 
@@ -268,12 +209,14 @@ if (Meteor.isClient) { // only runs on the client
     }
   );
 
-  // This lets us access {{currentWord}} in the Spacebars html 
+  // This lets us access {{currentWord}} in the Spacebars html
   Template.registerHelper('currentWord', function () {
       return Session.get('currentWord');
     }
   );
 
+
+  // Used in the html spacebars pass text to snip snip
   Template.registerHelper('truncate', function(passedString) {
     var n = 5; // how many words do you want?
 
@@ -286,119 +229,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-// Events that drive things like clicks etc
-
-
-
-  
-
-Template.AdminStation.events({
-  "submit .new-quote": function (event) {
-    var text = event.target.text.value;
-    var attribution = event.target.attribution.value;
-    if (text == "" || attribution == "") return false; // prevent empty strings
-
-    Meteor.call('addQuote', text, attribution, function(error, result) {
-      var newQuoteId = result;
-      Router.go('/quote/' + newQuoteId);
-    });
-
-    // Clear form
-    event.target.text.value = "";
-    event.target.attribution.value = "";
-
-
-    // Prevent default action from form submit
-    return false;
-  },
-  "click .delete": function () {
-    Meteor.call('deleteQuote', this._id);
-  }
-  });
-
-
-
-  
-
-
-
-  Template.AdminStation.events({
-    "submit .new-word": function (event) {      
-      var word = event.target.word.value;
-      if (word == "") return false; // prevent empty strings
-
-      Meteor.call('addWord', word);
-
-      // Clear form      
-      event.target.word.value = "";
-
-      // Prevent default action from form submit
-      return false;
-    }, 
-    "click .delete": function () {
-      if (confirm('Really delete ?')) {
-        Meteor.call('deleteWord', this._id);
-      }
-    }     
-  });
-
-
-  Template.LiteQuote.events({
-    "submit .quotePageAnother": function (event) {      
-    var word = event.target.word.value;
-    var quote_id = Session.get('sessionQuoteId');
-    console.log("Current quote ID: " + quote_id);
-    if (word == "") {
-      Router.go("/flip");
-      return false;
-    }
-    else {
-      Session.set('currentWord', word);
-      Router.go("/flip/" + word);
-    }
-
-         
-
-    // Prevent default action from form submit
-    return false;
-
-  }
-
-
-
-  });
-
-
-
-
-
-  Template.LiteHome.events({
-    "submit .word-search": function (event) {
-      var q = event.target.search.value;
-      
-      // if (/\s/.test(q)) { // tests for spaces/single words only please
-      //   // It has any kind of whitespace
-      //   alert("Qurious search is limited to single words for the time being.")
-      //   return false;
-      // }
-      
-      if (q == "") {
-        Router.go("/flip");
-        return false;
-      }
-
-
-
-      Router.go('/word/' + q);
-
-      // Router.go('/about');
-
-      // Prevent default action from form submit
-      return false;
-    },
-  });
-
-
+// Events that drive things like clicks etc go below here
 
   // When adding quotations from the Author
   Template.AddQuote.events({
@@ -406,7 +237,7 @@ Template.AdminStation.events({
       var text = event.target.text.value;
       var authorId = Session.get('authorId');
       console.log("This is the quote text: " + text);
-      
+
       if (text == "") return false; // prevent empty strings
 
       Meteor.call('addQuoteToAuthor', text, authorId, function(error, result) {
@@ -417,7 +248,7 @@ Template.AdminStation.events({
 
       // Clear form
       event.target.text.value = "";
-      
+
 
       // Prevent default action from form submit
       return false;
@@ -432,7 +263,7 @@ Template.AdminStation.events({
       var text = event.target.text.value;
       var authorId = Session.get('authorId');
       console.log(text);
-           
+
       if (text == "") return false; // prevent empty strings
 
       Meteor.call('addAuthor', text, function(error, result) {
@@ -443,7 +274,7 @@ Template.AdminStation.events({
 
       // Clear form
       event.target.text.value = "";
-      
+
 
       // Prevent default action from form submit
       return false;
@@ -457,75 +288,7 @@ Template.AdminStation.events({
         Meteor.call('deleteAuthor', this._id);
       }
     }
-  })
-
-
-
- 
-
-
-  Template.LiteQuote.onRendered(function () {
-    
-    
-    // $('[data-toggle="popover"]').popover()
-     $('[data-toggle="tooltip"]').tooltip()
-    
   });
-
-  // Template.LiteHome.onRendered(function () {
-  //   $('[data-toggle="tooltip"]').tooltip()
-  // });
-
-
-
-  // Dropcaps for Quotes do it once rendered
-  Template.LiteQuote.onRendered(function () {
-
-    // focus cursor on the input    
-    //this.$('button.another-button').focus();
-
-    console.log('Inserting dropcaps span');
-    var node = $("p").contents().filter(function () { return this.nodeType == 3 }).first(),
-        text = node.text().trim(),
-        first = text.slice(0, 1);
-    
-    if (!node.length) {
-        console.log('not done');
-        return;
-      }
-    
-    node[0].nodeValue = text.slice(first.length);
-    node.before('<span id="dropcap">' + first + '</span>');
-
-    dropcap = document.getElementById("dropcap");
-    window.Dropcap.layout(dropcap, 2, 2);
-
-    // Media queries for javascript pretty much
-    // Finally got it working. This triggers re-rendering for dropcaps
-    // on window resize
-    var tablet = window.matchMedia("(min-width: 768px)");
-    var desktop = window.matchMedia("(min-width: 992px)");
-    var largeDesktop = window.matchMedia("(min-width: 1200px)");  
-
-    var handleMediaChange = function (mediaQueryList) {
-        if (mediaQueryList.matches) {
-          console.log("Media query greater than triggered")
-          window.Dropcap.layout(dropcap, 2, 2);
-        }
-        else {
-          // The browser window is less than 480px wide
-          console.log("Media query js smaller than triggered")
-          window.Dropcap.layout(dropcap, 2, 2);
-        }
-    }
-
-    // When screen size changes shoot off an event and change things
-    tablet.addListener(handleMediaChange);
-    desktop.addListener(handleMediaChange);
-    largeDesktop.addListener(handleMediaChange);
-  });
-
-
 
 } // Client only code end
 
@@ -575,7 +338,7 @@ if (Meteor.isServer) {
     // Make sure some indexes are unique and can't be 2 or more of them
     // Words._ensureIndex({word: 1}, {unique: 1});
 
-    
+
   });  // end of code to do at startup
 
   // This is a monitoring tool

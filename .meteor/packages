@@ -7,8 +7,6 @@
 twbs:bootstrap
 iron:router
 momentjs:moment
-zimme:active-route
-accounts-password
 meteor-base
 mobile-experience
 mongo
@@ -28,7 +26,6 @@ fortawesome:fontawesome
 email
 underscorestring:underscore.string
 multiply:iron-router-progress
-jazeee:spiderable-longer-timeout
 aldeed:template-extension
 aldeed:simple-schema
 aldeed:collection2
@@ -38,7 +35,10 @@ ecmascript
 alanning:roles
 underscore
 yasaricli:slugify
-accounts-ui
-msavin:mongol
 insecure
 autopublish
+accounts-twitter
+msavin:mongol
+accounts-base
+accounts-ui-unstyled
+accounts-ui

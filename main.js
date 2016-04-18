@@ -44,16 +44,23 @@ Schemas.Author = new SimpleSchema({
     label: "Name",
     max: 200,
   },
+  createdAt: {
+    type: Date
+  },
   slug: {
     type: String,
     label: "Slug",
     unique: true,
     max: 500,
-  }
+  },
+  verified: {
+    type: Boolean,
+    defaultValue: false,
+  },
 });
 
 Schemas.Quote = new SimpleSchema({
-  author: { type: String },
+  authorId: { type: String },
   quotation: { type: String },
   createdAt: { type: Date },
   userId: { type: String },
@@ -64,7 +71,11 @@ Schemas.Quote = new SimpleSchema({
     // Oh look we migrated all the quotes and now we can make it unique
     unique: true,
     max: 500,
-  }
+  },
+  verified: {
+    type: Boolean,
+    defaultValue: false,
+  },
 });
 
 // Attach the schema objects to a collections
@@ -215,7 +226,6 @@ if (Meteor.isClient) { // only runs on the client
     }
   );
 
-
   // Used in the html spacebars pass text to snip snip
   Template.registerHelper('truncate', function(passedString) {
     var n = 5; // how many words do you want?
@@ -227,9 +237,33 @@ if (Meteor.isClient) { // only runs on the client
     return new Spacebars.SafeString(shortenedText);
   });
 
+  Template.registerHelper('showUnverified', function () {
+      if (Session.get('editMode')) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  );
+
 
 
 // Events that drive things like clicks etc go below here
+
+
+  Template.Nav.events({
+    "click .edit-mode": function () {
+      if (Session.get('editMode')) {
+        Session.set('editMode', false);
+      } else 
+       {
+        Session.set('editMode', true);
+      }
+      console.log('Edit mode is: ' + Session.get('editMode'));
+    }
+  });
+
+
 
   // When adding quotations from the Author
   Template.AddQuote.events({
@@ -268,7 +302,7 @@ if (Meteor.isClient) { // only runs on the client
 
       Meteor.call('addAuthor', text, function(error, result) {
         var newAuthorId = result;
-        console.log(newAuthorId);
+        console.log("New author Id is: " + newAuthorId);
         Router.go('/');
       });
 
@@ -329,11 +363,11 @@ if (Meteor.isServer) {
     if (!Meteor.settings.mailGunUrl) console.log('Warning: email config not done.');
     else console.log("Email config address: " + Meteor.settings.mailGunUrl);
 
-    /* had to remove due to unstyled accounts for some reason
-      Accounts.config({
-        forbidClientAccountCreation : false  // set this to true to disable signup
-        });
-    */
+    
+    Accounts.config({
+      forbidClientAccountCreation: true  // set this to true to disable password signup
+    });
+    
 
     // Make sure some indexes are unique and can't be 2 or more of them
     // Words._ensureIndex({word: 1}, {unique: 1});

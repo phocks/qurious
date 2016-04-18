@@ -26,9 +26,13 @@ Router.route('/', {
     this.render('Home', {
       data: {
         authors: function () {
-          return Authors.find({}, { sort: {name: 1}});
-          }
+          var authors = Authors.find({ verified: true }, { sort: {name: 1}});
+          return authors;
+        },
+        authorsUnverified: function () {
+          return Authors.find({ verified: false }, { sort: {name: 1}});
         }
+      }
     });
   }
 });
@@ -41,7 +45,9 @@ Router.route('/add', {
 
   },
   action: function () {
-    if (!Meteor.user() ) Router.go('/login'); // deny not logged in
+    //if (!Meteor.user() ) Router.go('/login'); // deny not logged in Meteor.loginWithTwitter
+    // if (!Meteor.user() ) Meteor.loginWithTwitter();
+
     this.layout('Layout');
     Session.set("DocumentTitle","Qurious - Add Author");
 
@@ -159,7 +165,7 @@ Router.route('/:_slug', {
           return Authors.findOne({slug: slug});
           },
         quotes: function () {
-          var quotes = Quotes.find({author: currentAuthor._id}, { sort: {quotation: 1}});
+          var quotes = Quotes.find( {authorId: currentAuthor._id}, { sort: {quotation: 1}} );
           return quotes;
         }
       }

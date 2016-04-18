@@ -43,11 +43,13 @@
   <div class="container qurious-nav">
     <ul class="navigation">
       <li class="brand"><a href="/"><img src="/grey-logo.png"></a></li>
-      <!-- <li><a href="/faq">faq</a></li> -->
+      <li><a href="/faq">faq</a></li>
       <!-- <li><a href="/explore">explore</a></li> -->
       <!-- <li>{{#unless currentUser}}<a href="/login">login</a>{{else}}<a href="/logout">logout</a>{{/unless}}</li> -->
+      {{#if currentUser}}
+      <li class="edit-mode"><a href="#edit">Edit mode</a></li>
       <li>{{> loginButtons}}</li>
-
+      {{/if}}
     </ul>
   </div>
 </template>
@@ -57,9 +59,18 @@
 <template name="Home">
   <div class="container backdrop-block">
     <ul class="author-list">
+      {{#unless showUnverified}}
       {{#each authors}}
         <li><a href="/{{slug}}/">{{name}}</a><!-- <span class="delete">x</span> --></li>
+      {{else}}
+      <li><a href="/add">No authors found</a></li>
       {{/each}}
+      {{/unless}}
+      {{#if showUnverified}}
+      {{#each authorsUnverified}}
+        <li><a href="/{{slug}}/">{{name}}</a><!-- <span class="delete">x</span> --></li>
+      {{/each}}
+      {{/if}}
       <li><a href="/add">+</a></li>
     </ul>
   </div>
@@ -86,7 +97,7 @@
 <template name="Login">
   <div class="container backdrop-block">
     <div class="login-form">
-      make login form
+      {{> loginButtons}}
     </div>
   </div>
 </template>
@@ -111,6 +122,7 @@
       </div>
       <button type="submit" class="btn btn-primary create">Submit</button>
     </form> -->
+    <p>Add some <strong>notable</strong> authors.</p>
 
 
     <form class="add-author form-inline">
@@ -132,7 +144,9 @@
     </div>
     <ul class="quote-list">
     {{#each quotes}}
-        <li class="quotation"><a href="{{slug}}">{{truncate quotation}}</a></li>
+      <li class="quotation"><a href="{{slug}}">{{truncate quotation}}</a></li>
+      {{else}}
+      <li class="quotation"><a href="add">No quotations found</a></li>
     {{/each}}
     <li><a href="/{{author.slug}}/add">+</a></li>
     </ul>
@@ -203,7 +217,6 @@
 
 <template name="Faq">
   <div class="container faq">
-    <h1>FAQ</h1>
     <p>No one has asked any questions yet?</p>
   </div>
 </template>

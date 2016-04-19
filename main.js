@@ -164,7 +164,7 @@ if (Meteor.isClient) { // only runs on the client
     loadingTemplate: 'Loading',
   });
 
-  // This will not work please update
+  // Renders if route not found, but pretty much 100% sure route will be found
   Router.plugin('dataNotFound', {notFoundTemplate: 'NotFound'});
 
 

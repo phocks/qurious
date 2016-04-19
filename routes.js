@@ -69,9 +69,23 @@ Router.route('/faq', {
 });
 
 
+Router.route('/signup', {
+  waitOn: function () {
+
+  },
+  action: function () {
+    if (Meteor.user() ) Router.go('/'); // deny not logged in
+    this.layout('Layout');
+    this.render('Nav', { to: 'nav'});
+    this.render('SignUp');
+    // this.render('Nav', { to: 'nav'});
+  }
+});
 
 
-Router.route('/login', {
+
+
+Router.route('/signin', {
   waitOn: function () {
 
   },
@@ -81,7 +95,7 @@ Router.route('/login', {
     Session.set("DocumentTitle","Qurious Login");
 
     this.render('Nav', { to: 'nav'});
-    this.render('Login');
+    this.render('SignIn');
     // this.render('Nav', { to: 'nav'});
   }
 });
@@ -148,6 +162,7 @@ Router.route('/:_author_slug/:_quote_slug', {
 
 
 // What quotes does the author have?
+// Don't put things below this as they probs won't work
 Router.route('/:_slug', {
   waitOn: function () {
     return Meteor.subscribe('authors');
@@ -156,8 +171,11 @@ Router.route('/:_slug', {
     var slug = this.params._slug;
     var currentAuthor = Authors.findOne({slug: slug});
 
-    Session.set("DocumentTitle", currentAuthor.name + " - Qurious");
-    Meteor.subscribe('quotesAuthorId', currentAuthor._id);
+    if (!currentAuthor) Router.go('/');
+    else {
+      Session.set("DocumentTitle", currentAuthor.name + " - Qurious");
+      Meteor.subscribe('quotesAuthorId', currentAuthor._id);
+    }
     this.render('Nav', { to: 'nav'});
     this.render('Author', {
       data: {

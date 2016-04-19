@@ -87,10 +87,10 @@
 
 
 
-<template name="Login">
+<template name="SignIn">
   <div class="container backdrop-block">
     <div class="login-form">
-      {{> loginButtons}}
+      Do Sign In
     </div>
   </div>
 </template>
@@ -170,6 +170,17 @@
       </div>
   </div>
 </template>
+
+
+
+<template name="SignUp">
+    <form>
+        <input type="email" name="signUpEmail">
+        <input type="password" name="signUpPassword">
+        <input type="submit" value="Sign Up">
+    </form>
+</template>
+
 
 
 

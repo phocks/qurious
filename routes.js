@@ -26,12 +26,12 @@ Router.route('/', {
     this.render('Home', {
       data: {
         authors: function () {
-          var authors = Authors.find({ verified: true }, { sort: {name: 1}});
+          var verifiedAuthors = Authors.find({ verified: true }, { sort: {name: 1}});
           return authors;
         },
-        authorsUnverified: function () {
-          return Authors.find({ verified: false }, { sort: {name: 1}});
-        }
+        // authorsUnverified: function () {
+        //   return Authors.find({ verified: false }, { sort: {name: 1}});
+        // }
       }
     });
   }

@@ -26,7 +26,6 @@ fortawesome:fontawesome
 email
 underscorestring:underscore.string
 multiply:iron-router-progress
-aldeed:template-extension
 aldeed:simple-schema
 aldeed:collection2
 standard-minifier-css
@@ -39,5 +38,3 @@ autopublish
 accounts-twitter
 msavin:mongol
 accounts-base
-accounts-ui-unstyled
-accounts-ui

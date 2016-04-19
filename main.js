@@ -140,9 +140,9 @@ if (Meteor.isClient) { // only runs on the client
   // One of 'USERNAME_AND_EMAIL', 'USERNAME_AND_OPTIONAL_EMAIL',
   // 'USERNAME_ONLY', or 'EMAIL_ONLY' (default).
   // Note: this doesn't do anything when using useraccounts:core
-  Accounts.ui.config({
-    passwordSignupFields: "USERNAME_AND_EMAIL"
-  });
+  // Accounts.ui.config({
+  //   passwordSignupFields: "USERNAME_AND_EMAIL"
+  // });
 
 
   // Some more configs to run initially

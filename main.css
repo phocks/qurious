@@ -630,11 +630,8 @@ ul.quote-list li {
 
 /* Found a way to log in via Twitter */
 /* Styles need to be !important to override accounts-ui */
-#login-buttons {
-  /*float: right;*/
-}
 
-.login-display-name {
+/*.login-display-name {
   display: none !important;
 }
 
@@ -644,7 +641,7 @@ ul.quote-list li {
   color: #999 !important;
   border-color: #ccc !important;
   font-family: inherit !important;
-}
+}*/
 
 
 

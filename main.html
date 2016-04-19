@@ -43,13 +43,13 @@
   <div class="container qurious-nav">
     <ul class="navigation">
       <li class="brand"><a href="/"><img src="/grey-logo.png"></a></li>
-      <li><a href="/faq">faq</a></li>
+      <!-- <li><a href="/faq">faq</a></li> -->
       <!-- <li><a href="/explore">explore</a></li> -->
       <!-- <li>{{#unless currentUser}}<a href="/login">login</a>{{else}}<a href="/logout">logout</a>{{/unless}}</li> -->
-      {{#if currentUser}}
-      <li class="edit-mode"><a href="#edit">Edit mode</a></li>
-      <li>{{> loginButtons}}</li>
-      {{/if}}
+      <!-- {{#if currentUser}} -->
+      <!-- <li class="edit-mode"><a href="#edit">Edit mode</a></li> -->
+      <!-- <li>{{> loginButtons}}</li> -->
+      <!-- {{/if}} -->
     </ul>
   </div>
 </template>
@@ -59,19 +59,12 @@
 <template name="Home">
   <div class="container backdrop-block">
     <ul class="author-list">
-      {{#unless showUnverified}}
-      {{#each authors}}
+      {{#each verifiedAuthors}}
         <li><a href="/{{slug}}/">{{name}}</a><!-- <span class="delete">x</span> --></li>
       {{else}}
-      <li><a href="/add">No authors found</a></li>
+      <li><a href="#">Coming soon</a></li>
       {{/each}}
-      {{/unless}}
-      {{#if showUnverified}}
-      {{#each authorsUnverified}}
-        <li><a href="/{{slug}}/">{{name}}</a><!-- <span class="delete">x</span> --></li>
-      {{/each}}
-      {{/if}}
-      <li><a href="/add">+</a></li>
+      <li><a href="#">+</a></li>
     </ul>
   </div>
 </template>

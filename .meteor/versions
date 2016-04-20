@@ -53,6 +53,7 @@ iron:middleware-stack@1.1.0
 iron:router@1.0.12
 iron:url@1.0.11
 jquery@1.11.8
+jss:flat-ui@2.2.2
 lai:collection-extensions@0.1.4
 launch-screen@1.0.11
 less@2.6.0

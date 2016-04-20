@@ -61,10 +61,11 @@
     <ul class="author-list">
       {{#each verifiedAuthors}}
         <li><a href="/{{slug}}/">{{name}}</a><!-- <span class="delete">x</span> --></li>
+        <li><a href="#">+</a></li>
       {{else}}
-      <li><a href="#">Coming soon</a></li>
+        <li><a href="/signup">Coming soon</a></li>
+        <li><a href="/signup">+</a></li>
       {{/each}}
-      <li><a href="#">+</a></li>
     </ul>
   </div>
 </template>
@@ -84,12 +85,26 @@
 
 
 
+<template name="SignUp">
+  <div class="container">
 
+  <form>
+    <input type="text" class="form-control input-hg" placeholder="Huge" />
+  </form>
+
+
+    <!-- <form>
+        <input type="email" name="signUpEmail">
+        <input type="password" name="signUpPassword">
+        <input type="submit" value="Sign Up">
+    </form> -->
+  </div>
+</template>
 
 
 <template name="SignIn">
   <div class="container backdrop-block">
-    <div class="login-form">
+    <div class="signin-form">
       Do Sign In
     </div>
   </div>
@@ -173,13 +188,7 @@
 
 
 
-<template name="SignUp">
-    <form>
-        <input type="email" name="signUpEmail">
-        <input type="password" name="signUpPassword">
-        <input type="submit" value="Sign Up">
-    </form>
-</template>
+
 
 
 

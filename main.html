@@ -88,7 +88,12 @@
 
 <template name="Home">
   <div class="container backdrop-block">
-    <h1>Welcome.</h1>
+    <div class="col-md-6">
+      <h1>Welcome.</h1>
+    </div>
+    <div class="col-md-6 spacer">
+      <!-- <p>Qurious is a new website about quotations etc.</p> -->
+    </div>
   </div>
 </template>
 
@@ -97,9 +102,9 @@
 <template name="Settings">
   <div class="container backdrop-block">
     <div class="col-md-6">
-      <h1>Settings.</h1>
+      <h1>Settings</h1>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 spacer">
       <p>User Id: {{_id}}</p>
       <a href="/sign-out">Sign out</a>
     </div>
@@ -126,7 +131,7 @@
     <div class="col-md-6">
       <h1>Sign Up</h1>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 spacer">
       <form>
         <div class="form-group">
           <label>What is your email address?</label>
@@ -153,14 +158,15 @@
       <h1>Sign In</h1>
       <!-- <p>Sign up to Qurious.</p> -->
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 spacer">
+      <p>We are currently still in beta testing phase and are accepting users on an invite only basis. If you already have an account please sign in below.</p>
       <form>
         <div class="form-group">
-          <label>Email</label>
+          <label>What email did you sign up with?</label>
           <input type="email" class="form-control" placeholder="email" name="signInEmail" />
         </div>
         <div class="form-group">
-          <label>Password</label>
+          <label>Do you remember your password?</label>
           <input type="password" class="form-control" placeholder="password" name="signInPassword" />
         </div>
         <button type="submit" class="btn btn-primary">Sign In</button>

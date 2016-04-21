@@ -38,6 +38,43 @@ Router.route('/', {
 });
 
 
+Router.route('/explore', {
+  waitOn: function () {
+    return Meteor.subscribe('authors');
+  },
+  action: function () {
+    Session.set("DocumentTitle","Qurious");
+
+    // console.log(Meteor.user().services.twitter.profile_image_url);
+
+    this.render('Nav', { to: 'nav'});
+
+    this.render('Explore', {
+      data: {
+        verifiedAuthors: function () {
+          var verifiedAuthors = Authors.find({ }, { sort: {name: 1}});
+          return verifiedAuthors;
+        },
+      }
+    });
+  }
+});
+
+
+Router.route('/settings', {
+  action: function () {
+    Session.set("DocumentTitle","Qurious");
+
+    
+    if (!Meteor.user() ) Router.go('/sign-in');
+    this.render('Nav', { to: 'nav'});
+    this.render('Settings', {
+      data: {
+        
+      }
+    });
+  }
+});
 
 
 Router.route('/add', {
@@ -69,12 +106,12 @@ Router.route('/faq', {
 });
 
 
-Router.route('/signup', {
+Router.route('/sign-up', {
   waitOn: function () {
 
   },
   action: function () {
-    if (Meteor.user() ) Router.go('/'); // deny not logged in
+    if (Meteor.user() ) Router.go('/'); // deny logged in
     this.layout('Layout');
     this.render('Nav', { to: 'nav'});
     this.render('SignUp');
@@ -85,12 +122,12 @@ Router.route('/signup', {
 
 
 
-Router.route('/signin', {
+Router.route('/sign-in', {
   waitOn: function () {
 
   },
   action: function () {
-    if (Meteor.user() ) Router.go('/'); // deny not logged in
+    if (Meteor.user() ) Router.go('/'); // deny logged in
     this.layout('Layout');
     Session.set("DocumentTitle","Qurious Login");
 
@@ -104,7 +141,7 @@ Router.route('/signin', {
 
 
 // Quick and easy logouts
-Router.route('/logout', function() {
+Router.route('/sign-out', function() {
   Meteor.logout();
   Router.go('/');
 });

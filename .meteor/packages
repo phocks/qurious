@@ -34,7 +34,7 @@ alanning:roles
 yasaricli:slugify
 insecure
 autopublish
-accounts-twitter
 msavin:mongol
 accounts-base
 jss:flat-ui
+accounts-password

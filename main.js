@@ -246,9 +246,17 @@ if (Meteor.isClient) { // only runs on the client
     }
   );
 
+  // End global helpers and now some Template specific helpers
+
+  Template.Settings.helpers({
+    _id: function () {
+      return Meteor.userId();
+    }
+  })
 
 
-// Events that drive things like clicks etc go below here
+
+  // Events that drive things like clicks etc go below here
 
 
   Template.Nav.events({
@@ -324,6 +332,49 @@ if (Meteor.isClient) { // only runs on the client
     }
   });
 
+
+  Template.SignUp.events({
+    'submit form': function(event) {
+      event.preventDefault();
+      var emailVar = event.target.signUpEmail.value;
+      var passwordVar = event.target.signUpPassword.value;
+      var passwordVarConfirm = event.target.signUpPasswordConfirm.value;
+      if (!emailVar) return false; // replace with better validation
+
+      if (passwordVar !== passwordVarConfirm) {
+        alert("Passwords don't match.");
+        return false;
+      }
+
+      Accounts.createUser({
+        email: emailVar,
+        password: passwordVar
+      }, function (error, result) {
+        if (error) {
+          console.log(error);
+          alert(error);
+        }
+      });
+      console.log("Form submitted.");
+    }
+  });
+
+  Template.SignIn.events({
+    'submit form': function(event) {
+      event.preventDefault();
+      var emailVar = event.target.signInEmail.value;
+      var passwordVar = event.target.signInPassword.value;
+      if (!emailVar) return false;
+      Meteor.loginWithPassword(emailVar, passwordVar, function (error, result) {
+        if (error) {
+          console.log(error);
+          alert(error);
+        }
+      });
+      console.log("User logged in.");
+    }
+  });
+
 } // Client only code end
 
 
@@ -363,10 +414,8 @@ if (Meteor.isServer) {
     if (!Meteor.settings.mailGunUrl) console.log('Warning: email config not done.');
     else console.log("Email config address: " + Meteor.settings.mailGunUrl);
 
-    
-    Accounts.config({
-      forbidClientAccountCreation: true  // set this to true to disable password signup
-    });
+    // set this to true to disable password signup
+    Accounts.config({forbidClientAccountCreation: false, });
     
 
     // Make sure some indexes are unique and can't be 2 or more of them

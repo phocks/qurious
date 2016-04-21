@@ -69,7 +69,15 @@ a:focus {
   outline: none;
 }
 
+.form-control {
+  font-family: "Montserrat", sans-serif;
+}
 
+.hide {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
 
 h1 {
   /*margin-top: 10px;*/
@@ -77,38 +85,20 @@ h1 {
 
 
 /* removes outline for Bootstrap Buttons */
-.btn:focus, .btn:active:focus, .btn.active:focus {
+/*.btn:focus, .btn:active:focus, .btn.active:focus {
   outline: none !important;
-  outline-style: none; }
+  outline-style: none; }*/
 
 
 /* Handy class that makes an image black and white */
 img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
-.btn {
-  /*border-width: 1px;*/
+
+
+.inline {
+  display: inline-block;
 }
-
-
-
-/* Bootstrap overrides */
-.navbar-default {
-  background-color: #fdfbf8;
-}
-
-.btn-default {
-  color: #666;
-}
-
-
-/* use this eventually to do things with alternating quotes perhaps
-.list-quote:nth-child(odd) {
-  background-color:#eee;
-}
-*/
-
-
 
 
 
@@ -367,16 +357,24 @@ Keep it clean
   padding-bottom: 28px;*/
 }
 
+.attribution {
+  /*margin-top: 32px;*/
+  /*font-size: 42px;*/
+  color: #f48365;
+  white-space: nowrap;
+}
+
 /*  nav */
 
 .qurious-nav {
   margin-top: 3vh;
-  margin-bottom: 3vh;
+  /*margin-bottom: 3vh;*/
   padding-top: 22px;
-  padding-bottom: 22px;
-  border-bottom: 1px solid #efefef;
+  /*padding-bottom: 22px;*/
+  /*border-bottom: 2px solid #efefef;*/
 }
 
+/*
 .qurious-nav ul {
   list-style-type: none;
   margin: 0;
@@ -394,29 +392,22 @@ Keep it clean
 
 .qurious-nav img {
   max-height: 32px;
-}
+}*/
 
-.navbar {
-  /*min-height: inherit;*/
-  background-color: transparent;
-}
 
-.navbar {
+
+/*.navbar {
   padding: 15px 0 15px;
   color: #999;
-  /*border: 0;*/
-  /*z-index: -100;*/
-}
+}*/
 
-.navbar a {
+/*.navbar a {
   color: #999;
   background-color: inherit;
-}
+}*/
 
 .navbar img {
   height: 32px;
-  /*opacity: 0.4;
-  filter: alpha(opacity=40);*/ /* For IE8 and earlier */
 }
 
 /* A list of Authors */
@@ -442,6 +433,7 @@ ul.quote-list a {
   color: inherit;
   padding: 8px 12px;
   background-color: #f2f1ef;
+  border-radius: 6px;
 }
 
 ul.author-list a:hover,
@@ -482,10 +474,9 @@ ul.quote-list li {
 
 .backdrop-block {
   padding-bottom: 65px; /* use if fixed bottom button nav */
-
 }
 
-.backdrop-block * {
+.backdrop-block {
   border-radius: 0;
 }
 
@@ -506,46 +497,24 @@ ul.quote-list li {
 }
 
 
-/* Login form */
-.at-form .at-title,
-.at-form .control-label {
-  display: none;
+
+/* Flat UI Overrides*/
+/*h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 { 
+  color: #f48365;
 }
 
-.at-form {
-  width: 263px;
-  margin-top: 0;
-  margin-bottom: 0;
-  overflow: visible;
-  margin: initial;
-  text-align: center;
-}
-
-.at-form * {
-  border-radius: 0;
-}
-
-.g-recaptcha {
-  transform:scale(0.77);
-  -webkit-transform:scale(0.77);
-  transform-origin:0 0;
-  -webkit-transform-origin:0 0;
-  box-shadow: none;
-}
-
-.g-recaptcha iframe {
-    border-radius: 5px;
-    width: 302px;
-    height: 76px;
- }
-
-.at-form button,
-.at-form input,
-.at-form .alert {
-  /*border-radius: 0;*/
-}
-
-
+*/
 
 
 
@@ -619,12 +588,7 @@ ul.quote-list li {
 
 
 
-.attribution {
-  /*margin-top: 32px;*/
-  font-size: 42px;
-  color: #f48365;
-  white-space: nowrap;
-}
+
 
 
 
@@ -648,6 +612,12 @@ ul.quote-list li {
 /* Another navigation section clean up soon */
 .navigation .brand {
   margin-right: 8px;
+}
+
+
+
+.content {
+  max-width: 700px;
 }
 
 

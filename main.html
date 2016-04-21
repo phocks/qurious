@@ -15,9 +15,9 @@
 
 <template name="Layout">
   <div class="container-fluid full-container">
-    <nav>
+    <div>
       {{> yield "nav"}}
-    </nav>
+    </div>
     <header>
       {{> yield "header"}}
     </header>
@@ -41,8 +41,8 @@
 <!-- This is the fixed nav -->
 <template name="Nav">
   <div class="container qurious-nav">
-    <ul class="navigation">
-      <li class="brand"><a href="/"><img src="/grey-logo.png"></a></li>
+    <!-- <ul class="navigation">
+      <li class="brand"><a href="/"><img src="/grey-logo.png"></a></li> -->
       <!-- <li><a href="/faq">faq</a></li> -->
       <!-- <li><a href="/explore">explore</a></li> -->
       <!-- <li>{{#unless currentUser}}<a href="/login">login</a>{{else}}<a href="/logout">logout</a>{{/unless}}</li> -->
@@ -50,7 +50,37 @@
       <!-- <li class="edit-mode"><a href="#edit">Edit mode</a></li> -->
       <!-- <li>{{> loginButtons}}</li> -->
       <!-- {{/if}} -->
-    </ul>
+    <!-- </ul> -->
+
+    <nav class="navbar navbar-default navbar-embossed" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+          <span class="sr-only">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand" href="/">Qurious</a>
+      </div>
+      <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <ul class="nav navbar-nav">
+          <!-- <li><a href="/">Home</a></li> -->
+          <li><a href="/explore">Explore</a></li>
+          <!-- <li><a href="/sign-up">Sign Up</a></li> -->
+          
+        </ul>
+        
+          {{#if currentUser}}
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/settings">Settings</a></li>
+            </ul>
+          {{else}}
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/sign-in">Sign In</a></li>
+            </ul>
+          {{/if}}
+      </div><!-- /.navbar-collapse -->
+    </nav><!-- /navbar -->
+
+
+
   </div>
 </template>
 
@@ -58,15 +88,21 @@
 
 <template name="Home">
   <div class="container backdrop-block">
-    <ul class="author-list">
-      {{#each verifiedAuthors}}
-        <li><a href="/{{slug}}/">{{name}}</a><!-- <span class="delete">x</span> --></li>
-        <li><a href="#">+</a></li>
-      {{else}}
-        <li><a href="/signup">Coming soon</a></li>
-        <li><a href="/signup">+</a></li>
-      {{/each}}
-    </ul>
+    <h1>Welcome.</h1>
+  </div>
+</template>
+
+
+
+<template name="Settings">
+  <div class="container backdrop-block">
+    <div class="col-md-6">
+      <h1>Settings.</h1>
+    </div>
+    <div class="col-md-6">
+      <p>User Id: {{_id}}</p>
+      <a href="/sign-out">Sign out</a>
+    </div>
   </div>
 </template>
 
@@ -87,25 +123,48 @@
 
 <template name="SignUp">
   <div class="container">
-
-  <form>
-    <input type="text" class="form-control input-hg" placeholder="Huge" />
-  </form>
-
-
-    <!-- <form>
-        <input type="email" name="signUpEmail">
-        <input type="password" name="signUpPassword">
-        <input type="submit" value="Sign Up">
-    </form> -->
+    <div class="col-md-6">
+      <h1>Sign Up</h1>
+    </div>
+    <div class="col-md-6">
+      <form>
+        <div class="form-group">
+          <label>What is your email address?</label>
+          <input type="email" class="form-control" placeholder="email" name="signUpEmail" />
+        </div>
+        <div class="form-group">
+          <label>Choose a good password</label>
+          <input type="password" class="form-control" placeholder="password" name="signUpPassword" />
+        </div>
+        <div class="form-group">
+          <label>Type it again for good luck</label>
+          <input type="password" class="form-control" placeholder="password" name="signUpPasswordConfirm" />
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+    </div>
   </div>
 </template>
 
 
 <template name="SignIn">
-  <div class="container backdrop-block">
-    <div class="signin-form">
-      Do Sign In
+  <div class="container">
+    <div class="col-md-6">
+      <h1>Sign In</h1>
+      <!-- <p>Sign up to Qurious.</p> -->
+    </div>
+    <div class="col-md-6">
+      <form>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" placeholder="email" name="signInEmail" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" placeholder="password" name="signInPassword" />
+        </div>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+      </form>
     </div>
   </div>
 </template>
@@ -114,8 +173,10 @@
 <template name="Explore">
   <div class="container backdrop-block">
     <ul class="author-list">
-      {{#each authors}}
-        <li><a href="/{{slug}}">{{name}}</a><!-- <span class="delete">x</span> --></li>
+      {{#each verifiedAuthors}}
+        <li><a href="/{{slug}}/">{{name}}</a><!-- <span class="delete">x</span> --></li>
+      {{else}}
+        <li><a href="/add">Coming soon</a></li>
       {{/each}}
       <li><a href="/add">+</a></li>
     </ul>
@@ -208,23 +269,7 @@
 
 <!-- This template is to show the loading spinner -->
 <template name="Loading">
-  <div class="lite-container container">
-    <div class="top-spacing">
-    </div>
-    <header>
-
-    </header>
-    <div class="body-container">
-      <!-- Do something else for the loader maybe a top bar -->
-      <!-- <p class="text-center"><img width="50px" src="/q-loader.gif"></p> -->
-    </div>
-    <footer>
-
-    </footer>
-    <nav>
-      <!-- {{>Nav}} -->
-    </nav>
-  </div>
+  {{> Nav}}
 </template>
 
 

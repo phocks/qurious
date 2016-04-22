@@ -114,6 +114,22 @@ Router.route('/sign-up', {
   },
   action: function () {
     if (Meteor.user() ) Router.go('/'); // deny logged in
+
+    var invited = Invites.find({ }).fetch();
+
+    
+
+    var arrayInvited = [];
+
+    invited.forEach( function (invitee) {
+      
+      arrayInvited.push(invitee.email);
+    });
+
+    
+
+
+    Session.set('Invited', arrayInvited);
     this.layout('Layout');
     this.render('Nav', { to: 'nav'});
     this.render('SignUp');
@@ -133,9 +149,9 @@ Router.route('/sign-in', {
 
   },
   action: function () {
-    // if (Meteor.user() ) Router.go('/'); // deny logged in
+    if (Meteor.user() ) Router.go('/'); // deny logged in
     this.layout('Layout');
-    Session.set("DocumentTitle","Qurious Login");
+    Session.set("DocumentTitle","Qurious");
 
     this.render('Nav', { to: 'nav'});
     this.render('SignIn');
@@ -143,6 +159,14 @@ Router.route('/sign-in', {
   }
 });
 
+
+Router.route('/admin', {
+  action: function () {
+    var loggedInUser = Meteor.userId();
+    if (Roles.userIsInRole(loggedInUser, 'admin')) Router.go('/');
+    this.render('404');
+  }
+});
 
 
 
@@ -217,7 +241,10 @@ Router.route('/:_slug', {
     var slug = this.params._slug;
     var currentAuthor = Authors.findOne({slug: slug});
 
-    if (!currentAuthor) Router.go('/not-found');
+    if (!currentAuthor) {
+      this.render('404');
+      return false;
+    }
     else {
       Session.set("DocumentTitle", currentAuthor.name + " - Qurious");
       Meteor.subscribe('quotesAuthorId', currentAuthor._id);

@@ -27,9 +27,10 @@
 // First up we are going to create a few collections
 Quotes = new Mongo.Collection('quotes');  // Our main quote db
 Authors = new Mongo.Collection('authors'); // People who say stuff
+Invites = new Mongo.Collection('invites'); // People we want to have on here
 // Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use really)
 // Words = new Mongo.Collection('words'); // Words are the basis of ideas
-// There is also a Users collection by default in Meteor
+// There is also a Users collection by default in Meteor and roles from the roles package
 
 
 
@@ -114,6 +115,7 @@ if (Meteor.isClient) { // only runs on the client
   // Meteor.subscribe("counters");
   Meteor.subscribe("userData"); // for admin account login access etc.
   Meteor.subscribe("authors"); // subscribe only to certain ones later
+  Meteor.subscribe("invites");
 
 
 
@@ -345,6 +347,14 @@ if (Meteor.isClient) { // only runs on the client
         alert("Passwords don't match.");
         return false;
       }
+      
+      if (Session.get('Invited').indexOf(emailVar) > -1) {
+        console.log("You're on the list!");
+      } else {
+        console.log('Not on the invite list sorry.');
+        alert('Not on the invite list sorry.')
+        return false;
+      }
 
       Accounts.createUser({
         email: emailVar,
@@ -354,7 +364,9 @@ if (Meteor.isClient) { // only runs on the client
           console.log(error);
           alert(error);
         }
+    
       });
+        
       console.log("Form submitted.");
     }
   });

@@ -124,4 +124,8 @@ Meteor.methods({
     }
     return true;
   },
+  isInvited: function (emailAddress) {
+    check(emailAddress, String);
+    Invites.findOne({ email: emailAddress })
+  }
 });

@@ -41,17 +41,6 @@
 <!-- This is the fixed nav -->
 <template name="Nav">
   <div class="container qurious-nav">
-    <!-- <ul class="navigation">
-      <li class="brand"><a href="/"><img src="/grey-logo.png"></a></li> -->
-      <!-- <li><a href="/faq">faq</a></li> -->
-      <!-- <li><a href="/explore">explore</a></li> -->
-      <!-- <li>{{#unless currentUser}}<a href="/login">login</a>{{else}}<a href="/logout">logout</a>{{/unless}}</li> -->
-      <!-- {{#if currentUser}} -->
-      <!-- <li class="edit-mode"><a href="#edit">Edit mode</a></li> -->
-      <!-- <li>{{> loginButtons}}</li> -->
-      <!-- {{/if}} -->
-    <!-- </ul> -->
-
     <nav class="navbar navbar-default navbar-embossed" role="navigation">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
@@ -78,9 +67,6 @@
           {{/if}}
       </div><!-- /.navbar-collapse -->
     </nav><!-- /navbar -->
-
-
-
   </div>
 </template>
 
@@ -169,7 +155,7 @@
           <label>Do you remember your password?</label>
           <input type="password" class="form-control" placeholder="password" name="signInPassword" />
         </div>
-        <button type="submit" class="btn btn-primary">Sign In</button>
+        <button type="submit" class="btn btn-primary">Sign In</button> <a href="/forgot">forgot?</a>
       </form>
     </div>
   </div>
@@ -276,6 +262,14 @@
 <!-- This template is to show the loading spinner -->
 <template name="Loading">
   {{> Nav}}
+</template>
+
+<template name="404">
+  {{> Nav}}
+  <div class="container">
+    <h1>404</h1>
+    <p>These aren't the droids you're looking for...</p>
+  </div>
 </template>
 
 

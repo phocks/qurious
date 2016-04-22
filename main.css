@@ -46,7 +46,7 @@
 
 body {
   background-color: #fdfbf8;
-  color: #888;
+  color: #777;
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
 }
@@ -586,6 +586,41 @@ h6,
   /*font-size: 42px;*/
 }
 
+
+
+/* We are fixing a bug in Flat UI that gives us wrong colours on click */
+.btn-default:hover,
+.btn-default.hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  color: #ffffff !important;
+  background-color: #cacfd2 !important;
+  border-color: #cacfd2 !important;
+}
+.btn-default:active,
+.btn-default.active,
+.open > .dropdown-toggle.btn-default {
+  background: #a1a6a9 !important;
+  border-color: #a1a6a9 !important;
+}
+.btn-primary:hover,
+.btn-primary.hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: #ffffff !important;
+  background-color: #48c9b0 !important;
+  border-color: #48c9b0 !important;
+}
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background: #16a085 !important;
+  border-color: #16a085 !important;
+}
 
 
 

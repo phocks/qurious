@@ -23,6 +23,8 @@ Router.route('/', {
 
     this.render('Nav', { to: 'nav'});
 
+    
+
     this.render('Home', {
       data: {
         authors: function () {
@@ -119,7 +121,11 @@ Router.route('/sign-up', {
   }
 });
 
-
+Router.route('/not-found', {
+  action: function () {
+    this.render('404');
+  }
+});
 
 
 Router.route('/sign-in', {
@@ -127,7 +133,7 @@ Router.route('/sign-in', {
 
   },
   action: function () {
-    if (Meteor.user() ) Router.go('/'); // deny logged in
+    // if (Meteor.user() ) Router.go('/'); // deny logged in
     this.layout('Layout');
     Session.set("DocumentTitle","Qurious Login");
 
@@ -191,9 +197,12 @@ Router.route('/:_author_slug/:_quote_slug', {
         }
       }
     });
-    // this.render('Nav', { to: 'nav'});
   }
 });
+
+
+
+
 
 
 
@@ -208,7 +217,7 @@ Router.route('/:_slug', {
     var slug = this.params._slug;
     var currentAuthor = Authors.findOne({slug: slug});
 
-    if (!currentAuthor) Router.go('/');
+    if (!currentAuthor) Router.go('/not-found');
     else {
       Session.set("DocumentTitle", currentAuthor.name + " - Qurious");
       Meteor.subscribe('quotesAuthorId', currentAuthor._id);
@@ -225,7 +234,6 @@ Router.route('/:_slug', {
         }
       }
     });
-    // this.render('Nav', { to: 'nav'});
   }
 });
 
@@ -239,7 +247,7 @@ Router.route('/:_slug', {
 Router.route('/(.*)', function() {
   this.layout('Layout');
   Session.set("DocumentTitle","Qurious - 404 not found");
-  this.render('LiteError');
+  this.render('404');
 });
 
 

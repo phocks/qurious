@@ -36,5 +36,6 @@ insecure
 autopublish
 msavin:mongol
 accounts-base
-jss:flat-ui
 accounts-password
+twbs:bootstrap
+jss:flat-ui

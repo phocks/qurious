@@ -417,7 +417,7 @@ if (Meteor.isServer) {
     // set this to true to disable password signup
     Accounts.config({forbidClientAccountCreation: false, });
     
-
+    
     // Make sure some indexes are unique and can't be 2 or more of them
     // Words._ensureIndex({word: 1}, {unique: 1});
 

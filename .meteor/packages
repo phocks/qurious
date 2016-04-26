@@ -32,8 +32,6 @@ standard-minifier-js
 ecmascript
 alanning:roles
 yasaricli:slugify
-insecure
-autopublish
 msavin:mongol
 accounts-base
 accounts-password

@@ -43,10 +43,20 @@ Schemas.Author = new SimpleSchema({
   name: {
     type: String,
     label: "Name",
+    unique: true,
     max: 200,
+  },
+  description: {
+    type: String,
+    max: 3000,
+    label: "Brief summary of author",
+    optional: true
   },
   createdAt: {
     type: Date
+  },
+  createdBy: {
+    type: String
   },
   slug: {
     type: String,
@@ -62,15 +72,19 @@ Schemas.Author = new SimpleSchema({
 
 Schemas.Quote = new SimpleSchema({
   authorId: { type: String },
-  quotation: { type: String },
+  quotation: { 
+    type: String,
+    max: 1000, 
+  },
   createdAt: { type: Date },
-  userId: { type: String },
+  createdBy: { type: String },
   slug: {
     type: String,
     label: "Slug",
     // We can't make this unique until all Quotes have slugs and on second thoughts let's not anyway
     // Oh look we migrated all the quotes and now we can make it unique
-    unique: true,
+    // But actually we probably don't want to
+    // unique: true,
     max: 500,
   },
   verified: {
@@ -94,11 +108,11 @@ maximumQuotationLength = 1000; // in characters
 
 
 // Deny public from editing user profile. May prevent DoS attack
-Meteor.users.deny({
-  update: function() {
-    return true;
-  }
-});
+// Meteor.users.deny({
+//   update: function() {
+//     return true;
+//   }
+// });
 
 
 
@@ -115,7 +129,7 @@ if (Meteor.isClient) { // only runs on the client
   // Meteor.subscribe("counters");
   Meteor.subscribe("userData"); // for admin account login access etc.
   Meteor.subscribe("authors"); // subscribe only to certain ones later
-  Meteor.subscribe("invites");
+  
 
 
 
@@ -239,6 +253,7 @@ if (Meteor.isClient) { // only runs on the client
     return new Spacebars.SafeString(shortenedText);
   });
 
+  // This was used to show unverified authors but not using any more
   Template.registerHelper('showUnverified', function () {
       if (Session.get('editMode')) {
         return true;
@@ -319,10 +334,15 @@ if (Meteor.isClient) { // only runs on the client
       // Clear form
       event.target.text.value = "";
 
-
       // Prevent default action from form submit
       return false;
     },
+  });
+
+  Template.Settings.events({
+    'submit form': function(event) {
+      event.preventDefault();
+    }
   });
 
 

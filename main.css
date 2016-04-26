@@ -406,8 +406,8 @@ Keep it clean
   background-color: inherit;
 }*/
 
-.navbar img {
-  height: 32px;
+.navbar-brand img {
+  height: 25px;
 }
 
 /* A list of Authors */
@@ -605,7 +605,7 @@ h6,
   background: #a1a6a9 !important;
   border-color: #a1a6a9 !important;
 }
-.btn-primary:hover,
+/*.btn-primary:hover,
 .btn-primary.hover,
 .btn-primary:focus,
 .btn-primary:active,
@@ -614,12 +614,12 @@ h6,
   color: #ffffff !important;
   background-color: #48c9b0 !important;
   border-color: #48c9b0 !important;
-}
+}*/
 .btn-primary:active,
 .btn-primary.active,
 .open > .dropdown-toggle.btn-primary {
-  background: #16a085 !important;
-  border-color: #16a085 !important;
+  background: #5ab2b5 !important;
+  border-color: #5ab2b5 !important;
 }
 
 

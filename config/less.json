@@ -1,0 +1,9 @@
+{
+  "enableAutoprefixer": true,  // defaults to false
+  "autoprefixerOptions": {
+      "browsers": ["> 2%", "last 2 versions"],
+      "cascade": true
+  },
+  "useIndex": true, // defaults to false
+  "indexFilePath": "client/lib/flat-ui-less/flat-ui.less" // defaults ./client/main.less
+}

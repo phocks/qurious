@@ -87,9 +87,9 @@ Meteor.publish("quotesInArray", function (array) {
 // We are going to publish some more userData
 // in order to check if user is admin we need this
 Meteor.publish("userData", function () {
-  return Meteor.users.find({},
-    { fields: {'isAdmin':1, 'liked': 1, 'username': 1 }
-  });
+  // return Meteor.users.find({},
+  //   { fields: {'isAdmin':1, 'liked': 1, 'username': 1 }
+  // });
 
 
   /*if (this.userId) {
@@ -110,6 +110,10 @@ Meteor.publish("authors", function () {
   return Authors.find({  }); // verified: true
 });
 
+
+Meteor.publish("invites", function () {
+  return Invites.find({});
+})
 
 
 // Meteor.publish("words", function () {

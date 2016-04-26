@@ -41,21 +41,18 @@
 <!-- This is the fixed nav -->
 <template name="Nav">
   <div class="container qurious-nav">
-    <nav class="navbar navbar-default navbar-embossed" role="navigation">
+    <nav class="navbar navbar-default" role="navigation">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
           <span class="sr-only">Toggle navigation</span>
         </button>
-        <a class="navbar-brand" href="/">Qurious</a>
+        <a class="navbar-brand" href="/"><img src="/grey-logo.png"></a>
       </div>
       <div class="collapse navbar-collapse" id="navbar-collapse-01">
         <ul class="nav navbar-nav">
           <!-- <li><a href="/">Home</a></li> -->
           <li><a href="/explore">Explore</a></li>
-          <!-- <li><a href="/sign-up">Sign Up</a></li> -->
-          
         </ul>
-        
           {{#if currentUser}}
             <ul class="nav navbar-nav navbar-right">
               <li><a href="/settings">Settings</a></li>
@@ -74,26 +71,24 @@
 
 <template name="Home">
   <div class="container backdrop-block">
-    <div class="col-md-6">
-      <h1>Welcome.</h1>
-    </div>
-    <div class="col-md-6 spacer">
-      <!-- <p>Qurious is a new website about quotations etc.</p> -->
-    </div>
+    <h1>Welcome to Qurious, a website about quotes.</h1>
   </div>
 </template>
 
 
 
-<template name="Settings">
+<template name="Explore">
   <div class="container backdrop-block">
-    <div class="col-md-6">
-      <h1>Settings</h1>
-    </div>
-    <div class="col-md-6 spacer">
-      <p>User Id: {{_id}}</p>
-      <a href="/sign-out">Sign out</a>
-    </div>
+    <ul class="author-list">
+      {{#each verifiedAuthors}}
+        <li><a href="/{{slug}}">{{name}}</a><!-- <span class="delete">x</span> --></li>
+      {{else}}
+        <li><a href="#">Nothing found</a></li>
+      {{/each}}
+      {{#if currentUser}}
+      <li><a href="/add">+</a></li>
+      {{/if}}
+    </ul>
   </div>
 </template>
 
@@ -107,6 +102,7 @@
         {{quote.quotation}} <span class="attribution">&mdash;{{author.name}}</span>
       </div>
     </div>
+    <!-- <div>flag</div> -->
   </div>
 </template>
 
@@ -115,9 +111,10 @@
 <template name="SignUp">
   <div class="container">
     <div class="col-md-6">
-      <h1>Sign Up</h1>
-    </div>
-    <div class="col-md-6 spacer">
+      <!-- <h1>Sign Up</h1> -->
+    <!-- </div>
+    <div class="col-md-6 spacer"> -->
+    <p>Sign ups are currently invite only.</p>
       <form>
         <div class="form-group">
           <label>What is your email address?</label>
@@ -141,18 +138,17 @@
 <template name="SignIn">
   <div class="container">
     <div class="col-md-6">
-      <h1>Sign In</h1>
-      <!-- <p>Sign up to Qurious.</p> -->
-    </div>
-    <div class="col-md-6 spacer">
-      <p>We are currently still in beta testing phase and are accepting <a href="/sign-up">sign ups</a> on an invite only basis. If you already have an account please sign in below.</p>
+      <!-- <h1>Sign In</h1> -->
+    <!-- </div>
+    <div class="col-md-6 spacer"> -->
+      <p>Still in beta.</p>
       <form>
         <div class="form-group">
-          <label>What email did you sign up with?</label>
+          <label>Your email address</label>
           <input type="email" class="form-control" placeholder="email" name="signInEmail" />
         </div>
         <div class="form-group">
-          <label>Do you remember your password?</label>
+          <label>Your password</label>
           <input type="password" class="form-control" placeholder="password" name="signInPassword" />
         </div>
         <button type="submit" class="btn btn-primary">Sign In</button>
@@ -162,18 +158,31 @@
 </template>
 
 
-<template name="Explore">
+
+
+<template name="Settings">
   <div class="container backdrop-block">
-    <ul class="author-list">
-      {{#each verifiedAuthors}}
-        <li><a href="/{{slug}}/">{{name}}</a><!-- <span class="delete">x</span> --></li>
-      {{else}}
-        <li><a href="/add">Coming soon</a></li>
-      {{/each}}
-      <li><a href="/add">+</a></li>
-    </ul>
+    <div class="col-md-6">
+      <h1>Settings</h1>
+    <!-- </div>
+    <div class="col-md-6 spacer"> -->
+      <!-- <form>
+        <div class="form-group">
+          <label>Your author account</label>
+          <input type="text" class="form-control" placeholder="Pen name" name="penName" />
+        </div>
+        <div class="form-group">     
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form> -->
+      <p>Your user id: {{_id}}</p>
+      <a href="/sign-out">Sign out</a>
+    </div>
   </div>
 </template>
+
+
+
 
 <template name="Add">
   <div class="container backdrop-block">
@@ -181,9 +190,9 @@
     <form class="add-author form-inline">
       <div class="form-group">
         <label class="sr-only" for="authorName">Author Name</label>
-        <input type="text" class="form-control" id="authorName" name="text" placeholder="Author name" disabled>
+        <input type="text" class="form-control" id="authorName" name="text" placeholder="Author name">
       </div>
-      <button type="submit" class="btn btn-default" disabled>Create</button>
+      <button type="submit" class="btn btn-default">Create</button>
     </form>
 
   </div>
@@ -194,10 +203,11 @@
   <div class="container backdrop-block author-page">
     <div class="author-title-box">
       <h1 class="author-name">{{author.name}}</h1>
+      <p>{{author.description}}</p>
     </div>
     <ul class="quote-list">
     {{#each quotes}}
-      <li class="quotation"><a href="{{slug}}">{{truncate quotation}}</a></li>
+      <li class="quotation"><a href="/{{../author.slug}}/{{slug}}">{{truncate quotation}}</a></li>
       {{else}}
       <li class="quotation"><a href="add">No quotations found</a></li>
     {{/each}}
@@ -266,14 +276,3 @@
 
 
 
-<template name="Menu">
-  <div class="container">
-    <ul class="menu-group full-screen-menu">
-      <li class="menu-group-item"><a href="/">Home</a></li>
-      <li class="menu-group-item"><a href="/about">About</a></li>
-      <!-- <li class="menu-group-item"><a href="/login">Login</a></li> -->
-      <!-- <li class="menu-group-item"><a href="/all_quotes">All Quotes</a></li> -->
-      <!-- <li class="menu-group-item"><a href="/r">Random</a></li> -->
-    </ul>
-  </div>
-</template>

@@ -54,7 +54,7 @@ Router.route('/explore', {
     this.render('Explore', {
       data: {
         verifiedAuthors: function () {
-          var verifiedAuthors = Authors.find({ }, { sort: {name: 1}});
+          var verifiedAuthors = Authors.find({ verified: true }, { sort: {name: 1}});
           return verifiedAuthors;
         },
       }
@@ -68,7 +68,7 @@ Router.route('/settings', {
     Session.set("DocumentTitle","Qurious");
 
     
-    if (!Meteor.user() ) Router.go('/sign-in');
+    // if (!Meteor.user() ) Router.go('/sign-in');
     this.render('Nav', { to: 'nav'});
     this.render('Settings', {
       data: {
@@ -110,7 +110,7 @@ Router.route('/faq', {
 
 Router.route('/sign-up', {
   waitOn: function () {
-
+    return Meteor.subscribe('invites');
   },
   action: function () {
     if (Meteor.user() ) Router.go('/'); // deny logged in
@@ -240,6 +240,7 @@ Router.route('/:_slug', {
   action: function () {
     var slug = this.params._slug;
     var currentAuthor = Authors.findOne({slug: slug});
+    Session.set('pageSlug', slug);
 
     if (!currentAuthor) {
       this.render('404');
@@ -258,7 +259,7 @@ Router.route('/:_slug', {
         quotes: function () {
           var quotes = Quotes.find( {authorId: currentAuthor._id}, { sort: {quotation: 1}} );
           return quotes;
-        }
+        },
       }
     });
   }

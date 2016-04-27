@@ -433,7 +433,7 @@ ul.quote-list a {
   color: inherit;
   padding: 8px 12px;
   background-color: #f2f1ef;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 ul.author-list a:hover,

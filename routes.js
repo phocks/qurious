@@ -64,6 +64,9 @@ Router.route('/explore', {
 
 
 Router.route('/settings', {
+  waitOn: function () {
+    return Meteor.subscribe('profiles');
+  },
   action: function () {
     Session.set("DocumentTitle","Qurious");
 
@@ -72,6 +75,10 @@ Router.route('/settings', {
     this.render('Nav', { to: 'nav'});
     this.render('Settings', {
       data: {
+        penName: function () {
+          var profile = Profiles.findOne({ rootId: Meteor.userId() });
+          return profile.name;
+        }
         
       }
     });

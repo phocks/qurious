@@ -31,6 +31,8 @@ Invites = new Mongo.Collection('invites'); // People we want to have on here
 // Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use really)
 // Words = new Mongo.Collection('words'); // Words are the basis of ideas
 // There is also a Users collection by default in Meteor and roles from the roles package
+Pages = new Mongo.Collection('pages'); // Pages can be Authors or Characters or anyting really
+Profiles = new Mongo.Collection('profiles'); // Users can have profiles, separate from the users collection for tidyness.
 
 
 
@@ -56,11 +58,12 @@ Schemas.Author = new SimpleSchema({
     type: Date
   },
   createdBy: {
-    type: String
+    type: String,
+    label: "_id of user document"
   },
   slug: {
     type: String,
-    label: "Slug",
+    label: "URL friendly string of words",
     unique: true,
     max: 500,
   },
@@ -71,7 +74,10 @@ Schemas.Author = new SimpleSchema({
 });
 
 Schemas.Quote = new SimpleSchema({
-  authorId: { type: String },
+  authorId: { 
+    type: String,
+    label: "The _id of an Author attached"
+    },
   quotation: { 
     type: String,
     max: 1000, 
@@ -93,9 +99,54 @@ Schemas.Quote = new SimpleSchema({
   },
 });
 
+// A page is the solution. A page can be categorised.
+Schemas.Page = new SimpleSchema({
+  name: {
+    type: String,
+    label: "Formal name of page",
+    unique: true,
+    max: 200,
+  },
+  createdAt: {
+    type: Date
+  },
+  createdBy: {
+    type: String,
+    label: "_id of user document"
+  },
+  slug: {
+    type: String,
+    label: "URL friendly string of words",
+    unique: true,
+    max: 500,
+  },
+  verified: {
+    type: Boolean,
+    defaultValue: false,
+  },
+});
+
+Schemas.Profile = new SimpleSchema({
+  rootId: {
+    type: String,
+    label: "User ID of referenced Mongo Doc",
+    unique: true,
+  },
+  name: {
+    type: String,
+    max: 200,
+  }
+});
+
+
+
+
 // Attach the schema objects to a collections
 Authors.attachSchema(Schemas.Author);
 Quotes.attachSchema(Schemas.Quote);
+Pages.attachSchema(Schemas.Page);
+Profiles.attachSchema(Schemas.Profile);
+
 
 
 
@@ -127,9 +178,9 @@ if (Meteor.isClient) { // only runs on the client
   // Later we don't want to subscribe to the whole thing
   // moved to individual routes // Meteor.subscribe("quotes");
   // Meteor.subscribe("counters");
-  Meteor.subscribe("userData"); // for admin account login access etc.
-  Meteor.subscribe("authors"); // subscribe only to certain ones later
-  
+  // Meteor.subscribe("userData"); // for admin account login access etc.
+  // Meteor.subscribe("authors"); // subscribe only to certain ones later
+  Meteor.subscribe("profiles");
 
 
 
@@ -342,6 +393,9 @@ if (Meteor.isClient) { // only runs on the client
   Template.Settings.events({
     'submit form': function(event) {
       event.preventDefault();
+      // console.log(event);
+      var penName = event.target.penName.value;
+      Meteor.call('updatePenName', penName);
     }
   });
 

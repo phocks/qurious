@@ -116,6 +116,18 @@ Meteor.publish("invites", function () {
 })
 
 
+
+
 // Meteor.publish("words", function () {
 //   return Words.find();
 // });
+
+Meteor.publish("pages", function () {
+  return Pages.find({});
+})
+
+
+
+Meteor.publish("profiles", function () {
+  return Profiles.find({});
+})

@@ -138,10 +138,6 @@
 <template name="SignIn">
   <div class="container">
     <div class="col-md-6">
-      <!-- <h1>Sign In</h1> -->
-    <!-- </div>
-    <div class="col-md-6 spacer"> -->
-      <p>Still in <a href="/sign-up">beta</a>.</p>
       <form>
         <div class="form-group">
           <label>Your email address</label>
@@ -163,18 +159,17 @@
 <template name="Settings">
   <div class="container backdrop-block">
     <div class="col-md-6">
-      <h1>Settings</h1>
     <!-- </div>
     <div class="col-md-6 spacer"> -->
-      <!-- <form>
+      <form>
         <div class="form-group">
-          <label>Your author account</label>
-          <input type="text" class="form-control" placeholder="Pen name" name="penName" />
+          <label>Full Name</label>
+          <input type="text" class="form-control" placeholder="Pen name" name="penName" value="{{penName}}" />
         </div>
         <div class="form-group">     
           <button type="submit" class="btn btn-primary">Update</button>
         </div>
-      </form> -->
+      </form>
       <p>Your user id: {{_id}}</p>
       <a href="/sign-out">Sign out</a>
     </div>

@@ -24,128 +24,6 @@
 
 
 
-// First up we are going to create a few collections
-Quotes = new Mongo.Collection('quotes');  // Our main quote db
-Authors = new Mongo.Collection('authors'); // People who say stuff
-Invites = new Mongo.Collection('invites'); // People we want to have on here
-// Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use really)
-// Words = new Mongo.Collection('words'); // Words are the basis of ideas
-// There is also a Users collection by default in Meteor and roles from the roles package
-Pages = new Mongo.Collection('pages'); // Pages can be Authors or Characters or anyting really
-Profiles = new Mongo.Collection('profiles'); // Users can have profiles, separate from the users collection for tidyness.
-
-
-
-
-// Let's set up some schemas so that our data doesn't get messy
-var Schemas = {}; // sets it up in memory or something
-
-// Define the schemas
-Schemas.Author = new SimpleSchema({
-  name: {
-    type: String,
-    label: "Name",
-    unique: true,
-    max: 200,
-  },
-  description: {
-    type: String,
-    max: 3000,
-    label: "Brief summary of author",
-    optional: true
-  },
-  createdAt: {
-    type: Date
-  },
-  createdBy: {
-    type: String,
-    label: "_id of user document"
-  },
-  slug: {
-    type: String,
-    label: "URL friendly string of words",
-    unique: true,
-    max: 500,
-  },
-  verified: {
-    type: Boolean,
-    defaultValue: false,
-  },
-});
-
-Schemas.Quote = new SimpleSchema({
-  authorId: { 
-    type: String,
-    label: "The _id of an Author attached"
-    },
-  quotation: { 
-    type: String,
-    max: 1000, 
-  },
-  createdAt: { type: Date },
-  createdBy: { type: String },
-  slug: {
-    type: String,
-    label: "Slug",
-    // We can't make this unique until all Quotes have slugs and on second thoughts let's not anyway
-    // Oh look we migrated all the quotes and now we can make it unique
-    // But actually we probably don't want to
-    // unique: true,
-    max: 500,
-  },
-  verified: {
-    type: Boolean,
-    defaultValue: false,
-  },
-});
-
-// A page is the solution. A page can be categorised.
-Schemas.Page = new SimpleSchema({
-  name: {
-    type: String,
-    label: "Formal name of page",
-    unique: true,
-    max: 200,
-  },
-  createdAt: {
-    type: Date
-  },
-  createdBy: {
-    type: String,
-    label: "_id of user document"
-  },
-  slug: {
-    type: String,
-    label: "URL friendly string of words",
-    unique: true,
-    max: 500,
-  },
-  verified: {
-    type: Boolean,
-    defaultValue: false,
-  },
-});
-
-Schemas.Profile = new SimpleSchema({
-  rootId: {
-    type: String,
-    label: "User ID of referenced Mongo Doc",
-    unique: true,
-  },
-  name: {
-    type: String,
-    max: 200,
-  }
-});
-
-
-
-
-// Attach the schema objects to a collections
-Authors.attachSchema(Schemas.Author);
-Quotes.attachSchema(Schemas.Quote);
-Pages.attachSchema(Schemas.Page);
-Profiles.attachSchema(Schemas.Profile);
 
 
 
@@ -159,11 +37,12 @@ maximumQuotationLength = 1000; // in characters
 
 
 // Deny public from editing user profile. May prevent DoS attack
-// Meteor.users.deny({
-//   update: function() {
-//     return true;
-//   }
-// });
+// Do it from the server side instead using Meteor Methods
+Meteor.users.deny({
+  update: function() {
+    return true;
+  }
+});
 
 
 
@@ -180,7 +59,7 @@ if (Meteor.isClient) { // only runs on the client
   // Meteor.subscribe("counters");
   // Meteor.subscribe("userData"); // for admin account login access etc.
   // Meteor.subscribe("authors"); // subscribe only to certain ones later
-  Meteor.subscribe("profiles");
+  // Meteor.subscribe("pages");
 
 
 
@@ -345,15 +224,15 @@ if (Meteor.isClient) { // only runs on the client
   Template.AddQuote.events({
     "submit .add-quote": function (event) {
       var text = event.target.text.value;
-      var authorId = Session.get('authorId');
+      var pageId = Session.get('pageId');
       console.log("This is the quote text: " + text);
 
       if (text == "") return false; // prevent empty strings
 
-      Meteor.call('addQuoteToAuthor', text, authorId, function(error, result) {
+      Meteor.call('addQuoteToPage', text, pageId, function(error, result) {
         var newQuoteId = result;
         console.log("New quote id: " + newQuoteId);
-        Router.go('/');
+        Router.go('/explore');
       });
 
       // Clear form
@@ -369,16 +248,16 @@ if (Meteor.isClient) { // only runs on the client
 
   // Adding another author
   Template.Add.events({
-    "submit .add-author": function (event) {
+    "submit form": function (event) {
       var text = event.target.text.value;
-      var authorId = Session.get('authorId');
+      // var pageId = Session.get('pageId');
       console.log(text);
 
       if (text == "") return false; // prevent empty strings
 
-      Meteor.call('addAuthor', text, function(error, result) {
-        var newAuthorId = result;
-        console.log("New author Id is: " + newAuthorId);
+      Meteor.call('addPage', text, function(error, result) {
+        var newPageId = result;
+        console.log("New page Id is: " + newPageId);
         Router.go('/');
       });
 
@@ -394,8 +273,8 @@ if (Meteor.isClient) { // only runs on the client
     'submit form': function(event) {
       event.preventDefault();
       // console.log(event);
-      var penName = event.target.penName.value;
-      Meteor.call('updatePenName', penName);
+      var fullName = event.target.fullName.value;
+      Meteor.call('updateFullName', fullName);
     }
   });
 

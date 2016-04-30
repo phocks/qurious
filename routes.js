@@ -14,7 +14,7 @@ Router.route('/api', function () {
 /* The root home route landing for qurious.cc/   */
 Router.route('/', {
   waitOn: function () {
-    return Meteor.subscribe('authors');
+    
   },
   action: function () {
     Session.set("DocumentTitle","Qurious");
@@ -27,13 +27,7 @@ Router.route('/', {
 
     this.render('Home', {
       data: {
-        authors: function () {
-          var verifiedAuthors = Authors.find({ verified: true }, { sort: {name: 1}});
-          return authors;
-        },
-        // authorsUnverified: function () {
-        //   return Authors.find({ verified: false }, { sort: {name: 1}});
-        // }
+        
       }
     });
   }
@@ -42,7 +36,7 @@ Router.route('/', {
 
 Router.route('/explore', {
   waitOn: function () {
-    return Meteor.subscribe('authors');
+    return Meteor.subscribe('pages');
   },
   action: function () {
     Session.set("DocumentTitle","Qurious");
@@ -53,8 +47,8 @@ Router.route('/explore', {
 
     this.render('Explore', {
       data: {
-        verifiedAuthors: function () {
-          var verifiedAuthors = Authors.find({ verified: true }, { sort: {name: 1}});
+        pages: function () {
+          var verifiedAuthors = Pages.find({  }, { sort: {name: 1}});
           return verifiedAuthors;
         },
       }
@@ -65,30 +59,35 @@ Router.route('/explore', {
 
 Router.route('/settings', {
   waitOn: function () {
-    return Meteor.subscribe('profiles');
+    // return Meteor.subscribe('profiles');
   },
   action: function () {
     Session.set("DocumentTitle","Qurious");
 
-    
     // if (!Meteor.user() ) Router.go('/sign-in');
     this.render('Nav', { to: 'nav'});
     this.render('Settings', {
       data: {
-        penName: function () {
-          var profile = Profiles.findOne({ rootId: Meteor.userId() });
-          return profile.name;
-        }
-        
+        // don't need user data as it is auto published in currentUser.profile
+        // fullName: function () {
+        //   return Meteor.user().profile.fullName;
+        // }
       }
     });
+  }
+});
+
+Router.route('/subscribe', {
+  action: function () {
+    this.render('Nav', { to: 'nav'});
+    this.render('Subscribe');
   }
 });
 
 
 Router.route('/add', {
   waitOn: function () {
-
+    
   },
   action: function () {
     //if (!Meteor.user() ) Router.go('/login'); // deny not logged in Meteor.loginWithTwitter
@@ -187,13 +186,13 @@ Router.route('/sign-out', function() {
 // How to add an author
 Router.route('/:_slug/add', {
   waitOn: function () {
-    return Meteor.subscribe('authors');
+    return Meteor.subscribe('pages');
   },
   action: function () {
     var slug = this.params._slug;
-    currentAuthor = Authors.findOne({slug: slug});
-    Session.set("DocumentTitle", "Add a " + currentAuthor.name + " quotation - Qurious");
-    Session.set("authorId", currentAuthor._id);
+    currentPage = Pages.findOne({slug: slug});
+    Session.set("DocumentTitle", "Add a " + currentPage.name + " quotation - Qurious");
+    Session.set("pageId", currentPage._id);
 
     this.render('Nav', { to: 'nav'});
     this.render('AddQuote');
@@ -203,24 +202,24 @@ Router.route('/:_slug/add', {
 
 
 // Display the single quote you found
-Router.route('/:_author_slug/:_quote_slug', {
+Router.route('/:_page_slug/:_quote_slug', {
   waitOn: function () {
     Meteor.subscribe('quotesSlug', this.params._quote_slug);
-    return Meteor.subscribe('authors');
+    return Meteor.subscribe('pages');
   },
   action: function () {
-    var authorSlug = this.params._author_slug;
+    var pageSlug = this.params._page_slug;
     var quoteSlug = this.params._quote_slug;
     console.log("Current quoteSlug is: " + quoteSlug );
-    currentAuthor = Authors.findOne({slug: authorSlug});
-    Session.set("DocumentTitle", "A quote by " + currentAuthor.name + " - Qurious");
-    Session.set("authorId", currentAuthor._id);
+    currentPage = Pages.findOne({slug: pageSlug});
+    Session.set("DocumentTitle", "A quote by " + currentPage.name + " - Qurious");
+    Session.set("pageId", currentPage._id);
 
     this.render('Nav', { to: 'nav'});
     this.render('DisplayQuote', {
       data: {
         author: function () {
-          return Authors.findOne({ slug: authorSlug });
+          return Pages.findOne({ slug: pageSlug });
           },
         quote: function () {
           var quote = Quotes.findOne({ slug: quoteSlug });
@@ -242,29 +241,29 @@ Router.route('/:_author_slug/:_quote_slug', {
 // Don't put things below this as they probs won't work
 Router.route('/:_slug', {
   waitOn: function () {
-    return Meteor.subscribe('authors');
+    return Meteor.subscribe('pages');
   },
   action: function () {
     var slug = this.params._slug;
-    var currentAuthor = Authors.findOne({slug: slug});
+    var currentPage = Pages.findOne({slug: slug});
     Session.set('pageSlug', slug);
 
-    if (!currentAuthor) {
+    if (!currentPage) {
       this.render('404');
       return false;
     }
     else {
-      Session.set("DocumentTitle", currentAuthor.name + " - Qurious");
-      Meteor.subscribe('quotesAuthorId', currentAuthor._id);
+      Session.set("DocumentTitle", currentPage.name + " - Qurious");
+      Meteor.subscribe('quotesPageId', currentPage._id);
     }
     this.render('Nav', { to: 'nav'});
-    this.render('Author', {
+    this.render('Page', {
       data: {
-        author: function () {
-          return Authors.findOne({slug: slug});
+        page: function () {
+          return Pages.findOne({slug: slug});
           },
         quotes: function () {
-          var quotes = Quotes.find( {authorId: currentAuthor._id}, { sort: {quotation: 1}} );
+          var quotes = Quotes.find( {pageId: currentPage._id}, { sort: {quotation: 1}} );
           return quotes;
         },
       }

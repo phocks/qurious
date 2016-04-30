@@ -62,8 +62,10 @@ Meteor.publish("quotesSlug", function (slug) {
 });
 
 
-Meteor.publish("quotesAuthorId", function (authorId) {
-  return Quotes.find({ author: authorId });
+
+
+Meteor.publish("quotesPageId", function (pageId) {
+  return Quotes.find({ pageId: pageId });
 });
 
 
@@ -106,9 +108,6 @@ Meteor.publish("userData", function () {
 
 
 
-Meteor.publish("authors", function () {
-  return Authors.find({  }); // verified: true
-});
 
 
 Meteor.publish("invites", function () {
@@ -128,6 +127,6 @@ Meteor.publish("pages", function () {
 
 
 
-Meteor.publish("profiles", function () {
-  return Profiles.find({});
-})
+// Meteor.publish("profiles", function () {
+//   return Profiles.find({});
+// })

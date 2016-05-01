@@ -41,7 +41,7 @@
 <!-- This is the fixed nav -->
 <template name="Nav">
   <div class="container qurious-nav">
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default navbar-embossed" role="navigation">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
           <span class="sr-only">Toggle navigation</span>
@@ -108,50 +108,7 @@
 
 
 
-<template name="SignUp">
-  <div class="container">
-    <div class="col-md-6">
-      <h1>Join Us</h1>
-    <p>Sign ups are currently invite only.</p>
-      <form>
-        <div class="form-group">
-          <label>What is your email address?</label>
-          <input type="email" class="form-control" placeholder="email" name="signUpEmail" />
-        </div>
-        <div class="form-group">
-          <label>Choose a good password</label>
-          <input type="password" class="form-control" placeholder="password" name="signUpPassword" />
-        </div>
-        <div class="form-group">
-          <label>Type it again for good luck</label>
-          <input type="password" class="form-control" placeholder="password" name="signUpPasswordConfirm" />
-        </div>
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-      </form>
-    </div>
-  </div>
-</template>
 
-
-<template name="SignIn">
-  <div class="container">
-    <div class="col-md-6">
-    <h1>Sign In</h1>
-    <p>Qurious is currently only open to a pre-selected <a href="/sign-up">limited list</a> of people. If you would like early access <a href="/subscribe">subscribe</a> to our mailing list.</p> 
-      <form>
-        <div class="form-group">
-          <label>Your email address</label>
-          <input type="email" class="form-control" placeholder="email" name="signInEmail" />
-        </div>
-        <div class="form-group">
-          <label>Your password</label>
-          <input type="password" class="form-control" placeholder="password" name="signInPassword" />
-        </div>
-        <button type="submit" class="btn btn-primary">Sign In</button>
-      </form>
-    </div>
-  </div>
-</template>
 
 
 
@@ -208,7 +165,7 @@
       {{else}}
       <!-- <li class="quotation"><a href="/{{page.slug}}/add">No quotations found</a></li> -->
     {{/each}}
-    <li><a href="/{{page.slug}}/add">+</a></li>
+    {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}}
     </ul>
   </div>
 </template>
@@ -230,7 +187,50 @@
 </template>
 
 
+<template name="SignUp">
+  <div class="container">
+    <div class="col-md-6">
+      <h1>Join Us</h1>
+    <p>Sign ups are currently invite only.</p>
+      <form>
+        <div class="form-group">
+          <label>What is your email address?</label>
+          <input type="email" class="form-control" placeholder="email" name="signUpEmail" />
+        </div>
+        <div class="form-group">
+          <label>Choose a good password</label>
+          <input type="password" class="form-control" placeholder="password" name="signUpPassword" />
+        </div>
+        <div class="form-group">
+          <label>Type it again for good luck</label>
+          <input type="password" class="form-control" placeholder="password" name="signUpPasswordConfirm" />
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</template>
 
+
+<template name="SignIn">
+  <div class="container">
+    <div class="col-md-6">
+    <h1>Sign In</h1>
+    <p>Qurious is currently only open to a pre-selected <a href="/sign-up">limited list</a> of people. If you would like early access <a href="/subscribe">subscribe</a> to our mailing list.</p> 
+      <form>
+        <div class="form-group">
+          <label>Your email address</label>
+          <input type="email" class="form-control" placeholder="email" name="signInEmail" />
+        </div>
+        <div class="form-group">
+          <label>Your password</label>
+          <input type="password" class="form-control" placeholder="password" name="signInPassword" />
+        </div>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+      </form>
+    </div>
+  </div>
+</template>
 
 <template name="Subscribe"> 
   <div class="container">

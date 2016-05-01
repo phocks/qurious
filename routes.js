@@ -48,8 +48,10 @@ Router.route('/explore', {
     this.render('Explore', {
       data: {
         pages: function () {
-          var verifiedAuthors = Pages.find({  }, { sort: {name: 1}});
-          return verifiedAuthors;
+          if (Meteor.user()) {
+            var pages = Pages.find({ _id: { $in: Meteor.user().profile.pages } }, { sort: {name: 1}});
+            return pages;
+          }
         },
       }
     });

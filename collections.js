@@ -121,6 +121,9 @@ Schemas.UserProfile = new SimpleSchema({
     country: {
         type: Schemas.UserCountry,
         optional: true
+    },
+    pages: {
+        type: [String]
     }
 });
 

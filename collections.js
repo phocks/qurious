@@ -70,17 +70,7 @@ Schemas.Page = new SimpleSchema({
   },
 });
 
-// Schemas.Profile = new SimpleSchema({
-//   rootId: {
-//     type: String,
-//     label: "User ID of referenced Mongo Doc",
-//     unique: true,
-//   },
-//   name: {
-//     type: String,
-//     max: 200,
-//   }
-// });
+
 
 
 Schemas.UserCountry = new SimpleSchema({

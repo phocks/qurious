@@ -256,9 +256,9 @@ if (Meteor.isClient) { // only runs on the client
       if (text == "") return false; // prevent empty strings
 
       Meteor.call('addPage', text, function(error, result) {
-        var newPageId = result;
-        console.log("New page Id is: " + newPageId);
-        Router.go('/');
+        var newPage = result;
+        console.log("New page is: " + newPage);
+        Router.go('/' + newPage);
       });
 
       // Clear form

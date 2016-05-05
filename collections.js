@@ -207,5 +207,4 @@ Schemas.User = new SimpleSchema({
 // Attach the schema objects to the collections
 Quotes.attachSchema(Schemas.Quote);
 Pages.attachSchema(Schemas.Page);
-// Profiles.attachSchema(Schemas.Profile);
 Meteor.users.attachSchema(Schemas.User);

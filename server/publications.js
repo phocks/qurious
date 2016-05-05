@@ -86,25 +86,7 @@ Meteor.publish("quotesInArray", function (array) {
 
 
 
-// We are going to publish some more userData
-// in order to check if user is admin we need this
-Meteor.publish("userData", function () {
-  // return Meteor.users.find({},
-  //   { fields: {'isAdmin':1, 'liked': 1, 'username': 1 }
-  // });
 
-
-  /*if (this.userId) {
-    return Meteor.users.find({_id: this.userId},
-      { fields: {'admin': 1, 'liked': 1, 'username': 1 }
-    });
-  } else {
-    return Meteor.users.find({},
-      { fields: {'liked': 1, 'username': 1 }
-    });
-    this.ready();
-  }*/
-});
 
 
 

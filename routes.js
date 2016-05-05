@@ -48,7 +48,8 @@ Router.route('/explore', {
     this.render('Explore', {
       data: {
         pages: function () {
-          if (Meteor.user()) {
+          profileHasPages = Meteor.users.findOne( { _id: Meteor.userId(), "profile.pages": {$exists: true} });
+          if (profileHasPages) {
             var pages = Pages.find({ _id: { $in: Meteor.user().profile.pages } }, { sort: {name: 1}});
             return pages;
           }

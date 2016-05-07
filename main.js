@@ -32,7 +32,7 @@
 // like some variables etc
 
 // loadMoreLimit = 5;  // for infinite scrolling, how many per load
-maximumQuotationLength = 1000; // in characters
+maximumQuotationLength = 1000; // in characters... now probably going to be handled in simpleSchema
 
 
 

@@ -41,21 +41,23 @@
 <!-- This is the fixed nav -->
 <template name="Nav">
   <div class="container qurious-nav">
-    <nav class="navbar navbar-default navbar-embossed" role="navigation">
+    <nav class="navbar navbar-default" role="navigation">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
           <span class="sr-only">Toggle navigation</span>
         </button>
         <a class="navbar-brand" href="/"><img src="/grey-logo.png"></a>
       </div>
+
+
       <div class="collapse navbar-collapse" id="navbar-collapse-01">
         <ul class="nav navbar-nav">
           <!-- <li><a href="/">Home</a></li> -->
-          <li><a href="/explore">Explore</a></li>
+          <!-- <li><a href="/explore">Explore</a></li> -->
         </ul>
           {{#if currentUser}}
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="/settings">Settings</a></li>
+              <li><a href="/settings">{{currentUser._id}}</a></li>
             </ul>
           {{else}}
             <ul class="nav navbar-nav navbar-right">
@@ -71,7 +73,11 @@
 
 <template name="Home">
   <div class="container backdrop-block">
-    <h1>Welcome to Qurious.</h1>
+    <div class="quote">
+    <h1><i class="fa fa-quote-left"></i></h1>
+      <p class="quotation">{{quotation}}</p>
+      <p class="attribution"><a href="/carl-sagan">{{page}}</a></p>
+    </div>
   </div>
 </template>
 
@@ -117,7 +123,7 @@
   <div class="container backdrop-block">
     <div class="col-md-6">
       <h1>Settings</h1>
-      <form>
+      <!-- <form>
         <div class="form-group">
           <label>Full Name</label>
           <input type="text" class="form-control" placeholder="Your full name" name="fullName" value="{{currentUser.profile.fullName}}" />
@@ -125,7 +131,7 @@
         <div class="form-group">     
           <button type="submit" class="btn btn-primary">Update</button>
         </div>
-      </form>
+      </form> -->
       <p>Your user id: {{_id}}</p>
       <a href="/sign-out">Sign out</a>
     </div>
@@ -213,7 +219,7 @@
 
 <template name="SignIn">
   <div class="container">
-    <div class="col-md-6">
+    <div class="col-md-4">
     <h1>Sign In</h1>
     <p>Qurious is currently only open to a pre-selected <a href="/sign-up">limited list</a> of people. If you would like early access <a href="/subscribe">subscribe</a> to our mailing list.</p> 
       <form>
@@ -267,7 +273,7 @@
 
 <!-- This template is to show the loading spinner -->
 <template name="Loading">
-  {{> Nav}}
+  <!-- {{> Nav}} -->
 </template>
 
 <template name="404">

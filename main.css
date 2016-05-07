@@ -45,19 +45,19 @@
 
 
 body {
-  /*background-color: #fdfbf8;*/
-  color: #777;
+  /*background-color: #fdfbf8; moved to LESS*/
+  color: black;
   font-family: "Montserrat", sans-serif;
-  font-size: 16px;
+  /*font-size: 16px;*/
 }
 
 a {
-  color: #5ab2b5;
+  /*color: #5ab2b5;*/
   /*background-color: #eee;*/
 }
 a:hover,
 a:focus {
-  color: #5ab2b5;
+  /*color: #5ab2b5;*/
   text-decoration: underline;
   /*background-color: #5ab2b5;*/
 }
@@ -186,63 +186,7 @@ And yes it works, so we're keeping it. */
 }
 
 
-/* Little list on the home page that displays popular words */
-.home-word-list {
-  padding: 0;
-  margin-top: 36px;
-  list-style-type: none;
-  /*text-align: left;*/
-  font-size: 1.5em;
-  line-height: 2em;
-  /*font-weight: bold;*/
-}
 
-.home-word-list li {
-  display: inline;
-}
-
-.home-word-list li a {
-  color: inherit;
-  padding: 3px;
-  background-color: #f2f1ef;
-}
-
-.home-word-list li a:hover,
-.home-word-list li a:active {
-  text-decoration: none;
-  background-color: #5ab2b5;
-  color: white;
-}
-
-
-/* List under the quotes that displays the words associated */
-.lite-controls ul.words {
-  padding: 0;
-  margin-top: 12px;
-  list-style-type: none;
-  /*text-align: left;*/
-  font-size: 1.5em;
-  line-height: 2em;
-  /*font-weight: bold;*/
-}
-
-
-.lite-controls ul.words li {
-  display: inline;
-}
-
-.lite-controls ul.words li a {
-  color: inherit;
-  padding: 3px;
-  background-color: #f2f1ef;
-}
-
-.lite-controls ul.words li a:hover,
-.lite-controls ul.words li a:active {
-  text-decoration: none;
-  background-color: #5ab2b5;
-  color: white;
-}
 
 
 .dont-break {
@@ -276,65 +220,8 @@ And yes it works, so we're keeping it. */
   text-decoration: underline;
 }
 
-.lite-controls ul.controls {
-  padding: 0;
-  list-style-type: none;
-  font-size: 2.4em;
-  color: #ccc;
-
-  /* This justifies icons across width. We maybe want this later
-  display: flex;
-  justify-content: space-around;
-  -webkit-justify-content: space-around; */
-
-  /* this spaces between*/
-  /*display: flex;
-  justify-content: space-between;
-  -webkit-justify-content: space-between;*/
-}
 
 
-
-
-.lite-controls ul.controls li {
-  display: inline;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-
-.lite-controls ul.controls li:hover {
-  /*color: crimson;*/
-  cursor: pointer;
-}
-
-
-.lite-controls ul.controls li a {
-  color: inherit;
-}
-
-
-.popover {
-  box-shadow: none; /*0px 1px 4px rgba(0, 0, 0, .25);*/
-  border-radius: 4px;
-  font-family: Montserrat;
-}
-
-p.quotation {
-  font-family: 'Vollkorn', serif;
-  font-size: 1.6em;
-}
-
-.at-form p {
-  padding-bottom: 0;
-}
-
-
-@media (max-width: 768px) {
-  .quotePageAnother button {
-    width: 100%;
-  }
-}
 
 
 
@@ -352,15 +239,15 @@ Keep it clean
 
 
 .quote {
-  font-size: 42px;
-  /*padding-top: 28px;
-  padding-bottom: 28px;*/
+  /*background-color: white;*/
+  /*max-width: 1080px;*/
+}
+
+.quotation {
+  font-size: 1.4em;
 }
 
 .attribution {
-  /*margin-top: 32px;*/
-  /*font-size: 42px;*/
-  color: #f48365;
   white-space: nowrap;
 }
 
@@ -374,37 +261,7 @@ Keep it clean
   /*border-bottom: 2px solid #efefef;*/
 }
 
-/*
-.qurious-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
 
-.qurious-nav li {
-  display: inline;
-}
-
-.qurious-nav li a {
-  padding-left: 6px;
-  padding-right: 6px;
-}
-
-.qurious-nav img {
-  max-height: 32px;
-}*/
-
-
-
-/*.navbar {
-  padding: 15px 0 15px;
-  color: #999;
-}*/
-
-/*.navbar a {
-  color: #999;
-  background-color: inherit;
-}*/
 
 .navbar-brand img {
   height: 25px;
@@ -438,7 +295,7 @@ ul.quote-list a {
 
 ul.author-list a:hover,
 ul.quote-list a:hover {
-  background-color: #5ab2b5;
+  background-color: gray;
   color: white;
 }
 
@@ -473,7 +330,7 @@ ul.quote-list li {
 }
 
 .backdrop-block {
-  padding-bottom: 65px; /* use if fixed bottom button nav */
+  /*padding-bottom: 65px;*/ /* use if fixed bottom button nav */
 }
 
 .backdrop-block {
@@ -498,33 +355,7 @@ ul.quote-list li {
 
 
 
-/* Flat UI Overrides*/
-/*h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 { 
-  color: #f48365;
-}
 
-*/
-
-
-
-/*.btn.btn-primary,
-.btn.btn-primary:active {
-  background-color: #f48365;
-  border-color: #f48365;
-  display: block;
-  width: 100%;
-}*/
 
 
 
@@ -549,16 +380,6 @@ h6,
 
 
 
-
-.quotation {
-  /*margin-top: 32px;
-  margin-bottom: 32px;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 32px;
-  font-family: "Josefin Slab", "Neuton", "Vollkorn", serif;*/
-
-}
 
 
 
@@ -588,59 +409,7 @@ h6,
 
 
 
-/* We are fixing a bug in Flat UI that gives us wrong colours on click */
-/*.btn-default:hover,
-.btn-default.hover,
-.btn-default:focus,
-.btn-default:active,
-.btn-default.active,
-.open > .dropdown-toggle.btn-default {
-  color: #ffffff !important;
-  background-color: #cacfd2 !important;
-  border-color: #cacfd2 !important;
-}
-.btn-default:active,
-.btn-default.active,
-.open > .dropdown-toggle.btn-default {
-  background: #a1a6a9 !important;
-  border-color: #a1a6a9 !important;
-}
-.btn-primary:hover,
-.btn-primary.hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.open > .dropdown-toggle.btn-primary {
-  color: #ffffff !important;
-  background-color: #48c9b0 !important;
-  border-color: #48c9b0 !important;
-}
-.btn-primary:active,
-.btn-primary.active,
-.open > .dropdown-toggle.btn-primary {
-  background: #16a085 !important;
-  border-color: #16a085 !important;
-}
-*/
 
-
-
-
-
-/* Found a way to log in via Twitter */
-/* Styles need to be !important to override accounts-ui */
-
-/*.login-display-name {
-  display: none !important;
-}
-
-.login-button {
-  background-color: white !important;
-  border-radius: 0 !important;
-  color: #999 !important;
-  border-color: #ccc !important;
-  font-family: inherit !important;
-}*/
 
 
 

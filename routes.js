@@ -20,14 +20,12 @@ Router.route('/', {
     Session.set("DocumentTitle","Qurious");
 
     // console.log(Meteor.user().services.twitter.profile_image_url);
-
-    this.render('Nav', { to: 'nav'});
-
+    // this.render('Nav', { to: 'nav'});
     
-
     this.render('Home', {
       data: {
-        
+        quotation: "Somewhere, something incredible is waiting to be known.",
+        page: "Carl Sagan"
       }
     });
   }
@@ -43,7 +41,7 @@ Router.route('/explore', {
 
     // console.log(Meteor.user().services.twitter.profile_image_url);
 
-    this.render('Nav', { to: 'nav'});
+    // this.render('Nav', { to: 'nav'});
 
     this.render('Explore', {
       data: {
@@ -140,7 +138,7 @@ Router.route('/sign-up', {
 
     Session.set('Invited', arrayInvited);
     this.layout('Layout');
-    this.render('Nav', { to: 'nav'});
+    // this.render('Nav', { to: 'nav'});
     this.render('SignUp');
     // this.render('Nav', { to: 'nav'});
   }
@@ -162,7 +160,7 @@ Router.route('/sign-in', {
     this.layout('Layout');
     Session.set("DocumentTitle","Qurious");
 
-    this.render('Nav', { to: 'nav'});
+    // this.render('Nav', { to: 'nav'});
     this.render('SignIn');
     // this.render('Nav', { to: 'nav'});
   }
@@ -218,7 +216,7 @@ Router.route('/:_page_slug/:_quote_slug', {
     Session.set("DocumentTitle", "A quote by " + currentPage.name + " - Qurious");
     Session.set("pageId", currentPage._id);
 
-    this.render('Nav', { to: 'nav'});
+    // this.render('Nav', { to: 'nav'});
     this.render('DisplayQuote', {
       data: {
         author: function () {
@@ -259,7 +257,7 @@ Router.route('/:_slug', {
       Session.set("DocumentTitle", currentPage.name + " - Qurious");
       Meteor.subscribe('quotesPageId', currentPage._id);
     }
-    this.render('Nav', { to: 'nav'});
+    // this.render('Nav', { to: 'nav'});
     this.render('Page', {
       data: {
         page: function () {

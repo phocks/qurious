@@ -8,8 +8,10 @@
 </head>
 
 
-<!-- Any body text first up..... pretty much useless maybeeeeee if we were adding analytics or something -->
-<body></body>
+<!-- <3 Always -->
+<body>
+  {{> sAlert}}
+</body>
 
 
 
@@ -52,8 +54,6 @@
 
       <div class="collapse navbar-collapse" id="navbar-collapse-01">
         <ul class="nav navbar-nav">
-          <!-- <li><a href="/">Home</a></li> -->
-          <!-- <li><a href="/explore">Explore</a></li> -->
         </ul>
           {{#if currentUser}}
             <ul class="nav navbar-nav navbar-right">
@@ -72,13 +72,17 @@
 
 
 <template name="Home">
-  <div class="container backdrop-block">
-    <div class="quote">
-    <h1><i class="fa fa-quote-left"></i></h1>
-      <p class="quotation">{{quotation}}</p>
-      <p class="attribution"><a href="/carl-sagan">{{page}}</a></p>
+  {{#unless currentUser}}
+    <div class="container backdrop">
+      <div class="title">Qurious.</div>
+      <a href="/login">Login</a>
     </div>
-  </div>
+  {{else}}
+    <div class="container backdrop">
+      <div class="title">Qurious.</div>
+      <a href="/logout">Logout</a>
+    </div>
+  {{/unless}}
 </template>
 
 
@@ -97,6 +101,7 @@
     </ul>
   </div>
 </template>
+
 
 
 
@@ -217,23 +222,44 @@
 </template>
 
 
-<template name="SignIn">
-  <div class="container">
-    <div class="col-md-4">
-    <h1>Sign In</h1>
-    <p>Qurious is currently only open to a pre-selected <a href="/sign-up">limited list</a> of people. If you would like early access <a href="/subscribe">subscribe</a> to our mailing list.</p> 
-      <form>
-        <div class="form-group">
-          <label>Your email address</label>
-          <input type="email" class="form-control" placeholder="email" name="signInEmail" />
-        </div>
-        <div class="form-group">
-          <label>Your password</label>
-          <input type="password" class="form-control" placeholder="password" name="signInPassword" />
-        </div>
-        <button type="submit" class="btn btn-primary">Sign In</button>
-      </form>
-    </div>
+<template name="Login">
+  <div class="container backdrop">
+    <div class="title">Qurious.</div>
+    <form>
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Email" name="signInEmail" />
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" name="signInPassword" />
+      </div>
+      <button type="submit" class="btn btn-default btn-block">Login</button>
+    </form>
+    <a class="forgot" href="/forgot">Forgot?</a>
+  </div>
+</template>
+
+
+<template name="Forgot"> 
+  <div class="container backdrop">
+  <div class="title">Qurious.</div>
+    <form>
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Email" name="forgotEmail" />
+      </div>
+      <button type="submit" class="btn btn-default btn-block">Reset password</button>
+    </form>
+  </div>
+</template>
+
+<template name="PasswordReset"> 
+  <div class="container backdrop">
+  <div class="title">Qurious.</div>
+    <form>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="New password" name="newPassword" />
+      </div>
+      <button type="submit" class="btn btn-default btn-block">Set password</button>
+    </form>
   </div>
 </template>
 
@@ -277,7 +303,7 @@
 </template>
 
 <template name="404">
-  {{> Nav}}
+  <!-- {{> Nav}} -->
   <div class="container">
     <h1>404</h1>
     <p>These aren't the droids you're looking for...</p>

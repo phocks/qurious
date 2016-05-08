@@ -234,7 +234,12 @@ Keep it clean
 */
 
 .full-container {
-  padding: 0;
+  /*margin-top: 3vh;*/
+}
+
+.title {
+  font-size: 2em;
+  font-weight: bold;
 }
 
 
@@ -329,8 +334,14 @@ ul.quote-list li {
   flex-direction: column;
 }
 
+.backdrop form {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
 .backdrop-block {
   /*padding-bottom: 65px;*/ /* use if fixed bottom button nav */
+  
 }
 
 .backdrop-block {
@@ -353,7 +364,9 @@ ul.quote-list li {
   list-style-type: none;
 }
 
-
+.forgot {
+  font-size: 14px;
+}
 
 
 
@@ -427,6 +440,15 @@ ul.quote-list li {
 
 .spacer {
   margin-top: 30px;
+}
+
+
+
+.s-alert-info {
+    background: #444;  /* your background color here */
+    color: #fff;  /* your text color here */
+    border-radius: 4px;
+    opacity: 0.8;
 }
 
 

@@ -51,6 +51,41 @@ Meteor.users.deny({
 
 if (Meteor.isClient) { // only runs on the client
 
+  // Some client only configuration
+  Meteor.startup(function () {
+
+    // A package called juliancwirko:s-alert gives us smart alerts
+    sAlert.config({
+      effect: '',
+      position: 'top-right',
+      timeout: 5000,
+      html: false,
+      onRouteClose: true,
+      stack: true,
+      // or you can pass an object:
+      // stack: {
+      //     spacing: 10 // in px
+      //     limit: 3 // when fourth alert appears all previous ones are cleared
+      // }
+      offset: 0, // in px - will be added to first alert (bottom or top - depends of the position in config)
+      beep: false,
+      // examples:
+      // beep: '/beep.mp3'  // or you can pass an object:
+      // beep: {
+      //     info: '/beep-info.mp3',
+      //     error: '/beep-error.mp3',
+      //     success: '/beep-success.mp3',
+      //     warning: '/beep-warning.mp3'
+      // }
+      onClose: _.noop //
+      // examples:
+      // onClose: function() {
+      //     /* Code here will be executed once the alert closes. */
+      // }
+    });
+
+});
+
 
 
   // We need to tell the client to subscribe explicitly to data collections
@@ -305,7 +340,7 @@ if (Meteor.isClient) { // only runs on the client
         console.log("You're on the list!");
       } else {
         console.log('Not on the invite list sorry.');
-        alert('Not on the invite list sorry.')
+        alert('Not on the invite list sorry.');
         return false;
       }
 
@@ -324,21 +359,69 @@ if (Meteor.isClient) { // only runs on the client
     }
   });
 
-  Template.SignIn.events({
+  Template.Login.events({
     'submit form': function(event) {
       event.preventDefault();
       var emailVar = event.target.signInEmail.value;
       var passwordVar = event.target.signInPassword.value;
-      if (!emailVar) return false;
-      Meteor.loginWithPassword(emailVar, passwordVar, function (error, result) {
+      if (!emailVar) {
+        sAlert.info("Something strange happened.");
+        return false;
+      }
+      Meteor.loginWithPassword(emailVar, passwordVar, function (error) {
         if (error) {
-          console.log(error);
-          alert(error);
-        }
+          // console.log(error);
+          sAlert.info("Incorrect email or password");
+        } 
       });
-      console.log("User logged in.");
     }
   });
+
+  Template.Forgot.events({
+    'submit form': function(event) {
+      event.preventDefault();
+      var emailVar = event.target.forgotEmail.value;
+      if (!emailVar) {
+        sAlert.info("Did you forget something?");
+        return false; // stops processing
+      }
+      Accounts.forgotPassword({
+        email: emailVar
+      }, function (error) {
+        if (error) {
+          console.log(error);
+          sAlert.info(error.reason);
+        } else {
+          sAlert.info("Reset email sent");
+          Meteor.setTimeout( function () { Router.go('/') }, 3000);
+        }
+      });
+      sAlert.info("Sending reset email");
+    }
+  });
+
+
+  Template.PasswordReset.events({
+    'submit form': function(event) {
+      event.preventDefault();
+      var newPassword = event.target.newPassword.value;
+      if (!newPassword) {
+        sAlert.info("You need to enter a new password");
+        return false; // stops processing
+      }
+      Accounts.resetPassword( Session.get('resetToken'), newPassword, function (error) {
+        if (error) {
+          console.log(error);
+          sAlert.info(error.reason);
+        } else {
+          sAlert.info("Password changed");
+          Meteor.setTimeout( function () { Router.go('/') }, 3000);
+        }
+      });
+    }
+  });
+
+
 
 } // Client only code end
 

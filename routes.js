@@ -57,6 +57,21 @@ Router.route('/explore', {
   }
 });
 
+Router.route('/forgot', {
+
+});
+
+Router.route('/password-reset/:_token', {
+  action: function () {
+    Session.set('resetToken', this.params._token);
+    this.render('PasswordReset', {
+      data: {
+        resetToken: this.params._token,
+      }
+    });
+  }
+});
+
 
 Router.route('/settings', {
   waitOn: function () {
@@ -80,7 +95,7 @@ Router.route('/settings', {
 
 Router.route('/subscribe', {
   action: function () {
-    this.render('Nav', { to: 'nav'});
+    // this.render('Nav', { to: 'nav'});
     this.render('Subscribe');
   }
 });
@@ -151,7 +166,7 @@ Router.route('/not-found', {
 });
 
 
-Router.route('/sign-in', {
+Router.route('/login', {
   waitOn: function () {
 
   },
@@ -161,8 +176,7 @@ Router.route('/sign-in', {
     Session.set("DocumentTitle","Qurious");
 
     // this.render('Nav', { to: 'nav'});
-    this.render('SignIn');
-    // this.render('Nav', { to: 'nav'});
+    this.render('Login');
   }
 });
 
@@ -178,7 +192,7 @@ Router.route('/admin', {
 
 
 // Quick and easy logouts
-Router.route('/sign-out', function() {
+Router.route('/logout', function() {
   Meteor.logout();
   Router.go('/');
 });

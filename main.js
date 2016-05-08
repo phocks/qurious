@@ -25,9 +25,6 @@
 
 
 
-
-
-
 // Initial setup of some things below
 // like some variables etc
 
@@ -362,15 +359,15 @@ if (Meteor.isClient) { // only runs on the client
   Template.Login.events({
     'submit form': function(event) {
       event.preventDefault();
-      var emailVar = event.target.signInEmail.value;
+      var userVar = event.target.signInUser.value;
       var passwordVar = event.target.signInPassword.value;
-      if (!emailVar) {
-        sAlert.info("Something strange happened.");
+      if (!userVar) {
+        sAlert.info("Something looks missing");
         return false;
       }
-      Meteor.loginWithPassword(emailVar, passwordVar, function (error) {
+      Meteor.loginWithPassword(userVar, passwordVar, function (error) {
         if (error) {
-          // console.log(error);
+          console.log(error);
           sAlert.info("Incorrect email or password");
         } 
       });

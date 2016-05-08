@@ -171,7 +171,9 @@ Router.route('/login', {
 
   },
   action: function () {
-    if (Meteor.user() ) Router.go('/'); // deny logged in
+    if (!Meteor.loggingIn()) { // I don't know about this, but should learn
+      if (Meteor.user() ) Router.go('/'); // deny logged in
+    }
     this.layout('Layout');
     Session.set("DocumentTitle","Qurious");
 

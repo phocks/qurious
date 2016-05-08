@@ -94,6 +94,14 @@ h1 {
 img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
+/* Get rid of form input shadow in iOS */
+input[type] {   
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;   
+}
+
+
 
 
 .inline {

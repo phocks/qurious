@@ -130,34 +130,34 @@ Router.route('/faq', {
 });
 
 
-Router.route('/sign-up', {
+Router.route('/register', {
   waitOn: function () {
     return Meteor.subscribe('invites');
   },
   action: function () {
     if (Meteor.user() ) Router.go('/'); // deny logged in
 
-    var invited = Invites.find({ }).fetch();
-
-    
+    // We check the Invite list (fix so it's secure later)
+    var invited = Invites.find({ }).fetch();    
 
     var arrayInvited = [];
 
     invited.forEach( function (invitee) {
-      
       arrayInvited.push(invitee.email);
     });
 
     
 
-
     Session.set('Invited', arrayInvited);
     this.layout('Layout');
     // this.render('Nav', { to: 'nav'});
-    this.render('SignUp');
+    this.render('Register');
     // this.render('Nav', { to: 'nav'});
   }
 });
+
+
+
 
 Router.route('/not-found', {
   action: function () {

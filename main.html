@@ -197,27 +197,21 @@
 </template>
 
 
-<template name="SignUp">
-  <div class="container">
-    <div class="col-md-6">
-      <h1>Join Us</h1>
-    <p>Sign ups are currently invite only.</p>
-      <form>
-        <div class="form-group">
-          <label>What is your email address?</label>
-          <input type="email" class="form-control" placeholder="email" name="signUpEmail" />
-        </div>
-        <div class="form-group">
-          <label>Choose a good password</label>
-          <input type="password" class="form-control" placeholder="password" name="signUpPassword" />
-        </div>
-        <div class="form-group">
-          <label>Type it again for good luck</label>
-          <input type="password" class="form-control" placeholder="password" name="signUpPasswordConfirm" />
-        </div>
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-      </form>
-    </div>
+<template name="Register">
+  <div class="container backdrop">
+    <div class="title">Qurious.</div>
+    <form>
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Email" name="registerEmail" />
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username" name="registerUsername" />
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" name="registerPassword" />
+      </div>
+      <button type="submit" class="btn btn-default btn-block">Sign Up</button>
+    </form>
   </div>
 </template>
 
@@ -227,14 +221,17 @@
     <div class="title">Qurious.</div>
     <form>
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Username or email" name="signInUser" />
+        <input type="text" class="form-control" placeholder="Username or email" name="loginUser" />
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" placeholder="Password" name="signInPassword" />
+        <input type="password" class="form-control" placeholder="Password" name="loginPassword" />
       </div>
       <button type="submit" class="btn btn-default btn-block">Login</button>
     </form>
-    <a class="forgot" href="/forgot">Forgot?</a>
+    
+      <a class="small" href="/forgot">Forgot password?</a>
+      <a class="small" href="/register">New here?</a>
+    
   </div>
 </template>
 

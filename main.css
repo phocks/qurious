@@ -372,10 +372,14 @@ ul.quote-list li {
   list-style-type: none;
 }
 
-.forgot {
-  font-size: 14px;
+.small {
+  font-size: 0.8em;
+  line-height: 1.8em;
 }
 
+.flex-row {
+  flex-direction: row;
+}
 
 
 

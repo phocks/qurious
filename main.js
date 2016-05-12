@@ -320,34 +320,42 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
-  Template.SignUp.events({
+  Template.Register.events({
     'submit form': function(event) {
       event.preventDefault();
-      var emailVar = event.target.signUpEmail.value;
-      var passwordVar = event.target.signUpPassword.value;
-      var passwordVarConfirm = event.target.signUpPasswordConfirm.value;
-      if (!emailVar) return false; // replace with better validation
-
-      if (passwordVar !== passwordVarConfirm) {
-        alert("Passwords don't match.");
-        return false;
+      var emailVar = event.target.registerEmail.value;
+      var usernameVar = event.target.registerUsername.value;
+      var passwordVar = event.target.registerPassword.value;
+      // var passwordVarConfirm = event.target.registerPasswordConfirm.value;
+      if (!emailVar) {
+        sAlert.info('Email is required');
+        return false; // replace with better validation
       }
+      if (!usernameVar) {
+        sAlert.info('Username is required');
+        return false; // replace with better validation
+      }
+      // if (passwordVar !== passwordVarConfirm) {
+      //   alert("Passwords don't match.");
+      //   return false;
+      // }
       
       if (Session.get('Invited').indexOf(emailVar) > -1) {
         console.log("You're on the list!");
       } else {
         console.log('Not on the invite list sorry.');
-        alert('Not on the invite list sorry.');
+        sAlert.info('Not on the invite list sorry.');
         return false;
       }
 
       Accounts.createUser({
         email: emailVar,
-        password: passwordVar
+        username: usernameVar,
+        password: passwordVar,
       }, function (error, result) {
         if (error) {
           console.log(error);
-          alert(error);
+          sAlert.info(error.reason);
         }
     
       });
@@ -359,8 +367,8 @@ if (Meteor.isClient) { // only runs on the client
   Template.Login.events({
     'submit form': function(event) {
       event.preventDefault();
-      var userVar = event.target.signInUser.value;
-      var passwordVar = event.target.signInPassword.value;
+      var userVar = event.target.registerUser.value;
+      var passwordVar = event.target.registerPassword.value;
       if (!userVar) {
         sAlert.info("Something looks missing");
         return false;

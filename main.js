@@ -367,8 +367,8 @@ if (Meteor.isClient) { // only runs on the client
   Template.Login.events({
     'submit form': function(event) {
       event.preventDefault();
-      var userVar = event.target.registerUser.value;
-      var passwordVar = event.target.registerPassword.value;
+      var userVar = event.target.loginUser.value;
+      var passwordVar = event.target.loginPassword.value;
       if (!userVar) {
         sAlert.info("Something looks missing");
         return false;

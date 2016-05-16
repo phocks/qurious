@@ -124,8 +124,10 @@ Meteor.methods({
     }
     return true;
   },
+
+  // This passes an email address string and checks if it is in the Invites list
   isInvited: function (emailAddress) {
     check(emailAddress, String);
-    Invites.findOne({ email: emailAddress })
+    return Invites.findOne({ email: emailAddress });
   }
 });

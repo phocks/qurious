@@ -335,30 +335,60 @@ if (Meteor.isClient) { // only runs on the client
         sAlert.info('Username is required');
         return false; // replace with better validation
       }
+      if (!passwordVar) {
+        sAlert.info('Password is required');
+        return false; // replace with better validation
+      }
+      // We used to have 2 password fields but not required if email field
       // if (passwordVar !== passwordVarConfirm) {
       //   alert("Passwords don't match.");
       //   return false;
       // }
-      
-      if (Session.get('Invited').indexOf(emailVar) > -1) {
-        console.log("You're on the list!");
-      } else {
-        console.log('Not on the invite list sorry.');
-        sAlert.info('Not on the invite list sorry.');
-        return false;
-      }
 
-      Accounts.createUser({
-        email: emailVar,
-        username: usernameVar,
-        password: passwordVar,
-      }, function (error, result) {
-        if (error) {
+      // We use callbacks to wait until the email is checked on server
+      Meteor.call('isInvited', emailVar, function (error) {
+        if (!error) {
+          Meteor.subscribe('invites', emailVar, createAccount);
+
+          // Here we are hoisting a function (I think) instead of nesting it
+          // so we don't create unnecessary Callback Hell
+          function createAccount ( error ) {
+            if (error) console.log(error);
+            var emailInList = Invites.findOne({ email: emailVar });
+            console.log(emailInList);
+
+            if (emailInList) {
+              Accounts.createUser({
+                email: emailVar,
+                username: usernameVar,
+                password: passwordVar,
+              }, function (error, result) {
+                if (error) {
+                  console.log(error);
+                  sAlert.info(error.reason);
+                }
+              });
+            } else {
+              console.log( 'not in list' );
+              sAlert.info('Sorry you are not on the list')
+            }
+          }
+          
+        } else {
           console.log(error);
-          sAlert.info(error.reason);
         }
-    
       });
+
+      
+      // if (Session.get('Invited').indexOf(emailVar) > -1) {
+      //   console.log("You're on the list!");
+      // } else {
+      //   console.log('Not on the invite list sorry.');
+      //   sAlert.info('Not on the invite list sorry.');
+      //   return false;
+      // }
+
+      
         
       console.log("Form submitted.");
     }

@@ -188,6 +188,14 @@ Router.route('/login', {
 Router.route('/admin', {
   action: function () {
     var loggedInUser = Meteor.userId();
+    if (!Roles.userIsInRole(loggedInUser, 'admin')) Router.go('/');
+    this.render('404');
+  }
+});
+
+Router.route('/invite', {
+  action: function () {
+    var loggedInUser = Meteor.userId();
     if (Roles.userIsInRole(loggedInUser, 'admin')) Router.go('/');
     this.render('404');
   }

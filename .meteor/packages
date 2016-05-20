@@ -30,11 +30,11 @@ aldeed:collection2
 standard-minifier-css
 standard-minifier-js
 ecmascript
-alanning:roles
 yasaricli:slugify
-msavin:mongol
 accounts-base
 accounts-password
 twbs:bootstrap
 jss:flat-ui
 juliancwirko:s-alert
+msavin:mongol
+alanning:roles

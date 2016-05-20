@@ -370,7 +370,7 @@ if (Meteor.isClient) { // only runs on the client
               });
             } else {
               console.log( 'not in list' );
-              sAlert.info('Sorry you are not on the list')
+              sAlert.info('Sorry you are not on our list')
             }
           }
           
@@ -494,6 +494,7 @@ if (Meteor.isServer) {
       clientIp = forwardedFor[0];
     });
 
+    // Email is handled via mailgun.com
     if (!Meteor.settings.mailGunUrl) console.log('Warning: email config not done.');
     else console.log("Email config address: " + Meteor.settings.mailGunUrl);
 

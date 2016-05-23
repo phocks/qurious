@@ -100,7 +100,7 @@
         <li><a href="#">Nothing found</a></li>
       {{/each}}
       {{#if currentUser}}
-      <li><a href="/add">+</a></li>
+      <!-- <li><a href="/add">+</a></li> -->
       {{/if}}
     </ul>
   </div>
@@ -112,12 +112,18 @@
 
 <template name="DisplayQuote">
   <div class="container backdrop">
-    <div class="quote">
+    <div class="quote text-center">
+      <i class="fa fa-quote-left"></i>
       <div>
-        {{quote.quotation}} <span class="attribution">&mdash;{{author.name}}</span>
+        {{quote.quotation}} 
       </div>
+      <div class="attribution">{{author.name}}</div>
+      <i class="fa fa-quote-right"></i>
     </div>
     <!-- <div>flag</div> -->
+  </div>
+  <div class="under">
+    
   </div>
 </template>
 
@@ -151,7 +157,7 @@
 
 
 <template name="Add">
-  <div class="container backdrop-block">
+  <div class="container backdrop">
     <p>Create a page.</p>
     <form class="form-inline">
       <div class="form-group">
@@ -168,30 +174,32 @@
 
 
 <template name="Page">
-  <div class="container backdrop-block text-center">
+  <div class="container backdrop text-center">
     <div class="page-title-box">
       <h1 class="page-name">{{page.name}}</h1>
       <p>{{page.description}}</p>
     </div>
-    <!-- <ul class="quote-list">
+    <ul class="quote-list">
     {{#each quotes}}
       <li class="quotation"><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
-      {{else}} -->
-      <!-- <li class="quotation"><a href="/{{page.slug}}/add">No quotations found</a></li> -->
-    <!-- {{/each}} -->
+      {{else}}
+      <li class="quotation"><a href="/{{page.slug}}/add">No quotations found</a></li>
+    {{/each}}
     <!-- {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} -->
-    <!-- </ul> -->
-    {{#each quotes}}
+    </ul>
+
+
+    <!-- {{#each quotes}}
     <div class="pageQuote">
       {{ quotation }}
     </div>
-    {{/each}}
+    {{/each}} -->
   </div>
 </template>
 
 
 <template name="AddQuote">
-  <div class="container backdrop-block">
+  <div class="container backdrop">
     <div class="create-block">
         <form class="add-quote form-inline">
           <div class="form-group">

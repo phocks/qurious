@@ -41,6 +41,12 @@ Schemas.Quote = new SimpleSchema({
     type: Boolean,
     defaultValue: false,
   },
+  length: {
+    type: String,
+    optional: true,
+    label: "Set so that CSS can know how big to display",
+}
+
 });
 
 // A page is the solution. A page can be categorised.
@@ -68,6 +74,10 @@ Schemas.Page = new SimpleSchema({
     type: Boolean,
     defaultValue: false,
   },
+  deleted: {
+    type: Boolean,
+    optional: true
+  }
 });
 
 

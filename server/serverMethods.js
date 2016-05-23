@@ -129,5 +129,34 @@ Meteor.methods({
   isInvited: function (emailAddress) {
     check(emailAddress, String);
     return Invites.findOne({ email: emailAddress });
-  }
+  },
+
+
+  // Here we are going to check the size of the quote and then
+  // set a value to it so that we can display long quotes with smaller font
+  // etc etc
+    checkQuoteSize: function(quoteId) {
+
+    check(quoteId, String);
+
+    var currentQuote = Quotes.findOne(quoteId);
+    var quotation = currentQuote.quotation;
+
+    //console.log(currentQuote.length);
+
+    if (true) { // use currentQuote.length == undefined to only update undefined
+      var n = quotation.length;
+
+      // if (n > maximumQuotationLength) return false; // i don't like massive quotes and i cannot lie
+
+      if (n <= 40) Quotes.update({ _id: quoteId }, { $set: { length: 'tiny' }});
+      if (n > 40 && n <= 120) Quotes.update({ _id: quoteId }, { $set: { length: 'short' }});
+      if (n > 120 && n <= 300) Quotes.update({ _id: quoteId }, { $set: { length: 'medium' }});
+      if (n > 300 && n <= 500) Quotes.update({ _id: quoteId }, { $set: { length: 'long' }});
+      if (n > 500) Quotes.update({ _id: quoteId }, { $set: { length: 'gigantic' }});
+    }
+
+    return true;
+  },
+
 });

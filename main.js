@@ -264,6 +264,7 @@ if (Meteor.isClient) { // only runs on the client
       Meteor.call('addQuoteToPage', text, pageId, function(error, result) {
         var newQuoteId = result;
         console.log("New quote id: " + newQuoteId);
+        Meteor.call('checkQuoteSize', newQuoteId);
         Router.go('/explore');
       });
 

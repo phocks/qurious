@@ -104,7 +104,7 @@ Meteor.publish("invites", function (emailAddress) {
 // });
 
 Meteor.publish("pages", function () {
-  return Pages.find({});
+  return Pages.find({ verified: true });
 })
 
 

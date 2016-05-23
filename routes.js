@@ -16,6 +16,14 @@ Router.route('/', {
   waitOn: function () {
     
   },
+  onBeforeAction: function() {
+    if (! Meteor.userId()) {
+      this.render('Loading');
+      console.log('logging in');
+    } else {
+      this.next();
+    }
+  },
   action: function () {
     Session.set("DocumentTitle","Qurious");
 
@@ -34,7 +42,7 @@ Router.route('/', {
 
 Router.route('/explore', {
   waitOn: function () {
-    return Meteor.subscribe('pages');
+    return Meteor.subscribe('pages'); // fix to only return needed pages
   },
   action: function () {
     Session.set("DocumentTitle","Qurious");
@@ -112,9 +120,8 @@ Router.route('/add', {
     this.layout('Layout');
     Session.set("DocumentTitle","Qurious - Add Author");
 
-    this.render('Nav', { to: 'nav'});
-    this.render('Add');
     // this.render('Nav', { to: 'nav'});
+    this.render('Add');
   }
 });
 
@@ -124,7 +131,7 @@ Router.route('/add', {
 
 Router.route('/faq', {
   action: function () {
-    this.render('Nav', { to: 'nav'});
+    // this.render('Nav', { to: 'nav'});
     this.render('Faq');
   }
 });
@@ -221,7 +228,7 @@ Router.route('/:_slug/add', {
     Session.set("DocumentTitle", "Add a " + currentPage.name + " quotation - Qurious");
     Session.set("pageId", currentPage._id);
 
-    this.render('Nav', { to: 'nav'});
+    // this.render('Nav', { to: 'nav'});
     this.render('AddQuote');
     // this.render('Nav', { to: 'nav'});
   }

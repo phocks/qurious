@@ -72,23 +72,27 @@
 
 
 <template name="Home">
-  {{#unless currentUser}}
-    <div class="container backdrop">
-      <div class="title">Qurious.</div>
-      <a href="/login">Login</a>
-    </div>
+  {{#if loggingIn}}
+    <p>Loggin in...</p>
   {{else}}
-    <div class="container backdrop">
-      <div class="title">Qurious.</div>
-      <a href="/logout">Logout</a>
-    </div>
-  {{/unless}}
+    {{#unless currentUser}}
+      <div class="container backdrop">
+        <div class="title">Qurious.</div>
+        <a href="/login">Login</a>
+      </div>
+    {{else}} <!-- Logged in users see this -->
+      <div class="container backdrop">
+        <!-- <div class="title">Qurious.</div> -->
+        <a class="btn btn-embossed btn-default" href="/explore">Qurious?</a>
+      </div>
+    {{/unless}}
+  {{/if}}
 </template>
 
 
 
 <template name="Explore">
-  <div class="container backdrop-block">
+  <div class="container backdrop">
     <ul class="author-list">
       {{#each pages}}
         <li><a href="/{{slug}}">{{name}}</a><!-- <span class="delete">x</span> --></li>
@@ -107,7 +111,7 @@
 
 
 <template name="DisplayQuote">
-  <div class="container backdrop-block">
+  <div class="container backdrop">
     <div class="quote">
       <div>
         {{quote.quotation}} <span class="attribution">&mdash;{{author.name}}</span>
@@ -164,19 +168,24 @@
 
 
 <template name="Page">
-  <div class="container backdrop-block author-page">
+  <div class="container backdrop-block text-center">
     <div class="page-title-box">
       <h1 class="page-name">{{page.name}}</h1>
       <p>{{page.description}}</p>
     </div>
-    <ul class="quote-list">
+    <!-- <ul class="quote-list">
     {{#each quotes}}
       <li class="quotation"><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
-      {{else}}
+      {{else}} -->
       <!-- <li class="quotation"><a href="/{{page.slug}}/add">No quotations found</a></li> -->
+    <!-- {{/each}} -->
+    <!-- {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} -->
+    <!-- </ul> -->
+    {{#each quotes}}
+    <div class="pageQuote">
+      {{ quotation }}
+    </div>
     {{/each}}
-    {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}}
-    </ul>
   </div>
 </template>
 
@@ -191,7 +200,6 @@
           </div>
           <button type="submit" class="btn btn-default">Add quote</button>
         </form>
-
       </div>
   </div>
 </template>
@@ -299,7 +307,7 @@
   <!-- {{> Nav}} -->
   <div class="container">
     <h1>404</h1>
-    <p>These aren't the droids you're looking for...</p>
+    <p>This isn't the page you're looking for...</p>
   </div>
 </template>
 

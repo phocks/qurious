@@ -254,14 +254,32 @@ Keep it clean
 .quote {
   /*background-color: white;*/
   /*max-width: 1080px;*/
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .quotation {
-  font-size: 1.4em;
+  font-size: 1em;
 }
 
 .attribution {
-  white-space: nowrap;
+  /*white-space: nowrap;*/
+  margin-top: 1em;
+  color: #666;
+}
+
+@media (min-width: 1200px) {
+
+  .quotation {
+    font-size: 1.3em;
+  }
+
+  .attribution {
+    /*white-space: nowrap;*/
+    margin-top: 1em;
+    color: #666;
+  }
+
 }
 
 /*  nav */

@@ -16,14 +16,14 @@ Router.route('/', {
   waitOn: function () {
     
   },
-  onBeforeAction: function() {
-    if (! Meteor.userId()) {
-      this.render('Loading');
-      console.log('logging in');
-    } else {
-      this.next();
-    }
-  },
+  // onBeforeAction: function() {
+  //   if (! Meteor.userId()) {
+  //     this.render('Loading');
+  //     console.log('logging in');
+  //   } else {
+  //     this.next();
+  //   }
+  // },
   action: function () {
     Session.set("DocumentTitle","Qurious");
 
@@ -239,7 +239,7 @@ Router.route('/:_slug/add', {
 Router.route('/:_page_slug/:_quote_slug', {
   waitOn: function () {
     Meteor.subscribe('quotesSlug', this.params._quote_slug);
-    return Meteor.subscribe('pages');
+    return Meteor.subscribe('pagesWithPageSlug', this.params._page_slug);
   },
   action: function () {
     var pageSlug = this.params._page_slug;
@@ -252,7 +252,7 @@ Router.route('/:_page_slug/:_quote_slug', {
     // this.render('Nav', { to: 'nav'});
     this.render('DisplayQuote', {
       data: {
-        author: function () {
+        page: function () {
           return Pages.findOne({ slug: pageSlug });
           },
         quote: function () {

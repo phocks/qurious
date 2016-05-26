@@ -103,6 +103,7 @@ Meteor.publish("invites", function (emailAddress) {
 //   return Words.find();
 // });
 
+// Return all pages this is bad do something different
 Meteor.publish("pages", function () {
   return Pages.find({ verified: true });
 })
@@ -112,3 +113,9 @@ Meteor.publish("pages", function () {
 // Meteor.publish("profiles", function () {
 //   return Profiles.find({});
 // })
+
+
+// Let's return a page when supplied a page slug
+Meteor.publish("pagesWithPageSlug", function (pageSlug) {
+  return Pages.find({ slug: pageSlug });
+})

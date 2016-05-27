@@ -33,7 +33,18 @@ Router.route('/', {
     this.render('Home', {
       data: {
         quotation: "Somewhere, something incredible is waiting to be known.",
-        page: "Carl Sagan"
+        page: "Carl Sagan",
+        greeting: function () {
+          var greetings = [
+            "Howdy",
+            "Hi",
+            "Yo",
+            "Hey",
+            "Welcome",
+          ];
+          var greeting = greetings[Math.floor(Math.random() * greetings.length)];
+          return greeting;
+        }
       }
     });
   }
@@ -213,7 +224,7 @@ Router.route('/invite', {
 // Quick and easy logouts
 Router.route('/logout', function() {
   Meteor.logout();
-  Router.go('/');
+  Meteor.setTimeout( function () { Router.go('/') }, 3000);
 });
 
 
@@ -275,7 +286,7 @@ Router.route('/:_page_slug/:_quote_slug', {
 // Don't put things below this as they probs won't work
 Router.route('/:_slug', {
   waitOn: function () {
-    return Meteor.subscribe('pages');
+    return Meteor.subscribe('pagesWithPageSlug', this.params._slug);
   },
   action: function () {
     var slug = this.params._slug;

@@ -429,7 +429,7 @@ if (Meteor.isClient) { // only runs on the client
           sAlert.info(error.reason);
         } else {
           sAlert.info("Reset email sent");
-          Meteor.setTimeout( function () { Router.go('/') }, 3000);
+          Meteor.setTimeout( function () { Router.go('/') }, 1000);
         }
       });
       sAlert.info("Sending reset email");

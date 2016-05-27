@@ -81,9 +81,11 @@
         <a href="/login">Login</a>
       </div>
     {{else}} <!-- Logged in users see this -->
-      <div class="container backdrop">
+      <div class="container backdrop-block">
         <!-- <div class="title">Qurious.</div> -->
-        <a class="btn btn-embossed btn-default" href="/explore">Qurious?</a>
+        <!-- <script>window.location.href = "/explore";</script> -->
+        <h1>{{greeting}}.</h1>
+        <p class="lead">Qurious is something new. So new we're not quite sure what it is just yet. But feel free to <a href="/explore">explore</a> what we have so far.</p>
       </div>
     {{/unless}}
   {{/if}}
@@ -114,7 +116,7 @@
   <div class="container backdrop">
     <div class="quote text-center">
       <!-- <i class="fa fa-quote-left"></i> -->
-      <div class="quotation">
+      <div class="quotation {{quote.length}}">
         {{quote.quotation}} 
       </div>
       <div class="attribution"><a href="/{{page.slug}}">{{page.name}}</a></div>
@@ -179,14 +181,14 @@
       <h1 class="page-name">{{page.name}}</h1>
       <p>{{page.description}}</p>
     </div>
-    <ul class="quote-list">
+    <!-- <ul class="quote-list">
     {{#each quotes}}
       <li class="quotation"><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
       {{else}}
       <li class="quotation"><a href="/{{page.slug}}/add">No quotations found</a></li>
-    {{/each}}
+    {{/each}} -->
     <!-- {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} -->
-    </ul>
+   <!--  </ul> -->
 
 
     <!-- {{#each quotes}}

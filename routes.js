@@ -40,7 +40,6 @@ Router.route('/', {
             "Hi",
             "Yo",
             "Hey",
-            "Welcome",
           ];
           var greeting = greetings[Math.floor(Math.random() * greetings.length)];
           return greeting;
@@ -294,6 +293,7 @@ Router.route('/:_slug', {
     Session.set('pageSlug', slug);
 
     if (!currentPage) {
+      Session.set("DocumentTitle", "404 not found - Qurious");
       this.render('404');
       return false;
     }

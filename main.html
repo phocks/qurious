@@ -81,11 +81,11 @@
         <a href="/login">Login</a>
       </div>
     {{else}} <!-- Logged in users see this -->
-      <div class="container backdrop-block">
-        <!-- <div class="title">Qurious.</div> -->
-        <!-- <script>window.location.href = "/explore";</script> -->
-        <h1>{{greeting}}.</h1>
-        <p class="lead">Qurious is something new. So new we're not quite sure what it is just yet. But feel free to <a href="/explore">explore</a> what we have so far.</p>
+      <div class="container backdrop">
+        <div class="content">
+          <h1>{{greeting}}.</h1>
+          <p class="lead">Qurious is something new. We're not quite sure what it is just yet. But feel free to <a href="/explore">explore</a> what we have so far.</p>
+        </div>
       </div>
     {{/unless}}
   {{/if}}
@@ -317,7 +317,7 @@
   <!-- {{> Nav}} -->
   <div class="container">
     <h1>404</h1>
-    <p>This isn't the page you're looking for...</p>
+    <p class="lead">This isn't the page you're looking for...</p>
   </div>
 </template>
 

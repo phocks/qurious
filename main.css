@@ -52,9 +52,9 @@ body {
 }
 
 a {
-  /*color: #5ab2b5;*/
+  color: #666;
   /*background-color: #eee;*/
-  text-decoration: underline;
+  /*text-decoration: underline;*/
 }
 a:hover,
 a:focus {
@@ -249,6 +249,10 @@ Belief release CSS mainly from here
 Keep it clean
 
 */
+/* Just an override for now */
+.container {
+  /*max-width: 700px;*/
+}
 
 .full-container {
   /*margin-top: 3vh;*/
@@ -367,6 +371,11 @@ ul.quote-list li {
   justify-content: center;
   min-height: 100vh;
   flex-direction: column;
+  /*max-width: 500px;*/
+}
+
+.backdrop h1 {
+  text-align: left;
 }
 
 .backdrop form {
@@ -376,7 +385,7 @@ ul.quote-list li {
 
 .backdrop-block {
   /*padding-bottom: 65px;*/ /* use if fixed bottom button nav */
-  
+  /*max-width: 500px;*/
 }
 
 .backdrop-block {
@@ -413,7 +422,7 @@ ul.quote-list li {
 
 
 .quote-container {
-  max-width: 500px;
+  /*max-width: 500px;*/
   /*margin-right: auto;
   margin-left: auto;*/
 

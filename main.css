@@ -311,11 +311,12 @@ Keep it clean
 @media (min-width: 1200px) {
 
   .quotation {
-    font-size: 1.3em;
+    font-size: 1.4em;
   }
 
   .attribution {
     /*white-space: nowrap;*/
+    font-size: 1.4em;
     margin-top: 1em;
     color: #666;
   }

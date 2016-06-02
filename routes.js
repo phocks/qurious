@@ -64,11 +64,15 @@ Router.route('/explore', {
     this.render('Explore', {
       data: {
         pages: function () {
-          profileHasPages = Meteor.users.findOne( { _id: Meteor.userId(), "profile.pages": {$exists: true} });
-          if (profileHasPages) {
-            var pages = Pages.find({ _id: { $in: Meteor.user().profile.pages } }, { sort: {name: 1}});
+          // We were going to only return ones in his bookmarks
+          // profileHasPages = Meteor.users.findOne( { _id: Meteor.userId(), "profile.pages": {$exists: true} });
+          // if (profileHasPages) {
+          //   var pages = Pages.find({ _id: { $in: Meteor.user().profile.pages } }, { sort: {name: 1}});
+          //   return pages;
+          // }
+
+          var pages = Pages.find({  }, { sort: {name: 1}});
             return pages;
-          }
         },
       }
     });
@@ -76,7 +80,7 @@ Router.route('/explore', {
 });
 
 Router.route('/forgot', {
-
+  // Automatically renders the "Forgot" template
 });
 
 Router.route('/password-reset/:_token', {
@@ -111,12 +115,13 @@ Router.route('/settings', {
   }
 });
 
+
 Router.route('/subscribe', {
   action: function () {
-    // this.render('Nav', { to: 'nav'});
     this.render('Subscribe');
   }
 });
+
 
 
 Router.route('/add', {
@@ -147,6 +152,7 @@ Router.route('/faq', {
 });
 
 
+
 Router.route('/register', {
   waitOn: function () {
     // return Meteor.subscribe('invites');
@@ -161,17 +167,16 @@ Router.route('/register', {
 
     // invited.forEach( function (invitee) {
     //   arrayInvited.push(invitee.email);
-    // });
-    
+    // });    
 
     // Session.set('Invited', arrayInvited);
 
+    // This has now been secured so it only returns input emails
 
 
     this.layout('Layout');
-    // this.render('Nav', { to: 'nav'});
     this.render('Register');
-    // this.render('Nav', { to: 'nav'});
+    
   }
 });
 
@@ -223,7 +228,7 @@ Router.route('/invite', {
 // Quick and easy logouts
 Router.route('/logout', function() {
   Meteor.logout();
-  Meteor.setTimeout( function () { Router.go('/') }, 3000);
+  Meteor.setTimeout( function () { Router.go('/') }, 1000);
 });
 
 

@@ -89,9 +89,6 @@ Meteor.publish("quotesInArray", function (array) {
 
 
 
-
-
-
 Meteor.publish("invites", function (emailAddress) {
   return Invites.find({ email: emailAddress });
 })

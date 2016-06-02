@@ -76,15 +76,16 @@
     <!-- <p>Say nothing. Be nothing...</p> -->
   {{else}}
     {{#unless currentUser}}
-      <div class="container backdrop">
+      <div class="container backdrop flex-center">
         <div class="title">Qurious.</div>
         <a href="/login">Login</a>
       </div>
     {{else}} <!-- Logged in users see this -->
       <div class="container backdrop">
         <div class="content">
-          <h1>{{greeting}}.</h1>
-          <p class="lead">Qurious is something new. We're not quite sure what it is just yet. But feel free to <a href="/explore">explore</a> what we have so far.</p>
+          <h1><i class="fa fa-quote-left"></i></h1>
+          <!-- <h1>{{greeting}}.</h1> -->
+          <p class="lead">Qurious is very new. Feel free to <a href="/explore" class="custom">explore</a>.</p>
         </div>
       </div>
     {{/unless}}
@@ -95,6 +96,7 @@
 
 <template name="Explore">
   <div class="container backdrop">
+    <h1>Pages.</h1>
     <ul class="author-list">
       {{#each pages}}
         <li><a href="/{{slug}}">{{name}}</a><!-- <span class="delete">x</span> --></li>
@@ -114,7 +116,7 @@
 
 <template name="DisplayQuote">
   <div class="container backdrop">
-    <div class="quote text-center">
+    <div class="quote content">
       <!-- <i class="fa fa-quote-left"></i> -->
       <div class="quotation {{quote.length}}">
         {{quote.quotation}} 
@@ -137,7 +139,7 @@
 
 
 <template name="Settings">
-  <div class="container backdrop-block">
+  <div class="container backdrop">
     <div class="col-md-6">
       <h1>Settings</h1>
       <!-- <form>
@@ -176,19 +178,19 @@
 
 
 <template name="Page">
-  <div class="container backdrop text-center">
+  <div class="container backdrop">
     <div class="page-title-box">
       <h1 class="page-name">{{page.name}}</h1>
       <p>{{page.description}}</p>
     </div>
-    <!-- <ul class="quote-list">
+    <ul class="quote-list">
     {{#each quotes}}
       <li class="quotation"><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
       {{else}}
       <li class="quotation"><a href="/{{page.slug}}/add">No quotations found</a></li>
-    {{/each}} -->
+    {{/each}}
     <!-- {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} -->
-   <!--  </ul> -->
+    </ul>
 
 
     <!-- {{#each quotes}}
@@ -216,7 +218,7 @@
 
 
 <template name="Register">
-  <div class="container backdrop">
+  <div class="container backdrop flex-center">
     <div class="title">Qurious.</div>
     <form>
       <div class="form-group">
@@ -236,7 +238,7 @@
 
 
 <template name="Login">
-  <div class="container backdrop">
+  <div class="container backdrop flex-center">
     <div class="title">Qurious.</div>
     <form>
       <div class="form-group">
@@ -256,7 +258,7 @@
 
 
 <template name="Forgot"> 
-  <div class="container backdrop">
+  <div class="container backdrop flex-center">
   <div class="title">Qurious.</div>
     <form>
       <div class="form-group">
@@ -268,7 +270,7 @@
 </template>
 
 <template name="PasswordReset"> 
-  <div class="container backdrop">
+  <div class="container backdrop flex-center">
   <div class="title">Qurious.</div>
     <form>
       <div class="form-group">
@@ -280,7 +282,7 @@
 </template>
 
 <template name="Subscribe"> 
-  <div class="container backdrop">
+  <div class="container backdrop flex-center">
     <div class="title">Qurious.</div>
       <!-- Begin MailChimp Signup Form -->
       <div id="mc_embed_signup">
@@ -315,7 +317,7 @@
 
 <template name="404">
   <!-- {{> Nav}} -->
-  <div class="container">
+  <div class="container flex-center">
     <h1>404</h1>
     <p class="lead">This isn't the page you're looking for...</p>
   </div>

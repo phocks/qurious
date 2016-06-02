@@ -12,9 +12,10 @@
   */
 /*@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);*/
 
-@import url(https://fonts.googleapis.com/css?family=Neuton);
-@import url(https://fonts.googleapis.com/css?family=Josefin+Slab:600,400);
+/*@import url(https://fonts.googleapis.com/css?family=Neuton);
+@import url(https://fonts.googleapis.com/css?family=Josefin+Slab:600,400);*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=EB+Garamond);
 
 
 
@@ -48,19 +49,16 @@ body {
   /*background-color: #fdfbf8; moved to LESS*/
   color: black;
   font-family: "Montserrat", sans-serif;
-  /*font-size: 16px;*/
 }
 
 a {
-  color: #666;
+  color: #999;
   /*background-color: #eee;*/
   /*text-decoration: underline;*/
 }
 a:hover,
 a:focus {
-  /*color: #5ab2b5;*/
-  /*text-decoration: underline;*/
-  /*background-color: #5ab2b5;*/
+  text-decoration: underline;
 }
 
 
@@ -69,6 +67,36 @@ a:hover,
 a:focus {
   outline: none;
 }
+
+
+
+/* Testing some underlining fancy stuff */
+
+/*a.custom {
+  text-decoration: none;
+  position: relative;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 2px, #333333 2px, #333333 3px, rgba(0, 0, 0, 0) 3px);
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  a.custom {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 2px, #333333 2px, #333333 2.5px, rgba(0, 0, 0, 0) 2.5px);
+  }
+}
+a.custom:hover, a.custom:focus {
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 2px, #55abad 2px, #55abad 3px, rgba(0, 0, 0, 0) 3px);
+}
+@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+  a.custom:hover, a.custom:focus {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 2px, #55abad 2px, #55abad 2.5px, rgba(0, 0, 0, 0) 2.5px);
+  }
+}
+*/
+
+
+
+
+
 
 .form-control {
   font-family: "Montserrat", sans-serif;
@@ -112,7 +140,6 @@ input[type] {
 
 
 
-
 .inline {
   display: inline-block;
 }
@@ -138,8 +165,8 @@ span.quo {
 
 
 #iron-router-progress {
-    background-color: #5ab2b5;
-    box-shadow: 0 0 0px #5ab2b5;
+    background-color: #888;
+    box-shadow: 0 0 0px #888;
 }
 
 
@@ -365,14 +392,11 @@ ul.quote-list li {
 
 
 /* keeps things in middle */
+
 .backdrop {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  flex-direction: column;
-  /*max-width: 500px;*/
+  
 }
+
 
 .backdrop h1 {
   text-align: left;
@@ -383,30 +407,17 @@ ul.quote-list li {
   margin-bottom: 16px;
 }
 
-.backdrop-block {
-  /*padding-bottom: 65px;*/ /* use if fixed bottom button nav */
-  /*max-width: 500px;*/
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-.backdrop-block {
-  border-radius: 0;
-}
 
-.home-text {
-  font-size: 1.8em;
-}
 
-.home-text h1 {
-  /*display: inline-block;*/
-  font-size: 1em;
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
 
-.home-text ul {
-  padding: 0;
-  list-style-type: none;
-}
 
 .small {
   font-size: 0.7em;
@@ -475,6 +486,8 @@ ul.quote-list li {
 
 .content {
   max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 

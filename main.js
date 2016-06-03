@@ -376,7 +376,7 @@ if (Meteor.isClient) { // only runs on the client
               });
             } else {
               console.log( 'not in list' );
-              sAlert.info('Sorry you are not on our list')
+              sAlert.info('We are invite only for now. Please subscribe.')
             }
           }
           

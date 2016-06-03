@@ -320,8 +320,7 @@ Keep it clean
   color: #666;
 }
 
-@media (min-width: 1200px) {
-
+@media (min-width: 768px) {
   .quotation {
     font-size: 1.4em;
   }
@@ -329,10 +328,18 @@ Keep it clean
   .attribution {
     /*white-space: nowrap;*/
     font-size: 1.4em;
-    margin-top: 1em;
-    color: #666;
+  }
+}
+
+@media (min-width: 1200px) {
+  .quotation {
+    font-size: 1.6em;
   }
 
+  .attribution {
+    /*white-space: nowrap;*/
+    font-size: 1.6em;
+  }
 }
 
 /*  nav */
@@ -407,8 +414,7 @@ ul.quote-list li {
 /* keeps things in middle */
 
 .backdrop {
-  padding-right: 0;
-  padding-left: 0;
+  
 }
 
 

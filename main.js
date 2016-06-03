@@ -311,6 +311,11 @@ if (Meteor.isClient) { // only runs on the client
     }
   });
 
+  // Using fittext to resize or could use vw in the css
+  Template.Explore.rendered = function () {
+    $('h1').fitText(1);
+  }
+
 
   Template.Explore.events({
     "click .delete": function () {

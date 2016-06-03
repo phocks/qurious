@@ -82,10 +82,17 @@
       </div>
     {{else}} <!-- Logged in users see this -->
       <div class="container backdrop">
-        <div class="content">
-          <h1><i class="fa fa-quote-left"></i></h1>
+        <div class="content text-center flex-center">
+          <!-- <h1><i class="fa fa-quote-left"></i></h1> -->
           <!-- <h1>{{greeting}}.</h1> -->
-          <p class="lead">Qurious is very new. Feel free to <a href="/explore" class="custom">explore</a>.</p>
+          <p class="lead">Qurious is kinda new.</p>
+        </div>
+      </div>
+      <div class="container-fluid backdrop" style="background-color: #eee">
+        <div class="content text-center flex-center">
+          <!-- <h1><i class="fa fa-quote-left"></i></h1> -->
+          <!-- <h1>{{greeting}}.</h1> -->
+          <p class="lead">Feel free to <a href="/explore" class="custom">explore</a>.</p>
         </div>
       </div>
     {{/unless}}
@@ -95,18 +102,25 @@
 
 
 <template name="Explore">
-  <div class="container backdrop">
-    <h1>Pages.</h1>
+  <div class="container backdrop explore">
+    <!-- <h1>Pages.</h1>
     <ul class="author-list">
       {{#each pages}}
-        <li><a href="/{{slug}}">{{name}}</a><!-- <span class="delete">x</span> --></li>
+        <li><a href="/{{slug}}">{{name}}</a></li>
       {{else}}
         <li><a href="#">Nothing found</a></li>
       {{/each}}
       {{#if currentUser}}
-      <!-- <li><a href="/add">+</a></li> -->
+      <li><a href="/add">+</a></li>
       {{/if}}
-    </ul>
+    </ul> -->
+
+    {{#each pages}}
+      <h1><a href="/{{slug}}">{{name}}</a></h1>
+    {{/each}}
+
+
+
   </div>
 </template>
 
@@ -178,26 +192,31 @@
 
 
 <template name="Page">
-  <div class="container backdrop">
+  <div class="container backdrop text-center content">
     <div class="page-title-box">
-      <h1 class="page-name">{{page.name}}</h1>
+      <h1 class="page-name text-center">{{page.name}}</h1>
       <p>{{page.description}}</p>
     </div>
-    <ul class="quote-list">
+    <!-- <ul class="quote-list">
     {{#each quotes}}
       <li class="quotation"><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
       {{else}}
       <li class="quotation"><a href="/{{page.slug}}/add">No quotations found</a></li>
     {{/each}}
-    <!-- {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} -->
-    </ul>
+     {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} 
+    </ul> -->
 
-
-    <!-- {{#each quotes}}
-    <div class="pageQuote">
-      {{ quotation }}
+    <div class="page-quotes">
+    <hr>
+      {{#each quotes}}
+      <div class="page-quote text-left">
+        {{ quotation }} <a class="view-quote" href="/{{../page.slug}}/{{slug}}">View <i class="fa fa-arrow-right"></i></a>
+        <hr>
+      </div>
+      {{/each}}
     </div>
-    {{/each}} -->
+
+
   </div>
 </template>
 

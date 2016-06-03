@@ -59,6 +59,7 @@ a {
 a:hover,
 a:focus {
   text-decoration: underline;
+  color: black;
 }
 
 
@@ -66,6 +67,12 @@ a, /* this gets rid of the dotty outline in Firefox. */
 a:hover,
 a:focus {
   outline: none;
+}
+
+@media (max-width: 800px) {
+  h1 {
+    font-size: 2em;
+  }
 }
 
 
@@ -281,6 +288,11 @@ Keep it clean
   /*max-width: 700px;*/
 }
 
+.container-fluid {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 .full-container {
   /*margin-top: 3vh;*/
 }
@@ -395,13 +407,11 @@ ul.quote-list li {
 /* keeps things in middle */
 
 .backdrop {
-  
+  padding-right: 0;
+  padding-left: 0;
 }
 
 
-.backdrop h1 {
-  text-align: left;
-}
 
 .backdrop form {
   margin-top: 8px;
@@ -542,4 +552,32 @@ ul.quote-list li {
   .lite-quote {
     font-size: 2.6em;
   }
+}
+
+.page-quotes {
+
+}
+
+.page-quote {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.view-quote {
+  
+}
+
+.explore h1 {
+  font-size: 7vw;
+  /*width: 100%;*/
+}
+
+.explore h1 a {
+  color: black;
+}
+
+/* Flat-UI adds a little transition and we are diabling it here */
+a {
+-webkit-transition: 0s;
+transition: 0s;
 }

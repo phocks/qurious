@@ -148,9 +148,12 @@
     <div class="page-quotes">
       {{#each quotes}}
       <div class="page-quote text-left">
-        {{ quotation }} <a class="view-quote" href="/{{../page.slug}}/{{slug}}"><i class="fa fa-caret-right"></i></a>
-        <hr>
+        {{ quotation }} &nbsp;<a class="view-quote" href="/{{../page.slug}}/{{slug}}"><i class="fa fa-caret-right"></i></a>
       </div>
+      <!-- <div>
+        <a class="view-quote" href="/{{../page.slug}}/{{slug}}"><i class="fa fa-caret-right"></i></a>
+      </div> -->
+      <hr>
       {{/each}}
     </div>
 

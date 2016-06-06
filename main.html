@@ -82,17 +82,16 @@
       </div>
     {{else}} <!-- Logged in users see this -->
       <div class="container backdrop">
-        <div class="content text-center flex-center">
+        <div class="content text-center flex-center" style="max-width: 400px;">
           <!-- <h1><i class="fa fa-quote-left"></i></h1> -->
-          <!-- <h1>{{greeting}}.</h1> -->
-          <p class="lead">Qurious is kinda new.</p>
+          <h1>Qurious.</h1>
+          <p>is kinda new, so please forgive us if there's not much here just yet.</p>
+          <a class="btn btn-default" href="/explore">Explore</a>
         </div>
       </div>
       <div class="container-fluid" style="background-color: #f4f4f4">
-        <div class="content text-center flex-center container">
-          <!-- <h1><i class="fa fa-quote-left"></i></h1> -->
-          <!-- <h1>{{greeting}}.</h1> -->
-          <p class="lead">Feel free to <a href="/explore" class="custom">explore</a>.</p>
+        <div class="content container text-center" style="padding: 8px 0 8px">
+          <small>Created by Meagre Inc.&nbsp;</small>
         </div>
       </div>
     {{/unless}}
@@ -119,6 +118,41 @@
       <h1><a href="/{{slug}}">{{name}}</a></h1>
     {{/each}}
 
+
+
+  </div>
+</template>
+
+
+
+
+
+
+<template name="Page">
+  <div class="container backdrop content">
+    <!-- <small><a href="/explore">Back</a></small> -->
+    <div class="page-title-box">
+      <h1 class="page-name">{{page.name}}</h1>
+      <p>{{page.description}}</p>
+      <hr>
+    </div>
+    <!-- <ul class="quote-list">
+    {{#each quotes}}
+      <li class="quotation"><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
+      {{else}}
+      <li class="quotation"><a href="/{{page.slug}}/add">No quotations found</a></li>
+    {{/each}}
+     {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} 
+    </ul> -->
+
+    <div class="page-quotes">
+      {{#each quotes}}
+      <div class="page-quote text-left">
+        {{ quotation }} <a class="view-quote" href="/{{../page.slug}}/{{slug}}"><i class="fa fa-caret-right"></i></a>
+        <hr>
+      </div>
+      {{/each}}
+    </div>
 
 
   </div>
@@ -191,34 +225,7 @@
 
 
 
-<template name="Page">
-  <div class="container backdrop text-center content">
-    <div class="page-title-box">
-      <h1 class="page-name text-center">{{page.name}}</h1>
-      <p>{{page.description}}</p>
-    </div>
-    <!-- <ul class="quote-list">
-    {{#each quotes}}
-      <li class="quotation"><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
-      {{else}}
-      <li class="quotation"><a href="/{{page.slug}}/add">No quotations found</a></li>
-    {{/each}}
-     {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} 
-    </ul> -->
 
-    <div class="page-quotes">
-    <hr>
-      {{#each quotes}}
-      <div class="page-quote text-left">
-        {{ quotation }} <a class="view-quote" href="/{{../page.slug}}/{{slug}}">View <i class="fa fa-arrow-right"></i></a>
-        <hr>
-      </div>
-      {{/each}}
-    </div>
-
-
-  </div>
-</template>
 
 
 <template name="AddQuote">

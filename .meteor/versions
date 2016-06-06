@@ -7,7 +7,6 @@ aldeed:schema-deny@1.0.1
 aldeed:schema-index@1.0.1
 aldeed:simple-schema@1.5.3
 allow-deny@1.0.4
-autopublish@1.0.7
 autoupdate@1.2.9
 babel-compiler@6.6.4
 babel-runtime@0.1.8
@@ -21,7 +20,6 @@ caching-compiler@1.0.4
 caching-html-compiler@1.0.6
 callback-hook@1.0.8
 check@1.2.1
-coffeescript@1.0.17
 ddp@1.2.5
 ddp-client@1.2.7
 ddp-common@1.2.5
@@ -73,7 +71,6 @@ mongo@1.1.7
 mongo-id@1.0.4
 mrt:fittext@1.2.0
 msavin:mongol@2.0.1
-multiply:iron-router-progress@1.0.2
 npm-bcrypt@0.8.5
 npm-mongo@1.4.43
 observe-sequence@1.0.11

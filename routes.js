@@ -27,6 +27,7 @@ Router.route('/', {
   action: function () {
     Session.set("DocumentTitle","Qurious");
 
+
     // console.log(Meteor.user().services.twitter.profile_image_url);
     // this.render('Nav', { to: 'nav'});
     

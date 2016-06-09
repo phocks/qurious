@@ -19,7 +19,6 @@ random
 ejson
 spacebars
 check
-okgrow:router-autoscroll
 less
 fortawesome:fontawesome
 email
@@ -38,3 +37,4 @@ juliancwirko:s-alert
 msavin:mongol
 alanning:roles
 mrt:fittext
+okgrow:router-autoscroll

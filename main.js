@@ -158,8 +158,8 @@ if (Meteor.isClient) { // only runs on the client
   // We have a package that gets us to the top when we navigate
   // This changes the animation period, set to zero for none
   // Doesn't seem to work with mobile (or sometimes at all)
-  RouterAutoscroll.animationDuration = 200;
-
+  // RouterAutoscroll.animationDuration = 200;
+  RouterAutoscroll.marginTop = 50;
 
   // Call this at any time to set the <title>
   Session.set("DocumentTitle","Qurious");
@@ -227,11 +227,21 @@ if (Meteor.isClient) { // only runs on the client
 
   // End global helpers and now some Template specific helpers
 
+
+  // Took me ages to work out how to scroll down on page load
+  // Have to wait until all the elements are on the page
+  // A bit hacky and I don't think we'll use it, but still
+  // Template.Home.onRendered(function () {
+  //   Meteor.setTimeout( function () { window.scroll(0, 50); }, 500);
+  // });
+
+
+
   Template.Settings.helpers({
     _id: function () {
       return Meteor.userId();
     }
-  })
+  });
 
 
 
@@ -313,7 +323,7 @@ if (Meteor.isClient) { // only runs on the client
 
   // Using fittext to resize or could use vw in the css
   Template.Explore.rendered = function () {
-    $('h1').fitText(1);
+    $('h1').fitText(1.2, );
   }
 
 

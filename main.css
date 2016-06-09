@@ -76,6 +76,12 @@ a:focus {
 }
 
 
+h1 {
+  /* Use em to keep spacing proportional when resizing text */
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
+}
+
 
 /* Testing some underlining fancy stuff */
 

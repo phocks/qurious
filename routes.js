@@ -314,7 +314,7 @@ Router.route('/:_slug', {
           return Pages.findOne({slug: slug});
           },
         quotes: function () {
-          var quotes = Quotes.find( {pageId: currentPage._id}, { sort: {quotation: 1}} );
+          var quotes = Quotes.find( { authorId: currentPage._id}, { sort: {quotation: 1}} );
           return quotes;
         },
       }

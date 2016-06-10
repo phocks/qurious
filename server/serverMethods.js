@@ -159,6 +159,82 @@ Meteor.methods({
     return true;
   },
 
+
+  addPage: function(pageName) {
+  // Make sure the user is logged in before inserting a task
+  if (! Meteor.userId()) {
+    throw new Meteor.Error("not-authorized");
+  }
+
+  // We wanted to have the slug as something the URL defines
+  function slugText(text)
+  {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')           // Replace spaces with -
+      .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+      .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+      .replace(/^-+/, '')             // Trim - from start of text
+      .replace(/-+$/, '');            // Trim - from end of text
+  }
+
+  pageSlug = slugText(pageName);
+
+  var newPageId = Pages.insert({
+      name: pageName,
+      slug: pageSlug,
+      createdAt: new Date(), // current time
+      createdBy: Meteor.userId(), // current user
+    }, function(error, result) {
+      if (error) {
+        console.log(error);
+        return false;
+      }
+      else console.log(result);
+      // This put the new page in the user profile. Probably don't do that right now.
+      // Meteor.users.update( { _id: Meteor.userId() }, { $addToSet:{"profile.pages": result }} );
+    });
+
+
+
+    return pageSlug;
+},
+
+addQuoteToPage: function (text, pageId) {
+  // Make sure the user is logged in otherwise throw and error
+  if (! Meteor.userId()) throw new Meteor.Error("not-authorized");
+
+  // Please make this error actually do something
+  if (text.length > maximumQuotationLength) throw new Meteor.Error('too-long');
+
+  var n = 5;
+  var shortenedText = text.replace(/\s+/g," ").split(/(?=\s)/gi).slice(0, n).join('');
+  shortenedText = shortenedText.replace(/[^a-zA-Z\d\s]/g, ""); // remove special chars as well
+
+  var quoteSlug = slugify(shortenedText);
+
+
+  var newQuote = Quotes.insert({
+    authorId: pageId,
+    quotation: text,
+    createdAt: new Date(), // current time
+    // username: Meteor.user().username, // username of whoever created quote
+    createdBy: Meteor.userId(),  // _id of logged in user
+    slug: quoteSlug,
+  }, function(error, result) {
+    if (error) {
+      console.log("Something went wrong trying to insert into the DB: " + error.message);
+      return result;
+    }
+  });
+
+  return newQuote; // Returns the _id of new quote
+},
+
+
+deleteQuote: function(quoteId) {
+  Quotes.remove(quoteId);
+},
+
   
 
 });

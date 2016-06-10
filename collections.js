@@ -18,10 +18,11 @@ Schemas.Quote = new SimpleSchema({
     label: "The _id of an Author attached",
     optional: true
     },
-    pageId: { 
-    type: String,
-    label: "The _id of root Page"
-    },
+    // Quotes will reference authorId, and later sourceId, etc.
+    // pageId: { 
+    // type: String,
+    // label: "The _id of root Page"
+    // },
   quotation: { 
     type: String,
     max: 1000, 

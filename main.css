@@ -381,13 +381,19 @@ ul.author-list li {
   margin-bottom: 10px;
 }
 
+@media (max-width: 800px) {
+  ul.author-list li {
+    font-size: 18px;
+  }
+}
+
 ul.author-list a,
 ul.quote-list a {
   text-decoration: none;
   color: inherit;
   padding: 8px 12px;
   background-color: #f2f1ef;
-  border-radius: 4px;
+  /*border-radius: 2px;*/
 }
 
 ul.author-list a:hover,
@@ -578,10 +584,9 @@ ul.quote-list li {
   
 }
 
-.explore h1 {
+/*.explore h1 {
   font-size: 7vw;
-  /*width: 100%;*/
-}
+}*/
 
 .explore h1 a {
   color: black;

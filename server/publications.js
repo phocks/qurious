@@ -101,9 +101,13 @@ Meteor.publish("invites", function (emailAddress) {
 // });
 
 // Return all pages this is bad do something different
-Meteor.publish("pages", function () {
+Meteor.publish("pagesVerified", function () {
   return Pages.find({ verified: true });
-})
+});
+
+Meteor.publish("pagesAll", function () {
+  return Pages.find({  });
+});
 
 
 
@@ -115,4 +119,4 @@ Meteor.publish("pages", function () {
 // Let's return a page when supplied a page slug
 Meteor.publish("pagesWithPageSlug", function (pageSlug) {
   return Pages.find({ slug: pageSlug });
-})
+});

@@ -92,7 +92,7 @@ Router.route('/explore/all', {
 
 		// this.render('Nav', { to: 'nav'});
 
-		this.render('Explore', {
+		this.render('ExploreAll', {
 			data: {
 				pages: function () {
 					var pages = Pages.find({  }, { sort: {name: 1}});

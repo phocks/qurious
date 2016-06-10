@@ -44,7 +44,6 @@
 
 
 
-
 body {
   /*background-color: #fdfbf8; moved to LESS*/
   color: black;
@@ -54,7 +53,7 @@ body {
 a {
   color: #525252;
   /*background-color: #eee;*/
-  /*text-decoration: underline;*/
+  text-decoration: underline;
 }
 a:hover,
 a:focus {

@@ -287,7 +287,7 @@ if (Meteor.isClient) { // only runs on the client
     },
   });
 
-
+  
 
   // Adding another author
   Template.Add.events({

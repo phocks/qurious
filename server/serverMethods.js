@@ -192,6 +192,9 @@ Meteor.methods({
       else console.log(result);
       // This put the new page in the user profile. Probably don't do that right now.
       // Meteor.users.update( { _id: Meteor.userId() }, { $addToSet:{"profile.pages": result }} );
+
+      // Update time of last submission
+      Meteor.users.update( { _id: Meteor.userId() }, { $set:{"profile.lastSubmissionTime": new Date() }} );
     });
 
 

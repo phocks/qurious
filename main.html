@@ -103,7 +103,35 @@
 <template name="Explore">
 	<div class="container backdrop explore">
 		<h1>Current Authors</h1>
-		<p>We are compiling a list of notable authors. There's not many at the moment. You can suggest some to us if you like. Or see all the authors.</p>
+		<p>Qurious is still very new. Firstly we will be compiling a list of notable authors &amp; their quotes. Please help us expand this list.</p>
+		
+		<ul class="author-list">
+			{{#each pages}}
+				<li><a href="/{{slug}}">{{name}}</a></li>
+			{{else}}
+				
+			{{/each}}
+			{{#if currentUser}}
+			<li><a href="/add">+</a></li>
+			{{/if}}
+		</ul>
+
+		<!-- {{#each pages}}
+			<h1><a href="/{{slug}}">{{name}}</a></h1>
+		{{/each}} -->
+
+
+
+	</div>
+</template>
+
+
+
+
+<template name="ExploreAll">
+	<div class="container backdrop explore">
+		<h1>All Authors</h1>
+		<p>Everything.</p>
 		
 		<ul class="author-list">
 			{{#each pages}}
@@ -214,20 +242,18 @@
 
 
 <template name="Add">
-	<div class="container backdrop">
-		<p>Create a page.</p>
-		<form class="form-inline">
-			<div class="form-group">
-				<label class="sr-only" for="authorName">Page Name</label>
-				<input type="text" class="form-control" id="authorName" name="text" placeholder="Page name">
-			</div>
-			<button type="submit" class="btn btn-default">Create</button>
-		</form>
-
+	<div class="container backdrop flex-center">
+		<div class="">
+			<form class="form-inline">
+				<div class="form-group">
+					<label class="sr-only" for="authorName">Author Name</label>
+					<input type="text" class="form-control" id="authorName" name="text" placeholder="Author name">
+				</div>
+				<button type="submit" class="btn btn-default">Create</button>
+			</form>
+		</div>
 	</div>
 </template>
-
-
 
 
 
@@ -356,7 +382,8 @@
 
 
 <template name="Faq">
-	<div class="container faq">
+	<div class="container faq content">
+		<h1>faq</h1>
 		<p>No one has asked any questions yet?</p>
 	</div>
 </template>

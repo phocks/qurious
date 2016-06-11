@@ -53,7 +53,7 @@ body {
 a {
   color: #525252;
   /*background-color: #eee;*/
-  text-decoration: underline;
+  /*text-decoration: underline;*/
 }
 a:hover,
 a:focus {
@@ -444,11 +444,15 @@ ul.quote-list li {
 
 
 
-
-
 .small {
   font-size: 0.7em;
   line-height: 1.8em;
+}
+
+.small-text {
+  font-size: 0.7em;
+  line-height: 1.8em;
+  color: #424242;
 }
 
 .flex-row {
@@ -583,9 +587,14 @@ ul.quote-list li {
   
 }
 
+/* This lets us do variable scaling */
 /*.explore h1 {
   font-size: 7vw;
 }*/
+
+.explore {
+  padding-top: 6vh;
+}
 
 .explore h1 a {
   color: black;
@@ -599,4 +608,14 @@ transition: 0s;
 
 .lead {
 	margin-bottom: 20px;
+}
+
+.absolute-nav {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.logo {
+
 }

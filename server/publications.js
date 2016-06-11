@@ -64,8 +64,8 @@ Meteor.publish("quotesSlug", function (slug) {
 
 
 
-Meteor.publish("quotesPageId", function (pageId) {
-  return Quotes.find({ pageId: pageId });
+Meteor.publish("quotesAuthorId", function (authorId) {
+  return Quotes.find({ authorId: authorId });
 });
 
 

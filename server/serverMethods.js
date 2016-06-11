@@ -179,7 +179,7 @@ Meteor.methods({
 
   pageSlug = slugText(pageName);
 
-  var newPageId = Pages.insert({
+  var newPage = Pages.insert({
       name: pageName,
       slug: pageSlug,
       createdAt: new Date(), // current time
@@ -189,17 +189,20 @@ Meteor.methods({
         console.log(error);
         return false;
       }
-      else console.log(result);
-      // This put the new page in the user profile. Probably don't do that right now.
-      // Meteor.users.update( { _id: Meteor.userId() }, { $addToSet:{"profile.pages": result }} );
+      else {
+        console.log(result);
+        // This put the new page in the user profile. Probably don't do that right now.
+        // Meteor.users.update( { _id: Meteor.userId() }, { $addToSet:{"profile.pages": result }} );
 
-      // Update time of last submission
-      Meteor.users.update( { _id: Meteor.userId() }, { $set:{"profile.lastSubmissionTime": new Date() }} );
-    });
+        // Update time of last submission
+        Meteor.users.update( { _id: Meteor.userId() }, { $set:{"profile.lastSubmissionTime": new Date() }} );
+        return true;
+      }
+    }); 
 
 
 
-    return pageSlug;
+  return pageSlug;
 },
 
 addQuoteToPage: function (text, pageId) {
@@ -230,7 +233,7 @@ addQuoteToPage: function (text, pageId) {
     }
   });
 
-  return newQuote; // Returns the _id of new quote
+  return quoteSlug; // Returns the _id of new quote
 },
 
 

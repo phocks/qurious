@@ -261,6 +261,23 @@ Router.route('/logout', function() {
 // How to add an author
 Router.route('/:_slug/add', {
 	waitOn: function () {
+		return Meteor.subscribe('pagesWithPageSlug', this.params._slug);
+	},
+	action: function () {
+		var slug = this.params._slug;
+		currentPage = Pages.findOne({slug: slug});
+		Session.set("DocumentTitle", "Add a " + currentPage.name + " quotation - Qurious");
+		Session.set("pageId", currentPage._id);
+
+		// this.render('Nav', { to: 'nav'});
+		this.render('AddQuote');
+		// this.render('Nav', { to: 'nav'});
+	}
+});
+
+// Edit page for authors/pages/whatever
+Router.route('/:_slug/edit', {
+	waitOn: function () {
 		return Meteor.subscribe('pages');
 	},
 	action: function () {
@@ -330,7 +347,7 @@ Router.route('/:_slug', {
 		}
 		else {
 			Session.set("DocumentTitle", currentPage.name + " - Qurious");
-			Meteor.subscribe('quotesPageId', currentPage._id);
+			Meteor.subscribe('quotesAuthorId', currentPage._id);
 		}
 		// this.render('Nav', { to: 'nav'});
 		this.render('Page', {

@@ -157,11 +157,13 @@ Router.route('/add', {
 		
 	},
 	action: function () {
-		//if (!Meteor.user() ) Router.go('/login'); // deny not logged in Meteor.loginWithTwitter
+		// if (!Meteor.user() ) Router.go('/login'); // deny not logged in Meteor.loginWithTwitter. Doesn't seem to work because on refresh etc
 		// if (!Meteor.user() ) Meteor.loginWithTwitter();
 
 		this.layout('Layout');
 		Session.set("DocumentTitle","Qurious - Add Author");
+
+		this.render('Header', { to: 'header'});
 
 		// this.render('Nav', { to: 'nav'});
 		this.render('Add');
@@ -365,7 +367,7 @@ Router.route('/:_slug', {
 			});
 		} 
 		else {
-			this.render('PageVerify',  {
+			this.render('PageUnverified',  {
 				data: {
 					page: function () {
 						return Pages.findOne({slug: slug});

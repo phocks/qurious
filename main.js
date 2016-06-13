@@ -298,6 +298,10 @@ if (Meteor.isClient) { // only runs on the client
 
       if (text == "") return false; // prevent empty strings
 
+      if ( Meteor.user().profile.lastSubmissionTime ) {
+        console.log( Meteor.user().profile.lastSubmissionTime );
+      }
+
       Meteor.call('addPage', text, function(error, result) {
         var newPage = result;
         console.log("New page is: " + newPage);

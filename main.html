@@ -87,8 +87,10 @@
 	{{else}}
 		{{#unless currentUser}}
 			<div class="container backdrop flex-center">
-				<div class="title">Qurious.</div>
-				<a href="/login">Login</a>
+				<div class="wrapper text-center">
+					<div class="title">Qurious.</div>
+					<a href="/login">Login</a> · <a href="/faq">FAQ</a>
+				</div>
 			</div>
 		{{else}} <!-- Logged in users see this -->
 			<div id="main" class="container backdrop">
@@ -96,12 +98,12 @@
 					<!-- <h1><i class="fa fa-quote-left"></i></h1> -->
 					<h1>Qurious.</h1>
 					<p>is kinda new, so please forgive us if there's not much here just yet.</p>
-					<a class="btn btn-embossed btn-primary" href="/explore" style="margin-bottom: 25px">Explore</a>
+					<a class="btn btn-default" href="/explore" style="margin-bottom: 25px">Explore</a>
 				</div>
 			</div>
 			<div class="container-fluid" style="background-color: #f4f4f4">
 				<div class="content container text-center" style="padding: 8px 0 8px">
-					<small>Created by Meagre Inc.&nbsp;</small>
+					<small>Created by a Meagre company.&nbsp;</small>
 				</div>
 			</div>
 		{{/unless}}
@@ -113,7 +115,7 @@
 <template name="Explore">
 	<div class="container backdrop explore spacer content">
 		<h1>Current Authors</h1>
-		<p>Qurious is still very new. Here is a list of verified notable authors &amp; their quotations, or you can see <a href="/explore/all">all authors</a> submitted without verification. Please help us expand this list.</p>
+		<p>Qurious is still very new. Here is a list of verified notable authors that we are compiling. You can also see <a href="/explore/all">all authors</a> submitted who are not yet verified. Please help us expand this list.</p>
 		
 		<ul class="author-list">
 			{{#each pages}}
@@ -139,11 +141,11 @@
 <template name="ExploreAll">
 	<div class="container backdrop explore spacer content">
 		<h1>All Authors</h1>
-		<p>Here are all authors. Please flag any unsuitable content.</p>
+		<p>Here are all submitted authors. Please flag anything that seems out of place.</p>
 		
 		<ul class="author-list">
 			{{#each pages}}
-				<li><a href="/{{slug}}">{{name}}</a></li>
+				<li><a href="/{{slug}}" class="{{#if verified}}verified{{/if}}">{{name}}</a></li>
 			{{else}}
 				
 			{{/each}}
@@ -199,13 +201,14 @@
 
 
 
-<template name="PageVerify">
-	<div class="container backdrop spacer flex-center text-center">
+<template name="PageUnverified">
+	<div class="container backdrop spacer flex-center">
 		<!-- <small><a href="/explore">Back</a></small> -->
 		<div class="page-verify">
 			<h1 class="page-name">{{page.name}}</h1>
-			<p>This author is yet to be verified. </p>
-			<button class="btn btn-embossed btn-primary">Flag</button>
+			<p>This author is unverified.</p>
+			<button class="btn btn-default">Verify</button>
+			<button class="btn btn-default">Flag</button>
 		</div>		
 	</div>
 </template>
@@ -264,7 +267,9 @@
 	<!-- <div class="absolute-nav">
 		<span class="logo">Qurious</span>
 	</div> -->
-	<div class="container backdrop flex-center">
+	<div class="container backdrop spacer">
+		<h1>Add Author</h1>
+		<p>Notable authors only. All suggestions will be moderated. Please use proper Capitalisation</p>
 		<div class="wrapper">
 			<form class="form-inline">
 				<div class="form-group">
@@ -275,12 +280,7 @@
 			</form>
 			<!-- <ul class="small-text">
 				<li>Notable authors only</li>
-			</ul> -->
-			<p class="small-text">
-				* Notable authors only<br>
-				* All suggestions will be moderated<br>
-				* Please use proper Capitalisation
-			</p>			
+			</ul> -->		
 		</div>
 	</div>
 </template>
@@ -413,8 +413,11 @@
 
 
 <template name="Faq">
-	<div class="container faq content">
-		<h1>faq</h1>
-		<p>No one has asked any questions yet?</p>
+	<div class="container faq content spacer">
+		<h1>Frequently Asked Questions</h1>
+		<div class="spacer"></div>
+		<p><b>What is Qurious?</b><br>We're not 100% sure just yet. It has something to do with words, ideas, and quotations.</p>
+		<p><b>Can I have access?</b><br>We are rolling out acess very slowly to people who have <a href="/subscribe">subscribed</a>.</p>
+		<p><b>Do you need help building Qurious?</b><br>If you have JavaScript coding experience and have an interest in quotations, literature, or typography please <a href="mailto:info@qurious.cc">contact us</a> to help out.</p>
 	</div>
 </template>

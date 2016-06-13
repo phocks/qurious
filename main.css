@@ -391,7 +391,7 @@ ul.quote-list a {
   text-decoration: none;
   color: inherit;
   padding: 8px 12px;
-  background-color: #f2f1ef;
+  background-color: #f1f1f1;
   /*border-radius: 2px;*/
 }
 
@@ -399,6 +399,14 @@ ul.author-list a:hover,
 ul.quote-list a:hover {
   background-color: black;
   color: white;
+}
+
+ul.author-list li a.verified {
+  background-color: #e0e0e0;
+}
+
+ul.author-list li a.verified:hover {
+  background-color: black;
 }
 
 
@@ -648,3 +656,4 @@ transition: 0s;
   margin-left: auto;
   margin-right: auto;
 }
+

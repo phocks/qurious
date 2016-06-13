@@ -68,7 +68,7 @@ a:focus {
   outline: none;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   h1 {
     font-size: 2em;
   }
@@ -380,9 +380,9 @@ ul.author-list li {
   margin-bottom: 10px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   ul.author-list li {
-    font-size: 18px;
+    font-size: 1.2em;
   }
 }
 
@@ -397,7 +397,7 @@ ul.quote-list a {
 
 ul.author-list a:hover,
 ul.quote-list a:hover {
-  background-color: gray;
+  background-color: black;
   color: white;
 }
 
@@ -425,6 +425,7 @@ ul.quote-list li {
 /* keeps things in middle */
 
 .backdrop {
+
 }
 
 
@@ -434,6 +435,9 @@ ul.quote-list li {
   margin-bottom: 16px;
 }
 
+
+
+
 .flex-center {
   display: flex;
   align-items: center;
@@ -441,6 +445,7 @@ ul.quote-list li {
   min-height: 100vh;
   flex-direction: column;
 }
+
 
 
 
@@ -489,7 +494,14 @@ ul.quote-list li {
 
 
 .header {
-  text-align: center;
+  /*text-align: center;*/
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  background-color: black;
+}
+
+.header a {
+  color: white;
 }
 
 .header img.logo {
@@ -516,14 +528,15 @@ ul.quote-list li {
 
 
 .content {
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  
 }
 
+.content a {
+  text-decoration: underline;
+}
 
 .spacer {
-  margin-top: 30px;
+  padding-top: 4vh;
 }
 
 
@@ -583,6 +596,10 @@ ul.quote-list li {
   margin-bottom: 30px;
 }
 
+.page-name {
+  margin-top: 0;
+}
+
 .view-quote {
   
 }
@@ -593,7 +610,7 @@ ul.quote-list li {
 }*/
 
 .explore {
-  padding-top: 6vh;
+  
 }
 
 .explore h1 a {
@@ -618,4 +635,16 @@ transition: 0s;
 
 .logo {
 
+}
+
+.home-container {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.narrow {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -58,7 +58,7 @@ Router.route('/explore', {
 	action: function () {
 		Session.set("DocumentTitle","Qurious");
 
-		// console.log(Meteor.user().services.twitter.profile_image_url);
+		this.render('Header', { to: 'header'});
 
 		// this.render('Nav', { to: 'nav'});
 
@@ -89,6 +89,8 @@ Router.route('/explore/all', {
 		Session.set("DocumentTitle","Qurious");
 
 		// console.log(Meteor.user().services.twitter.profile_image_url);
+
+		this.render('Header', { to: 'header'});
 
 		// this.render('Nav', { to: 'nav'});
 
@@ -328,7 +330,6 @@ Router.route('/:_page_slug/:_quote_slug', {
 
 
 
-
 // What quotes does the author have?
 // Don't put things below this as they probs won't work
 Router.route('/:_slug', {
@@ -349,18 +350,33 @@ Router.route('/:_slug', {
 			Session.set("DocumentTitle", currentPage.name + " - Qurious");
 			Meteor.subscribe('quotesAuthorId', currentPage._id);
 		}
-		// this.render('Nav', { to: 'nav'});
-		this.render('Page', {
-			data: {
-				page: function () {
-					return Pages.findOne({slug: slug});
+		if (currentPage.verified) {
+			this.render('Header', { to: 'header'});
+			this.render('Page', {
+				data: {
+					page: function () {
+						return Pages.findOne({slug: slug});
+						},
+					quotes: function () {
+						var quotes = Quotes.find( { authorId: currentPage._id}, { sort: {quotation: 1}} );
+						return quotes;
 					},
-				quotes: function () {
-					var quotes = Quotes.find( { authorId: currentPage._id}, { sort: {quotation: 1}} );
-					return quotes;
-				},
-			}
-		});
+				}
+			});
+		} 
+		else {
+			this.render('PageVerify',  {
+				data: {
+					page: function () {
+						return Pages.findOne({slug: slug});
+						},
+					quotes: function () {
+						var quotes = Quotes.find( { authorId: currentPage._id}, { sort: {quotation: 1}} );
+						return quotes;
+					},
+				}
+			});
+		}
 	}
 });
 

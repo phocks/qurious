@@ -35,7 +35,7 @@ Schemas.Quote = new SimpleSchema({
 		// We can't make this unique until all Quotes have slugs and on second thoughts let's not anyway
 		// Oh look we migrated all the quotes and now we can make it unique
 		// But actually we probably don't want to
-		unique: true,
+		// unique: true,
 		max: 500,
 	},
 	verified: {

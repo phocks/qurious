@@ -166,9 +166,9 @@ Meteor.methods({
     throw new Meteor.Error("not-authorized");
   }
 
-  pageName = toTitleCase(pageName);
+  pageName = toTitleCase(pageName); // these are defined in globalFunctions.js
 
-  pageSlug = slugText(pageName);
+  pageSlug = slugText(pageName); // these are defined in globalFunctions.js
 
 
   var newPage = Pages.insert({

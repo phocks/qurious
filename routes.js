@@ -72,7 +72,7 @@ Router.route('/explore', {
 					//   return pages;
 					// }
 
-					var pages = Pages.find({  }, { sort: {name: 1}});
+					var pages = Pages.find({ verified:true }, { sort: {name: 1}});
 					return pages;
 				},				
 			}
@@ -97,7 +97,7 @@ Router.route('/explore/all', {
 		this.render('ExploreAll', {
 			data: {
 				pages: function () {
-					var pages = Pages.find({  }, { sort: {name: 1}});
+					var pages = Pages.find({ $or: [ { verified:false } , { verified: { $exists:false } }] });
 					return pages;
 				},				
 			}

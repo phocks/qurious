@@ -299,7 +299,17 @@ if (Meteor.isClient) { // only runs on the client
       if (text == "") return false; // prevent empty strings
 
       if ( Meteor.user().profile.lastSubmissionTime ) {
-        console.log( Meteor.user().profile.lastSubmissionTime );
+        var lastSub = moment(Meteor.user().profile.lastSubmissionTime);
+        var compare = moment().subtract(60, 'seconds');
+
+        if ( compare < lastSub ) { 
+          console.log ('compare less than lastsub');
+          sAlert.info('Too many submissions');
+          return false;
+        }
+        else console.log('good to go');
+
+
       }
 
       Meteor.call('addPage', text, function(error, result) {

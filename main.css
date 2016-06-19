@@ -550,10 +550,10 @@ ul.quote-list li {
 
 
 .s-alert-info {
-    background: #444;  /* your background color here */
-    color: #fff;  /* your text color here */
-    border-radius: 4px;
-    opacity: 0.8;
+  background: #444;  /* your background color here */
+  color: #fff;  /* your text color here */
+  border-radius: 4px;
+  /*opacity: 0.8;*/
 }
 
 

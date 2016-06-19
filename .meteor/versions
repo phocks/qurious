@@ -74,6 +74,7 @@ msavin:mongol@2.0.1
 npm-bcrypt@0.8.6_1
 npm-mongo@1.4.44
 observe-sequence@1.0.12
+okgrow:analytics@1.0.7
 okgrow:router-autoscroll@0.1.8
 ordered-dict@1.0.8
 promise@0.7.2

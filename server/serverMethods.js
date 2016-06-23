@@ -193,8 +193,8 @@ Meteor.methods({
     }); 
 
 
-
-  return pageSlug;
+  // if (newPage) return pageSlug;
+  // else return false;
 },
 
 addQuoteToPage: function (text, pageId) {

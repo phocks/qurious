@@ -304,9 +304,10 @@ if (Meteor.isClient) { // only runs on the client
         var lastSub = moment(Meteor.user().profile.lastSubmissionTime);
         var compare = moment().subtract(60, 'seconds');
 
+        // Prevent multiple submissions in short period
         if ( compare < lastSub ) { 
           console.log ('compare less than lastsub');
-          sAlert.info('Too many submissions');
+          sAlert.info('Hold up. Wait a minute or two.');
           return false;
         }
         else console.log('good to go');

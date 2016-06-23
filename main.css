@@ -544,7 +544,7 @@ ul.quote-list li {
 }
 
 .spacer {
-  padding-top: 4vh;
+  padding-top: 7vh;
 }
 
 
@@ -652,7 +652,7 @@ transition: 0s;
 }
 
 .narrow {
-  width: 400px;
+  width: 800px;
   margin-left: auto;
   margin-right: auto;
 }

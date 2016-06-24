@@ -68,6 +68,12 @@ a:focus {
   outline: none;
 }
 
+/* Flat-UI adds a little transition and we are diabling it here */
+a {
+  -webkit-transition: 0s;
+  transition: 0s;
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 2em;
@@ -129,6 +135,8 @@ a.custom:hover, a.custom:focus {
   font-family: "Montserrat", sans-serif;
 }
 
+
+
 .hide {
   position: absolute !important;
   top: -9999px !important;
@@ -136,7 +144,7 @@ a.custom:hover, a.custom:focus {
 }
 
 /* Use to break up words too big */
-/*h1 {
+h1.break {
   -ms-word-break: break-all;
   word-break: break-all;
 
@@ -145,7 +153,7 @@ a.custom:hover, a.custom:focus {
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   hyphens: auto;
-}*/
+}
 
 
 /* removes outline for Bootstrap Buttons */
@@ -190,10 +198,10 @@ span.quo {
 }
 
 
-
+/* Not sure if we are using this any more */
 #iron-router-progress {
-    background-color: #888;
-    box-shadow: 0 0 0px #888;
+  background-color: #888;
+  box-shadow: 0 0 0px #888;
 }
 
 
@@ -323,44 +331,6 @@ Keep it clean
 }
 
 
-.quote {
-  /*background-color: white;*/
-  /*max-width: 1080px;*/
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-
-.quotation {
-  font-size: 1em;
-}
-
-.attribution {
-  /*white-space: nowrap;*/
-  margin-top: 1em;
-  color: #666;
-}
-
-@media (min-width: 768px) {
-  .quotation {
-    font-size: 1.4em;
-  }
-
-  .attribution {
-    /*white-space: nowrap;*/
-    font-size: 1.4em;
-  }
-}
-
-@media (min-width: 1200px) {
-  .quotation {
-    font-size: 1.6em;
-  }
-
-  .attribution {
-    /*white-space: nowrap;*/
-    font-size: 1.6em;
-  }
-}
 
 /*  nav */
 
@@ -559,7 +529,8 @@ ul.quote-list li {
 }
 
 .spacer {
-  padding-top: 7vh;
+  margin-top: 7vh !important;
+  margin-bottom: 7vh !important;
 }
 
 
@@ -610,14 +581,7 @@ ul.quote-list li {
   }
 }
 
-.page-quotes {
 
-}
-
-.page-quote {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
 
 .page-name {
   margin-top: 0;
@@ -640,14 +604,10 @@ ul.quote-list li {
   color: black;
 }
 
-/* Flat-UI adds a little transition and we are diabling it here */
-a {
--webkit-transition: 0s;
-transition: 0s;
-}
+
 
 .lead {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .absolute-nav {
@@ -672,3 +632,80 @@ transition: 0s;
   margin-right: auto;
 }
 
+
+.page-quotes {
+
+}
+
+.page-quote {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+
+.page-quotes blockquote {
+  border-left: none;
+  font-size: 32px;
+  line-height: 1.6;
+  padding-top: 2.2em;
+  padding-left: 0;
+}
+
+.page-quotes blockquote a {
+  color: black;
+}
+.page-quotes blockquote a:hover {
+  text-decoration: none;
+}
+
+/* nudges quote a bit up on hover. */
+/*.page-quotes blockquote:hover {
+  position: relative;
+  top: -1px;
+}*/
+
+
+
+
+/* Display Single Quote */
+
+.quote {
+  /*background-color: white;*/
+  /*max-width: 1080px;*/
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+
+.quotation {
+  font-size: 1.5em;
+  line-height: 1.5;
+}
+
+.attribution {
+  /*white-space: nowrap;*/
+  margin-top: 1.5em;
+  color: #666;
+}
+
+@media (min-width: 768px) {
+  .quotation {
+    font-size: 2em;
+  }
+
+  .attribution {
+    /*white-space: nowrap;*/
+    font-size: 2em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .quotation {
+    font-size: 3em;
+  }
+
+  .attribution {
+    /*white-space: nowrap;*/
+    font-size: 3em;
+  }
+}

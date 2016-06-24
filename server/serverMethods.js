@@ -170,31 +170,31 @@ Meteor.methods({
 
   pageSlug = slugText(pageName); // these are defined in globalFunctions.js
 
+  var page = {
+    name: pageName,
+    slug: pageSlug,
+    createdAt: new Date(), // current time
+    createdBy: Meteor.userId(), // current user
+  };
 
-  var newPage = Pages.insert({
-      name: pageName,
-      slug: pageSlug,
-      createdAt: new Date(), // current time
-      createdBy: Meteor.userId(), // current user
-    }, function(error, result) {
+  
+
+  Pages.insert(page, function(error, result) {
       if (error) {
         console.log(error);
-        return false;
+        throw new Meteor.Error( 500, 'There was an error processing your request :(' );
       }
       else {
         console.log(result);
+
+        var pageId = result;
         // This put the new page in the user profile. Probably don't do that right now.
         // Meteor.users.update( { _id: Meteor.userId() }, { $addToSet:{"profile.pages": result }} );
 
         // Update time of last submission
         Meteor.users.update( { _id: Meteor.userId() }, { $set:{"profile.lastSubmissionTime": new Date() }} );
-        return true;
       }
     }); 
-
-
-  // if (newPage) return pageSlug;
-  // else return false;
 },
 
 addQuoteToPage: function (text, pageId) {

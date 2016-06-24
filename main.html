@@ -186,9 +186,9 @@
 
     <div class="page-quotes">
       {{#each quotes}}
-      <div class="page-quote text-left">
-        {{ quotation }} &nbsp;<a class="view-quote" href="/{{../page.slug}}/{{slug}}"><i class="fa fa-caret-right"></i></a>
-      </div>
+      <blockquote class="page-quote">
+        &lsquo;<a class="view-quote" href="/{{../page.slug}}/{{slug}}">{{ quotation }}</a>&rsquo;
+      </blockquote>
       <!-- <div>
         <a class="view-quote" href="/{{../page.slug}}/{{slug}}"><i class="fa fa-caret-right"></i></a>
       </div> -->
@@ -270,9 +270,9 @@
   </div> -->
   <div class="container backdrop spacer text-center">
     <h1>Add Author</h1>
-    <p>Notable authors only. All suggestions will be moderated. Please use proper Capitalisation</p>
+    <p>Notable authors only. All suggestions will be moderated.</p>
     <div class="wrapper">
-      <form class="form-inline">
+      <form class="form-inline spacer">
         <div class="form-group">
           <label class="sr-only" for="authorName">Author Name</label>
           <input type="text" class="form-control" id="authorName" name="text" placeholder="Author name">

@@ -302,7 +302,7 @@ if (Meteor.isClient) { // only runs on the client
 
       if ( Meteor.user().profile.lastSubmissionTime ) {
         var lastSub = moment(Meteor.user().profile.lastSubmissionTime);
-        var compare = moment().subtract(60, 'seconds');
+        var compare = moment().subtract(5, 'seconds');
 
         // Prevent multiple submissions in short period
         if ( compare < lastSub ) { 
@@ -311,15 +311,18 @@ if (Meteor.isClient) { // only runs on the client
           return false;
         }
         else console.log('good to go');
-
-
       }
 
       Meteor.call('addPage', text, function(error, result) {
-        var newPage = result;
-        console.log("New page is: " + newPage);
-        Router.go('/' + newPage);
+        if (error) {
+          sAlert.info(error.reason);
+        } else {
+          var newPage = result;
+          console.log("New page is: " + newPage);
+        }
       });
+
+      Router.go('/explore');
 
       // Clear form
       event.target.text.value = "";

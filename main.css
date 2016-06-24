@@ -72,6 +72,21 @@ a:focus {
   h1 {
     font-size: 2em;
   }
+  h2 {
+    font-size: 1.414em;
+  }
+  h3 {
+    font-size: 1.155em;
+  }
+  h4 {
+    font-size: 1em;
+  }
+  h5 {
+    font-size: 0.894em;
+  }
+  h6 {
+    font-size: 0.816em;
+  }
 }
 
 
@@ -120,17 +135,17 @@ a.custom:hover, a.custom:focus {
   left: -9999px !important;
 }
 
-h1 {
+/* Use to break up words too big */
+/*h1 {
   -ms-word-break: break-all;
   word-break: break-all;
 
-  /* Non standard for webkit */
   word-break: break-word;
 
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   hyphens: auto;
-}
+}*/
 
 
 /* removes outline for Bootstrap Buttons */
@@ -652,7 +667,7 @@ transition: 0s;
 }
 
 .narrow {
-  width: 800px;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
 }

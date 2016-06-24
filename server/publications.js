@@ -30,9 +30,9 @@ Meteor.publish("quotesPopular", function (limit) {
 
 
 
-Meteor.publish("quotesCurrentUser", function () {
-  return Quotes.find({ owner: this.userId });
-});
+// Meteor.publish("quotesCurrentUser", function () {
+//   return Quotes.find({ owner: this.userId });
+// });
 
 
 
@@ -47,18 +47,25 @@ Meteor.publish("quotesSlugUser", function (user_slug) {
 
 Meteor.publish("quotesSlug", function (slug) {
   check(slug, String);
-  var quote = Quotes.find({ _id: slug });
+  var quote = Quotes.find({ slug: slug });
   // console.log(quote); // trying to get counter quotes working too../....
   // if (!quote) quote = Quotes.find({ quote_id: slug });
 
   
 
-  // Simulated latency
+  // Simulated latency (doesn't do anything if doc already in miniMongo memory)
   // var timeToSleep = getRandomInt(300,1000);
   // console.log("Simulating latency for " + timeToSleep + " milliseconds.");
   // Meteor._sleepForMs(timeToSleep); 
 
   return quote;
+});
+
+
+
+
+Meteor.publish("quotesAuthorId", function (authorId) {
+  return Quotes.find({ authorId: authorId });
 });
 
 
@@ -72,41 +79,44 @@ Meteor.publish("quotesInArray", function (array) {
 
 
 
-Meteor.publish("counters", function () {
-  return Counters.find();
+// Meteor.publish("counters", function () {
+//   return Counters.find();
+// });
+
+
+
+
+
+
+
+Meteor.publish("invites", function (emailAddress) {
+  return Invites.find({ email: emailAddress });
+})
+
+
+
+
+// Meteor.publish("words", function () {
+//   return Words.find();
+// });
+
+// Return all pages this is bad do something different
+Meteor.publish("pagesVerified", function () {
+  return Pages.find({ verified: true });
+});
+
+Meteor.publish("pagesAll", function () {
+  return Pages.find({  });
 });
 
 
 
-
-// We are going to publish some more userData
-// in order to check if user is admin we need this
-Meteor.publish("userData", function () {
-  return Meteor.users.find({},
-    { fields: {'admin':1, 'liked': 1, 'username': 1 }
-  });
+// Meteor.publish("profiles", function () {
+//   return Profiles.find({});
+// })
 
 
-  /*if (this.userId) {
-    return Meteor.users.find({_id: this.userId},
-      { fields: {'admin': 1, 'liked': 1, 'username': 1 }
-    });
-  } else {
-    return Meteor.users.find({},
-      { fields: {'liked': 1, 'username': 1 }
-    });
-    this.ready();
-  }*/
-});
-
-
-
-Meteor.publish("authors", function () {
-  return Authors.find();
-});
-
-
-
-Meteor.publish("words", function () {
-  return Words.find();
+// Let's return a page when supplied a page slug
+Meteor.publish("pagesWithPageSlug", function (pageSlug) {
+  return Pages.find({ slug: pageSlug });
 });

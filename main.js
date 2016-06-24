@@ -24,24 +24,17 @@
 
 
 
-// First up we are going to create a few collections
-Quotes = new Mongo.Collection('quotes');  // Our main quote db
-Authors = new Mongo.Collection('authors'); // People who say stuff
-Counters = new Mongo.Collection('counters'); // Handles numbering (which we no longer use really)
-Words = new Mongo.Collection('words'); // Words are the basis of ideas
-// There is also a Users collection by default in Meteor
-
-
-
-
 
 // Initial setup of some things below
 // like some variables etc
 
-loadMoreLimit = 5;  // for infinite scrolling, how many per load
-maximumQuotationLength = 1000; // in characters
+// loadMoreLimit = 5;  // for infinite scrolling, how many per load
+maximumQuotationLength = 1000; // in characters... now probably going to be handled in simpleSchema
 
-// Deny public from editing profile. May prevent DoS attack
+
+
+// Deny public from editing user profile. May prevent DoS attack
+// Do it from the server side instead using Meteor Methods
 Meteor.users.deny({
   update: function() {
     return true;
@@ -55,17 +48,52 @@ Meteor.users.deny({
 
 if (Meteor.isClient) { // only runs on the client
 
+  // Some client only configuration
+  Meteor.startup(function () {
 
+    // A package called juliancwirko:s-alert gives us smart alerts
+    sAlert.config({
+      effect: '',
+      position: 'top-right',
+      timeout: 5000,
+      html: false,
+      onRouteClose: true,
+      stack: true,
+      // or you can pass an object:
+      // stack: {
+      //     spacing: 10 // in px
+      //     limit: 3 // when fourth alert appears all previous ones are cleared
+      // }
+      offset: 0, // in px - will be added to first alert (bottom or top - depends of the position in config)
+      beep: false,
+      // examples:
+      // beep: '/beep.mp3'  // or you can pass an object:
+      // beep: {
+      //     info: '/beep-info.mp3',
+      //     error: '/beep-error.mp3',
+      //     success: '/beep-success.mp3',
+      //     warning: '/beep-warning.mp3'
+      // }
+      onClose: _.noop //
+      // examples:
+      // onClose: function() {
+      //     /* Code here will be executed once the alert closes. */
+      // }
+    });
 
+    
+
+});
 
 
 
   // We need to tell the client to subscribe explicitly to data collections
   // Later we don't want to subscribe to the whole thing
   // moved to individual routes // Meteor.subscribe("quotes");
-  Meteor.subscribe("counters");
-  Meteor.subscribe("userData"); // for admin account login access etc.
-  Meteor.subscribe("authors"); // subscribe only to certain ones later
+  // Meteor.subscribe("counters");
+  // Meteor.subscribe("userData"); // for admin account login access etc.
+  // Meteor.subscribe("authors"); // subscribe only to certain ones later
+  // Meteor.subscribe("pages");
 
 
 
@@ -92,29 +120,31 @@ if (Meteor.isClient) { // only runs on the client
   // One of 'USERNAME_AND_EMAIL', 'USERNAME_AND_OPTIONAL_EMAIL',
   // 'USERNAME_ONLY', or 'EMAIL_ONLY' (default).
   // Note: this doesn't do anything when using useraccounts:core
-  Accounts.ui.config({
-    passwordSignupFields: "USERNAME_AND_EMAIL"
-  });
+  // Accounts.ui.config({
+  //   passwordSignupFields: "USERNAME_AND_EMAIL"
+  // });
 
 
   // Some more configs to run initially
 
   Router.configure({ // commenting out default due to Lite layout change
     // sets default layout so you don't have to set it in the route
-    // layoutTemplate: 'ApplicationLayout',
+    layoutTemplate: 'Layout',
     // loadingTemplate: "Loading",
-    // yieldTemplates: {
-    //     Header: {to: 'header'},
-    //     Footer: {to: 'footer'},
-    // },
+    yieldTemplates: { // These don't seem to work with iron-router-progress installed
+        // Header: {to: 'header'},
+        // Footer: {to: 'footer'},
+        // Nav: {to: 'nav'},
+    },
     //notFoundTemplate: '404' //this is used for somewhat custom 404s
 
     // for the loading up top thing
     progressSpinner: false,
     progressDelay: 100,
+    loadingTemplate: 'Loading',
   });
 
-
+  // Renders if route not found, but pretty much 100% sure route will be found
   Router.plugin('dataNotFound', {notFoundTemplate: 'NotFound'});
 
 
@@ -130,8 +160,8 @@ if (Meteor.isClient) { // only runs on the client
   // We have a package that gets us to the top when we navigate
   // This changes the animation period, set to zero for none
   // Doesn't seem to work with mobile (or sometimes at all)
-  RouterAutoscroll.animationDuration = 200;
-
+  // RouterAutoscroll.animationDuration = 200;
+  RouterAutoscroll.marginTop = 50;
 
   // Call this at any time to set the <title>
   Session.set("DocumentTitle","Qurious");
@@ -144,116 +174,10 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-  // Setting up the useraccounts:core
-  AccountsTemplates.configure({
-    forbidClientAccountCreation: true,
-    enablePasswordChange: true,
-    showForgotPasswordLink: true,
-    lowercaseUsername: true,
 
-    homeRoutePath: '/',
-    redirectTimeout: 4000,
-
-    defaultLayout: 'ApplicationLayout',
-
-    texts: { // Here we enter some custom error messages
-        errors: {
-            accountsCreationDisabled: "Client side accounts creation is disabled!!!",
-            cannotRemoveService: "Cannot remove the only active service!",
-            captchaVerification: "Captcha verification failed!",
-            loginForbidden: "error.accounts.User or password incorrect",
-            mustBeLoggedIn: "error.accounts.Must be logged in",
-            pwdMismatch: "error.pwdsDontMatch",
-            validationErrors: "Validation Errors",
-            verifyEmailFirst: "Please verify your email first. Check the email and follow the link!",
-        }
-    },
-  });
-
-
-  // We are making a field that accepts username + email
-  // This is so that a user can log in with either
-  var pwd = AccountsTemplates.removeField('password');
-  AccountsTemplates.removeField('email');
-  AccountsTemplates.addFields([
-    {
-        _id: "username",
-        type: "text",
-        displayName: "username",
-        required: true,
-        minLength: 3,
-    },
-    {
-        _id: 'email',
-        type: 'email',
-        required: true,
-        displayName: "email",
-        re: /.+@(.+){2,}\.(.+){2,}/,
-        errStr: 'Invalid email',
-    },
-    pwd
-  ]);
-
-
-
-
-  // We are setting up Infinite Scrolling here
-  // This is not a very elegant way of doing it. Please change in future
-
-
-  // incrementLimit = function(inc) { // this is defining a new global function
-  //   var inc = loadMoreLimit;
-  //   newLimit = Session.get('limit') + inc;
-  //   Session.set('limit', newLimit);
-  // }
-
-  // Template.Quotes.created = function() {
-  //   Session.set('limit', loadMoreLimit);  // use Session.setDefault maybe
-
-  //   // Deps.autorun() automatically rerun the subscription whenever Session.get('limit') changes
-  //   // http://docs.meteor.com/#deps_autorun
-  //   // Changed to 'Tracker' in newer versions of Meteor
-  //   Tracker.autorun(function() {
-  //     Meteor.subscribe('quotesPopular', Session.get('limit'));
-  //     Meteor.subscribe('quotesLatest', Session.get('limit'));
-  //     Meteor.subscribe('quotesCurrentUser', Session.get('limit'));
-  //   });
-  // }
-
-  // This is an auto load feature when we have reached the bottom
-  /*
-  Template.Quotes.rendered = function() {
-    // is triggered every time we scroll
-    $(window).scroll(function() {
-      if ($(window).scrollTop() + $(window).height() > $(document).height() - 50) {
-        incrementLimit();
-      }
-    });
-  }
-  */
-
-  // Enable the "Load more" button
-  Template.Quotes.events({
-    'click .give-me-more': function(evt) {
-      incrementLimit();
-    }
-  });
-
-  // So we can customise the login form so much more
-  // Requires aldeed:template-extension
-  Template.AtFormQurious.replaces("atForm");
 
 
   // Here are the helpers to put data into Templates etc
-
-  
-
-
-  // Template.ListAuthors.helpers({
-  //   authors: function () {
-  //     return Authors.find({}, {sort: {name: 1}});
-  //   }
-  // });
 
 
 
@@ -276,338 +200,295 @@ if (Meteor.isClient) { // only runs on the client
     }
   );
 
-  // This lets us access {{currentWord}} in the Spacebars html 
+  // This lets us access {{currentWord}} in the Spacebars html
   Template.registerHelper('currentWord', function () {
       return Session.get('currentWord');
     }
   );
 
+  // Used in the html spacebars pass text to snip snip
+  Template.registerHelper('truncate', function(passedString) {
+    var n = 5; // how many words do you want?
 
+    // Take only the first n words
+    var shortenedText = passedString.replace(/\s+/g," ").split(/(?=\s)/gi).slice(0, n).join('');
+    // This removes special characters except whitespace
+    shortenedText = shortenedText.replace(/[^a-zA-Z\d\s]/g, "");
+    return new Spacebars.SafeString(shortenedText);
+  });
 
-
-// Events that drive things like clicks etc
-
-
-  Template.SingleQuote.helpers({
-    // determines if user submitted quote
-    isOwner: function () {
-      var quoteId = Session.get("sessionQuoteId");
-      var currentQuote = Quotes.findOne({ _id: quoteId });
-
-      if (currentQuote.owner == Meteor.userId()) {
-        console.log("The current user has submitted this quote.")
+  // This was used to show unverified authors but not using any more
+  Template.registerHelper('showUnverified', function () {
+      if (Session.get('editMode')) {
         return true;
+      } else {
+        return false;
       }
-      else return false;
-    },
-    // works out if user has dogeared quote or not
-    dogeared: function () {
-      if (!Meteor.user()) return false; // if not logged in just undogear
-      var quoteId = Session.get("sessionQuoteId");
-      var user = Meteor.users.findOne({_id:Meteor.userId(), liked:{ $ne:quoteId }});
-      if (user) return false;
-      else return true;
+    }
+  );
+
+  // End global helpers and now some Template specific helpers
+
+
+  // Took me ages to work out how to scroll down on page load
+  // Have to wait until all the elements are on the page
+  // A bit hacky and I don't think we'll use it, but still
+  // Template.Home.onRendered(function () {
+  //   Meteor.setTimeout( function () { window.scroll(0, 50); }, 500);
+  // });
+
+
+
+  Template.Settings.helpers({
+    _id: function () {
+      return Meteor.userId();
     }
   });
 
-  // Let's finally set up a delete
-  Template.SingleQuote.events({
-    "click .delete-click": function () {
-      if (confirm('Really delete ?')) {
-        Meteor.call('deleteQuote', this._id);
+
+
+  // Events that drive things like clicks etc go below here
+
+
+  Template.Nav.events({
+    "click .edit-mode": function () {
+      if (Session.get('editMode')) {
+        Session.set('editMode', false);
+      } else 
+       {
+        Session.set('editMode', true);
       }
-    },
-
-    // Put the quotation into the users collection!
-    "click .dogear-click": function () {
-      console.log("Calling function to dogear this quote");
-      Meteor.call('dogearQuote', this._id);
-    },
-
-    // Remove the quotation into the users collection!
+      console.log('Edit mode is: ' + Session.get('editMode'));
+    }
   });
 
 
-  
 
-Template.AdminStation.events({
-    "submit .new-quote": function (event) {
+  // When adding quotations from the Author
+  Template.AddQuote.events({
+    "submit .add-quote": function (event) {
       var text = event.target.text.value;
-      var attribution = event.target.attribution.value;
-      if (text == "" || attribution == "") return false; // prevent empty strings
+      var pageId = Session.get('pageId');
+      console.log("This is the quote text: " + text);
 
-      Meteor.call('addQuote', text, attribution, function(error, result) {
+      if (text == "") return false; // prevent empty strings
+
+      Meteor.call('addQuoteToPage', text, pageId, function(error, result) {
         var newQuoteId = result;
-        Router.go('/quote/' + newQuoteId);
+        console.log("New quote id: " + newQuoteId);
+        Meteor.call('checkQuoteSize', newQuoteId);
+        Router.go('/explore');
       });
 
       // Clear form
       event.target.text.value = "";
-      event.target.attribution.value = "";
 
 
       // Prevent default action from form submit
       return false;
     },
-    "click .delete": function () {
-      Meteor.call('deleteQuote', this._id);
-    }
   });
-
-
 
   
 
+  // Adding another author
+  Template.Add.events({
+    "submit form": function (event) {
+      var text = event.target.text.value;
+      // var pageId = Session.get('pageId');
+      console.log(text);
 
+      if (text == "") return false; // prevent empty strings
 
-    Template.AdminStation.events({
-      "submit .new-word": function (event) {      
-        var word = event.target.word.value;
-        if (word == "") return false; // prevent empty strings
+      if ( Meteor.user().profile.lastSubmissionTime ) {
+        var lastSub = moment(Meteor.user().profile.lastSubmissionTime);
+        var compare = moment().subtract(60, 'seconds');
 
-        Meteor.call('addWord', word);
-
-        // Clear form      
-        event.target.word.value = "";
-
-        // Prevent default action from form submit
-        return false;
-      }, 
-      "click .delete": function () {
-        if (confirm('Really delete ?')) {
-          Meteor.call('deleteWord', this._id);
+        // Prevent multiple submissions in short period
+        if ( compare < lastSub ) { 
+          console.log ('compare less than lastsub');
+          sAlert.info('Hold up. Wait a minute or two.');
+          return false;
         }
-      }     
-    });
+        else console.log('good to go');
 
 
-    Template.LiteQuote.events({
-      "submit .quotePageAnother": function (event) {      
-      var word = event.target.word.value;
-      var quote_id = Session.get('sessionQuoteId');
-      console.log("Current quote ID: " + quote_id);
-      if (word == "") {
-        Router.go("/flip");
-        return false;
-      }
-      else {
-        Session.set('currentWord', word);
-        Router.go("/flip/" + word);
       }
 
-           
+      Meteor.call('addPage', text, function(error, result) {
+        var newPage = result;
+        console.log("New page is: " + newPage);
+        Router.go('/' + newPage);
+      });
+
+      // Clear form
+      event.target.text.value = "";
 
       // Prevent default action from form submit
       return false;
-
-    }
-
-
-      // "submit .new-word": function (event) {      
-      //   var word = event.target.word.value;
-      //   var quote_id = Session.get('sessionQuoteId');
-      //   console.log(quote_id);
-      //   if (word == "") return false; // prevent empty strings
-
-      //   Meteor.call('addWordToQuote', word, quote_id);
-
-      //   // Clear form      
-      //   event.target.word.value = "";
-
-      //   // Prevent default action from form submit
-      //   return false;
-      // }, 
-      // "click .delete": function () {
-      //   var word = this.toString();
-      //   var quote_id = Session.get('sessionQuoteId');
-      //   if (confirm('Really delete ?')) {
-      //     Meteor.call('deleteWordFromQuote', word, quote_id);
-      //   }
-      // }
-    });
-
-
-      // Template.Create.events({
-  //   "submit .new-quote": function (event) {
-  //     var text = event.target.text.value;
-  //     var attribution = event.target.attribution.value;
-  //     if (text == "" || attribution == "") return false; // prevent empty strings
-
-  //     Meteor.call('addQuote', text, attribution, function(error, result) {
-  //       var newQuoteId = result;
-  //       Router.go('/quotes/' + newQuoteId);
-  //     });
-
-  //     // Clear form
-  //     event.target.text.value = "";
-  //     event.target.attribution.value = "";
-
-
-  //     // Prevent default action from form submit
-  //     return false;
-  //   },
-  //   "click .delete": function () {
-  //     Meteor.call('deleteQuote', this._id);
-  //   }
-  // });
-
-
-
-    Template.LiteHome.events({
-      "submit .word-search": function (event) {
-        var q = event.target.search.value;
-        
-        // if (/\s/.test(q)) { // tests for spaces/single words only please
-        //   // It has any kind of whitespace
-        //   alert("Qurious search is limited to single words for the time being.")
-        //   return false;
-        // }
-        
-        if (q == "") {
-          Router.go("/flip");
-          return false;
-        }
-
-
-
-        Router.go('/word/' + q);
-
-        // Router.go('/about');
-
-        // Prevent default action from form submit
-        return false;
-      },
-    });
-
-
-
-
-
-
-
-
-
- 
-
-
-  Template.LiteQuote.onRendered(function () {
-    
-    
-    // $('[data-toggle="popover"]').popover()
-     $('[data-toggle="tooltip"]').tooltip()
-    
+    },
   });
 
-  // Template.LiteHome.onRendered(function () {
-  //   $('[data-toggle="tooltip"]').tooltip()
+  Template.Settings.events({
+    'submit form': function(event) {
+      event.preventDefault();
+      // console.log(event);
+      var fullName = event.target.fullName.value;
+      Meteor.call('updateFullName', fullName);
+    }
+  });
+
+  // Using fittext to resize or could use vw in the css
+  // Template.Explore.onRendered( function () {
+  //   $('h1').fitText(1.2, );
+  //   // use { minFontSize: '20px', maxFontSize: '40px' } as second argument if you wanna
   // });
 
 
-
-  // Dropcaps for Quotes do it once rendered
-  Template.LiteQuote.onRendered(function () {
-
-    // focus cursor on the input    
-    //this.$('button.another-button').focus();
-
-    console.log('Inserting dropcaps span');
-    var node = $("p").contents().filter(function () { return this.nodeType == 3 }).first(),
-        text = node.text().trim(),
-        first = text.slice(0, 1);
-    
-    if (!node.length) {
-        console.log('not done');
-        return;
+  Template.Explore.events({
+    "click .delete": function () {
+      if (confirm('Really delete ?')) {
+        Meteor.call('deleteAuthor', this._id);
       }
-    
-    node[0].nodeValue = text.slice(first.length);
-    node.before('<span id="dropcap">' + first + '</span>');
-
-    dropcap = document.getElementById("dropcap");
-    window.Dropcap.layout(dropcap, 2, 2);
-
-    // Media queries for javascript pretty much
-    // Finally got it working. This triggers re-rendering for dropcaps
-    // on window resize
-    var tablet = window.matchMedia("(min-width: 768px)");
-    var desktop = window.matchMedia("(min-width: 992px)");
-    var largeDesktop = window.matchMedia("(min-width: 1200px)");  
-
-    var handleMediaChange = function (mediaQueryList) {
-        if (mediaQueryList.matches) {
-          console.log("Media query greater than triggered")
-          window.Dropcap.layout(dropcap, 2, 2);
-        }
-        else {
-          // The browser window is less than 480px wide
-          console.log("Media query js smaller than triggered")
-          window.Dropcap.layout(dropcap, 2, 2);
-        }
     }
-
-    // When screen size changes shoot off an event and change things
-    tablet.addListener(handleMediaChange);
-    desktop.addListener(handleMediaChange);
-    largeDesktop.addListener(handleMediaChange);
   });
 
 
+  Template.Register.events({
+    'submit form': function(event) {
+      event.preventDefault();
+      var emailVar = event.target.registerEmail.value;
+      var usernameVar = event.target.registerUsername.value;
+      var passwordVar = event.target.registerPassword.value;
+      // var passwordVarConfirm = event.target.registerPasswordConfirm.value;
+      if (!emailVar) {
+        sAlert.info('Email is required');
+        return false; // replace with better validation
+      }
+      if (!usernameVar) {
+        sAlert.info('Username is required');
+        return false; // replace with better validation
+      }
+      if (!passwordVar) {
+        sAlert.info('Password is required');
+        return false; // replace with better validation
+      }
+      // We used to have 2 password fields but not required if email field
+      // if (passwordVar !== passwordVarConfirm) {
+      //   alert("Passwords don't match.");
+      //   return false;
+      // }
 
-// Template.ListAuthors.events({
-//   "submit .new-author": function (event) {      
-//     var author = event.target.author.value;
-//     if (author == "") return false; // prevent empty strings
+      // We use callbacks to wait until the email is checked on server
+      Meteor.call('isInvited', emailVar, function (error) {
+        if (!error) {
+          Meteor.subscribe('invites', emailVar, createAccount);
 
-//     Meteor.call('addAuthor', author);
+          // Here we are hoisting a function (I think) instead of nesting it
+          // so we don't create unnecessary Callback Hell
+          function createAccount ( error ) {
+            if (error) console.log(error);
+            var emailInList = Invites.findOne({ email: emailVar });
+            console.log(emailInList);
 
-//     // Clear form      
-//     event.target.author.value = "";
+            if (emailInList) {
+              Accounts.createUser({
+                email: emailVar,
+                username: usernameVar,
+                password: passwordVar,
+              }, function (error, result) {
+                if (error) {
+                  console.log(error);
+                  sAlert.info(error.reason);
+                }
+              });
+            } else {
+              console.log( 'not in list' );
+              sAlert.info('We are invite only for now. Please subscribe.')
+            }
+          }
+          
+        } else {
+          console.log(error);
+        }
+      });
 
-//     // Prevent default action from form submit
-//     return false;
-//   },
-//   "click .delete": function () {
-//     if (confirm('Really delete ?')) {
-//       Meteor.call('deleteAuthor', this._id);
-//     }
-//   }
-// });
+      
+      // if (Session.get('Invited').indexOf(emailVar) > -1) {
+      //   console.log("You're on the list!");
+      // } else {
+      //   console.log('Not on the invite list sorry.');
+      //   sAlert.info('Not on the invite list sorry.');
+      //   return false;
+      // }
+
+      
+        
+      console.log("Form submitted.");
+    }
+  });
+
+  Template.Login.events({
+    'submit form': function(event) {
+      event.preventDefault();
+      var userVar = event.target.loginUser.value;
+      var passwordVar = event.target.loginPassword.value;
+      if (!userVar) {
+        sAlert.info("Something looks missing");
+        return false;
+      }
+      Meteor.loginWithPassword(userVar, passwordVar, function (error) {
+        if (error) {
+          console.log(error);
+          sAlert.info("Incorrect email or password");
+        } 
+      });
+    }
+  });
+
+  Template.Forgot.events({
+    'submit form': function(event) {
+      event.preventDefault();
+      var emailVar = event.target.forgotEmail.value;
+      if (!emailVar) {
+        sAlert.info("Did you forget something?");
+        return false; // stops processing
+      }
+      Accounts.forgotPassword({
+        email: emailVar
+      }, function (error) {
+        if (error) {
+          console.log(error);
+          sAlert.info(error.reason);
+        } else {
+          sAlert.info("Reset email sent");
+          Meteor.setTimeout( function () { Router.go('/') }, 1000);
+        }
+      });
+      sAlert.info("Sending reset email");
+    }
+  });
 
 
-// Template.Header.events({
-//   "submit .search-form": function (event) {
-//     var q = event.target.q.value;
-
-//     if (q == "") {
-//       Router.go('/explore/latest');
-//       return false;
-
-//     }
-
-//     //event.target.q.value = "";
-
-
-//     Router.go('/search/' + q);
-
-
-//     // Prevent default action from form submit
-//     return false;
-//   },
-// });
-
-
-// this isn't even used any more but yeah it's for a delete button on Explore
-  // Template.Quotes.events({
-  //   "click .delete-click": function () {
-  //     Meteor.call('deleteQuote', this._id);
-  //   },
-
-
-  //   "click .list-quote": function () {
-  //     Router.go('/quotes/' + this._id);
-  //   } this was commented out in favour of a direct read more link 
-  // });
-
+  Template.PasswordReset.events({
+    'submit form': function(event) {
+      event.preventDefault();
+      var newPassword = event.target.newPassword.value;
+      if (!newPassword) {
+        sAlert.info("You need to enter a new password");
+        return false; // stops processing
+      }
+      Accounts.resetPassword( Session.get('resetToken'), newPassword, function (error) {
+        if (error) {
+          console.log(error);
+          sAlert.info(error.reason);
+        } else {
+          sAlert.info("Password changed");
+          Meteor.setTimeout( function () { Router.go('/') }, 3000);
+        }
+      });
+    }
+  });
 
 
 
@@ -632,9 +513,9 @@ if (Meteor.isServer) {
     // code to run on server at startup
 
     // init the counters in case mongo reset
-    if (Counters.find().count() === 0) {
-      Counters.insert( { _id: "quote_id", seq: 0 } );
-    }
+    // if (Counters.find().count() === 0) {
+    //   Counters.insert( { _id: "quote_id", seq: 0 } );
+    // }
 
     //process.env.HTTP_FORWARDED_COUNT = 2; // this seems to shift x-forwarded-for list for ip
 
@@ -647,19 +528,18 @@ if (Meteor.isServer) {
       clientIp = forwardedFor[0];
     });
 
+    // Email is handled via mailgun.com
     if (!Meteor.settings.mailGunUrl) console.log('Warning: email config not done.');
     else console.log("Email config address: " + Meteor.settings.mailGunUrl);
 
-    /* had to remove due to unstyled accounts for some reason
-      Accounts.config({
-        forbidClientAccountCreation : false  // set this to true to disable signup
-        });
-    */
-
-    // Make sure some indexes are unique and can't be 2 or more of them
-    Words._ensureIndex({word: 1}, {unique: 1});
-
+    // set this to true to disable password signup
+    Accounts.config({forbidClientAccountCreation: false, });
     
+    
+    // Make sure some indexes are unique and can't be 2 or more of them
+    // Words._ensureIndex({word: 1}, {unique: 1});
+
+
   });  // end of code to do at startup
 
   // This is a monitoring tool

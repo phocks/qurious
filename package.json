@@ -1,0 +1,26 @@
+{
+  "name": "qurious",
+  "version": "1.0.0",
+  "description": "a few quotations",
+  "main": "main.js",
+  "dependencies": {
+    "meteor-node-stubs": "^0.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meagre/qurious.git"
+  },
+  "keywords": [
+    "quotes"
+  ],
+  "author": "Meagre Inc.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/meagre/qurious/issues"
+  },
+  "homepage": "https://github.com/meagre/qurious#readme"
+}

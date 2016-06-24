@@ -1,23 +1,25 @@
-<!--
 
-What we have here is the main HTML file for Qurious
-We will probably split this file up at a later stage.
-
-For now it contains mostly different templates for all the different views.
-
-Please try to keep things nice and tidy.
-
-Thanks. Josh.
-
--->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel='shortcut icon' type='image/png' sizes="16x16 32x32" href='/favicon.png?v=2' />
+  <title>Qurious</title>
+</head>
 
 
+<!-- <3 Always -->
+<body>
+  {{> sAlert}}
+</body>
 
 
 
-<!-- First up we have the iron-router main layout -->
-<template name="ApplicationLayout">
-  <div class="master-container">
+<template name="Layout">
+  <div class="container-fluid full-container">
+    <div>
+      {{> yield "nav"}}
+    </div>
     <header>
       {{> yield "header"}}
     </header>
@@ -32,387 +34,204 @@ Thanks. Josh.
 
 
 
-
-<!-- This is the Navigation Bar up top for Logo etc. -->
 <template name="Header">
-  <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Expand navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <!-- to hide this on a certain page use: {{#if isActivePath '/'}}hidden{{/if}} in the class-->
-            <a class="navbar-brand" href="/home"><img src="/qurious_logo.png"></a>
+  <nav class="header text-center">
+    <div class="container">
+      <a href="/">Qurious</a>
+    </div>
+  </nav>
+</template>
 
-          </div>
-
-          <!-- <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-          </form> -->
-
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <form class="navbar-form search-form" role="search">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search" name="q">
-                  <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                    <!-- <span id="searchclear" class="glyphicon glyphicon-remove-circle"></span> -->
-                  </div>
-                </div>
-              </form>            
-            </ul>
+<template name="top-bar">
+  <div class="top-bar">
+    Qurious
+  </div>
+</template>
 
 
 
-            
+<!-- This is the fixed nav -->
+<template name="Nav">
+  <div class="container qurious-nav">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+          <span class="sr-only">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand" href="/">Qurious<!-- <img src="/grey-logo.png"> --></a>
+      </div>
+
+
+      <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <ul class="nav navbar-nav">
+        </ul>
+          {{#if currentUser}}
             <ul class="nav navbar-nav navbar-right">
-                <li class="{{isActivePath '/explore'}}"><a href="/explore">Explore</a></li>
-
-
-                <!-- <li class="dropdown {{isActivePath regex='\/explore\/'}}">
-                  <a href="/explore" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Explore <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="/explore/popular">Popular</a></li>
-                    <li><a href="/explore/latest">Latest</a></li>
-                  </ul>
-                </li> -->
-
-
-
-
-                <li class="{{isActivePath '/random'}}"><a href="/random">Random</a></li>
-                <!-- Let's remove this Latest and put it in under Explore
-                <li class="{{isActivePath '/latest'}}"><a href="/latest">Latest</a></li>
-                -->
-
-
-              {{#unless currentUser}}
-                <li class="{{isActivePath '/login'}}"><a href="/login">Login</a></li>
-              {{/unless}}
-
-              {{#if currentUser}}
-              <!-- <li class="{{isActivePath '/create'}}">
-                <a href="/create" title="Create a quote">
-                  Contribute
-                </a>
-              </li> -->
-              {{/if}}
-
-
-              {{#if currentUser}}
-                <li class="dropdown {{isActivePath regex='\/users\/'}}">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUsername}} <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="/users/{{currentUsername}}">Contributed Quotes</a></li>
-                    <li><a href="/users/{{currentUsername}}/dogears">Your Dogears</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li class="dropdown-header hidden">Nav header</li>
-                    <li><a href="/create">Add a quote</a></li>
-                    <li><a href="/logout">Logout</a></li>
-                  </ul>
-                </li>
-              {{/if}}              
+              <li><a href="/settings">{{currentUser._id}}</a></li>
             </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </nav>
-</template>
-
-
-
-
-
-
-
-<!-- The front landing page / or root page the first thing many people will see -->
-<template name="Home">
-  <div class="body-container">    
-    <div class="container-fluid">
-      
-
-
-      <!-- <div class="row"> -->
-        <!-- <div class="front-content-row">  -->      
-          
-
-        <!-- <h1 class="hidden">Qurious</h1><h1><img src="/qurious_logo.png"></h1> -->
-        <!-- <p class="subtitle">Curiously quotable</p>
-        <br><br>
-        {{#unless currentUser}}
-          <a href="/login" class="btn btn-info raised" role="button">LOGIN or SIGN UP</a>
-        {{/unless}}
-        {{#if currentUser}}
-          <a href="/create" class="btn btn-info raised" role="button">Add a quote</a>
-          <a href="/random" class="btn btn-info raised" role="button">Randomise!</a>
-        {{/if}} -->
-        <!-- </div>
-      </div> -->
-
-      <div class="row home-about-row">
-        <div class="col-lg-2 col-lg-offset-2 about-logo"><img src="/about_logo.png"></div>
-        <div class="col-lg-6">
-          <div class="home-about">
-        
-            <p class="home-about-text">Welcome to Qurious—a new way to explore and discover the best quotations from writers, thinkers, politicians, and artists throughout history.</p>
-            
-            <p class="home-about-readmore"><a href="/about" class="home-readmore-link">Qurious? Read more <i class="icon ion-arrow-right-c"></i></a> </p>
-
-        </div>
-          
-        </div>
-      </div>
-
-    </div> <!-- end container -->
-  </div>  
-  
-</template>
-
-
-
-
-
-
-
-
-
-
-
-
-<template name="Footer">
-  <div class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-3 footer-title"><a href="/"><img class="" width="80px" src="/grey-logo.png" alt="Qurious"></a></div>
-        <div class="col-sm-3">
-            <ul class="list-unstyled">
-              <li><a href="/">Home</a></li>
-              <li><a href="/about">About Qurious</a></li>
-              <li><a href="/random">Random</a></li>
+          {{else}}
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/sign-in">Sign In</a></li>
             </ul>
-        </div>
-        <div class="col-sm-3">
-          <ul class="list-unstyled">
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="/terms">Terms &amp; Conditions</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-3">
-          <ul class="list-unstyled">
-            <!-- <li><a href="https://github.com/meagre/qurious"><i class="icon ion-social-github"></i> GitHub</a></li> -->
-            <li>&copy; <a href="http://meag.re/">Meagre</a> 2015</li>      
-          </ul>          
-          <span class="hidden"><img src="/q-loader.gif"></span></div> <!-- Preload our spinner -->
-      </div>
-    </div>
-  </div>
-  <div class="post-footer">
-    <div class="container">
-      <div class="row">
-        <h5>A Meagre <i class="glyphicon glyphicon-heart"></i> Production</h5>
-      </div>
-    </div>
-  </div>
-</template>
-
-
-
-
-
-
-
-
-
-
-
-<template name="TextPageNavigation">
-  <div class="navigation-column col-md-3 hidden">
-    <ul class="nav nav-pills nav-stacked text-page-navigation">
-      <li><a href="/about">About</a></li>
-      <li><a href="/privacy">Privacy Policy</a></li>
-      <li><a href="/terms">Terms &amp; Conditions</a></li>
-      <li><a href="/contact">Contact Us</a></li>
-    </ul>
-  </div>
-</template>
-
-
-
-
-<!-- the AboutText etc templates are now in their own files under /client/about.html etc -->
-
-
-
-
-
-<!-- <template name="Loading">
-  <div class="body-container">
-  <div class="single-quote">
-    <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-      <div class="loading">
-        <img width="50px" src="/q-loader.gif">
-      </div>
-      </div>
-    </div>
-    </div>
-  </div>
-  </div>
-</template> -->
-
-
-<!-- <template name="Login">
-  <div class="container-fluid content-container login-container">
-  <div class="col-md-6 col-md-offset-3">
-    {{> atForm}}
-  </div>
-  </div>
-</template> -->
-
-
-
-
-<template name="Quotes">
-  <div class="content-container container">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="explore-lead">
-          <h1 class="text-center">Exploring {{exploreToShow}}</h1>
-          {{#if isActivePath regex='\/dogears'}}
-            <h2 class="text-center">dogears</h2>
           {{/if}}
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        {{#each quotes}}
-          {{> Quote}}
-        {{/each}}
-      </div>
-    </div>
-
-
-    <!-- 
-
-    Trying a thing to get full width load more
-
-    <div class="load-more">
-      <button class="btn btn-primary raised center-block give-me-more">MORE POSTS</button>
-    </div> -->
-
-
-  </div>
-  <div class="container-fluid">
-  <div class="row give-me-more text-center">
-    
-    Load more
-    
-  </div>
+      </div><!-- /.navbar-collapse -->
+    </nav><!-- /navbar -->
   </div>
 </template>
 
 
-<template name="Quote">
-  <div class="list-quote">
-    <div class="row">
-      <div class="col-xs-7">
-        <div class="contrib">
-            <p>Contributed by <a href="/users/{{username}}">{{username}}</a> <!-- - {{views}} views --></p>
-          </div>
-      </div>
-      <div class="col-xs-5">
-        <div class="time-stamp">
-          <p class="text-right">{{formatTime createdAt}}</p>
+
+<template name="Home">
+  {{#if loggingIn}}
+    <!-- <p>Say nothing. Be nothing...</p> -->
+  {{else}}
+    {{#unless currentUser}}
+      <div class="container backdrop flex-center">
+        <div class="wrapper text-center">
+          <div class="title">Qurious.</div>
+          <a href="/login">Login</a> · <a href="/faq">FAQ</a>
         </div>
       </div>
-    </div>
-
-    <div class="quotation">
-      <p><!-- &ldquo; -->{{ quotation }}<!-- &rdquo; --></p>
-    </div>
-    <div class="row">
-      <div class="col-xs-7">
-        <div class="attribution">
-          {{ attribution }}
+    {{else}} <!-- Logged in users see this -->
+      <div id="main" class="container backdrop">
+        <div class="text-center flex-center home-container">
+          <!-- <h1><i class="fa fa-quote-left"></i></h1> -->
+          <h1>Qurious.</h1>
+          <p>is kinda new, so please forgive us if there's not much here just yet.</p>
+          <a class="btn btn-default" href="/explore" style="margin-bottom: 25px">Explore</a>
         </div>
       </div>
-      <div class="col-xs-5">
-        <div class="read-more">
-          <p class="text-right"><a href="/quotes/{{_id}}">Read more <i class="icon ion-arrow-right-c"></i></a></p>
+      <div class="container-fluid" style="background-color: #f4f4f4">
+        <div class="content container text-center" style="padding: 8px 0 8px">
+          <small>Created by a Meagre company.&nbsp;</small>
         </div>
       </div>
-    </div>
-  </div>
-<!-- old way with time etc <li class="quote">&ldquo;{{quotation}}&rdquo; {{#if author}}&mdash;{{author}}
-  <small class="link"><a href="/quotes/{{ quote_id }}">{{formatTime createdAt}}</a></small>
-  {{/if}} {{#if currentUser}}<small class="delete"><a href="#">delete</a></small>{{/if}}</li> -->
-</template>
-
-
-
-
-
-
-
-
-
-
-
-
-<template name="Create">
-
-
-  {{#unless currentUser}}
-    {{> NoticeLogin}}
-  {{/unless}}
-
-
-
-
-
-  {{#if currentUser}}
-    <div class="container">
-      <div class="col-md-6 col-md-offset-3">
-        <div class="create-block">
-          <form class="new-quote">
-            <div class="form-group">
-              <label for="quotationText">Quotation text</label>
-              <textarea type="text" rows="5" class="form-control" id="quotationText" name="text" placeholder="Enter your quotation here. Please do not include quotation marks, line breaks or special characters. Please keep it brief." autocomplete="off"></textarea>
-            </div>
-            <div class="form-group">
-              <label for="attributionText">Attribution</label>
-              <input type="text" class="form-control" id="attributionText" name="attribution" placeholder="e.g. Albert Einstein">
-            </div>
-            <div class="submissionText">
-            <p>By submitting your quotation you agree to our <a href="/terms">Terms and Conditions</a> and <a href="/privacy">Privacy Policy</a>.</p>
-            </div>
-
-            <button type="submit" class="btn btn-primary create">SUBMIT</button>
-          </form>
-        </div>
-      </div>
-    </div>
+    {{/unless}}
   {{/if}}
 </template>
 
 
 
+<template name="Explore">
+  <div class="container backdrop explore spacer content text-center">
+    <h1>Current Authors</h1>
+     <p>Qurious is still very new. Here is a list of verified notable authors that we are compiling. You can also see <a href="/explore/all">unverified authors</a> and help us moderate them. Please help us expand this list.</p> 
+    
+    <ul class="author-list">
+      {{#each pages}}
+        <li><a href="/{{slug}}">{{name}}</a></li>
+      {{else}}
+        
+      {{/each}}
+      {{#if currentUser}}
+      <li><a href="/add">+</a></li>
+      {{/if}}
+    </ul>
+
+    <!-- {{#each pages}}
+      <h1><a href="/{{slug}}">{{name}}</a></h1>
+    {{/each}} -->
+
+  </div>
+</template>
 
 
 
 
-<template name="NoticeLogin">
-  <div class="vertical-container container-fluid">
-    <div class="alert alert-warning" role="alert">Please login!</div>
+<template name="ExploreAll">
+  <div class="container backdrop explore spacer content text-center">
+    <h1>Unverified Authors</h1>
+    <p>Here are submitted authors who haven't been verified. Please flag anything that seems out of place.</p>
+    
+    <ul class="author-list">
+      {{#each pages}}
+        <li><a href="/{{slug}}" class="{{#if verified}}verified{{/if}}">{{name}}</a></li>
+      {{else}}
+        
+      {{/each}}
+      {{#if currentUser}}
+      <li><a href="/add">+</a></li>
+      {{/if}}
+    </ul>
+
+    <!-- {{#each pages}}
+      <h1><a href="/{{slug}}">{{name}}</a></h1>
+    {{/each}} -->
+
+  </div>
+</template>
+
+
+
+
+
+
+<template name="Page">
+  <div class="container backdrop spacer text-center">
+    <!-- <small><a href="/explore">Back</a></small> -->
+    <div class="page-title-box">
+      <h1 class="page-name">{{page.name}}</h1>
+      <p>{{page.description}}</p>
+      <!-- <a href="#">flag</a> -->
+      <!-- <hr> -->
+    </div>
+    <!-- <ul class="quote-list">
+    {{#each quotes}}
+      <li class="quotation"><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
+      {{else}}
+      <li class="quotation"><a href="/{{page.slug}}/add">No quotations found</a></li>
+    {{/each}}
+     {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} 
+    </ul> -->
+
+    <div class="page-quotes">
+      {{#each quotes}}
+      <div class="page-quote text-left">
+        {{ quotation }} &nbsp;<a class="view-quote" href="/{{../page.slug}}/{{slug}}"><i class="fa fa-caret-right"></i></a>
+      </div>
+      <!-- <div>
+        <a class="view-quote" href="/{{../page.slug}}/{{slug}}"><i class="fa fa-caret-right"></i></a>
+      </div> -->
+      <!-- <hr> -->
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+
+
+
+<template name="PageUnverified">
+  <div class="container backdrop flex-center text-center">
+    <!-- <small><a href="/explore">Back</a></small> -->
+    <div class="page-verify">
+      <h1 class="page-name">{{page.name}}</h1>
+      <p>This author is unverified.</p>
+      <button class="btn btn-default">Verify</button>
+      <button class="btn btn-default">Flag</button>
+      <button class="btn btn-default">Edit</button>
+    </div>    
+  </div>
+</template>
+
+
+
+
+
+<template name="DisplayQuote">
+  <div class="container backdrop flex-center">
+    <div class="quote">
+      <h1 style="margin-top:0"><i class="fa fa-quote-left"></i></h1>
+      <div class="quotation {{quote.length}}">
+        {{quote.quotation}} 
+      </div>
+      <div class="attribution"><a href="/{{page.slug}}">{{page.name}}</a></div>
+      <!-- <i class="fa fa-quote-right"></i> -->
+    </div>
+    <!-- <div>flag</div> -->
+  </div>
+  <div class="under">
+    
   </div>
 </template>
 
@@ -423,51 +242,188 @@ Thanks. Josh.
 
 
 
-<template name="NotFound">
-  <div class="vertical-container">
-  <div class="single-quote"> <!-- quote emulation -->
-    <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-
-      <div class="quotation">
-
-        <p>&ldquo;404. You are looking for something that is not in the database.&rdquo;</p>
-
-      </div>
-
-      <div class="attribution">
-        Qurious
-      </div>
-      </div>
+<template name="Settings">
+  <div class="container backdrop">
+    <div class="col-md-6">
+      <h1>Settings</h1>
+      <!-- <form>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" class="form-control" placeholder="Your full name" name="fullName" value="{{currentUser.profile.fullName}}" />
+        </div>
+        <div class="form-group">     
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form> -->
+      <p>Your user id: {{_id}}</p>
+      <a href="/sign-out">Sign out</a>
     </div>
-    </div>
-  </div>
   </div>
 </template>
 
 
 
+
+<template name="Add">
+  <!-- <div class="absolute-nav">
+    <span class="logo">Qurious</span>
+  </div> -->
+  <div class="container backdrop spacer text-center">
+    <h1>Add Author</h1>
+    <p>Notable authors only. All suggestions will be moderated. Please use proper Capitalisation</p>
+    <div class="wrapper">
+      <form class="form-inline">
+        <div class="form-group">
+          <label class="sr-only" for="authorName">Author Name</label>
+          <input type="text" class="form-control" id="authorName" name="text" placeholder="Author name">
+        </div>
+        <button type="submit" class="btn btn-default">Create</button>
+      </form>
+      <!-- <ul class="small-text">
+        <li>Notable authors only</li>
+      </ul> -->   
+    </div>
+  </div>
+</template>
+
+
+
+
+
+<template name="AddQuote">
+  <div class="container backdrop flex-center">
+    <div class="create-block">
+        <form class="add-quote form-inline">
+          <div class="form-group">
+            <label class="sr-only" for="quoteText">Quote Text</label>
+            <input type="text" class="form-control" id="quoteText" name="text" placeholder="Quotation text">
+          </div>
+          <button type="submit" class="btn btn-default">Add quote</button>
+        </form>
+      </div>
+  </div>
+</template>
+
+
+<template name="Register">
+  <div class="container backdrop flex-center">
+    <div class="title">Qurious.</div>
+    <p><small>(currently invite only)</small></p>
+    <form>
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Email" name="registerEmail" />
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username" name="registerUsername" />
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" name="registerPassword" />
+      </div>
+      <button type="submit" class="btn btn-default btn-block">Sign Up</button>
+    </form>
+    <a class="small" href="/subscribe">Subscribe</a>
+  </div>
+</template>
+
+
+<template name="Login">
+  <div class="container backdrop flex-center">
+    <div class="title">Qurious.</div>
+    <form>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Username or email" name="loginUser" autocorrect="off" autocapitalize="none"/>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" name="loginPassword" />
+      </div>
+      <button type="submit" class="btn btn-default btn-block">Login</button>
+    </form>
+    
+      <a class="small" href="/forgot">Forgot password?</a>
+      <a class="small" href="/register">Register</a>
+    
+  </div>
+</template>
+
+
+<template name="Forgot"> 
+  <div class="container backdrop flex-center">
+  <div class="title">Qurious.</div>
+    <form>
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Email" name="forgotEmail" />
+      </div>
+      <button type="submit" class="btn btn-default btn-block">Reset password</button>
+    </form>
+  </div>
+</template>
+
+<template name="PasswordReset"> 
+  <div class="container backdrop flex-center">
+  <div class="title">Qurious.</div>
+    <form>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="New password" name="newPassword" />
+      </div>
+      <button type="submit" class="btn btn-default btn-block">Set password</button>
+    </form>
+  </div>
+</template>
+
+<template name="Subscribe"> 
+  <div class="container backdrop flex-center">
+    <div class="title">Qurious.</div>
+      <!-- Begin MailChimp Signup Form -->
+      <div id="mc_embed_signup">
+      <form action="//qurious.us1.list-manage.com/subscribe/post?u=cf9d60bafd106d479eaf9a181&amp;id=e0e0728735" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+          <div id="mc_embed_signup_scroll">
+        
+      <div class="mc-field-group form-group">        
+        <input type="email" value="" name="EMAIL" class="required email form-control" id="mce-EMAIL" placeholder="Email">
+      </div>
+        <div id="mce-responses" class="clear">
+          <div class="response" id="mce-error-response" style="display:none"></div>
+          <div class="response" id="mce-success-response" style="display:none"></div>
+        </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cf9d60bafd106d479eaf9a181_e0e0728735" tabindex="-1" value=""></div>
+          <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button btn btn-default btn-block"></div>
+          </div>
+      </form>
+      </div>
+      <!--End mc_embed_signup-->
+  </div>
+</template>
+
+
+
+
+
+
+<!-- This template is to show the loading spinner -->
+<template name="Loading">
+  <!-- {{> Nav}} -->
+</template>
 
 <template name="404">
-  <div class="vertical-container">
-  <div class="single-quote"> <!-- quote emulation -->
-    <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-
-      <div class="quotation">
-
-        <p>&ldquo;404. You are lost.&rdquo;</p>
-
-      </div>
-
-      <div class="attribution">
-        Qurious
-      </div>
-      </div>
-    </div>
-    </div>
+  <!-- {{> Nav}} -->
+  <div class="container flex-center">
+    <h1>404</h1>
+    <p class="lead">This isn't the page you're looking for...</p>
   </div>
+</template>
+
+
+
+
+<template name="Faq">
+  <div class="container faq content spacer narrow text-center">
+    <h1>Frequently Asked Questions</h1>
+    <div class="spacer"></div>
+    <h3>What is Qurious?</h3>
+    <p>Qurious is a website about quotes, words, and ideas. We are still in early alpha stage testing.</p>
+    <h3>Can I have access?</h3>
+    <p>We are rolling out acess very slowly to people who have subscribed. <a href="/subscribe">Sign up</a> for early access.</p>
+    <h3>Do you need help building Qurious?</h3>
+    <p>If you have some coding experience (JavaScript is a plus) and have an interest in quotations, literature, or typography please <a href="mailto:info@qurious.cc">contact us</a> to help out.</p>
   </div>
 </template>

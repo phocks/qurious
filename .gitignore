@@ -42,4 +42,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Specific files and folders
 settings.json
+node_modules

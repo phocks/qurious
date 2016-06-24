@@ -124,4 +124,115 @@ Meteor.methods({
     }
     return true;
   },
+
+  // This passes an email address string and checks if it is in the Invites list
+  isInvited: function (emailAddress) {
+    check(emailAddress, String);
+    return Invites.findOne({ email: emailAddress });
+  },
+
+
+  // Here we are going to check the size of the quote and then
+  // set a value to it so that we can display long quotes with smaller font
+  // etc etc
+    checkQuoteSize: function(quoteId) {
+
+    check(quoteId, String);
+
+    var currentQuote = Quotes.findOne(quoteId);
+    var quotation = currentQuote.quotation;
+
+    //console.log(currentQuote.length);
+
+    if (true) { // use currentQuote.length == undefined to only update undefined
+      var n = quotation.length;
+
+      // if (n > maximumQuotationLength) return false; // i don't like massive quotes and i cannot lie
+
+      if (n <= 40) Quotes.update({ _id: quoteId }, { $set: { length: 'tiny' }});
+      if (n > 40 && n <= 120) Quotes.update({ _id: quoteId }, { $set: { length: 'short' }});
+      if (n > 120 && n <= 300) Quotes.update({ _id: quoteId }, { $set: { length: 'medium' }});
+      if (n > 300 && n <= 500) Quotes.update({ _id: quoteId }, { $set: { length: 'long' }});
+      if (n > 500) Quotes.update({ _id: quoteId }, { $set: { length: 'gigantic' }});
+    }
+
+    return true;
+  },
+
+
+  addPage: function(pageName) {
+  // Make sure the user is logged in before inserting a task
+  if (! Meteor.userId()) {
+    throw new Meteor.Error("not-authorized");
+  }
+
+  pageName = toTitleCase(pageName); // these are defined in globalFunctions.js
+
+  pageSlug = slugText(pageName); // these are defined in globalFunctions.js
+
+
+  var newPage = Pages.insert({
+      name: pageName,
+      slug: pageSlug,
+      createdAt: new Date(), // current time
+      createdBy: Meteor.userId(), // current user
+    }, function(error, result) {
+      if (error) {
+        console.log(error);
+        return false;
+      }
+      else {
+        console.log(result);
+        // This put the new page in the user profile. Probably don't do that right now.
+        // Meteor.users.update( { _id: Meteor.userId() }, { $addToSet:{"profile.pages": result }} );
+
+        // Update time of last submission
+        Meteor.users.update( { _id: Meteor.userId() }, { $set:{"profile.lastSubmissionTime": new Date() }} );
+        return true;
+      }
+    }); 
+
+
+  // if (newPage) return pageSlug;
+  // else return false;
+},
+
+addQuoteToPage: function (text, pageId) {
+  // Make sure the user is logged in otherwise throw and error
+  if (! Meteor.userId()) throw new Meteor.Error("not-authorized");
+
+  // Please make this error actually do something
+  if (text.length > maximumQuotationLength) throw new Meteor.Error('too-long');
+
+  var n = 5;
+  var shortenedText = text.replace(/\s+/g," ").split(/(?=\s)/gi).slice(0, n).join('');
+  shortenedText = shortenedText.replace(/[^a-zA-Z\d\s]/g, ""); // remove special chars as well
+
+  var quoteSlug = slugify(shortenedText);
+
+
+  var newQuote = Quotes.insert({
+    authorId: pageId,
+    quotation: text,
+    createdAt: new Date(), // current time
+    // username: Meteor.user().username, // username of whoever created quote
+    createdBy: Meteor.userId(),  // _id of logged in user
+    slug: quoteSlug,
+  }, function(error, result) {
+    if (error) {
+      console.log("Something went wrong trying to insert into the DB: " + error.message);
+      return result;
+    }
+  });
+
+  return quoteSlug; // Returns the _id of new quote
+},
+
+
+deleteQuote: function(quoteId) {
+  Quotes.remove(quoteId);
+},
+
+  
+
 });

@@ -274,9 +274,9 @@ if (Meteor.isClient) { // only runs on the client
       if (text == "") return false; // prevent empty strings
 
       Meteor.call('addQuoteToPage', text, pageId, function(error, result) {
-        var newQuoteId = result;
-        console.log("New quote id: " + newQuoteId);
-        Meteor.call('checkQuoteSize', newQuoteId);
+        var newQuoteSlug = result;
+        console.log("New quote id: " + newQuoteSlug);
+        Meteor.call('checkQuoteSize', newQuoteSlug);
         Router.go('/explore');
       });
 

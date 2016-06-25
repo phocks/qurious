@@ -311,6 +311,8 @@ Router.route('/:_page_slug/:_quote_slug', {
 		Session.set("DocumentTitle", "A quote by " + currentPage.name + " - Qurious");
 		Session.set("pageId", currentPage._id);
 
+		Meteor.call('checkQuoteSize', quoteSlug);
+
 		// this.render('Nav', { to: 'nav'});
 		this.render('DisplayQuote', {
 			data: {
@@ -342,6 +344,7 @@ Router.route('/:_slug', {
 		var slug = this.params._slug;
 		var currentPage = Pages.findOne({slug: slug});
 		Session.set('pageSlug', slug);
+
 
 		if (!currentPage) {
 			Session.set("DocumentTitle", "404 not found - Qurious");

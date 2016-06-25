@@ -135,11 +135,11 @@ Meteor.methods({
   // Here we are going to check the size of the quote and then
   // set a value to it so that we can display long quotes with smaller font
   // etc etc
-    checkQuoteSize: function(quoteId) {
+  checkQuoteSize: function(quoteSlug) {
 
-    check(quoteId, String);
+    check(quoteSlug, String);
 
-    var currentQuote = Quotes.findOne(quoteId);
+    var currentQuote = Quotes.findOne({ slug: quoteSlug });
     var quotation = currentQuote.quotation;
 
     //console.log(currentQuote.length);
@@ -149,11 +149,11 @@ Meteor.methods({
 
       // if (n > maximumQuotationLength) return false; // i don't like massive quotes and i cannot lie
 
-      if (n <= 40) Quotes.update({ _id: quoteId }, { $set: { length: 'tiny' }});
-      if (n > 40 && n <= 120) Quotes.update({ _id: quoteId }, { $set: { length: 'short' }});
-      if (n > 120 && n <= 300) Quotes.update({ _id: quoteId }, { $set: { length: 'medium' }});
-      if (n > 300 && n <= 500) Quotes.update({ _id: quoteId }, { $set: { length: 'long' }});
-      if (n > 500) Quotes.update({ _id: quoteId }, { $set: { length: 'gigantic' }});
+      if (n <= 40) Quotes.update({ slug: quoteSlug }, { $set: { length: 'tiny' }});
+      if (n > 40 && n <= 120) Quotes.update({ slug: quoteSlug }, { $set: { length: 'short' }});
+      if (n > 120 && n <= 300) Quotes.update({ slug: quoteSlug }, { $set: { length: 'medium' }});
+      if (n > 300 && n <= 500) Quotes.update({ slug: quoteSlug }, { $set: { length: 'long' }});
+      if (n > 500) Quotes.update({ slug: quoteSlug }, { $set: { length: 'gigantic' }});
     }
 
     return true;

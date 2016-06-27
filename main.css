@@ -79,19 +79,19 @@ a {
     font-size: 2em;
   }
   h2 {
-    font-size: 1.414em;
+    font-size: 1.6em;
   }
   h3 {
-    font-size: 1.155em;
+    font-size: 1.4em;
   }
   h4 {
-    font-size: 1em;
+    font-size: 1.3em;
   }
   h5 {
-    font-size: 0.894em;
+    font-size: 1.2em;
   }
   h6 {
-    font-size: 0.816em;
+    font-size: 1.1em;
   }
 }
 
@@ -101,6 +101,11 @@ h1 {
   margin-top: 0.4em;
   margin-bottom: 0.2em;
 }
+
+/*p {
+  font-size: 28px;
+  line-height: 1.6;
+}*/
 
 
 /* Testing some underlining fancy stuff */
@@ -144,7 +149,7 @@ a.custom:hover, a.custom:focus {
 }
 
 /* Use to break up words too big */
-h1.break {
+.break {
   -ms-word-break: break-all;
   word-break: break-all;
 
@@ -205,10 +210,6 @@ span.quo {
 }
 
 
-
-.spaced {
-  padding-bottom: 30px !important;
-}
 
 
 .menu {
@@ -358,17 +359,10 @@ ul.author-list {
 }
 
 ul.author-list li {
-  font-size: 24px;
   display: inline-block;
   padding: 0;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-@media (max-width: 768px) {
-  ul.author-list li {
-    font-size: 1.2em;
-  }
 }
 
 ul.author-list a,
@@ -398,17 +392,47 @@ ul.author-list li a.verified:hover {
 ul.quote-list {
   list-style-type: none;
   margin: 0;
-  margin-top: 3vh;
   padding: 0;
 }
 
 ul.quote-list li {
-  font-size: 24px;
   display: inline-block;
   padding: 0;
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  ul.quote-list li {
+    font-size: 1.2em;
+  }
+  ul.author-list li {
+    font-size: 1.2em;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  ul.quote-list li {
+    font-size: 1.3em;
+  }
+  ul.author-list li {
+    font-size: 1.3em;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  ul.quote-list li {
+    font-size: 1.36em;
+  }
+  ul.author-list li {
+    font-size: 1.36em;
+  }
+}
+
+
 
 
 
@@ -418,7 +442,7 @@ ul.quote-list li {
 /* keeps things in middle */
 
 .backdrop {
-
+  
 }
 
 
@@ -583,7 +607,7 @@ ul.quote-list li {
 
 
 
-.page-name {
+.page-verify .page-name {
   margin-top: 0;
 }
 
@@ -678,24 +702,25 @@ ul.quote-list li {
 
 
 .quotation {
-  font-size: 1.5em;
+  font-size: 1.8em;
   line-height: 1.5;
 }
 
 .attribution {
   /*white-space: nowrap;*/
-  margin-top: 1.5em;
+  font-size: 1.8em;
+  margin-top: 1em;
   color: #666;
 }
 
 @media (min-width: 768px) {
   .quotation {
-    font-size: 2em;
+    font-size: 2.5em;
   }
 
   .attribution {
     /*white-space: nowrap;*/
-    font-size: 2em;
+    font-size: 2.5em;
   }
 }
 
@@ -708,4 +733,9 @@ ul.quote-list li {
     /*white-space: nowrap;*/
     font-size: 3em;
   }
+}
+
+
+.section {
+  padding-top: 6vh;
 }

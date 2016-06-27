@@ -81,9 +81,9 @@ Router.route('/explore', {
 });
 
 
-Router.route('/explore/all', {
+Router.route('/explore/pending', {
 	waitOn: function () {
-		return Meteor.subscribe('pagesAll'); 
+		return Meteor.subscribe('pagesPending'); 
 	},
 	action: function () {
 		Session.set("DocumentTitle","Qurious");
@@ -94,7 +94,7 @@ Router.route('/explore/all', {
 
 		// this.render('Nav', { to: 'nav'});
 
-		this.render('ExploreAll', {
+		this.render('ExplorePending', {
 			data: {
 				pages: function () {
 					var pages = Pages.find({ $or: [ { verified:false } , { verified: { $exists:false } }] });
@@ -307,11 +307,19 @@ Router.route('/:_page_slug/:_quote_slug', {
 		var pageSlug = this.params._page_slug;
 		var quoteSlug = this.params._quote_slug;
 		console.log("Current quoteSlug is: " + quoteSlug );
-		currentPage = Pages.findOne({slug: pageSlug});
+		var currentPage = Pages.findOne({slug: pageSlug});
+		var quote = Quotes.findOne({ slug: quoteSlug });
+
+		if (quote) {
+			Meteor.call('checkQuoteSize', quoteSlug);
+		} else {
+			Meteor.setTimeout( function () { Router.go('/not-found')}, 1000);
+		}
+
 		Session.set("DocumentTitle", "A quote by " + currentPage.name + " - Qurious");
 		Session.set("pageId", currentPage._id);
 
-		Meteor.call('checkQuoteSize', quoteSlug);
+		
 
 		// this.render('Nav', { to: 'nav'});
 		this.render('DisplayQuote', {

@@ -113,20 +113,24 @@
 
 
 <template name="Explore">
-  <div class="container backdrop explore spacer content text-center">
-    <h1>Current Authors</h1>
-     <p>Qurious is still very new. Here is a list of verified notable authors that we are compiling. You can also see <a href="/explore/all">unverified authors</a> and help us moderate them. Please help us expand this list.</p> 
+  <div class="container backdrop explore content text-center">
+    <section class="section">
+      <h1>Current Authors</h1>
+       <p class="lead">Qurious is still very new. Here is a list of verified notable authors. You can also see <a href="/explore/pending">pending authors</a> and help moderate them.</p>
+    </section>
     
-    <ul class="author-list">
-      {{#each pages}}
-        <li><a href="/{{slug}}">{{name}}</a></li>
-      {{else}}
-        
-      {{/each}}
-      {{#if currentUser}}
-      <li><a href="/add">+</a></li>
-      {{/if}}
-    </ul>
+    <div class="section">
+      <ul class="author-list">
+        {{#each pages}}
+          <li><a href="/{{slug}}">{{name}}</a></li>
+        {{else}}
+          
+        {{/each}}
+        {{#if currentUser}}
+        <li><a href="/add">+</a></li>
+        {{/if}}
+      </ul>
+    </div>
 
     <!-- {{#each pages}}
       <h1><a href="/{{slug}}">{{name}}</a></h1>
@@ -138,21 +142,26 @@
 
 
 
-<template name="ExploreAll">
-  <div class="container backdrop explore spacer content text-center">
-    <h1>Unverified Authors</h1>
-    <p>Here are submitted authors who haven't been verified. Please flag anything that seems out of place.</p>
+<template name="ExplorePending">
+  <div class="container backdrop explore content text-center">
     
-    <ul class="author-list">
-      {{#each pages}}
-        <li><a href="/{{slug}}" class="{{#if verified}}verified{{/if}}">{{name}}</a></li>
-      {{else}}
-        
-      {{/each}}
-      {{#if currentUser}}
-      <li><a href="/add">+</a></li>
-      {{/if}}
-    </ul>
+    <section class="section">
+      <h1>Unverified Authors</h1>
+      <p class="lead">Here are submitted authors who haven't been verified. Please flag anything that seems out of place.</p>
+    </section>
+
+    <div class="section">
+      <ul class="author-list">
+        {{#each pages}}
+          <li><a href="/{{slug}}" class="{{#if verified}}verified{{/if}}">{{name}}</a></li>
+        {{else}}
+          
+        {{/each}}
+        {{#if currentUser}}
+        <li><a href="/add">+</a></li>
+        {{/if}}
+      </ul>
+    </div>
 
     <!-- {{#each pages}}
       <h1><a href="/{{slug}}">{{name}}</a></h1>
@@ -160,29 +169,28 @@
 
   </div>
 </template>
-
 
 
 
 
 
 <template name="Page">
-  <div class="container backdrop spacer text-center">
-    <!-- <small><a href="/explore">Back</a></small> -->
-    <div class="page-title-box">
+  <div class="container backdrop text-center">
+    <div class="page-title-box section">
       <h1 class="page-name">{{page.name}}</h1>
       <p>{{page.description}}</p>
-      <!-- <a href="#">flag</a> -->
-      <!-- <hr> -->
     </div>
-    <ul class="quote-list">
-    {{#each quotes}}
-      <li class="quotation"><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
-      {{else}}
-      <li class="quotation"><a href="/{{page.slug}}/add">No quotations found</a></li>
-    {{/each}}
-     {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} 
-    </ul>
+
+    <div class="section">
+      <ul class="quote-list">
+      {{#each quotes}}
+        <li><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
+        {{else}}
+        <li><a href="/{{page.slug}}/add">No quotations found</a></li>
+      {{/each}}
+       {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} 
+      </ul>
+    </div>
 
     <!-- <div class="page-quotes">
       {{#each quotes}}
@@ -230,8 +238,10 @@
     </div>
     <!-- <div>flag</div> -->
   </div>
-  <div class="under">
-    
+  <div class="container-fluid" style="background-color: #f4f4f4">
+    <div class="content container text-center" style="padding: 8px 0 8px">
+      <small>Created by a Meagre company.&nbsp;</small>
+    </div>
   </div>
 </template>
 
@@ -265,14 +275,13 @@
 
 
 <template name="Add">
-  <!-- <div class="absolute-nav">
-    <span class="logo">Qurious</span>
-  </div> -->
-  <div class="container backdrop spacer text-center">
-    <h1>Add Author</h1>
-    <p>Notable authors only. All suggestions will be moderated.</p>
-    <div class="wrapper">
-      <form class="form-inline spacer">
+  <div class="container backdrop text-center">
+    <section class="section">
+      <h1>Add Author</h1>
+      <p>Notable authors only. All suggestions will be moderated.</p>
+    </section>
+    <div class="wrapper section">
+      <form class="form-inline">
         <div class="form-group">
           <label class="sr-only" for="authorName">Author Name</label>
           <input type="text" class="form-control" id="authorName" name="text" placeholder="Author name">

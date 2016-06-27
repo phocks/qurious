@@ -105,8 +105,8 @@ Meteor.publish("pagesVerified", function () {
   return Pages.find({ verified: true });
 });
 
-Meteor.publish("pagesAll", function () {
-  return Pages.find({  });
+Meteor.publish("pagesPending", function () {
+  return Pages.find({ verified: false });
 });
 
 

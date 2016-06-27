@@ -442,7 +442,7 @@ ul.quote-list li {
 /* keeps things in middle */
 
 .backdrop {
-  
+
 }
 
 
@@ -738,4 +738,19 @@ ul.quote-list li {
 
 .section {
   padding-top: 6vh;
+}
+
+.footer {
+  background-color: black;
+  color: white;
+  padding: 8px 0 8px
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
 }

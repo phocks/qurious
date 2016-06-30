@@ -177,24 +177,23 @@ Meteor.methods({
     createdBy: Meteor.userId(), // current user
   };
 
-  
 
   Pages.insert(page, function(error, result) {
-      if (error) {
-        console.log(error);
-        throw new Meteor.Error( 500, 'There was an error processing your request :(' );
-      }
-      else {
-        console.log(result);
+    if (error) {
+      console.log(error);
+      throw new Meteor.Error( 500, 'There was an error processing your request :(' );
+    }
+    else {
+      console.log(result);
 
-        var pageId = result;
-        // This put the new page in the user profile. Probably don't do that right now.
-        // Meteor.users.update( { _id: Meteor.userId() }, { $addToSet:{"profile.pages": result }} );
+      var pageId = result;
+      // This put the new page in the user profile. Probably don't do that right now.
+      // Meteor.users.update( { _id: Meteor.userId() }, { $addToSet:{"profile.pages": result }} );
 
-        // Update time of last submission
-        Meteor.users.update( { _id: Meteor.userId() }, { $set:{"profile.lastSubmissionTime": new Date() }} );
-      }
-    }); 
+      // Update time of last submission
+      Meteor.users.update( { _id: Meteor.userId() }, { $set:{"profile.lastSubmissionTime": new Date() }} );
+    }
+  }); 
 },
 
 addQuoteToPage: function (text, pageId) {
@@ -231,6 +230,10 @@ addQuoteToPage: function (text, pageId) {
 
 deleteQuote: function(quoteId) {
   Quotes.remove(quoteId);
+},
+
+deleteAuthor: function(authorId) {
+  Pages.remove(authorId);
 },
 
   

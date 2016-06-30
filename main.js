@@ -319,10 +319,14 @@ if (Meteor.isClient) { // only runs on the client
         } else {
           var newPage = result;
           console.log("New page is: " + newPage);
+          if (result) {
+            Router.go('/explore');
+          }
+          
         }
       });
 
-      Router.go('/explore');
+      
 
       // Clear form
       event.target.text.value = "";
@@ -490,6 +494,16 @@ if (Meteor.isClient) { // only runs on the client
           Meteor.setTimeout( function () { Router.go('/') }, 3000);
         }
       });
+    }
+  });
+
+
+  Template.PageEdit.events({
+    "click .delete": function () {
+      if (confirm('Really delete ?')) {
+        Meteor.call('deleteAuthor', Session.get("pageId"));
+        Router.go('/explore')
+      }
     }
   });
 

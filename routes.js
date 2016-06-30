@@ -282,16 +282,18 @@ Router.route('/:_slug/add', {
 // Edit page for authors/pages/whatever
 Router.route('/:_slug/edit', {
 	waitOn: function () {
-		return Meteor.subscribe('pages');
+		return Meteor.subscribe('pagesWithPageSlug', this.params._slug);
 	},
 	action: function () {
 		var slug = this.params._slug;
 		currentPage = Pages.findOne({slug: slug});
-		Session.set("DocumentTitle", "Add a " + currentPage.name + " quotation - Qurious");
+		Session.set("DocumentTitle", "Editing " + currentPage.name + " - Qurious");
 		Session.set("pageId", currentPage._id);
 
+		console.log(Session.get("pageId"));
+
 		// this.render('Nav', { to: 'nav'});
-		this.render('AddQuote');
+		this.render('PageEdit');
 		// this.render('Nav', { to: 'nav'});
 	}
 });

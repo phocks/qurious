@@ -358,6 +358,8 @@ ul.author-list {
   list-style-type: none;
 }
 
+
+
 ul.author-list li {
   display: inline-block;
   padding: 0;
@@ -401,6 +403,13 @@ ul.quote-list li {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+
+/*ul.author-list li a,
+ul.quote.list li a {
+  overflow: hidden;
+}*/
+
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {

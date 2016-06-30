@@ -35,7 +35,7 @@
 
 
 <template name="Header">
-  <nav class="header text-center">
+  <nav class="header">
     <div class="container">
       <a href="/">Qurious</a>
     </div>
@@ -113,10 +113,10 @@
 
 
 <template name="Explore">
-  <div class="container backdrop explore content text-center">
+  <div class="container backdrop explore content">
     <section class="section">
       <h1>Current Authors</h1>
-       <p class="lead">Qurious is still very new. Here is a list of verified notable authors. You can also see <a href="/explore/pending">pending authors</a> and help moderate them.</p>
+       <p class="lead">Qurious is still very new. Here is a list of verified notable authors. <!-- You can also see <a href="/explore/pending">pending authors</a> and help moderate them. --></p>
     </section>
     
     <div class="section">
@@ -143,7 +143,7 @@
 
 
 <template name="ExplorePending">
-  <div class="container backdrop explore content text-center">
+  <div class="container backdrop explore content">
     
     <section class="section">
       <h1>Pending Authors</h1>
@@ -175,7 +175,7 @@
 
 
 <template name="Page">
-  <div class="container backdrop text-center">
+  <div class="container backdrop">
     <div class="page-title-box section">
       <h1 class="page-name">{{page.name}}</h1>
       <p>{{page.description}}</p>
@@ -223,6 +223,9 @@
 </template>
 
 
+<template name="PageEdit">
+  <span class="delete">delete</span>
+</template>
 
 
 

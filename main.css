@@ -132,7 +132,9 @@ a.custom:hover, a.custom:focus {
 */
 
 
-
+.black-background {
+  background-color: black;
+}
 
 
 
@@ -749,8 +751,11 @@ ul.quote.list li a {
   padding-top: 6vh;
 }
 
+
+
+
 .footer {
-  background-color: black;
+  background-color: #121212;
   color: white;
   padding: 8px 0 8px
 }
@@ -762,4 +767,25 @@ ul.quote.list li a {
 
 .footer a:hover {
   text-decoration: underline;
+}
+
+
+
+
+
+.white-quote {
+  font-size: 1.8em;
+  padding-top: 8em;
+  padding-bottom: 8em;
+  color: white;
+}
+
+.white-quote a {
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .white-quote {
+    font-size: 1.4em;
+  }
 }

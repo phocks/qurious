@@ -92,6 +92,11 @@
           <a href="/login">Login</a><!--  · <a href="/about">About</a> -->
         </div>
       </div>
+      <div class="container-fluid black-background">
+        <div class="content container text-center white-quote">
+          "Qurious is your home of quotations. We are still in production. For early access please <a href="/subscribe">subscribe</a>." &mdash;The Qurious Team
+        </div>
+      </div>
     {{else}} <!-- Logged in users see this -->
       <div id="main" class="container backdrop">
         <div class="text-center flex-center home-container">
@@ -101,11 +106,11 @@
           <a class="btn btn-default" href="/explore" style="margin-bottom: 25px">Explore</a>
         </div>
       </div>
-      <div class="container-fluid" style="background-color: #f4f4f4">
+      <!-- <div class="container-fluid" style="background-color: #f4f4f4">
         <div class="content container text-center" style="padding: 8px 0 8px">
-          <small>Created by a Meagre company.&nbsp;</small>
+          <small>Created by a Meagre company.</small>
         </div>
-      </div>
+      </div> -->
     {{/unless}}
   {{/if}}
 </template>
@@ -241,15 +246,18 @@
     </div>
     <!-- <div>flag</div> -->
   </div>
-  <div class="container-fluid footer">
-    <div class="content container text-center">
-      <small>from <a href="/">Qurious</a></small>
-    </div>
-  </div>
+  
 </template>
 
 
 
+<template name="Footer">
+  <div class="container-fluid footer">
+    <div class="content container text-center">
+      <small>from <a href="/">Meagre Inc.</a></small>
+    </div>
+  </div>
+</template>
 
 
 

@@ -47,6 +47,7 @@ Router.route('/', {
 				}
 			}
 		});
+		this.render('Footer', { to: 'footer'} );
 	}
 });
 

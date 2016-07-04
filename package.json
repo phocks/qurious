@@ -4,7 +4,8 @@
   "description": "a few quotations",
   "main": "main.js",
   "dependencies": {
-    "meteor-node-stubs": "^0.2.3"
+    "meteor-node-stubs": "^0.2.3",
+    "slug": "^0.9.1"
   },
   "devDependencies": {},
   "scripts": {

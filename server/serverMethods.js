@@ -2,6 +2,9 @@
 // Things like database changes that the client might do latency compensation on are especially
 // useful to hide from the client.
 
+// Trying out a new npm package we are able to in Meteor 1.3 sweet
+import slug from 'slug';
+
 Meteor.methods({
 
   // Throw the dice with all the db docs
@@ -161,6 +164,7 @@ Meteor.methods({
 
 
   addPage: function(pageName) {
+  
   // Make sure the user is logged in before inserting a task
   if (! Meteor.userId()) {
     throw new Meteor.Error("not-authorized");
@@ -168,7 +172,9 @@ Meteor.methods({
 
   pageName = toTitleCase(pageName); // these are defined in globalFunctions.js
 
-  pageSlug = slugText(pageName); // these are defined in globalFunctions.js
+
+  console.log(slug(pageName)); // yep it works
+  pageSlug = slug(pageName);// old code: slugText(pageName); // these are defined in globalFunctions.js
 
   var page = {
     name: pageName,

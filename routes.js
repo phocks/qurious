@@ -107,6 +107,32 @@ Router.route('/explore/pending', {
 
 
 
+Router.route('/explore/all', {
+	waitOn: function () {
+		return Meteor.subscribe('pagesAll'); 
+	},
+	action: function () {
+		Session.set("DocumentTitle","Qurious");
+
+		// console.log(Meteor.user().services.twitter.profile_image_url);
+
+		this.render('Header', { to: 'header'});
+
+		// this.render('Nav', { to: 'nav'});
+
+		this.render('Explore', {
+			data: {
+				pages: function () {
+					var pages = Pages.find({  });
+					return pages;
+				},				
+			}
+		});
+	}
+});
+
+
+
 Router.route('/forgot', {
 	// Automatically renders the "Forgot" template
 });

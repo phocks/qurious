@@ -100,12 +100,16 @@ Meteor.publish("invites", function (emailAddress) {
 //   return Words.find();
 // });
 
+Meteor.publish("pagesPending", function () {
+  return Pages.find({  });
+});
+
 // Return all pages this is bad do something different
 Meteor.publish("pagesVerified", function () {
   return Pages.find({ verified: true });
 });
 
-Meteor.publish("pagesPending", function () {
+Meteor.publish("pagesAll", function () {
   return Pages.find({ verified: false });
 });
 

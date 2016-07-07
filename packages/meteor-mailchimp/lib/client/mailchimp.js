@@ -185,7 +185,7 @@ Meteor.startup( function () {
 			},
 
 			'submit form.form': function ( e ) {
-				event.preventDefault();		// Prevents html form submission
+				e.preventDefault();		// Prevents html form submission
 			},
 
 		});

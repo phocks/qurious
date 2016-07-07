@@ -333,7 +333,10 @@ Keep it clean
   font-weight: bold;
 }
 
-
+.title a {
+  color: black;
+  text-decoration: none;
+}
 
 /*  nav */
 

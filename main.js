@@ -82,16 +82,12 @@ if (Meteor.isClient) { // only runs on the client
       // onClose: function() {
       //     /* Code here will be executed once the alert closes. */
       // }
-    });
+    }); 
 
-    // For the subscribe thing
-    subscribeMessage      = 'Get on the waiting list:';
-     
+  }); // end startup client code
 
-    
 
-});
-
+  
 
 
   // We need to tell the client to subscribe explicitly to data collections
@@ -513,6 +509,9 @@ if (Meteor.isClient) { // only runs on the client
       }
     }
   });
+
+
+  
 
 
 

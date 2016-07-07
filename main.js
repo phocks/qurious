@@ -44,6 +44,9 @@ Meteor.users.deny({
 
 
 
+
+
+
 // Here we have stuff that will only run on the client's browser
 
 if (Meteor.isClient) { // only runs on the client
@@ -80,6 +83,10 @@ if (Meteor.isClient) { // only runs on the client
       //     /* Code here will be executed once the alert closes. */
       // }
     });
+
+    // For the subscribe thing
+    subscribeMessage      = 'Get on the waiting list:';
+     
 
     
 

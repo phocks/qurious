@@ -1,5 +1,5 @@
-var subscribeMessage			= 'Get on the mailing list:',
-	subscribeInvalidEmail		= 'Invalid email address :(',
+var subscribeMessage			= 'Get on the waiting list:',
+	subscribeInvalidEmail		= 'That\'s not email address yet :(',
 	subscribeSubscribing		= 'Subscribing...',
 	subscribeSuccess			= 'Oh joy! Check your inbox! :)',
 	subscribeAlreadySubscribed	= 'Already subscribed! O.o',

@@ -242,6 +242,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
+
   Template.Settings.helpers({
     _id: function () {
       return Meteor.userId();
@@ -251,6 +252,26 @@ if (Meteor.isClient) { // only runs on the client
 
 
   // Events that drive things like clicks etc go below here
+
+
+  Template.Home.events({
+    // "click .scroll": function () {
+    //   console.log('hi');
+    //   $('html, body').animate({
+    //       scrollTop: $("#down").offset().top
+    //   }, 1000);
+    // }
+    
+    // 'click a[href^="#"]': function(event) {
+    //   var target = $(this.getAttribute('href'));
+    //   if( target.length ) {
+    //       event.preventDefault();
+    //       $('html, body').stop().animate({
+    //           scrollTop: target.offset().top
+    //       }, 1000);
+    //   }
+    // }
+  });
 
 
   Template.Nav.events({

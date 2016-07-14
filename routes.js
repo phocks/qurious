@@ -32,22 +32,22 @@ Router.route('/', {
 		// this.render('Nav', { to: 'nav'});
 		
 		this.render('Home', {
-			data: {
-				quotation: "Somewhere, something incredible is waiting to be known.",
-				page: "Carl Sagan",
-				greeting: function () {
-					var greetings = [
-						"Howdy",
-						"Hi",
-						"Yo",
-						"Hey",
-					];
-					var greeting = greetings[Math.floor(Math.random() * greetings.length)];
-					return greeting;
-				}
-			}
+			// data: {
+			// 	quotation: "Somewhere, something incredible is waiting to be known.",
+			// 	page: "Carl Sagan",
+			// 	greeting: function () {
+			// 		var greetings = [
+			// 			"Howdy",
+			// 			"Hi",
+			// 			"Yo",
+			// 			"Hey",
+			// 		];
+			// 		var greeting = greetings[Math.floor(Math.random() * greetings.length)];
+			// 		return greeting;
+			// 	}
+			// }
 		});
-		this.render('Footer', { to: 'footer'} );
+		// this.render('Footer', { to: 'footer'} );
 	}
 });
 

@@ -97,20 +97,21 @@
           "Qurious is your home of quotations. We are still in production. For early access please <a href="/subscribe">subscribe</a>." &mdash;The Qurious Team
         </div>
       </div>
+      {{> Footer}}
     {{else}} <!-- Logged in users see this -->
       <div id="main" class="container backdrop">
         <div class="text-center flex-center home-container">
           <!-- <h1><i class="fa fa-quote-left"></i></h1> -->
           <h1>Qurious.</h1>
-          <p>is kinda new, so please forgive us if there's not much here just yet.</p>
-          <a class="btn btn-default scroll" href="/#down" style="margin-bottom: 25px">Explore</a>
+          <!-- <p>is kinda new, so please forgive us if there's not much here just yet.</p>
+          <a class="btn btn-default scroll" href="/explore" style="margin-bottom: 25px">Explore</a> -->
         </div>
       </div>
-      <div class="container-fluid black-background">
+      <!-- <div class="container-fluid black-background">
         <div id="down" class="content container text-center white-quote">
           "Qurious is your home of quotations. We are still in production. For early access please <a href="/subscribe">subscribe</a>." &mdash;The Qurious Team
         </div>
-      </div>
+      </div> -->
       <!-- <div class="container-fluid" style="background-color: #f4f4f4">
         <div class="content container text-center" style="padding: 8px 0 8px">
           <small>Created by a Meagre company.</small>
@@ -257,11 +258,15 @@
 
 
 <template name="Footer">
+  {{#if loggingIn}}
+  <!-- nothing -->
+  {{else}}
   <div class="container-fluid footer">
     <div class="content container text-center">
       <small>from <a href="/">Meagre Inc.</a></small>
     </div>
   </div>
+  {{/if}}
 </template>
 
 

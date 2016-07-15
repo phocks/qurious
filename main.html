@@ -107,16 +107,21 @@
           <a class="btn btn-default scroll" href="/explore" style="margin-bottom: 25px">Explore</a> -->
         </div>
       </div>
-      <!-- <div class="container-fluid black-background">
-        <div id="down" class="content container text-center white-quote">
-          "Qurious is your home of quotations. We are still in production. For early access please <a href="/subscribe">subscribe</a>." &mdash;The Qurious Team
+      <div class="container-fluid grey-background text-center">
+        <div class="space-both">
+          <ul class="author-list">
+            {{#each pages}}
+              <li><a href="/{{slug}}">{{name}}</a></li>
+            {{else}}
+              
+            {{/each}}
+            {{#if isInRole 'admin'}}
+            <li><a href="/add">+</a></li>
+            {{/if}}
+          </ul>
         </div>
-      </div> -->
-      <!-- <div class="container-fluid" style="background-color: #f4f4f4">
-        <div class="content container text-center" style="padding: 8px 0 8px">
-          <small>Created by a Meagre company.</small>
-        </div>
-      </div> -->
+      </div>
+      {{> Footer}}
     {{/unless}}
   {{/if}}
 </template>

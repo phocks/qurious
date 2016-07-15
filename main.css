@@ -136,6 +136,15 @@ a.custom:hover, a.custom:focus {
   background-color: black;
 }
 
+.grey-background {
+  background-color: #f9f9f9;
+}
+
+.space-both {
+  margin-top: 5em;
+  margin-bottom: 5em;
+}
+
 
 
 .form-control {

@@ -107,9 +107,7 @@
           <a class="btn btn-default scroll" href="/explore" style="margin-bottom: 25px">Explore</a> -->
         </div>
         <!-- <div class="text-center flex-center home-container">
-          
           <p>is kinda new, so please forgive us if there's not much here just yet.</p>
-          
         </div> -->
       </div>
       {{> Authors}}
@@ -126,7 +124,7 @@
         {{#each pages}}
           <li><a href="/{{slug}}">{{name}}</a></li>
         {{else}}
-          
+
         {{/each}}
         {{#if isInRole 'admin'}}
         <li><a href="/add">+</a></li>
@@ -233,6 +231,8 @@
     <!-- {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} -->
     </ul>
   </div>
+
+  {{> ControlBar}}
 </template>
 
 
@@ -492,4 +492,14 @@
         </div>
         <button class="mailchimp-subscribe btn btn-default btn-block" type="button" style="width: 200px;margin-left:auto; margin-right:auto;">Subscribe</button>
     </form>
+</template>
+
+
+
+
+
+<template name="ControlBar">
+<div class="fluid-container text-center space-both">
+  <a class="btn btn-default" href="#">See unverified</a>
+</div>
 </template>

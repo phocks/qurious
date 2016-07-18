@@ -106,24 +106,34 @@
           <!-- <p>is kinda new, so please forgive us if there's not much here just yet.</p>
           <a class="btn btn-default scroll" href="/explore" style="margin-bottom: 25px">Explore</a> -->
         </div>
+        <!-- <div class="text-center flex-center home-container">
+          
+          <p>is kinda new, so please forgive us if there's not much here just yet.</p>
+          
+        </div> -->
       </div>
-      <div class="container-fluid grey-background text-center">
-        <div class="space-both">
-          <ul class="author-list">
-            {{#each pages}}
-              <li><a href="/{{slug}}">{{name}}</a></li>
-            {{else}}
-              
-            {{/each}}
-            {{#if isInRole 'admin'}}
-            <li><a href="/add">+</a></li>
-            {{/if}}
-          </ul>
-        </div>
-      </div>
+      {{> Authors}}
       {{> Footer}}
     {{/unless}}
   {{/if}}
+</template>
+
+
+<template name="Authors">
+  <div class="container-fluid text-center material-background">
+    <div class="space-both">
+      <ul class="author-list">
+        {{#each pages}}
+          <li><a href="/{{slug}}">{{name}}</a></li>
+        {{else}}
+          
+        {{/each}}
+        {{#if isInRole 'admin'}}
+        <li><a href="/add">+</a></li>
+        {{/if}}
+      </ul>
+    </div>
+  </div>
 </template>
 
 
@@ -191,22 +201,13 @@
 
 
 <template name="Page">
-  <div class="container backdrop">
-    <div class="page-title-box section">
+  <div class="container backdrop flex-center text-center">
+    <div class="page-title-box">
       <h1 class="page-name">{{page.name}}</h1>
-      <p>{{page.description}}</p>
+      <!-- <p>{{page.description}}</p> -->
     </div>
 
-    <div class="section">
-      <ul class="quote-list">
-      {{#each quotes}}
-        <li><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
-        {{else}}
-        <li><a href="/{{page.slug}}/add">No quotations found</a></li>
-      {{/each}}
-       {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} 
-      </ul>
-    </div>
+    
 
     <!-- <div class="page-quotes">
       {{#each quotes}}
@@ -219,6 +220,18 @@
       <!-- <hr> -->
       <!-- {{/each}}
     </div> -->
+
+
+  </div>
+  <div class="fluid-container material-background text-center space-both">
+    <ul class="quote-list">
+    {{#each quotes}}
+      <li><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
+      {{else}}
+      <li><a href="/{{page.slug}}/add">No quotations found</a></li>
+    {{/each}}
+    <!-- {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} -->
+    </ul>
   </div>
 </template>
 

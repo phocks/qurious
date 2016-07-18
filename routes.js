@@ -385,14 +385,14 @@ Router.route('/:_slug', {
       Meteor.subscribe('quotesAuthorId', currentPage._id);
     }
     if (currentPage.verified) {
-      this.render('Header', { to: 'header'});
+      // this.render('Header', { to: 'header'});
       this.render('Page', {
         data: {
           page: function () {
             return Pages.findOne({slug: slug});
             },
           quotes: function () {
-            var quotes = Quotes.find( { authorId: currentPage._id}, { sort: {quotation: 1}} );
+            var quotes = Quotes.find( { authorId: currentPage._id, verified: true}, { sort: {quotation: 1}} );
             return quotes;
           },
         }

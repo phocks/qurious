@@ -99,7 +99,7 @@ a {
 h1 {
   /* Use em to keep spacing proportional when resizing text */
   margin-top: 0.4em;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.4em;
 }
 
 /*p {
@@ -141,8 +141,8 @@ a.custom:hover, a.custom:focus {
 }
 
 .space-both {
-  margin-top: 5em;
-  margin-bottom: 5em;
+  padding-top: 5em;
+  padding-bottom: 5em;
 }
 
 
@@ -767,7 +767,7 @@ ul.quote.list li a {
 
 
 .footer {
-  background-color: #121212;
+  background-color: black;
   color: white;
   padding: 8px 0 8px
 }
@@ -800,4 +800,8 @@ ul.quote.list li a {
   .white-quote {
     font-size: 1.4em;
   }
+}
+
+.material-background {
+  background-color: #fafafa;
 }

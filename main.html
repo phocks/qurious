@@ -226,7 +226,7 @@
 
       <div class="fluid-container text-center space-both list-quote">
         <div class="container">
-          {{quotation}}
+          &ldquo;{{quotation}}&rdquo; &mdash;{{../page.name}}
         </div>
       </div>
     {{else}}
@@ -250,6 +250,16 @@
   
 
   {{> ControlBar}}
+</template>
+
+
+
+
+<template name="ControlBar">
+<div class="fluid-container text-center space-both">
+  <!-- <a class="btn btn-default" href="#">See unverified</a> -->
+  <a href="/"><img src="/grey-logo.png" width="74px"></a>
+</div>
 </template>
 
 
@@ -515,8 +525,3 @@
 
 
 
-<template name="ControlBar">
-<div class="fluid-container text-center space-both">
-  <a class="btn btn-default" href="#">See unverified</a>
-</div>
-</template>

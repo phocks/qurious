@@ -812,3 +812,10 @@ ul.quote.list li a {
 .list-quote {
   font-size: 1.2em;
 }
+
+
+
+.list-quote:nth-child(odd) {
+  background-color: black;
+  color: white;
+}

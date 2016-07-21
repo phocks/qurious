@@ -221,24 +221,30 @@
 
 
   </div>
-  <div class="fluid-container material-background text-center space-both">
-    <!-- <ul class="quote-list"> -->
-    <!-- {{#each quotes}}
-      <li><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
-      {{else}}
-      <li><a href="/{{page.slug}}/add">No quotations found</a></li>
-    {{/each}} -->
-    <!-- {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} -->
-    <!-- </ul> -->
+  <div class="the-page-list">
+    {{#each quotes}}
 
-    <div class="container list-quote">
-      {{#each quotes}}
-        {{quotation}}
+      <div class="fluid-container text-center space-both list-quote">
+        <div class="container">
+          {{quotation}}
+        </div>
+      </div>
+    {{else}}
+      No quotations found
+    {{/each}}
+      
+
+
+      <!-- <ul class="quote-list"> -->
+      <!-- {{#each quotes}}
+        <li><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
         {{else}}
-        No quotations found
-      {{/each}}
-    </div>
+        <li><a href="/{{page.slug}}/add">No quotations found</a></li>
+      {{/each}} -->
+      <!-- {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} -->
+      <!-- </ul> -->
 
+    
   </div>
 
   

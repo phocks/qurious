@@ -222,15 +222,26 @@
 
   </div>
   <div class="fluid-container material-background text-center space-both">
-    <ul class="quote-list">
-    {{#each quotes}}
+    <!-- <ul class="quote-list"> -->
+    <!-- {{#each quotes}}
       <li><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
       {{else}}
       <li><a href="/{{page.slug}}/add">No quotations found</a></li>
-    {{/each}}
+    {{/each}} -->
     <!-- {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} -->
-    </ul>
+    <!-- </ul> -->
+
+    <div class="container list-quote">
+      {{#each quotes}}
+        {{quotation}}
+        {{else}}
+        No quotations found
+      {{/each}}
+    </div>
+
   </div>
+
+  
 
   {{> ControlBar}}
 </template>

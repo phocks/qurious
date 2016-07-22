@@ -360,6 +360,40 @@ if (Meteor.isClient) { // only runs on the client
     },
   });
 
+
+  Template.Invite.events({
+    "submit form": function (event) {
+      event.preventDefault();
+      
+      // Get value from form element
+      const target = event.target;
+      const text = target.text.value;
+
+      // var email = event.target.text.value;
+      // var pageId = Session.get('pageId');
+      console.log(text);
+
+      if (text == "") return false; // prevent empty strings
+
+      
+
+      Meteor.call('addInvite', text);
+
+      
+
+      // Clear form
+      event.target.text.value = "";
+
+      // Prevent default action from form submit
+      //return false; // use event.preventDefault() instead as more robust
+    },
+  });
+
+
+
+
+
+
   Template.Settings.events({
     'submit form': function(event) {
       event.preventDefault();

@@ -267,8 +267,8 @@ Router.route('/admin', {
 Router.route('/invite', {
   action: function () {
     var loggedInUser = Meteor.userId();
-    if (Roles.userIsInRole(loggedInUser, 'admin')) Router.go('/');
-    this.render('404');
+    // if (!Roles.userIsInRole(loggedInUser, 'admin')) Router.go('/');
+    this.render('Invite');
   }
 });
 

@@ -165,6 +165,13 @@ Meteor.methods({
   },
 
 
+
+  addInvite: function(inviteEmail) {
+    const invite = { email: inviteEmail};
+    Invites.insert(invite);
+  },
+
+
   addPage: function(pageName) {
   
   // Make sure the user is logged in before inserting a task

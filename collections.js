@@ -12,6 +12,13 @@ var Schemas = {}; // sets it up in memory or something
 
 // Define the schemas
 
+Schemas.Invite = new SimpleSchema({
+	email: {
+		type: String,
+  	regEx: SimpleSchema.RegEx.Email
+  }
+});
+
 Schemas.Quote = new SimpleSchema({
 	authorId: { 
 		type: String,
@@ -221,4 +228,5 @@ Schemas.User = new SimpleSchema({
 // Attach the schema objects to the collections
 Quotes.attachSchema(Schemas.Quote);
 Pages.attachSchema(Schemas.Page);
+Invites.attachSchema(Schemas.Invite);
 Meteor.users.attachSchema(Schemas.User);

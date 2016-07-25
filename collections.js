@@ -230,3 +230,7 @@ Quotes.attachSchema(Schemas.Quote);
 Pages.attachSchema(Schemas.Page);
 Invites.attachSchema(Schemas.Invite);
 Meteor.users.attachSchema(Schemas.User);
+
+
+// Trying out collection revisions using todda00:collection-revisions
+// Quotes.attachCollectionRevisions(); // let's maybe save it till we need it

@@ -20,6 +20,7 @@ caching-compiler@1.0.6
 caching-html-compiler@1.0.6
 callback-hook@1.0.9
 check@1.2.3
+coffeescript@1.1.4
 ddp@1.2.5
 ddp-client@1.2.9
 ddp-common@1.2.6
@@ -55,6 +56,7 @@ less@2.6.5
 livedata@1.0.18
 localstorage@1.0.11
 logging@1.0.14
+matb33:collection-hooks@0.7.15
 mdg:validation-error@0.5.1
 meteor@1.1.16
 meteor-base@1.0.4
@@ -97,6 +99,7 @@ standard-minifier-css@1.0.8
 standard-minifier-js@1.0.8
 templating@1.1.14
 templating-tools@1.0.4
+todda00:collection-revisions@0.2.1
 tracker@1.0.15
 twbs:bootstrap@3.3.6
 ui@1.0.11

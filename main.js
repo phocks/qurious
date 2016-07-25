@@ -324,7 +324,8 @@ if (Meteor.isClient) { // only runs on the client
 
       if (text == "") return false; // prevent empty strings
 
-      if ( Meteor.user().profile.lastSubmissionTime ) {
+
+      if ( Meteor.user().profile && Meteor.user().profile.lastSubmissionTime ) {
         var lastSub = moment(Meteor.user().profile.lastSubmissionTime);
         var compare = moment().subtract(5, 'seconds');
 
@@ -336,6 +337,7 @@ if (Meteor.isClient) { // only runs on the client
         }
         else console.log('good to go');
       }
+
 
       Meteor.call('addPage', text, function(error, result) {
         if (error) {

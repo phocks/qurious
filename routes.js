@@ -1,5 +1,9 @@
 // This file handles all the URL routes. It uses the iron:router Meteor package.
 
+import slug from 'slug';
+// slug('string', [{options} || 'replacement']);
+slug.defaults.mode ='rfc3986'; // makes it lowercase etc
+
 
 
 // Let's test out an API call for use in the future
@@ -363,39 +367,53 @@ Router.route('/:_page_slug/:_quote_slug', {
 
 
 
-// What quotes does the author have?
+// A URL with something after it
 // Don't put things below this as they probs won't work
-Router.route('/:_slug', {
+Router.route('/:_pageUrl', {
   waitOn: function () {
-    return Meteor.subscribe('pagesWithPageSlug', this.params._slug);
+    // return Meteor.subscribe('pagesWithPageSlug', this.params._slug);
   },
   action: function () {
-    var slug = this.params._slug;
-    var currentPage = Pages.findOne({slug: slug});
-    Session.set('pageSlug', slug);
+    const pageUrl = this.params._pageUrl; // haven't sluggified it yet
 
+    const pageSlug = slug(pageUrl);
 
-    if (!currentPage) {
-      Session.set("DocumentTitle", "404 not found - Qurious");
-      this.render('404');
-      return false;
-    }
-    else {
-      Session.set("DocumentTitle", currentPage.name + " - Qurious");
-      Meteor.subscribe('quotesAuthorId', currentPage._id);
+    if (pageUrl != pageSlug) {
+      console.log('navigating')
+      Router.go("/" + pageSlug);
     }
 
-    this.render('Page', {
-      data: {
-        page: function () {
-          return Pages.findOne({slug: slug});
-          },
-        quotes: function () {
-          var quotes = Quotes.find( { authorId: currentPage._id /*, verified: true*/}, { sort: {quotation: 1}} );
-          return quotes;
-        },
-      }
-    });
+
+    // var slug = this.params._slug;
+    // var currentPage = Pages.findOne({slug: slug});
+    // Session.set('pageSlug', slug);
+
+
+    // if (!currentPage) {
+    //   Session.set("DocumentTitle", "404 not found - Qurious");
+    //   this.render('404');
+    //   return false;
+    // }
+    // else {
+    //   Session.set("DocumentTitle", currentPage.name + " - Qurious");
+    //   Meteor.subscribe('quotesAuthorId', currentPage._id);
+    // }
+
+    // this.render('Page', {
+    //   data: {
+    //     page: function () {
+    //       return Pages.findOne({slug: slug});
+    //       },
+    //     quotes: function () {
+    //       var quotes = Quotes.find( { authorId: currentPage._id /*, verified: true*/}, { sort: {quotation: 1}} );
+    //       return quotes;
+    //     },
+    //   }
+    // });
+
+
+
+
 
     // if (currentPage.verified) {
     //   // this.render('Header', { to: 'header'});

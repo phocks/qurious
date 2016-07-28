@@ -373,13 +373,15 @@ if (Meteor.isClient) { // only runs on the client
 
       // var email = event.target.text.value;
       // var pageId = Session.get('pageId');
-      console.log(text);
+      // console.log(text);
 
       if (text == "") return false; // prevent empty strings
 
       
 
-      Meteor.call('addInvite', text);
+      Meteor.call('addInvite', text, function (error, result) {
+          if (!error) console.log("invited " + text);
+        });      
 
       
 

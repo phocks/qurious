@@ -271,7 +271,6 @@ Router.route('/admin', {
 Router.route('/invite', {
   action: function () {
     var loggedInUser = Meteor.userId();
-    // if (!Roles.userIsInRole(loggedInUser, 'admin')) Router.go('/');
     this.render('Invite');
   }
 });
@@ -378,7 +377,7 @@ Router.route('/:_pageUrl', {
 
     const pageSlug = slug(pageUrl);
 
-    if (pageUrl != pageSlug) {
+    if (pageUrl !== pageSlug) {
       console.log('navigating')
       Router.go("/" + pageSlug);
     }

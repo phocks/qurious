@@ -167,8 +167,9 @@ Meteor.methods({
 
 
   addInvite: function(inviteEmail) {
-    const invite = { email: inviteEmail};
-    Invites.insert(invite);
+    const invite = {$set: { email: inviteEmail}};
+    console.log('Adding ' + inviteEmail + " to invite list.")
+    Invites.upsert({email: inviteEmail}, invite);
   },
 
 

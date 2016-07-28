@@ -357,19 +357,18 @@
 
 
 <template name="Invite">
-
   {{#if isInRole 'admin'}}
-  <div clas="invite">
+  <div class="container backdrop flex-center invite">
     <form class="form-inline">
       <div class="form-group">
         <label class="sr-only" for="emailAddress">Email</label>
         <input type="text" class="form-control" id="emailAddress" name="text" placeholder="Email">
       </div>
-      <button type="submit" class="btn btn-default">Create</button>
+      <button type="submit" class="btn btn-default">Invite</button>
     </form>
   </div>
   {{else}}
-  <!-- say nothing -->
+    <!-- say nothing -->
   {{/if}}
  
 </template>

@@ -377,10 +377,12 @@ if (Meteor.isClient) { // only runs on the client
 
       if (text == "") return false; // prevent empty strings
 
-      
 
       Meteor.call('addInvite', text, function (error, result) {
-          if (!error) console.log("invited " + text);
+          if (!error) {
+            console.log("invited " + text);
+            sAlert.info(text + " has been invited")
+          }
         });      
 
       

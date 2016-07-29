@@ -368,17 +368,28 @@ Router.route('/:_page_slug/:_quote_slug', {
 
 // A URL with something after it
 // Don't put things below this as they probs won't work
-Router.route('/:_pageUrl', {
+Router.route('/:_pageUrlText', {
   waitOn: function () {
     // return Meteor.subscribe('pagesWithPageSlug', this.params._slug);
   },
   action: function () {
-    const pageUrl = this.params._pageUrl; // haven't sluggified it yet
+    const pageUrlText = this.params._pageUrlText; // haven't sluggified it yet
 
-    const pageSlug = slug(pageUrl);
+    console.log(pageUrlText + " was the url text")
 
-    if (pageUrl !== pageSlug) {
-      console.log('navigating')
+    const pageSlug = slug(pageUrlText);
+
+    if (pageSlug !== pageUrlText) {
+      console.log("Setting current page name to " + pageUrlText);
+      Session.set("currentPageName", pageUrlText);
+    }
+
+    console.log("Current page name is " + Session.get("currentPageName"));
+
+
+
+    if (pageUrlText !== pageSlug) {
+      console.log('We are now navigating')
       Router.go("/" + pageSlug);
     }
 

@@ -370,7 +370,8 @@ Router.route('/:_page_slug/:_quote_slug', {
 // Don't put things below this as they probs won't work
 Router.route('/:_pageUrlText', {
   waitOn: function () {
-    // return Meteor.subscribe('pagesWithPageSlug', this.params._slug);
+    Session.set('pageSlug', this.params._pageUrlText);
+    return Meteor.subscribe('pagesWithPageSlug', this.params._pageUrlText);
   },
   action: function () {
     const pageUrlText = this.params._pageUrlText; // haven't sluggified it yet
@@ -378,6 +379,12 @@ Router.route('/:_pageUrlText', {
     console.log(pageUrlText + " was the url text")
 
     const pageSlug = slug(pageUrlText);
+
+    // Meteor.subscribe('pagesWithPageSlug', pageSlug);
+
+    const currentPage = Pages.findOne({slug: pageSlug});
+
+    console.log(currentPage);
 
     if (pageSlug !== pageUrlText) {
       console.log("Setting current page name to " + pageUrlText);
@@ -394,8 +401,23 @@ Router.route('/:_pageUrlText', {
     }
 
 
+
+
+      this.render('Page', {
+      data: {
+        page: function () {
+          return Pages.findOne({slug: pageSlug});
+          },
+        quotes: function () {
+          var quotes = Quotes.find( { pageSlug: currentPage._id } );
+          return quotes;
+        },
+      }
+    });
+
+
     // var slug = this.params._slug;
-    // var currentPage = Pages.findOne({slug: slug});
+    
     // Session.set('pageSlug', slug);
 
 
@@ -409,17 +431,7 @@ Router.route('/:_pageUrlText', {
     //   Meteor.subscribe('quotesAuthorId', currentPage._id);
     // }
 
-    // this.render('Page', {
-    //   data: {
-    //     page: function () {
-    //       return Pages.findOne({slug: slug});
-    //       },
-    //     quotes: function () {
-    //       var quotes = Quotes.find( { authorId: currentPage._id /*, verified: true*/}, { sort: {quotation: 1}} );
-    //       return quotes;
-    //     },
-    //   }
-    // });
+  
 
 
 

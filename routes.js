@@ -375,45 +375,43 @@ Router.route('/:_pageUrlText', {
   },
   action: function () {
     const pageUrlText = this.params._pageUrlText; // haven't sluggified it yet
-
-    console.log(pageUrlText + " was the url text")
-
     const pageSlug = slug(pageUrlText);
 
     // Meteor.subscribe('pagesWithPageSlug', pageSlug);
 
-    const currentPage = Pages.findOne({slug: pageSlug});
-
-    console.log(currentPage);
+    currentPage = Pages.findOne({slug: pageSlug});
 
     if (pageSlug !== pageUrlText) {
       console.log("Setting current page name to " + pageUrlText);
       Session.set("currentPageName", pageUrlText);
     }
 
-    console.log("Current page name is " + Session.get("currentPageName"));
-
+    // console.log("Current page name is " + Session.get("currentPageName"));  // testing
 
 
     if (pageUrlText !== pageSlug) {
       console.log('We are now navigating')
-      Router.go("/" + pageSlug);
+      Router.go("/" + pageSlug, {}, {replaceState: true}); // second argument needed here
     }
 
-
-
-
+    if (currentPage) {
       this.render('Page', {
-      data: {
-        page: function () {
-          return Pages.findOne({slug: pageSlug});
+        data: {
+          page: function () {
+            return Pages.findOne({slug: Session.get('pageSlug')});
+            },
+          quotes: function () {
+            var quotes = Quotes.find( { pageSlug: Session.get('pageSlug') } );
+            return quotes;
           },
-        quotes: function () {
-          var quotes = Quotes.find( { pageSlug: currentPage._id } );
-          return quotes;
-        },
-      }
-    });
+        }
+      });
+    } 
+
+    else if (!currentPage) {
+      // Session.set("DocumentTitle", Session.get('pageSlug') + " - Qurious");
+      this.render('404');
+    }
 
 
     // var slug = this.params._slug;

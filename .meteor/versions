@@ -51,7 +51,7 @@ iron:router@1.0.13
 iron:url@1.0.11
 jquery@1.11.9
 jss:flat-ui@2.2.2
-juliancwirko:s-alert@3.1.4
+juliancwirko:s-alert@3.2.0
 launch-screen@1.0.12
 less@2.7.4
 livedata@1.0.18

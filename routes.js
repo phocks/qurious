@@ -410,7 +410,11 @@ Router.route('/:_pageUrlText', {
 
     else if (!currentPage) {
       // Session.set("DocumentTitle", Session.get('pageSlug') + " - Qurious");
-      this.render('404');
+      this.render('pageNotFound', {
+        data: {
+          pageName: function () { return Session.get('currentPageName'); }
+        }
+      });
     }
 
 

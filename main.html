@@ -585,3 +585,20 @@
 
   </div>
 </template>
+
+
+
+<template name="pageNotFound">
+  <div class="container flex-center">
+    <h2>Page not found</h2>    
+  </div>
+  <div class="below-fold container-fluid flex-center text-center">
+    <form class="">
+      <div class="form-group">
+        <label class="sr-only" for="authorName">Author Name</label>
+        <input type="text" class="form-control" id="authorName" name="text" placeholder="Page name" value="{{pageName}}">
+      </div>
+      <button type="submit" class="btn btn-default btn-block">Create Page</button>
+    </form>
+  </div>
+</template>

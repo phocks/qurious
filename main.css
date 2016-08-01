@@ -820,3 +820,11 @@ ul.quote.list li a {
   background-color: black;
   color: white;
 }
+
+
+.below-fold {
+  padding-top: 5em;
+  padding-bottom: 5em;
+
+  background-color: #fafafa;
+}

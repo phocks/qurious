@@ -310,17 +310,21 @@ Router.route('/:_slug/edit', {
   action: function () {
     var slug = this.params._slug;
     currentPage = Pages.findOne({slug: slug});
-    Session.set("DocumentTitle", "Editing " + currentPage.name + " - Qurious");
-    Session.set("pageId", currentPage._id);
 
     console.log(Session.get("pageId"));
 
     // this.render('Nav', { to: 'nav'});
-    this.render('PageEdit', {
-      data: {
-        page: currentPage
-      }
-    });
+    if (currentPage) {
+      Session.set("DocumentTitle", "Editing " + currentPage.name + " - Qurious");
+      Session.set("pageId", currentPage._id);
+      this.render('PageEdit', {
+        data: {
+          page: currentPage
+        }
+      });
+    } else {
+      this.render('404');
+    }
     // this.render('Nav', { to: 'nav'});
   }
 });
@@ -400,6 +404,7 @@ Router.route('/:_pageUrlText', {
     }
 
     if (currentPage) {
+      Session.set("DocumentTitle", currentPage.name + " - Qurious");
       this.render('Page', {
         data: {
           page: function () {
@@ -417,7 +422,8 @@ Router.route('/:_pageUrlText', {
       // Session.set("DocumentTitle", Session.get('pageSlug') + " - Qurious");
       this.render('pageNotFound', {
         data: {
-          pageName: function () { return Session.get('currentPageName'); }
+          pageName: function () { return Session.get('currentPageName'); },
+          pageSlug: Session.get('pageSlug')
         }
       });
     }

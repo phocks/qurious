@@ -304,6 +304,7 @@ Router.route('/:_slug/add', {
 // Edit page for authors/pages/whatever
 Router.route('/:_slug/edit', {
   waitOn: function () {
+    Session.set('pageSlug', this.params._slug);
     return Meteor.subscribe('pagesWithPageSlug', this.params._slug);
   },
   action: function () {
@@ -315,7 +316,11 @@ Router.route('/:_slug/edit', {
     console.log(Session.get("pageId"));
 
     // this.render('Nav', { to: 'nav'});
-    this.render('PageEdit');
+    this.render('PageEdit', {
+      data: {
+        page: currentPage
+      }
+    });
     // this.render('Nav', { to: 'nav'});
   }
 });

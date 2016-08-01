@@ -255,7 +255,19 @@
 
 
 <template name="PageEdit">
-  <span class="delete">delete</span>
+  <div class="container flex-center">
+    <h2>{{page.name}}</h2>    
+  </div>
+  <div class="below-fold container-fluid flex-center text-center">
+    <form class="">
+      <div class="form-group">
+        <label class="sr-only" for="authorName">Page Name</label>
+        <input type="text" class="form-control" id="authorName" name="text" placeholder="Page name" value="{{page.name}}">
+      </div>
+      <button type="submit" class="btn btn-default btn-block">Save Edits</button>
+    </form>
+  </div>
+  <!-- <span class="delete">delete</span> --> <!-- We don't really want to let people delete at will -->
 </template>
 
 
@@ -595,7 +607,7 @@
   <div class="below-fold container-fluid flex-center text-center">
     <form class="">
       <div class="form-group">
-        <label class="sr-only" for="authorName">Author Name</label>
+        <label class="sr-only" for="authorName">Page Name</label>
         <input type="text" class="form-control" id="authorName" name="text" placeholder="Page name" value="{{pageName}}">
       </div>
       <button type="submit" class="btn btn-default btn-block">Create Page</button>

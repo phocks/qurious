@@ -293,7 +293,7 @@ Router.route('/:_slug/add', {
     var slug = this.params._slug;
     currentPage = Pages.findOne({slug: slug});
     Session.set("DocumentTitle", "Add a " + currentPage.name + " quotation - Qurious");
-    Session.set("pageId", currentPage._id);
+    Session.set("pageSlug", this.params._slug);
 
     // this.render('Nav', { to: 'nav'});
     this.render('AddQuote');
@@ -380,7 +380,10 @@ Router.route('/:_page_slug/:_quote_slug', {
 Router.route('/:_pageUrlText', {
   waitOn: function () {
     Session.set('pageSlug', this.params._pageUrlText);
-    return Meteor.subscribe('pagesWithPageSlug', this.params._pageUrlText);
+
+    return [Meteor.subscribe('pagesWithPageSlug', this.params._pageUrlText),
+      Meteor.subscribe('quotesSlug', this.params._pageUrlText)];
+            
   },
   action: function () {
     const pageUrlText = this.params._pageUrlText; // haven't sluggified it yet
@@ -411,7 +414,7 @@ Router.route('/:_pageUrlText', {
             return Pages.findOne({slug: Session.get('pageSlug')});
             },
           quotes: function () {
-            var quotes = Quotes.find( { pageSlug: Session.get('pageSlug') } );
+            var quotes = Quotes.find( { tags: Session.get('pageSlug') } );
             return quotes;
           },
         }

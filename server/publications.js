@@ -47,7 +47,7 @@ Meteor.publish("quotesSlugUser", function (user_slug) {
 
 Meteor.publish("quotesSlug", function (slug) {
   check(slug, String);
-  var quote = Quotes.find({ slug: slug });
+  var quote = Quotes.find({ tags: slug });
   // console.log(quote); // trying to get counter quotes working too../....
   // if (!quote) quote = Quotes.find({ quote_id: slug });
 

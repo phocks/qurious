@@ -209,7 +209,7 @@
 
       <div class="fluid-container text-center space-both list-quote">
         <div class="container">
-          &ldquo;{{quotation}}&rdquo; <em>&mdash;<small>{{../page.name}}</small></em>
+          &ldquo;{{quotation}}&rdquo; <!-- <em>&mdash;{{../page.name}}</em> -->
         </div>
       </div>
     {{else}}
@@ -235,9 +235,16 @@
   </div>
 
   
-
+  <!-- {{> AddQuoteToPage}} -->
   {{> ControlBar}}
 </template>
+
+
+<!-- <template name="AddQuoteToPage">
+  <div class="container-fluid material-background">
+  hello
+  </div>
+</template> -->
 
 
 
@@ -342,10 +349,15 @@
 <template name="AddQuote">
   <div class="container backdrop flex-center">
     <div class="create-block">
-        <form class="add-quote form-inline">
+        <form class="add-quote">
           <div class="form-group">
             <label class="sr-only" for="quoteText">Quote Text</label>
-            <input type="text" class="form-control" id="quoteText" name="text" placeholder="Quotation text">
+            <input type="text" class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text">
+            <!-- <textarea class="form-control" rows="3"></textarea> -->
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="quoteText">Attribution Text</label>
+            <input type="text" class="form-control" id="attributionText" name="attributionText" placeholder="Attribution text">
           </div>
           <button type="submit" class="btn btn-default">Add quote</button>
         </form>

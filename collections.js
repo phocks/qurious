@@ -42,7 +42,7 @@ Schemas.Quote = new SimpleSchema({
 		// We can't make this unique until all Quotes have slugs and on second thoughts let's not anyway
 		// Oh look we migrated all the quotes and now we can make it unique
 		// But actually we probably don't want to
-		// unique: true,
+		unique: true,
 		max: 500,
 	},
 	verified: {
@@ -53,7 +53,17 @@ Schemas.Quote = new SimpleSchema({
 		type: String,
 		optional: true,
 		label: "Set so that CSS can know how big to display",
-}
+	},
+	tags: {
+		type: [String],
+		optional: true,
+		label: "Things this quote is attached to"
+	},
+	username: {
+		type: String,
+		optional: true,
+		label: "Whoever created this thing"
+	},
 
 });
 

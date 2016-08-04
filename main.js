@@ -285,21 +285,21 @@ if (Meteor.isClient) { // only runs on the client
   // When adding quotations from the Author
   Template.AddQuote.events({
     "submit .add-quote": function (event) {
-      var text = event.target.text.value;
-      var pageId = Session.get('pageId');
-      console.log("This is the quote text: " + text);
+      var quoteText = event.target.quoteText.value;
+      var pageSlug = Session.get('pageSlug');
+      console.log("This is the quote text: " + quoteText);
 
-      if (text == "") return false; // prevent empty strings
+      if (quoteText == "") return false; // prevent empty strings
 
-      Meteor.call('addQuoteToPage', text, pageId, function(error, result) {
+      Meteor.call('addQuoteToPage', quoteText, pageSlug, function(error, result) {
         var newQuoteSlug = result;
-        console.log("New quote id: " + newQuoteSlug);
+        console.log("New quote: " + newQuoteSlug);
         Meteor.call('checkQuoteSize', newQuoteSlug);
-        Router.go('/explore');
+        Router.go('/' + pageSlug);
       });
 
       // Clear form
-      event.target.text.value = "";
+      event.target.quoteText.value = "";
 
 
       // Prevent default action from form submit

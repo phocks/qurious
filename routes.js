@@ -18,7 +18,7 @@ Router.route('/api', function () {
 /* The root home route landing for qurious.cc/   */
 Router.route('/', {
   waitOn: function () {
-    return Meteor.subscribe('pagesVerified');
+    return Meteor.subscribe('quotesLatest', 5);
   },
   // onBeforeAction: function() {
   //   if (! Meteor.userId()) {
@@ -40,6 +40,10 @@ Router.route('/', {
         pages: function () {
           var pages = Pages.find({ verified:true }, { sort: {name: 1}});
           return pages;
+        },
+        quotes: function () {
+          var quotes = Quotes.find({}, { sort: {createdAt: -1}, limit: 5 });
+          return quotes;
         },
       }
     });

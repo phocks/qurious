@@ -56,13 +56,31 @@
         <div class="text-center flex-center home-container">
           <!-- <h1><i class="fa fa-quote-left"></i></h1> -->
           <h1>Qurious.</h1>
-          <p>is kinda new, so please forgive us if there's not much here at all just yet.</p>
+          <!-- <p>is kinda new, so please forgive us if there's not much here at all just yet.</p> -->
           <!-- <a class="btn btn-default scroll" href="/explore" style="margin-bottom: 25px">Explore</a> -->
         </div>
         <!-- <div class="text-center flex-center home-container">
           <p>is kinda new, so please forgive us if there's not much here just yet.</p>
         </div> -->
       </div>
+
+      <div class="the-page-list">
+        {{#each quotes}}
+
+          <div class="fluid-container text-center space-both list-quote">
+            <div class="container">
+              &ldquo;{{quotation}}&rdquo; <!-- <em>&mdash;{{../page.name}}</em> -->
+            </div>
+          </div>
+        {{else}}
+        <div class="fluid-container text-center space-both list-quote">
+          <div class="container">
+            No quotations found.
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{> ControlBar}}
       <!-- {{> Authors}}
       {{> Footer}} -->
     {{/unless}}
@@ -107,34 +125,6 @@
 
 
 
-<!-- This is the fixed nav -->
-<template name="Nav">
-  <div class="container qurious-nav">
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-          <span class="sr-only">Toggle navigation</span>
-        </button>
-        <a class="navbar-brand" href="/">Qurious<!-- <img src="/grey-logo.png"> --></a>
-      </div>
-
-
-      <div class="collapse navbar-collapse" id="navbar-collapse-01">
-        <ul class="nav navbar-nav">
-        </ul>
-          {{#if currentUser}}
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/settings">{{currentUser._id}}</a></li>
-            </ul>
-          {{else}}
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/sign-in">Sign In</a></li>
-            </ul>
-          {{/if}}
-      </div><!-- /.navbar-collapse -->
-    </nav><!-- /navbar -->
-  </div>
-</template>
 
 
 
@@ -188,22 +178,9 @@
       <!-- <p>{{page.description}}</p> -->
     </div>
 
-    
-
-    <!-- <div class="page-quotes">
-      {{#each quotes}}
-      <blockquote class="page-quote">
-        &lsquo;<a class="view-quote" href="/{{../page.slug}}/{{slug}}">{{ quotation }}</a>&rsquo;
-      </blockquote> -->
-      <!-- <div>
-        <a class="view-quote" href="/{{../page.slug}}/{{slug}}"><i class="fa fa-caret-right"></i></a>
-      </div> -->
-      <!-- <hr> -->
-      <!-- {{/each}}
-    </div> -->
-
-
   </div>
+
+
   <div class="the-page-list">
     {{#each quotes}}
 
@@ -219,19 +196,6 @@
       </div>
     </div>
     {{/each}}
-      
-
-
-      <!-- <ul class="quote-list"> -->
-      <!-- {{#each quotes}}
-        <li><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
-        {{else}}
-        <li><a href="/{{page.slug}}/add">No quotations found</a></li>
-      {{/each}} -->
-      <!-- {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} -->
-      <!-- </ul> -->
-
-    
   </div>
 
   
@@ -239,12 +203,6 @@
   {{> ControlBar}}
 </template>
 
-
-<!-- <template name="AddQuoteToPage">
-  <div class="container-fluid material-background">
-  hello
-  </div>
-</template> -->
 
 
 
@@ -631,4 +589,41 @@
     </form>
   </div>
   <!-- <span class="delete">delete</span> --> <!-- We don't really want to let people delete at will -->
+</template>
+
+
+
+
+
+
+
+
+
+<!-- This is the fixed nav -->
+<template name="Nav">
+  <div class="container qurious-nav">
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+          <span class="sr-only">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand" href="/">Qurious<!-- <img src="/grey-logo.png"> --></a>
+      </div>
+
+
+      <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <ul class="nav navbar-nav">
+        </ul>
+          {{#if currentUser}}
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/settings">{{currentUser._id}}</a></li>
+            </ul>
+          {{else}}
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/sign-in">Sign In</a></li>
+            </ul>
+          {{/if}}
+      </div><!-- /.navbar-collapse -->
+    </nav><!-- /navbar -->
+  </div>
 </template>

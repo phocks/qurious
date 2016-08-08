@@ -32,7 +32,14 @@ Schemas.Quote = new SimpleSchema({
 		// },
 	quotation: { 
 		type: String,
+		label: "Actual quotation text",
 		max: 1000, 
+	},
+	attribution: {
+		type: String,
+		label: "Where is it coming from",
+		max: 512, 
+		optional: true,
 	},
 	createdAt: { type: Date },
 	createdBy: { type: String },
@@ -43,7 +50,7 @@ Schemas.Quote = new SimpleSchema({
 		// Oh look we migrated all the quotes and now we can make it unique
 		// But actually we probably don't want to
 		unique: true,
-		max: 500,
+		max: 512,
 	},
 	verified: {
 		type: Boolean,

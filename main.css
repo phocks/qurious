@@ -808,10 +808,15 @@ ul.quote.list li a {
 
 
 
-
+/* Listing the quotations on each page */
 .list-quote {
   font-size: 1.6em;
   background-color: #fafafa;
+}
+
+.list-quote a {
+  color: black;
+  text-decoration: none;
 }
 
 
@@ -821,10 +826,24 @@ ul.quote.list li a {
   color: white;
 }
 
+.list-quote:nth-child(odd) a {
+  color: white;
+  text-decoration: none;
+}
+
 
 .below-fold {
   padding-top: 5em;
   padding-bottom: 5em;
 
   background-color: #fafafa;
+}
+
+.create-block {
+  min-width: 300px;
+}
+
+a.flat-link {
+  color: white;
+  text-decoration: none;
 }

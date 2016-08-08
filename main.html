@@ -64,22 +64,8 @@
         </div> -->
       </div>
 
-      <div class="the-page-list">
-        {{#each quotes}}
+      {{> ThePageList}}
 
-          <div class="fluid-container text-center space-both list-quote">
-            <div class="container">
-              &ldquo;{{quotation}}&rdquo; <!-- <em>&mdash;{{../page.name}}</em> -->
-            </div>
-          </div>
-        {{else}}
-        <div class="fluid-container text-center space-both list-quote">
-          <div class="container">
-            No quotations found.
-          </div>
-        </div>
-        {{/each}}
-      </div>
       {{> ControlBar}}
       <!-- {{> Authors}}
       {{> Footer}} -->
@@ -87,80 +73,6 @@
   {{/if}}
 </template>
 
-
-<template name="Authors">
-  <div class="container-fluid text-center material-background">
-    <div class="space-both">
-      <ul class="author-list">
-        {{#each pages}}
-          <li><a href="/{{slug}}">{{name}}</a></li>
-        {{else}}
-
-        {{/each}}
-      </ul>
-    </div>
-  </div>
-</template>
-
-
-
-
-
-
-
-
-<template name="Header">
-  <nav class="header">
-    <div class="container">
-      <a href="/">Qurious</a>
-    </div>
-  </nav>
-</template>
-
-<template name="top-bar">
-  <div class="top-bar">
-    Qurious
-  </div>
-</template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<template name="Explore">
-  <div class="container backdrop explore content">
-    <section class="section">
-      <h1>Explore</h1>
-       <p class="lead"><!-- Qurious is still very new. Here is a list of verified notable authors. --> <!-- You can also see <a href="/explore/pending">pending authors</a> and help moderate them. --></p>
-    </section>
-    
-    <div class="section">
-      <ul class="author-list">
-        {{#each pages}}
-          <li><a href="/{{slug}}">{{name}}</a></li>
-        {{else}}
-          
-        {{/each}}
-        {{#if currentUser}}
-        <li><a href="/add">+</a></li>
-        {{/if}}
-      </ul>
-    </div>
-
-    <!-- {{#each pages}}
-      <h1><a href="/{{slug}}">{{name}}</a></h1>
-    {{/each}} -->
-
-  </div>
-</template>
 
 
 
@@ -180,28 +92,14 @@
 
   </div>
 
-
-  <div class="the-page-list">
-    {{#each quotes}}
-
-      <div class="fluid-container text-center space-both list-quote">
-        <div class="container">
-          &ldquo;{{quotation}}&rdquo; <!-- <em>&mdash;{{../page.name}}</em> -->
-        </div>
-      </div>
-    {{else}}
-    <div class="fluid-container text-center space-both list-quote">
-      <div class="container">
-        No quotations found.
-      </div>
-    </div>
-    {{/each}}
-  </div>
+  {{> ThePageList}}
 
   
   <!-- {{> AddQuoteToPage}} -->
   {{> ControlBar}}
 </template>
+
+
 
 
 
@@ -220,61 +118,26 @@
 
 
 
+<template name="ThePageList">
+  <div class="the-page-list">
+    {{#each quotes}}
 
-
-
-<template name="DisplayQuote">
-  <div class="container backdrop flex-center">
-    <div class="quote">
-      <h1 style="margin-top:0"><i class="fa fa-quote-left"></i></h1>
-      <div class="quotation {{quote.length}}">
-        {{quote.quotation}} 
+      <div class="fluid-container text-center space-both list-quote">
+        <div class="container">
+          &ldquo;{{quotation}}&rdquo; 
+          &mdash;<em><a href="/{{slugThisString attribution}}">{{attribution}}</a></em>
+        </div>
       </div>
-      <div class="attribution"><a href="/{{page.slug}}">{{page.name}}</a></div>
-      <!-- <i class="fa fa-quote-right"></i> -->
+    {{else}}
+    <div class="fluid-container text-center space-both list-quote">
+      <div class="container">
+        <a class="flat-link" href="{{page.slug}}/add">No quotations found.</a>
+      </div>
     </div>
-    <!-- <div>flag</div> -->
-  </div>
-  
-</template>
-
-
-
-
-<template name="Footer">
-  {{#if loggingIn}}
-  <!-- nothing -->
-  {{else}}
-  <div class="container-fluid footer">
-    <div class="content container text-center">
-      <small>from <a href="/">Meagre Inc.</a></small>
-    </div>
-  </div>
-  {{/if}}
-</template>
-
-
-
-
-
-<template name="Settings">
-  <div class="container backdrop">
-    <div class="col-md-6">
-      <h1>Settings</h1>
-      <!-- <form>
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" class="form-control" placeholder="Your full name" name="fullName" value="{{currentUser.profile.fullName}}" />
-        </div>
-        <div class="form-group">     
-          <button type="submit" class="btn btn-primary">Update</button>
-        </div>
-      </form> -->
-      <p>Your user id: {{_id}}</p>
-      <a href="/sign-out">Sign out</a>
-    </div>
+    {{/each}}
   </div>
 </template>
+
 
 
 
@@ -304,6 +167,36 @@
 
 
 
+
+
+
+
+
+
+
+<template name="Footer">
+  {{#if loggingIn}}
+  <!-- nothing -->
+  {{else}}
+  <div class="container-fluid footer">
+    <div class="content container text-center">
+      <small>from <a href="/">Meagre Inc.</a></small>
+    </div>
+  </div>
+  {{/if}}
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
 <template name="AddQuote">
   <div class="container backdrop flex-center">
     <div class="create-block">
@@ -324,6 +217,8 @@
 </template>
 
 
+
+
 <template name="Invite">
   {{#if isInRole 'admin'}}
   <div class="container backdrop flex-center invite">
@@ -340,6 +235,7 @@
   {{/if}}
  
 </template>
+
 
 
 
@@ -625,5 +521,117 @@
           {{/if}}
       </div><!-- /.navbar-collapse -->
     </nav><!-- /navbar -->
+  </div>
+</template>
+
+
+
+
+
+
+
+<template name="Header">
+  <nav class="header">
+    <div class="container">
+      <a href="/">Qurious</a>
+    </div>
+  </nav>
+</template>
+
+<template name="top-bar">
+  <div class="top-bar">
+    Qurious
+  </div>
+</template>
+
+
+
+
+
+
+
+<template name="Explore">
+  <div class="container backdrop explore content">
+    <section class="section">
+      <h1>Explore</h1>
+       <p class="lead"><!-- Qurious is still very new. Here is a list of verified notable authors. --> <!-- You can also see <a href="/explore/pending">pending authors</a> and help moderate them. --></p>
+    </section>
+    
+    <div class="section">
+      <ul class="author-list">
+        {{#each pages}}
+          <li><a href="/{{slug}}">{{name}}</a></li>
+        {{else}}
+          
+        {{/each}}
+        {{#if currentUser}}
+        <li><a href="/add">+</a></li>
+        {{/if}}
+      </ul>
+    </div>
+
+    <!-- {{#each pages}}
+      <h1><a href="/{{slug}}">{{name}}</a></h1>
+    {{/each}} -->
+
+  </div>
+</template>
+
+
+
+
+
+
+<template name="Authors">
+  <div class="container-fluid text-center material-background">
+    <div class="space-both">
+      <ul class="author-list">
+        {{#each pages}}
+          <li><a href="/{{slug}}">{{name}}</a></li>
+        {{else}}
+
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</template>
+
+
+
+
+<template name="DisplayQuote">
+  <div class="container backdrop flex-center">
+    <div class="quote">
+      <h1 style="margin-top:0"><i class="fa fa-quote-left"></i></h1>
+      <div class="quotation {{quote.length}}">
+        {{quote.quotation}} 
+      </div>
+      <div class="attribution"><a href="/{{page.slug}}">{{page.name}}</a></div>
+      <!-- <i class="fa fa-quote-right"></i> -->
+    </div>
+    <!-- <div>flag</div> -->
+  </div>
+</template>
+
+
+
+
+
+<template name="Settings">
+  <div class="container backdrop">
+    <div class="col-md-6">
+      <h1>Settings</h1>
+      <!-- <form>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" class="form-control" placeholder="Your full name" name="fullName" value="{{currentUser.profile.fullName}}" />
+        </div>
+        <div class="form-group">     
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form> -->
+      <p>Your user id: {{_id}}</p>
+      <a href="/sign-out">Sign out</a>
+    </div>
   </div>
 </template>

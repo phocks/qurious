@@ -7,6 +7,7 @@ import slug from 'slug';
 // slug('string', [{options} || 'replacement']);
 slug.defaults.mode ='rfc3986'; // makes it lowercase etc
 
+
 Meteor.methods({
 
   // Throw the dice with all the db docs
@@ -173,55 +174,17 @@ Meteor.methods({
   },
 
 
-  addPage: function(pageName) {
   
-  // Make sure the user is logged in before inserting a task
-  if (! Meteor.userId()) {
-    throw new Meteor.Error("not-authorized");
-  }
-
-  pageName = toTitleCase(pageName); // these are defined in globalFunctions.js
-
-
-  console.log(slug(pageName)); // yep it works
-  pageSlug = slug(pageName);// old code: slugText(pageName); // these are defined in globalFunctions.js
-
-  var page = {
-    name: pageName,
-    slug: pageSlug,
-    createdAt: new Date(), // current time
-    createdBy: Meteor.userId(), // current user
-  };
-
-
-  Pages.insert(page, function(error, result) {
-    if (error) {
-      console.log(error);
-      throw new Meteor.Error( 500, 'There was an error processing your request :(' );
-    }
-    else {
-      console.log(result);
-
-      var pageId = result;
-      // This put the new page in the user profile. Probably don't do that right now.
-      // Meteor.users.update( { _id: Meteor.userId() }, { $addToSet:{"profile.pages": result }} );
-
-      // Update time of last submission
-      Meteor.users.update( { _id: Meteor.userId() }, { $set:{"profile.lastSubmissionTime": new Date() }} );
-    }
-  }); 
-},
 
 
 
+  deleteQuote: function(quoteId) {
+    Quotes.remove(quoteId);
+  },
 
-deleteQuote: function(quoteId) {
-  Quotes.remove(quoteId);
-},
-
-deleteAuthor: function(authorId) {
-  Pages.remove(authorId);
-},
+  deleteAuthor: function(authorId) {
+    Pages.remove(authorId);
+  },
 
   
 

@@ -131,7 +131,8 @@
     {{else}}
     <div class="fluid-container text-center space-both list-quote">
       <div class="container">
-        <a class="flat-link" href="{{page.slug}}/add">No quotations found.</a>
+        <!-- <a class="flat-link" href="{{page.slug}}/add">No quotations found.</a> -->
+        No quotations found.
       </div>
     </div>
     {{/each}}
@@ -142,7 +143,7 @@
 
 
 
-<template name="pageNotFound">
+<template name="PageNotFound">
   <div class="container flex-center">
     <h2>Page not found</h2>    
   </div>
@@ -258,13 +259,13 @@
     <div class="create-block">
         <form class="add-quote">
           <div class="form-group">
-            <label class="sr-only" for="quoteText">Quote Text</label>
+            <label class="sr-only" for="quoteText">Quotation Text</label>
             <input type="text" class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text">
             <!-- <textarea class="form-control" rows="3"></textarea> -->
           </div>
           <div class="form-group">
-            <label class="sr-only" for="quoteText">Attribution Text</label>
-            <input type="text" class="form-control" id="attributionText" name="attributionText" placeholder="Attribution text">
+            <label class="sr-only" for="quoteText">Author Text</label>
+            <input type="text" class="form-control" id="attributionText" name="attributionText" placeholder="Author (or character) text">
           </div>
           <button type="submit" class="btn btn-default">Add quote</button>
         </form>

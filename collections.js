@@ -61,10 +61,10 @@ Schemas.Quote = new SimpleSchema({
 		optional: true,
 		label: "Set so that CSS can know how big to display",
 	},
-	tags: {
+	pageSlugs: {
 		type: [String],
 		optional: true,
-		label: "Things this quote is attached to"
+		label: "An array of things this quote is attached to"
 	},
 	username: {
 		type: String,

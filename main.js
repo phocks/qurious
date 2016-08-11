@@ -292,35 +292,11 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-  // When adding quotations from the Author
-  Template.AddQuote.events({
-    "submit .add-quote": function (event) {
-      var quoteText = event.target.quoteText.value;
-      var attributionText = event.target.attributionText.value;
-      var pageSlug = Session.get('pageSlug');
-      console.log("This is the quote text: " + quoteText);
 
-      if (quoteText == "") return false; // prevent empty strings
-
-      Meteor.call('addQuoteToPage', quoteText, attributionText, pageSlug, function(error, result) {
-        var newQuoteSlug = result;
-        console.log("New quote: " + newQuoteSlug);
-        Meteor.call('checkQuoteSize', newQuoteSlug);
-        Router.go('/' + pageSlug);
-      });
-
-      // Clear form
-      event.target.quoteText.value = "";
-
-
-      // Prevent default action from form submit
-      return false;
-    },
-  });
 
   
 
-  // Adding another author
+  // Adding pages to Qurious
   Template.Add.events({
     "submit form": function (event) {
       var text = event.target.text.value;
@@ -368,6 +344,36 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
+
+    // When adding quotations from the Author
+  Template.AddQuote.events({
+    "submit .add-quote": function (event) {
+      var quoteText = event.target.quoteText.value;
+      var attributionText = event.target.attributionText.value;
+      var pageSlug = Session.get('pageSlug');
+      console.log("This is the quote text: " + quoteText);
+
+      if (quoteText == "") return false; // prevent empty strings
+
+      Meteor.call('addQuoteToPage', quoteText, attributionText, pageSlug, function(error, result) {
+        var newQuoteSlug = result;
+        console.log("New quote: " + newQuoteSlug);
+        Meteor.call('checkQuoteSize', newQuoteSlug);
+        Router.go('/' + pageSlug);
+      });
+
+      // Clear form
+      event.target.quoteText.value = "";
+
+
+      // Prevent default action from form submit
+      return false;
+    },
+  });
+
+
+
+  // Add people to the beta invite list
   Template.Invite.events({
     "submit form": function (event) {
       event.preventDefault();
@@ -579,7 +585,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-  Template.pageNotFound.events({
+  Template.NewPage.events({
     "submit form": function (event) {
       event.preventDefault();
 
@@ -592,7 +598,7 @@ if (Meteor.isClient) { // only runs on the client
 
       if ( Meteor.user().profile && Meteor.user().profile.lastSubmissionTime ) {
         var lastSub = moment(Meteor.user().profile.lastSubmissionTime);
-        var compare = moment().subtract(5, 'seconds');
+        var compare = moment().subtract(60, 'seconds');
 
         // Prevent multiple submissions in short period
         if ( compare < lastSub ) { 

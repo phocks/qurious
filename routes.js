@@ -427,7 +427,7 @@ Router.route('/:_pageUrlText', {
             return Pages.findOne({slug: Session.get('pageSlug')});
             },
           quotes: function () {
-            var quotes = Quotes.find( { tags: Session.get('pageSlug') } );
+            var quotes = Quotes.find( { pageSlugs: Session.get('pageSlug') } );
             return quotes;
           },
         }
@@ -436,7 +436,7 @@ Router.route('/:_pageUrlText', {
 
     else if (!currentPage) {
       // Session.set("DocumentTitle", Session.get('pageSlug') + " - Qurious");
-      this.render('pageNotFound', {
+      this.render('PageNotFound', {
         data: {
           pageName: function () { return Session.get('currentPageName'); },
           pageSlug: Session.get('pageSlug')

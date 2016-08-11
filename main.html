@@ -142,6 +142,62 @@
 
 
 
+<template name="pageNotFound">
+  <div class="container flex-center">
+    <h2>Page not found</h2>    
+  </div>
+  <div class="below-fold container-fluid flex-center">
+    <!-- <form class="form-inline">
+      <div class="form-group">
+        <label class="sr-only" for="authorName">Page Name</label>
+        <input type="text" class="form-control" id="authorName" name="text" placeholder="Page name" value="{{pageName}}">
+      </div>
+      <button type="submit" class="btn btn-default">Create Page</button>
+    </form> -->
+    <a href="/{{pageSlug}}/edit" class="btn btn-default">Add Page</a>
+  </div>
+</template>
+
+
+
+
+<template name="PageEdit">
+  <div class="container flex-center">
+    <h2>{{page.name}}</h2>    
+  </div>
+  <div class="below-fold container-fluid flex-center">
+    <form class="basic-form">
+      <div class="form-group">
+        <label class="sr-only" for="authorName">Page Name</label>
+        <input type="text" class="form-control" id="pageName" name="text" placeholder="Page name" value="{{page.name}}">
+      </div>
+      <button type="submit" class="btn btn-default">Save Edits</button>
+    </form>
+  </div>
+  <!-- <span class="delete">delete</span> --> <!-- We don't really want to let people delete at will -->
+</template>
+
+
+
+<template name="NewPage">
+  <div class="container-fluid flex-center">
+    <form class="basic-form">
+      <div class="form-group">
+        <label class="sr-only" for="authorName">Page Name</label>
+        <input type="text" class="form-control" id="pageName" name="text" placeholder="Page name" value="{{pageName}}">
+      </div>
+      <button type="submit" class="btn btn-default">Save Page</button>
+    </form>
+  </div>
+  <!-- <span class="delete">delete</span> --> <!-- We don't really want to let people delete at will -->
+</template>
+
+
+
+
+
+
+
 <template name="Add">
   <div class="container backdrop">
     <section class="section">
@@ -451,41 +507,6 @@
 </template>
 
 
-
-<template name="pageNotFound">
-  <div class="container flex-center">
-    <h2>Page not found</h2>    
-  </div>
-  <div class="below-fold container-fluid flex-center">
-    <!-- <p>/{{pageSlug}}</p> -->
-    <form class="form-inline">
-      <div class="form-group">
-        <label class="sr-only" for="authorName">Page Name</label>
-        <input type="text" class="form-control" id="authorName" name="text" placeholder="Page name" value="{{pageName}}">
-      </div>
-      <button type="submit" class="btn btn-default">Create Page</button>
-    </form>
-  </div>
-</template>
-
-
-
-
-<template name="PageEdit">
-  <div class="container flex-center">
-    <h2>{{page.name}}</h2>    
-  </div>
-  <div class="below-fold container-fluid flex-center">
-    <form class="">
-      <div class="form-group">
-        <label class="sr-only" for="authorName">Page Name</label>
-        <input type="text" class="form-control" id="authorName" name="text" placeholder="Page name" value="{{page.name}}">
-      </div>
-      <button type="submit" class="btn btn-default">Save Edits</button>
-    </form>
-  </div>
-  <!-- <span class="delete">delete</span> --> <!-- We don't really want to let people delete at will -->
-</template>
 
 
 

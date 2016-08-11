@@ -294,6 +294,9 @@ Router.route('/:_slug/add', {
     return Meteor.subscribe('pagesWithPageSlug', this.params._slug);
   },
   action: function () {
+    // Prevent anonymous adds
+    if ( !Meteor.userId() ) Router.go('/login');
+
     var slug = this.params._slug;
     currentPage = Pages.findOne({slug: slug});
     Session.set("DocumentTitle", "Add a " + currentPage.name + " quotation - Qurious");
@@ -315,7 +318,9 @@ Router.route('/:_slug/edit', {
     var slug = this.params._slug;
     currentPage = Pages.findOne({slug: slug});
 
-    console.log(Session.get("pageId"));
+    // Send the public to login so they can't add rubbish
+    // Might not be 100% secure so try putting this in methods too
+    if ( !Meteor.userId() ) Router.go('/login');
 
     // this.render('Nav', { to: 'nav'});
     if (currentPage) {
@@ -327,7 +332,11 @@ Router.route('/:_slug/edit', {
         }
       });
     } else {
-      this.render('404');
+      this.render('NewPage', {
+        data: {
+          pageName: function () { return Session.get('currentPageName'); },
+        }
+      });
     }
     // this.render('Nav', { to: 'nav'});
   }

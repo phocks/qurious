@@ -74,6 +74,7 @@ momentjs:moment@2.14.4
 mongo@1.1.10
 mongo-id@1.0.5
 mrt:fittext@1.2.0
+msavin:jetsetter@2.0.0
 msavin:mongol@2.0.1
 npm-bcrypt@0.8.7
 npm-mongo@1.5.45

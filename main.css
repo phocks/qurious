@@ -814,9 +814,15 @@ ul.quote.list li a {
   background-color: #fafafa;
 }
 
+@media (max-width: 768px) {
+  .list-quote {
+    font-size: 1em;
+  }
+}
+
 .list-quote a {
   color: black;
-  text-decoration: none;
+  /*text-decoration: none;*/
 }
 
 
@@ -828,7 +834,7 @@ ul.quote.list li a {
 
 .list-quote:nth-child(odd) a {
   color: white;
-  text-decoration: none;
+  /*text-decoration: none;*/
 }
 
 
@@ -839,9 +845,11 @@ ul.quote.list li a {
   background-color: #fafafa;
 }
 
-.create-block {
+.create-block, .basic-form {
   min-width: 300px;
 }
+
+
 
 a.flat-link {
   color: white;

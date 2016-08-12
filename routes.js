@@ -393,6 +393,7 @@ Router.route('/:_page_slug/:_quote_slug', {
 Router.route('/:_pageUrlText', {
   waitOn: function () {
     Session.set('pageSlug', this.params._pageUrlText);
+    Session.set("DocumentTitle", "Qurious");
 
     return [Meteor.subscribe('pagesWithPageSlug', this.params._pageUrlText),
       Meteor.subscribe('quotesSlug', this.params._pageUrlText)];

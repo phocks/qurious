@@ -349,13 +349,13 @@ if (Meteor.isClient) { // only runs on the client
   Template.AddQuote.events({
     "submit .add-quote": function (event) {
       var quoteText = event.target.quoteText.value;
-      var attributionText = event.target.attributionText.value;
+      var authorText = event.target.authorText.value;
       var pageSlug = Session.get('pageSlug');
       console.log("This is the quote text: " + quoteText);
 
       if (quoteText == "") return false; // prevent empty strings
 
-      Meteor.call('addQuoteToPage', quoteText, attributionText, pageSlug, function(error, result) {
+      Meteor.call('addQuoteToPage', quoteText, authorText, pageSlug, function(error, result) {
         var newQuoteSlug = result;
         console.log("New quote: " + newQuoteSlug);
         Meteor.call('checkQuoteSize', newQuoteSlug);

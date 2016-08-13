@@ -133,8 +133,12 @@
     {{else}}
     <div class="fluid-container text-center space-both list-quote">
       <div class="container">
-        <!-- <a class="flat-link" href="{{page.slug}}/add">No quotations found.</a> -->
-        No quotations found.
+        {{#if page.slug}}
+          <a class="flat-link" href="{{page.slug}}/add">No quotations found.</a>
+        {{else}}
+          No quotations found.
+        {{/if}}
+        
       </div>
     </div>
     {{/each}}

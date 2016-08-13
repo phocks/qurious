@@ -2,9 +2,14 @@
 
 import slug from 'slug';
 // slug('string', [{options} || 'replacement']);
-slug.defaults.mode ='rfc3986'; // makes it lowercase etc
-
-
+slug.defaults.modes['pretty'] = {
+    replacement: '-',
+    symbols: true,
+    remove: /[.]/g,
+    lower: true,
+    charmap: slug.charmap,
+    multicharmap: slug.multicharmap
+};
 
 // Let's test out an API call for use in the future
 Router.route('/api', function () {

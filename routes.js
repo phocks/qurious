@@ -42,7 +42,7 @@ Router.route('/', {
           return pages;
         },
         quotes: function () {
-          var quotes = Quotes.find({}, { sort: {createdAt: -1}, limit: 5 });
+          var quotes = Quotes.find({}, { limit: 5 });
           return quotes;
         },
       }
@@ -297,14 +297,23 @@ Router.route('/:_slug/add', {
     // Prevent anonymous adds
     if ( !Meteor.userId() ) Router.go('/login');
 
+
     var slug = this.params._slug;
     currentPage = Pages.findOne({slug: slug});
-    Session.set("DocumentTitle", "Add a " + currentPage.name + " quotation - Qurious");
-    Session.set("pageSlug", this.params._slug);
 
-    // this.render('Nav', { to: 'nav'});
-    this.render('AddQuote');
-    // this.render('Nav', { to: 'nav'});
+    if (!currentPage) {
+      this.render('404');
+    } else {
+      Session.set("DocumentTitle", "Add a " + currentPage.name + " quotation - Qurious");
+      Session.set("pageSlug", this.params._slug);
+
+      // this.render('Nav', { to: 'nav'});
+      this.render('AddQuote', {
+        data: {
+          author: function() { return currentPage.name }
+        }
+      });
+    }
   }
 });
 

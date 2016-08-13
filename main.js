@@ -589,11 +589,13 @@ if (Meteor.isClient) { // only runs on the client
     "submit form": function (event) {
       event.preventDefault();
 
-      var text = event.target.text.value;
-      // var pageId = Session.get('pageId');
-      console.log(text);
+      const pageText = event.target.text.value;
+      const pageSlug = Session.get('pageSlug');
+      
+      console.log("page text is " + pageText);
+      console.log("Page slug is " + pageSlug);
 
-      if (text == "") return false; // prevent empty strings
+      if (pageText == "") return false; // prevent empty strings
 
 
       if ( Meteor.user().profile && Meteor.user().profile.lastSubmissionTime ) {
@@ -610,15 +612,15 @@ if (Meteor.isClient) { // only runs on the client
       }
 
 
-      Meteor.call('addPage', text, function(error, result) {
+      Meteor.call('addPage', pageText, pageSlug, function(error, result) {
         if (error) {
           sAlert.info(error.reason);
         } else {
           var newPage = result;
           console.log("New page is: " + newPage);
-          // if (result) {
-          //   Router.go('/explore');
-          // }
+          if (result) {
+            Router.go('/' + pageSlug);
+          }
         }
       });
 

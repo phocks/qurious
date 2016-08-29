@@ -179,23 +179,23 @@ Router.route('/subscribe', {
 
 
 
-Router.route('/add', {
-  waitOn: function () {
+// Router.route('/add', {
+//   waitOn: function () {
     
-  },
-  action: function () {
-    // if (!Meteor.user() ) Router.go('/login'); // deny not logged in Meteor.loginWithTwitter. Doesn't seem to work because on refresh etc
-    // if (!Meteor.user() ) Meteor.loginWithTwitter();
+//   },
+//   action: function () {
+//     // if (!Meteor.user() ) Router.go('/login'); // deny not logged in Meteor.loginWithTwitter. Doesn't seem to work because on refresh etc
+//     // if (!Meteor.user() ) Meteor.loginWithTwitter();
 
-    this.layout('Layout');
-    Session.set("DocumentTitle","Qurious - Add Author");
+//     this.layout('Layout');
+//     Session.set("DocumentTitle","Qurious - Add Author");
 
-    this.render('Header', { to: 'header'});
+//     this.render('Header', { to: 'header'});
 
-    // this.render('Nav', { to: 'nav'});
-    this.render('Add');
-  }
-});
+//     // this.render('Nav', { to: 'nav'});
+//     this.render('Add');
+//   }
+// });
 
 
 

@@ -42,10 +42,10 @@ Router.route('/', {
     
     this.render('Home', {
       data: {      
-        pages: function () {
-          var pages = Pages.find({ verified:true }, { sort: {name: 1}});
-          return pages;
-        },
+        // pages: function () {
+        //   var pages = Pages.find({ verified:true }, { sort: {name: 1}});
+        //   return pages;
+        // },
         quotes: function () {
           var quotes = Quotes.find({}, { limit: 10 });
           return quotes;
@@ -59,30 +59,25 @@ Router.route('/', {
 
 Router.route('/explore', {
   waitOn: function () {
-    return Meteor.subscribe('pagesVerified');
+    return Meteor.subscribe('quotesLatest', 10);
   },
   action: function () {
     Session.set("DocumentTitle","Qurious");
 
-    this.render('Header', { to: 'header'});
-
-    // this.render('Nav', { to: 'nav'});
-
     this.render('Explore', {
-      data: {
-        pages: function () {
-          // We were going to only return ones in his bookmarks
-          // profileHasPages = Meteor.users.findOne( { _id: Meteor.userId(), "profile.pages": {$exists: true} });
-          // if (profileHasPages) {
-          //   var pages = Pages.find({ _id: { $in: Meteor.user().profile.pages } }, { sort: {name: 1}});
-          //   return pages;
-          // }
-
-          var pages = Pages.find({ verified:true }, { sort: {name: 1}});
-          return pages;
-        },        
+      data: {      
+        // pages: function () {
+        //   var pages = Pages.find({ verified:true }, { sort: {name: 1}});
+        //   return pages;
+        // },
+        quotes: function () {
+          var quotes = Quotes.find({}, { limit: 10 });
+          return quotes;
+        },
       }
     });
+
+    
   }
 });
 
@@ -315,7 +310,7 @@ Router.route('/:_slug/add', {
       // this.render('Nav', { to: 'nav'});
       this.render('AddQuote', {
         data: {
-          author: function() { return currentPage.name }
+          // author: function() { return currentPage.name } // removed due to source and topic
         }
       });
     }

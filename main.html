@@ -47,7 +47,7 @@
       </div>
       <div class="container-fluid black-background">
         <div class="content container text-center white-quote">
-          "Qurious is your home of quotations. We are still in production. For early access please <a href="/subscribe">subscribe</a>." &mdash;The Qurious Team
+          "Qurious is your home of quotations. We are still in production. For early access please <a href="/subscribe">subscribe</a> or feel free to take a <a href="/explore">quick look</a> around." <small>&mdash;The Qurious Team</small>
         </div>
       </div>
       {{> Footer}}
@@ -130,7 +130,7 @@
             &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{/if}}
           {{/if}}
           {{#if source}}
-            {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}">{{source}}</a>
+            {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>
           {{/if}}
           </small>
         </div>
@@ -271,12 +271,12 @@
         <form class="add-quote">
           <div class="form-group">
             <label class="sr-only" for="quoteText">Quotation Text</label>
-            <input type="text" class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text">
-            <!-- <textarea class="form-control" rows="3"></textarea> -->
+            <!-- <input type="text" class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text"> -->
+            <textarea class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text" rows="3"></textarea>
           </div>
           <div class="form-group">
             <label class="sr-only" for="quoteText">Author Text</label>
-            <input type="text" class="form-control" id="authorText" name="authorText" placeholder="Author (or character)" value="{{author}}">
+            <input type="text" class="form-control" id="authorText" name="authorText" placeholder="Author (or character)">
           </div>
           <button type="submit" class="btn btn-default">Add quote</button>
         </form>
@@ -582,32 +582,15 @@
 
 
 
-
+<!-- We use this for Anonymous to check us out -->
 <template name="Explore">
-  <div class="container backdrop explore content">
-    <section class="section">
-      <h1>Explore</h1>
-       <p class="lead"><!-- Qurious is still very new. Here is a list of verified notable authors. --> <!-- You can also see <a href="/explore/pending">pending authors</a> and help moderate them. --></p>
-    </section>
-    
-    <div class="section">
-      <ul class="author-list">
-        {{#each pages}}
-          <li><a href="/{{slug}}">{{name}}</a></li>
-        {{else}}
-          
-        {{/each}}
-        {{#if currentUser}}
-        <li><a href="/add">+</a></li>
-        {{/if}}
-      </ul>
+  <div id="main" class="container backdrop">
+    <div class="text-center flex-center home-container">
+      <h1>Qurious.</h1>
     </div>
-
-    <!-- {{#each pages}}
-      <h1><a href="/{{slug}}">{{name}}</a></h1>
-    {{/each}} -->
-
   </div>
+  {{> ThePageList}}
+  {{> ControlBar}}
 </template>
 
 

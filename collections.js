@@ -32,7 +32,19 @@ Schemas.Quote = new SimpleSchema({
   },
   author: {
     type: String,
-    label: "Where is it coming from",
+    label: "Where the words are coming from",
+    max: 512, 
+    optional: true,
+  },
+  source: {
+    type: String,
+    label: "A publication or Movie etc.",
+    max: 512, 
+    optional: true,
+  },
+  topic: {
+    type: String,
+    label: "What the hell is this about?",
     max: 512, 
     optional: true,
   },

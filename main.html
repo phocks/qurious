@@ -124,10 +124,15 @@
 
       <div class="fluid-container text-center space-both list-quote">
         <div class="container">
-          &ldquo;{{quotation}}&rdquo; 
+          &ldquo;{{quotation}}&rdquo;
+          <small>
           {{#if author}}
-            &mdash;<em><a href="/{{slugThisString author}}">{{author}}</a></em>
+            &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{/if}}
           {{/if}}
+          {{#if source}}
+            {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}">{{source}}</a>
+          {{/if}}
+          </small>
         </div>
       </div>
     {{else}}

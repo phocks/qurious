@@ -23,7 +23,7 @@ Router.route('/api', function () {
 /* The root home route landing for qurious.cc/   */
 Router.route('/', {
   waitOn: function () {
-    return Meteor.subscribe('quotesLatest', 10);
+    return Meteor.subscribe('quotesLatest', 64);
   },
   // onBeforeAction: function() {
   //   if (! Meteor.userId()) {
@@ -47,7 +47,7 @@ Router.route('/', {
         //   return pages;
         // },
         quotes: function () {
-          var quotes = Quotes.find({}, { limit: 10 });
+          var quotes = Quotes.find({}, { limit: 64 });
           return quotes;
         },
       }
@@ -59,7 +59,7 @@ Router.route('/', {
 
 Router.route('/explore', {
   waitOn: function () {
-    return Meteor.subscribe('quotesLatest', 10);
+    return Meteor.subscribe('quotesLatest', 64);
   },
   action: function () {
     Session.set("DocumentTitle","Qurious");
@@ -71,7 +71,7 @@ Router.route('/explore', {
         //   return pages;
         // },
         quotes: function () {
-          var quotes = Quotes.find({}, { limit: 10 });
+          var quotes = Quotes.find({}, { limit: 64 });
           return quotes;
         },
       }

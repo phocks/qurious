@@ -121,16 +121,18 @@
 <template name="ThePageList">
   <div class="the-page-list">
     {{#each quotes}}
-
       <div class="fluid-container text-center space-both list-quote">
         <div class="container">
           &ldquo;{{quotation}}&rdquo;
           <small>
-          {{#if author}}
-            &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{/if}}
+          {{#if author}} <!-- we need to do some hacky stuff for layout -->
+            &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
           {{/if}}
           {{#if source}}
-            {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>
+            {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>{{#if topic}},{{/if}}
+          {{/if}}
+          {{#if topic}}
+            on <a href="/{{slugThisString topic}}">{{topic}}</a>
           {{/if}}
           </small>
         </div>
@@ -253,8 +255,12 @@
             <input type="text" class="form-control" id="authorText" name="authorText" placeholder="Author, or Character">
           </div>
           <div class="form-group">
-            <label class="sr-only" for="quoteText">Source</label>
+            <label class="sr-only" for="sourceText">Source</label>
             <input type="text" class="form-control" id="sourceText" name="sourceText" placeholder="Source, or Work (optional)">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="topicText">Source</label>
+            <input type="text" class="form-control" id="topicText" name="topicText" placeholder="Topic (optional)">
           </div>
           <button type="submit" class="btn btn-default">Add quote</button>
         </form>

@@ -91,7 +91,7 @@ Schemas.Page = new SimpleSchema({
     type: String,
     label: "author? book? source? topic? what?",
     max: 64
-  }
+  },
   createdAt: {
     type: Date
   },

@@ -246,11 +246,15 @@
           <div class="form-group">
             <label class="sr-only" for="quoteText">Quotation Text</label>
             <!-- <input type="text" class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text"> -->
-            <textarea class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text" rows="3"></textarea>
+            <textarea class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text (no quotation marks)" rows="3" autofocus></textarea>
           </div>
           <div class="form-group">
-            <label class="sr-only" for="quoteText">Author Text</label>
-            <input type="text" class="form-control" id="authorText" name="authorText" placeholder="Author (or character)">
+            <label class="sr-only" for="quoteText">Author</label>
+            <input type="text" class="form-control" id="authorText" name="authorText" placeholder="Author, or Character">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="quoteText">Source</label>
+            <input type="text" class="form-control" id="sourceText" name="sourceText" placeholder="Source, or Work (optional)">
           </div>
           <button type="submit" class="btn btn-default">Add quote</button>
         </form>

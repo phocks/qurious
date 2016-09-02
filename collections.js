@@ -85,8 +85,13 @@ Schemas.Page = new SimpleSchema({
     type: String,
     label: "Formal name of page",
     unique: true,
-    max: 70,
+    max: 70
   },
+  type: {
+    type: String,
+    label: "author? book? source? topic? what?",
+    max: 64
+  }
   createdAt: {
     type: Date
   },
@@ -98,11 +103,11 @@ Schemas.Page = new SimpleSchema({
     type: String,
     label: "URL friendly string of words",
     unique: true,
-    max: 500,
+    max: 500
   },
   verified: {
     type: Boolean,
-    defaultValue: false,
+    defaultValue: false
   },
   deleted: {
     type: Boolean,

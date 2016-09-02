@@ -294,54 +294,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-  
 
-  // Adding pages to Qurious
-  // Template.Add.events({
-  //   "submit form": function (event) {
-  //     var text = event.target.text.value;
-  //     // var pageId = Session.get('pageId');
-  //     console.log(text);
-
-  //     if (text == "") return false; // prevent empty strings
-
-
-  //     if ( Meteor.user().profile && Meteor.user().profile.lastSubmissionTime ) {
-  //       var lastSub = moment(Meteor.user().profile.lastSubmissionTime);
-  //       var compare = moment().subtract(5, 'seconds');
-
-  //       // Prevent multiple submissions in short period
-  //       if ( compare < lastSub ) { 
-  //         console.log ('compare less than lastsub');
-  //         sAlert.info('Hold up. Wait a minute or two.');
-  //         return false;
-  //       }
-  //       else console.log('good to go');
-  //     }
-
-
-  //     Meteor.call('addPage', text, function(error, result) {
-  //       if (error) {
-  //         sAlert.info(error.reason);
-  //       } else {
-  //         var newPage = result;
-  //         console.log("New page is: " + newPage);
-  //         if (result) {
-  //           Router.go('/explore');
-  //         }
-          
-  //       }
-  //     });
-
-      
-
-  //     // Clear form
-  //     event.target.text.value = "";
-
-  //     // Prevent default action from form submit
-  //     return false;
-  //   },
-  // });
 
 
 

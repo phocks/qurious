@@ -665,7 +665,7 @@ if (Meteor.isServer) {
     //process.env.HTTP_FORWARDED_COUNT = 2; // this seems to shift x-forwarded-for list for ip
 
     // Did something change so we had to do this? this isn't working anyway wtf
-    //process.env.ROOT_URL = "https://qurious.cc";
+    // process.env.ROOT_URL = "https://qurious.cc";
 
     // Here we are going to get the client IP Address
     Meteor.onConnection(function(conn) {

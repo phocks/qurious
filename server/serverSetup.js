@@ -20,6 +20,6 @@ Accounts.emailTemplates.verifyEmail.html = function (user, url) {
 
 // This removes the # in the url so it can be processed by iron-router
 Accounts.urls.resetPassword = function(token) {
-  //return Meteor.absoluteUrl('password-reset/' + token);
-  return 'https://qurious.cc/password-reset/' + token;
+  return Meteor.absoluteUrl('password-reset/' + token);
+  //return 'https://qurious.cc/password-reset/' + token;
 };

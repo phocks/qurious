@@ -540,7 +540,9 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
-
+  Template.NewPage.onRendered( function() {
+    $("select").select2({dropdownCssClass: 'dropdown-inverse'});
+  });
 
   Template.NewPage.events({
     "submit form": function (event) {

@@ -102,6 +102,10 @@ h1 {
   margin-bottom: 0.4em;
 }
 
+h2 a {
+  color: black;
+}
+
 /*p {
   font-size: 28px;
   line-height: 1.6;
@@ -182,8 +186,8 @@ a.custom:hover, a.custom:focus {
 img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
-/* Get rid of form input shadow in iOS */
-input[type] {   
+/* Get rid of form input shadow in iOS - ok but this hides checkboxes.... so yeah */
+input[type=text],input[type=password] {   
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;   

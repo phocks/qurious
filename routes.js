@@ -453,56 +453,6 @@ Router.route('/:_pageUrlText', {
         }
       });
     }
-
-
-    // var slug = this.params._slug;
-    
-    // Session.set('pageSlug', slug);
-
-
-    // if (!currentPage) {
-    //   Session.set("DocumentTitle", "404 not found - Qurious");
-    //   this.render('404');
-    //   return false;
-    // }
-    // else {
-    //   Session.set("DocumentTitle", currentPage.name + " - Qurious");
-    //   Meteor.subscribe('quotesAuthorId', currentPage._id);
-    // }
-
-  
-
-
-
-
-
-    // if (currentPage.verified) {
-    //   // this.render('Header', { to: 'header'});
-    //   this.render('Page', {
-    //     data: {
-    //       page: function () {
-    //         return Pages.findOne({slug: slug});
-    //         },
-    //       quotes: function () {
-    //         var quotes = Quotes.find( { authorId: currentPage._id, verified: true}, { sort: {quotation: 1}} );
-    //         return quotes;
-    //       },
-    //     }
-    //   });
-    // } 
-    // else {
-    //   this.render('PageUnverified',  {
-    //     data: {
-    //       page: function () {
-    //         return Pages.findOne({slug: slug});
-    //         },
-    //       quotes: function () {
-    //         var quotes = Quotes.find( { authorId: currentPage._id}, { sort: {quotation: 1}} );
-    //         return quotes;
-    //       },
-    //     }
-    //   });
-    // }
   }  // end of action
 });
 

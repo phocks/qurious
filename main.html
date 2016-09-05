@@ -158,9 +158,9 @@
 
 <template name="PageNotFound">
   <div class="container flex-center">
-    <h2>Page not found</h2>    
+    <h2><a href="/{{pageSlug}}/edit">Page not found</a></h2>    
   </div>
-  <div class="below-fold container-fluid flex-center">
+  <!-- <div class="below-fold container-fluid flex-center"> -->
     <!-- <form class="form-inline">
       <div class="form-group">
         <label class="sr-only" for="authorName">Page Name</label>
@@ -168,17 +168,17 @@
       </div>
       <button type="submit" class="btn btn-default">Create Page</button>
     </form> -->
-    <a href="/{{pageSlug}}/edit" class="btn btn-default">Add Page</a>
-  </div>
+    <!-- <a href="/{{pageSlug}}/edit" class="btn btn-default">Add Page</a> -->
+  <!-- </div> -->
 </template>
 
 
 
 
 <template name="PageEdit">
-  <div class="container flex-center">
+  <!-- <div class="container flex-center">
     <h2>{{page.name}}</h2>    
-  </div>
+  </div> -->
   <div class="below-fold container-fluid flex-center">
     <form class="basic-form">
       <div class="form-group">
@@ -199,6 +199,15 @@
       <div class="form-group">
         <label class="sr-only" for="authorName">Page Name</label>
         <input type="text" class="form-control" id="pageName" name="text" placeholder="Page name" value="{{pageName}}">
+      </div>
+      <div class="form-group">
+        <select class="form-control select select-primary select-block mbl">
+          <optgroup label="Page Type">
+            <option value="author">Author</option>
+            <option value="source">Source</option>
+            <option value="topic">Topic</option>
+          </optgroup>
+        </select>
       </div>
       <button type="submit" class="btn btn-default">Save Page</button>
     </form>

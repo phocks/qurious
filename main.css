@@ -859,3 +859,12 @@ a.flat-link {
   color: white;
   text-decoration: none;
 }
+
+a.header-link {
+  color: black;
+}
+
+
+.select a {
+  text-decoration: none;
+}

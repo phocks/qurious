@@ -86,7 +86,7 @@
 <template name="Page">
   <div class="container backdrop flex-center text-center">
     <div class="page-title-box">
-      <h1 class="page-name">{{page.name}}</h1>
+      <h1 class="page-name"><a class="header-link" href="{{page.slug}}/add">{{page.name}}</a></h1>
       <!-- <p>{{page.description}}</p> -->
     </div>
 
@@ -201,12 +201,11 @@
         <input type="text" class="form-control" id="pageName" name="text" placeholder="Page name" value="{{pageName}}">
       </div>
       <div class="form-group">
-        <select class="form-control select select-primary select-block mbl">
-          <optgroup label="Page Type">
-            <option value="author">Author</option>
-            <option value="source">Source</option>
-            <option value="topic">Topic</option>
-          </optgroup>
+        <select class="form-control select select-primary select-block mbl" name=type>
+          <option selected value="">Choose page type</option>
+          <option value="author">Author (character, person, etc.)</option>
+          <option value="source">Source (book, movie, etc.)</option>
+          <option value="topic">Topic (subject, tag, etc.)</option>
         </select>
       </div>
       <button type="submit" class="btn btn-default">Save Page</button>

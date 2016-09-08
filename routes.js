@@ -288,7 +288,7 @@ Router.route('/logout', function() {
 });
 
 
-// How to add an author
+// How to add an author, or maybe a quote
 Router.route('/:_slug/add', {
   waitOn: function () {
     return Meteor.subscribe('pagesWithPageSlug', this.params._slug);

@@ -550,11 +550,13 @@ if (Meteor.isClient) { // only runs on the client
 
       const pageText = event.target.text.value;
       const pageSlug = Session.get('pageSlug');
+      const pageType = event.target.type.value;
       
       console.log("page text is " + pageText);
       console.log("Page slug is " + pageSlug);
+      console.log("Page type is " + pageType);
 
-      if (pageText == "") return false; // prevent empty strings
+      if (pageText === "" || pageType === "") return false; // prevent empty strings
 
 
       if ( Meteor.user().profile && Meteor.user().profile.lastSubmissionTime ) {
@@ -571,7 +573,7 @@ if (Meteor.isClient) { // only runs on the client
       }
 
 
-      Meteor.call('addPage', pageText, pageSlug, function(error, result) {
+      Meteor.call('addPage', pageText, pageSlug, pageType, function(error, result) {
         if (error) {
           sAlert.info(error.reason);
         } else {

@@ -529,15 +529,11 @@ if (Meteor.isClient) { // only runs on the client
     }
   });
 
-
-  Template.PageEdit.events({
-    "click .delete": function () {
-      if (confirm('Really delete ?')) {
-        Meteor.call('deleteAuthor', Session.get("pageId"));
-        Router.go('/explore')
-      }
-    }
+  Template.PageEdit.onRendered( function() {
+    $("select").select2({dropdownCssClass: 'dropdown-inverse'});
   });
+
+
 
 
   Template.NewPage.onRendered( function() {
@@ -602,16 +598,17 @@ if (Meteor.isClient) { // only runs on the client
     "submit form": function (event) {
       event.preventDefault();
 
-      var text = event.target.text.value;
+      const newPageName = event.target.text.value;
+      const newPageType = event.target.type.value;
       // var pageId = Session.get('pageId');
-      console.log(text);
+      console.log(newPageName);
 
-      if (text == "") return false; // prevent empty strings
+      if (newPageName === "" || newPageType === "") return false; // prevent empty strings
 
 
       if ( Meteor.user().profile && Meteor.user().profile.lastSubmissionTime ) {
         var lastSub = moment(Meteor.user().profile.lastSubmissionTime);
-        var compare = moment().subtract(5, 'seconds');
+        var compare = moment().subtract(64, 'seconds');
 
         // Prevent multiple submissions in short period
         if ( compare < lastSub ) { 
@@ -623,7 +620,7 @@ if (Meteor.isClient) { // only runs on the client
       }
 
 
-      Meteor.call('updatePage', Session.get('pageSlug'), text);
+      Meteor.call('updatePage', Session.get('pageSlug'), newPageName, newPageType);
 
       
       Router.go("/" + Session.get('pageSlug'));
@@ -633,9 +630,14 @@ if (Meteor.isClient) { // only runs on the client
 
       // Prevent default action from form submit
       // return false; // now handled up top
+    },
+    "click .delete": function () {
+      if (confirm('Really delete ?')) {
+        Meteor.call('deleteAuthor', Session.get("pageId"));
+        Router.go('/explore')
+      }
     }
   });
-
 
   
 

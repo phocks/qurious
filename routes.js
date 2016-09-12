@@ -310,7 +310,10 @@ Router.route('/:_slug/add', {
       // this.render('Nav', { to: 'nav'});
       this.render('AddQuote', {
         data: {
-          // author: function() { return currentPage.name } // removed due to source and topic
+          currentPage: function() { return currentPage },
+          isAuthor: function() { if (currentPage.type === "author") return true },
+          isSource: function() { if (currentPage.type === "source") return true },
+          isTopic: function() { if (currentPage.type === "topic") return true },
         }
       });
     }
@@ -337,7 +340,16 @@ Router.route('/:_slug/edit', {
       Session.set("pageId", currentPage._id);
       this.render('PageEdit', {
         data: {
-          page: currentPage
+          page: currentPage,
+          authorSelected: function () {
+            return (currentPage.type === "author") ? 'selected' : '';
+          },
+          sourceSelected: function () {
+            return (currentPage.type === "source") ? 'selected' : '';
+          },
+          topicSelected: function () {
+            return (currentPage.type === "topic") ? 'selected' : '';
+          }
         }
       });
     } else {
@@ -430,7 +442,7 @@ Router.route('/:_pageUrlText', {
     }
 
     if (currentPage) {
-      Session.set("DocumentTitle", currentPage.name + " - Qurious");
+      Session.set("DocumentTitle", currentPage.name);
       this.render('Page', {
         data: {
           page: function () {

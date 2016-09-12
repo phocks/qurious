@@ -331,7 +331,7 @@ Router.route('/:_slug/edit', {
     currentPage = Pages.findOne({slug: slug});
 
     // Send the public to login so they can't add rubbish
-    // Might not be 100% secure so try putting this in methods too
+    // Might not be 100% secure so try putting this in methods too?
     if ( !Meteor.userId() ) Router.go('/login');
 
     // this.render('Nav', { to: 'nav'});
@@ -380,7 +380,7 @@ Router.route('/:_page_slug/:_quote_slug', {
     if (quote) {
       Meteor.call('checkQuoteSize', quoteSlug);
     } else {
-      Meteor.setTimeout( function () { Router.go('/not-found')}, 1000);
+      Meteor.setTimeout( function () { Router.go('/not-found'), {}, {replaceState: true}}, 1000);
     }
 
     Session.set("DocumentTitle", "A quote by " + currentPage.name + " - Qurious");
@@ -416,12 +416,15 @@ Router.route('/:_pageUrlText', {
     Session.set('pageSlug', this.params._pageUrlText);
     Session.set("DocumentTitle", "Qurious");
 
+    
+
+    // put each subscription in an array to wait until all are done
     return [Meteor.subscribe('pagesWithPageSlug', this.params._pageUrlText),
       Meteor.subscribe('quotesSlug', this.params._pageUrlText)];
             
   },
   action: function () {
-    const pageUrlText = this.params._pageUrlText; // haven't sluggified it yet
+    const pageUrlText = this.params._pageUrlText; // haven't sluggified it yet 
     const pageSlug = slug(pageUrlText);
 
     // Meteor.subscribe('pagesWithPageSlug', pageSlug);
@@ -436,20 +439,29 @@ Router.route('/:_pageUrlText', {
     // console.log("Current page name is " + Session.get("currentPageName"));  // testing
 
 
+
+
     if (pageUrlText !== pageSlug) {
       console.log('We are now navigating')
       Router.go("/" + pageSlug, {}, {replaceState: true}); // second argument needed here
     }
 
     if (currentPage) {
+      Meteor.subscribe('quotesWithPageName', currentPage.name);
       Session.set("DocumentTitle", currentPage.name);
       this.render('Page', {
         data: {
           page: function () {
-            return Pages.findOne({slug: Session.get('pageSlug')});
+            // return Pages.findOne({slug: Session.get('pageSlug')});
+            return currentPage;
             },
           quotes: function () {
-            var quotes = Quotes.find( { pageSlugs: Session.get('pageSlug') } );
+            var quotes = Quotes.find( { $or: [
+              { pageSlugs: Session.get('pageSlug') },
+              { author: currentPage.name },
+              { source: currentPage.name },
+              { topic: currentPage.name }
+              ] } );
             return quotes;
           },
         }

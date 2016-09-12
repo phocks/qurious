@@ -123,7 +123,7 @@
     {{#each quotes}}
       <div class="fluid-container text-center space-both list-quote">
         <div class="container">
-          &ldquo;{{quotation}}&rdquo;
+          &ldquo;<!-- <a href="/{{../page.slug}}/{{slug}}"> -->{{quotation}}<!-- </a> -->&rdquo;
           <small>
           {{#if author}} <!-- we need to do some hacky stuff for layout -->
             &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}

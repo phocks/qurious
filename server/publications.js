@@ -63,6 +63,20 @@ Meteor.publish("quotesSlug", function (slug) {
 
 
 
+Meteor.publish("quotesWithPageName", function (pageName) {
+  check(pageName, String);
+  var quotes = Quotes.find( { $or: [
+              { author: pageName },
+              { source: pageName },
+              { topic: pageName }
+              ] } );
+  
+
+  return quotes;
+});
+
+
+
 
 Meteor.publish("quotesAuthorId", function (authorId) {
   return Quotes.find({ authorId: authorId });

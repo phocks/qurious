@@ -89,7 +89,6 @@
       <h1 class="page-name"><a class="header-link" href="{{page.slug}}/edit">{{page.name}}</a></h1>
       <!-- <p>{{page.description}}</p> -->
     </div>
-
   </div>
 
   {{> ThePageList}}
@@ -123,7 +122,9 @@
     {{#each quotes}}
       <div class="fluid-container text-center space-both list-quote">
         <div class="container">
-          &ldquo;<!-- <a href="/{{../page.slug}}/{{slug}}"> -->{{quotation}}<!-- </a> -->&rdquo;
+          <div class="quotation">
+            &ldquo;<a href="/quote/{{slug}}">{{quotation}}</a>&rdquo;
+          </div>
           <small>
           {{#if author}} <!-- we need to do some hacky stuff for layout -->
             &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
@@ -171,6 +172,50 @@
     <!-- <a href="/{{pageSlug}}/edit" class="btn btn-default">Add Page</a> -->
   <!-- </div> -->
 </template>
+
+
+<template name="SingleQuote">
+  <div class="backdrop flex-center">
+    <div class="fluid-container text-center space-both single-quote">
+      <div class="container quote">
+      {{#with quote}}
+        <div class="quotation">
+          &ldquo;<a href="/quote/{{slug}}/edit">{{quotation}}</a>&rdquo;
+        </div>
+        <small>
+        {{#if author}} <!-- we need to do some hacky stuff for layout -->
+          &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
+        {{/if}}
+        {{#if source}}
+          {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>{{#if topic}},{{/if}}
+        {{/if}}
+        {{#if topic}}
+          on <a href="/{{slugThisString topic}}">{{topic}}</a>
+        {{/if}}
+        </small>
+      {{/with}}
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+<template name="DisplayQuote">
+  <div class="container backdrop flex-center">
+    <div class="quote">
+      <h1 style="margin-top:0"><i class="fa fa-quote-left"></i></h1>
+      <div class="quotation {{quote.length}}">
+        {{quote.quotation}}
+      </div>
+      <div class="attribution"><a href="/{{page.slug}}">{{page.name}}</a></div>
+      <!-- <i class="fa fa-quote-right"></i> -->
+    </div>
+    <!-- <div>flag</div> -->
+  </div>
+</template>
+
+
 
 
 
@@ -230,26 +275,6 @@
 
 
 
-<template name="Footer">
-  {{#if loggingIn}}
-  <!-- nothing -->
-  {{else}}
-  <div class="container-fluid footer">
-    <div class="content container text-center">
-      <small>from <a href="/">Meagre Inc.</a></small>
-    </div>
-  </div>
-  {{/if}}
-</template>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -278,6 +303,54 @@
         </form>
       </div>
   </div>
+</template>
+
+
+<template name="EditQuote">
+  <div class="container backdrop flex-center">
+    <div class="create-block">
+        <form class="add-quote">
+          <div class="form-group">
+            <label class="sr-only" for="quoteText">Quotation Text</label>
+            <!-- <input type="text" class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text"> -->
+            <textarea class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text (no quotation marks)" rows="3" autofocus></textarea>
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="quoteText">Author</label>
+            <input type="text" class="form-control" id="authorText" name="authorText" placeholder="Author, or Character (optional)" value="{{#if isAuthor}}{{currentPage.name}}{{/if}}">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="sourceText">Source</label>
+            <input type="text" class="form-control" id="sourceText" name="sourceText" placeholder="Source, or Work (optional)" value="{{#if isSource}}{{currentPage.name}}{{/if}}">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="topicText">Source</label>
+            <input type="text" class="form-control" id="topicText" name="topicText" placeholder="Topic (optional)" value="{{#if isTopic}}{{currentPage.name}}{{/if}}">
+          </div>
+          <button type="submit" class="btn btn-default">Add quote</button>
+        </form>
+      </div>
+  </div>
+</template>
+
+
+
+
+
+
+
+
+
+<template name="Footer">
+  {{#if loggingIn}}
+  <!-- nothing -->
+  {{else}}
+  <div class="container-fluid footer">
+    <div class="content container text-center">
+      <small>from <a href="/">Meagre Inc.</a></small>
+    </div>
+  </div>
+  {{/if}}
 </template>
 
 
@@ -611,19 +684,7 @@
 
 
 
-<template name="DisplayQuote">
-  <div class="container backdrop flex-center">
-    <div class="quote">
-      <h1 style="margin-top:0"><i class="fa fa-quote-left"></i></h1>
-      <div class="quotation {{quote.length}}">
-        {{quote.quotation}} 
-      </div>
-      <div class="attribution"><a href="/{{page.slug}}">{{page.name}}</a></div>
-      <!-- <i class="fa fa-quote-right"></i> -->
-    </div>
-    <!-- <div>flag</div> -->
-  </div>
-</template>
+
 
 
 

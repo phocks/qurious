@@ -14,6 +14,15 @@
 // Some npm imports
 
 import slug from 'slug';
+// slug('string', [{options} || 'replacement']);
+slug.defaults.modes['pretty'] = {
+    replacement: '-',
+    symbols: true,
+    remove: /[.]/g,
+    lower: true,
+    charmap: slug.charmap,
+    multicharmap: slug.multicharmap
+};
 
 
 /*
@@ -298,35 +307,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-    // When adding quotations from the Author
-  Template.AddQuote.events({
-    "submit .add-quote": function (event) {
-      event.preventDefault();
-      
-      var quoteText = event.target.quoteText.value;
-      var authorText = event.target.authorText.value;
-      var sourceText = event.target.sourceText.value;
-      var topicText = event.target.topicText.value;
-      var pageSlug = Session.get('pageSlug');
-      console.log("This is the quote text: " + quoteText);
 
-      if (quoteText == "") return false; // prevent empty strings
-
-      Meteor.call('addQuoteToPage', quoteText, authorText, sourceText, topicText, pageSlug, function(error, result) {
-        var newQuoteSlug = result;
-        console.log("New quote: " + newQuoteSlug);
-        Meteor.call('checkQuoteSize', newQuoteSlug);
-        Router.go('/' + pageSlug);
-      });
-
-      // Clear form
-      event.target.quoteText.value = "";
-
-
-      // Prevent default action from form submit
-      return false;
-    },
-  });
 
 
 
@@ -640,6 +621,41 @@ if (Meteor.isClient) { // only runs on the client
   });
 
   
+
+  // When adding quotations from the Author
+  Template.AddQuote.events({
+    "submit .add-quote": function (event) {
+      event.preventDefault();
+      
+      var quoteText   = event.target.quoteText.value;
+      var authorText  = event.target.authorText.value;
+      var sourceText  = event.target.sourceText.value;
+      var topicText   = event.target.topicText.value;
+      var pageSlug    = Session.get('pageSlug');
+      console.log("This is the quote text: " + quoteText);
+
+      if (quoteText == "") return false; // prevent empty strings
+
+      Meteor.call('addQuoteToPage', 
+                  quoteText, 
+                  authorText, 
+                  sourceText, 
+                  topicText, 
+                  pageSlug, 
+                  function(error, result) {
+        var newQuoteSlug = result;
+        console.log("New quote: " + newQuoteSlug);
+        Meteor.call('checkQuoteSize', newQuoteSlug);
+        Router.go('/' + pageSlug);
+      });
+
+      // Clear form
+      event.target.quoteText.value = "";
+
+      // Prevent default action from form submit
+      return false;
+    },
+  });
 
 
 

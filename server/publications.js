@@ -47,7 +47,7 @@ Meteor.publish("quotesSlugUser", function (user_slug) {
 
 Meteor.publish("quotesSlug", function (slug) {
   check(slug, String);
-  var quote = Quotes.find({ pageSlugs: slug });
+  var quote = Quotes.find({ pageSlugs: slug }); // finds within arrays too as pageSlugs
   // console.log(quote); // trying to get counter quotes working too../....
   // if (!quote) quote = Quotes.find({ quote_id: slug });
 
@@ -62,13 +62,21 @@ Meteor.publish("quotesSlug", function (slug) {
 });
 
 
+Meteor.publish("quoteSingle", function (slugString) {
+  check(slugString, String);
+  var quote = Quotes.find({ slug: slugString }); // finds within arrays too as pageSlugs
 
-Meteor.publish("quotesWithPageName", function (pageName) {
-  check(pageName, String);
+  return quote;
+});
+
+
+
+Meteor.publish("quotesWithSlugInAuthorEtc", function (pageSlug) {
+  check(pageSlug, String);
   var quotes = Quotes.find( { $or: [
-              { author: pageName },
-              { source: pageName },
-              { topic: pageName }
+              { authorSlug: pageSlug },
+              { sourceSlug: pageSlug },
+              { topicSlug: pageSlug }
               ] } );
   
 

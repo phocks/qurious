@@ -364,11 +364,44 @@ Router.route('/:_slug/edit', {
 });
 
 
+Router.route('/quote/:_quote_slug', {
+  waitOn: function () {
+    return Meteor.subscribe('quoteSingle', this.params._quote_slug);
+  },
+  action: function () {
+    var quoteSlug = this.params._quote_slug;
+    console.log("Current quoteSlug is: " + quoteSlug );
+    var quote = Quotes.findOne({ slug: quoteSlug });
+
+    if (quote) {
+      Meteor.call('checkQuoteSize', quoteSlug);
+    } 
+    // else {
+    //   Meteor.setTimeout( function () { Router.go('/not-found'), {}, {replaceState: true}}, 1000);
+    // }
+
+    Session.set("DocumentTitle", "Qurious");
+
+    this.render('SingleQuote', {
+      data: {
+        quote: function () {
+          var quote = Quotes.findOne({ slug: quoteSlug });
+          return quote;
+        }
+      }
+    });
+  }
+});
+
+
+
 // Display the single quote you found
+// Moving to /quote/_quote_slug probably
 Router.route('/:_page_slug/:_quote_slug', {
   waitOn: function () {
-    Meteor.subscribe('quotesSlug', this.params._quote_slug);
-    return Meteor.subscribe('pagesWithPageSlug', this.params._page_slug);
+    
+    return [Meteor.subscribe('pagesWithPageSlug', this.params._page_slug),
+            Meteor.subscribe('quotesSlug', this.params._quote_slug)];
   },
   action: function () {
     var pageSlug = this.params._page_slug;
@@ -420,7 +453,8 @@ Router.route('/:_pageUrlText', {
 
     // put each subscription in an array to wait until all are done
     return [Meteor.subscribe('pagesWithPageSlug', this.params._pageUrlText),
-      Meteor.subscribe('quotesSlug', this.params._pageUrlText)];
+            Meteor.subscribe('quotesSlug', this.params._pageUrlText),
+            Meteor.subscribe('quotesWithSlugInAuthorEtc', this.params._pageUrlText)];
             
   },
   action: function () {
@@ -447,7 +481,7 @@ Router.route('/:_pageUrlText', {
     }
 
     if (currentPage) {
-      Meteor.subscribe('quotesWithPageName', currentPage.name);
+      // Meteor.subscribe('quotesWithPageName', currentPage.name);
       Session.set("DocumentTitle", currentPage.name);
       this.render('Page', {
         data: {
@@ -458,9 +492,9 @@ Router.route('/:_pageUrlText', {
           quotes: function () {
             var quotes = Quotes.find( { $or: [
               { pageSlugs: Session.get('pageSlug') },
-              { author: currentPage.name },
-              { source: currentPage.name },
-              { topic: currentPage.name }
+              { authorSlug: currentPage.slug }, // 3 permanent slugs and then an array of others
+              { sourceSlug: currentPage.slug }, // for some reason this will be best I think
+              { topicSlug: currentPage.slug }
               ] } );
             return quotes;
           },

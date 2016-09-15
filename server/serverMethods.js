@@ -5,7 +5,14 @@
 // Trying out a new npm package we are able to in Meteor 1.3 sweet
 import slug from 'slug';
 // slug('string', [{options} || 'replacement']);
-slug.defaults.mode ='rfc3986'; // makes it lowercase etc
+slug.defaults.modes['pretty'] = {
+    replacement: '-',
+    symbols: true,
+    remove: /[.]/g,
+    lower: true,
+    charmap: slug.charmap,
+    multicharmap: slug.multicharmap
+};
 
 
 Meteor.methods({

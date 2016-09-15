@@ -106,34 +106,7 @@ h2 a {
   color: black;
 }
 
-/*p {
-  font-size: 28px;
-  line-height: 1.6;
-}*/
 
-
-/* Testing some underlining fancy stuff */
-
-/*a.custom {
-  text-decoration: none;
-  position: relative;
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 2px, #333333 2px, #333333 3px, rgba(0, 0, 0, 0) 3px);
-}
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
-  a.custom {
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 2px, #333333 2px, #333333 2.5px, rgba(0, 0, 0, 0) 2.5px);
-  }
-}
-a.custom:hover, a.custom:focus {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 2px, #55abad 2px, #55abad 3px, rgba(0, 0, 0, 0) 3px);
-}
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
-  a.custom:hover, a.custom:focus {
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 2px, #55abad 2px, #55abad 2.5px, rgba(0, 0, 0, 0) 2.5px);
-  }
-}
-*/
 
 
 .black-background {
@@ -607,30 +580,7 @@ ul.quote.list li a {
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .lite-quote {
-    font-size: 2.2em;
-  }
 
-  ul.menu-group {
-    font-size: 64px;
-  }
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .lite-quote {
-    font-size: 2.4em;
-  }
-}
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  .lite-quote {
-    font-size: 2.6em;
-  }
-}
 
 
 
@@ -718,54 +668,6 @@ ul.quote.list li a {
 
 
 
-/* Display Single Quote */
-
-.quote {
-  /*background-color: white;*/
-  /*max-width: 1080px;*/
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-
-
-.quotation {
-  font-size: 1.8em;
-  line-height: 1.5;
-}
-
-.attribution {
-  /*white-space: nowrap;*/
-  font-size: 1.8em;
-  margin-top: 1em;
-  color: #666;
-}
-
-@media (min-width: 768px) {
-  .quotation {
-    font-size: 2.5em;
-  }
-
-  .attribution {
-    /*white-space: nowrap;*/
-    font-size: 2.5em;
-  }
-}
-
-@media (min-width: 1200px) {
-  .quotation {
-    font-size: 3em;
-  }
-
-  .attribution {
-    /*white-space: nowrap;*/
-    font-size: 3em;
-  }
-}
-
-
-.section {
-  padding-top: 6vh;
-}
 
 
 
@@ -826,9 +728,13 @@ ul.quote.list li a {
 
 .list-quote a {
   color: black;
-  /*text-decoration: none;*/
+
 }
 
+
+.list-quote .quotation a:hover {
+  text-decoration: none;
+} 
 
 
 .list-quote:nth-child(odd) {
@@ -840,6 +746,21 @@ ul.quote.list li a {
   color: white;
   /*text-decoration: none;*/
 }
+
+
+.single-quote {
+  font-size: 1.6em;
+  color: black;
+}
+
+.single-quote a {
+  color: black;
+}
+
+.single-quote .quotation a:hover {
+  text-decoration: none;
+}
+
 
 
 .below-fold {

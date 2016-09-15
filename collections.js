@@ -48,6 +48,24 @@ Schemas.Quote = new SimpleSchema({
     max: 512, 
     optional: true,
   },
+  authorSlug: {
+    type: String,
+    label: "Where the words are coming from",
+    max: 512, 
+    optional: true,
+  },
+  sourceSlug: {
+    type: String,
+    label: "A publication or Movie etc.",
+    max: 512, 
+    optional: true,
+  },
+  topicSlug: {
+    type: String,
+    label: "What the hell is this about?",
+    max: 512, 
+    optional: true,
+  },
   createdAt: { type: Date },
   createdBy: { type: String },
   slug: {

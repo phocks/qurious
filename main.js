@@ -510,16 +510,17 @@ if (Meteor.isClient) { // only runs on the client
     }
   });
 
+
+
   Template.PageEdit.onRendered( function() {
     $("select").select2({dropdownCssClass: 'dropdown-inverse'});
   });
 
 
-
-
   Template.NewPage.onRendered( function() {
     $("select").select2({dropdownCssClass: 'dropdown-inverse'});
   });
+
 
   Template.NewPage.events({
     "submit form": function (event) {
@@ -656,6 +657,42 @@ if (Meteor.isClient) { // only runs on the client
       return false;
     },
   });
+
+  // When adding quotations from the Author
+  Template.EditQuote.events({
+    "submit .add-quote": function (event) {
+      event.preventDefault();
+      
+      var quoteSlug   = Session.get('quoteSlug');
+      var quoteText   = event.target.quoteText.value;
+      var authorText  = event.target.authorText.value;
+      var sourceText  = event.target.sourceText.value;
+      var topicText   = event.target.topicText.value;
+      console.log("This is the quote text: " + quoteText);
+
+      if (quoteText == "") return false; // prevent empty strings
+
+      Meteor.call('editQuote', 
+                  quoteSlug,
+                  quoteText, 
+                  authorText, 
+                  sourceText, 
+                  topicText,
+                  function(error, result) {
+        var editedQuoteSlug = result;
+        console.log("Edited quote: " + quoteSlug);
+        Meteor.call('checkQuoteSize', quoteSlug);
+        Router.go('/quote/' + quoteSlug);
+      });
+
+      // Clear form
+      event.target.quoteText.value = "";
+
+      // Prevent default action from form submit
+      return false;
+    },
+  });
+
 
 
 

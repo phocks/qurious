@@ -334,7 +334,6 @@ Router.route('/:_slug/edit', {
     // Might not be 100% secure so try putting this in methods too?
     if ( !Meteor.userId() ) Router.go('/login');
 
-    // this.render('Nav', { to: 'nav'});
     if (currentPage) {
       Session.set("DocumentTitle", "Editing " + currentPage.name + " - Qurious");
       Session.set("pageId", currentPage._id);
@@ -376,9 +375,9 @@ Router.route('/quote/:_quote_slug', {
     if (quote) {
       Meteor.call('checkQuoteSize', quoteSlug);
     } 
-    // else {
-    //   Meteor.setTimeout( function () { Router.go('/not-found'), {}, {replaceState: true}}, 1000);
-    // }
+    else {
+      Meteor.setTimeout( function () { Router.go('/not-found'), {}, {replaceState: true}}, 1000);
+    }
 
     Session.set("DocumentTitle", "Qurious");
 
@@ -392,6 +391,42 @@ Router.route('/quote/:_quote_slug', {
     });
   }
 });
+
+
+
+
+Router.route('/quote/:_quote_slug/edit', {
+  waitOn: function () {
+    Session.set('quoteSlug', this.params._quote_slug);
+    return Meteor.subscribe('quoteSingle', this.params._quote_slug);
+  },
+  action: function () {
+    const quoteSlug = this.params._quote_slug;
+    const quote = Quotes.findOne({ slug: quoteSlug });
+
+    if (quote) {
+      Meteor.call('checkQuoteSize', quoteSlug);
+    } 
+    else {
+      Meteor.setTimeout( function () { Router.go('/not-found'), {}, {replaceState: true}}, 1000);
+    }
+
+
+    // Send the public to login so they can't add rubbish
+    // Might not be 100% secure so try putting this in methods too?
+    if ( !Meteor.userId() ) Router.go('/login');
+
+    this.render('EditQuote', {
+      data: {
+        quote: function () {
+          var quote = Quotes.findOne({ slug: quoteSlug });
+          return quote;
+        }
+      }
+    });
+  }
+});
+
 
 
 

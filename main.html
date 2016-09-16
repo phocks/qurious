@@ -268,12 +268,12 @@
 
 <template name="AddQuote">
   <div class="container backdrop flex-center">
-    <div class="create-block">
+    <div class="create-block container">
         <form class="add-quote">
           <div class="form-group">
             <label class="sr-only" for="quoteText">Quotation Text</label>
             <!-- <input type="text" class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text"> -->
-            <textarea class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text (no quotation marks)" rows="3" autofocus></textarea>
+            <textarea class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text (no quotation marks)" rows="5" autofocus></textarea>
           </div>
           <div class="form-group">
             <label class="sr-only" for="quoteText">Author</label>
@@ -296,13 +296,13 @@
 
 <template name="EditQuote">
   <div class="container backdrop flex-center">
-    <div class="create-block">
+    <div class="create-block container">
     {{#with quote}}
         <form class="add-quote">
           <div class="form-group">
             <label class="sr-only" for="quoteText">Quotation Text</label>
             <!-- <input type="text" class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text"> -->
-            <textarea class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text (no quotation marks)" rows="3" value="{{quotation}}" autofocus></textarea>
+            <textarea class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text (no quotation marks)" rows="5" value="{{quotation}}" autofocus></textarea>
           </div>
           <div class="form-group">
             <label class="sr-only" for="quoteText">Author</label>

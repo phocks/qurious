@@ -301,8 +301,8 @@ Keep it clean
 
 */
 /* Just an override for now */
-.container {
-  /*max-width: 700px;*/
+.container.create-block {
+  max-width: 700px;
 }
 
 .container-fluid {

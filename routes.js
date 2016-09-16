@@ -500,6 +500,8 @@ Router.route('/:_pageUrlText', {
 
     currentPage = Pages.findOne({slug: pageSlug});
 
+
+
     if (pageSlug !== pageUrlText) {
       console.log("Setting current page name to " + pageUrlText);
       Session.set("currentPageName", pageUrlText);
@@ -516,8 +518,18 @@ Router.route('/:_pageUrlText', {
     }
 
     if (currentPage) {
-      // Meteor.subscribe('quotesWithPageName', currentPage.name);
-      Session.set("DocumentTitle", currentPage.name);
+      // Set browser tab title depending on page type
+      if (currentPage.type === "author") {
+        Session.set("DocumentTitle", "Quotes by " + currentPage.name);
+      } 
+      else if (currentPage.type === "source") { 
+        Session.set("DocumentTitle", "Quotes from " + currentPage.name);
+      }
+      else if (currentPage.type === "topic") { 
+        Session.set("DocumentTitle", "Quotes on " + currentPage.name);
+      } 
+      else Session.set("DocumentTitle", currentPage.name);
+
       this.render('Page', {
         data: {
           page: function () {

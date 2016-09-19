@@ -602,7 +602,10 @@ if (Meteor.isClient) { // only runs on the client
       }
 
 
-      Meteor.call('updatePage', Session.get('pageSlug'), newPageName, newPageType);
+      Meteor.call('updatePage', 
+        Session.get('pageSlug'), 
+        newPageName, 
+        newPageType);
 
       
       Router.go("/" + Session.get('pageSlug'));

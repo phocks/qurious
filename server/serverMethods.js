@@ -157,7 +157,7 @@ Meteor.methods({
 
     //console.log(currentQuote.length);
 
-    if (true) { // use currentQuote.length == undefined to only update undefined
+    if (currentQuote.length == undefined) { // use currentQuote.length == undefined to only update undefined
       var n = quotation.length;
 
       // if (n > maximumQuotationLength) return false; // i don't like massive quotes and i cannot lie

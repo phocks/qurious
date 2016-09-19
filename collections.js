@@ -120,6 +120,13 @@ Schemas.Page = new SimpleSchema({
     type: String,
     label: "_id of user document"
   },
+  lastEditedAt: {
+    type: Date
+  },
+  lastEditedBy: {
+    type: String,
+    label: "_id of user who last edited"
+  },
   slug: {
     type: String,
     label: "URL friendly string of words",
@@ -281,4 +288,10 @@ Meteor.users.attachSchema(Schemas.User);
 
 
 // Trying out collection revisions using todda00:collection-revisions
-// Quotes.attachCollectionRevisions(); // let's maybe save it till we need it
+
+CollectionRevisions.Quotes = {
+  keep:10,
+  ignoreWithin: 1,
+  ignoreWithinUnit: 'minutes'
+}
+Quotes.attachCollectionRevisions(CollectionRevisions.Quotes); // let's maybe save it till we need it

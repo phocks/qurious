@@ -68,6 +68,8 @@ Schemas.Quote = new SimpleSchema({
   },
   createdAt: { type: Date },
   createdBy: { type: String },
+  lastEditedAt: { type: Date },
+  lastEditedBy: { type: String },
   slug: {
     type: String,
     label: "Slug",

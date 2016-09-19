@@ -123,7 +123,7 @@
       <div class="fluid-container text-center space-both list-quote">
         <div class="container">
           <span class="quotation">
-            &ldquo;<a href="/quote/{{slug}}">{{quotation}}</a>&rdquo;
+            &ldquo;<a href="/q/{{slug}}">{{quotation}}</a>&rdquo;
           </span>
           <small>
           {{#if author}} <!-- we need to do some hacky stuff for layout -->
@@ -180,7 +180,11 @@
       <div class="container quote">
       {{#with quote}}
         <span class="quotation">
-          &ldquo;<a href="/quote/{{slug}}/edit">{{quotation}}</a>&rdquo;
+          {{#if currentUser}}
+            &ldquo;<a href="/q/{{slug}}/edit">{{quotation}}</a>&rdquo;
+          {{else}}
+            &ldquo;{{quotation}}&rdquo;
+          {{/if}}
         </span>
         <small>
         {{#if author}} <!-- we need to do some hacky stuff for layout -->
@@ -501,7 +505,7 @@
   <!-- {{> Nav}} -->
   <div class="container flex-center">
     <h1>404</h1>
-    <p class="lead">This isn't the page you're looking for...</p>
+    <p class="lead"><a href="/">This isn't the page you're looking for...</a></p>
   </div>
 </template>
 

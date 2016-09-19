@@ -240,7 +240,7 @@ Router.route('/register', {
 
 
 
-Router.route('/not-found', {
+Router.route('/notfound', {
   action: function () {
     this.render('404');
   }
@@ -363,7 +363,7 @@ Router.route('/:_slug/edit', {
 });
 
 
-Router.route('/quote/:_quote_slug', {
+Router.route('/q/:_quote_slug', {
   waitOn: function () {
     return Meteor.subscribe('quoteSingle', this.params._quote_slug);
   },
@@ -376,7 +376,7 @@ Router.route('/quote/:_quote_slug', {
       Meteor.call('checkQuoteSize', quoteSlug);
     } 
     else {
-      Meteor.setTimeout( function () { Router.go('/not-found'), {}, {replaceState: true}}, 1000);
+      Meteor.setTimeout( function () { Router.go('/notfound'), {}, {replaceState: true}}, 1000);
     }
 
     Session.set("DocumentTitle", "Qurious");
@@ -395,7 +395,7 @@ Router.route('/quote/:_quote_slug', {
 
 
 
-Router.route('/quote/:_quote_slug/edit', {
+Router.route('/q/:_quote_slug/edit', {
   waitOn: function () {
     Session.set('quoteSlug', this.params._quote_slug);
     return Meteor.subscribe('quoteSingle', this.params._quote_slug);
@@ -408,7 +408,7 @@ Router.route('/quote/:_quote_slug/edit', {
       Meteor.call('checkQuoteSize', quoteSlug);
     } 
     else {
-      Meteor.setTimeout( function () { Router.go('/not-found'), {}, {replaceState: true}}, 1000);
+      Meteor.setTimeout( function () { Router.go('/notfound'), {}, {replaceState: true}}, 1000);
     }
 
 
@@ -448,7 +448,7 @@ Router.route('/:_page_slug/:_quote_slug', {
     if (quote) {
       Meteor.call('checkQuoteSize', quoteSlug);
     } else {
-      Meteor.setTimeout( function () { Router.go('/not-found'), {}, {replaceState: true}}, 1000);
+      Meteor.setTimeout( function () { Router.go('/notfound'), {}, {replaceState: true}}, 1000);
     }
 
     Session.set("DocumentTitle", "A quote by " + currentPage.name + " - Qurious");

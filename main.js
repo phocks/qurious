@@ -682,7 +682,7 @@ if (Meteor.isClient) { // only runs on the client
         var editedQuoteSlug = result;
         console.log("Edited quote: " + quoteSlug);
         Meteor.call('checkQuoteSize', quoteSlug);
-        Router.go('/quote/' + quoteSlug);
+        Router.go('/q/' + quoteSlug);
       });
 
       // Clear form

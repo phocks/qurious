@@ -186,7 +186,7 @@
             &ldquo;{{quotation}}&rdquo;
           {{/if}}
         </span>
-        <small>
+        <span class="attribution"><small>
         {{#if author}} <!-- we need to do some hacky stuff for layout -->
           &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
         {{/if}}
@@ -196,11 +196,12 @@
         {{#if topic}}
           on <a href="/{{slugThisString topic}}">{{topic}}</a>
         {{/if}}
-        </small>
+        </small></span>
       {{/with}}
       </div>
     </div>
   </div>
+  {{> ControlBar}}
 </template>
 
 

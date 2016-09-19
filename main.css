@@ -761,6 +761,13 @@ ul.quote.list li a {
   text-decoration: none;
 }
 
+.single-quote .attribution,
+.single-quote .attribution a {
+  color: #666;
+}
+
+
+
 
 
 .below-fold {

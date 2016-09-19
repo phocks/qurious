@@ -68,8 +68,8 @@ Schemas.Quote = new SimpleSchema({
   },
   createdAt: { type: Date },
   createdBy: { type: String },
-  lastEditedAt: { type: Date },
-  lastEditedBy: { type: String },
+  lastEditedAt: { type: Date, optional: true, },
+  lastEditedBy: { type: String, optional: true, },
   slug: {
     type: String,
     label: "Slug",
@@ -121,11 +121,13 @@ Schemas.Page = new SimpleSchema({
     label: "_id of user document"
   },
   lastEditedAt: {
-    type: Date
+    type: Date,
+    optional: true,
   },
   lastEditedBy: {
     type: String,
-    label: "_id of user who last edited"
+    label: "_id of user who last edited",
+    optional: true,
   },
   slug: {
     type: String,

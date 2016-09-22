@@ -685,7 +685,7 @@ if (Meteor.isClient) { // only runs on the client
         var editedQuoteSlug = result;
         console.log("Edited quote: " + quoteSlug);
         Meteor.call('checkQuoteSize', quoteSlug);
-        Router.go('/q/' + quoteSlug);
+        Router.go('/quote/' + quoteSlug);
       });
 
       // Clear form
@@ -696,6 +696,17 @@ if (Meteor.isClient) { // only runs on the client
     },
   });
 
+
+  Template.SingleQuote.events ({
+    "click .fave": function () {
+      if (!Meteor.userId()) {
+        Router.go('/login');
+      } 
+      else {
+        Meteor.call('faveQuote', Session.get('quoteId'));
+      }
+    }
+  });
 
 
 

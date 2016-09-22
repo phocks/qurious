@@ -47,7 +47,7 @@ Router.route('/', {
         //   return pages;
         // },
         quotes: function () {
-          var quotes = Quotes.find({}, { limit: 64 });
+          var quotes = Quotes.find({}, {sort: {favedBy: -1}}, { limit: 64 } );
           return quotes;
         },
       }
@@ -71,7 +71,7 @@ Router.route('/explore', {
         //   return pages;
         // },
         quotes: function () {
-          var quotes = Quotes.find({}, { limit: 64 });
+          var quotes = Quotes.find({}, {sort: {favedBy: -1}}, { limit: 64 });
           return quotes;
         },
       }
@@ -82,55 +82,55 @@ Router.route('/explore', {
 });
 
 
-Router.route('/explore/pending', {
-  waitOn: function () {
-    return Meteor.subscribe('pagesPending'); 
-  },
-  action: function () {
-    Session.set("DocumentTitle","Qurious");
+// Router.route('/explore/pending', {
+//   waitOn: function () {
+//     return Meteor.subscribe('pagesPending'); 
+//   },
+//   action: function () {
+//     Session.set("DocumentTitle","Qurious");
 
-    // console.log(Meteor.user().services.twitter.profile_image_url);
+//     // console.log(Meteor.user().services.twitter.profile_image_url);
 
-    this.render('Header', { to: 'header'});
+//     this.render('Header', { to: 'header'});
 
-    // this.render('Nav', { to: 'nav'});
+//     // this.render('Nav', { to: 'nav'});
 
-    this.render('ExplorePending', {
-      data: {
-        pages: function () {
-          var pages = Pages.find({ $or: [ { verified:false } , { verified: { $exists:false } }] });
-          return pages;
-        },        
-      }
-    });
-  }
-});
+//     this.render('ExplorePending', {
+//       data: {
+//         pages: function () {
+//           var pages = Pages.find({ $or: [ { verified:false } , { verified: { $exists:false } }] });
+//           return pages;
+//         },        
+//       }
+//     });
+//   }
+// });
 
 
 
-Router.route('/explore/all', {
-  waitOn: function () {
-    return Meteor.subscribe('pagesAll'); 
-  },
-  action: function () {
-    Session.set("DocumentTitle","Qurious");
+// Router.route('/explore/all', {
+//   waitOn: function () {
+//     return Meteor.subscribe('pagesAll'); 
+//   },
+//   action: function () {
+//     Session.set("DocumentTitle","Qurious");
 
-    // console.log(Meteor.user().services.twitter.profile_image_url);
+//     // console.log(Meteor.user().services.twitter.profile_image_url);
 
-    this.render('Header', { to: 'header'});
+//     this.render('Header', { to: 'header'});
 
-    // this.render('Nav', { to: 'nav'});
+//     // this.render('Nav', { to: 'nav'});
 
-    this.render('Explore', {
-      data: {
-        pages: function () {
-          var pages = Pages.find({  });
-          return pages;
-        },        
-      }
-    });
-  }
-});
+//     this.render('Explore', {
+//       data: {
+//         pages: function () {
+//           var pages = Pages.find({  });
+//           return pages;
+//         },        
+//       }
+//     });
+//   }
+// });
 
 
 
@@ -363,17 +363,21 @@ Router.route('/:_slug/edit', {
 });
 
 
-Router.route('/q/:_quote_slug', {
+Router.route('/quote/:_quote_slug', {
   waitOn: function () {
     return Meteor.subscribe('quoteSingle', this.params._quote_slug);
   },
   action: function () {
-    var quoteSlug = this.params._quote_slug;
-    console.log("Current quoteSlug is: " + quoteSlug );
+    const quoteSlug = this.params._quote_slug;
+
+    // console.log("Current quoteSlug is: " + quoteSlug );
+    Session.set('quoteSlug', quoteSlug);
+
     var quote = Quotes.findOne({ slug: quoteSlug });
 
     if (quote) {
       Meteor.call('checkQuoteSize', quoteSlug);
+      Session.set('quoteId', quote._id);
     } 
     else {
       Meteor.setTimeout( function () { Router.go('/notfound'), {}, {replaceState: true}}, 1000);
@@ -386,6 +390,12 @@ Router.route('/q/:_quote_slug', {
         quote: function () {
           var quote = Quotes.findOne({ slug: quoteSlug });
           return quote;
+        },
+        faved: function () {
+          const quoteIsFaved = Quotes.findOne({ slug: quoteSlug, favedBy: Meteor.userId() });
+          if (quoteIsFaved && Meteor.user()){
+            return true;
+          } else return false;
         }
       }
     });
@@ -395,7 +405,7 @@ Router.route('/q/:_quote_slug', {
 
 
 
-Router.route('/q/:_quote_slug/edit', {
+Router.route('/quote/:_quote_slug/edit', {
   waitOn: function () {
     Session.set('quoteSlug', this.params._quote_slug);
     return Meteor.subscribe('quoteSingle', this.params._quote_slug);
@@ -542,7 +552,7 @@ Router.route('/:_pageUrlText', {
               { authorSlug: currentPage.slug }, // 3 permanent slugs and then an array of others
               { sourceSlug: currentPage.slug }, // for some reason this will be best I think
               { topicSlug: currentPage.slug }
-              ] } );
+              ] }, {sort: {favedBy: -1}} );
             return quotes;
           },
         }

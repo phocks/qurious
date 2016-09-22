@@ -66,10 +66,20 @@ Schemas.Quote = new SimpleSchema({
     max: 512, 
     optional: true,
   },
-  createdAt: { type: Date },
-  createdBy: { type: String },
-  lastEditedAt: { type: Date, optional: true, },
-  lastEditedBy: { type: String, optional: true, },
+  createdAt: { 
+    type: Date 
+  },
+  createdBy: { 
+    type: String 
+  },
+  lastEditedAt: { 
+    type: Date, 
+    optional: true, 
+  },
+  lastEditedBy: { 
+    type: String, 
+    optional: true, 
+  },
   slug: {
     type: String,
     label: "Slug",
@@ -94,8 +104,18 @@ Schemas.Quote = new SimpleSchema({
   username: {
     type: String,
     optional: true,
-    label: "Whoever created this thing"
+    label: "Whoever created this thing, a string of a name"
   },
+  favedBy: {
+    type: [String],
+    optional: true,
+    label: "An array of ids who like this quote"
+  },
+  faveCount: {
+    type: Number,
+    optional: true,
+    label: "Calculated number from favedBy array"
+  }
 
 });
 
@@ -292,8 +312,8 @@ Meteor.users.attachSchema(Schemas.User);
 // Trying out collection revisions using todda00:collection-revisions
 
 CollectionRevisions.Quotes = {
-  keep:10,
-  ignoreWithin: 1,
+  keep:2,
+  ignoreWithin: 4,
   ignoreWithinUnit: 'minutes'
 }
 Quotes.attachCollectionRevisions(CollectionRevisions.Quotes); // let's maybe save it till we need it

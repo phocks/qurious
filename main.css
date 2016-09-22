@@ -748,13 +748,19 @@ ul.quote.list li a {
 }
 
 
+/* Display a single quote on a page please */
+
+.black-flex {
+  background-color: black;
+}
+
 .single-quote {
-  font-size: 1.6em;
-  color: black;
+  font-size: 2.2em;
+  color: white;
 }
 
 .single-quote a {
-  color: black;
+  color: white;
 }
 
 .single-quote .quotation a:hover {
@@ -763,7 +769,7 @@ ul.quote.list li a {
 
 .single-quote .attribution,
 .single-quote .attribution a {
-  color: #666;
+  color: white;
 }
 
 
@@ -795,4 +801,15 @@ a.header-link {
 
 .select a {
   text-decoration: none;
+}
+
+
+
+.control {
+  font-size: 32px;
+}
+
+.control.fave {
+  color: red;
+  cursor:  pointer;
 }

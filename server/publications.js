@@ -17,6 +17,14 @@ Meteor.publish("quotesLatest", function (limit) {
 });
 
 
+Meteor.publish("quotesLimit", function (limit) {
+  if (limit > Quotes.find().count()) {
+    limit = 0;
+  }
+  return Quotes.find({}, { sort: {faveCount: -1}, limit: limit });
+});
+
+
 
 
 Meteor.publish("quotesPopular", function (limit) {

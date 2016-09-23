@@ -759,6 +759,12 @@ ul.quote.list li a {
   color: white;
 }
 
+@media (max-width: 768px) {
+  .single-quote {
+    font-size: 1.3em;
+  }
+}
+
 .single-quote a {
   color: white;
 }
@@ -811,5 +817,9 @@ a.header-link {
 
 .control.fave {
   color: red;
-  cursor:  pointer;
+  cursor: pointer;
+}
+
+.load-more {
+  cursor: pointer;
 }

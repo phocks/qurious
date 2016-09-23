@@ -23,7 +23,8 @@ Router.route('/api', function () {
 /* The root home route landing for qurious.cc/   */
 Router.route('/', {
   waitOn: function () {
-    return Meteor.subscribe('quotesLatest', 64);
+
+    // return Meteor.subscribe('quotesLimit', 4); // Moved to a helper for pagination
   },
   // onBeforeAction: function() {
   //   if (! Meteor.userId()) {
@@ -47,7 +48,8 @@ Router.route('/', {
         //   return pages;
         // },
         quotes: function () {
-          var quotes = Quotes.find({}, {sort: {favedBy: -1}}, { limit: 64 } );
+          // var quotes = Quotes.find({}, { sort: {faveCount: -1}}, { limit: 2 } );
+          var quotes = Quotes.find({});
           return quotes;
         },
       }
@@ -71,13 +73,11 @@ Router.route('/explore', {
         //   return pages;
         // },
         quotes: function () {
-          var quotes = Quotes.find({}, {sort: {favedBy: -1}}, { limit: 64 });
+          var quotes = Quotes.find({}, {sort: {faveCount: -1}}, { limit: Meteor.get('quoteLimit') });
           return quotes;
         },
       }
     });
-
-    
   }
 });
 

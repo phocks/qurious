@@ -82,55 +82,7 @@ Router.route('/explore', {
 });
 
 
-// Router.route('/explore/pending', {
-//   waitOn: function () {
-//     return Meteor.subscribe('pagesPending'); 
-//   },
-//   action: function () {
-//     Session.set("DocumentTitle","Qurious");
 
-//     // console.log(Meteor.user().services.twitter.profile_image_url);
-
-//     this.render('Header', { to: 'header'});
-
-//     // this.render('Nav', { to: 'nav'});
-
-//     this.render('ExplorePending', {
-//       data: {
-//         pages: function () {
-//           var pages = Pages.find({ $or: [ { verified:false } , { verified: { $exists:false } }] });
-//           return pages;
-//         },        
-//       }
-//     });
-//   }
-// });
-
-
-
-// Router.route('/explore/all', {
-//   waitOn: function () {
-//     return Meteor.subscribe('pagesAll'); 
-//   },
-//   action: function () {
-//     Session.set("DocumentTitle","Qurious");
-
-//     // console.log(Meteor.user().services.twitter.profile_image_url);
-
-//     this.render('Header', { to: 'header'});
-
-//     // this.render('Nav', { to: 'nav'});
-
-//     this.render('Explore', {
-//       data: {
-//         pages: function () {
-//           var pages = Pages.find({  });
-//           return pages;
-//         },        
-//       }
-//     });
-//   }
-// });
 
 
 
@@ -179,23 +131,6 @@ Router.route('/subscribe', {
 
 
 
-// Router.route('/add', {
-//   waitOn: function () {
-    
-//   },
-//   action: function () {
-//     // if (!Meteor.user() ) Router.go('/login'); // deny not logged in Meteor.loginWithTwitter. Doesn't seem to work because on refresh etc
-//     // if (!Meteor.user() ) Meteor.loginWithTwitter();
-
-//     this.layout('Layout');
-//     Session.set("DocumentTitle","Qurious - Add Author");
-
-//     this.render('Header', { to: 'header'});
-
-//     // this.render('Nav', { to: 'nav'});
-//     this.render('Add');
-//   }
-// });
 
 
 
@@ -272,9 +207,12 @@ Router.route('/admin', {
   }
 });
 
+
 Router.route('/invite', {
   action: function () {
+    Meteor.subscribe('invitesAll');
     var loggedInUser = Meteor.userId();
+    // if (!Roles.userIsInRole(loggedInUser, 'admin')) Router.go('/');
     this.render('Invite');
   }
 });
@@ -586,4 +524,76 @@ Router.route('/(.*)', function() {
 
 
 
+
+
 // Please refrain from putting any routes below here as they will (probably) not work
+
+
+// Router.route('/explore/pending', {
+//   waitOn: function () {
+//     return Meteor.subscribe('pagesPending'); 
+//   },
+//   action: function () {
+//     Session.set("DocumentTitle","Qurious");
+
+//     // console.log(Meteor.user().services.twitter.profile_image_url);
+
+//     this.render('Header', { to: 'header'});
+
+//     // this.render('Nav', { to: 'nav'});
+
+//     this.render('ExplorePending', {
+//       data: {
+//         pages: function () {
+//           var pages = Pages.find({ $or: [ { verified:false } , { verified: { $exists:false } }] });
+//           return pages;
+//         },        
+//       }
+//     });
+//   }
+// });
+
+
+
+// Router.route('/explore/all', {
+//   waitOn: function () {
+//     return Meteor.subscribe('pagesAll'); 
+//   },
+//   action: function () {
+//     Session.set("DocumentTitle","Qurious");
+
+//     // console.log(Meteor.user().services.twitter.profile_image_url);
+
+//     this.render('Header', { to: 'header'});
+
+//     // this.render('Nav', { to: 'nav'});
+
+//     this.render('Explore', {
+//       data: {
+//         pages: function () {
+//           var pages = Pages.find({  });
+//           return pages;
+//         },        
+//       }
+//     });
+//   }
+// });
+
+
+// Router.route('/add', {
+//   waitOn: function () {
+    
+//   },
+//   action: function () {
+//     // if (!Meteor.user() ) Router.go('/login'); // deny not logged in Meteor.loginWithTwitter. Doesn't seem to work because on refresh etc
+//     // if (!Meteor.user() ) Meteor.loginWithTwitter();
+
+//     this.layout('Layout');
+//     Session.set("DocumentTitle","Qurious - Add Author");
+
+//     this.render('Header', { to: 'header'});
+
+//     // this.render('Nav', { to: 'nav'});
+//     this.render('Add');
+//   }
+// });

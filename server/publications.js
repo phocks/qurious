@@ -124,6 +124,12 @@ Meteor.publish("invites", function (emailAddress) {
 })
 
 
+Meteor.publish("invitesAll", function () {
+  // if (!Roles.userIsInRole( Meteor.userId(), 'admin') ) return false;
+  return Invites.find({ });
+})
+
+
 
 
 // Meteor.publish("words", function () {

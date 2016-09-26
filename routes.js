@@ -23,8 +23,9 @@ Router.route('/api', function () {
 /* The root home route landing for qurious.cc/   */
 Router.route('/', {
   waitOn: function () {
-
-    // return Meteor.subscribe('quotesLimit', 4); // Moved to a helper for pagination
+    if (Meteor.user()) {
+      return Meteor.subscribe('quotesLimit', 4); // Moved to a helper for pagination
+    }
   },
   // onBeforeAction: function() {
   //   if (! Meteor.userId()) {
@@ -321,6 +322,12 @@ Router.route('/quote/:_quote_slug', {
       Meteor.setTimeout( function () { Router.go('/notfound'), {}, {replaceState: true}}, 1000);
     }
 
+    // If quote has an author we wanna redirect to have that as the slug
+    console.log(quote.authorSlug);
+    if (quote.authorSlug) {
+      Router.go("/" + quote.authorSlug + "/" + quoteSlug, {}, {replaceState: true});
+    }
+
     Session.set("DocumentTitle", "Qurious");
 
     this.render('SingleQuote', {
@@ -383,14 +390,15 @@ Router.route('/quote/:_quote_slug/edit', {
 Router.route('/:_page_slug/:_quote_slug', {
   waitOn: function () {
     
-    return [Meteor.subscribe('pagesWithPageSlug', this.params._page_slug),
-            Meteor.subscribe('quotesSlug', this.params._quote_slug)];
+    // return [Meteor.subscribe('pagesWithPageSlug', this.params._page_slug),
+    //         Meteor.subscribe('quotesSlug', this.params._quote_slug)];
+    return Meteor.subscribe('quoteSingle', this.params._quote_slug);
   },
   action: function () {
-    var pageSlug = this.params._page_slug;
+    // var pageSlug = this.params._page_slug;
     var quoteSlug = this.params._quote_slug;
     console.log("Current quoteSlug is: " + quoteSlug );
-    var currentPage = Pages.findOne({slug: pageSlug});
+    // var currentPage = Pages.findOne({slug: pageSlug});
     var quote = Quotes.findOne({ slug: quoteSlug });
 
     if (quote) {
@@ -399,20 +407,37 @@ Router.route('/:_page_slug/:_quote_slug', {
       Meteor.setTimeout( function () { Router.go('/notfound'), {}, {replaceState: true}}, 1000);
     }
 
-    Session.set("DocumentTitle", "A quote by " + currentPage.name + " - Qurious");
-    Session.set("pageId", currentPage._id);
+    // Session.set("DocumentTitle", "A quote by " + currentPage.name + " - Qurious");
+    // Session.set("pageId", currentPage._id);
+
+    Session.set("DocumentTitle", "Qurious");
 
     
 
     // this.render('Nav', { to: 'nav'});
-    this.render('DisplayQuote', {
+    // this.render('DisplayQuote', {
+    //   data: {
+    //     page: function () {
+    //       return Pages.findOne({ slug: pageSlug });
+    //       },
+    //     quote: function () {
+    //       var quote = Quotes.findOne({ slug: quoteSlug });
+    //       return quote;
+    //     }
+    //   }
+    // });
+
+    this.render('SingleQuote', {
       data: {
-        page: function () {
-          return Pages.findOne({ slug: pageSlug });
-          },
         quote: function () {
           var quote = Quotes.findOne({ slug: quoteSlug });
           return quote;
+        },
+        faved: function () {
+          const quoteIsFaved = Quotes.findOne({ slug: quoteSlug, favedBy: Meteor.userId() });
+          if (quoteIsFaved && Meteor.user()){
+            return true;
+          } else return false;
         }
       }
     });

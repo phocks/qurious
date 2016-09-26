@@ -254,9 +254,9 @@ if (Meteor.isClient) { // only runs on the client
   // });
 
 
-  Template.Home.onCreated( function () {
-    quotationsHandler = Meteor.subscribe('quotesLimit', 20);
-  })
+  // Template.Home.onCreated( function () {
+  //   quotationsHandler = Meteor.subscribe('quotesLimit', 20);
+  // });
 
 
   Template.Settings.helpers({

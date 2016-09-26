@@ -178,6 +178,9 @@ Meteor.methods({
     if ( !Roles.userIsInRole( Meteor.userId(), 'admin') ) {
       throw new Meteor.Error("pants-not-found", "Can't find my pants");
     }
+
+    inviteEmail = inviteEmail.toLowerCase();
+
     const invite = {$set: { email: inviteEmail}};
     console.log('Adding ' + inviteEmail + " to invite list.")
     Invites.upsert({email: inviteEmail}, invite);

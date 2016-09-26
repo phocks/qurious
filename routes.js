@@ -210,8 +210,8 @@ Router.route('/admin', {
 
 Router.route('/invite', {
   action: function () {
-    Meteor.subscribe('invitesAll');
-    var loggedInUser = Meteor.userId();
+    // Meteor.subscribe('invitesAll');
+    // var loggedInUser = Meteor.userId();
     // if (!Roles.userIsInRole(loggedInUser, 'admin')) Router.go('/');
     this.render('Invite');
   }

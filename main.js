@@ -384,7 +384,7 @@ if (Meteor.isClient) { // only runs on the client
   Template.Register.events({
     'submit form': function(event) {
       event.preventDefault();
-      var emailVar = event.target.registerEmail.value;
+      var emailVar = event.target.registerEmail.value.toLowerCase();
       var usernameVar = event.target.registerUsername.value;
       var passwordVar = event.target.registerPassword.value;
       // var passwordVarConfirm = event.target.registerPasswordConfirm.value;
@@ -410,6 +410,8 @@ if (Meteor.isClient) { // only runs on the client
       Meteor.call('isInvited', emailVar, function (error) {
         if (!error) {
           Meteor.subscribe('invites', emailVar, createAccount);
+
+          // emailVar = emailVar.toLowerCase();
 
           // Here we are hoisting a function (I think) instead of nesting it
           // so we don't create unnecessary Callback Hell

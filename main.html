@@ -55,7 +55,7 @@
       <div id="main" class="container backdrop">
         <div class="text-center flex-center home-container">
           <!-- <h1><i class="fa fa-quote-left"></i></h1> -->
-          <h1>Qurious.</h1>
+          <h1>Qurious.{{test}}</h1>
           <!-- <p>is kinda new, so please forgive us if there's not much here at all just yet.</p> -->
           <!-- <a class="btn btn-default scroll" href="/explore" style="margin-bottom: 25px">Explore</a> -->
         </div>
@@ -70,7 +70,7 @@
         <span class="load-more">More...</span>
       </div> -->
 
-      <!-- {{> ControlBar}} -->
+      {{> ControlBar}}
       <!-- {{> Authors}}
       {{> Footer}} -->
     {{/unless}}
@@ -116,7 +116,7 @@
 <div class="fluid-container text-center space-both">
   <!-- <a class="btn btn-default" href="#">See unverified</a> -->
   <!-- <a href="/"><img src="/grey-logo.png" width="74px"></a> -->
-  <a href="/">Qurious</a>
+  <span class="next-page">Next</span>
 </div>
 </template>
 
@@ -135,7 +135,7 @@
             {{#if authorSlug}}
             &ldquo;<a href="/{{authorSlug}}/{{slug}}">{{quotation}}</a>&rdquo;
             {{else}}
-            &ldquo;<a href="/{{authorSlug}}/{{slug}}">{{quotation}}</a>&rdquo;
+            &ldquo;<a href="/quote/{{slug}}">{{quotation}}</a>&rdquo;
             {{/if}}
           </span>
           <small>

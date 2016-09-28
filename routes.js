@@ -24,7 +24,7 @@ Router.route('/api', function () {
 Router.route('/', {
   waitOn: function () {
     if (Meteor.user()) {
-      return Meteor.subscribe('quotesLimit', 4); // Moved to a helper for pagination
+      // return Meteor.subscribe('quotesLimit', 4); // Moved to a helper for pagination
     }
   },
   // onBeforeAction: function() {
@@ -55,7 +55,6 @@ Router.route('/', {
         },
       }
     });
-    // this.render('Footer', { to: 'footer'} );
   }
 });
 
@@ -323,8 +322,8 @@ Router.route('/quote/:_quote_slug', {
     }
 
     // If quote has an author we wanna redirect to have that as the slug
-    console.log(quote.authorSlug);
     if (quote.authorSlug) {
+      console.log(quote.authorSlug);
       Router.go("/" + quote.authorSlug + "/" + quoteSlug, {}, {replaceState: true});
     }
 

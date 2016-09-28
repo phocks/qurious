@@ -173,7 +173,7 @@ if (Meteor.isClient) { // only runs on the client
   // This changes the animation period, set to zero for none
   // Doesn't seem to work with mobile (or sometimes at all)
   // RouterAutoscroll.animationDuration = 200;
-  //RouterAutoscroll.marginTop = 50;
+  // RouterAutoscroll.marginTop = 50;
 
   // Call this at any time to set the <title>
   Session.set("DocumentTitle","Qurious");
@@ -253,10 +253,12 @@ if (Meteor.isClient) { // only runs on the client
   //   Meteor.setTimeout( function () { window.scroll(0, 50); }, 500);
   // });
 
+  Session.setDefault("skip", 1);
 
-  // Template.Home.onCreated( function () {
-  //   quotationsHandler = Meteor.subscribe('quotesLimit', 20);
-  // });
+
+  Tracker.autorun( function () {
+    Meteor.subscribe('quotesInPages', Session.get("skip"));
+  });
 
 
   Template.Settings.helpers({
@@ -264,6 +266,19 @@ if (Meteor.isClient) { // only runs on the client
       return Meteor.userId();
     }
   });
+
+
+
+  Template.ThePageList.helpers({
+    // quotes: function () {
+    //   // var quotes = Quotes.find({}, { sort: {faveCount: -1}}, { limit: 2 } );
+    // var quotes = Quotes.find({});
+    // return quotes;
+    // },
+    test() {
+      return "hello";
+    }
+  })
 
 
 
@@ -288,9 +303,9 @@ if (Meteor.isClient) { // only runs on the client
     //   }
     // }
 
-    "click .load-more": function () {
-      quotationsHandler.loadNextPage();
-    }
+    // "click .load-more": function () {
+    //   quotationsHandler.loadNextPage();
+    // }
   });
 
 
@@ -579,6 +594,13 @@ if (Meteor.isClient) { // only runs on the client
 
       // Prevent default action from form submit
       // return false; // now handled up top
+    }
+  });
+
+
+  Template.ControlBar.events({
+    "click .next-page": function () {
+      Session.set("skip", Session.get("skip")+1);
     }
   });
 

@@ -823,3 +823,7 @@ a.header-link {
 .load-more {
   cursor: pointer;
 }
+
+.next-page {
+  cursor: pointer;
+}

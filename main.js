@@ -253,7 +253,12 @@ if (Meteor.isClient) { // only runs on the client
   //   Meteor.setTimeout( function () { window.scroll(0, 50); }, 500);
   // });
 
-  Session.setDefault("skip", 1);
+
+
+
+  // Here we are setting up pagination
+
+  Session.setDefault("skip", 0);
 
 
   Tracker.autorun( function () {
@@ -309,27 +314,17 @@ if (Meteor.isClient) { // only runs on the client
   });
 
 
-  Template.Nav.events({
-    "click .edit-mode": function () {
-      if (Session.get('editMode')) {
-        Session.set('editMode', false);
-      } else 
-       {
-        Session.set('editMode', true);
-      }
-      console.log('Edit mode is: ' + Session.get('editMode'));
-    }
-  });
-
-
-
-
-
-
-
-
-
-
+  // Template.Nav.events({
+  //   "click .edit-mode": function () {
+  //     if (Session.get('editMode')) {
+  //       Session.set('editMode', false);
+  //     } else 
+  //      {
+  //       Session.set('editMode', true);
+  //     }
+  //     console.log('Edit mode is: ' + Session.get('editMode'));
+  //   }
+  // });
 
 
 
@@ -601,6 +596,11 @@ if (Meteor.isClient) { // only runs on the client
   Template.ControlBar.events({
     "click .next-page": function () {
       Session.set("skip", Session.get("skip")+1);
+      window.scrollTo(0, 0);
+    },
+    "click .previous-page": function () {
+      Session.set("skip", Session.get("skip")-1);
+      window.scrollTo(0, 0);
     }
   });
 

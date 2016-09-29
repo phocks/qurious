@@ -824,6 +824,7 @@ a.header-link {
   cursor: pointer;
 }
 
-.next-page {
+.next-page,
+.previous-page {
   cursor: pointer;
 }

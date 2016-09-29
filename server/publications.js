@@ -164,6 +164,6 @@ Meteor.publish("pagesWithPageSlug", function (pageSlug) {
 
 
 Meteor.publish("quotesInPages", function (pageNumber) {
-  const skipCount = pageNumber * 1;
-  return Quotes.find({}, {limit: 1, skip: skipCount})
+  const skipCount = pageNumber * 5;
+  return Quotes.find({}, { sort: {faveCount: -1}, limit: 5, skip: skipCount });
 });

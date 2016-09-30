@@ -24,7 +24,7 @@ Router.route('/api', function () {
 Router.route('/', {
   waitOn: function () {
     if (Meteor.user()) {
-      // return Meteor.subscribe('quotesLimit', 4); // Moved to a helper for pagination
+      // return Meteor.subscribe('quotesInPages', 0); // Moved to a helper for pagination
     }
   },
   // onBeforeAction: function() {
@@ -43,11 +43,7 @@ Router.route('/', {
     // this.render('Nav', { to: 'nav'});
     
     this.render('Home', {
-      data: {      
-        // pages: function () {
-        //   var pages = Pages.find({ verified:true }, { sort: {name: 1}});
-        //   return pages;
-        // },
+      data: {
         quotes: function () {
           // var quotes = Quotes.find({}, { sort: {faveCount: -1}}, { limit: 2 } );
           var quotes = Quotes.find({});
@@ -55,6 +51,7 @@ Router.route('/', {
         },
       }
     });
+    this.render('FooterNavigation', { to: 'footer'});
   }
 });
 
@@ -210,6 +207,7 @@ Router.route('/admin', {
 
 Router.route('/invite', {
   action: function () {
+    Session.set("DocumentTitle","Invite people to Qurious");
     // Meteor.subscribe('invitesAll');
     // var loggedInUser = Meteor.userId();
     // if (!Roles.userIsInRole(loggedInUser, 'admin')) Router.go('/');

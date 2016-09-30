@@ -167,3 +167,9 @@ Meteor.publish("quotesInPages", function (pageNumber) {
   const skipCount = pageNumber * 5;
   return Quotes.find({}, { sort: {faveCount: -1}, limit: 5, skip: skipCount });
 });
+
+
+
+Meteor.publish("quotesInfiniteLoad", function (loadCount) {
+  return Quotes.find({}, { sort: {faveCount: -1}, limit: loadCount });
+});

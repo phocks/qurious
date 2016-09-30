@@ -258,12 +258,14 @@ if (Meteor.isClient) { // only runs on the client
 
   // Here we are setting up pagination
 
-  Session.setDefault("skip", 0);
+  // Session.setDefault("skip", 0);
+  // Session.setDefault("infiniteLoadCount", 10);
 
 
-  Tracker.autorun( function () {
-    Meteor.subscribe('quotesInPages', Session.get("skip"));
-  });
+  // Tracker.autorun( function () {
+  //   Meteor.subscribe('quotesInPages', Session.get("skip"));
+  //   Meteor.subscribe('quotesInfiniteLoad', Session.get("infiniteLoadCount"));
+  // });
 
 
   Template.Settings.helpers({

@@ -55,7 +55,7 @@
       <div id="main" class="container backdrop">
         <div class="text-center flex-center home-container">
           <!-- <h1><i class="fa fa-quote-left"></i></h1> -->
-          <h1>Qurious.{{test}}</h1>
+          <h1>Qurious.</h1>
           <!-- <p>is kinda new, so please forgive us if there's not much here at all just yet.</p> -->
           <!-- <a class="btn btn-default scroll" href="/explore" style="margin-bottom: 25px">Explore</a> -->
         </div>
@@ -64,13 +64,15 @@
         </div> -->
       </div>
 
-      {{> ThePageList}}
+      <!-- {{> ThePageList}} -->
+
+      <!-- {{> FooterNav}} -->
 
       <!-- <div class="container-fluid text-center space-both">
         <span class="load-more">More...</span>
       </div> -->
 
-      {{> ControlBar}}
+      <!-- {{> ControlBar}} -->
       <!-- {{> Authors}}
       {{> Footer}} -->
     {{/unless}}
@@ -80,9 +82,75 @@
 
 
 
+<!-- Maybe in the future -->
+<template name="HomeLoggedIn">
+  <div class="container">
+    <h1>{{name}}</h1>
+    <div class="row">
+      <div class="col-md-8">
+        {{#each quotes}}
+        <div class="full-quote">
+          <span class="quotation">
+          <big>
+            {{#if authorSlug}}
+            &ldquo;<a href="/{{authorSlug}}/{{slug}}">{{quotation}}</a>&rdquo;
+            {{else}}
+            &ldquo;<a href="/quote/{{slug}}">{{quotation}}</a>&rdquo;
+            {{/if}}
+          </big>
+          </span>
+          <span>
+            <small>
+            {{#if author}} <!-- we need to do some hacky stuff for layout -->
+              &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
+            {{/if}}
+            {{#if source}}
+              {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>{{#if topic}},{{/if}}
+            {{/if}}
+            {{#if topic}}
+              on <a href="/{{slugThisString topic}}">{{topic}}</a>
+            {{/if}}
+            </small>
+          </span>
+          </div>
+        {{/each}}
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+    
+  </div>
+</template>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<template name="ControlBar">
+<div class="fluid-container text-center space-both">
+  <!-- <a class="btn btn-default" href="#">See unverified</a> -->
+  <!-- <a href="/"><img src="/grey-logo.png" width="74px"></a> -->
+  <span class="previous-page">Previous</span> · <span class="next-page">Next</span>
+</div>
+</template>
+
+
+
+<template name="FooterNavigation">
+
+</template>
 
 
 
@@ -105,24 +173,6 @@
   <!-- {{> AddQuoteToPage}} -->
   <!-- {{> ControlBar}} -->
 </template>
-
-
-
-
-
-
-
-<template name="ControlBar">
-<div class="fluid-container text-center space-both">
-  <!-- <a class="btn btn-default" href="#">See unverified</a> -->
-  <!-- <a href="/"><img src="/grey-logo.png" width="74px"></a> -->
-  <span class="previous-page">Previous</span> · <span class="next-page">Next</span>
-</div>
-</template>
-
-
-
-
 
 
 
@@ -172,7 +222,7 @@
 
 <template name="PageNotFound">
   <div class="container flex-center">
-    <h2><a href="/{{pageSlug}}/edit">Curious about {{pageSlug}}?</a></h2>    
+    <h2><a href="/{{pageSlug}}/edit">Curious?</a></h2>    
   </div>
   <!-- <div class="below-fold container-fluid flex-center"> -->
     <!-- <form class="form-inline">

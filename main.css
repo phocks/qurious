@@ -726,13 +726,14 @@ ul.quote.list li a {
   }
 }
 
-.list-quote a {
+.list-quote a,
+.quotation a {
   color: black;
 
 }
 
 
-.list-quote .quotation a:hover {
+.quotation a:hover {
   text-decoration: none;
 } 
 
@@ -827,4 +828,15 @@ a.header-link {
 .next-page,
 .previous-page {
   cursor: pointer;
+}
+
+.full-quote {
+  margin: 2em 0;
+}
+
+
+/* Some Flat UI navbar overrides */
+
+.navbar {
+  margin-bottom: 0;
 }

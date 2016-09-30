@@ -284,13 +284,21 @@ Router.route('/:_slug/edit', {
           },
           topicSelected: function () {
             return (currentPage.type === "topic") ? 'selected' : '';
+          },
+          pageSlug: function () {
+            return Session.get('pageSlug');
           }
         }
       });
     } else {
       this.render('NewPage', {
         data: {
-          pageName: function () { return Session.get('currentPageName'); },
+          pageName: function () { 
+            return Session.get('currentPageName'); 
+          },
+          pageSlug: function () {
+            return Session.get('pageSlug');
+          }
         }
       });
     }

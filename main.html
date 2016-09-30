@@ -217,7 +217,7 @@
   </div>
 
   <!-- Control Bar -->
-  <div class="fluid-container text-center space-both control-bar">
+  <div class="fluid-container text-center control-bar">
     <span class='brand'><a href="/">Qurious</a></span> · 
     {{#if faved}}
     <i class="fa fa-heart control fave"></i>
@@ -252,6 +252,7 @@
         </select>
       </div>
       <button type="submit" class="btn btn-default">Save Page</button>
+      <a href="/{{pageSlug}}" class="btn btn-default">Cancel</a>
     </form>
   </div>
 </template>
@@ -274,6 +275,7 @@
         </select>
       </div>
       <button type="submit" class="btn btn-default">Save Page</button>
+      <a href="/{{pageSlug}}" class="btn btn-default">Cancel</a>
     </form>
   </div>
   <!-- <span class="delete">delete</span> --> <!-- We don't really want to let people delete at will -->

@@ -816,6 +816,8 @@ a.header-link {
 .control-bar {
   font-size: 32px;
   font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .control {

@@ -106,7 +106,13 @@ h2 a {
   color: black;
 }
 
+h1 a {
+  color: black;
+}
 
+h1 a:hover {
+  text-decoration: none;
+}
 
 
 .black-background {
@@ -535,15 +541,6 @@ ul.quote.list li a {
 
 
 
-
-
-/* Another navigation section clean up soon */
-.navigation .brand {
-  margin-right: 8px;
-}
-
-
-
 .content {
   
 }
@@ -811,9 +808,18 @@ a.header-link {
 }
 
 
+.brand a {
+  color: black;
+  text-decoration: none;
+}
+
+.control-bar {
+  font-size: 32px;
+  font-weight: bold;
+}
 
 .control {
-  font-size: 32px;
+  font-size: 30px;
 }
 
 .control.fave {

@@ -358,6 +358,7 @@ Router.route('/quote/:_quote_slug/edit', {
 
     if (quote) {
       Meteor.call('checkQuoteSize', quoteSlug);
+      Session.set('quoteId', quote._id);
     } 
     else {
       Meteor.setTimeout( function () { Router.go('/notfound'), {}, {replaceState: true}}, 1000);
@@ -400,6 +401,7 @@ Router.route('/:_page_slug/:_quote_slug', {
 
     if (quote) {
       Meteor.call('checkQuoteSize', quoteSlug);
+      Session.set('quoteId', quote._id);
     } else {
       Meteor.setTimeout( function () { Router.go('/notfound'), {}, {replaceState: true}}, 1000);
     }

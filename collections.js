@@ -311,9 +311,9 @@ Meteor.users.attachSchema(Schemas.User);
 
 // Trying out collection revisions using todda00:collection-revisions
 
-CollectionRevisions.Quotes = {
-  keep:2,
-  ignoreWithin: 4,
-  ignoreWithinUnit: 'minutes'
-}
-Quotes.attachCollectionRevisions(CollectionRevisions.Quotes); // let's maybe save it till we need it
+// CollectionRevisions.Quotes = {
+//   keep:2,
+//   ignoreWithin: 4,
+//   ignoreWithinUnit: 'minutes'
+// }
+// Quotes.attachCollectionRevisions(CollectionRevisions.Quotes); // let's maybe save it till we need it

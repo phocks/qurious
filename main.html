@@ -55,7 +55,7 @@
       <div id="main" class="container backdrop">
         <div class="text-center flex-center home-container">
           <!-- <h1><i class="fa fa-quote-left"></i></h1> -->
-          <h1>Qurious.</h1>
+          <h1><a href="/carl-sagan">Qurious.</a></h1>
           <!-- <p>is kinda new, so please forgive us if there's not much here at all just yet.</p> -->
           <!-- <a class="btn btn-default scroll" href="/explore" style="margin-bottom: 25px">Explore</a> -->
         </div>
@@ -78,55 +78,6 @@
     {{/unless}}
   {{/if}}
 </template>
-
-
-
-
-<!-- Maybe in the future -->
-<template name="HomeLoggedIn">
-  <div class="container">
-    <h1>{{name}}</h1>
-    <div class="row">
-      <div class="col-md-8">
-        {{#each quotes}}
-        <div class="full-quote">
-          <span class="quotation">
-          <big>
-            {{#if authorSlug}}
-            &ldquo;<a href="/{{authorSlug}}/{{slug}}">{{quotation}}</a>&rdquo;
-            {{else}}
-            &ldquo;<a href="/quote/{{slug}}">{{quotation}}</a>&rdquo;
-            {{/if}}
-          </big>
-          </span>
-          <span>
-            <small>
-            {{#if author}} <!-- we need to do some hacky stuff for layout -->
-              &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
-            {{/if}}
-            {{#if source}}
-              {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>{{#if topic}},{{/if}}
-            {{/if}}
-            {{#if topic}}
-              on <a href="/{{slugThisString topic}}">{{topic}}</a>
-            {{/if}}
-            </small>
-          </span>
-          </div>
-        {{/each}}
-      </div>
-      <div class="col-md-4"></div>
-    </div>
-    
-  </div>
-</template>
-
-
-
-
-
-
-
 
 
 
@@ -266,7 +217,8 @@
   </div>
 
   <!-- Control Bar -->
-  <div class="fluid-container text-center space-both">
+  <div class="fluid-container text-center space-both control-bar">
+    <span class='brand'><a href="/">Qurious</a></span> · 
     {{#if faved}}
     <i class="fa fa-heart control fave"></i>
     {{else}}
@@ -791,5 +743,48 @@
       <!-- <i class="fa fa-quote-right"></i> -->
     </div>
     <!-- <div>flag</div> -->
+  </div>
+</template>
+
+
+
+
+
+<!-- Maybe in the future -->
+<template name="HomeLoggedIn">
+  <div class="container">
+    <h1>{{name}}</h1>
+    <div class="row">
+      <div class="col-md-8">
+        {{#each quotes}}
+        <div class="full-quote">
+          <span class="quotation">
+          <big>
+            {{#if authorSlug}}
+            &ldquo;<a href="/{{authorSlug}}/{{slug}}">{{quotation}}</a>&rdquo;
+            {{else}}
+            &ldquo;<a href="/quote/{{slug}}">{{quotation}}</a>&rdquo;
+            {{/if}}
+          </big>
+          </span>
+          <span>
+            <small>
+            {{#if author}} <!-- we need to do some hacky stuff for layout -->
+              &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
+            {{/if}}
+            {{#if source}}
+              {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>{{#if topic}},{{/if}}
+            {{/if}}
+            {{#if topic}}
+              on <a href="/{{slugThisString topic}}">{{topic}}</a>
+            {{/if}}
+            </small>
+          </span>
+          </div>
+        {{/each}}
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+    
   </div>
 </template>

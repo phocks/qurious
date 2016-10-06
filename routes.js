@@ -40,7 +40,6 @@ Router.route('/', {
   // },
   action: function () {
     Session.set("DocumentTitle","Qurious");
-    Session.set('numberOfQuotesToShow', 1);
 
 
     // console.log(Meteor.user().services.twitter.profile_image_url);
@@ -87,6 +86,10 @@ Router.route('/explore', {
   }
 });
 
+// After we leave a Route for a new URL hopefully we will reset the load more session value
+Router.onStop(function() {
+  Session.set('numberOfQuotesToShow', 1);
+});
 
 
 

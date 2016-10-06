@@ -33,6 +33,19 @@
 </template>
 
 
+<!-- A new template let's maybe wait until next release -->
+<template name="Exploration">
+  <div class="back-layer">
+    <div class="top-bar">
+      <span class="brand">Qurious</span>
+    </div>
+  </div>
+</template>
+
+
+
+
+
 
 <template name="Home">
   {{#if loggingIn}}
@@ -55,9 +68,9 @@
       <div id="main" class="container backdrop">
         <div class="text-center flex-center home-container">
           <!-- <h1><i class="fa fa-quote-left"></i></h1> -->
-          <h1><a href="/carl-sagan">Qurious.</a></h1>
-          <!-- <p>is kinda new, so please forgive us if there's not much here at all just yet.</p> -->
-          <!-- <a class="btn btn-default scroll" href="/explore" style="margin-bottom: 25px">Explore</a> -->
+          <h1><a href="/">Qurious.</a></h1>
+          <p>is kinda new, so please forgive us if there's not much here just yet.</p>
+          <a class="btn btn-default scroll" href="/explore" style="margin-bottom: 25px">Explore</a>
         </div>
         <!-- <div class="text-center flex-center home-container">
           <p>is kinda new, so please forgive us if there's not much here just yet.</p>
@@ -80,7 +93,23 @@
 </template>
 
 
+<template name="Explore">
+      <div id="main" class="container backdrop">
+        <div class="text-center flex-center">
+          <h1><a href="/">Qurious.</a></h1>
 
+          <!-- <i class="fa fa-angle-down" style="position: relative;font-size: 42px;top: 60px"></i> -->
+        </div>
+      </div>
+
+      {{> ThePageList}}
+
+      <!-- {{> FooterNav}} -->
+
+      <div class="container-fluid text-center space-both">
+        <span class="load-more"><b>More...</b></span>
+      </div>
+</template>
 
 
 
@@ -425,7 +454,7 @@
     <div class="title"><a href="/">Qurious.</a></div>
     <form>
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Username or email" name="loginUser" autocorrect="off" autocapitalize="none"/>
+        <input type="text" class="form-control" placeholder="Username or email" name="loginUser" autocorrect="off" autocapitalize="none" autofocus />
       </div>
       <div class="form-group">
         <input type="password" class="form-control" placeholder="Password" name="loginPassword" />
@@ -545,248 +574,3 @@
 
 
 
-
-
-
-<template name="PageUnverified">
-  <div class="container backdrop flex-center text-center">
-    <!-- <small><a href="/explore">Back</a></small> -->
-    <div class="page-verify">
-      <h1 class="page-name">{{page.name}}</h1>
-      <p>This author is unverified.</p>
-      <!-- <button class="btn btn-default">Verify</button>
-      <button class="btn btn-default">Flag</button>
-      <button class="btn btn-default">Edit</button> -->
-    </div>    
-  </div>
-</template>
-
-
-
-<template name="Faq">
-  <div class="container faq content spacer narrow text-center">
-    <h1>Frequently Asked Questions</h1>
-    <div class="spacer"></div>
-    <h3>What is Qurious?</h3>
-    <p>Qurious is a website about quotes, words, and ideas. We are still in early alpha stage testing.</p>
-    <h3>Can I have access?</h3>
-    <p>We are rolling out acess very slowly to people who have subscribed. <a href="/subscribe">Sign up</a> for early access.</p>
-    <h3>Do you need help building Qurious?</h3>
-    <p>If you have some coding experience (JavaScript is a plus) and have an interest in quotations, literature, or typography please <a href="mailto:info@qurious.cc">contact us</a> to help out.</p>
-  </div>
-</template>
-
-
-
-
-<template name="ExplorePending">
-  <div class="container backdrop explore content">
-    
-    <section class="section">
-      <h1>Pending Authors</h1>
-      <p class="lead">Here are submitted authors who haven't been verified. Please flag anything that seems out of place.</p>
-    </section>
-
-    <div class="section">
-      <ul class="author-list">
-        {{#each pages}}
-          <li><a href="/{{slug}}" class="{{#if verified}}verified{{/if}}">{{name}}</a></li>
-        {{else}}
-          
-        {{/each}}
-        {{#if currentUser}}
-        <li><a href="/add">+</a></li>
-        {{/if}}
-      </ul>
-    </div>
-
-    <!-- {{#each pages}}
-      <h1><a href="/{{slug}}">{{name}}</a></h1>
-    {{/each}} -->
-
-  </div>
-</template>
-
-
-
-
-
-
-
-
-
-
-
-<!-- This is the fixed nav -->
-<template name="Nav">
-  <div class="container qurious-nav">
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-          <span class="sr-only">Toggle navigation</span>
-        </button>
-        <a class="navbar-brand" href="/">Qurious<!-- <img src="/grey-logo.png"> --></a>
-      </div>
-
-
-      <div class="collapse navbar-collapse" id="navbar-collapse-01">
-        <ul class="nav navbar-nav">
-        </ul>
-          {{#if currentUser}}
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/settings">{{currentUser._id}}</a></li>
-            </ul>
-          {{else}}
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/sign-in">Sign In</a></li>
-            </ul>
-          {{/if}}
-      </div><!-- /.navbar-collapse -->
-    </nav><!-- /navbar -->
-  </div>
-</template>
-
-
-
-
-
-
-
-<template name="Header">
-  <nav class="header">
-    <div class="container">
-      <a href="/">Qurious</a>
-    </div>
-  </nav>
-</template>
-
-<template name="top-bar">
-  <div class="top-bar">
-    Qurious
-  </div>
-</template>
-
-
-
-
-
-
-<!-- We use this for Anonymous to check us out -->
-<template name="Explore">
-  <div id="main" class="container backdrop">
-    <div class="text-center flex-center home-container">
-      <h1>Qurious.</h1>
-    </div>
-  </div>
-  {{> ThePageList}}
-  {{> ControlBar}}
-</template>
-
-
-
-
-
-
-<template name="Authors">
-  <div class="container-fluid text-center material-background">
-    <div class="space-both">
-      <ul class="author-list">
-        {{#each pages}}
-          <li><a href="/{{slug}}">{{name}}</a></li>
-        {{else}}
-
-        {{/each}}
-      </ul>
-    </div>
-  </div>
-</template>
-
-
-
-
-
-
-
-
-
-
-<template name="Settings">
-  <div class="container backdrop">
-    <div class="col-md-6">
-      <h1>Settings</h1>
-      <!-- <form>
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" class="form-control" placeholder="Your full name" name="fullName" value="{{currentUser.profile.fullName}}" />
-        </div>
-        <div class="form-group">     
-          <button type="submit" class="btn btn-primary">Update</button>
-        </div>
-      </form> -->
-      <p>Your user id: {{_id}}</p>
-      <a href="/sign-out">Sign out</a>
-    </div>
-  </div>
-</template>
-
-
-
-
-
-
-<template name="DisplayQuote">
-  <div class="container backdrop flex-center">
-    <div class="quote">
-      <h1 style="margin-top:0"><i class="fa fa-quote-left"></i></h1>
-      <div class="quotation {{quote.length}}">
-        {{quote.quotation}}
-      </div>
-      <div class="attribution"><a href="/{{page.slug}}">{{page.name}}</a></div>
-      <!-- <i class="fa fa-quote-right"></i> -->
-    </div>
-    <!-- <div>flag</div> -->
-  </div>
-</template>
-
-
-
-
-
-<!-- Maybe in the future -->
-<template name="HomeLoggedIn">
-  <div class="container">
-    <h1>{{name}}</h1>
-    <div class="row">
-      <div class="col-md-8">
-        {{#each quotes}}
-        <div class="full-quote">
-          <span class="quotation">
-          <big>
-            {{#if authorSlug}}
-            &ldquo;<a href="/{{authorSlug}}/{{slug}}">{{quotation}}</a>&rdquo;
-            {{else}}
-            &ldquo;<a href="/quote/{{slug}}">{{quotation}}</a>&rdquo;
-            {{/if}}
-          </big>
-          </span>
-          <span>
-            <small>
-            {{#if author}} <!-- we need to do some hacky stuff for layout -->
-              &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
-            {{/if}}
-            {{#if source}}
-              {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>{{#if topic}},{{/if}}
-            {{/if}}
-            {{#if topic}}
-              on <a href="/{{slugThisString topic}}">{{topic}}</a>
-            {{/if}}
-            </small>
-          </span>
-          </div>
-        {{/each}}
-      </div>
-      <div class="col-md-4"></div>
-    </div>
-    
-  </div>
-</template>

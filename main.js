@@ -253,7 +253,7 @@ if (Meteor.isClient) { // only runs on the client
   //   Meteor.setTimeout( function () { window.scroll(0, 50); }, 500);
   // });
 
-
+  Session.setDefault('numberOfQuotesToShow', 1);
 
 
   // Here we are setting up pagination
@@ -268,65 +268,21 @@ if (Meteor.isClient) { // only runs on the client
   // });
 
 
-  Template.Settings.helpers({
-    _id: function () {
-      return Meteor.userId();
-    }
-  });
 
 
-
-  Template.ThePageList.helpers({
-    // quotes: function () {
-    //   // var quotes = Quotes.find({}, { sort: {faveCount: -1}}, { limit: 2 } );
-    // var quotes = Quotes.find({});
-    // return quotes;
-    // },
-    test() {
-      return "hello";
-    }
-  })
 
 
 
   // Events that drive things like clicks etc go below here
 
 
-  Template.Home.events({
-    // "click .scroll": function () {
-    //   console.log('hi');
-    //   $('html, body').animate({
-    //       scrollTop: $("#down").offset().top
-    //   }, 1000);
-    // }
-    
-    // 'click a[href^="#"]': function(event) {
-    //   var target = $(this.getAttribute('href'));
-    //   if( target.length ) {
-    //       event.preventDefault();
-    //       $('html, body').stop().animate({
-    //           scrollTop: target.offset().top
-    //       }, 1000);
-    //   }
-    // }
-
-    // "click .load-more": function () {
-    //   quotationsHandler.loadNextPage();
-    // }
-  });
+Template.Explore.events({
+  "click .load-more": function () {
+    Session.set("numberOfQuotesToShow", Session.get('numberOfQuotesToShow') + 1 );
+  }
+});
 
 
-  // Template.Nav.events({
-  //   "click .edit-mode": function () {
-  //     if (Session.get('editMode')) {
-  //       Session.set('editMode', false);
-  //     } else 
-  //      {
-  //       Session.set('editMode', true);
-  //     }
-  //     console.log('Edit mode is: ' + Session.get('editMode'));
-  //   }
-  // });
 
 
 
@@ -368,14 +324,7 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
-  Template.Settings.events({
-    'submit form': function(event) {
-      event.preventDefault();
-      // console.log(event);
-      var fullName = event.target.fullName.value;
-      Meteor.call('updateFullName', fullName);
-    }
-  });
+  
 
   // Using fittext to resize or could use vw in the css
   // Template.Explore.onRendered( function () {
@@ -384,13 +333,7 @@ if (Meteor.isClient) { // only runs on the client
   // });
 
 
-  Template.Explore.events({
-    "click .delete": function () {
-      if (confirm('Really delete ?')) {
-        Meteor.call('deleteAuthor', this._id);
-      }
-    }
-  });
+ 
 
 
   Template.Register.events({
@@ -649,12 +592,7 @@ if (Meteor.isClient) { // only runs on the client
       // Prevent default action from form submit
       // return false; // now handled up top
     },
-    "click .delete": function () {
-      if (confirm('Really delete ?')) {
-        Meteor.call('deleteAuthor', Session.get("pageId"));
-        Router.go('/explore')
-      }
-    }
+    
   });
 
   

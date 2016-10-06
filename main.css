@@ -849,3 +849,18 @@ a.header-link {
 .navbar {
   margin-bottom: 0;
 }
+
+
+
+/* A new home */
+
+.back-layer {
+  min-height: 100vh;
+  background-color: #fdfbf8;
+}
+
+.top-bar {
+  background-color: white;
+  padding: 16px;
+  border-bottom: 1px solid #f7f5f2;
+}

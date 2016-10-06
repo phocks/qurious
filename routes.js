@@ -1,7 +1,10 @@
 // This file handles all the URL routes. It uses the iron:router Meteor package.
 
+// As of Meteor 1.3 we something need to import npm stuff
+// or something.... I dunno
 import slug from 'slug';
 // slug('string', [{options} || 'replacement']);
+// Makes it lowercase and other stuff
 slug.defaults.modes['pretty'] = {
     replacement: '-',
     symbols: true,
@@ -37,31 +40,37 @@ Router.route('/', {
   // },
   action: function () {
     Session.set("DocumentTitle","Qurious");
+    Session.set('numberOfQuotesToShow', 1);
 
 
     // console.log(Meteor.user().services.twitter.profile_image_url);
     // this.render('Nav', { to: 'nav'});
-    
-    this.render('Home', {
-      data: {
-        quotes: function () {
-          // var quotes = Quotes.find({}, { sort: {faveCount: -1}}, { limit: 2 } );
-          var quotes = Quotes.find({});
-          return quotes;
-        },
-      }
-    });
-    this.render('FooterNavigation', { to: 'footer'});
+
+    if (!Meteor.user()) { this.render('Home'); }
+    else {
+      this.render('Home', { // Render new layout later
+        data: {
+          quotes: function () {
+            // var quotes = Quotes.find({}, { sort: {faveCount: -1}}, { limit: 2 } );
+            var quotes = Quotes.find({});
+            return quotes;
+          },
+        }
+      });
+      this.render('FooterNavigation', { to: 'footer'});
+    }
   }
 });
 
 
 Router.route('/explore', {
-  waitOn: function () {
-    return Meteor.subscribe('quotesLatest', 64);
-  },
+  // waitOn: function () {
+  //   return Meteor.subscribe('quotesLatest', 1);
+  // },
   action: function () {
     Session.set("DocumentTitle","Qurious");
+
+    Meteor.subscribe('quotesInfiniteLoad', Session.get('numberOfQuotesToShow') );
 
     this.render('Explore', {
       data: {      
@@ -69,8 +78,8 @@ Router.route('/explore', {
         //   var pages = Pages.find({ verified:true }, { sort: {name: 1}});
         //   return pages;
         // },
-        quotes: function () {
-          var quotes = Quotes.find({}, {sort: {faveCount: -1}}, { limit: Meteor.get('quoteLimit') });
+        quotes: function () { 
+          var quotes = Quotes.find({}, { sort: {faveCount: -1}, limit: Session.get('numberOfQuotesToShow') });
           return quotes;
         },
       }
@@ -506,7 +515,7 @@ Router.route('/:_pageUrlText', {
         Session.set("DocumentTitle", "Quotes from " + currentPage.name);
       }
       else if (currentPage.type === "topic") { 
-        Session.set("DocumentTitle", "Quotes on " + currentPage.name);
+        Session.set("DocumentTitle", "Quotes about " + currentPage.name);
       } 
       else Session.set("DocumentTitle", currentPage.name);
 

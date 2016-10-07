@@ -55,7 +55,6 @@ Meteor.users.deny({
 
 
 
-
 // Here we have stuff that will only run on the client's browser
 
 if (Meteor.isClient) { // only runs on the client
@@ -276,7 +275,7 @@ if (Meteor.isClient) { // only runs on the client
   // Events that drive things like clicks etc go below here
 
 
-Template.Explore.events({
+Template.LoadMore.events({
   "click .load-more": function () {
     Session.set("numberOfQuotesToShow", Session.get('numberOfQuotesToShow') + 1 );
   }

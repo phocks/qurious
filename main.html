@@ -87,33 +87,38 @@
 
       <!-- {{> ControlBar}} -->
       <!-- {{> Authors}}
-      {{> Footer}} -->
+      {{>   Footer}} -->
     {{/unless}}
   {{/if}}
 </template>
 
 
 <template name="Explore">
-      <div id="main" class="container backdrop">
-        <div class="text-center flex-center">
-          <h1><a href="/">Qurious.</a></h1>
+  <div id="main" class="container backdrop">
+    <div class="text-center flex-center">
+      <h1><a href="/">Qurious.</a></h1>
 
-          <!-- <i class="fa fa-angle-down" style="position: relative;font-size: 42px;top: 60px"></i> -->
-        </div>
-      </div>
+      <!-- <i class="fa fa-angle-down" style="position: relative;font-size: 42px;top: 60px"></i> -->
+    </div>
+  </div>
 
-      {{> ThePageList}}
+  {{> ThePageList}}
 
-      <!-- {{> FooterNav}} -->
+  <!-- {{> FooterNav}} -->
 
-      <div class="container-fluid text-center space-both">
-        <span class="load-more"><b>More...</b></span>
-      </div>
+  {{> LoadMore}}
+
+  {{> Copyright}}
+
 </template>
 
 
 
-
+<template name="LoadMore">
+  <div class="container-fluid text-center space-both">
+    <span class="load-more"><b><a class="btn btn-default" href="#">More...</a></b></span>
+  </div>
+</template>
 
 
 
@@ -132,7 +137,11 @@
 
 </template>
 
-
+<template name="Copyright">
+  <div class="container-fluid copyright">
+    <center><small>Another <b><a href="http://meag.re/">Meagre</a></b> production.</small></center>
+  </div>
+</template>
 
 
 <template name="Page">
@@ -148,6 +157,8 @@
   </div>
 
   {{> ThePageList}}
+
+  {{> LoadMore}}
 
   
   <!-- {{> AddQuoteToPage}} -->
@@ -396,7 +407,7 @@
   {{else}}
   <div class="container-fluid footer">
     <div class="content container text-center">
-      <small>from <a href="/">Meagre Inc.</a></small>
+      <small>Another <a href="/">Meagre production.</a></small>
     </div>
   </div>
   {{/if}}

@@ -47,7 +47,7 @@ Router.route('/', {
 
     if (!Meteor.user()) { this.render('Home'); }
     else {
-      this.render('Home', { // Render new layout later
+      this.render('Home', { // Render new "Exploration" layout later
         data: {
           quotes: function () {
             // var quotes = Quotes.find({}, { sort: {faveCount: -1}}, { limit: 2 } );
@@ -534,7 +534,7 @@ Router.route('/:_pageUrlText', {
               { authorSlug: currentPage.slug }, // 3 permanent slugs and then an array of others
               { sourceSlug: currentPage.slug }, // for some reason this will be best I think
               { topicSlug: currentPage.slug }
-              ] }, {sort: {favedBy: -1}} );
+              ] }, { sort: { favedBy: -1 }, limit: Session.get('numberOfQuotesToShow') } );
             return quotes;
           },
         }

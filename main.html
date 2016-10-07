@@ -142,7 +142,7 @@
 
 <template name="Copyright">
   <div class="container-fluid copyright">
-    <center><small>Another <b><a href="http://meag.re/">Meagre</a></b> production.</small></center>
+    <center><small><b><a href="/">Qurious</a></b> is a <b><a href="http://meag.re/">Meagre</a></b> production.</small></center>
   </div>
 </template>
 
@@ -264,11 +264,11 @@
 
   <!-- Control Bar -->
   <div class="fluid-container text-center control-bar">
-    <span class='brand'><a href="/">Qurious</a></span> · 
+    <!-- <span class='brand'><a href="/">Qurious</a></span> ·  -->
     {{#if faved}}
-    <i class="fa fa-heart control fave"></i>
+      <a class="control fave" href="#">Liked!</a> <a class="control fave" href="#"><i class="fa fa-heart red"></i></a>
     {{else}}
-    <i class="fa fa-heart-o control fave"></i>
+      <a class="control fave" href="#">Like?</a> <a class="control fave" href="#"><i class="fa fa-heart-o red"></i></a>
     {{/if}}
   </div>
 

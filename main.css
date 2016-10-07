@@ -847,14 +847,14 @@ a.header-link {
   font-size: 30px;
 }
 
-.control.fave {
+.red {
   color: red;
-  cursor: pointer;
 }
 
-.load-more {
-  cursor: pointer;
+a.control.fave {
+  color: black;
 }
+
 
 .next-page,
 .previous-page {

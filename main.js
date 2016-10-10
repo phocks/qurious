@@ -11,15 +11,22 @@
 // Copyright Meagre 2015- All rights reserved
 
 
+// Some npm imports
+
+import slug from 'slug';
+// slug('string', [{options} || 'replacement']);
+slug.defaults.modes['pretty'] = {
+    replacement: '-',
+    symbols: true,
+    remove: /[.]/g,
+    lower: true,
+    charmap: slug.charmap,
+    multicharmap: slug.multicharmap
+};
+
 
 /*
-|--------------------------------------------------------------------------
-| Title template
-|--------------------------------------------------------------------------
-|
-| Comments can go here and description
-| that spans multi lines.
-|
+  MAIN JAVASCRIPT FILE PUT STUFF IN HERE THAT CONTROLS SHIT
 */
 
 
@@ -40,6 +47,10 @@ Meteor.users.deny({
     return true;
   }
 });
+
+
+
+
 
 
 
@@ -79,12 +90,12 @@ if (Meteor.isClient) { // only runs on the client
       // onClose: function() {
       //     /* Code here will be executed once the alert closes. */
       // }
-    });
+    }); 
 
-    
+  }); // end startup client code
 
-});
 
+  
 
 
   // We need to tell the client to subscribe explicitly to data collections
@@ -161,7 +172,7 @@ if (Meteor.isClient) { // only runs on the client
   // This changes the animation period, set to zero for none
   // Doesn't seem to work with mobile (or sometimes at all)
   // RouterAutoscroll.animationDuration = 200;
-  RouterAutoscroll.marginTop = 50;
+  // RouterAutoscroll.marginTop = 50;
 
   // Call this at any time to set the <title>
   Session.set("DocumentTitle","Qurious");
@@ -227,6 +238,10 @@ if (Meteor.isClient) { // only runs on the client
     }
   );
 
+  Template.registerHelper('slugThisString', function(stringToSluggify) {
+    return slug(stringToSluggify); 
+  });
+
   // End global helpers and now some Template specific helpers
 
 
@@ -237,106 +252,78 @@ if (Meteor.isClient) { // only runs on the client
   //   Meteor.setTimeout( function () { window.scroll(0, 50); }, 500);
   // });
 
+  Session.setDefault('numberOfQuotesToShow', 1);
 
 
-  Template.Settings.helpers({
-    _id: function () {
-      return Meteor.userId();
-    }
-  });
+  // Here we are setting up pagination
+
+  // Session.setDefault("skip", 0);
+  // Session.setDefault("infiniteLoadCount", 10);
+
+
+  // Tracker.autorun( function () {
+  //   Meteor.subscribe('quotesInPages', Session.get("skip"));
+  //   Meteor.subscribe('quotesInfiniteLoad', Session.get("infiniteLoadCount"));
+  // });
+
+
+
+
 
 
 
   // Events that drive things like clicks etc go below here
 
 
-  Template.Nav.events({
-    "click .edit-mode": function () {
-      if (Session.get('editMode')) {
-        Session.set('editMode', false);
-      } else 
-       {
-        Session.set('editMode', true);
-      }
-      console.log('Edit mode is: ' + Session.get('editMode'));
-    }
-  });
+Template.LoadMore.events({
+  "click .load-more": function () {
+    Session.set("numberOfQuotesToShow", Session.get('numberOfQuotesToShow') + 1 );
+  }
+});
 
 
 
-  // When adding quotations from the Author
-  Template.AddQuote.events({
-    "submit .add-quote": function (event) {
-      var text = event.target.text.value;
-      var pageId = Session.get('pageId');
-      console.log("This is the quote text: " + text);
+
+
+  // Add people to the beta invite list
+  Template.Invite.events({
+    "submit form": function (event) {
+      event.preventDefault();
+      
+      // Get value from form element
+      const target = event.target;
+      const text = target.text.value;
+
+      // var email = event.target.text.value;
+      // var pageId = Session.get('pageId');
+      // console.log(text);
 
       if (text == "") return false; // prevent empty strings
 
-      Meteor.call('addQuoteToPage', text, pageId, function(error, result) {
-        var newQuoteId = result;
-        console.log("New quote id: " + newQuoteId);
-        Meteor.call('checkQuoteSize', newQuoteId);
-        Router.go('/explore');
-      });
+
+      Meteor.call('addInvite', text, function (error, result) {
+          if (!error) {
+            console.log("invited " + text);
+            sAlert.info(text + " has been invited")
+          }
+        });      
+
+      
 
       // Clear form
       event.target.text.value = "";
 
-
       // Prevent default action from form submit
-      return false;
+      //return false; // use event.preventDefault() instead as more robust
     },
   });
+
+
+
+
+
 
   
-
-  // Adding another author
-  Template.Add.events({
-    "submit form": function (event) {
-      var text = event.target.text.value;
-      // var pageId = Session.get('pageId');
-      console.log(text);
-
-      if (text == "") return false; // prevent empty strings
-
-      if ( Meteor.user().profile.lastSubmissionTime ) {
-        var lastSub = moment(Meteor.user().profile.lastSubmissionTime);
-        var compare = moment().subtract(60, 'seconds');
-
-        // Prevent multiple submissions in short period
-        if ( compare < lastSub ) { 
-          console.log ('compare less than lastsub');
-          sAlert.info('Hold up. Wait a minute or two.');
-          return false;
-        }
-        else console.log('good to go');
-
-
-      }
-
-      Meteor.call('addPage', text, function(error, result) {
-        var newPage = result;
-        console.log("New page is: " + newPage);
-        Router.go('/' + newPage);
-      });
-
-      // Clear form
-      event.target.text.value = "";
-
-      // Prevent default action from form submit
-      return false;
-    },
-  });
-
-  Template.Settings.events({
-    'submit form': function(event) {
-      event.preventDefault();
-      // console.log(event);
-      var fullName = event.target.fullName.value;
-      Meteor.call('updateFullName', fullName);
-    }
-  });
 
   // Using fittext to resize or could use vw in the css
   // Template.Explore.onRendered( function () {
@@ -345,19 +332,13 @@ if (Meteor.isClient) { // only runs on the client
   // });
 
 
-  Template.Explore.events({
-    "click .delete": function () {
-      if (confirm('Really delete ?')) {
-        Meteor.call('deleteAuthor', this._id);
-      }
-    }
-  });
+ 
 
 
   Template.Register.events({
     'submit form': function(event) {
       event.preventDefault();
-      var emailVar = event.target.registerEmail.value;
+      var emailVar = event.target.registerEmail.value.toLowerCase();
       var usernameVar = event.target.registerUsername.value;
       var passwordVar = event.target.registerPassword.value;
       // var passwordVarConfirm = event.target.registerPasswordConfirm.value;
@@ -383,6 +364,8 @@ if (Meteor.isClient) { // only runs on the client
       Meteor.call('isInvited', emailVar, function (error) {
         if (!error) {
           Meteor.subscribe('invites', emailVar, createAccount);
+
+          // emailVar = emailVar.toLowerCase();
 
           // Here we are hoisting a function (I think) instead of nesting it
           // so we don't create unnecessary Callback Hell
@@ -492,6 +475,212 @@ if (Meteor.isClient) { // only runs on the client
 
 
 
+  Template.PageEdit.onRendered( function() {
+    $("select").select2({dropdownCssClass: 'dropdown-inverse'});
+  });
+
+
+  Template.NewPage.onRendered( function() {
+    $("select").select2({dropdownCssClass: 'dropdown-inverse'});
+  });
+
+
+  Template.NewPage.events({
+    "submit form": function (event) {
+      event.preventDefault();
+
+      const pageText = event.target.text.value;
+      const pageSlug = Session.get('pageSlug');
+      const pageType = event.target.type.value;
+      
+      console.log("page text is " + pageText);
+      console.log("Page slug is " + pageSlug);
+      console.log("Page type is " + pageType);
+
+      if (pageText === "" || pageType === "") return false; // prevent empty strings
+
+
+      if ( Meteor.user().profile && Meteor.user().profile.lastSubmissionTime ) {
+        var lastSub = moment(Meteor.user().profile.lastSubmissionTime);
+        var compare = moment().subtract(60, 'seconds');
+
+        // Prevent multiple submissions in short period
+        if ( compare < lastSub ) { 
+          console.log ('compare less than lastsub');
+          sAlert.info('Hold up. Wait a minute or two.');
+          return false;
+        }
+        else console.log('good to go');
+      }
+
+
+      Meteor.call('addPage', pageText, pageSlug, pageType, function(error, result) {
+        if (error) {
+          sAlert.info(error.reason);
+        } else {
+          var newPage = result;
+          console.log("New page is: " + newPage);
+          if (result) {
+            Router.go('/' + pageSlug);
+          }
+        }
+      });
+
+      
+
+      // Clear form
+      event.target.text.value = "";
+
+      // Prevent default action from form submit
+      // return false; // now handled up top
+    }
+  });
+
+
+  Template.ControlBar.events({
+    "click .next-page": function () {
+      Session.set("skip", Session.get("skip")+1);
+      window.scrollTo(0, 0);
+    },
+    "click .previous-page": function () {
+      Session.set("skip", Session.get("skip")-1);
+      window.scrollTo(0, 0);
+    }
+  });
+
+
+
+
+  Template.PageEdit.events({
+    "submit form": function (event) {
+      event.preventDefault();
+
+      const newPageName = event.target.text.value;
+      const newPageType = event.target.type.value;
+      // var pageId = Session.get('pageId');
+      console.log(newPageName);
+
+      if (newPageName === "" || newPageType === "") return false; // prevent empty strings
+
+
+      if ( Meteor.user().profile && Meteor.user().profile.lastSubmissionTime ) {
+        var lastSub = moment(Meteor.user().profile.lastSubmissionTime);
+        var compare = moment().subtract(64, 'seconds');
+
+        // Prevent multiple submissions in short period
+        if ( compare < lastSub ) { 
+          console.log ('compare less than lastsub');
+          sAlert.info('Hold up. Wait a minute or two.');
+          return false;
+        }
+        else console.log("Haven't seen you in a while, good to go");
+      }
+
+
+      Meteor.call('updatePage', 
+        Session.get('pageSlug'), 
+        newPageName, 
+        newPageType);
+
+      
+      Router.go("/" + Session.get('pageSlug'));
+
+      // Clear form
+      // event.target.text.value = "";
+
+      // Prevent default action from form submit
+      // return false; // now handled up top
+    },
+    
+  });
+
+  
+
+  // When adding quotations from the Author
+  Template.AddQuote.events({
+    "submit .add-quote": function (event) {
+      event.preventDefault();
+      
+      var quoteText   = event.target.quoteText.value;
+      var authorText  = event.target.authorText.value;
+      var sourceText  = event.target.sourceText.value;
+      var topicText   = event.target.topicText.value;
+      var pageSlug    = Session.get('pageSlug');
+      console.log("This is the quote text: " + quoteText);
+
+      if (quoteText == "") return false; // prevent empty strings
+
+      Meteor.call('addQuoteToPage', 
+                  quoteText, 
+                  authorText, 
+                  sourceText, 
+                  topicText, 
+                  pageSlug, 
+                  function(error, result) {
+        var newQuoteSlug = result;
+        console.log("New quote: " + newQuoteSlug);
+        Meteor.call('checkQuoteSize', newQuoteSlug);
+        Router.go('/' + pageSlug);
+      });
+
+      // Clear form
+      event.target.quoteText.value = "";
+
+      // Prevent default action from form submit
+      return false;
+    },
+  });
+
+  // When adding quotations from the Author
+  Template.EditQuote.events({
+    "submit .add-quote": function (event) {
+      event.preventDefault();
+      
+      var quoteSlug   = Session.get('quoteSlug');
+      var quoteText   = event.target.quoteText.value;
+      var authorText  = event.target.authorText.value;
+      var sourceText  = event.target.sourceText.value;
+      var topicText   = event.target.topicText.value;
+      console.log("This is the quote text: " + quoteText);
+
+      if (quoteText == "") return false; // prevent empty strings
+
+      Meteor.call('editQuote', 
+                  quoteSlug,
+                  quoteText, 
+                  authorText, 
+                  sourceText, 
+                  topicText,
+                  function(error, result) {
+        var editedQuoteSlug = result;
+        console.log("Edited quote: " + quoteSlug);
+        Meteor.call('checkQuoteSize', quoteSlug);
+        Router.go('/quote/' + quoteSlug);
+      });
+
+      // Clear form
+      event.target.quoteText.value = "";
+
+      // Prevent default action from form submit
+      return false;
+    },
+  });
+
+
+  Template.SingleQuote.events ({
+    "click .fave": function (event) {
+      event.preventDefault();
+      if (!Meteor.userId()) {
+        Router.go('/login');
+      } 
+      else {
+        Meteor.call('faveQuote', Session.get('quoteId'));
+      }
+    }
+  });
+
+
+
 } // Client only code end
 
 
@@ -518,6 +707,9 @@ if (Meteor.isServer) {
     // }
 
     //process.env.HTTP_FORWARDED_COUNT = 2; // this seems to shift x-forwarded-for list for ip
+
+    // Did something change so we had to do this? this isn't working anyway wtf
+    // process.env.ROOT_URL = "https://qurious.cc";
 
     // Here we are going to get the client IP Address
     Meteor.onConnection(function(conn) {

@@ -2,6 +2,19 @@
 // Things like database changes that the client might do latency compensation on are especially
 // useful to hide from the client.
 
+// Trying out a new npm package we are able to in Meteor 1.3 sweet
+import slug from 'slug';
+// slug('string', [{options} || 'replacement']);
+slug.defaults.modes['pretty'] = {
+    replacement: '-',
+    symbols: true,
+    remove: /[.]/g,
+    lower: true,
+    charmap: slug.charmap,
+    multicharmap: slug.multicharmap
+};
+
+
 Meteor.methods({
 
   // Throw the dice with all the db docs
@@ -35,7 +48,7 @@ Meteor.methods({
     var count = Quotes.find({quotation: { '$regex': word, $options: 'i'}}).count();
     var random_index = Math.floor(Math.random() * (count));
     var random_object = Quotes.findOne({ $or: [ { quotation: { '$regex': word, $options: 'i'}},
-                                                { attribution: { '$regex': word, $options: 'i'}} ]},
+                                                { author: { '$regex': word, $options: 'i'}} ]},
                                                 {skip:random_index}
                                               );
     if (random_object !== undefined) return random_object._id;
@@ -135,103 +148,56 @@ Meteor.methods({
   // Here we are going to check the size of the quote and then
   // set a value to it so that we can display long quotes with smaller font
   // etc etc
-    checkQuoteSize: function(quoteId) {
+  checkQuoteSize: function(quoteSlug) {
 
-    check(quoteId, String);
+    check(quoteSlug, String);
 
-    var currentQuote = Quotes.findOne(quoteId);
+    var currentQuote = Quotes.findOne({ slug: quoteSlug });
     var quotation = currentQuote.quotation;
 
     //console.log(currentQuote.length);
 
-    if (true) { // use currentQuote.length == undefined to only update undefined
+    if (currentQuote.length == undefined) { // use currentQuote.length == undefined to only update undefined
       var n = quotation.length;
 
       // if (n > maximumQuotationLength) return false; // i don't like massive quotes and i cannot lie
 
-      if (n <= 40) Quotes.update({ _id: quoteId }, { $set: { length: 'tiny' }});
-      if (n > 40 && n <= 120) Quotes.update({ _id: quoteId }, { $set: { length: 'short' }});
-      if (n > 120 && n <= 300) Quotes.update({ _id: quoteId }, { $set: { length: 'medium' }});
-      if (n > 300 && n <= 500) Quotes.update({ _id: quoteId }, { $set: { length: 'long' }});
-      if (n > 500) Quotes.update({ _id: quoteId }, { $set: { length: 'gigantic' }});
+      if (n <= 40) Quotes.update({ slug: quoteSlug }, { $set: { length: 'tiny' }});
+      if (n > 40 && n <= 120) Quotes.update({ slug: quoteSlug }, { $set: { length: 'short' }});
+      if (n > 120 && n <= 300) Quotes.update({ slug: quoteSlug }, { $set: { length: 'medium' }});
+      if (n > 300 && n <= 500) Quotes.update({ slug: quoteSlug }, { $set: { length: 'long' }});
+      if (n > 500) Quotes.update({ slug: quoteSlug }, { $set: { length: 'gigantic' }});
     }
 
     return true;
   },
 
 
-  addPage: function(pageName) {
-  // Make sure the user is logged in before inserting a task
-  if (! Meteor.userId()) {
-    throw new Meteor.Error("not-authorized");
-  }
 
-  pageName = toTitleCase(pageName); // these are defined in globalFunctions.js
-
-  pageSlug = slugText(pageName); // these are defined in globalFunctions.js
-
-
-  var newPage = Pages.insert({
-      name: pageName,
-      slug: pageSlug,
-      createdAt: new Date(), // current time
-      createdBy: Meteor.userId(), // current user
-    }, function(error, result) {
-      if (error) {
-        console.log(error);
-        return false;
-      }
-      else {
-        console.log(result);
-        // This put the new page in the user profile. Probably don't do that right now.
-        // Meteor.users.update( { _id: Meteor.userId() }, { $addToSet:{"profile.pages": result }} );
-
-        // Update time of last submission
-        Meteor.users.update( { _id: Meteor.userId() }, { $set:{"profile.lastSubmissionTime": new Date() }} );
-        return true;
-      }
-    }); 
-
-
-  // if (newPage) return pageSlug;
-  // else return false;
-},
-
-addQuoteToPage: function (text, pageId) {
-  // Make sure the user is logged in otherwise throw and error
-  if (! Meteor.userId()) throw new Meteor.Error("not-authorized");
-
-  // Please make this error actually do something
-  if (text.length > maximumQuotationLength) throw new Meteor.Error('too-long');
-
-  var n = 5;
-  var shortenedText = text.replace(/\s+/g," ").split(/(?=\s)/gi).slice(0, n).join('');
-  shortenedText = shortenedText.replace(/[^a-zA-Z\d\s]/g, ""); // remove special chars as well
-
-  var quoteSlug = slugify(shortenedText);
-
-
-  var newQuote = Quotes.insert({
-    authorId: pageId,
-    quotation: text,
-    createdAt: new Date(), // current time
-    // username: Meteor.user().username, // username of whoever created quote
-    createdBy: Meteor.userId(),  // _id of logged in user
-    slug: quoteSlug,
-  }, function(error, result) {
-    if (error) {
-      console.log("Something went wrong trying to insert into the DB: " + error.message);
-      return result;
+  addInvite: function(inviteEmail) {
+    if ( !Roles.userIsInRole( Meteor.userId(), 'admin') ) {
+      throw new Meteor.Error("pants-not-found", "Can't find my pants");
     }
-  });
 
-  return quoteSlug; // Returns the _id of new quote
-},
+    inviteEmail = inviteEmail.toLowerCase();
+
+    const invite = {$set: { email: inviteEmail}};
+    console.log('Adding ' + inviteEmail + " to invite list.")
+    Invites.upsert({email: inviteEmail}, invite);
+  },
 
 
-deleteQuote: function(quoteId) {
-  Quotes.remove(quoteId);
-},
+  
+
+
+
+  deleteQuote: function(quoteId) {
+    Quotes.remove(quoteId);
+  },
+
+  deleteAuthor: function(authorId) {
+    Pages.remove(authorId);
+  },
 
   
 

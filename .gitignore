@@ -45,3 +45,5 @@ Temporary Items
 # Specific files and folders
 settings.json
 node_modules
+mup.js
+mup.json

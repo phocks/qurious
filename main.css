@@ -15,9 +15,24 @@
 /*@import url(https://fonts.googleapis.com/css?family=Neuton);
 @import url(https://fonts.googleapis.com/css?family=Josefin+Slab:600,400);*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-@import url(https://fonts.googleapis.com/css?family=EB+Garamond);
+/*@import url(https://fonts.googleapis.com/css?family=EB+Garamond);*/
 
 
+
+@font-face {
+  font-family: 'youngserifregular';
+  src: url('/fonts/youngserif/YoungSerif-Regular.eot');
+}
+
+@font-face {
+  font-family: 'youngserifregular';
+  src: url('/fonts/youngserif/YoungSerif-Regular.woff2') format('woff2'),
+  url('/fonts/youngserif/YoungSerif-Regular.woff') format('woff'),
+  url('/fonts/youngserif/YoungSerif-Regular.ttf') format('truetype'),
+  url('/fonts/youngserif/YoungSerif-Regular.svg#youngserifregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 
 /* Your local CSS File */
@@ -48,6 +63,7 @@ body {
   /*background-color: #fdfbf8; moved to LESS*/
   color: black;
   font-family: "Montserrat", sans-serif;
+  /*font-family: Sans-Serif;*/
 }
 
 a {
@@ -68,24 +84,34 @@ a:focus {
   outline: none;
 }
 
+/* Flat-UI adds a little transition and we are diabling it here */
+a {
+  -webkit-transition: 0s;
+  transition: 0s;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  /*font-family: "Montserrat", sans-serif;*/
+}
+
 @media (max-width: 768px) {
   h1 {
     font-size: 2em;
   }
   h2 {
-    font-size: 1.414em;
+    font-size: 1.6em;
   }
   h3 {
-    font-size: 1.155em;
+    font-size: 1.4em;
   }
   h4 {
-    font-size: 1em;
+    font-size: 1.3em;
   }
   h5 {
-    font-size: 0.894em;
+    font-size: 1.2em;
   }
   h6 {
-    font-size: 0.816em;
+    font-size: 1.1em;
   }
 }
 
@@ -93,41 +119,44 @@ a:focus {
 h1 {
   /* Use em to keep spacing proportional when resizing text */
   margin-top: 0.4em;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.4em;
 }
 
+h2 a {
+  color: black;
+}
 
-/* Testing some underlining fancy stuff */
+h1 a {
+  color: black;
+}
 
-/*a.custom {
+h1 a:hover {
   text-decoration: none;
-  position: relative;
-  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 2px, #333333 2px, #333333 3px, rgba(0, 0, 0, 0) 3px);
 }
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
-  a.custom {
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 2px, #333333 2px, #333333 2.5px, rgba(0, 0, 0, 0) 2.5px);
-  }
-}
-a.custom:hover, a.custom:focus {
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 2px, #55abad 2px, #55abad 3px, rgba(0, 0, 0, 0) 3px);
-}
-@media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
-  a.custom:hover, a.custom:focus {
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 2px, #55abad 2px, #55abad 2.5px, rgba(0, 0, 0, 0) 2.5px);
-  }
-}
-*/
 
 
 
+
+.black-background {
+  background-color: black;
+}
+
+.grey-background {
+  background-color: #f9f9f9;
+}
+
+.space-both {
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
 
 
 
 .form-control {
   font-family: "Montserrat", sans-serif;
 }
+
+
 
 .hide {
   position: absolute !important;
@@ -136,7 +165,7 @@ a.custom:hover, a.custom:focus {
 }
 
 /* Use to break up words too big */
-/*h1 {
+.break {
   -ms-word-break: break-all;
   word-break: break-all;
 
@@ -145,7 +174,7 @@ a.custom:hover, a.custom:focus {
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   hyphens: auto;
-}*/
+}
 
 
 /* removes outline for Bootstrap Buttons */
@@ -158,8 +187,8 @@ a.custom:hover, a.custom:focus {
 img.desaturate { -webkit-filter: grayscale(100%); filter: grayscale(100%); }
 
 
-/* Get rid of form input shadow in iOS */
-input[type] {   
+/* Get rid of form input shadow in iOS - ok but this hides checkboxes.... so yeah */
+input[type=text],input[type=password] {   
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;   
@@ -190,17 +219,13 @@ span.quo {
 }
 
 
-
+/* Not sure if we are using this any more */
 #iron-router-progress {
-    background-color: #888;
-    box-shadow: 0 0 0px #888;
+  background-color: #888;
+  box-shadow: 0 0 0px #888;
 }
 
 
-
-.spaced {
-  padding-bottom: 30px !important;
-}
 
 
 .menu {
@@ -304,8 +329,8 @@ Keep it clean
 
 */
 /* Just an override for now */
-.container {
-  /*max-width: 700px;*/
+.container.create-block {
+  max-width: 700px;
 }
 
 .container-fluid {
@@ -322,44 +347,9 @@ Keep it clean
   font-weight: bold;
 }
 
-
-.quote {
-  /*background-color: white;*/
-  /*max-width: 1080px;*/
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-
-.quotation {
-  font-size: 1em;
-}
-
-.attribution {
-  /*white-space: nowrap;*/
-  margin-top: 1em;
-  color: #666;
-}
-
-@media (min-width: 768px) {
-  .quotation {
-    font-size: 1.4em;
-  }
-
-  .attribution {
-    /*white-space: nowrap;*/
-    font-size: 1.4em;
-  }
-}
-
-@media (min-width: 1200px) {
-  .quotation {
-    font-size: 1.6em;
-  }
-
-  .attribution {
-    /*white-space: nowrap;*/
-    font-size: 1.6em;
-  }
+.title a {
+  color: black;
+  text-decoration: none;
 }
 
 /*  nav */
@@ -387,18 +377,13 @@ ul.author-list {
   list-style-type: none;
 }
 
+
+
 ul.author-list li {
-  font-size: 24px;
   display: inline-block;
   padding: 0;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-@media (max-width: 768px) {
-  ul.author-list li {
-    font-size: 1.2em;
-  }
 }
 
 ul.author-list a,
@@ -428,17 +413,54 @@ ul.author-list li a.verified:hover {
 ul.quote-list {
   list-style-type: none;
   margin: 0;
-  margin-top: 3vh;
   padding: 0;
 }
 
 ul.quote-list li {
-  font-size: 24px;
   display: inline-block;
   padding: 0;
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+
+/*ul.author-list li a,
+ul.quote.list li a {
+  overflow: hidden;
+}*/
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  ul.quote-list li {
+    font-size: 1.2em;
+  }
+  ul.author-list li {
+    font-size: 1.2em;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  ul.quote-list li {
+    font-size: 1.3em;
+  }
+  ul.author-list li {
+    font-size: 1.3em;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  ul.quote-list li {
+    font-size: 1.36em;
+  }
+  ul.author-list li {
+    font-size: 1.36em;
+  }
+}
+
+
 
 
 
@@ -541,15 +563,6 @@ ul.quote-list li {
 
 
 
-
-
-/* Another navigation section clean up soon */
-.navigation .brand {
-  margin-right: 8px;
-}
-
-
-
 .content {
   
 }
@@ -559,7 +572,8 @@ ul.quote-list li {
 }
 
 .spacer {
-  padding-top: 7vh;
+  margin-top: 7vh !important;
+  margin-bottom: 7vh !important;
 }
 
 
@@ -585,41 +599,11 @@ ul.quote-list li {
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .lite-quote {
-    font-size: 2.2em;
-  }
 
-  ul.menu-group {
-    font-size: 64px;
-  }
-}
 
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .lite-quote {
-    font-size: 2.4em;
-  }
-}
 
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  .lite-quote {
-    font-size: 2.6em;
-  }
-}
 
-.page-quotes {
-
-}
-
-.page-quote {
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-
-.page-name {
+.page-verify .page-name {
   margin-top: 0;
 }
 
@@ -640,14 +624,10 @@ ul.quote-list li {
   color: black;
 }
 
-/* Flat-UI adds a little transition and we are diabling it here */
-a {
--webkit-transition: 0s;
-transition: 0s;
-}
+
 
 .lead {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .absolute-nav {
@@ -672,3 +652,250 @@ transition: 0s;
   margin-right: auto;
 }
 
+
+.page-quotes {
+
+}
+
+.page-quote {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+
+.page-quotes blockquote {
+  border-left: none;
+  font-size: 32px;
+  line-height: 1.5;
+  padding-top: 2.2em;
+  padding-left: 0;
+}
+
+.page-quotes blockquote a {
+  color: black;
+}
+.page-quotes blockquote a:hover {
+  text-decoration: none;
+}
+
+/* nudges quote a bit up on hover. */
+/*.page-quotes blockquote:hover {
+  position: relative;
+  top: -1px;
+}*/
+
+
+
+
+
+
+
+
+.footer {
+  background-color: black;
+  color: white;
+  padding: 8px 0 8px
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
+.white-quote {
+  font-size: 1.8em;
+  padding-top: 8em;
+  padding-bottom: 8em;
+  color: white;
+}
+
+.white-quote a {
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .white-quote {
+    font-size: 1.4em;
+  }
+}
+
+.material-background {
+  background-color: #fafafa;
+}
+
+
+
+/* Listing the quotations on each page */
+.list-quote {
+  font-size: 1.6em;
+  background-color: #fafafa;
+}
+
+@media (max-width: 768px) {
+  .list-quote {
+    font-size: 1em;
+  }
+}
+
+.list-quote a,
+.quotation a {
+  color: black;
+
+}
+
+
+.quotation a:hover {
+  text-decoration: none;
+} 
+
+
+.list-quote:nth-child(odd) {
+  background-color: #090909;
+  color: white;
+}
+
+.list-quote:nth-child(odd) a {
+  color: white;
+  /*text-decoration: none;*/
+}
+
+
+/* Display a single quote on a page please */
+
+.black-flex {
+  background-color: #090909;
+}
+
+.single-quote {
+  font-size: 2.2em;
+  color: white;
+  font-family: "youngserifregular";
+  line-height: 1.4em;
+}
+
+@media (max-width: 768px) {
+  .single-quote {
+    font-size: 1.3em;
+  }
+}
+
+.single-quote a {
+  color: white;
+}
+
+.single-quote .quotation a:hover {
+  text-decoration: none;
+}
+
+.single-quote .attribution,
+.single-quote .attribution a {
+  color: white;
+}
+
+
+
+
+
+.below-fold {
+  padding-top: 5em;
+  padding-bottom: 5em;
+
+  background-color: #fafafa;
+}
+
+.create-block, .basic-form {
+  min-width: 300px;
+}
+
+
+
+a.flat-link {
+  color: white;
+  text-decoration: none;
+}
+
+a.header-link {
+  color: black;
+}
+
+
+.select a {
+  text-decoration: none;
+}
+
+
+.brand a {
+  color: black;
+  text-decoration: none;
+}
+
+.control-bar {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 2.4em;
+  margin-bottom: 2.4em;
+}
+
+.control {
+  font-size: 30px;
+}
+
+.red {
+  color: red;
+}
+
+a.control.fave {
+  color: black;
+}
+
+
+.next-page,
+.previous-page {
+  cursor: pointer;
+}
+
+.full-quote {
+  margin: 2em 0;
+}
+
+
+/* Some Flat UI navbar overrides */
+
+.navbar {
+  margin-bottom: 0;
+}
+
+
+
+/* A new home */
+
+.back-layer {
+  min-height: 100vh;
+  background-color: #fdfbf8;
+}
+
+.top-bar {
+  background-color: white;
+  padding: 16px;
+  border-bottom: 1px solid #f7f5f2;
+}
+
+/* Down the bottom */
+.copyright {
+  background-color: black;
+  color: white;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.copyright a {
+  color: white;
+}

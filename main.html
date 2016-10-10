@@ -33,51 +33,17 @@
 </template>
 
 
-
-<template name="Header">
-  <nav class="header text-center">
-    <div class="container">
-      <a href="/">Qurious</a>
+<!-- A new template let's maybe wait until next release -->
+<template name="Exploration">
+  <div class="back-layer">
+    <div class="top-bar">
+      <span class="brand">Qurious</span>
     </div>
-  </nav>
-</template>
-
-<template name="top-bar">
-  <div class="top-bar">
-    Qurious
   </div>
 </template>
 
 
 
-<!-- This is the fixed nav -->
-<template name="Nav">
-  <div class="container qurious-nav">
-    <nav class="navbar navbar-default" role="navigation">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-          <span class="sr-only">Toggle navigation</span>
-        </button>
-        <a class="navbar-brand" href="/">Qurious<!-- <img src="/grey-logo.png"> --></a>
-      </div>
-
-
-      <div class="collapse navbar-collapse" id="navbar-collapse-01">
-        <ul class="nav navbar-nav">
-        </ul>
-          {{#if currentUser}}
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/settings">{{currentUser._id}}</a></li>
-            </ul>
-          {{else}}
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/sign-in">Sign In</a></li>
-            </ul>
-          {{/if}}
-      </div><!-- /.navbar-collapse -->
-    </nav><!-- /navbar -->
-  </div>
-</template>
 
 
 
@@ -89,150 +55,276 @@
       <div class="container backdrop flex-center">
         <div class="wrapper text-center">
           <div class="title">Qurious.</div>
-          <a href="/login">Login</a> · <a href="/faq">FAQ</a>
+          <a href="/login">Login</a><!--  · <a href="/about">About</a> -->
         </div>
       </div>
+      <div class="container-fluid black-background">
+        <div class="content container text-center white-quote">
+          "Qurious is your home of quotations. We are still in production. For early access please <a href="/subscribe">subscribe</a>." <!-- or feel free to take a <a href="/explore">quick look</a> around.--> <small>&mdash;The Qurious Team</small>
+        </div>
+      </div>
+      {{> Footer}}
     {{else}} <!-- Logged in users see this -->
       <div id="main" class="container backdrop">
         <div class="text-center flex-center home-container">
           <!-- <h1><i class="fa fa-quote-left"></i></h1> -->
-          <h1>Qurious.</h1>
+          <h1><a href="/">Qurious.</a></h1>
           <p>is kinda new, so please forgive us if there's not much here just yet.</p>
-          <a class="btn btn-default" href="/explore" style="margin-bottom: 25px">Explore</a>
+          <a class="btn btn-default scroll" href="/explore" style="margin-bottom: 25px">Explore</a>
         </div>
+        <!-- <div class="text-center flex-center home-container">
+          <p>is kinda new, so please forgive us if there's not much here just yet.</p>
+        </div> -->
       </div>
-      <div class="container-fluid" style="background-color: #f4f4f4">
-        <div class="content container text-center" style="padding: 8px 0 8px">
-          <small>Created by a Meagre company.&nbsp;</small>
-        </div>
-      </div>
+
+
+      {{> Copyright}}
+
+      <!-- {{> ThePageList}} -->
+
+      <!-- {{> FooterNav}} -->
+
+      <!-- <div class="container-fluid text-center space-both">
+        <span class="load-more">More...</span>
+      </div> -->
+
+      <!-- {{> ControlBar}} -->
+      <!-- {{> Authors}}
+      {{>   Footer}} -->
     {{/unless}}
   {{/if}}
 </template>
 
 
-
 <template name="Explore">
-  <div class="container backdrop explore spacer content text-center">
-    <h1>Current Authors</h1>
-     <p>Qurious is still very new. Here is a list of verified notable authors that we are compiling. You can also see <a href="/explore/all">unverified authors</a> and help us moderate them. Please help us expand this list.</p> 
-    
-    <ul class="author-list">
-      {{#each pages}}
-        <li><a href="/{{slug}}">{{name}}</a></li>
-      {{else}}
-        
-      {{/each}}
-      {{#if currentUser}}
-      <li><a href="/add">+</a></li>
-      {{/if}}
-    </ul>
+  <div id="main" class="container backdrop">
+    <div class="text-center flex-center">
+      <h1><a href="/">Qurious.</a></h1>
 
-    <!-- {{#each pages}}
-      <h1><a href="/{{slug}}">{{name}}</a></h1>
-    {{/each}} -->
+      <!-- <i class="fa fa-angle-down" style="position: relative;font-size: 42px;top: 60px"></i> -->
+    </div>
+  </div>
 
+  {{> ThePageList}}
+
+  <!-- {{> FooterNav}} -->
+
+  {{> LoadMore}}
+
+  {{> Copyright}}
+
+</template>
+
+
+
+<template name="LoadMore">
+  <div class="container-fluid text-center space-both">
+    <span class="load-more"><b><a class="btn btn-default" href="#">More...</a></b></span>
   </div>
 </template>
 
 
 
 
-<template name="ExploreAll">
-  <div class="container backdrop explore spacer content text-center">
-    <h1>Unverified Authors</h1>
-    <p>Here are submitted authors who haven't been verified. Please flag anything that seems out of place.</p>
-    
-    <ul class="author-list">
-      {{#each pages}}
-        <li><a href="/{{slug}}" class="{{#if verified}}verified{{/if}}">{{name}}</a></li>
-      {{else}}
-        
-      {{/each}}
-      {{#if currentUser}}
-      <li><a href="/add">+</a></li>
-      {{/if}}
-    </ul>
 
-    <!-- {{#each pages}}
-      <h1><a href="/{{slug}}">{{name}}</a></h1>
-    {{/each}} -->
 
-  </div>
+
+<template name="ControlBar">
+<div class="fluid-container text-center space-both">
+  <!-- <a class="btn btn-default" href="#">See unverified</a> -->
+  <!-- <a href="/"><img src="/grey-logo.png" width="74px"></a> -->
+  <span class="previous-page">Previous</span> · <span class="next-page">Next</span>
+</div>
 </template>
 
 
+
+<template name="FooterNavigation">
+
+</template>
+
+<template name="Copyright">
+  <div class="container-fluid copyright">
+    <center><small><b><a href="/">Qurious</a></b> is a <b><a href="http://meag.re/">Meagre</a></b> production.</small></center>
+  </div>
+</template>
 
 
 
 
 <template name="Page">
-  <div class="container backdrop spacer text-center">
-    <!-- <small><a href="/explore">Back</a></small> -->
-    <div class="page-title-box">
-      <h1 class="page-name">{{page.name}}</h1>
-      <p>{{page.description}}</p>
-      <!-- <a href="#">flag</a> -->
-      <!-- <hr> -->
-    </div>
-    <!-- <ul class="quote-list">
-    {{#each quotes}}
-      <li class="quotation"><a href="/{{../page.slug}}/{{slug}}">{{truncate quotation}}</a></li>
-      {{else}}
-      <li class="quotation"><a href="/{{page.slug}}/add">No quotations found</a></li>
-    {{/each}}
-     {{#if currentUser}}<li><a href="/{{page.slug}}/add">+</a></li>{{/if}} 
-    </ul> -->
-
-    <div class="page-quotes">
-      {{#each quotes}}
-      <div class="page-quote text-left">
-        {{ quotation }} &nbsp;<a class="view-quote" href="/{{../page.slug}}/{{slug}}"><i class="fa fa-caret-right"></i></a>
-      </div>
-      <!-- <div>
-        <a class="view-quote" href="/{{../page.slug}}/{{slug}}"><i class="fa fa-caret-right"></i></a>
-      </div> -->
-      <!-- <hr> -->
-      {{/each}}
-    </div>
-  </div>
-</template>
-
-
-
-
-<template name="PageUnverified">
   <div class="container backdrop flex-center text-center">
-    <!-- <small><a href="/explore">Back</a></small> -->
-    <div class="page-verify">
+    <div class="page-title-box">
+      {{ #if currentUser }}
+      <h1 class="page-name"><a class="header-link" href="/{{page.slug}}/edit">{{page.name}}</a></h1>
+      {{else}}
       <h1 class="page-name">{{page.name}}</h1>
-      <p>This author is unverified.</p>
-      <button class="btn btn-default">Verify</button>
-      <button class="btn btn-default">Flag</button>
-      <button class="btn btn-default">Edit</button>
-    </div>    
+      {{/if}}
+      <!-- <p>{{page.description}}</p> -->
+    </div>
   </div>
+
+  {{> ThePageList}}
+
+  {{#if hasMore}}
+    {{> LoadMore }}
+  {{else}}
+    <div class="container-fluid text-center space-both">
+      <a class="btn btn-default" href="/{{page.slug}}/add"><b>Add quote...</b></a>
+    </div>
+  {{/if}}
+
+  {{> Copyright}}
+  
+  <!-- {{> AddQuoteToPage}} -->
+  <!-- {{> ControlBar}} -->
 </template>
 
 
 
-
-
-<template name="DisplayQuote">
-  <div class="container backdrop flex-center">
-    <div class="quote">
-      <h1 style="margin-top:0"><i class="fa fa-quote-left"></i></h1>
-      <div class="quotation {{quote.length}}">
-        {{quote.quotation}} 
+<template name="ThePageList">
+  <div class="the-page-list">
+    {{#each quotes}}
+      <div class="fluid-container text-center space-both list-quote">
+        <div class="container">
+          <span class="quotation">
+            {{#if authorSlug}}
+            &ldquo;<a href="/{{authorSlug}}/{{slug}}">{{quotation}}</a>&rdquo;
+            {{else}}
+            &ldquo;<a href="/quote/{{slug}}">{{quotation}}</a>&rdquo;
+            {{/if}}
+          </span>
+          <small>
+          {{#if author}} <!-- we need to do some hacky stuff for layout -->
+            &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
+          {{/if}}
+          {{#if source}}
+            {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>{{#if topic}},{{/if}}
+          {{/if}}
+          {{#if topic}}
+            on <a href="/{{slugThisString topic}}">{{topic}}</a>
+          {{/if}}
+          </small>
+        </div>
       </div>
-      <div class="attribution"><a href="/{{page.slug}}">{{page.name}}</a></div>
-      <!-- <i class="fa fa-quote-right"></i> -->
+    {{else}}
+    <div class="fluid-container text-center space-both list-quote">
+      <div class="container">
+        {{#if page.slug}}
+          <a class="flat-link" href="{{page.slug}}/add">No quotations found.</a>
+        {{else}}
+          No quotations found.
+        {{/if}}
+        
+      </div>
     </div>
-    <!-- <div>flag</div> -->
+    {{/each}}
   </div>
-  <div class="under">
-    
+</template>
+
+
+
+<!-- Not used yet but maybe in the future -->
+<template name="ThePageListLeftAlign">
+  <div class="the-page-list">
+    {{#each quotes}}
+      <div class="fluid-container space-both list-quote">
+        <div class="container">
+          <div class="quotation">
+            {{#if authorSlug}}
+              <a href="/{{authorSlug}}/{{slug}}">{{quotation}}</a>
+            {{else}}
+              <a href="/quote/{{slug}}">{{quotation}}</a>
+            {{/if}}
+          </div>
+          <div style="padding-top: 1em;">
+            <small>
+              {{#if author}} <!-- we need to do some hacky stuff for layout -->
+                &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
+              {{/if}}
+              {{#if source}}
+                {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>{{#if topic}},{{/if}}
+              {{/if}}
+              {{#if topic}}
+                on <a href="/{{slugThisString topic}}">{{topic}}</a>
+              {{/if}}
+            </small>
+          </div>
+        </div>
+      </div>
+    {{else}}
+    <div class="fluid-container text-center space-both list-quote">
+      <div class="container">
+        {{#if page.slug}}
+          <a class="flat-link" href="{{page.slug}}/add">No quotations found.</a>
+        {{else}}
+          No quotations found.
+        {{/if}}
+        
+      </div>
+    </div>
+    {{/each}}
   </div>
+</template>
+
+
+
+<template name="PageNotFound">
+  <div class="container flex-center">
+    <h2><a href="/{{pageSlug}}/edit">Curious?</a></h2>    
+  </div>
+  <!-- <div class="below-fold container-fluid flex-center"> -->
+    <!-- <form class="form-inline">
+      <div class="form-group">
+        <label class="sr-only" for="authorName">Page Name</label>
+        <input type="text" class="form-control" id="authorName" name="text" placeholder="Page name" value="{{pageName}}">
+      </div>
+      <button type="submit" class="btn btn-default">Create Page</button>
+    </form> -->
+    <!-- <a href="/{{pageSlug}}/edit" class="btn btn-default">Add Page</a> -->
+  <!-- </div> -->
+</template>
+
+
+<template name="SingleQuote">
+  <div class="backdrop flex-center black-flex">
+    <div class="fluid-container text-center single-quote">
+      <div class="container quote">
+      {{#with quote}}
+        <span class="quotation">
+          {{#if currentUser}}
+            &ldquo;<a href="/quote/{{slug}}/edit">{{quotation}}</a>&rdquo;
+          {{else}}
+            &ldquo;{{quotation}}&rdquo;
+          {{/if}}
+        </span>
+        <span class="attribution"><small>
+        {{#if author}} <!-- we need to do some hacky stuff for layout -->
+          &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
+        {{/if}}
+        {{#if source}}
+          {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>{{#if topic}},{{/if}}
+        {{/if}}
+        {{#if topic}}
+          on <a href="/{{slugThisString topic}}">{{topic}}</a>
+        {{/if}}
+        </small></span>
+      {{/with}}
+      </div>
+    </div>
+  </div>
+
+  <!-- Control Bar -->
+  <div class="fluid-container text-center control-bar">
+    <!-- <span class='brand'><a href="/">Qurious</a></span> ·  -->
+    {{#if faved}}
+      <a class="control fave" href="#">Liked</a> <a class="control fave" href="#"><i class="fa fa-heart red"></i></a>
+    {{else}}
+      <a class="control fave" href="#">Like</a> <a class="control fave" href="#"><i class="fa fa-heart-o red"></i></a>
+    {{/if}}
+  </div>
+
+  {{> Copyright}}
 </template>
 
 
@@ -242,49 +334,63 @@
 
 
 
-<template name="Settings">
-  <div class="container backdrop">
-    <div class="col-md-6">
-      <h1>Settings</h1>
-      <!-- <form>
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" class="form-control" placeholder="Your full name" name="fullName" value="{{currentUser.profile.fullName}}" />
-        </div>
-        <div class="form-group">     
-          <button type="submit" class="btn btn-primary">Update</button>
-        </div>
-      </form> -->
-      <p>Your user id: {{_id}}</p>
-      <a href="/sign-out">Sign out</a>
-    </div>
+
+
+<template name="PageEdit">
+  <div class="container-fluid flex-center">
+    <form class="basic-form">
+      <div class="form-group">
+        <label class="sr-only" for="authorName">Page Name</label>
+        <input type="text" class="form-control" id="pageName" name="text" placeholder="Page name" value="{{page.name}}">
+      </div>
+      <div class="form-group">
+        <select class="form-control select select-primary select-block mbl" name=type>
+          <option value="">Choose page type</option>
+          <option value="author" {{authorSelected}}>Author (character, person, etc.)</option>
+          <option value="source" {{sourceSelected}}>Source (book, movie, etc.)</option>
+          <option value="topic" {{topicSelected}}>Topic (subject, tag, etc.)</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-default">Save Page</button>
+      <a href="/{{pageSlug}}" class="btn btn-default">Cancel</a>
+    </form>
   </div>
 </template>
 
 
 
-
-<template name="Add">
-  <!-- <div class="absolute-nav">
-    <span class="logo">Qurious</span>
-  </div> -->
-  <div class="container backdrop spacer text-center">
-    <h1>Add Author</h1>
-    <p>Notable authors only. All suggestions will be moderated. Please use proper Capitalisation</p>
-    <div class="wrapper">
-      <form class="form-inline">
-        <div class="form-group">
-          <label class="sr-only" for="authorName">Author Name</label>
-          <input type="text" class="form-control" id="authorName" name="text" placeholder="Author name">
-        </div>
-        <button type="submit" class="btn btn-default">Create</button>
-      </form>
-      <!-- <ul class="small-text">
-        <li>Notable authors only</li>
-      </ul> -->   
-    </div>
+<template name="NewPage">
+  <div class="container-fluid flex-center">
+    <form class="basic-form">
+      <div class="form-group">
+        <label class="sr-only" for="authorName">Page Name</label>
+        <input type="text" class="form-control" id="pageName" name="text" placeholder="Page name" value="{{pageName}}">
+      </div>
+      <div class="form-group">
+        <select class="form-control select select-primary select-block mbl" name=type>
+          <option selected value="">Choose page type</option>
+          <option value="author">Author (character, person, etc.)</option>
+          <option value="source">Source (book, movie, etc.)</option>
+          <option value="topic">Topic (subject, tag, etc.)</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-default">Save Page</button>
+      <a href="/{{pageSlug}}" class="btn btn-default">Cancel</a>
+    </form>
   </div>
+  <!-- <span class="delete">delete</span> --> <!-- We don't really want to let people delete at will -->
 </template>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -292,22 +398,110 @@
 
 <template name="AddQuote">
   <div class="container backdrop flex-center">
-    <div class="create-block">
-        <form class="add-quote form-inline">
+    <div class="create-block container">
+        <form class="add-quote">
           <div class="form-group">
-            <label class="sr-only" for="quoteText">Quote Text</label>
-            <input type="text" class="form-control" id="quoteText" name="text" placeholder="Quotation text">
+            <label class="sr-only" for="quoteText">Quotation Text</label>
+            <!-- <input type="text" class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text"> -->
+            <textarea class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text (no quotation marks)" rows="5" autofocus></textarea>
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="quoteText">Author</label>
+            <input type="text" class="form-control" id="authorText" name="authorText" placeholder="Author, or Character (optional)" value="{{#if isAuthor}}{{currentPage.name}}{{/if}}">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="sourceText">Source</label>
+            <input type="text" class="form-control" id="sourceText" name="sourceText" placeholder="Source, or Work (optional)" value="{{#if isSource}}{{currentPage.name}}{{/if}}">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="topicText">Source</label>
+            <input type="text" class="form-control" id="topicText" name="topicText" placeholder="Topic (optional)" value="{{#if isTopic}}{{currentPage.name}}{{/if}}">
           </div>
           <button type="submit" class="btn btn-default">Add quote</button>
+          <a href="/" class="btn btn-default">Cancel</a>
         </form>
       </div>
   </div>
 </template>
 
 
+<template name="EditQuote">
+  <div class="container backdrop flex-center">
+    <div class="create-block container">
+    {{#with quote}}
+        <form class="add-quote">
+          <div class="form-group">
+            <label class="sr-only" for="quoteText">Quotation Text</label>
+            <!-- <input type="text" class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text"> -->
+            <textarea class="form-control" id="quoteText" name="quoteText" placeholder="Quotation text (no quotation marks)" rows="5" value="{{quotation}}" autofocus></textarea>
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="quoteText">Author</label>
+            <input type="text" class="form-control" id="authorText" name="authorText" placeholder="Author, or Character (optional)" value="{{author}}">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="sourceText">Source</label>
+            <input type="text" class="form-control" id="sourceText" name="sourceText" placeholder="Source, or Work (optional)" value="{{source}}">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="topicText">Source</label>
+            <input type="text" class="form-control" id="topicText" name="topicText" placeholder="Topic (optional)" value="{{topic}}">
+          </div>
+          <button type="submit" class="btn btn-default">Update quote</button>
+          <a href="/quote/{{slug}}" class="btn btn-default">Cancel</a>
+        </form>
+      {{/with}}
+      </div>
+  </div>
+</template>
+
+
+
+
+
+
+
+
+
+<template name="Footer">
+  {{#if loggingIn}}
+  <!-- nothing -->
+  {{else}}
+  <div class="container-fluid footer">
+    <div class="content container text-center">
+      <small>Another <a href="/">Meagre production.</a></small>
+    </div>
+  </div>
+  {{/if}}
+</template>
+
+
+
+
+<template name="Invite">
+  {{#if isInRole 'admin'}}
+  <div class="container backdrop flex-center invite">
+    <form class="form-inline">
+      <div class="form-group">
+        <label class="sr-only" for="emailAddress">Email</label>
+        <input type="text" class="form-control" id="emailAddress" name="text" placeholder="Email">
+      </div>
+      <button type="submit" class="btn btn-default">Invite</button>
+    </form>
+  </div>
+  {{else}}
+    <!-- say nothing -->
+  {{/if}}
+ 
+</template>
+
+
+
+
+
 <template name="Register">
   <div class="container backdrop flex-center">
-    <div class="title">Qurious.</div>
+    <div class="title"><a href="/">Qurious.</a></div>
     <p><small>(currently invite only)</small></p>
     <form>
       <div class="form-group">
@@ -326,12 +520,14 @@
 </template>
 
 
+
+
 <template name="Login">
   <div class="container backdrop flex-center">
-    <div class="title">Qurious.</div>
+    <div class="title"><a href="/">Qurious.</a></div>
     <form>
       <div class="form-group">
-        <input type="text" class="form-control" placeholder="Username or email" name="loginUser" autocorrect="off" autocapitalize="none"/>
+        <input type="text" class="form-control" placeholder="Username or email" name="loginUser" autocorrect="off" autocapitalize="none" autofocus />
       </div>
       <div class="form-group">
         <input type="password" class="form-control" placeholder="Password" name="loginPassword" />
@@ -346,9 +542,11 @@
 </template>
 
 
+
+
 <template name="Forgot"> 
   <div class="container backdrop flex-center">
-  <div class="title">Qurious.</div>
+  <div class="title"><a href="/">Qurious.</a></div>
     <form>
       <div class="form-group">
         <input type="email" class="form-control" placeholder="Email" name="forgotEmail" />
@@ -358,9 +556,12 @@
   </div>
 </template>
 
+
+
+
 <template name="PasswordReset"> 
   <div class="container backdrop flex-center">
-  <div class="title">Qurious.</div>
+  <div class="title"><a href="/">Qurious.</a></div>
     <form>
       <div class="form-group">
         <input type="password" class="form-control" placeholder="New password" name="newPassword" />
@@ -370,11 +571,18 @@
   </div>
 </template>
 
+
+
+
 <template name="Subscribe"> 
   <div class="container backdrop flex-center">
-    <div class="title">Qurious.</div>
+    <div class="title"><a href="/">Qurious?</a></div>
+      <div id="subscribeForm">
+          {{> MailChimpListSubscribe}}
+      </div>
+
       <!-- Begin MailChimp Signup Form -->
-      <div id="mc_embed_signup">
+      <!-- <div id="mc_embed_signup">
       <form action="//qurious.us1.list-manage.com/subscribe/post?u=cf9d60bafd106d479eaf9a181&amp;id=e0e0728735" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
           <div id="mc_embed_signup_scroll">
         
@@ -384,14 +592,27 @@
         <div id="mce-responses" class="clear">
           <div class="response" id="mce-error-response" style="display:none"></div>
           <div class="response" id="mce-success-response" style="display:none"></div>
-        </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cf9d60bafd106d479eaf9a181_e0e0728735" tabindex="-1" value=""></div>
+        </div> -->    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <!-- <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_cf9d60bafd106d479eaf9a181_e0e0728735" tabindex="-1" value=""></div>
           <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button btn btn-default btn-block"></div>
           </div>
       </form>
-      </div>
+      </div> -->
       <!--End mc_embed_signup-->
   </div>
+</template>
+
+<!-- Bootstrap example -->
+<template name="MailChimpListSubscribe">
+    <form class="form">
+    {{#if message}}
+        <p class="mailchimp-message">{{{message}}}</p>
+    {{/if}}
+        <div class="form-group" style="width: 200px; margin-left:auto; margin-right:auto;">
+            <input class="mailchimp-email form-control" type="email" placeholder="your@email.com"/>
+        </div>
+        <button class="mailchimp-subscribe btn btn-default btn-block" type="button" style="width: 200px;margin-left:auto; margin-right:auto;">Subscribe</button>
+    </form>
 </template>
 
 
@@ -404,26 +625,25 @@
   <!-- {{> Nav}} -->
 </template>
 
+
+
+
+
 <template name="404">
   <!-- {{> Nav}} -->
   <div class="container flex-center">
     <h1>404</h1>
-    <p class="lead">This isn't the page you're looking for...</p>
+    <p class="lead"><a href="/">This isn't the page you're looking for...</a></p>
   </div>
 </template>
 
 
 
 
-<template name="Faq">
-  <div class="container faq content spacer narrow text-center">
-    <h1>Frequently Asked Questions</h1>
-    <div class="spacer"></div>
-    <h3>What is Qurious?</h3>
-    <p>Qurious is a website about quotes, words, and ideas. We are still in early alpha stage testing.</p>
-    <h3>Can I have access?</h3>
-    <p>We are rolling out acess very slowly to people who have subscribed. <a href="/subscribe">Sign up</a> for early access.</p>
-    <h3>Do you need help building Qurious?</h3>
-    <p>If you have some coding experience (JavaScript is a plus) and have an interest in quotations, literature, or typography please <a href="mailto:info@qurious.cc">contact us</a> to help out.</p>
-  </div>
-</template>
+
+
+
+<!-- Probably unused templates after here -->
+
+
+

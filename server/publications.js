@@ -17,6 +17,14 @@ Meteor.publish("quotesLatest", function (limit) {
 });
 
 
+Meteor.publish("quotesLimit", function (limit) {
+  if (limit > Quotes.find().count()) {
+    limit = 0;
+  }
+  return Quotes.find({}, { sort: {faveCount: -1}, limit: limit });
+});
+
+
 
 
 Meteor.publish("quotesPopular", function (limit) {
@@ -47,7 +55,7 @@ Meteor.publish("quotesSlugUser", function (user_slug) {
 
 Meteor.publish("quotesSlug", function (slug) {
   check(slug, String);
-  var quote = Quotes.find({ slug: slug });
+  var quote = Quotes.find({ pageSlugs: slug }); // finds within arrays too as pageSlugs
   // console.log(quote); // trying to get counter quotes working too../....
   // if (!quote) quote = Quotes.find({ quote_id: slug });
 
@@ -59,6 +67,28 @@ Meteor.publish("quotesSlug", function (slug) {
   // Meteor._sleepForMs(timeToSleep); 
 
   return quote;
+});
+
+
+Meteor.publish("quoteSingle", function (slugString) {
+  check(slugString, String);
+  var quote = Quotes.find({ slug: slugString }); // finds within arrays too as pageSlugs
+
+  return quote;
+});
+
+
+
+Meteor.publish("quotesWithSlugInAuthorEtc", function (pageSlug) {
+  check(pageSlug, String);
+  var quotes = Quotes.find( { $or: [
+              { authorSlug: pageSlug },
+              { sourceSlug: pageSlug },
+              { topicSlug: pageSlug }
+              ] } );
+  
+
+  return quotes;
 });
 
 
@@ -94,11 +124,21 @@ Meteor.publish("invites", function (emailAddress) {
 })
 
 
+// Meteor.publish("invitesAll", function () {
+//   // if (!Roles.userIsInRole( Meteor.userId(), 'admin') ) return false;
+//   return Invites.find({ });
+// })
+
+
 
 
 // Meteor.publish("words", function () {
 //   return Words.find();
 // });
+
+Meteor.publish("pagesPending", function () {
+  return Pages.find({  });
+});
 
 // Return all pages this is bad do something different
 Meteor.publish("pagesVerified", function () {
@@ -106,7 +146,7 @@ Meteor.publish("pagesVerified", function () {
 });
 
 Meteor.publish("pagesAll", function () {
-  return Pages.find({  });
+  return Pages.find({ verified: false });
 });
 
 
@@ -119,4 +159,17 @@ Meteor.publish("pagesAll", function () {
 // Let's return a page when supplied a page slug
 Meteor.publish("pagesWithPageSlug", function (pageSlug) {
   return Pages.find({ slug: pageSlug });
+});
+
+
+
+Meteor.publish("quotesInPages", function (pageNumber) {
+  const skipCount = pageNumber * 5;
+  return Quotes.find({}, { sort: {faveCount: -1}, limit: 5, skip: skipCount });
+});
+
+
+
+Meteor.publish("quotesInfiniteLoad", function (loadCount) {
+  return Quotes.find({}, { sort: {faveCount: -1}, limit: loadCount });
 });

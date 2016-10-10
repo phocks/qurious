@@ -80,7 +80,7 @@ Router.route('/explore', {
         //   return pages;
         // },
         quotes: function () { 
-          var quotes = Quotes.find({}, { sort: {faveCount: -1}, limit: Session.get('numberOfQuotesToShow') });
+          var quotes = Quotes.find({}, { sort: {faveCount: -1, quotation: 1 }, limit: Session.get('numberOfQuotesToShow') });
           return quotes;
         },
       }
@@ -90,7 +90,7 @@ Router.route('/explore', {
 
 // After we leave a Route for a new URL hopefully we will reset the load more session value
 Router.onStop(function() {
-  Session.set('numberOfQuotesToShow', 1);
+  Session.set('numberOfQuotesToShow', quotesPerPage);
 });
 
 
@@ -282,7 +282,7 @@ Router.route('/:_slug/edit', {
 
     // Send the public to login so they can't add rubbish
     // Might not be 100% secure so try putting this in methods too?
-    if ( !Meteor.userId() ) Router.go('/login');
+    if ( !Meteor.userId() ) Router.go('/login', {}, {replaceState: true});
 
     if (currentPage) {
       Session.set("DocumentTitle", "Editing " + currentPage.name + " - Qurious");
@@ -499,6 +499,8 @@ Router.route('/:_pageUrlText', {
     if (pageSlug !== pageUrlText) {
       console.log("Setting current page name to " + pageUrlText);
       Session.set("currentPageName", pageUrlText);
+    } else if (currentPage) {
+      Session.set("currentPageName", currentPage.name);
     }
 
     // console.log("Current page name is " + Session.get("currentPageName"));  // testing

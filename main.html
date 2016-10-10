@@ -271,7 +271,7 @@
 
 <template name="PageNotFound">
   <div class="container flex-center">
-    <h2><a href="/{{pageSlug}}/edit">Curious?</a></h2>    
+    <h2><a href="/{{pageSlug}}/edit">{{pageSlug}}?</a></h2>    
   </div>
   <!-- <div class="below-fold container-fluid flex-center"> -->
     <!-- <form class="form-inline">
@@ -300,13 +300,13 @@
         </span>
         <span class="attribution"><small>
         {{#if author}} <!-- we need to do some hacky stuff for layout -->
-          &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
+          &mdash;<a href="/{{slugThisString author}}" class="author">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
         {{/if}}
         {{#if source}}
-          {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>{{#if topic}},{{/if}}
+          {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}" class="source"><em>{{source}}</em></a>{{#if topic}},{{/if}}
         {{/if}}
         {{#if topic}}
-          on <a href="/{{slugThisString topic}}">{{topic}}</a>
+          on <a href="/{{slugThisString topic}}" class="topic">{{topic}}</a>
         {{/if}}
         </small></span>
       {{/with}}

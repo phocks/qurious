@@ -37,6 +37,7 @@ slug.defaults.modes['pretty'] = {
 
 // loadMoreLimit = 5;  // for infinite scrolling, how many per load
 maximumQuotationLength = 1000; // in characters... now probably going to be handled in simpleSchema
+quotesPerPage = 5; // Still not 100% sure on global variables... anyone?
 
 
 
@@ -252,7 +253,7 @@ if (Meteor.isClient) { // only runs on the client
   //   Meteor.setTimeout( function () { window.scroll(0, 50); }, 500);
   // });
 
-  Session.setDefault('numberOfQuotesToShow', 1);
+  Session.setDefault('numberOfQuotesToShow', quotesPerPage);
 
 
   // Here we are setting up pagination
@@ -277,7 +278,13 @@ if (Meteor.isClient) { // only runs on the client
 
 Template.LoadMore.events({
   "click .load-more": function () {
-    Session.set("numberOfQuotesToShow", Session.get('numberOfQuotesToShow') + 1 );
+    Session.set("numberOfQuotesToShow", Session.get('numberOfQuotesToShow') + quotesPerPage );
+  }
+});
+
+Template.SingleQuote.events({
+  "click .author": function () {
+    Session.set("currentPageName", "Test" );
   }
 });
 

@@ -171,5 +171,5 @@ Meteor.publish("quotesInPages", function (pageNumber) {
 
 
 Meteor.publish("quotesInfiniteLoad", function (loadCount) {
-  return Quotes.find({}, { sort: {faveCount: -1}, limit: loadCount });
+  return Quotes.find({}, { sort: {faveCount: -1, quotation: 1 }, limit: loadCount });
 });

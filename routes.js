@@ -41,6 +41,8 @@ Router.route('/', {
   action: function () {
     Session.set("DocumentTitle","Qurious");
 
+    scroll(0,0); // this seems to work for now for scrolling to top maybe find a better way
+
 
     // console.log(Meteor.user().services.twitter.profile_image_url);
     // this.render('Nav', { to: 'nav'});
@@ -479,9 +481,9 @@ Router.route('/:_pageUrlText', {
     
 
     // put each subscription in an array to wait until all are done
-    return [Meteor.subscribe('pagesWithPageSlug', this.params._pageUrlText),
-            Meteor.subscribe('quotesSlug', this.params._pageUrlText),
-            Meteor.subscribe('quotesWithSlugInAuthorEtc', this.params._pageUrlText)];
+    return [Meteor.subscribe('pagesWithPageSlug', this.params._pageUrlText), // returns the page 
+            Meteor.subscribe('quotesSlug', this.params._pageUrlText), // if slug is in quote array
+            Meteor.subscribe('quotesWithSlugInAuthorEtc', this.params._pageUrlText)]; // if equiv to sluggified text
             
   },
   action: function () {
@@ -537,6 +539,18 @@ Router.route('/:_pageUrlText', {
               ] }, { sort: { favedBy: -1 }, limit: Session.get('numberOfQuotesToShow') } );
             return quotes;
           },
+          hasMore: function () {
+            if ( Quotes.find( {
+              $or: [
+                { pageSlugs: Session.get('pageSlug') },
+                { authorSlug: currentPage.slug }, // 3 permanent slugs and then an array of others
+                { sourceSlug: currentPage.slug }, // for some reason this will be best I think
+                { topicSlug: currentPage.slug }
+              ]
+            }).count() > Session.get('numberOfQuotesToShow') ) {
+              return true;
+            }
+          }
         }
       });
     } 

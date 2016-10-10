@@ -668,7 +668,8 @@ Template.LoadMore.events({
 
 
   Template.SingleQuote.events ({
-    "click .fave": function () {
+    "click .fave": function (event) {
+      event.preventDefault();
       if (!Meteor.userId()) {
         Router.go('/login');
       } 

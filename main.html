@@ -126,6 +126,9 @@
 
 
 
+
+
+
 <template name="ControlBar">
 <div class="fluid-container text-center space-both">
   <!-- <a class="btn btn-default" href="#">See unverified</a> -->
@@ -153,7 +156,7 @@
   <div class="container backdrop flex-center text-center">
     <div class="page-title-box">
       {{ #if currentUser }}
-      <h1 class="page-name"><a class="header-link" href="{{page.slug}}/edit">{{page.name}}</a></h1>
+      <h1 class="page-name"><a class="header-link" href="/{{page.slug}}/edit">{{page.name}}</a></h1>
       {{else}}
       <h1 class="page-name">{{page.name}}</h1>
       {{/if}}
@@ -163,7 +166,13 @@
 
   {{> ThePageList}}
 
-  {{> LoadMore}}
+  {{#if hasMore}}
+    {{> LoadMore }}
+  {{else}}
+    <div class="container-fluid text-center space-both">
+      <a class="btn btn-default" href="/{{page.slug}}/add"><b>Add quote...</b></a>
+    </div>
+  {{/if}}
 
   {{> Copyright}}
   
@@ -214,6 +223,49 @@
 </template>
 
 
+
+<!-- Not used yet but maybe in the future -->
+<template name="ThePageListLeftAlign">
+  <div class="the-page-list">
+    {{#each quotes}}
+      <div class="fluid-container space-both list-quote">
+        <div class="container">
+          <div class="quotation">
+            {{#if authorSlug}}
+              <a href="/{{authorSlug}}/{{slug}}">{{quotation}}</a>
+            {{else}}
+              <a href="/quote/{{slug}}">{{quotation}}</a>
+            {{/if}}
+          </div>
+          <div style="padding-top: 1em;">
+            <small>
+              {{#if author}} <!-- we need to do some hacky stuff for layout -->
+                &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
+              {{/if}}
+              {{#if source}}
+                {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>{{#if topic}},{{/if}}
+              {{/if}}
+              {{#if topic}}
+                on <a href="/{{slugThisString topic}}">{{topic}}</a>
+              {{/if}}
+            </small>
+          </div>
+        </div>
+      </div>
+    {{else}}
+    <div class="fluid-container text-center space-both list-quote">
+      <div class="container">
+        {{#if page.slug}}
+          <a class="flat-link" href="{{page.slug}}/add">No quotations found.</a>
+        {{else}}
+          No quotations found.
+        {{/if}}
+        
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</template>
 
 
 
@@ -366,6 +418,7 @@
             <input type="text" class="form-control" id="topicText" name="topicText" placeholder="Topic (optional)" value="{{#if isTopic}}{{currentPage.name}}{{/if}}">
           </div>
           <button type="submit" class="btn btn-default">Add quote</button>
+          <a href="/" class="btn btn-default">Cancel</a>
         </form>
       </div>
   </div>
@@ -395,6 +448,7 @@
             <input type="text" class="form-control" id="topicText" name="topicText" placeholder="Topic (optional)" value="{{topic}}">
           </div>
           <button type="submit" class="btn btn-default">Update quote</button>
+          <a href="/quote/{{slug}}" class="btn btn-default">Cancel</a>
         </form>
       {{/with}}
       </div>

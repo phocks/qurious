@@ -626,10 +626,14 @@ Template.SingleQuote.events({
                   topicText, 
                   pageSlug, 
                   function(error, result) {
-        var newQuoteSlug = result;
-        console.log("New quote: " + newQuoteSlug);
-        Meteor.call('checkQuoteSize', newQuoteSlug);
-        Router.go('/' + pageSlug);
+                    if (!error) {
+                      var newQuoteSlug = result;
+                      console.log("New quote: " + newQuoteSlug);
+                      Meteor.call('checkQuoteSize', newQuoteSlug);
+                      Router.go('/' + pageSlug);
+                    } else {
+                      console.log('something bad happened');
+                    }                  
       });
 
       // Clear form
@@ -671,7 +675,7 @@ Template.SingleQuote.events({
       event.target.quoteText.value = "";
 
       // Prevent default action from form submit
-      return false;
+      return false; // Handled above as well but keeping in just in case
     },
   });
 

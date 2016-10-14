@@ -22,6 +22,12 @@ Router.route('/api', function () {
 }, {where: 'server'});
 
 
+// After we leave a Route for a new URL hopefully we will reset the load more session value
+Router.onStop(function() {
+  Session.set('numberOfQuotesToShow', quotesPerPage);
+});
+
+
 
 /* The root home route landing for qurious.cc/   */
 Router.route('/', {
@@ -88,10 +94,31 @@ Router.route('/explore', {
   }
 });
 
-// After we leave a Route for a new URL hopefully we will reset the load more session value
-Router.onStop(function() {
-  Session.set('numberOfQuotesToShow', quotesPerPage);
+Router.route('/explore/latest', {
+  // waitOn: function () {
+  //   return Meteor.subscribe('quotesLatest', 1);
+  // },
+  action: function () {
+    Session.set("DocumentTitle","Qurious");
+
+    Meteor.subscribe('quotesLatest', Session.get('numberOfQuotesToShow') );
+
+    this.render('Explore', {
+      data: {      
+        // pages: function () {
+        //   var pages = Pages.find({ verified:true }, { sort: {name: 1}});
+        //   return pages;
+        // },
+        quotes: function () { 
+          var quotes = Quotes.find({}, { sort: {createdAt: -1}, limit: Session.get('numberOfQuotesToShow') });
+          return quotes;
+        },
+      }
+    });
+  }
 });
+
+
 
 
 

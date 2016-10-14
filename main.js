@@ -312,6 +312,8 @@ Template.SingleQuote.events({
           if (!error) {
             console.log("invited " + text);
             sAlert.info(text + " has been invited")
+          } else if (error) {
+            sAlert.info(error);
           }
         });      
 

@@ -179,6 +179,12 @@ Meteor.methods({
       throw new Meteor.Error("pants-not-found", "Can't find my pants");
     }
 
+    const isInList = Invites.findOne({ email: inviteEmail });
+
+    console.log(isInList);
+
+    if (isInList) throw new Meteor.Error("Already invited", "Can't find my pants");
+
     inviteEmail = inviteEmail.toLowerCase();
 
     const invite = {$set: { email: inviteEmail}};

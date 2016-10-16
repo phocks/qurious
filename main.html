@@ -289,8 +289,8 @@
 <template name="SingleQuote">
   <div class="backdrop flex-center black-flex">
     <div class="fluid-container text-center single-quote">
-      <div class="container quote">
       {{#with quote}}
+      <div class="container quote {{length}}">
         <span class="quotation">
           {{#if currentUser}}
             &ldquo;<a href="/quote/{{slug}}/edit">{{quotation}}</a>&rdquo;
@@ -309,8 +309,8 @@
           on <a href="/{{slugThisString topic}}" class="topic">{{topic}}</a>
         {{/if}}
         </small></span>
-      {{/with}}
       </div>
+      {{/with}}
     </div>
   </div>
 

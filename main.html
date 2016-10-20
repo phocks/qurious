@@ -194,17 +194,19 @@
             &ldquo;<a href="/quote/{{slug}}">{{quotation}}</a>&rdquo;
             {{/if}}
           </span>
-          <small>
-          {{#if author}} <!-- we need to do some hacky stuff for layout -->
-            &mdash;<a href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
-          {{/if}}
-          {{#if source}}
-            {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}"><em>{{source}}</em></a>{{#if topic}},{{/if}}
-          {{/if}}
-          {{#if topic}}
-            on <a href="/{{slugThisString topic}}">{{topic}}</a>
-          {{/if}}
-          </small>
+          <span class="attribution">
+            <small>
+            {{#if author}} <!-- we need to do some hacky stuff for layout -->
+              &mdash;<a class="attribution-link" href="/{{slugThisString author}}">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
+            {{/if}}
+            {{#if source}}
+              {{#unless author}}&mdash;{{/unless}}<em><a class="attribution-link" href="/{{slugThisString source}}">{{source}}</a></em>{{#if topic}},{{/if}}
+            {{/if}}
+            {{#if topic}}
+              on <a class="attribution-link" href="/{{slugThisString topic}}">{{topic}}</a>
+            {{/if}}
+            </small>
+          </span>
         </div>
       </div>
     {{else}}
@@ -286,6 +288,7 @@
 </template>
 
 
+
 <template name="SingleQuote">
   <div class="backdrop flex-center black-flex">
     <div class="fluid-container text-center single-quote">
@@ -300,13 +303,13 @@
         </span>
         <span class="attribution"><small>
         {{#if author}} <!-- we need to do some hacky stuff for layout -->
-          &mdash;<a href="/{{slugThisString author}}" class="author">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
+          &mdash;<a href="/{{slugThisString author}}" class="author attribution-link">{{author}}</a>{{#if source}},{{else}}{{#if topic}},{{/if}}{{/if}}
         {{/if}}
         {{#if source}}
-          {{#unless author}}&mdash;{{/unless}}<a href="/{{slugThisString source}}" class="source"><em>{{source}}</em></a>{{#if topic}},{{/if}}
+          {{#unless author}}&mdash;{{/unless}}<em><a href="/{{slugThisString source}}" class="source attribution-link">{{source}}</a></em>{{#if topic}},{{/if}}
         {{/if}}
         {{#if topic}}
-          on <a href="/{{slugThisString topic}}" class="topic">{{topic}}</a>
+          on <a href="/{{slugThisString topic}}" class="topic attribution-link">{{topic}}</a>
         {{/if}}
         </small></span>
       </div>

@@ -243,6 +243,9 @@ if (Meteor.isClient) { // only runs on the client
     return slug(stringToSluggify); 
   });
 
+
+
+
   // End global helpers and now some Template specific helpers
 
 
@@ -274,6 +277,16 @@ if (Meteor.isClient) { // only runs on the client
 
 
   // Events that drive things like clicks etc go below here
+
+
+
+  // Global events work in the <body> tag apparently.. hm noo that didn't work how about Layout
+  Template.Layout.events({
+    'click .attribution-link': function (event) {
+        console.log(event);
+        Session.set('currentPageName', event.target.text);
+    }
+  })
 
 
 Template.LoadMore.events({
@@ -339,6 +352,8 @@ Template.SingleQuote.events({
   //   $('h1').fitText(1.2, );
   //   // use { minFontSize: '20px', maxFontSize: '40px' } as second argument if you wanna
   // });
+
+
 
 
  
